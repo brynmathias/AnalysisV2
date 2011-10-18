@@ -5,8 +5,6 @@ CVS
 .hgignore
 
 bin
-obj
-Debug
 Release
 TestResults
 *.obj
