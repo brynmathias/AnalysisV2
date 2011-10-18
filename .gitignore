@@ -8,17 +8,9 @@ bin
 Release
 TestResults
 *.obj
-*.suo
-*.ncb
-*.user
-*.tli
-*.tlh
-*.idb
-*.pdb
+*.cvsignore
 
-build
-*.pbxuser
-*.perspectivev3
+
 .DS_Store
 
 *.old
@@ -30,3 +22,4 @@ build
 *.o
 *.d
 .svn
+.pyc
