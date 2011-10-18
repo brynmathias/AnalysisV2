@@ -1,0 +1,8 @@
+hadd z.root *_DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1*root
+ hadd lm3.root *_LM3_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_*.root
+hadd lm1.root *_LM1_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_*.root
+hadd tt.root *_TTJets_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1_*root
+hadd w.root *_WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1_*root
+hadd lm6.root *_LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_*.root
+hadd data.root *ingleMu_up*root
+hadd BKG.root z.root w.root tt.root 

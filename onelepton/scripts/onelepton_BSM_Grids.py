@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+import setupSUSY
+
+from montecarlo.PhysicsProcesses_mSUGRA_tanbeta3Fall10v1 import *
+from montecarlo.PhysicsProcesses_mSUGRA_tanbeta10Fall10v1 import *
+from montecarlo.PhysicsProcesses_mSUGRA_tanbeta50Fall10_spadhi import *
+
+samplesBSMgrids = [PhysicsProcesses_mSUGRA_tanbeta3Fall10v1,PhysicsProcesses_mSUGRA_tanbeta10Fall10v1,PhysicsProcesses_mSUGRA_tanbeta50Fall10_spadhi]
+
+from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1 import *
+from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1 import *
+
+from SUSYSignalScan.SMS_T3wb_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1 import *
+
+samplesBSMgrids42 = [
+    mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1,
+#   mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1
+    ]
+
+samplesSMS = [
+    SMS_T3wb_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1
+    ]

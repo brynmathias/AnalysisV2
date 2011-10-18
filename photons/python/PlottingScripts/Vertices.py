@@ -1,0 +1,23 @@
+from ROOT import *
+
+file_data = TFile.Open("../../results/Vertices_PhotonHad_uptoRun163817_1.root")
+file_mc = TFile.Open("../../results/Vertices_QCD_Pt_170to300_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_6.root")
+hist_data = file_data.Get("StandardPlots_HT/nVertices_all")
+hist_data.Scale(1./hist_data.Integral(1,11))
+hist_data.SetLineColor(1)
+hist_data.SetLineWidth(3)
+hist_mc = file_mc.Get("StandardPlots_HT/nVertices_all")
+hist_mc.Scale(1./hist_mc.Integral(1,11))
+hist_mc.SetLineColor(1)
+hist_mc.SetLineWidth(3)
+c = TCanvas("canvas","name",1200,1200)
+hist_mc.Draw()
+c.SaveAs("nVertices-MC-170to300.png")
+c.SaveAs("nVertices-MC-170to300.eps")
+hist_data.Draw()
+c.SaveAs("nVertices-Data.png")
+c.SaveAs("nVertices-Data.eps")
+reweight = hist_data.Clone()
+reweight.Divide(hist_mc)
+for bin in range(reweight.GetNbinsX()+2):
+  print str(bin)+": "+str(reweight.GetBinContent(bin))

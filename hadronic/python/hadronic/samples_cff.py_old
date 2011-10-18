@@ -1,0 +1,101 @@
+import setupSUSY
+from libFrameworkSUSY import *
+from libHadronic import *
+from icf.core import PSet,Analysis
+
+from data.Jet_15pb_WithTP_json221010 import * # 15pb^-1           (json 22/11/2010 and before)
+from data.Multijet_json291010 import * # + 7pb^-1                 (json 29/11/2010)
+MultiJet_json291010.Name = "Multijet_json291010" #rename to avoid confusion.
+#
+from data.MultiJet_Run2010B_PromptReco_v2_408 import * # + 7pb^-1 (json 05/11/2010) # takes us to 35pb^-1
+MultiJet_Run2010B_PromptReco_v2.Name = "Multijet_json051110" #rename to avoid confusion.
+#
+#from data.Jet_MultiJet_JetMet_38_JSonUpTo151010 import *
+
+#from data.Jet_3pb_WithTP_run2010A import *
+#from data.Jet_22pb_WithTP_json291010 import *
+#from data.Jet_35pb_WithTP_json051110 import *
+from data.Jet_MultiJet_JetMet_38_JSonUpTo151010 import *
+
+from montecarlo.LMx import *
+from montecarlo.tanBeta10 import *
+
+from montecarlo.WJets_Madgraph_NNLO import *
+from montecarlo.TTBarTauola_NNLO import *
+from montecarlo.Zinvisible_jets_pset_NNLO import *
+from montecarlo.Zjets_madgraph_NNLO import *
+
+#from montecarlo.QCD_Pythia6_allBins import *
+from montecarlo.QCD_Pythia6_ALL import * # same as above, but no wildcards, allows to run multiple jobs on batch
+
+from montecarlo.QCD_Pt_0to15_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_15to20_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_20to30_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_30to50_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_50to80_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_80to120_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_120to170_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_170to230_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_230to300_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_300to380_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_380to470_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_470to600_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_600to800_7TeV_pythia8_Summer10_START36_V10_S09_v1 import *
+from montecarlo.QCD_Pt_800to1000_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_1000to1400_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_1400to1800_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_1800to2200_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_2200to2600_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_2600to3000_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+from montecarlo.QCD_Pt_3000to3500_7TeV_pythia8_Summer10_START36_V10_S09_v2 import *
+
+QCD_Pythia8_ALL = [
+    QCD_Pt_0to15_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_15to20_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_20to30_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_30to50_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_50to80_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_80to120_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_120to170_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_170to230_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_230to300_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_300to380_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_380to470_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_470to600_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_600to800_7TeV_pythia8_Summer10_START36_V10_S09_v1,
+    QCD_Pt_800to1000_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_1000to1400_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_1400to1800_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_1800to2200_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_2200to2600_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_2600to3000_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    QCD_Pt_3000to3500_7TeV_pythia8_Summer10_START36_V10_S09_v2,
+    ]
+
+from montecarlo.QCD_Madgraph_50_100 import *
+from montecarlo.QCD_Madgraph_100_250 import *
+from montecarlo.QCD_Madgraph_250_500 import *
+from montecarlo.QCD_Madgraph_500_1000 import *
+from montecarlo.QCD_Madgraph_1000_inf import *
+
+QCD_MadGraph_ALL = [
+    QCD_Madgraph_50_100,
+    QCD_Madgraph_100_250,
+    QCD_Madgraph_250_500,
+    QCD_Madgraph_500_1000,
+    QCD_Madgraph_1000_inf,
+    ]
+
+# CMSSW_3_8_4_patch3 V14-00-02 samples
+from montecarlo.QCD_Pythia6_384patch3_V14_00_02_ALL import *
+from montecarlo.QCD_Pythia8_384patch3_V14_00_02_ALL import *
+
+#photon+jet
+from montecarlo.PhotonJet_Pythia6_allBins import *
+#
+from montecarlo.PhotonJet_Madgraph import *
+PhotonJet_MadGraph_ALL = [
+    pjets_madgraph_40,
+    pjets_madgraph_100_200,
+    pjets_madgraph_200,
+    ]

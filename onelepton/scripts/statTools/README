@@ -1,0 +1,11 @@
+Optimisation tools 
+----------------------------------- 
+
+The file predict.C contains the main logic of predicting background
+and calculating errors. This can be steered via a python (recommended)
+or Cint script. The file run.py is an example of a python script to do
+it.
+
+./run.py
+
+
