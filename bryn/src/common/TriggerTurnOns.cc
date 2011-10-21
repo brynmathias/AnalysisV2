@@ -91,7 +91,7 @@ void TriggerTurnOns::Plots() {
   BookHistArray( preScale_,
     "PreScale",
     ";M_{eff} GeV",
-    100000,0.,100000.,
+    1000,0.,1000.,
     1, 0, 1, true );
 
 

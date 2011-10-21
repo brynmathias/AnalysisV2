@@ -205,7 +205,11 @@ Cross_Trigger_PS = PSet(
 def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   """docstring for AddBinedHist"""
   out = []
-  refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True,TriggerReWeight = [TestTrig],Verbose = False).ps())
+  refTrigs = None
+  if "Mu40" in RefTrig:
+   refTrigs = [TestTrig,RefTrig]
+  else: refTrigs = [TestTrig]
+  refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True if "Mu40" not in RefTrig else False,TriggerReWeight = refTrigs,Verbose = False).ps())
   testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True,TriggerReWeight = [TestTrig],Verbose = False).ps())
   refTrigPS =  PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
   refTrigPS.Triggers = [RefTrig]
@@ -289,21 +293,33 @@ cutTreeData.TAttach(secondJetET,zeroMuon)
 # If no preslection:
 # cutTreeData.TAttach(json,AlphaT_Trigger_Filter)
 # cutTreeData.TAttach(AlphaT_Trigger_Filter,Plots_TriggerOnly)
-
-
+ht275 = RECO_CommonHTCut(275.)
+ht325 = RECO_CommonHTCut(325.)
+ht375 = RECO_CommonHTCut(375.)
+# htLess325 = RECO_CommonHTLessThanCut(375.)
+# htLess475 = RECO_CommonHTLessThanCut(475.)
 # If muon required --- AlphaT and Meff Turn ons
 cutTreeData.TAttach(oneMuon,muDr)
+cutTreeData.TAttach(muDr,ht375)
 cutTreeData.TAttach(muDr,ht275)
-refTrigList = ["HLT_Mu40_HT200_v*"]
-TestTrigList = ["HLT_HT250_AlphaT0p55_v*"]
+cutTreeData.TAttach(muDr,ht325)
+# cutTreeData.TAttach(ht375,htLess475)
+refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
+TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
+
 for ref,test in zip(refTrigList,TestTrigList):
-  out.append(AddHistPair(cutTreeData,ht275,ref,test))
+  if int(bin) is 275:
+    out.append(AddHistPair(cutTreeData,ht275,ref,test))
+  if int(bin) is 325:
+    out.append(AddHistPair(cutTreeData,ht325,ref,test))
+  if int(bin) is 375:
+    out.append(AddHistPair(cutTreeData,ht375,ref,test))
 # "HLT_HT150_v8","HLT_HT200_v8","HLT_HT250_v8","HLT_HT400_v8","HLT_HT450_v8","HLT_HT600_v1"
 # "HLT_HT200_v8","HLT_HT250_v8","HLT_HT300_v9","HLT_HT450_v8","HLT_HT500_v8","HLT_HT650_v1"
 
 # If muon is not required
-refTrigList =  ["HLT_HT500_v8","HLT_HT400_v8","HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT150_v8"]
-TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]
+refTrigList =  ["HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9"]#,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT150_v8"]
+TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8"]#,"HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
 
@@ -360,8 +376,9 @@ addCutFlowData(anal_ak5_pfData)
 from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 from data.Run2011.MuHad2011AB import *
-outDir = "../TestWithNewMethod/WeightOnlyIfPassSigWithSigPreScale/"
+sample = HTRun2011AB
+outDir = "../TestWithNewMethod/%s/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 #MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
-anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HTRun2011AB])
+anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
