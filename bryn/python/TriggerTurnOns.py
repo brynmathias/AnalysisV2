@@ -368,7 +368,7 @@ for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
 refTrigList = ["HLT_HT150_v8"]
 TestTrigList = ["HLT_HT300_v9"]
-L1SeedRef = ["Rubbis"]
+L1SeedRef = ["Rubbish"]
 L1SeedTest = ["L1_HTT50"]
 for ref,test,l1ref,l1test in zip(refTrigList,TestTrigList,L1SeedRef,L1SeedTest):
   out.append(AddHistPairWithL1(cutTreeData,zeroMuon,ref,test,l1ref,l1test))
@@ -426,7 +426,7 @@ from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 # from data.Run2011.MuHad2011AB import *
 sample = HTRun2011AB
-#sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+# sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 outDir = "../TestWithL1PreScaleFolding/%s/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 #MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]

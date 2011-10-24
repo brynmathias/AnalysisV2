@@ -93,14 +93,14 @@ void TriggerTurnOns::Plots() {
   BookHistArray( preScaleHLT_,
     "preScaleHLT",
     ";Prescale",
-    1000,0.,1000.,
+    10000,0.,10000.,
     1, 0, 1, true );
 
 
   BookHistArray( preScaleL1andHLT_,
     "PreScale_L1AndHT",
     ";Prescale",
-    1000,0.,1000.,
+    10000,0.,10000.,
     1, 0, 1, true );
 
 
@@ -109,15 +109,13 @@ void TriggerTurnOns::Plots() {
     "MHTovHT",
     ";#slash{H}_{T}/H_{T}",
     100,0.,1.,
-    1, 0, 1, true );
-
+    nMax_+1, 0, 1, true );
 
   BookHistArray( MHT_MEff_,
     "MHTovMeff",
     ";#slash{H}_{T}/M_{Eff}",
     100,0.,1.,
-    1, 0, 1, true );
-
+    nMax_+1, 0, 1, true );
 
 }
 
@@ -198,7 +196,7 @@ if(ReWeightL1_){
             if(L1PreScale == -1) L1PreScale = prescale->second;
             else if( L1PreScale > prescale->second) L1PreScale = prescale->second;
           }
-          if(L1PreScale != -1){
+          if(L1PreScale != -1 && L1PreScale != 0){
           weight *= L1PreScale;
         }
   }
