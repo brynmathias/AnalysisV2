@@ -348,8 +348,8 @@ cutTreeData.TAttach(muDr,ht375)
 cutTreeData.TAttach(muDr,ht275)
 cutTreeData.TAttach(muDr,ht325)
 # cutTreeData.TAttach(ht375,htLess475)
-refTrigList =  ["HLT_*","HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
-TestTrigList = ["HLT_*","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
+refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
+TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for ref,test in zip(refTrigList,TestTrigList):
   if int(bin) is 275:
@@ -426,8 +426,8 @@ from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 # from data.Run2011.MuHad2011AB import *
 sample = HTRun2011AB
-sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-outDir = "../TestWithNewMethod/%s/ht%dNoUpper/"%(sample.Name,bin)
+#sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+outDir = "../TestWithL1PreScaleFolding/%s/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 #MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
