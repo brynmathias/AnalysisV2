@@ -21,4 +21,9 @@ TestResults
 *.o
 *.d
 .svn
-.pyc
+*.pyc
+*.cxx
+*.so
+*.sh
+*.csh
+__susyJob__*
