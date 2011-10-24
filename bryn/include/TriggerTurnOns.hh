@@ -29,15 +29,20 @@ namespace Operation {
     std::string dirName_;
     UInt_t nMin_;
     UInt_t nMax_;
+    bool Plots_;
+    bool ReWeight_;
+    bool ReWeightL1_;
+    std::vector<std::string> ReWeightVec_;
+    std::vector<std::string> L1ReWeightVec_;
+    bool verb_;
     std::vector<TH1D*> MHT_;
     std::vector<TH1D*> AlphaT_;
     std::vector<TH1D*> HT_;
     std::vector<TH1D*> MEff_;
-    std::vector<TH1D*> preScale_;
-    bool ReWeight_;
-    std::vector<std::string> ReWeightVec_;
-    bool verb_;
-    bool Plots_;
+    std::vector<TH1D*> preScaleHLT_;
+    std::vector<TH1D*> preScaleL1andHLT_;
+    std::vector<TH1D*> MHT_HT_;
+    std::vector<TH1D*> MHT_MEff_;
     void Plots();
     bool Plots( Event::Data& );
 

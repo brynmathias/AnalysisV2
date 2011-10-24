@@ -209,8 +209,8 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   if "Mu40" in RefTrig:
    refTrigs = [TestTrig,RefTrig]
   else: refTrigs = [TestTrig]
-  refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True if "Mu40" not in RefTrig else False,TriggerReWeight = refTrigs,Verbose = False).ps())
-  testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True,TriggerReWeight = [TestTrig],Verbose = False).ps())
+  refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True if "Mu40" not in RefTrig else False,TriggerReWeight = refTrigs,Verbose = True).ps())
+  testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True,TriggerReWeight = [TestTrig],Verbose = True).ps())
   refTrigPS =  PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
   refTrigPS.Triggers = [RefTrig]
   refTrigOP = OP_MultiTrigger( refTrigPS.ps() )
@@ -268,14 +268,15 @@ MHT_METCut = OP_MHToverMET(1.25,50.)
 # AK5 Calo
 json_ouput = JSONOutput("filtered")
 alphaT = OP_CommonAlphaTCut(0.53)
-json = JSONFilter("Json Mask", json_to_pset("/home/hep/rjb3/public_html/golden.json"))
+# json = JSONFilter("Json Mask", json_to_pset("/home/hep/rjb3/public_html/golden.json"))
 evDump = EventDump()
 # htTriggerEmu = OP_TriggerHT_Emu(250.,40.)
 cutTreeData = Tree("Data")
 out = []
-cutTreeData.Attach(json)
-cutTreeData.TAttach(json,json_ouput)
-cutTreeData.TAttach(json,NoiseFilt)
+# cutTreeData.Attach(json)
+# cutTreeData.TAttach(json,json_ouput)
+# cutTreeData.TAttach(json,NoiseFilt)
+cutTreeData.Attach(NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
 cutTreeData.TAttach(oddMuon,oddElectron)
@@ -304,8 +305,8 @@ cutTreeData.TAttach(muDr,ht375)
 cutTreeData.TAttach(muDr,ht275)
 cutTreeData.TAttach(muDr,ht325)
 # cutTreeData.TAttach(ht375,htLess475)
-refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
-TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
+refTrigList =  ["HLT_*","HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
+TestTrigList = ["HLT_*","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for ref,test in zip(refTrigList,TestTrigList):
   if int(bin) is 275:
@@ -318,8 +319,8 @@ for ref,test in zip(refTrigList,TestTrigList):
 # "HLT_HT200_v8","HLT_HT250_v8","HLT_HT300_v9","HLT_HT450_v8","HLT_HT500_v8","HLT_HT650_v1"
 
 # If muon is not required
-refTrigList =  ["HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9"]#,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT150_v8"]
-TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8"]#,"HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]
+refTrigList =  ["HLT_*","HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9"]#,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT150_v8"]
+TestTrigList = ["HLT_*","HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8"]#,"HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
 
@@ -375,8 +376,9 @@ addCutFlowData(anal_ak5_pfData)
 
 from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
-from data.Run2011.MuHad2011AB import *
+# from data.Run2011.MuHad2011AB import *
 sample = HTRun2011AB
+sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 outDir = "../TestWithNewMethod/%s/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 #MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]

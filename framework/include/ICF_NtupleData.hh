@@ -48,7 +48,7 @@ namespace ICF{
     const std::string mTauPrefix;
     const std::string mTauSuffix;
     const std::string mSecTauPrefix;
-    const std::string mSecTauSuffix;   
+    const std::string mSecTauSuffix;
     const std::string mPhotonPrefix;
     const std::string mPhotonSuffix;
   public:
@@ -418,6 +418,13 @@ namespace ICF{
     Event::Element<std::map<std::string,int>* ,NtupleData> hlt_prescaled;
     Event::Element<bool,NtupleData> hltHandleValid;
 
+    // L1T
+    Event::Element<std::map<std::string,bool>* , NtupleData> l1t;
+    Event::Element<std::map<std::string,int>* ,NtupleData> l1t_prescaled;
+    Event::Element<bool,NtupleData> l1tHandleValid;
+
+
+
   // Dirty Rec Hits
     Event::Element<bool ,NtupleData> rechitCaloHandleValidEb;
     Event::Element<std::vector<float>* ,NtupleData> rechitCaloTimeEb;
@@ -566,12 +573,12 @@ namespace ICF{
 
   //   Tau ID by Tau Neural Classifier
 
-    bool IsTauByDecay(int index) const {return tauIdbyDecay()->at(index);} 
-    bool IsTauByLooseIso(int index) const {return tauIdbyLooseIsolation()->at(index);}   
-    bool IsTauByMediumIso(int index) const {return tauIdbyMediumIsolation()->at(index);} 
-    bool IsTauByTightIso(int index) const {return tauIdbyTightIsolation()->at(index);} 
-    bool IsTauAgainstElectron(int index) const {return tauIdAgainstElectron()->at(index);} 
-    bool IsTauAgainstMuon(int index) const {return tauIdAgainstMuon()->at(index);} 
+    bool IsTauByDecay(int index) const {return tauIdbyDecay()->at(index);}
+    bool IsTauByLooseIso(int index) const {return tauIdbyLooseIsolation()->at(index);}
+    bool IsTauByMediumIso(int index) const {return tauIdbyMediumIsolation()->at(index);}
+    bool IsTauByTightIso(int index) const {return tauIdbyTightIsolation()->at(index);}
+    bool IsTauAgainstElectron(int index) const {return tauIdAgainstElectron()->at(index);}
+    bool IsTauAgainstMuon(int index) const {return tauIdAgainstMuon()->at(index);}
     float GetTauIdbyTaNC(int index) const {return tauTauIdbyTaNC()->at(index);}         // discriminant variable
     ICF_XYZPoint GetTauVx(int index) const {return tauVx() -> at(index);}
     bool IsTauNCfr100(int index) const {return tauTauIdbyTaNCfrOnePercent()->at(index);}     //   fake rate = 1%
