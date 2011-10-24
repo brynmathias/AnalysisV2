@@ -216,7 +216,7 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,
                                           MaxObjects = 15,Plots = True,ReWeight = True,
                                           TriggerReWeight = [TestTrig],Verbose = False,
-                                          ReWeightL1 = True, L1TriggerReWeight = refTrigs).ps())
+                                          ReWeightL1 = False, L1TriggerReWeight = refTrigs).ps())
   refTrigPS =  PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
   refTrigPS.Triggers = [RefTrig]
   refTrigOP = OP_MultiTrigger( refTrigPS.ps() )
@@ -245,12 +245,13 @@ def AddHistPairWithL1(cutTree = None,cut = None, RefTrig = None, TestTrig = None
    refTrigs = [TestTrig,RefTrig]
   else: refTrigs = [TestTrig]
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,
-                                MaxObjects = 15,Plots = True,ReWeight = True if "Mu40" not in RefTrig else False,
-                                TriggerReWeight = refTrigs,Verbose = False,
-                                ReWeightL1 = True, L1TriggerReWeight = [L1ListRef]).ps())
-  testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,
-                                     MaxObjects = 15,Plots = True,ReWeight = True,
-                                     TriggerReWeight = [TestTrig],Verbose = False,
+                                MaxObjects = 15,Plots = True, ReWeight = True if "Mu40" not in RefTrig else False,
+                                TriggerReWeight = refTrigs,   Verbose = False,
+                                ReWeightL1 = True, L1TriggerReWeight = [L1ListTest]).ps())
+
+  testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects = 0,
+                                     MaxObjects = 15,Plots = True, ReWeight = True,
+                                     TriggerReWeight = [TestTrig], Verbose = False,
                                      ReWeightL1 = True, L1TriggerReWeight = [L1ListTest]).ps())
 
 
@@ -311,15 +312,15 @@ MHT_METCut = OP_MHToverMET(1.25,50.)
 # AK5 Calo
 json_ouput = JSONOutput("filtered")
 alphaT = OP_CommonAlphaTCut(0.53)
-# json = JSONFilter("Json Mask", json_to_pset("/home/hep/rjb3/public_html/golden.json"))
+json = JSONFilter("Json Mask", json_to_pset("/home/hep/rjb3/public_html/golden.json"))
 evDump = EventDump()
 # htTriggerEmu = OP_TriggerHT_Emu(250.,40.)
 cutTreeData = Tree("Data")
 out = []
-# cutTreeData.Attach(json)
-# cutTreeData.TAttach(json,json_ouput)
-# cutTreeData.TAttach(json,NoiseFilt)
-cutTreeData.Attach(NoiseFilt)
+cutTreeData.Attach(json)
+cutTreeData.TAttach(json,json_ouput)
+cutTreeData.TAttach(json,NoiseFilt)
+# cutTreeData.Attach(NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
 cutTreeData.TAttach(oddMuon,oddElectron)
@@ -368,7 +369,7 @@ for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
 refTrigList = ["HLT_HT150_v8"]
 TestTrigList = ["HLT_HT300_v9"]
-L1SeedRef = ["Rubbish"]
+L1SeedRef = ["L1_HTT50"]
 L1SeedTest = ["L1_HTT50"]
 for ref,test,l1ref,l1test in zip(refTrigList,TestTrigList,L1SeedRef,L1SeedTest):
   out.append(AddHistPairWithL1(cutTreeData,zeroMuon,ref,test,l1ref,l1test))
