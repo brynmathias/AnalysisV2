@@ -610,6 +610,13 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
 	if(myGenMatrixBin.the_GenTau.size()==2)	  return true;
 	else return false;
       }
+    if(mNoLep==4)
+      {
+	int muEliSum = myGenMatrixBin.the_GenMuon.size()+myGenMatrixBin.the_GenEli.size();
+	if(myGenMatrixBin.the_GenTau.size()==2)	  return true;
+	return false;
+      }
+
     if(aNLepton==mNoLep) return true;
 
     return false;

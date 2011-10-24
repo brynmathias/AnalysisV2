@@ -9,14 +9,14 @@ from onelepton_Cuts_Plots import *
 # Data/MC samples
 from onelepton_MC_samples import *
 from onelepton_Data_samples import *
-from onelepton_BSM_Grids import samplesBSMgrids42
+from onelepton_BSM_Grids import samplesBSMgrids42, samplesSMS
 from onelepton_Skimmed_samples import *
 # systematics code
 from onelepton.filters import electronSystematics
 from icf.utils import autoname
 
 # here a few flags to ensure you correct all instances
-mode = "MC311"
+#mode = "MC311"
 #mode = "MC38"
 #mode = "data39"
 #mode = "data311"
@@ -26,17 +26,22 @@ mode = "MC311"
 #mode = "MC42ttw_Z41"
 #mode  = "MC42QCD"
 #mode  = "MCGrid"
+mode = "SMS"
+##AUTOMATE_MODE##
+
+isSM = not (mode in ["MCGrid", "SMS"])
 
 # Systematics
-#systematics = None
-systematics = "metup_flat"
+systematics = None
+#systematics = "metup_flat"
 #systematics = "metdown_flat"
 #systematics = "metres_conservative"
 #systematics = "metres_11"
 #systematics = "metres_12"
 #systematics = "polup"
 #systematics = "poldown"
-# systematics = "mupt"
+#systematics = "mupt"
+##AUTOMATE_SYSTEMATICS##
 
 # MET type
 #MET = "typeI"
@@ -57,10 +62,10 @@ bins = [0,150, 250, 350, 450]
 # Setup bins in LP
 lp_sig_bins, lp_bkg_bins, nolp_bins, lp_ops = setupSignalBins(tree, AtLeast3Jts, bins,
                                                    mode = "lp", sig_cut_value = 0.15,
-                                                   bg_cut_value = 0.3)
+                                                   bg_cut_value = 0.3, SM=isSM)
 # Setup bins in pfmet/leppt
-#pfmet_sig_bins, pfmet_bkg_bins, _, pfmet_ops = setupSignalBins(tree, AtLeast3Jts, bins,
-#                                                               mode = "pfmet")
+pfmet_sig_bins, pfmet_bkg_bins, _, pfmet_ops = setupSignalBins(tree, AtLeast3Jts, bins,
+                                                               mode = "pfmet", SM = isSM)
 
 # Define some plots
 #sig_plots = makePlots(tree, lp_sig_bins, LeptonicPlots, "MuonStandardPlots_%d", mu_plots_cfg.ps())
@@ -93,15 +98,15 @@ samplesList = {
     "data42X_ReReco"     : samplesData42X_ElHad_RR_V15_03_14_residual,#samplesData42X_ElHad_ReReco,
     "MC42ttw_Z41"        : samplesMC42Wtt,
     "MC42QCD"            : samplesMC42QCD,
+    "SMS"                : samplesSMS
     }
 
 if systematics: syst_str = "_"+systematics
 else: syst_str = ""
 
-if mode.startswith("data"): output_dir = autoname("/vols/cms02/gouskos/onelepton/20110806_El_Sel_COR")
-else: output_dir = autoname("/vols/cms02/gouskos/onelepton/20110806_El_Sel_COR%(syst_mode)s", syst_mode=syst_str)
-#output_dir = "/vols/cms02/gouskos/onelepton/20110806_El_AntiSel_COR"
+if mode.startswith("data"): output_dir = autoname("./resultsData")
+else: output_dir = autoname("./resultsMC%(syst_mode)s", syst_mode=syst_str)
+#output_dir = "./data"
 
 # Run the analysis!
 sig.Run(output_dir, conf, samplesList[mode])
-

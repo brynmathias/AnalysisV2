@@ -22,6 +22,7 @@ namespace OneLepton{
       mDeltaPhi(ps.Get<int>("DeltaPhiAtVtx")),
       mShh(ps.Get<int>("SigmaIEtaIEta")),
       mConv(ps.Get<int>("Conversions")),
+      mPassExtra(ps.Contains("d0dzCutApplied") ? ps.Get<bool>("d0dzCutApplied") : true),
 
       mRelCombIsoBarrel(ps.Get<double>(prefix+".RelCombIso.Barrel")),
       mRelCombIsoEndcap(ps.Get<double>(prefix+".RelCombIso.Endcap")),
@@ -146,16 +147,19 @@ namespace OneLepton{
 	    ) { passExtra = true; }
       }
 
+      bool passExtraOut = false;
+      if (mPassExtra) { passExtraOut = passExtra; }
+      else { passExtraOut = true; }
 
       return (
-          (mIso < 0 ? true : int(passIso) == mIso) &&
-          (mHoE < 0 ? true : int(passHoE) == mHoE) &&
-          (mDeltaEta < 0 ? true : int(passDeltaEta) == mDeltaEta) &&
-          (mDeltaPhi < 0 ? true : int(passDeltaPhi) == mDeltaPhi) &&
-          (mShh < 0 ? true : int(passShh) == mShh) &&
-          (mConv < 0 ? true : int(passConv) == mConv) &&
-          passExtra
-              );
+	      (mIso < 0 ? true : int(passIso) == mIso) &&
+	      (mHoE < 0 ? true : int(passHoE) == mHoE) &&
+	      (mDeltaEta < 0 ? true : int(passDeltaEta) == mDeltaEta) &&
+	      (mDeltaPhi < 0 ? true : int(passDeltaPhi) == mDeltaPhi) &&
+	      (mShh < 0 ? true : int(passShh) == mShh) &&
+	      (mConv < 0 ? true : int(passConv) == mConv) &&
+	      passExtraOut
+	      );
 
     }
 
@@ -187,6 +191,7 @@ namespace OneLepton{
     int mMissingHits;
     bool mSupressErrors;
     bool mCorrEEMisalig;
+    bool mPassExtra;
 
   };
 

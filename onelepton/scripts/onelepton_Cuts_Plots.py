@@ -257,7 +257,7 @@ def getMSUGRAPSet(path):
     return msugra_psets[path]
 
 def tripleScale(model = "tanB10", cutTree = None, cut = None, label = "", SM=False) :
-    from libSUSYSignalScan import OP_mSuGraPlottingOps
+    from libSUSYSignalScan import OP_mSuGraPlottingOps, OP_SMPlottingOps
     out = []
     for scale in q2_scales: # see onelepton_settings.py
         scale2 = scale.replace(".","")
@@ -268,8 +268,8 @@ def tripleScale(model = "tanB10", cutTree = None, cut = None, label = "", SM=Fal
         ps = getMSUGRAPSet(mSUGRAFile)
         pset._quiet_set("NLO", ps)
         pset.DirectoryName = "Counter_BSMGrid_%s_scale%s"%(label, scale2)
-        pset._quiet_set("SM", SM)
-        op = OP_mSuGraPlottingOps(pset.ps())
+        if SM: op = OP_SMPlottingOps(pset.ps())
+        else: op = OP_mSuGraPlottingOps(pset.ps())
         out.append(op)
         out.append(ps)
        # if cut is not None:
@@ -679,4 +679,3 @@ def makePlots(tree, ops, PlotClass,plot_name, *plot_args):
                                   *plot_args))
         tree.TAttach(bin_op, plot_ops[-1])
     return plot_ops
-

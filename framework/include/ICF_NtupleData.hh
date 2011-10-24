@@ -75,6 +75,9 @@ namespace ICF{
     Event::Element<floatle,NtupleData> MChi0;
 
 
+    Event::Element<bool, NtupleData> RA2TrackingFailureFilter;
+    Event::Element<bool, NtupleData> RA2ecaldeadcellfilterflag;
+
     Event::Element<bool, NtupleData> hbheNoiseFilter;
     Event::Element<bool, NtupleData> beamHaloCSCTightHaloId;
     Event::Element<int, NtupleData> tracksNEtaLT0p9AllTracks;
@@ -492,6 +495,8 @@ namespace ICF{
     int GetgensignalProcessID() const{return gensignalProcessID();}
 
 
+    bool GetRA2TrackingFailureFilter() const{return RA2TrackingFailureFilter();}
+    bool GetRA2ecaldeadcellfilterflag() const{return RA2ecaldeadcellfilterflag();}
     bool GethbheNoiseFilterResult() const{return hbheNoiseFilter();}
     bool GethbeamHaloCSCTightHaloIdResult() const{return beamHaloCSCTightHaloId();}
 

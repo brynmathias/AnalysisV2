@@ -16,7 +16,7 @@
 
 using namespace boost::python;
 
-BOOST_PYTHON_MODULE(libOneLepton) {
+BOOST_PYTHON_MODULE(libOneLepton) { 
  class_<Operation::PTlepCut, bases<Operation::_Base> >("OP_PTlepCut",init<float,float>() );
  class_<Operation::DphiPTW_muCut, bases<Operation::_Base> >("OP_DphiPTW_muCut",init<float>() );
 
@@ -26,14 +26,18 @@ BOOST_PYTHON_MODULE(libOneLepton) {
  class_<OneLepton::EleJetDRFilter, bases<Compute::ObjectFilter<Event::Jet> > >("EleJetDRFilter",
 									   init<double>());
  class_<Operation::MuonCheck, bases<Operation::_Base > >("OP_MuonCheck");
-
-  class_<OneLepton::MuonJetDRFilter, bases<Compute::ObjectFilter<Event::Jet> > >("MuonJetDRFilter",
-                                                                                 init<double, const Utils::ParameterSet &>());
-  class_<OneLepton::LepMinIsoFilter, bases<Compute::ObjectFilter<Event::Lepton> > >("LepMinIsoFilter",
-									       init<double>());
+ 
+ class_<OneLepton::MuonJetDRFilter, bases<Compute::ObjectFilter<Event::Jet> > >("MuonJetDRFilter",
+										init<double, const Utils::ParameterSet &>());
+ class_<OneLepton::LepMinIsoFilter, bases<Compute::ObjectFilter<Event::Lepton> > >("LepMinIsoFilter",
+										   init<double>());
+ 
+ class_<OneLepton::JESCorrectionsFromFile, bases<Compute::ObjectFilter<Event::Jet> > >("JESCorrectionsFromFile",
+										       init<bool, std::string>());
 
  class_<OneLepton::LooseEleId, bases<Compute::ObjectFilter<Event::Lepton> > >("LooseEleId");
  class_<OneLepton::CustomEleIdRA4Sync, bases<Compute::ObjectFilter<Event::Lepton> > >("CustomEleIdRA4Sync",init<const Utils::ParameterSet &>());
+
   class_<OneLepton::CustomMuId, bases<Compute::ObjectFilter<Event::Lepton> > >("CustomMuId",init<float,int,int>());
   class_<OneLepton::CustomVBTFMuID, bases<Compute::ObjectFilter<Event::Lepton> > >("CustomVBTFMuID",init<const Utils::ParameterSet &>());
 
@@ -90,7 +94,7 @@ BOOST_PYTHON_MODULE(libOneLepton) {
 									      init<>());
 
  class_<OneLepton::MuonJetDRFilterRA4Sync, bases<Compute::ObjectFilter<Event::Jet> > >("MuonJetDRFilterRA4Sync",init<double, const Utils::ParameterSet &>());
- class_<OneLepton::EleJetDRFilterRA4Sync, bases<Compute::ObjectFilter<Event::Jet> > >("EleJetDRFilterRA4Sync",init<double, const Utils::ParameterSet &>());
+
  class_<OneLepton::PFJetIDLoose, bases<Compute::ObjectFilter<Event::Jet> > >("PFJetIDLoose",init<>());
  class_<Operation::NumOfLooseElectronsRA4, bases<Operation::_Base> >("NumOfLooseElectronsRA4", init<const std::string &,int,const Utils::ParameterSet &>());
 

@@ -209,8 +209,51 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   if "Mu40" in RefTrig:
    refTrigs = [TestTrig,RefTrig]
   else: refTrigs = [TestTrig]
-  refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True if "Mu40" not in RefTrig else False,TriggerReWeight = refTrigs,Verbose = True).ps())
-  testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,MaxObjects = 15,Plots = True,ReWeight = True,TriggerReWeight = [TestTrig],Verbose = True).ps())
+  refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,
+                                     MaxObjects = 15,Plots = True,ReWeight = True if "Mu40" not in RefTrig else False,
+                                     TriggerReWeight = refTrigs,Verbose = False,
+                                     ReWeightL1 = False, L1TriggerReWeight = refTrigs).ps())
+  testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,
+                                          MaxObjects = 15,Plots = True,ReWeight = True,
+                                          TriggerReWeight = [TestTrig],Verbose = False,
+                                          ReWeightL1 = True, L1TriggerReWeight = refTrigs).ps())
+  refTrigPS =  PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
+  refTrigPS.Triggers = [RefTrig]
+  refTrigOP = OP_MultiTrigger( refTrigPS.ps() )
+  testTrigPS = PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
+  testTrigPS.Triggers = [TestTrig]
+  print "RefTrig = %s, testTrig = %s"%(refTrigPS.Triggers[0],testTrigPS.Triggers[0])
+  testTrigOP = OP_MultiTrigger( testTrigPS.ps() )
+  cutTree.TAttach(cut,refTrigOP)
+  cutTree.TAttach(refTrigOP,refPlots)
+  cutTree.TAttach(refTrigOP,testTrigOP)
+  cutTree.TAttach(testTrigOP,testTrigPlots)
+  out.append(refTrigOP)
+  out.append(refPlots)
+  out.append(testTrigPlots)
+  out.append(testTrigOP)
+  return out
+  pass
+
+
+
+def AddHistPairWithL1(cutTree = None,cut = None, RefTrig = None, TestTrig = None, L1ListRef = None,L1ListTest = None):
+  """docstring for AddBinedHist"""
+  out = []
+  refTrigs = None
+  if "Mu40" in RefTrig:
+   refTrigs = [TestTrig,RefTrig]
+  else: refTrigs = [TestTrig]
+  refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,
+                                MaxObjects = 15,Plots = True,ReWeight = True if "Mu40" not in RefTrig else False,
+                                TriggerReWeight = refTrigs,Verbose = False,
+                                ReWeightL1 = True, L1TriggerReWeight = [L1ListRef]).ps())
+  testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig,MinObjects =0 ,
+                                     MaxObjects = 15,Plots = True,ReWeight = True,
+                                     TriggerReWeight = [TestTrig],Verbose = False,
+                                     ReWeightL1 = True, L1TriggerReWeight = [L1ListTest]).ps())
+
+
   refTrigPS =  PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
   refTrigPS.Triggers = [RefTrig]
   refTrigOP = OP_MultiTrigger( refTrigPS.ps() )
@@ -323,7 +366,12 @@ refTrigList =  ["HLT_*","HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9"]#,"HLT_HT35
 TestTrigList = ["HLT_*","HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8"]#,"HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
-
+refTrigList = ["HLT_HT150_v8"]
+TestTrigList = ["HLT_HT300_v9"]
+L1SeedRef = ["L1_HTT50"]
+L1SeedTest = ["L1_HTT100"]
+for ref,test,l1ref,l1test in zip(refTrigList,TestTrigList,L1SeedRef,L1SeedTest):
+  out.append(AddHistPairWithL1(cutTreeData,zeroMuon,ref,test,l1ref,l1test))
 # cutTreeData.TAttach(muDr,MHT_METCut)
 # cutTreeData.TAttach(secondJetET,muDr)
 

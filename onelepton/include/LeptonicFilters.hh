@@ -10,7 +10,7 @@
 #include <sstream>
 #include <vector>
 #include "ICF_NtupleData.hh"
-
+#include "JECUnc_JetCorrectionUncertainty.hh"
 
 using namespace Operation; // For wpol stuff
 
@@ -24,13 +24,19 @@ namespace OneLepton{
       ~EleJetDRFilter(){}
 
       bool Apply(const Event::Jet* ob){
-         if(mEv->LD_CommonElectrons().accepted.size()==0) return true;
-         else {
-            double dR=fabs(ROOT::Math::VectorUtil::DeltaR ((*ob),*(mEv->LD_CommonElectrons().accepted[0])));
-            return (dR > mDRCut );
-         }
+	double electronComJetDRmin_ = 9999999.;
+	for (std::vector<Lepton const *>::const_iterator iEl = mEv->LD_CommonElectrons().accepted.begin();
+	     iEl != mEv->LD_CommonElectrons().accepted.end();
+	     ++iEl) {
+	  if(fabs(ROOT::Math::VectorUtil::DeltaR ((*ob),(**iEl)))<electronComJetDRmin_) electronComJetDRmin_=fabs(ROOT::Math::VectorUtil::DeltaR (*ob,**iEl));
+	  
+	}
+	if (electronComJetDRmin_ > mDRCut) { return true; } // keep the jet
+	else {return false; }
+	
+	return true;
       }
-
+     
       std::ostream & Description(std::ostream & ostrm){
          ostrm << "Custom DR(e-jet) Cut > "<< mDRCut;
          return ostrm;
@@ -54,47 +60,41 @@ class LooseEleId : public Compute::ObjectFilter<Event::Lepton>{
   }
 };
 
-   class MuonJetDRFilter : public Compute::ObjectFilter<Event::Jet>{
-   public:
-     MuonJetDRFilter(double drCut, const Utils::ParameterSet & ps):
-         mDRCut(drCut),
-         mMuPtCut(ps.Get<double>("MinPt")),
-         mMuEtaCut(ps.Get<double>("MaxEta")),
-         mMuIsoCut(ps.Get<double>("MaxIsolation"))
-     { mModifies=false;}
+  class MuonJetDRFilter : public Compute::ObjectFilter<Event::Jet>{
+  public:
+    MuonJetDRFilter(double drCut, const Utils::ParameterSet & ps):
+      mDRCut(drCut),
+      mMuPtCut(ps.Get<double>("MinPt")),
+      mMuEtaCut(ps.Get<double>("MaxEta")),
+      mMuIsoCut(ps.Get<double>("MaxIsolation"))
+    { mModifies=false;}
+    
+    ~MuonJetDRFilter(){}
+    
+    
+    bool Apply(const Event::Jet* ob){
+      
+      float minDr =10000;
 
-      ~MuonJetDRFilter(){}
 
-      bool Apply(const Event::Jet* ob){
-        const Event::Lepton * leading_mu = 0;
-        for(std::vector<Event::Lepton>::const_iterator mu = mEv->LD_Muons().begin();
-            mu != mEv->LD_Muons().end();
-            ++mu){
-          if((mu->Pt() > mMuPtCut) &&
-             (fabs(mu->Eta()) < mMuEtaCut) &&
-             (mEv->IsMuonTracker(mu->GetIndex())) &&
-             (mEv->IsGlobalMuonPromptTight(mu->GetIndex())) &&
-             (mu->GetCombIsolation() < mMuIsoCut)){
-            leading_mu = &(*mu);
-            break;
-          }
-        }
-        if(!leading_mu) return true;
-        else return  fabs(ROOT::Math::VectorUtil::DeltaR ((*ob),*leading_mu)) > mDRCut;
-      }
-
-      std::ostream & Description(std::ostream & ostrm){
-         ostrm << "Custom DR(mu-jet) Cut > "<< mDRCut;
-         return ostrm;
-      }
-
+      for(std::vector<Event::Lepton const *>::const_iterator mu = mEv->LD_CommonMuons().accepted.begin();  mu != mEv->LD_CommonMuons().accepted.end();mu++)
+	{
+	  if(fabs(ROOT::Math::VectorUtil::DeltaR ((*ob),(**mu)))<minDr) minDr=fabs(ROOT::Math::VectorUtil::DeltaR (*ob,**mu));
+	}
+      return  minDr > mDRCut;
+    }
+    
+    std::ostream & Description(std::ostream & ostrm){
+      ostrm << "Custom DR(mu-jet) Cut > "<< mDRCut;
+      return ostrm;
+    }
+    
    private:
       double mDRCut;
      double mMuPtCut;
      double mMuEtaCut;
      double mMuIsoCut;
    };
-
 
 
   class MuonJetDRFilterRA4Sync : public Compute::ObjectFilter<Event::Jet>{
@@ -206,192 +206,6 @@ class LooseEleId : public Compute::ObjectFilter<Event::Lepton>{
     double mMaxInrTrkDz;
   };
 
-
-
-
-
-
-  class EleJetDRFilterRA4Sync : public Compute::ObjectFilter<Event::Jet>{
-  public:
-    EleJetDRFilterRA4Sync(double drCut, const Utils::ParameterSet & ps, const std::string & prefix = "Cuts"):
-      mDRCut(drCut),
-      mIso(ps.Get<bool>("Isolation")),
-      mHoE(ps.Get<bool>("HoverE")),
-      mDeltaEta(ps.Get<bool>("DeltaEtaAtVtx")),
-      mDeltaPhi(ps.Get<bool>("DeltaPhiAtVtx")),
-      mShh(ps.Get<bool>("SigmaIEtaIEta")),
-      mConv(ps.Get<bool>("Conversions")),
-      //      mCtrl(ps.Get<bool>("Ctrl")),
-
-      mRelCombIsoBarrel(ps.Get<double>(prefix+".RelCombIso.Barrel")),
-      mRelCombIsoEndcap(ps.Get<double>(prefix+".RelCombIso.Endcap")),
-      mTrkIsoBarrel(ps.Get<double>(prefix+".TrkIso.Barrel")),
-      mTrkIsoEndcap(ps.Get<double>(prefix+".TrkIso.Endcap")),
-      mEcalIsoBarrel(ps.Get<double>(prefix+".EcalIso.Barrel")),
-      mEcalIsoEndcap(ps.Get<double>(prefix+".EcalIso.Endcap")),
-      mHcalIsoBarrel(ps.Get<double>(prefix+".HcalIso.Barrel")),
-      mHcalIsoEndcap(ps.Get<double>(prefix+".HcalIso.Endcap")),
-      mHoEBarrel(ps.Get<double>(prefix+".HoverE.Barrel")),
-      mHoEEndcap(ps.Get<double>(prefix+".HoverE.Endcap")),
-      mDeltaPhiBarrel(ps.Get<double>(prefix+".DeltaPhi.Barrel")),
-      mDeltaPhiEndcap(ps.Get<double>(prefix+".DeltaPhi.Endcap")),
-      mDeltaEtaBarrel(ps.Get<double>(prefix+".DeltaEta.Barrel")),
-      mDeltaEtaEndcap(ps.Get<double>(prefix+".DeltaEta.Endcap")),
-      mSigmaIEtaIEtaBarrel(ps.Get<double>(prefix+".SigmaIEtaIEta.Barrel")),
-      mSigmaIEtaIEtaEndcap(ps.Get<double>(prefix+".SigmaIEtaIEta.Endcap")),
-      mDCot(ps.Get<double>(prefix+".Conversions.DCot")),
-      mDist(ps.Get<double>(prefix+".Conversions.Dist")),
-      mMissingHits(ps.Get<int>(prefix+".Conversions.MissingHits")),
-      mSupressErrors(ps.Contains("SupressErrors") ? ps.Get<bool>("SupressErrors") : false),
-      mCorrEEMisalig(ps.Contains("CorrEEMisalig") ? ps.Get<bool>("CorrEEMisalig") : false)
-    { mModifies=false;}
-
-    ~EleJetDRFilterRA4Sync(){}
-
-    // Based on Paolo Meridiani's corrections
-    float dPhiCorr(double elePhi , double eleEta){
-      double C, D, A;
-      if (eleEta>1.479){
-        C = 0.0;  D = 0.52; A = 2.17;
-      }
-      else if (eleEta<-1.479){
-	C = 0.0; D = 0.45; A = -1.58;
-      }
-      else return 0;
-      return C + (D/325.)*sinh(eleEta)*sin(A-elePhi);
-    }
-    float dEtaCorr(double elePhi , double eleEta){
-      double C, DZ, D, A;
-      if (eleEta>1.479){
-        C = 0.0013; DZ = -0.06; D = 0.52; A = 2.17;
-      }
-      else if (eleEta<-1.479){
-        C = -0.0013; DZ = -0.32; D = 0.45; A = -1.58;
-      }
-      else return 0;
-      return C + (tanh(eleEta)/325.)*(DZ-D*sinh(eleEta)*cos(elePhi-A));
-    }
-
-
-
-    bool Apply(const Event::Jet* ob){
-
-      double electronComJetDRmin_ = 9999999.;
-      for (std::vector<Lepton>::const_iterator iEl = mEv->LD_Electrons().begin();
-	   iEl != mEv->LD_Electrons().end();
-	   ++iEl) {
-
-	bool passIso = false;
-	bool passHoE = false;
-	bool passDeltaEta = false; bool passDeltaPhi = false;
-	bool passShh = false;
-	bool passConv = false;
-	bool passExtra = false;
-
-
-	//         bool passConvExtra = false;
-	int el = (iEl)->GetIndex();
-
-	//passConv = mEv->GetElectronHasValidHitInFirstPixelBarrel(el);
-	try{
-	  passConv = (fabs(mEv->GetElectronDCot(el)) > mDCot || fabs(mEv->GetElectronDist(el)) > mDist);
-	  passConv &= (mEv->GetElectronGsfTrackTrackerExpectedHitsInner(el) <= mMissingHits);
-	}
-	catch(std::invalid_argument & e){
-
-	  if(!mSupressErrors) throw e;
-	}
-
-	//      if (fabs(ob->Eta()) < 1.4442) {
-	if (fabs(mEv->GetElectronESuperClusterEta(el)) < 1.4442) {
-
-	  // Barrel
-	  passIso = ( (((iEl->GetTrkIsolation()) + max(0., iEl->GetEcalIsolation()-1.) + iEl->GetHcalIsolation())/(iEl->Pt())) < mRelCombIsoBarrel );
-	  //      passIso = ( iEl->GetCombIsolation() < mRelCombIsoBarrel );
-	  //            ( iEl->GetTrkIsolation() < mTrkIsoBarrel &&
-	  //           iEl->GetEcalIsolation()< mEcalIsoBarrel &&
-	  //           iEl->GetHcalIsolation()< mHcalIsoBarrel );
-	  passHoE = ( mEv->GetElectronHoE(el) < mHoEBarrel );
-	  passDeltaPhi = ( fabs(mEv->GetElectronDeltaPhiAtVtx(el)) < mDeltaPhiBarrel );
-	  passDeltaEta = ( fabs(mEv->GetElectronDeltaEtaAtVtx(el)) < mDeltaEtaBarrel );
-	  passShh = ( mEv->GetElectronSigmaIetaIeta(el) < mSigmaIEtaIEtaBarrel );
-	}
-	//      else if (fabs(iEl->Eta()) > 1.560 ) {
-	else if ( (fabs(mEv->GetElectronESuperClusterEta(el)) > 1.560) && (fabs(mEv->GetElectronESuperClusterEta(el)) < 2.5) ) {
-	  // End-caps
-	  passIso = ( iEl->GetCombIsolation() < mRelCombIsoEndcap );
-	  //( iEl->GetTrkIsolation() < mTrkIsoEndcap &&
-	  //        iEl->GetEcalIsolation() < mEcalIsoEndcap &&
-	  //        iEl->GetHcalIsolation() < mHcalIsoEndcap );
-	  passHoE = ( mEv->GetElectronHoE(el) < mHoEEndcap );
-	  if (mCorrEEMisalig){
-	    passDeltaPhi = ( fabs(mEv->GetElectronDeltaPhiAtVtx(el)-dPhiCorr(iEl->Phi(),iEl->Eta())) < mDeltaPhiEndcap ) ;
-	    passDeltaEta = ( fabs(mEv->GetElectronDeltaEtaAtVtx(el)-dEtaCorr(iEl->Phi(),iEl->Eta())) < mDeltaEtaEndcap);
-	  }
-
-	  passShh = ( mEv->GetElectronSigmaIetaIeta(el) < mSigmaIEtaIEtaEndcap );
-
-	} else { return false; }
-
-	try {
-	  // 2011 definition
-	  if (
-	      ( fabs(mEv->GetElectronD0BS(el)) < 0.02) &&
-	      ( fabs(mEv->electronGsfTrackVertexz()->at(el) - (mEv->GetvertexPosition(0).Z())) < 1. )
-	      ) { passExtra = true; }
-	}
-	catch (std::invalid_argument & e) {
-	  // 2010 definition
-	  if (
-	      ( fabs(mEv->GetElectronD0BS(el)) < 0.02)
-	      ) { passExtra = true; }
-	}
-
-
-	if (mIso==passIso && mHoE==passHoE && mDeltaEta==passDeltaEta && mDeltaPhi==passDeltaPhi &&
-	    mShh==passShh && mConv == passConv && passExtra==true) {
-
-	  double tmpElectronComJetDR_ = fabs(ROOT::Math::VectorUtil::DeltaR(*ob,*iEl));
-	  if (tmpElectronComJetDR_ < electronComJetDRmin_) { electronComJetDRmin_ = tmpElectronComJetDR_; }
-	  return  fabs(ROOT::Math::VectorUtil::DeltaR ((*ob),*iEl)) > mDRCut;
-
-	}
-
-      } // ~ end of looping over the Electrons
-
-      if (electronComJetDRmin_ > mDRCut) { return true; } // keep the jet
-      else {return false; }
-
-      return true;
-    } // ~ end of bool function
-
-
-    std::ostream & Description(std::ostream & ostrm){
-      ostrm << "Custom DR(el-jet) Cut > "<< mDRCut;
-      return ostrm;
-    }
-
-  private:
-    double mDRCut;
-    bool mIso;
-    bool mHoE;
-    bool mDeltaEta, mDeltaPhi;
-    bool mShh;
-    bool mConv;
-    //     bool mCtrl;
-    double mRelCombIsoBarrel, mRelCombIsoEndcap;
-    double mTrkIsoBarrel, mTrkIsoEndcap;
-    double mEcalIsoBarrel, mEcalIsoEndcap;
-    double mHcalIsoBarrel, mHcalIsoEndcap;
-    double mHoEBarrel, mHoEEndcap;
-    double mDeltaPhiBarrel, mDeltaPhiEndcap;
-    double mDeltaEtaBarrel, mDeltaEtaEndcap;
-    double mSigmaIEtaIEtaBarrel, mSigmaIEtaIEtaEndcap;
-    double mDCot, mDist;
-    int mMissingHits;
-    bool mSupressErrors;
-    bool mCorrEEMisalig;
-  };
 
    class LepMinIsoFilter : public Compute::ObjectFilter<Event::Lepton>{
    public:
@@ -873,6 +687,54 @@ class MuPtScale : public Compute::ObjectFilter<Event::Lepton> {
     enum LeptonType{ ELECTRON, MUON } mLepton;
 
   };
+
+
+class JESCorrectionsFromFile : public Compute::ObjectFilter<Event::Jet> {
+    
+  public:
+    
+  JESCorrectionsFromFile(bool up, std::string JECUncFile)
+      
+    {
+      mModifies = true;
+      Up_bool = up;
+      mJECUncFile = JECUncFile;
+
+    }
+    
+    ~JESCorrectionsFromFile(){} 
+    
+    bool Apply( Event::Jet* ob ) {
+      if (!ob) { return true; }
+
+
+      Operation::JetCorrectionUncertainty jecUnc(mJECUncFile);
+      jecUnc.setJetEta(ob->Eta());
+      jecUnc.setJetPt(ob->Pt());
+      float unc = jecUnc.getUncertainty(true);     
+      // cout << " trulala"<<endl;
+      float corfactor;
+      if (Up_bool) corfactor=1+unc;
+      else corfactor=1-unc;
+      ob->SetPxPyPzE(corfactor * ob->Px(),
+		     corfactor * ob->Py(),
+		     corfactor * ob->Pz(),
+		     corfactor * ob->E());
+      
+      return true;
+    }
+    
+    
+    std::ostream & Description(std::ostream & ostrm) {
+      ostrm << "Jet Energy Corrections applied to jets"<<endl; 
+      return ostrm;
+    }
+    
+  private:
+    float  Up_bool ;
+  std::string  mJECUncFile;
+  };
+
 
 
 

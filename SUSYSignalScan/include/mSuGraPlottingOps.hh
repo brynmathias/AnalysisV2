@@ -24,7 +24,22 @@ class TH2D;
 
 namespace Operation {
 
-   class mSuGraPlottingOps : public PlottingBase {
+class SMPlottingOps : public PlottingBase {
+ public:
+  SMPlottingOps(const Utils::ParameterSet & ps);
+  ~SMPlottingOps();
+  void Start(Event::Data & ev);
+  bool Process(Event::Data & ev);
+
+  std::ostream & Description(std::ostream & ostrm);
+
+ private:
+  void BookHistos();
+  TH1D * SMHist, *SMHist_noweight;
+  std::string dirName_;
+};
+
+class mSuGraPlottingOps : public PlottingBase {
 
 
   public:
@@ -44,12 +59,12 @@ namespace Operation {
    private:
 
      void BookHistos();
-
+     //     void BookHistos(){}
      std::string dirName_;
      std::string mSuGraFile_;
 
      bool verbose_;
-
+     bool SM_;
 
 
      std::vector<TH3D *> H_M0_M12_mChi;   std::vector<TH3D *> H_M0_M12_mChi_noweight;
@@ -91,7 +106,6 @@ namespace Operation {
     std::vector<double> GG_;
     std::vector<double> SG_;
     std::map< std::pair<int, int>, std::vector<double> > M0_M12_NLO_;
-    TH1D * SMHist;
 
   }; //~mSuGra scan class
 }
