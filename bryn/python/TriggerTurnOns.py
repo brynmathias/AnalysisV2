@@ -368,8 +368,8 @@ for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
 refTrigList = ["HLT_HT150_v8"]
 TestTrigList = ["HLT_HT300_v9"]
-L1SeedRef = ["L1_HTT50"]
-L1SeedTest = ["L1_HTT100"]
+L1SeedRef = ["Rubbis"]
+L1SeedTest = ["L1_HTT50"]
 for ref,test,l1ref,l1test in zip(refTrigList,TestTrigList,L1SeedRef,L1SeedTest):
   out.append(AddHistPairWithL1(cutTreeData,zeroMuon,ref,test,l1ref,l1test))
 # cutTreeData.TAttach(muDr,MHT_METCut)
