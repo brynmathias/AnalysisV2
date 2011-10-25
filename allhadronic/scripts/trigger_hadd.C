@@ -60,36 +60,36 @@ void trigger_hadd() {
   
   //std::string file_name("Trigger_HT42_incomplete");
   //std::string file_name("Trigger_HT_Run2011A_L1OffSet");
-  std::string file_name("Trigger_HT_Run2011A");
+  std::string file_name("Trigger_HTRun2011AB");
   //std::string file_name("Trigger_HT_Run2011A_AllReco_17June");
   
   std::string dir_name("Triggers");
   std::string his_name = "TriggersVsRunNumber";
   
   std::vector<std::string> filters;
-  filters.push_back("HLT_HT???_MHT??_v*");
+  //filters.push_back("HLT_HT???_MHT??_v*");
 //   filters.push_back("HLT_HT250_AlphaT0p??_v*");
 
-//   filters.push_back("HLT_HT1??_v*");
-//   filters.push_back("HLT_HT2??_v*");
+   filters.push_back("HLT_HT1??_v*");
+   filters.push_back("HLT_HT2??_v*");
 
 //   filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
 //   filters.push_back("HLT_Mu?_HT200_v*");
 //   filters.push_back("HLT_Mu??_HT200_v*");
 
-//   filters.push_back("HLT_HT25?_v*");
+ //  filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
-//   filters.push_back("HLT_HT3??_v*");
-//   filters.push_back("HLT_HT4??_v*");
-//   filters.push_back("HLT_HT5??_v*");
-//   filters.push_back("HLT_HT6??_v*");
-//   filters.push_back("HLT_HT7??_v*");
-//   filters.push_back("HLT_HT8??_v*");
-//   filters.push_back("HLT_HT9??_v*");
-//   filters.push_back("HLT_HT9??_v*");
-//   filters.push_back("HLT_HT1???_v*");
-  
+   filters.push_back("HLT_HT3??_v*");
+ //  filters.push_back("HLT_HT4??_v*");
+ //  filters.push_back("HLT_HT5??_v*");
+ //  filters.push_back("HLT_HT6??_v*");
+ //  filters.push_back("HLT_HT7??_v*");
+ //  filters.push_back("HLT_HT8??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT1???_v*");
+   filters.push_back("HLT_IsoMu??_eta2p1_v*");
   typedef std::map<int,float> Runs;
   typedef std::map<std::string,Runs> Triggers;
   Triggers trigs;

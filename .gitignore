@@ -9,9 +9,10 @@ TestResults
 *.obj
 *.cvsignore
 
-
+*filtered.json
+*Trigger*.json
 .DS_Store
-
+AK5*
 *.old
 *.log
 *.out
