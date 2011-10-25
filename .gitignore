@@ -4,14 +4,14 @@ CVS
 .hg
 .hgignore
 
-bin
 TestResults
-*.obj
 *.cvsignore
 
 
 .DS_Store
-
+*.so
+*.cxx
+*.csh
 *.old
 *.log
 *.out
@@ -21,4 +21,4 @@ TestResults
 *.o
 *.d
 .svn
-.pyc
+*.pyc

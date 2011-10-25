@@ -359,20 +359,25 @@ for ref,test in zip(refTrigList,TestTrigList):
     out.append(AddHistPair(cutTreeData,ht325,ref,test))
   if int(bin) is 375:
     out.append(AddHistPair(cutTreeData,ht375,ref,test))
+
+refTrigList=
+TestTrigList=
+for ref,test in zip(refTrigList,TestTrigList)
+  out.append(AddHistPair(cutTreeData,muon,ref,test))
 # "HLT_HT150_v8","HLT_HT200_v8","HLT_HT250_v8","HLT_HT400_v8","HLT_HT450_v8","HLT_HT600_v1"
 # "HLT_HT200_v8","HLT_HT250_v8","HLT_HT300_v9","HLT_HT450_v8","HLT_HT500_v8","HLT_HT650_v1"
 
 # If muon is not required
-refTrigList =  ["HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9"]#,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT150_v8"]
-TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8"]#,"HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]
+refTrigList =  ["HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]#,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT150_v8"]
+TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1"]#,"HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9"]
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
-refTrigList  = ["HLT_HT150_v8"]
-TestTrigList = ["HLT_HT300_v9"]
-L1SeedRef    = ["NONE"]
-L1SeedTest   = ["L1_HTT50"]
-for ref,test,l1ref,l1test in zip(refTrigList,TestTrigList,L1SeedRef,L1SeedTest):
-  out.append(AddHistPairWithL1(cutTreeData,zeroMuon,ref,test,l1ref,l1test))
+# refTrigList  = ["HLT_HT150_v8"]
+# TestTrigList = ["HLT_HT300_v9"]
+# L1SeedRef    = ["NONE"]
+# L1SeedTest   = ["L1_HTT50"]
+# for ref,test,l1ref,l1test in zip(refTrigList,TestTrigList,L1SeedRef,L1SeedTest):
+  # out.append(AddHistPairWithL1(cutTreeData,zeroMuon,ref,test,l1ref,l1test))
 # cutTreeData.TAttach(muDr,MHT_METCut)
 # cutTreeData.TAttach(secondJetET,muDr)
 
