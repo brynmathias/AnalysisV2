@@ -4,15 +4,16 @@ CVS
 .hg
 .hgignore
 
-bin
 TestResults
-*.obj
 *.cvsignore
 
 *filtered.json
 *Trigger*.json
 .DS_Store
 AK5*
+*.so
+*.cxx
+*.csh
 *.old
 *.log
 *.out
