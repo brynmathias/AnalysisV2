@@ -39,7 +39,7 @@ msugra_pset = PSet(
     yBins =80,
     yLow =0.,
     yHigh =800.,
-    zBins =40,
+    zBins =1,
     zLow =0.,
     zHigh =1000.,
     verbose = True,
@@ -86,7 +86,7 @@ def smsOps(model = "", cutTree = None, cut = None, label = "") :
   pset2.yBins = 44
   pset2.yLow = 50.
   pset2.yHigh = 1150.
-  mSUGRAFile = susydir +  "SUSYSignalScan/textfiles/scale_xsection_nlo2.0_m0_m12_10_1v1.txt"
+  mSUGRAFile = susydir +  "SUSYSignalScan/textfiles/scale_xsection_nlo1.0_m0_m12_10_1v1.txt"
   processes, kfactors = readKFactors(mSUGRAFile)
   ps = kfactorsToPSet(processes, kfactors)
   pset2._quiet_set("NLO", ps)
