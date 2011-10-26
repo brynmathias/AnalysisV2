@@ -206,11 +206,11 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   """docstring for AddBinedHist"""
   out = []
   refTrigs = None
-  if "Mu40" in RefTrig:
+  if "Mu" in RefTrig:
    refTrigs = [TestTrig,RefTrig]
   else: refTrigs = [TestTrig]
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0,
-                                     MaxObjects = 15, Plots = True, ReWeight = True if "Mu40" not in RefTrig else False,
+                                     MaxObjects = 15, Plots = True, ReWeight = True if "Mu" not in RefTrig else False,
                                      TriggerReWeight = refTrigs,    Verbose = False,
                                      ReWeightL1 = False, L1TriggerReWeight = refTrigs).ps())
   testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig, MinObjects = 0,
@@ -242,11 +242,11 @@ def AddHistPairWithL1(cutTree = None,cut = None, RefTrig = None, TestTrig = None
   """docstring for AddBinedHist"""
   out = []
   refTrigs = None
-  if "Mu40" in RefTrig:
+  if "Mu" in RefTrig:
    refTrigs = [TestTrig,RefTrig]
   else: refTrigs = [TestTrig]
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,
-                                MaxObjects = 15,Plots = True, ReWeight = True if "Mu40" not in RefTrig else False,
+                                MaxObjects = 15,Plots = True, ReWeight = True if "Mu" not in RefTrig else False,
                                 TriggerReWeight = refTrigs,   Verbose = False,
                                 ReWeightL1 = False, L1TriggerReWeight = [L1ListRef]).ps())
 
@@ -377,8 +377,8 @@ for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
 
 
-refTrigList  = ["HLT_Mu40_v*"]
-TestTrigList = ["HLT_HT200_v*"]
+refTrigList  = ["HLT_Mu30_v5"]
+TestTrigList = ["HLT_HT250_v7"]
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,oneMuon,ref,test))
 
