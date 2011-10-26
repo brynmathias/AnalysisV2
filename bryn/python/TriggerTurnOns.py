@@ -378,7 +378,7 @@ for ref,test in zip(refTrigList,TestTrigList):
 
 
 refTrigList  = ["HLT_Mu40_v*"]
-TestTrigList = ["HLT_HT200_v*"]
+TestTrigList = ["HLT_HT250_v*"]
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,oneMuon,ref,test))
 

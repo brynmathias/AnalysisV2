@@ -71,7 +71,7 @@ void trigger_hadd() {
 //   filters.push_back("HLT_HT250_AlphaT0p??_v*");
 
    //filters.push_back("HLT_HT1??_v*");
-   filters.push_back("HLT_HT20?_v*");
+   filters.push_back("HLT_HT25?_v*");
 
 //   filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
