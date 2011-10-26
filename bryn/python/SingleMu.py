@@ -5980,7 +5980,7 @@ SingleMu=PSet(
     "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos/ICF/automated/2011_10_19_17_01_43/SusyCAF_Tree_99_1_J9O.root" ,
     "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos/ICF/automated/2011_10_19_17_01_43/SusyCAF_Tree_9_1_bOi.root" ,
 
-    ]
+    ],
 
 
     Weight = 1.0,
