@@ -89,6 +89,11 @@ void trigger_hadd() {
  //  filters.push_back("HLT_HT9??_v*");
  //  filters.push_back("HLT_HT9??_v*");
  //  filters.push_back("HLT_HT1???_v*");
+   filters.push_back("HLT_Mu?_v*");
+   filters.push_back("HLT_Mu??_v*");
+   filters.push_back("HLT_IsoMu?_v*");
+   filters.push_back("HLT_IsoMu??_v*");
+   filters.push_back("HLT_IsoMu?_eta2p1_v*");
    filters.push_back("HLT_IsoMu??_eta2p1_v*");
   typedef std::map<int,float> Runs;
   typedef std::map<std::string,Runs> Triggers;
@@ -99,7 +104,7 @@ void trigger_hadd() {
     
     // Construct file name
     std::stringstream ss;
-    ss << "./" << file_name << "_" << ii << ".root";
+    ss << "../python/" << file_name << "_" << ii << ".root";
     
     // Attempt to open file
     TFile* file = new TFile(ss.str().c_str());

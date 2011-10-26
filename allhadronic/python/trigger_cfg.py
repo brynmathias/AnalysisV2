@@ -190,6 +190,7 @@ ps = PSet(
                "HLT_Mu*_HT*_v*",
                "HLT_IsoMu*_v*",
                "HLT_IsoMu*_eta2p1_v*",
+               "HLT_Mu*_v*",
                ],
 
     Versus = 2,
