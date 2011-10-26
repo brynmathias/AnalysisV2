@@ -60,7 +60,7 @@ void trigger_hadd() {
   
   //std::string file_name("Trigger_HT42_incomplete");
   //std::string file_name("Trigger_HT_Run2011A_L1OffSet");
-  std::string file_name("Trigger_HTRun2011AB");
+  std::string file_name("Trigger_SingleMu");
   //std::string file_name("Trigger_HT_Run2011A_AllReco_17June");
   
   std::string dir_name("Triggers");
@@ -70,8 +70,8 @@ void trigger_hadd() {
   //filters.push_back("HLT_HT???_MHT??_v*");
 //   filters.push_back("HLT_HT250_AlphaT0p??_v*");
 
-   filters.push_back("HLT_HT1??_v*");
-   filters.push_back("HLT_HT2??_v*");
+   //filters.push_back("HLT_HT1??_v*");
+   filters.push_back("HLT_HT20?_v*");
 
 //   filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
@@ -91,10 +91,10 @@ void trigger_hadd() {
  //  filters.push_back("HLT_HT1???_v*");
    filters.push_back("HLT_Mu?_v*");
    filters.push_back("HLT_Mu??_v*");
-   filters.push_back("HLT_IsoMu?_v*");
-   filters.push_back("HLT_IsoMu??_v*");
-   filters.push_back("HLT_IsoMu?_eta2p1_v*");
-   filters.push_back("HLT_IsoMu??_eta2p1_v*");
+  // filters.push_back("HLT_IsoMu?_v*");
+  // filters.push_back("HLT_IsoMu??_v*");
+  // filters.push_back("HLT_IsoMu?_eta2p1_v*");
+  // filters.push_back("HLT_IsoMu??_eta2p1_v*");
   typedef std::map<int,float> Runs;
   typedef std::map<std::string,Runs> Triggers;
   Triggers trigs;

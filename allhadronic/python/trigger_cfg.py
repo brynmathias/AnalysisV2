@@ -236,6 +236,7 @@ data=PSet(
     )
 
 from data.Run2011.HTRun2011AB import *
+from SingleMu import *
 # -----------------------------------------------------------------------------
 # Analysis
 
@@ -245,7 +246,7 @@ anal=Analysis("Trigger")
 #anal.AddJetFilter("PreCC",JetCorrections)
 anal+=cut_flow
 
-anal.Run(".",conf,[HTRun2011AB])
+anal.Run(".",conf,[SingleMu])
 #anal.Run(".",conf,[Jet_35pb_WithTP_json051110])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011A_PromptReco_v1])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])
