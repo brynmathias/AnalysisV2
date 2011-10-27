@@ -211,7 +211,7 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   else: refTrigs = [TestTrig]
   checkExists = CheckTrigExists( PSet(TrigExistsList = [RefTrig,TestTrig]).ps() )
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig, MinObjects = 0,
-                                     MaxObjects = 15, Plots = True, ReWeight = True if "Mu40" not in RefTrig else False,
+                                     MaxObjects = 15, Plots = True, ReWeight = False if "Mu40" not in RefTrig else False,
                                      TriggerReWeight = refTrigs,    Verbose = False,
                                      ReWeightL1 = False, L1TriggerReWeight = refTrigs).ps())
 
