@@ -124,22 +124,22 @@ checkTrigExists::checkTrigExists( const Utils::ParameterSet& ps ) :
     std::vector<std::string>::const_iterator ite = trigList.end();
     for( ; it != ite; ++it){
       if( it->at(it->size()-1) != '*'){
-        std::map<std::string, bool>::const_iterator trig = ev.hlt()->find(*it);
-        if( trig == ev.hlt()->end() ) return false;
+        // std::map<std::string, bool>::const_iterator trig = ev.hlt()->find(*it);
+        std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*it);
+        if( prescale == ev.hlt_prescaled()->end() ) return false;
+        if( prescale != ev.hlt_prescaled()->end() && prescale->second == 0 ) return false;
       }else{
         size_t found;
     // now loop though the map and test the string part -- slow!
-        std::map<std::string, bool>::const_iterator itrig = ev.hlt()->begin();
-        std::map<std::string, bool>::const_iterator jtrig = ev.hlt()->end();
         std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
-        for( ; itrig != jtrig; ++itrig, ++ipre ){
-          if(itrig->second){
+        std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->end();
+        for( ; ipre != jpre; ++ipre, ++ipre ){
             std::string str = *it;
             str = str.substr(0, str.size() - 1 );
           // cout <<*it<< " compare with " << itrig->first << endl;
-            found = itrig->first.find(str);
+            found = ipre->first.find(str);
             if(found == string::npos){ return false; }
-          }
+            if( found != string::npos && ipre->second == 0 ) return false;
         }
       }
     }
