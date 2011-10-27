@@ -112,3 +112,47 @@ std::ostream& alphaTriggerEmu::Description( std::ostream &ostrm){
   ostrm << "Cut on emulated alphaT trigger of " << aTCut_ << " using jets above " << JetEt_ << " GeV" << " HT above " << HtCut_ << " and limited to " << maxNjets_ << "Jets ";
   return ostrm;
 }
+
+
+//---------------------------------------------------------------------
+checkTrigExists::checkTrigExists( std::vector<std::string> toCheck ) :
+  trigList(toCheck)
+    {;}
+
+  bool checkTrigExists::Process( Event::Data &ev ){
+    std::vector<std::string>::const_iterator it = trigList.begin();
+    std::vector<std::string>::const_iterator ite = trigList.end();
+    for( ; it != ite; ++it){
+      if( it->at(it->size()-1) != '*'){
+        std::map<std::string, bool>::const_iterator trig = ev.hlt()->find(*it);
+        if( trig == ev.hlt()->end() ) return false;
+      }else{
+        size_t found;
+    // now loop though the map and test the string part -- slow!
+        std::map<std::string, bool>::const_iterator itrig = ev.hlt()->begin();
+        std::map<std::string, bool>::const_iterator jtrig = ev.hlt()->end();
+        std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
+        for( ; itrig != jtrig; ++itrig, ++ipre ){
+          if(itrig->second){
+            std::string str = *it;
+            str = str.substr(0, str.size() - 1 );
+          // cout <<*it<< " compare with " << itrig->first << endl;
+            found = itrig->first.find(str);
+            if(found == string::npos){ return false; }
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+std::ostream& checkTrigExists::Description( std::ostream &ostrm){
+  ostrm << "Check that the following triggers: \n ";
+    std::vector<std::string>::const_iterator it = trigList.begin();
+    std::vector<std::string>::const_iterator ite = trigList.end();
+    for( ; it != ite; ++it){
+      ostrm << "\t" << *it << "\n";
+    }
+    ostrm << "Exist in the event.";
+    return ostrm;
+}
