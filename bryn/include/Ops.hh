@@ -40,6 +40,20 @@ private:
   int maxNjets_;
 };
 
+
+class checkTrigExists : public Operation::_Base
+{
+public:
+  checkTrigExists (const Utils::ParameterSet&);
+  ~checkTrigExists(){;}
+  bool Process( Event::Data&);
+  std::ostream& Description( std::ostream& );
+private:
+  std::vector<std::string> trigList;
+};
+
+
+
 }
 
 #endif // bryn_include_Ops_hh
