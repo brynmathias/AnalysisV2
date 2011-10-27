@@ -115,8 +115,8 @@ std::ostream& alphaTriggerEmu::Description( std::ostream &ostrm){
 
 
 //---------------------------------------------------------------------
-checkTrigExists::checkTrigExists( std::vector<std::string> toCheck ) :
-  trigList(toCheck)
+checkTrigExists::checkTrigExists( const Utils::ParameterSet& ps ) :
+  trigList(ps.Get< std::vector<std::string> >("TrigExistsList") )
     {;}
 
   bool checkTrigExists::Process( Event::Data &ev ){

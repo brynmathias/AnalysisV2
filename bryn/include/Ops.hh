@@ -44,7 +44,7 @@ private:
 class checkTrigExists : public Operation::_Base
 {
 public:
-  checkTrigExists (std::vector<std::string> toCheck);
+  checkTrigExists (const Utils::ParameterSet&);
   ~checkTrigExists(){;}
   bool Process( Event::Data&);
   std::ostream& Description( std::ostream& );

@@ -29,4 +29,10 @@ BOOST_PYTHON_MODULE(libbryn) {
 
   class_<Operation::confHT, bases<Operation::_Base> >("confHT", init<float,float>());
 
+
+  class_<Operation::checkTrigExists, bases<Operation::_Base> >( "CheckTrigExists",
+                    init<const Utils::ParameterSet&>());
+
+
+
 }

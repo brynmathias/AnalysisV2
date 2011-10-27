@@ -209,6 +209,7 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   if "Mu40" in RefTrig:
    refTrigs = [TestTrig,RefTrig]
   else: refTrigs = [TestTrig]
+  checkExists = CheckTrigExists( PSet(TrigExistsList = [RefTrig,TestTrig]).ps)
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig, MinObjects = 0,
                                      MaxObjects = 15, Plots = True, ReWeight = True if "Mu40" not in RefTrig else False,
                                      TriggerReWeight = refTrigs,    Verbose = False,
@@ -226,7 +227,8 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   testTrigPS.Triggers = [TestTrig]
   print "RefTrig = %s, testTrig = %s"%(refTrigPS.Triggers[0],testTrigPS.Triggers[0])
   testTrigOP = OP_MultiTrigger( testTrigPS.ps() )
-  cutTree.TAttach(cut,refTrigOP)
+  cutTree.TAttach(cut,checkExists)
+  cutTree.TAttach(checkExists,refTrigOP)
   cutTree.TAttach(refTrigOP,refPlots)
   cutTree.TAttach(refTrigOP,testTrigOP)
   cutTree.TAttach(testTrigOP,testTrigPlots)
@@ -234,6 +236,7 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   out.append(refPlots)
   out.append(testTrigPlots)
   out.append(testTrigOP)
+  out.append(checkExists)
   return out
   pass
 
