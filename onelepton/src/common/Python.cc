@@ -43,7 +43,7 @@ BOOST_PYTHON_MODULE(libOneLepton) {
 
 
   class_<Operation::HTPTCut, bases<Operation::_Base> >("OP_HTPTCut",
-						     init<float>());
+						       init<float,float>());
   class_<Operation::HTlepCut, bases<Operation::_Base> >("RECO_LeptonicHTCut",
 						     init<float>());
 

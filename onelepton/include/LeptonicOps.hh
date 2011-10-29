@@ -125,7 +125,7 @@ class HTPTCut : public Operation::_Base {
 
   public:
 
-    HTPTCut(float mHTPTCutVal);
+  HTPTCut(float mHTPTCutVal,float mHTPTCutValUp=-1 );
     ~HTPTCut() {;}
     bool Process(Event::Data & ev);
     std::ostream& Description(std::ostream& ostrm);
@@ -133,7 +133,7 @@ class HTPTCut : public Operation::_Base {
   private:
 
     float mHTPTCutVal;
-
+    float mHTPTCutValUp;
   };
 
   class HTlepCut : public Operation::_Base {

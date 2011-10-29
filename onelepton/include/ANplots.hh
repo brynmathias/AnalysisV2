@@ -117,6 +117,13 @@ namespace Operation {
     TH1D* RelCombIso_neg;
     TH1D* RelCombIso_tot;
 
+
+    // Slava's binning
+    TH1D* LPf_tot;
+    TH1D* MTf_tot;
+    TH1D* STf_tot;
+    TH1D* LepPtf_tot;
+
   }; //~ANplots class
 
 }

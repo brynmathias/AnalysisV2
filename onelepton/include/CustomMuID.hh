@@ -91,20 +91,9 @@ namespace OneLepton{
       bool id = false;
       if (mID=="Tight") { id = (mEv->IsMuonTracker(ob->GetIndex())) && (mEv->IsGlobalMuonPromptTight(ob->GetIndex())); }
       else { id = (mEv->IsMuonGlobal(ob->GetIndex())); }
-
-      //      /*
-      double muonComJetDRmin_ = 9999999.;
-      if( doJetLoop_){
-      for (std::vector<Event::Jet const *>::const_iterator iMuj = mEv->JD_CommonJets().accepted.begin();
-      iMuj != mEv->JD_CommonJets().accepted.end(); iMuj++) {
-
-        double tmpMuonComJetDR_ = fabs(ROOT::Math::VectorUtil::DeltaR(*ob,**iMuj));
-
-        if ( (tmpMuonComJetDR_ < muonComJetDRmin_) && (tmpMuonComJetDR_>0.1)) { muonComJetDRmin_ = tmpMuonComJetDR_; }
-      } // ~ end of loop over the common Jts.
       //Add a check to do jet loop or not, this solves problem with the cross cleaner.
       //      */
-    }
+    
       bool muonIsTight = false;
 
       try {
@@ -118,7 +107,6 @@ namespace OneLepton{
           ( mEv->muonGlobalTracknumberOfValidTrackerHits()->at(ob->GetIndex()) >= mMinGlbTrkNumOfValidHits )  &&
           ( mEv->muonNumberOfPixelLayersWithMeasurement()->at(ob->GetIndex()) >= mPixelHitsOnInrTrk )  &&
           ( ( fabs(mEv->muonInnerTrackVertexz()->at(ob->GetIndex()) - (mEv->GetvertexPosition(0).Z())) ) < mMaxInrTrkDz ) &&
-          ( muonComJetDRmin_ > mDRMuJet) &&
 	  ( mEv->muonGlobalTrackPTsigma()->at(ob->GetIndex())/(ob->Pt()*ob->Pt())< 0.001) 
           ) { muonIsTight = true; }
   // ~end of new definition - 2011
@@ -133,11 +121,36 @@ namespace OneLepton{
           ( mEv->muonNumberOfMatches()->at(ob->GetIndex()) > mSegMatch2GlbMu )  &&
           ( mEv->GetMuonInnerTracknumberOfValidHits(ob->GetIndex()) >= mMinGlbTrkNumOfValidHits )  &&
           ( mEv->muonNumberOfValidPixelHits()->at(ob->GetIndex()) >= mPixelHitsOnInrTrk ) &&
-          ( ( fabs(mEv->GetMuonInnerTrackDz(ob->GetIndex()))) < mMaxInrTrkDz ) &&
-          ( muonComJetDRmin_ > mDRMuJet)
+          ( ( fabs(mEv->GetMuonInnerTrackDz(ob->GetIndex()))) < mMaxInrTrkDz ) 
           ) { muonIsTight = true; }
   // ~end of old definition - 2010
       }
+
+	int muonPFIndex =-1;
+	float Drmin = 1000;
+      
+	for(int i = 0 ; i<mEv->secMuonP4()->size(); i++)
+	  {
+	  
+	  
+	    if( fabs(ROOT::Math::VectorUtil::DeltaR (mEv->secMuonP4()->at(i),*ob ))<Drmin){
+	      Drmin=fabs(ROOT::Math::VectorUtil::DeltaR ((mEv->secMuonP4()->at(i)),*ob));
+	      muonPFIndex = i;
+	 	    
+	    }  
+	  }
+      
+      
+	if(muonIsTight == true)
+	  {
+
+	    if(muonPFIndex!=-1)
+	      {
+		if(fabs(mEv->secMuonP4()->at(muonPFIndex).Pt()-ob->Pt())/ob->Pt()>0.2) muonIsTight=false;	 
+	      }
+	    //   else {muonIsTight=false;}
+	  }
+
 
       if (muonIsTight) { return true; } else { return false; }
 
