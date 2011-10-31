@@ -150,6 +150,14 @@ Thrust = new TH1D("Thrust",";Thrust;",100,0,1);
   RelCombIso_neg = new TH1D("RelCombIso_neg","RelCombIso_neg",1000,0.,2.);
   RelCombIso_tot = new TH1D("RelCombIso_tot","RelCombIso_tot",1000,0.,2.);
 
+
+  // Slavas's plots
+  LPf_tot    = new TH1D("LPf_tot",";L_{P};",28,-2.1,2.1);
+  MTf_tot    = new TH1D("MTf_tot",";M_{T} [GeV];",100,0.,1000.);
+  STf_tot    = new TH1D("STf_tot",";S_{T}^{lep} [GeV];",20,0.,1000.);
+  LepPtf_tot = new TH1D("LepPtf_tot",";p_{T}(lep) [GeV];",50,0.,1000.);
+
+
 }
 
 
@@ -308,6 +316,12 @@ bool ANplots::Process(Event::Data & ev) {
 
   PFMETtypeVSPFMET->Fill(ev.metP4pfTypeI()->Pt(),ev.metP4pf()->Pt(),ev.GetEventWeight());
   PFMETtypeOVPFMET->Fill(ev.metP4pfTypeI()->Pt()/ev.metP4pf()->Pt(),ev.GetEventWeight());
+
+  LPf_tot->Fill(LP,ev.GetEventWeight());
+  MTf_tot->Fill(pfMT,ev.GetEventWeight());
+  STf_tot->Fill(SumLepPt,ev.GetEventWeight());
+  LepPtf_tot->Fill((theRECOLepton.at(0)->Pt()),ev.GetEventWeight());
+
 
   if ( fabs((1.-ev.metP4pfTypeI()->Pt())/ev.metP4pf()->Pt())>0.3 ) { MT_gt03_tot->Fill(pfMT,ev.GetEventWeight()); }
   if ( fabs((1.-ev.metP4pfTypeI()->Pt())/ev.metP4pf()->Pt())<0.3 ) { MT_lt03_tot->Fill(pfMT,ev.GetEventWeight()); }  

@@ -16,7 +16,7 @@ from onelepton.filters import electronSystematics
 from icf.utils import autoname
 
 # here a few flags to ensure you correct all instances
-#mode = "MC311"
+mode = "MC311"
 #mode = "MC38"
 #mode = "data39"
 #mode = "data311"
@@ -26,7 +26,7 @@ from icf.utils import autoname
 #mode = "MC42ttw_Z41"
 #mode  = "MC42QCD"
 #mode  = "MCGrid"
-mode = "SMS"
+#mode = "SMS"
 ##AUTOMATE_MODE##
 
 isSM = not (mode in ["MCGrid", "SMS"])
@@ -80,7 +80,8 @@ pfmet_sig_bins, pfmet_bkg_bins, _, pfmet_ops = setupSignalBins(tree, AtLeast3Jts
 #bkg_plots = makePlots(tree, lp_bkg_bins, OP_ANplots,"MuonANPlots_%d_BKG")
 #nolp_plots = makePlots(tree, nolp_bins, OP_ANplots, "MuonANPlots_%d_NOLP")
 
-#sig_plots =  makePlots(tree, lp_sig_bins, OP_ANplots, "ANplots%d_LP")
+bkg_plots =  makePlots(tree, lp_bkg_bins, OP_ANplots, "ANplots%d_BKG")
+sig_plots =  makePlots(tree, lp_sig_bins, OP_ANplots, "ANplots%d_LP")
 nolp_plots = makePlots(tree, nolp_bins, OP_ANplots, "ANplots%d_NOLP")
 
 # Systematics
@@ -89,7 +90,7 @@ syst_filters = electronSystematics(sig, systematics)
 # List of samples available. Please add here.
 samplesList = {
     "MCGrid"             : samplesBSMgrids42,
-    "MC311"              : samplesMC42X,
+    "MC311"              : samplesMC42X, #samplesMC_QCD, #samplesMC_Approval, #samplesMC42X, #samplesMC_WandTT,
     "MC38"               : samplesMC,
     "data39"             : samplesData,
     "data311"            : samplesData311,
@@ -106,6 +107,7 @@ else: syst_str = ""
 
 if mode.startswith("data"): output_dir = autoname("./resultsData")
 else: output_dir = autoname("./resultsMC%(syst_mode)s", syst_mode=syst_str)
+#output_dir = "/vols/cms02/gouskos/onelepton/20111026_El_Sel"
 #output_dir = "./data"
 
 # Run the analysis!

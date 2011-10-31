@@ -21,6 +21,7 @@ namespace SSDL{
 
       mMissingHits(ps.Get<int>("Cuts.ConversionsExtra.MissingHits")),
       mSupressErrors(ps.Contains("SupressErrors") ? ps.Get<bool>("SupressErrors") : false),
+      mPUCorrections(ps.Contains("PUCorrection") ? ps.Get<bool>("PUCorrection") : false),
       mD0max(ps.Get<double>("Cuts.D0max"))
 
       { mModifies = false; }
@@ -58,12 +59,13 @@ namespace SSDL{
          }
      }
 
-       
-	   
+      
+      float pucorr=(log(ob->Pt())*(mEv->GetVertexSize()-1))/(30*ob->Pt());
+      float IsoThreshold=(mPUCorrections)? mIsoCombSR+pucorr : mIsoCombSR;
 	  
       if (fabs(ob->Eta()) < 1.4442) {
 	// Barrel
-	passIso = ( (mEv->GetElectronTrkIso03(iM) +	max(0.,mEv->GetElectronEcalIso03(iM)-1.) + mEv->GetElectronHcalIso03(iM))/ob->Pt()< mIsoCombSR );
+	passIso = ( (mEv->GetElectronTrkIso03(iM) +	max(0.,mEv->GetElectronEcalIso03(iM)-1.) + mEv->GetElectronHcalIso03(iM))/ob->Pt()< IsoThreshold);
 	passHoE = ( mEv->GetElectronHoE(iM) < mHoEBarrel );
 	passDelta = ( fabs(mEv->GetElectronDeltaPhiAtVtx(iM)) < mDeltaPhiBarrel &&
 		      fabs(mEv->GetElectronDeltaEtaAtVtx(iM)) < mDeltaEtaBarrel );
@@ -71,7 +73,7 @@ namespace SSDL{
       } 
       else if (fabs(ob->Eta()) > 1.566 ) {
 	// End-caps
-	passIso = ( (mEv->GetElectronTrkIso03(iM) + mEv->GetElectronEcalIso03(iM) + mEv->GetElectronHcalIso03(iM))/ob->Pt() < mIsoCombSR);
+	passIso = ( (mEv->GetElectronTrkIso03(iM) + mEv->GetElectronEcalIso03(iM) + mEv->GetElectronHcalIso03(iM))/ob->Pt() < IsoThreshold);
 	passHoE = ( mEv->GetElectronHoE(iM) < mHoEEndcap );
 	passDelta = ( fabs(mEv->GetElectronDeltaPhiAtVtx(iM)) < mDeltaPhiEndcap &&
 		      fabs(mEv->GetElectronDeltaEtaAtVtx(iM)) < mDeltaEtaEndcap);
@@ -80,8 +82,9 @@ namespace SSDL{
 
 
 	
-	return 
-	  passShh  && passDelta && passHoE && passIso && passD0 && passCharge && passConv &&passFBrem;
+      return 
+	passShh  && passDelta && passHoE && passIso && passD0 && passCharge && passConv &&passFBrem;
+
     }
 
 
@@ -109,6 +112,7 @@ namespace SSDL{
     int mMissingHits;
     bool mSupressErrors;
     std::string mDxyChoice;
+    bool mPUCorrections;
     double mD0max;     
   };
   
@@ -119,7 +123,9 @@ namespace SSDL{
       mNumValidTrackerHits(ps.Get<int>("Cuts.NumValidTrackerHits")),
       mNumValidStandAloneHits(ps.Get<int>("Cuts.NumValidStandAloneHits")),
       mGlobalNormChi2(ps.Get<double>("Cuts.GlobalNormChi2")),
-      mDxyV(ps.Get<double>("Cuts.dxyclosestzvertex"))
+      mDxyV(ps.Get<double>("Cuts.dxyclosestzvertex")),
+      mCalVetoes(ps.Contains("CaloVetoes") ? ps.Get<bool>("CaloVetoes") : true),
+      mPUCorrections(ps.Contains("PUCorrection") ? ps.Get<bool>("PUCorrection") : false)
     { mModifies = false; }
 
     ~CustomMuonId() {}
@@ -129,22 +135,22 @@ namespace SSDL{
       bool passIso =false;
 
       int iM = (ob)->GetIndex();
-
-     
-     
+      float pucorr=(log(ob->Pt())*(mEv->GetVertexSize()-1))/(30*ob->Pt());
+      float IsoThreshold=(mPUCorrections)? mIsoCombSR+pucorr : mIsoCombSR;
+  
+       
       if( mEv->GetMuonInnerTracknumberOfValidHits(iM) > static_cast<unsigned int>(mNumValidTrackerHits) && 
           mEv->GetMuonOuterTracknumberOfValidHits(iM) > mNumValidStandAloneHits && 
           mEv->IsMuonGlobal(iM) && mEv->IsMuonTracker(iM)  &&  
           mEv->GetMuonGlobalTrackNormChi2(iM)< mGlobalNormChi2  && 
-          // mEv->GetMuonEcalVetoDep(iM)< 4. &&
-          // mEv->GetMuonHcalVetoDep(iM)< 6. &&
           fabs(mEv->GetMuonInnerTrackDxy(iM)) < mDxyV) passMuonID = true;
-      
- 
-	passIso = ((mEv->GetMuonTrkIso03(iM) + mEv->GetMuonEcalIso03(iM) + mEv->GetMuonHcalIso03(iM))/ob->Pt()< mIsoCombSR );
 
-     
-      return ( passMuonID && passIso);   
+      bool passCaloVeto = (mCalVetoes) ? 
+	(  mEv->GetMuonEcalVetoDep(iM)< 4. &&
+	   mEv->GetMuonHcalVetoDep(iM)< 6.) :true;
+      
+      passIso = ((mEv->GetMuonTrkIso03(iM) + mEv->GetMuonEcalIso03(iM) + mEv->GetMuonHcalIso03(iM))/ob->Pt()< IsoThreshold );
+      return ( passMuonID && passIso && passCaloVeto);   
     }
     std::ostream & Description(std::ostream & ostrm){
       ostrm << "Custom MuonID " << std::endl;
@@ -158,6 +164,8 @@ namespace SSDL{
     u_int mNumValidStandAloneHits;
     double mGlobalNormChi2;
     double mDxyV; 
+    bool mCalVetoes;
+    bool mPUCorrections;
   };
   
   
@@ -292,4 +300,3 @@ namespace SSDL{
     double mCHMEMFrac;
  };
 }
-

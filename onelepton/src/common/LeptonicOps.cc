@@ -198,8 +198,8 @@ std::ostream& MuonCheck::Description(std::ostream &ostrm) {
   }
 
 
-HTPTCut::HTPTCut(float sumPt)
- : mHTPTCutVal(sumPt)
+  HTPTCut::HTPTCut(float sumPt,float sumPtUp)
+    : mHTPTCutVal(sumPt), mHTPTCutValUp(sumPtUp)
 {;}
 
 bool HTPTCut::Process(Event::Data & ev) {
@@ -212,8 +212,8 @@ bool HTPTCut::Process(Event::Data & ev) {
 	  HTPT+=(**j).Pt();
 	}
       }
-
-  return (mHTPTCutVal < HTPT);
+   if (mHTPTCutValUp<=0) return (mHTPTCutVal < HTPT);
+   return (mHTPTCutVal < HTPT&& mHTPTCutValUp > HTPT);
 }
 
 std::ostream& HTPTCut::Description(std::ostream &ostrm) {

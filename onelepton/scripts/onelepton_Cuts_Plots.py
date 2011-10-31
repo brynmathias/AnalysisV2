@@ -174,8 +174,8 @@ RECO_PFMHTCut100 = OP_mPFMHTCut(100.)
 RECO_PFMHTCut150 = OP_mPFMHTCut(150.)
 RECO_PFMHTCut200 = OP_mPFMHTCut(200.)
 
-RECO_CommonHTCut300 = OP_HTPTCut(300.)
-RECO_CommonHTCut500 = OP_HTPTCut(500.)
+RECO_CommonHTCut300 = OP_HTPTCut(300.,-1.)
+RECO_CommonHTCut500 = OP_HTPTCut(500.,-1.)
 
 PFMuonCheck = OP_MuonCheck()
 
@@ -303,7 +303,7 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
 
     # Muon-jet DR cut
     #    mu_jet_dr = MuonJetDRFilter(0.1, Mus.ps())
-    mu_jet_dr = MuonJetDRFilterRA4Sync(0.1, Mus.ps())
+    mu_jet_dr = MuonJetDRFilter(0.3, Mus.ps())
     a.AddJetFilter("PreCC", mu_jet_dr)
     filters += [mu_jet_dr]
 
@@ -404,11 +404,11 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
     tree.TAttach(myCountsAndBSMGrids_2jets,AtLeast3JtsSync)
     tree.TAttach(AtLeast3JtsSync,myCountsAndBSMGrids_3jets)
 ### FOR SYCHRONIZATION######################################
- #   tree.TAttach(myCountsAndBSMGrids_3jets,AtLeast4Jts)
- #   tree.TAttach(AtLeast4Jts,myCountsAndBSMGrids_4jets)
- #   tree.TAttach(myCountsAndBSMGrids_4jets,OneMu)
+    tree.TAttach(myCountsAndBSMGrids_3jets,AtLeast4Jts)
+    tree.TAttach(AtLeast4Jts,myCountsAndBSMGrids_4jets)
+    tree.TAttach(myCountsAndBSMGrids_4jets,OneMu)
 ############################################################
-    tree.TAttach(myCountsAndBSMGrids_3jets,OneMu)
+   # tree.TAttach(myCountsAndBSMGrids_3jets,OneMu)
     tree.TAttach(OneMu,myCountsAndBSMGrids_1mu)
     tree.TAttach(myCountsAndBSMGrids_1mu,PFMuonCheck)
     tree.TAttach(PFMuonCheck,myCountsAndBSMGrids_1muPF)
@@ -416,9 +416,9 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
     tree.TAttach(ZeroEl,myCountsAndBSMGrids_0El)
     tree.TAttach(myCountsAndBSMGrids_0El,ZeroLooseMu)
     tree.TAttach(ZeroLooseMu,myCountsAndBSMGrids_0loosemu)
-    tree.TAttach(myCountsAndBSMGrids_0loosemu,DphiPTW_muCut)
-    tree.TAttach(DphiPTW_muCut,ZeroLooseEl)
-   ## tree.TAttach( myCountsAndBSMGrids_0loosemu,ZeroLooseEl)
+   # tree.TAttach(myCountsAndBSMGrids_0loosemu,DphiPTW_muCut)
+   # tree.TAttach(DphiPTW_muCut,ZeroLooseEl)
+    tree.TAttach( myCountsAndBSMGrids_0loosemu,ZeroLooseEl)
     tree.TAttach(ZeroLooseEl,myCountsAndBSMGrids_0Eloose)
     #### FOR SYCHRONIZATION #################################################
     tree.TAttach(myCountsAndBSMGrids_0Eloose,RECO_CommonHTCut300)
@@ -580,20 +580,25 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
             tree.TAttach(ElHad_Aug5ReReco_v1_Cut_BE,ElHad_Aug5ReReco_v1_Cut_TP)
             tree.TAttach(ElHad_Aug5ReReco_v1_Cut_TP,ElHad_Prompt_v6_Cut_BE)
             tree.TAttach(ElHad_Prompt_v6_Cut_BE,ElHad_Prompt_v6_Cut_TP)
-            tree.TAttach(ElHad_Prompt_v6_Cut_TP,AtLeast3Jts)
-            tree.TAttach(ElHad_Prompt_v6_Cut_TP,AtLeast4Jts)
-
+            tree.TAttach(ElHad_Prompt_v6_Cut_TP,ElHad_PromptB_v1_Cut_BE)
+            tree.TAttach(ElHad_PromptB_v1_Cut_BE,ElHad_PromptB_v1_Cut_TP)
+            tree.TAttach(ElHad_PromptB_v1_Cut_TP,AtLeast3Jts)
+            tree.TAttach(ElHad_PromptB_v1_Cut_TP,AtLeast4Jts)
+            
         else:
             tree.TAttach(RECO_CommonHTCut500, AtLeast3Jts)
+            #            tree.TAttach(RECO_CommonHTCut500, NumOfGenLeptons)
+            #            tree.TAttach(NumOfGenLeptons, AtLeast3Jts)
+            #            tree.TAttach(AtLeast3Jts , AnalysisTree_El)
             tree.TAttach(RECO_CommonHTCut500, AtLeast4Jts)
-
+            
 
     return (a, tree, filters)
 ################################################################################
 
 
 
-def setupSignalBins(tree, hook, bins, mode="lp",
+def setupSignalBins(tree, hook, bins, secondDcut , mode="lp",
                     sig_cut_value=0.15, bg_cut_value=0.3, prefix=None, SM=False):
     """ Setup a series of bins in the chosen scale variable
 
@@ -612,9 +617,11 @@ def setupSignalBins(tree, hook, bins, mode="lp",
         for idx, sbin in enumerate(bins):
             if mode == "lp":
                 bin_name = "SumLepPT%d" %  sbin
+                bin_name += "secondDcut%d" % secondDcut
                 BinOpClass = OP_SumPTlepCut
             elif mode == "pfmet":
                 bin_name = "PFMETCut%d" % sbin
+                bin_name += "secondDcut%d" % secondDcut
                 if region == "sig": BinOpClass = OP_PFMETCutBin
                 elif region == "bkg": BinOpClass = OP_PTlepCut
 

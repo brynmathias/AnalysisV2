@@ -23,6 +23,7 @@ namespace OneLepton{
       mShh(ps.Get<int>("SigmaIEtaIEta")),
       mConv(ps.Get<int>("Conversions")),
       mPassExtra(ps.Contains("d0dzCutApplied") ? ps.Get<bool>("d0dzCutApplied") : true),
+      mPassDetaOrDphi(ps.Contains("DetaOrDphi") ? ps.Get<bool>("DetaOrDphi") : false),
 
       mRelCombIsoBarrel(ps.Get<double>(prefix+".RelCombIso.Barrel")),
       mRelCombIsoEndcap(ps.Get<double>(prefix+".RelCombIso.Endcap")),
@@ -84,6 +85,8 @@ namespace OneLepton{
       bool passShh = false;
       bool passConv = false;
       bool passExtra = false;
+      bool passDetaAndDphiCuts = false;
+
 
       //         bool passConvExtra = false;
       int iM = (ob)->GetIndex();
@@ -151,15 +154,60 @@ namespace OneLepton{
       if (mPassExtra) { passExtraOut = passExtra; }
       else { passExtraOut = true; }
 
+
+      //      cout << "mDeltaEta = " << mDeltaEta << " , mDeltaPhi = " << mDeltaEta << " , mPassDetaOrDphi = " << mPassDetaOrDphi << "\n";  
+
+      // invert one of Deta or Dphi cuts - antiselection
+      if ( (mDeltaEta==0) && (mDeltaPhi==0) && (mPassDetaOrDphi) ) {
+
+        //      cout << "TRUE" << "\n";
+        //      cout << "passDeltaEta " << passDeltaEta << " , " << "passDeltaPhi " << passDeltaPhi << "\n";
+        if ((!passDeltaEta) || (!passDeltaPhi)) { passDetaAndDphiCuts = true; }
+        else { passDetaAndDphiCuts = false; }
+
+      }
+
+      // invert both Deta and Dphi cuts - antiselection
+      else if ( (mDeltaEta==0) && (mDeltaPhi==0) && (!mPassDetaOrDphi) ) {
+
+        //      cout << "FALSE" << "\n";
+        //      cout << "passDeltaEta " << passDeltaEta << " , " << "passDeltaPhi " << passDeltaPhi << "\n";
+        if ((!passDeltaEta) && (!passDeltaPhi)) { passDetaAndDphiCuts = true; }
+        else { passDetaAndDphiCuts = false; }
+
+      }
+
+      // apply as usual the Deta and Dphi cuts - selection                                         
+      else {
+        //      cout << "NOTHING" << "\n";                                                         
+        if (passDeltaEta && passDeltaPhi) { passDetaAndDphiCuts = true; }
+	else { passDetaAndDphiCuts = false; }
+      }
+
+
+      /*
       return (
-	      (mIso < 0 ? true : int(passIso) == mIso) &&
-	      (mHoE < 0 ? true : int(passHoE) == mHoE) &&
-	      (mDeltaEta < 0 ? true : int(passDeltaEta) == mDeltaEta) &&
-	      (mDeltaPhi < 0 ? true : int(passDeltaPhi) == mDeltaPhi) &&
-	      (mShh < 0 ? true : int(passShh) == mShh) &&
-	      (mConv < 0 ? true : int(passConv) == mConv) &&
-	      passExtraOut
-	      );
+              (mIso < 0 ? true : int(passIso) == mIso) &&
+              (mHoE < 0 ? true : int(passHoE) == mHoE) &&
+              (mDeltaEta < 0 ? true : int(passDeltaEta) == mDeltaEta) &&
+              (mDeltaPhi < 0 ? true : int(passDeltaPhi) == mDeltaPhi) &&
+              (mShh < 0 ? true : int(passShh) == mShh) &&
+              (mConv < 0 ? true : int(passConv) == mConv) &&
+              passExtraOut
+              );
+      */
+
+      return (
+              (mIso < 0 ? true : int(passIso) == mIso) &&
+              (mHoE < 0 ? true : int(passHoE) == mHoE) &&
+              (mShh < 0 ? true : int(passShh) == mShh) &&
+              (mConv < 0 ? true : int(passConv) == mConv) &&
+              passDetaAndDphiCuts &&
+              passExtraOut
+              );
+
+
+
 
     }
 
@@ -192,6 +240,7 @@ namespace OneLepton{
     bool mSupressErrors;
     bool mCorrEEMisalig;
     bool mPassExtra;
+    bool mPassDetaOrDphi;
 
   };
 

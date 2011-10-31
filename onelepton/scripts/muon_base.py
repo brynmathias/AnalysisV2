@@ -21,13 +21,13 @@ from icf.utils import autoname
 #mode = "data42X_PromptReco"
 #mode = "data42X_ReReco"
 #mode  = "MCGrid"
-mode = "MC42ttw_Z41"
+#mode = "MC42ttw_Z41"
 #mode  = "MC42QCD"
 #mode = "MCskims"
 #mode = "data42_muHadSkims"
 ##AUTOMATE_MODE##
 #mode = "MC42QCDMu"
-#mode = "sample_Fall11_data"
+mode = "sample_Fall11_data"
 
 #mode = "SMS"
 
@@ -57,29 +57,37 @@ MET = "Uncor"
 # You can attach more cuts by doing tree.TAttach(cut, my_cut)
 sig, tree, extra = setupMuonPreselection(MET, "Muons", mode)
 
-# Define bins to use
-bins = [150, 250, 350, 450]
+
+
 # This function sets up the signal and control bins requested and attaches them
 # to the tree (after the 3 jet cut).
 # Setup bins in LP
-lp_sig_bins, lp_bkg_bins, nolp_bins, lp_ops = setupSignalBins(tree, AtLeast3Jts, bins,
-                                                   mode = "lp", sig_cut_value = 0.15,
-                                                   bg_cut_value = 0.3, SM = isSM)
-# Setup bins in pfmet/leppt
-pfmet_sig_bins, pfmet_bkg_bins, _, pfmet_ops = setupSignalBins(tree, AtLeast3Jts, bins,
-                                                               mode = "pfmet", SM = isSM)
 
-# Define some plots
-#met_sig_plots = makePlots(tree, pfmet_sig_bins, wpol.RECO_ttWPlotting, "LepMet%d_PFisotest")
-#met_bkg_plots = makePlots(tree, pfmet_bkg_bins, wpol.RECO_ttWPlotting, "LepMet%d_MuonID")
-sig_plots =  makePlots(tree, lp_sig_bins, OP_ANplots, "ANplots%d_LP")
-nolp_plots = makePlots(tree, nolp_bins, OP_ANplots, "ANplots%d_NOLP")
-bkg_plots =  makePlots(tree, lp_bkg_bins, OP_ANplots, "ANplots%d_ConLP")
+# Define ST bins to use
+bins = [150, 250, 350, 450]
+# Define HT bins to use
+HTbins = [500,1000]
+BinnedHTPTCut = []
+backtuple_list = []
+sig_plots = []
+nolp_plots = []
+bkg_plots = []
 
-#nolp_plots = makePlots(tree, nolp_bins, OP_ANplots, "ANplots%d_NOLP")
-#nolp_plotsttW = makePlots(tree, nolp_bins, wpol.RECO_ttWPlotting, "RECO_ttWPlotting%d_NOLP")
-#sig_plotsttW = makePlots(tree, lp_sig_bins, wpol.RECO_ttWPlotting, "RECO_ttWPlotting%d_LP")
-#bgk_plotsttW = makePlots(tree, lp_bkg_bins, wpol.RECO_ttWPlotting, "RECO_ttWPlotting%d_LPControl")
+for idxHT, sbinHT in enumerate(HTbins):
+    if len(HTbins)-1==idxHT:
+        BinnedHTPTCut += [OP_HTPTCut(HTbins[idxHT],-1.)]
+    else:
+        BinnedHTPTCut += [OP_HTPTCut(HTbins[idxHT],HTbins[idxHT+1])]
+    
+    tree.TAttach(AtLeast3Jts,BinnedHTPTCut[idxHT])
+    backtuple_list  += [setupSignalBins(tree, BinnedHTPTCut[idxHT], bins, HTbins[idxHT],
+                                        mode = "lp", sig_cut_value = 0.15,
+                                        bg_cut_value = 0.3, SM = isSM)]
+    nameAdd = "secondD%d" % HTbins[idxHT]
+    sig_plots +=  [makePlots(tree, backtuple_list[idxHT][0], OP_ANplots, "ANplots%d_LP"+nameAdd)]
+    nolp_plots += [makePlots(tree,backtuple_list[idxHT][2] , OP_ANplots, "ANplots%d_NOLP"+nameAdd)]
+    bkg_plots +=  [makePlots(tree,backtuple_list[idxHT][1] , OP_ANplots, "ANplots%d_ConLP"+nameAdd)]
+
 
 # Systematics
 syst_filters = muonSystematics(sig, systematics)
@@ -103,7 +111,7 @@ samplesList = {
     "data42_muHadSkims"  : data42_skims,
     "MC42QCDMu"          : samplesMCQCDmu,
     "FASTW"              : [WJets_HT300toInf_Madgraph_Summer11_GEN_V2_leo_TuneZ2_Fastsim_4_2_4_p1_NoPU_V2_651176baf0801b18003b251b106ec60b],
-    "SMS"                : samplesSMS
+    "SMS"                : samplesSMS,
     "sample_Fall11_data" : sample_Fall11
     }
 
