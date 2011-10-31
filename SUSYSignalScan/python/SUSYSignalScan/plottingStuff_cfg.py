@@ -46,6 +46,22 @@ msugra_pset = PSet(
     NLO = None
     )
 
+sms_pset = PSet(
+    DirectoryName = "mSuGraScan",
+    xBins = 200,
+    xLow = 0.,
+    xHigh = 2000.,
+    yBins =80,
+    yLow =0.,
+    yHigh =800.,
+    zBins =1,
+    zLow =0.,
+    zHigh =1000.,
+    verbose = True,
+    MChiCut = -1
+    )
+
+
 def tripleScale(model = "", cutTree = None, cut = None, label = "") :
   out = []
   for scale in ["2.0","0.5","1.0"] :
@@ -66,19 +82,9 @@ def tripleScale(model = "", cutTree = None, cut = None, label = "") :
       cutTree.Attach(op)
   return out
 
-def smsOps(model = "", cutTree = None, cut = None, label = "") :
+def smsOps(model = "", cutTree = None, cut = None, label = "",MChiCut = -1) :
   out = []
-
-#  pset = deepcopy(isr_pset)
-#  pset.ISRFile = "hadronic/%s_weights.root"%model
-#  pset.ISRDir = "%s_weight"%model
-#  pset.DirectoryName += "_%s"%label
-
- # op = OP_ISRPlottingOps(pset.ps())
- # out.append(op)
- # cutTree.TAttach(cut, op)
-
-  pset2 = deepcopy(msugra_pset)
+  pset2 = deepcopy(sms_pset)
   pset2.DirectoryName = "smsScan_%s"%label
   pset2.xBins = 44
   pset2.xLow = 100.
@@ -86,17 +92,15 @@ def smsOps(model = "", cutTree = None, cut = None, label = "") :
   pset2.yBins = 44
   pset2.yLow = 50.
   pset2.yHigh = 1150.
-  mSUGRAFile = susydir +  "SUSYSignalScan/textfiles/scale_xsection_nlo1.0_m0_m12_10_1v1.txt"
-  processes, kfactors = readKFactors(mSUGRAFile)
-  ps = kfactorsToPSet(processes, kfactors)
-  pset2._quiet_set("NLO", ps)
-  op2 = OP_mSuGraPlottingOps(pset2.ps())
+  if MChiCut != -1:
+    pset2.MChiCut = MChiCut
+  op2 = OP_smsPlottingOps(pset2.ps())
   out.append(op2)
   cutTree.TAttach(cut, op2)
 
   return out
 
-def addBinnedStuff(model = "", cutTree = None, cut = None, htBins = [],label2 = None) :
+def addBinnedStuff(model = "", cutTree = None, cut = None, htBins = [],label2 = None,extra = None) :
   out = []
   for lower,upper in zip(htBins, htBins[1:]+[None]) :
     lowerCut = eval("RECO_CommonHTCut(%d)"%lower)
@@ -114,7 +118,7 @@ def addBinnedStuff(model = "", cutTree = None, cut = None, htBins = [],label2 = 
     elif isSms(model) :
       someOps = smsOps(model = model, cutTree = cutTree,
                        cut = upperCut if upper else lowerCut,
-                       label = label2+"%d%s"%(lower, "_%d"%upper if upper else ""))
+                       label = label2+"%d%s"%(lower, "_%d"%upper if upper else ""),MChiCut = extra)
     else :
       someOps = None
 
