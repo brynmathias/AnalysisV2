@@ -132,9 +132,8 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
     std::vector<std::string>::const_iterator ite = ReWeightVec_.end();
     for( ; it != ite; ++it){
       if( it->at(it->size()-1) != '*'){
-        std::map<std::string, bool>::const_iterator trig = ev.hlt()->find(*it);
         std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*it);
-        if( (trig != ev.hlt()->end() && trig->second) && (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
+        if( (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
           preScaleVal = prescale->second ;
           if(verb_){
             std::cout << "Trigger " << (*it) << " Has a prescale of " << prescale->second << " " << std::endl;
@@ -143,15 +142,13 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
       }else{
         size_t found;
     // now loop though the map and test the string part -- slow!
-        std::map<std::string, bool>::const_iterator itrig = ev.hlt()->begin();
-        std::map<std::string, bool>::const_iterator jtrig = ev.hlt()->end();
         std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
         for( ; itrig != jtrig; ++itrig, ++ipre ){
           if(itrig->second){
             std::string str = *it;
             str = str.substr(0, str.size() - 1 );
           // cout <<*it<< " compare with " << itrig->first << endl;
-            found = itrig->first.find(str);
+            found = ipre->first.find(str);
             if(found != string::npos){ preScaleVal = ipre->second; }
           }
         }
