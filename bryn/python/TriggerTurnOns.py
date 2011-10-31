@@ -248,7 +248,7 @@ def AddHistPairWithL1(cutTree = None,cut = None, RefTrig = None, TestTrig = None
   refTrigs = None
   if "Mu" in RefTrig:
    refTrigs = [TestTrig,RefTrig]
-  else: refTrigs = [TestTrig,RefTrig]
+  else: refTrigs = [TestTrig]
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,
                                 MaxObjects = 15,Plots = True, ReWeight = True if "Mu" not in RefTrig else False,
                                 TriggerReWeight = refTrigs,   Verbose = False,
