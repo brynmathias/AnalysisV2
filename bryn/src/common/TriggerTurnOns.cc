@@ -169,7 +169,7 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
       }
     }
-    if(preScaleVal == 99999) preScaleVal = -1;
+    if(preScaleVal == 99999) preScaleVal = 0;
     double factor = double(preScaleVal);
     weight *= factor;
   }
