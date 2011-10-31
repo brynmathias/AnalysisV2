@@ -123,7 +123,7 @@ void TriggerTurnOns::Plots() {
 bool TriggerTurnOns::Plots( Event::Data& ev ) {
   UInt_t n = ev.CommonObjects().size();
   Double_t weight = ev.GetEventWeight();
-  int preScaleVal = 99999;
+  int preScaleVal = 9999999;
   if(ReWeight_ ){
     if(verb_){
       std::cout << "New Event" << std::endl;
@@ -159,7 +159,7 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
     }
     if(verb_){
       cout << " The lowest prescale in the event is " << preScaleVal << std::endl;
-      if(preScaleVal == 99999) {
+      if(preScaleVal == 9999999) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
         cout << "Triggers that exist in the event:" <<endl;
         for(std::map<std::string,bool>::const_iterator it2 = ev.hlt()->begin();
@@ -169,7 +169,7 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
       }
     }
-    if(preScaleVal == 99999) preScaleVal = 0;
+    if(preScaleVal == 9999999) preScaleVal = 0;
     double factor = double(preScaleVal);
     weight *= factor;
   }
