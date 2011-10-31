@@ -248,7 +248,7 @@ def AddHistPairWithL1(cutTree = None,cut = None, RefTrig = None, TestTrig = None
   refTrigs = None
   if "Mu" in RefTrig:
    refTrigs = [TestTrig,RefTrig]
-  else: refTrigs = [TestTrig]
+  else: refTrigs = [TestTrig,RefTrig]
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig,MinObjects =0 ,
                                 MaxObjects = 15,Plots = True, ReWeight = True if "Mu" not in RefTrig else False,
                                 TriggerReWeight = refTrigs,   Verbose = False,
@@ -373,8 +373,8 @@ for ref,test in zip(refTrigList,TestTrigList):
 # "HLT_HT200_v8","HLT_HT250_v8","HLT_HT300_v9","HLT_HT450_v8","HLT_HT500_v8","HLT_HT650_v1"
 
 # If muon is not required
-refTrigList =  ["HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8"]
-TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8"]
+refTrigList =  ["HLT_HT450_v8"]#,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8"]
+TestTrigList = ["HLT_HT600_v1"]#,"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8"]
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
 
