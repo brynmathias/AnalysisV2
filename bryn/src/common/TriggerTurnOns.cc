@@ -143,14 +143,13 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
         size_t found;
     // now loop though the map and test the string part -- slow!
         std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
-        for( ; itrig != jtrig; ++itrig, ++ipre ){
-          if(itrig->second){
+        std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
+        for( ; ipre != jpre; ++ipre ){
             std::string str = *it;
             str = str.substr(0, str.size() - 1 );
           // cout <<*it<< " compare with " << itrig->first << endl;
             found = ipre->first.find(str);
             if(found != string::npos){ preScaleVal = ipre->second; }
-          }
         }
       }
     }
