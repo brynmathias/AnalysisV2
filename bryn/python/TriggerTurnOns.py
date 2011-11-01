@@ -212,18 +212,18 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   checkExists = CheckTrigExists( PSet(TrigExistsList = [RefTrig,TestTrig]).ps() )
   refPlots = PL_TriggerTurnOns( PSet(DirName = RefTrig+"_For_"+TestTrig, MinObjects = 0,
                                      MaxObjects = 15, Plots = True, ReWeight = True if "Mu40" not in RefTrig else False,
-                                     TriggerReWeight = refTrigs,    Verbose = False,
+                                     TriggerReWeight = refTrigs,    Verbose = True,
                                      ReWeightL1 = False, L1TriggerReWeight = refTrigs).ps())
 
   testTrigPlots = PL_TriggerTurnOns( PSet(DirName = TestTrig+"_From_"+RefTrig, MinObjects = 0,
                                           MaxObjects = 15, Plots = True, ReWeight = True,
-                                          TriggerReWeight = [TestTrig],  Verbose = False,
+                                          TriggerReWeight = [TestTrig],  Verbose = True,
                                           ReWeightL1 = False, L1TriggerReWeight = refTrigs).ps())
 
-  refTrigPS =  PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
+  refTrigPS =  PSet(Verbose = True,UsePreScaledTriggers = True,Triggers = [] )
   refTrigPS.Triggers = [RefTrig]
   refTrigOP = OP_MultiTrigger( refTrigPS.ps() )
-  testTrigPS = PSet(Verbose = False,UsePreScaledTriggers = True,Triggers = [] )
+  testTrigPS = PSet(Verbose = True,UsePreScaledTriggers = True,Triggers = [] )
   testTrigPS.Triggers = [TestTrig]
   print "RefTrig = %s, testTrig = %s"%(refTrigPS.Triggers[0],testTrigPS.Triggers[0])
   testTrigOP = OP_MultiTrigger( testTrigPS.ps() )
@@ -238,7 +238,6 @@ def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
   out.append(testTrigOP)
   out.append(checkExists)
   return out
-  pass
 
 
 
@@ -445,9 +444,9 @@ from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 from SingleMu import *
 # from data.Run2011.MuHad2011AB import *
 sample = HTRun2011AB
-# sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-outDir = "../%s/ht%dNoUpper/"%(sample.Name,bin)
+sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+outDir = "../TestWithL1PreScaleFolding/%s/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
-#MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
+# MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
