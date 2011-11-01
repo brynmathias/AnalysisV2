@@ -133,11 +133,12 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
     for( ; it != ite; ++it){
       if( it->at(it->size()-1) != '*'){
         std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*it);
-        if( (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
-          preScaleVal = prescale->second ;
           if(verb_){
             std::cout << "Trigger " << (*it) << " Has a prescale of " << prescale->second << " " << std::endl;
           }
+        if( (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
+          preScaleVal = prescale->second ;
+
         }
       }else{
         size_t found;
