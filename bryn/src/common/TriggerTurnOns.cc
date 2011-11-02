@@ -166,7 +166,11 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
       }
     }
-    if(preScaleVal == 9999999) preScaleVal = 0;
+    if(preScaleVal != 1)
+    {
+      preScaleVal = 0;
+      printf("Run: %d Lumi: %d Event: %d where HT600 does not have a prescale equal to 1",ev.RunNumber(),ev.LumiSection(),ev.EventNumber());
+    }
     double factor = double(preScaleVal);
     weight *= factor;
   }
