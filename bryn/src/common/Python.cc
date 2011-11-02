@@ -5,6 +5,8 @@
 #include "EventDump.hh"
 #include "EventSelector.hh"
 #include "Ops.hh"
+#include "PreScaledTriggers.hh"
+
 using namespace boost::python;
 
 BOOST_PYTHON_MODULE(libbryn) {
@@ -17,6 +19,9 @@ BOOST_PYTHON_MODULE(libbryn) {
                     init<const Utils::ParameterSet&>());
 
   class_<Operation::Trigger, bases<Operation::_Base> >( "PL_TriggerPlots",
+                    init<const Utils::ParameterSet&>());
+
+  class_<Operation::PreScaledTriggers, bases<Operation::_Base> >( "PreScaledTriggers",
                     init<const Utils::ParameterSet&>());
 
   class_<Operation::TriggerTurnOns, bases<Operation::_Base> >( "PL_TriggerTurnOns",
