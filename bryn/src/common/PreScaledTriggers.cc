@@ -65,14 +65,14 @@ void PreScaledTriggers::Plots() {
     "HT_Nom",
     ";H_{T} GeV",
     300,0.,3000.,
-    100, 0, 1, true );
+    50, 0, 1, true );
 
 
   BookHistArray( HT_Denom,
     "HT_Denom",
     ";H_{T} GeV",
     300,0.,3000.,
-    100, 0, 1, true );
+    50, 0, 1, true );
 
 
   BookHistArray( preDenom,
@@ -86,7 +86,7 @@ void PreScaledTriggers::Plots() {
     "OverLapCheck",
     ";Did Denom Fire given Nom did?",
     2,-0.5,1.5,
-    100, 0, 1, true );
+    50, 0, 1, true );
 
 
 
