@@ -78,14 +78,14 @@ void PreScaledTriggers::Plots() {
   BookHistArray( preDenom,
     "Prescales",
     ";Prescale Num; Prescale Denom",
-    3000,-0.5,3000.5,
-    3000,-0.5,3000.5,
+    2000,-0.5,2000.5,
+    2000,-0.5,2000.5,
     1, 0, 1, true );
 
   BookHistArray( OverLapCheck_,
     "OverLapCheck",
     ";Did Denom Fire given Nom did?",
-    2,-0.5.,1.5,
+    2,-0.5,1.5,
     100, 0, 1, true );
 
 
