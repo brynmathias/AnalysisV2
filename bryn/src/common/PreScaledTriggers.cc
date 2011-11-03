@@ -76,18 +76,20 @@ void PreScaledTriggers::Plots() {
 
 
   BookHistArray( preDenom,
-    "Denominator_Prescale",
-    ";Prescale",
+    "Prescales",
+    ";Prescale Num; Prescale Denom",
+    3000,-0.5,3000.5,
     3000,-0.5,3000.5,
     1, 0, 1, true );
 
+  BookHistArray( OverLapCheck_,
+    "OverLapCheck",
+    ";Did Denom Fire given Nom did?",
+    2,-0.5.,1.5,
+    100, 0, 1, true );
 
 
-  BookHistArray( preNom,
-    "Neumerator_Prescale",
-    ";Prescale",
-    3000,-0.5,3000.5,
-    1, 0, 1, true );
+
 
 
 }
@@ -150,8 +152,7 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
       if(found != string::npos){ DenomPass = pass->second; }
     }
   }
-  preNom[0]->Fill(NomPre,1.0);
-  preDenom[0]->Fill(DenomPre,1.0);
+  preDenom[0]->Fill(DenomPre,NomPre,1.0);
   std::pair<int,int> key(NomPre,DenomPre);
   std::map<std::pair<int,int> , int >::const_iterator histN = histMap_.find(key);
   if( histN == histMap_.end() ) {
@@ -160,10 +161,13 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     HT_Denom[hIdxTrack_]->SetTitle(Form("Denom_%sPre_%d_%sPre_%d",  NomTrigger_.c_str(),NomPre,DeNomTrigger_.c_str(),DenomPre));
     HT_Nom[hIdxTrack_]->SetName(Form("Nom_%sPre_%d_%sPre_%d",      NomTrigger_.c_str(),NomPre,DeNomTrigger_.c_str(),DenomPre));
     HT_Denom[hIdxTrack_]->SetName(Form("Denom_%sPre_%d_%sPre_%d",  NomTrigger_.c_str(),NomPre,DeNomTrigger_.c_str(),DenomPre));
+    OverLapCheck_[hIdxTrack_]->SetName(Form("OverLapCheck_%sPre_%d_%sPre_%d",  NomTrigger_.c_str(),NomPre,DeNomTrigger_.c_str(),DenomPre));
     hIdxTrack_++;
   }
  histN = histMap_.find(key);
   if( histN != histMap_.end() ) {
+    if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
+    if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
     if(DenomPass){
       HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
       if(NomPass){

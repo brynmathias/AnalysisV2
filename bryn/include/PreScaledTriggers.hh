@@ -33,8 +33,8 @@ namespace Operation {
     bool verb_;
     std::vector<TH1D*> HT_Nom;
     std::vector<TH1D*> HT_Denom;
-    std::vector<TH1D*> preDenom;
-    std::vector<TH1D*> preNom;
+    std::vector<TH2D*> preDenom;
+    std::vector<TH1D*> OverLapCheck_;
     void Plots();
     bool Plots( Event::Data& );
     std::map< std::pair<int, int>, int > histMap_;
