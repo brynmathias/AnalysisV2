@@ -199,7 +199,15 @@ Cross_Trigger_PS = PSet(
     )
 
 
-
+def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None):
+  print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
+  out = []
+  op = PreScaledTriggers( PSet(DirName = NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
+  cutTree.TAttach(cut,op)
+  out.append(op)
+  return out
+  """docstring for PreScaledPair"""
+  pass
 
 
 def AddHistPair(cutTree = None,cut = None, RefTrig = None, TestTrig = None):
@@ -316,15 +324,15 @@ MHT_METCut = OP_MHToverMET(1.25,50.)
 # AK5 Calo
 json_ouput = JSONOutput("filtered")
 alphaT = OP_CommonAlphaTCut(0.53)
-json = JSONFilter("Json Mask", json_to_pset("/home/hep/rjb3/public_html/golden.json"))
+# json = JSONFilter("Json Mask", json_to_pset("/home/hep/rjb3/public_html/golden.json"))
 evDump = EventDump()
 # htTriggerEmu = OP_TriggerHT_Emu(250.,40.)
 cutTreeData = Tree("Data")
 out = []
-cutTreeData.Attach(json)
-cutTreeData.TAttach(json,json_ouput)
-cutTreeData.TAttach(json,NoiseFilt)
-# cutTreeData.Attach(NoiseFilt)
+# cutTreeData.Attach(json)
+# cutTreeData.TAttach(json,json_ouput)
+# cutTreeData.TAttach(json,NoiseFilt)
+cutTreeData.Attach(NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
 cutTreeData.TAttach(oddMuon,oddElectron)
@@ -374,15 +382,19 @@ for ref,test in zip(refTrigList,TestTrigList):
 # If muon is not required
 refTrigList =  ["HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT600_v1"]
 TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"]
+# refTrigList = ["HLT_*"]
+# TestTrigList = ["HLT_*"]
 for ref,test in zip(refTrigList,TestTrigList):
-  out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
+  # out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
+  out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref))
 
 
 refTrigList  = ["HLT_Mu30_v5"]
 TestTrigList = ["HLT_HT250_v7"]
+
+
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,oneMuon,ref,test))
-
 # refTrigList  = ["HLT_HT150_v8"]
 # TestTrigList = ["HLT_HT300_v9"]
 # L1SeedRef    = ["NONE"]
@@ -445,7 +457,9 @@ from SingleMu import *
 # from data.Run2011.MuHad2011AB import *
 sample = HTRun2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-outDir = "../%s/ht%dNoUpper/"%(sample.Name,bin)
+
+#sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+outDir = "../%s_PreTest/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])

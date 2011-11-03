@@ -5,6 +5,7 @@ hadd data_Run2011A_PromptRecoV6.root Electrons_ElectronHad_Run2011A_PromptReco_v
 
 hadd data_Run2011B_PromptRecoV1.root Electrons_ElectronHad_Run2011B_PromptReco_v1*.root
 
+hadd data_PAS.root data_Run2011A_May10ReReco.root data_Run2011A_PromptRecoV4.root
 hadd data_Run2011A.root data_Run2011A_May10ReReco.root data_Run2011A_PromptRecoV4.root data_Run2011A_Aug05ReReco.root data_Run2011A_PromptRecoV6.root
 cp data_Run2011B_PromptRecoV1.root data_Run2011B.root 
 
