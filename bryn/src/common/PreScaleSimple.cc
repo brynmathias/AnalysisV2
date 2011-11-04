@@ -97,8 +97,11 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
   int denomPreScale = -1;
   bool NOMFIRE = false;
   bool DENOMFIRE = false;
+  carryonsearchingNom = true;
+  carryonsearchingDenom = true;
   // Take care of all the numerator prescales
   for( ; nom != nomEnd; ++nom){
+    if(!carryonsearchingNom) continue;
         size_t found;
         std::string str = *nom;
         cout << "Checking " << (*nom) << endl;
@@ -122,6 +125,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         nomPreScale *= -prescale->second;
       }
       if( fire != ev.hlt()->end() ){
+        carryonsearchingNom = false;
         cout << "Have found " << (*nom) << endl;
         NOMFIRE = fire->second; continue;}
     }
@@ -141,6 +145,8 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         if(found != string::npos){
           nomPreScale *= -ipre->second;
           NOMFIRE = fire->second;
+          carryonsearchingNom = false;
+
           cout << "Did " << (*nom) << " fire? " << fire->second << endl;
           continue;
         }
@@ -150,6 +156,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
 
 
   for( ; denom != denomEnd; ++denom){
+      if(!carryonsearchingDenom) continue;
         size_t found;
         std::string str = *denom;
         str = str.substr(0, str.size() - 1 );
@@ -170,7 +177,9 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
       if( prescale != ev.hlt_prescaled()->end() ){
         denomPreScale *= -prescale->second;
       }
-      if( fire != ev.hlt()->end() ){ DENOMFIRE = fire->second; continue;}
+      if( fire != ev.hlt()->end() ){
+        carryonsearchingDenom = false
+        DENOMFIRE = fire->second;}
 
     }
     else{
@@ -184,6 +193,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         str = str.substr(0, str.size() - 1 );
         found = ipre->first.find(str);
         if(found != string::npos){
+          carryonsearchingDenom = false
           denomPreScale *= -ipre->second;
           DENOMFIRE = fire->second;
         }
