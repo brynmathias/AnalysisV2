@@ -104,7 +104,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
     if(!carryonsearchingNom) continue;
         size_t found;
         std::string str = *nom;
-        cout << "Checking " << (*nom) << endl;
+        // cout << "Checking " << (*nom) << endl;
         str = str.substr(0, str.size() - 1 );
         found = str.find("HLT_HT150_v");
         // handle the L1 prescales
@@ -126,18 +126,18 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
       }
       if( fire != ev.hlt()->end() ){
         carryonsearchingNom = false;
-        cout << "Have found " << (*nom) << endl;
+        // cout << "Have found " << (*nom) << endl;
         NOMFIRE = fire->second; continue;}
     }
     else{
       size_t found;
-      cout <<"Trigger has a star in the name searching" << endl;
+      // cout <<"Trigger has a star in the name searching" << endl;
     // now loop though the map and test the string part -- slow!
       std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
       std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->end();
       std::map<std::string, bool>::const_iterator fire = ev.hlt()->begin();
       for( ; ipre != jpre; ++ipre, ++fire ){
-       cout << "comparing " << (*nom) << " To " << ipre->first << endl;
+       // cout << "comparing " << (*nom) << " To " << ipre->first << endl;
 
         std::string str = *nom;
         str = str.substr(0, str.size() - 1 );
@@ -147,7 +147,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
           NOMFIRE = fire->second;
           carryonsearchingNom = false;
 
-          cout << "Did " << (*nom) << " fire? " << fire->second << endl;
+          // cout << "Did " << (*nom) << " fire? " << fire->second << endl;
           continue;
         }
       }
