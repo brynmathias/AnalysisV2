@@ -97,8 +97,8 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
   int denomPreScale = -1;
   bool NOMFIRE = false;
   bool DENOMFIRE = false;
-  carryonsearchingNom = true;
-  carryonsearchingDenom = true;
+  bool carryonsearchingNom = true;
+  bool carryonsearchingDenom = true;
   // Take care of all the numerator prescales
   for( ; nom != nomEnd; ++nom){
     if(!carryonsearchingNom) continue;
