@@ -130,7 +130,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
       cout <<"Trigger has a star in the name searching" << endl;
     // now loop though the map and test the string part -- slow!
       std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
-      std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
+      std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->end();
       std::map<std::string, bool>::const_iterator fire = ev.hlt()->begin();
       for( ; ipre != jpre; ++ipre, ++fire ){
        cout << "comparing " << (*nom) << " To " << ipre->first << endl;
@@ -177,7 +177,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
       size_t found;
     // now loop though the map and test the string part -- slow!
       std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
-      std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
+      std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->end();
       std::map<std::string, bool>::const_iterator fire = ev.hlt()->begin();
       for( ; ipre != jpre; ++ipre, ++fire ){
         std::string str = *denom;
