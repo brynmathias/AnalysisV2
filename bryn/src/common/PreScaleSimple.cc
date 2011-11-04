@@ -132,12 +132,15 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
       std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
       std::map<std::string, bool>::const_iterator fire = ev.hlt()->begin();
       for( ; ipre != jpre; ++ipre, ++fire ){
+       cout << "comparing " << (*nom) << " To " << ipre->first << endl;
+
         std::string str = *nom;
         str = str.substr(0, str.size() - 1 );
         found = ipre->first.find(str);
         if(found != string::npos){
           nomPreScale *= -ipre->second;
           NOMFIRE = fire->second;
+          cout << "Did " << (*nom) << " fire? " << fire->second << endl;
           continue;
         }
       }
