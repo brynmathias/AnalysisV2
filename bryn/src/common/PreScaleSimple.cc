@@ -101,6 +101,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
   for( ; nom != nomEnd; ++nom){
         size_t found;
         std::string str = *nom;
+        cout << "Checking " << (*nom) << endl;
         str = str.substr(0, str.size() - 1 );
         found = str.find("HLT_HT150_v");
         // handle the L1 prescales
@@ -120,7 +121,9 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
       if( prescale != ev.hlt_prescaled()->end() ){
         nomPreScale *= -prescale->second;
       }
-      if( fire != ev.hlt()->end() ){ NOMFIRE = fire->second; continue;}
+      if( fire != ev.hlt()->end() ){
+        cout << "Have found " << (*nom) << endl;
+        NOMFIRE = fire->second; continue;}
     }
     else{
       size_t found;
