@@ -178,7 +178,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         denomPreScale *= -prescale->second;
       }
       if( fire != ev.hlt()->end() ){
-        carryonsearchingDenom = false
+        carryonsearchingDenom = false;
         DENOMFIRE = fire->second;}
 
     }
@@ -193,7 +193,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         str = str.substr(0, str.size() - 1 );
         found = ipre->first.find(str);
         if(found != string::npos){
-          carryonsearchingDenom = false
+          carryonsearchingDenom = false;
           denomPreScale *= -ipre->second;
           DENOMFIRE = fire->second;
         }
