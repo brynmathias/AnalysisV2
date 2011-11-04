@@ -201,8 +201,9 @@ Cross_Trigger_PS = PSet(
 
 def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None):
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
+  print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
-  op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
+  op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -405,8 +406,8 @@ MonitorTriggersOption = [
 
 
 # If muon is not required
-refTrigList =  (["HLT_HT450_v8",])#"HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT600_v1"])
-TestTrigList = (["HLT_HT600_v1",])#"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
+refTrigList =  (["HLT_HT250_v*",],)#,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT600_v1"])
+TestTrigList = (["HLT_HT400_v*",],)#"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
 # refTrigList = ["HLT_*"]
 # TestTrigList = ["HLT_*"]
 for ref,test in zip(refTrigList,TestTrigList):
