@@ -116,11 +116,11 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
     if( nom->at(nom->size()-1) != '*'){
       std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*nom);
       std::map<std::string, bool>::const_iterator fire = ev.hlt()->find(*nom);
-      if( fire != ev.hlt()->end() ){ NOMFIRE = fire->second; }
+
       if( prescale != ev.hlt_prescaled()->end() ){
         nomPreScale *= -prescale->second;
-
       }
+      if( fire != ev.hlt()->end() ){ NOMFIRE = fire->second; continue;}
     }
     else{
       size_t found;
@@ -135,6 +135,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         if(found != string::npos){
           nomPreScale *= -ipre->second;
           NOMFIRE = fire->second;
+          continue;
         }
       }
     }
@@ -159,11 +160,11 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
     if( denom->at(denom->size()-1) != '*'){
       std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*denom);
       std::map<std::string, bool>::const_iterator fire = ev.hlt()->find(*denom);
-      if( fire != ev.hlt()->end() ){ NOMFIRE = fire->second; }
       if( prescale != ev.hlt_prescaled()->end() ){
         denomPreScale *= -prescale->second;
-
       }
+      if( fire != ev.hlt()->end() ){ DENOMFIRE = fire->second; continue;}
+
     }
     else{
       size_t found;
