@@ -127,6 +127,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
     }
     else{
       size_t found;
+      cout <<"Trigger has a star in the name searching" << endl;
     // now loop though the map and test the string part -- slow!
       std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
       std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
