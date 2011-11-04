@@ -202,7 +202,7 @@ Cross_Trigger_PS = PSet(
 def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None):
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   out = []
-  op = PreScaledTriggers( PSet(DirName = NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
+  op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -405,8 +405,8 @@ MonitorTriggersOption = [
 
 
 # If muon is not required
-refTrigList =  ["HLT_HT450_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT600_v1"]
-TestTrigList = ["HLT_HT600_v1","HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"]
+refTrigList =  (["HLT_HT450_v8",])#"HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT600_v1"])
+TestTrigList = (["HLT_HT600_v1",])#"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
 # refTrigList = ["HLT_*"]
 # TestTrigList = ["HLT_*"]
 for ref,test in zip(refTrigList,TestTrigList):
@@ -484,7 +484,7 @@ sample = HTRun2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
 #sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-outDir = "../%s_PreTest_1GeVBins/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s_PreTest_SimplePreClassTest/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])

@@ -75,13 +75,6 @@ void PreScaledTriggers::Plots() {
     50, 0, 1, true );
 
 
-  BookHistArray( preDenom,
-    "Prescales",
-    ";Prescale Num; Prescale Denom",
-    2000,-0.5,2000.5,
-    2000,-0.5,2000.5,
-    1, 0, 1, true );
-
   BookHistArray( OverLapCheck_,
     "OverLapCheck",
     ";Did Denom Fire given Nom did?",
@@ -152,7 +145,7 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
       if(found != string::npos){ DenomPass = pass->second; }
     }
   }
-  preDenom[0]->Fill(DenomPre,NomPre,1.0);
+
   std::pair<int,int> key(NomPre,DenomPre);
   std::map<std::pair<int,int> , int >::const_iterator histN = histMap_.find(key);
   if( histN == histMap_.end() ) {
