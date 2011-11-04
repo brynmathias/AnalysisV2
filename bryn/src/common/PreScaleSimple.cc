@@ -63,14 +63,14 @@ void PreScaleSimple::Plots() {
     "HT_Nom",
     ";H_{T} GeV",
     2000,0.,2000.,
-    50, 0, 1, true );
+    1, 0, 1, true );
 
 
   BookHistArray( HT_Denom,
     "HT_Denom",
     ";H_{T} GeV",
     2000,0.,2000.,
-    50, 0, 1, true );
+    1, 0, 1, true );
 
 
 
