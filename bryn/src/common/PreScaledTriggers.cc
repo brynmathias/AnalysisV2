@@ -64,14 +64,14 @@ void PreScaledTriggers::Plots() {
   BookHistArray( HT_Nom,
     "HT_Nom",
     ";H_{T} GeV",
-    300,0.,3000.,
+    2000,0.,2000.,
     50, 0, 1, true );
 
 
   BookHistArray( HT_Denom,
     "HT_Denom",
     ";H_{T} GeV",
-    300,0.,3000.,
+    2000,0.,2000.,
     50, 0, 1, true );
 
 
