@@ -201,7 +201,7 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         }
       }
 
-      if(denomPreScale != 0 && nomPreScale != 0){
+      if(denomPreScale != 0 && nomPreScale != 0 && denomPreScale != -1 && nomPreScale != -1){
         if ( denomPreScale % nomPreScale == 0){
           if(DENOMFIRE){
             HT_Denom[0]->Fill(ev.CommonHT(),1);
