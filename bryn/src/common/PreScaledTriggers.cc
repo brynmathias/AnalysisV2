@@ -106,11 +106,11 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     // now loop though the map and test the string part -- slow!
     std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
     std::map<std::string, bool>::const_iterator pass = ev.hlt()->begin();
-    std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
+    std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->end();
     for( ; ipre != jpre; ++ipre, ++pass ){
       std::string str = NomTrigger_;
       str = str.substr(0, str.size() - 1 );
-            // cout <<*it<< " compare with " << ipre->first << endl;
+      // cout <<NomTrigger_<< " compare with " << ipre->first << endl;
       found = ipre->first.find(str);
       if(found != string::npos){
         NomPre = ipre->second;
@@ -134,11 +134,11 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     // now loop though the map and test the string part -- slow!
     std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
     std::map<std::string, bool>::const_iterator pass = ev.hlt()->begin();
-    std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
+    std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->end();
     for( ; ipre != jpre; ++ipre, ++pass ){
       std::string str = DeNomTrigger_;
       str = str.substr(0, str.size() - 1 );
-            // cout <<*it<< " compare with " << ipre->first << endl;
+      // cout <<DeNomTrigger_ << " compare with " << ipre->first << endl;
       found = ipre->first.find(str);
       if(found != string::npos){ DenomPre = ipre->second; }
       found = pass->first.find(str);
