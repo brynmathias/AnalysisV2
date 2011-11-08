@@ -383,7 +383,7 @@ refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",  
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for ref,test in zip(refTrigList,TestTrigList):
-  out.append(PreScaledPair(cutTreeData,muDr,ref,test))
+  out.append(PreScaledPair(cutTreeData,muDr,test,ref))
   # if int(bin) is 275:
     # out.append(AddHistPair(cutTreeData,ht275,ref,test))
   # if int(bin) is 325:
@@ -463,8 +463,9 @@ addCutFlowData(anal_ak5_pfData)
 from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 from SingleMu import *
-from data.Run2011.MuHad2011AB import *
-sample = MuHad2011AB
+#from data.Run2011.MuHad2011AB import *
+from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
+sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
 # sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
