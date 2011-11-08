@@ -33,6 +33,8 @@ namespace Operation {
     bool verb_;
     std::vector<TH1D*> HT_Nom;
     std::vector<TH1D*> HT_Denom;
+    std::vector<TH1D*> AlphaT_Nom;
+    std::vector<TH1D*> AlphaT_Denom;
     void Plots();
     bool Plots( Event::Data& );
     };
