@@ -203,8 +203,8 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
- op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
-  # op = PreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
+ # op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
+  op = PreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -378,11 +378,11 @@ refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",  
         "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4","HLT_HT250_AlphaT0p55_v*"
 ]
 
-refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
-TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
+# refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
+# TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for ref,test in zip(refTrigList,TestTrigList):
-  out.append(AddHistPair(cutTreeData,muDr,ref,test))
+  out.append(PreScaledPair(cutTreeData,muDr,ref,test))
   # if int(bin) is 275:
     # out.append(AddHistPair(cutTreeData,ht275,ref,test))
   # if int(bin) is 325:
