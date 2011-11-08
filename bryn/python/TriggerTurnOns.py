@@ -378,8 +378,8 @@ refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",  
         "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4","HLT_HT250_AlphaT0p55_v*"
 ]
 
-# refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
-# TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
+refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
+TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for ref,test in zip(refTrigList,TestTrigList):
   out.append(AddHistPair(cutTreeData,muDr,ref,test))
