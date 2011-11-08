@@ -366,17 +366,16 @@ cutTreeData.TAttach(muDr,ht325)
 
 
 TestTrigList = [
-       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5",
-       "HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
-       "HTL_HT300_AlphaT0p52_v1","HTL_HT300_AlphaT0p52_v2","HTL_HT300_AlphaT0p52_v3","HTL_HT300_AlphaT0p52_v4","HTL_HT300_AlphaT0p52_v5","HTL_HT300_AlphaT0p53_v5","HTL_HT300_AlphaT0p53_v6","HTL_HT300_AlphaT0p53_v6", #
-       "HTL_HT350_AlphaT0p51_v1","HTL_HT350_AlphaT0p51_v2","HTL_HT350_AlphaT0p51_v3","HTL_HT350_AlphaT0p51_v4","HTL_HT350_AlphaT0p51_v5","HTL_HT350_AlphaT0p52_v1","HTL_HT350_AlphaT0p52_v2","HTL_HT350_AlphaT0p52_v2", #
-       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7","HTL_HT400_AlphaT0p51_v7", #
+       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5","HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
+       "HTL_HT300_AlphaT0p52_v1","HTL_HT300_AlphaT0p52_v2","HTL_HT300_AlphaT0p52_v3","HTL_HT300_AlphaT0p52_v4","HTL_HT300_AlphaT0p52_v5","HTL_HT300_AlphaT0p53_v5","HTL_HT300_AlphaT0p53_v6","HTL_HT300_AlphaT0p53_v6",
+       "HTL_HT350_AlphaT0p51_v1","HTL_HT350_AlphaT0p51_v2","HTL_HT350_AlphaT0p51_v3","HTL_HT350_AlphaT0p51_v4","HTL_HT350_AlphaT0p51_v5","HTL_HT350_AlphaT0p52_v1","HTL_HT350_AlphaT0p52_v2","HTL_HT350_AlphaT0p52_v2",
+       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7","HTL_HT400_AlphaT0p51_v7",
        ]
 
-refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4","HLT_Mu15_HT200_v2","HLT_Mu15_HT200_v3","HLT_Mu15_HT200_v4","HLT_Mu30_HT200_v1","HLT_Mu40_HT200_v4","HLT_Mu40_HT200_v4",
+refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v4",      "HLT_Mu40_HT200_v4",
         "HLT_Mu5_HT200_v3",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
-        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4"       "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
-        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4"       "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
 ]
 
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
@@ -463,8 +462,8 @@ addCutFlowData(anal_ak5_pfData)
 from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 from SingleMu import *
-# from data.Run2011.MuHad2011AB import *
-sample = HTRun2011AB
+from data.Run2011.MuHad2011AB import *
+sample = MuHad2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
 # sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
