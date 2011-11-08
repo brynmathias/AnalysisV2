@@ -367,20 +367,13 @@ cutTreeData.TAttach(muDr,ht325)
 
 TestTrigList = [
        "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
-       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
-       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
-       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
-       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
+
        "HLT_HT300_AlphaT0p52_v1","HLT_HT300_AlphaT0p52_v2","HLT_HT300_AlphaT0p52_v3","HLT_HT300_AlphaT0p52_v4","HLT_HT300_AlphaT0p52_v5","HLT_HT300_AlphaT0p53_v5","HLT_HT300_AlphaT0p53_v6","HLT_HT300_AlphaT0p53_v6",
        "HLT_HT350_AlphaT0p51_v1","HLT_HT350_AlphaT0p51_v2","HLT_HT350_AlphaT0p51_v3","HLT_HT350_AlphaT0p51_v4","HLT_HT350_AlphaT0p51_v5","HLT_HT350_AlphaT0p52_v1","HLT_HT350_AlphaT0p52_v2","HLT_HT350_AlphaT0p52_v2",
   "HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4","HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v7","HLT_HT250_AlphaT0p55_v*"
        ]
 
-refTrigList = ["HLT_Mu5_HT200_v1","HLT_Mu8_HT200_v1",     "HLT_Mu15_HT200_v1",      "HLT_Mu15_HT200_v1",      "HLT_Mu15_HT200_v1",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v1",      "HLT_Mu40_HT200_v1",
-               "HLT_Mu5_HT200_v2","HLT_Mu8_HT200_v2",     "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v2",      "HLT_Mu30_HT200_v2",        "HLT_Mu40_HT200_v2",      "HLT_Mu40_HT200_v2",
-              "HLT_Mu5_HT200_v3","HLT_Mu8_HT200_v3",     "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v3",      "HLT_Mu30_HT200_v3",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v3",
-              "HLT_Mu5_HT200_v4","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v4",      "HLT_Mu15_HT200_v4",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v4",        "HLT_Mu40_HT200_v4",      "HLT_Mu40_HT200_v4",
-              "HLT_Mu5_HT200_v5","HLT_Mu8_HT200_v5",     "HLT_Mu15_HT200_v5",      "HLT_Mu15_HT200_v5",      "HLT_Mu15_HT200_v5",      "HLT_Mu30_HT200_v5",        "HLT_Mu40_HT200_v5",      "HLT_Mu40_HT200_v5",
+refTrigList = ["HLT_Mu5_HT200_v4","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v4",      "HLT_Mu40_HT200_v4",
           "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
           "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
           "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
