@@ -466,7 +466,7 @@ from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
-#sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+#sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
 # sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 outDir = "../%s_SignalTriggers/ht%dNoUpper/"%(sample.Name,bin)
