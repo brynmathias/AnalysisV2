@@ -72,6 +72,17 @@ void PreScaleSimple::Plots() {
     2000,0.,2000.,
     1, 0, 1, true );
 
+  BookHistArray( AlphaT_Nom,
+    "AlphaT_Nom",
+    ";#alpha_{T}",
+    100,0.,5.,
+    1, 0, 1, true );
+
+  BookHistArray( AlphaT_Denom,
+    "AlphaT_Denom",
+    ";#alpha_{T}",
+    100,0.,5.,
+    1, 0, 1, true );
 
 
 
@@ -205,7 +216,9 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         if ( denomPreScale % nomPreScale == 0){
           if(DENOMFIRE){
             HT_Denom[0]->Fill(ev.CommonHT(),1);
+            AlphaT_Denom[0]->Fill(ev.CommonAlphaT(),1);
             if(NOMFIRE){
+              AlphaT_Nom[0]->Fill(ev.CommonAlphaT(),1);
               HT_Nom[0]->Fill(ev.CommonHT(),1);
             }
           }
