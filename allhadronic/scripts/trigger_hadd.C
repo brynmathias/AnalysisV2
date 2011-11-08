@@ -68,19 +68,19 @@ void trigger_hadd() {
   
   std::vector<std::string> filters;
   //filters.push_back("HLT_HT???_MHT??_v*");
-//   filters.push_back("HLT_HT250_AlphaT0p??_v*");
+  filters.push_back("HLT_HT400_AlphaT0p??_v*");
 
    //filters.push_back("HLT_HT1??_v*");
-   filters.push_back("HLT_HT25?_v*");
+  // filters.push_back("HLT_HT25?_v*");
 
 //   filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
-//   filters.push_back("HLT_Mu?_HT200_v*");
-//   filters.push_back("HLT_Mu??_HT200_v*");
+   filters.push_back("HLT_Mu?_HT200_v*");
+   filters.push_back("HLT_Mu??_HT200_v*");
 
  //  filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
-   filters.push_back("HLT_HT3??_v*");
+  // filters.push_back("HLT_HT3??_v*");
  //  filters.push_back("HLT_HT4??_v*");
  //  filters.push_back("HLT_HT5??_v*");
  //  filters.push_back("HLT_HT6??_v*");
@@ -89,8 +89,8 @@ void trigger_hadd() {
  //  filters.push_back("HLT_HT9??_v*");
  //  filters.push_back("HLT_HT9??_v*");
  //  filters.push_back("HLT_HT1???_v*");
-   filters.push_back("HLT_Mu?_v*");
-   filters.push_back("HLT_Mu??_v*");
+  // filters.push_back("HLT_Mu?_v*");
+  // filters.push_back("HLT_Mu??_v*");
   // filters.push_back("HLT_IsoMu?_v*");
   // filters.push_back("HLT_IsoMu??_v*");
   // filters.push_back("HLT_IsoMu?_eta2p1_v*");
