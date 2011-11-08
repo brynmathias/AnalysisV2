@@ -313,7 +313,7 @@ muDr = RECO_MuonJetDRCut(0.5)
 ht275= RECO_CommonHTCut(275.0)
 if bin == 275 or bin == 325:
   htLow = RECO_CommonHTCut(bin)
-  htUp =  RECO_CommonHTLessThanCut(bin + 50.)
+  htUp =  RECO_CommonHLTessThanCut(bin + 50.)
   htUp = None
 else :
   htUp = None
@@ -355,8 +355,8 @@ cutTreeData.TAttach(secondJetET,zeroMuon)
 ht275 = RECO_CommonHTCut(275.)
 ht325 = RECO_CommonHTCut(325.)
 ht375 = RECO_CommonHTCut(375.)
-# htLess325 = RECO_CommonHTLessThanCut(375.)
-# htLess475 = RECO_CommonHTLessThanCut(475.)
+# htLess325 = RECO_CommonHLTessThanCut(375.)
+# htLess475 = RECO_CommonHLTessThanCut(475.)
 # If muon required --- AlphaT and Meff Turn ons
 cutTreeData.TAttach(oneMuon,muDr)
 cutTreeData.TAttach(muDr,ht375)
@@ -366,14 +366,14 @@ cutTreeData.TAttach(muDr,ht325)
 
 
 TestTrigList = [
-       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5","HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
-       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5","HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
-       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5","HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
-       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5","HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
-       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5","HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
-       "HTL_HT300_AlphaT0p52_v1","HTL_HT300_AlphaT0p52_v2","HTL_HT300_AlphaT0p52_v3","HTL_HT300_AlphaT0p52_v4","HTL_HT300_AlphaT0p52_v5","HTL_HT300_AlphaT0p53_v5","HTL_HT300_AlphaT0p53_v6","HTL_HT300_AlphaT0p53_v6",
-       "HTL_HT350_AlphaT0p51_v1","HTL_HT350_AlphaT0p51_v2","HTL_HT350_AlphaT0p51_v3","HTL_HT350_AlphaT0p51_v4","HTL_HT350_AlphaT0p51_v5","HTL_HT350_AlphaT0p52_v1","HTL_HT350_AlphaT0p52_v2","HTL_HT350_AlphaT0p52_v2",
-  "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7","HTL_HT400_AlphaT0p51_v7","HLT_HT250_AlphaT0p55_v*"
+       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
+       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
+       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
+       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
+       "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2", # 275
+       "HLT_HT300_AlphaT0p52_v1","HLT_HT300_AlphaT0p52_v2","HLT_HT300_AlphaT0p52_v3","HLT_HT300_AlphaT0p52_v4","HLT_HT300_AlphaT0p52_v5","HLT_HT300_AlphaT0p53_v5","HLT_HT300_AlphaT0p53_v6","HLT_HT300_AlphaT0p53_v6",
+       "HLT_HT350_AlphaT0p51_v1","HLT_HT350_AlphaT0p51_v2","HLT_HT350_AlphaT0p51_v3","HLT_HT350_AlphaT0p51_v4","HLT_HT350_AlphaT0p51_v5","HLT_HT350_AlphaT0p52_v1","HLT_HT350_AlphaT0p52_v2","HLT_HT350_AlphaT0p52_v2",
+  "HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4","HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v7","HLT_HT250_AlphaT0p55_v*"
        ]
 
 refTrigList = ["HLT_Mu5_HT200_v1","HLT_Mu8_HT200_v1",     "HLT_Mu15_HT200_v1",      "HLT_Mu15_HT200_v1",      "HLT_Mu15_HT200_v1",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v1",      "HLT_Mu40_HT200_v1",
