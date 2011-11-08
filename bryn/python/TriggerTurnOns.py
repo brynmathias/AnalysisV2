@@ -203,8 +203,8 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
- # op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
-  op = PreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
+ op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
+  # op = PreScaledTriggers( PSet(DirName = NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -363,16 +363,33 @@ cutTreeData.TAttach(muDr,ht375)
 cutTreeData.TAttach(muDr,ht275)
 cutTreeData.TAttach(muDr,ht325)
 # cutTreeData.TAttach(ht375,htLess475)
-refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
-TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
+
+
+TestTrigList = [
+       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5",
+       "HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
+       "HTL_HT300_AlphaT0p52_v1","HTL_HT300_AlphaT0p52_v2","HTL_HT300_AlphaT0p52_v3","HTL_HT300_AlphaT0p52_v4","HTL_HT300_AlphaT0p52_v5","HTL_HT300_AlphaT0p53_v5","HTL_HT300_AlphaT0p53_v6","HTL_HT300_AlphaT0p53_v6", #
+       "HTL_HT350_AlphaT0p51_v1","HTL_HT350_AlphaT0p51_v2","HTL_HT350_AlphaT0p51_v3","HTL_HT350_AlphaT0p51_v4","HTL_HT350_AlphaT0p51_v5","HTL_HT350_AlphaT0p52_v1","HTL_HT350_AlphaT0p52_v2","HTL_HT350_AlphaT0p52_v2", #
+       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7","HTL_HT400_AlphaT0p51_v7", #
+       ]
+
+refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4","HLT_Mu15_HT200_v2","HLT_Mu15_HT200_v3","HLT_Mu15_HT200_v4","HLT_Mu30_HT200_v1","HLT_Mu40_HT200_v4","HLT_Mu40_HT200_v4",
+        "HLT_Mu5_HT200_v3",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4"       "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4"       "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+]
+
+# refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
+# TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for ref,test in zip(refTrigList,TestTrigList):
-  if int(bin) is 275:
-    out.append(AddHistPair(cutTreeData,ht275,ref,test))
-  if int(bin) is 325:
-    out.append(AddHistPair(cutTreeData,ht325,ref,test))
-  if int(bin) is 375:
-    out.append(AddHistPair(cutTreeData,ht375,ref,test))
+  out.append(AddHistPair(cutTreeData,muDr,ref,test))
+  # if int(bin) is 275:
+    # out.append(AddHistPair(cutTreeData,ht275,ref,test))
+  # if int(bin) is 325:
+    # out.append(AddHistPair(cutTreeData,ht325,ref,test))
+  # if int(bin) is 375:
+    # out.append(AddHistPair(cutTreeData,ht375,ref,test))
 
 # refTrigList=
 # TestTrigList=
@@ -381,29 +398,9 @@ for ref,test in zip(refTrigList,TestTrigList):
 # "HLT_HT150_v8","HLT_HT200_v8","HLT_HT250_v8","HLT_HT400_v8","HLT_HT450_v8","HLT_HT600_v1"
 # "HLT_HT200_v8","HLT_HT250_v8","HLT_HT300_v9","HLT_HT450_v8","HLT_HT500_v8","HLT_HT650_v1"
 
-SignalTriggersOption = [
-       "HTL_HT250_AlphaT0p55_v1","HTL_HT250_AlphaT0p55_v2","HTL_HT250_AlphaT0p53_v2","HTL_HT250_AlphaT0p53_v3","HTL_HT250_AlphaT0p53_v4","HTL_HT250_AlphaT0p53_v5",
-       "HTL_HT250_AlphaT0p53_v6","HTL_HT250_AlphaT0p55_v2", # 275
-       "HTL_HT300_AlphaT0p52_v1","HTL_HT300_AlphaT0p52_v2","HTL_HT300_AlphaT0p52_v3","HTL_HT300_AlphaT0p52_v4","HTL_HT300_AlphaT0p52_v5","HTL_HT300_AlphaT0p53_v5","HTL_HT300_AlphaT0p53_v6", # 325
-       "HTL_HT350_AlphaT0p51_v1","HTL_HT350_AlphaT0p51_v2","HTL_HT350_AlphaT0p51_v3","HTL_HT350_AlphaT0p51_v4","HTL_HT350_AlphaT0p51_v5","HTL_HT350_AlphaT0p52_v1","HTL_HT350_AlphaT0p52_v2", # 375
-       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7", # 475
-       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7", # 575
-       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7", # 675
-       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7", # 775
-       "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7", # 875
-       ]
 
 
-MonitorTriggersOption = (
-       ["HLT_HT250_v2",],["HLT_HT250_v3",],["HLT_HT250_v4",],["HLT_HT250_v5",],["HLT_HT250_v6",],["HLT_HT250_v7",],["HLT_HT250_v8",], # 275
-       ["HLT_HT300_v3",],["HLT_HT300_v4",],["HLT_HT300_v5",],["HLT_HT300_v6",],["HLT_HT300_v7",],["HLT_HT300_v8",],["HLT_HT300_v9",], # 325
-       ["HLT_HT350_v2",],["HLT_HT350_v3",],["HLT_HT350_v4",],["HLT_HT350_v5",],["HLT_HT350_v6",],["HLT_HT350_v7",],["HLT_HT350_v8",], # 375
-       ["HLT_HT450_v2",],["HLT_HT450_v3",],["HLT_HT450_v4",],["HLT_HT450_v5",],["HLT_HT450_v6",],["HLT_HT450_v7",],["HLT_HT450_v8",], # 475
-       ["HLT_HT550_v2",],["HLT_HT550_v3",],["HLT_HT550_v4",],["HLT_HT550_v5",],["HLT_HT550_v6",],["HLT_HT550_v7",],["HLT_HT550_v8",], # 575
-       ["HLT_HT550_v2",],["HLT_HT550_v3",],["HLT_HT550_v4",],["HLT_HT550_v5",],["HLT_HT550_v6",],["HLT_HT550_v7",],["HLT_HT600_v1",], # 675
-       ["HLT_HT550_v2",],["HLT_HT550_v3",],["HLT_HT550_v4",],["HLT_HT550_v5",],["HLT_HT550_v6",],["HLT_HT550_v7",],["HLT_HT600_v1",], # 775
-       ["HLT_HT550_v2",],["HLT_HT550_v3",],["HLT_HT550_v4",],["HLT_HT550_v5",],["HLT_HT550_v6",],["HLT_HT550_v7",],["HLT_HT600_v1",], # 875
-)
+
 
 
 # If muon is not required
@@ -411,25 +408,10 @@ refTrigList =  (["HLT_HT250_v2",],["HLT_HT250_v3",],["HLT_HT250_v4",],["HLT_HT25
 TestTrigList = (["HLT_HT350_v2",],["HLT_HT350_v3",],["HLT_HT350_v4",],["HLT_HT350_v5",],["HLT_HT350_v6",],["HLT_HT350_v7",],["HLT_HT350_v8",],["HLT_HT450_v2",],["HLT_HT450_v3",],["HLT_HT450_v4",],["HLT_HT450_v5",],["HLT_HT450_v6",],["HLT_HT450_v7",],["HLT_HT450_v8",],["HLT_HT550_v2",],["HLT_HT550_v3",],["HLT_HT550_v4",],["HLT_HT550_v5",],["HLT_HT550_v6",],["HLT_HT550_v7",],["HLT_HT550_v8",],["HLT_HT600_v1",],["HLT_HT300_v*",],["HLT_HT350_v*",],["HLT_HT400_v*",],["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",],["HLT_HT300_v*",],["HLT_HT350_v*",],["HLT_HT400_v*",],["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",])#"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
 # refTrigList = ["HLT_*"]
 # TestTrigList = ["HLT_*"]
-for ref,test in zip(refTrigList,TestTrigList):
+# for ref,test in zip(refTrigList,TestTrigList):
   # out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
-  out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref))
+  # out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref))
 
-
-refTrigList  = ["HLT_Mu30_v5"]
-TestTrigList = ["HLT_HT250_v7"]
-
-
-for ref,test in zip(refTrigList,TestTrigList):
-  out.append(AddHistPair(cutTreeData,oneMuon,ref,test))
-# refTrigList  = ["HLT_HT150_v8"]
-# TestTrigList = ["HLT_HT300_v9"]
-# L1SeedRef    = ["NONE"]
-# L1SeedTest   = ["L1_HTT50"]
-# for ref,test,l1ref,l1test in zip(refTrigList,TestTrigList,L1SeedRef,L1SeedTest):
-  # out.append(AddHistPairWithL1(cutTreeData,zeroMuon,ref,test,l1ref,l1test))
-# cutTreeData.TAttach(muDr,MHT_METCut)
-# cutTreeData.TAttach(secondJetET,muDr)
 
 
 from ra1objectid.vbtfElectronId_cff import *
@@ -486,7 +468,7 @@ sample = HTRun2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
 # sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-outDir = "../%s_ROBREQUEST_DEBUG_2/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s_SignalTriggers/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
