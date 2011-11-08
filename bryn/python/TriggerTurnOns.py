@@ -383,7 +383,7 @@ refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",  
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for ref,test in zip(refTrigList,TestTrigList):
-  out.append(PreScaledPair(cutTreeData,muDr,ref,test))
+  out.append(PreScaledPair(cutTreeData,muDr,test,ref))
   # if int(bin) is 275:
     # out.append(AddHistPair(cutTreeData,ht275,ref,test))
   # if int(bin) is 325:
