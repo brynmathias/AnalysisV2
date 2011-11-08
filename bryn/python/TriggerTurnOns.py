@@ -326,15 +326,15 @@ MHT_METCut = OP_MHToverMET(1.25,50.)
 # AK5 Calo
 json_ouput = JSONOutput("filtered")
 alphaT = OP_CommonAlphaTCut(0.53)
-# json = JSONFilter("Json Mask", json_to_pset("/home/hep/rjb3/public_html/golden.json"))
+json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden2011.json"))
 evDump = EventDump()
 # htTriggerEmu = OP_TriggerHT_Emu(250.,40.)
 cutTreeData = Tree("Data")
 out = []
-# cutTreeData.Attach(json)
-# cutTreeData.TAttach(json,json_ouput)
-# cutTreeData.TAttach(json,NoiseFilt)
-cutTreeData.Attach(NoiseFilt)
+cutTreeData.Attach(json)
+cutTreeData.TAttach(json,json_ouput)
+cutTreeData.TAttach(json,NoiseFilt)
+# cutTreeData.Attach(NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
 cutTreeData.TAttach(oddMuon,oddElectron)
@@ -372,11 +372,11 @@ TestTrigList = [
   "HTL_HT400_AlphaT0p51_v1","HTL_HT400_AlphaT0p51_v2","HTL_HT400_AlphaT0p51_v3","HTL_HT400_AlphaT0p51_v4","HTL_HT400_AlphaT0p51_v5","HTL_HT400_AlphaT0p51_v6","HTL_HT400_AlphaT0p51_v7","HTL_HT400_AlphaT0p51_v7","HLT_HT250_AlphaT0p55_v*"
        ]
 
-refTrigList = ["HLT_Mu8_HT200_v3","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v4",      "HLT_Mu40_HT200_v4",
-        "HLT_Mu5_HT200_v3",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
-        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
-        "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
-        "HLT_Mu40_HT200_v*"
+refTrigList = ["HLT_Mu5_HT200_v4","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v4",      "HLT_Mu40_HT200_v4",
+          "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+          "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+          "HLT_Mu5_HT200_v4",     "HLT_Mu8_HT200_v4",       "HLT_Mu15_HT200_v2",      "HLT_Mu15_HT200_v3",      "HLT_Mu15_HT200_v4",      "HLT_Mu30_HT200_v1",        "HLT_Mu40_HT200_v3",      "HLT_Mu40_HT200_v4",
+          "HLT_Mu40_HT200_v*"
 ]
 
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
