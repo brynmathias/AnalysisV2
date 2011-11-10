@@ -203,7 +203,7 @@ test = Trigger(ps.ps())
 #JsonFileOption = "/allhadronic/python/Cert_160404-166861_7TeV_PromptReco_Collisions11_JSON.txt"
 #JsonFileOption = "/allhadronic/python/Cert_160404-166502_7TeV_PromptReco_Collisions11_JSON.txt"
 #JsonFileOption = "/allhadronic/python/Cert_160404-167151_7TeV_PromptReco_Collisions11_JSON.txt"
-JsonFileOption = "/home/hep/rjb3/public_html/golden.json"
+JsonFileOption = "/home/hep/db1110/public_html/Golden2011.json"
 
 json = JSONFilter("JSON",json_to_pset(JsonFileOption))
 json_output = JSONOutput("_filtered")
@@ -237,6 +237,7 @@ data=PSet(
 
 from data.Run2011.HTRun2011AB import *
 from SingleMu import *
+from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 # -----------------------------------------------------------------------------
 # Analysis
 
@@ -246,7 +247,7 @@ anal=Analysis("Trigger")
 #anal.AddJetFilter("PreCC",JetCorrections)
 anal+=cut_flow
 
-anal.Run(".",conf,[SingleMu])
+anal.Run(".",conf,[MuHad_Run2011A_Complete_V15_03_14])
 #anal.Run(".",conf,[Jet_35pb_WithTP_json051110])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011A_PromptReco_v1])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])

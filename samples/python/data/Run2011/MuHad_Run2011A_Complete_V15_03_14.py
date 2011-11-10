@@ -7023,5 +7023,5 @@ MuHad_Run2011A_Complete_V15_03_14=PSet(
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bm409/ICF/automated/2011_10_04_17_23_30/MuHad.Run2011A-PromptReco-v4.AOD/SusyCAF_Tree_99_1_3RR.root" ,
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bm409/ICF/automated/2011_10_04_17_23_30/MuHad.Run2011A-PromptReco-v4.AOD/SusyCAF_Tree_9_1_CBi.root" ,
   ],
-	Weight=1,
+	Weight=1.0,
 )
