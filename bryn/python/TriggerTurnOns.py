@@ -358,7 +358,9 @@ ht375 = RECO_CommonHTCut(375.)
 # htLess325 = RECO_CommonHLTessThanCut(375.)
 # htLess475 = RECO_CommonHLTessThanCut(475.)
 # If muon required --- AlphaT and Meff Turn ons
-cutTreeData.TAttach(oneMuon,muDr)
+cutTreeData.TAttach(oneMuon,DeadEcalCutData)
+cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
+cutTreeData.TAttach(MHT_METCut,muDr)
 cutTreeData.TAttach(muDr,ht375)
 cutTreeData.TAttach(muDr,ht275)
 cutTreeData.TAttach(muDr,ht325)
@@ -511,10 +513,8 @@ from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
 #sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 # sample = HTRun2011AB
-#sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
-#sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-outDir = "../%s_AlphaT_withALTPlots/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s_AlphaT_withALTPlots_WithCleaning/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
