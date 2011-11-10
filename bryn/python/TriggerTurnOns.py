@@ -203,7 +203,7 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
-  op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = [NumeratorTrig], DenominatorTrigger = [DenominatorTrig]).ps() )
+  op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = [NumeratorTrig], DenominatorTrigger = [DenominatorTrig]).ps() )
   # op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
