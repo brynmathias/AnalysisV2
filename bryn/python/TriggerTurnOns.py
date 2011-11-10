@@ -436,7 +436,7 @@ alphatTesting = {
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for key,vals in alphatTesting.iteritems():
-   print key
+   print key,vals[0],vals[1]
    cut = eval("RECO_CommonHTCut(%f)"%(vals[1]))
    out.append(cut)
    cutTreeData.TAttach(muDr,cut)
@@ -545,7 +545,7 @@ sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
 # sample = HTRun2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
-# sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 outDir = "../%s_AlphaT_withALTPlots/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
