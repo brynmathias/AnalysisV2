@@ -436,6 +436,7 @@ alphatTesting = {
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for key,vals in alphatTesting.iteritems():
+   print key
    cut = eval("RECO_CommonHTCut(%f)"%(vals[1]))
    out.append(cut)
    cutTreeData.TAttach(muDr,cut)
