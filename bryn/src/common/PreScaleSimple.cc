@@ -75,13 +75,13 @@ void PreScaleSimple::Plots() {
   BookHistArray( AlphaT_Nom,
     "AlphaT_Nom",
     ";#alpha_{T}",
-    100,0.,5.,
+    500,0.,5.,
     1, 0, 1, true );
 
   BookHistArray( AlphaT_Denom,
     "AlphaT_Denom",
     ";#alpha_{T}",
-    100,0.,5.,
+    500,0.,5.,
     1, 0, 1, true );
 
 
