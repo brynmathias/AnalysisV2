@@ -383,14 +383,14 @@ refTrigList = ["HLT_Mu5_HT200_v4","HLT_Mu8_HT200_v4",     "HLT_Mu15_HT200_v2",  
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
-for ref,test in zip(refTrigList,TestTrigList):
-  out.append(PreScaledPair(cutTreeData,muDr,test,ref))
-  if int(bin) is 275:
-    out.append(PreScaledPair(cutTreeData,ht275,test,ref))
-  if int(bin) is 325:
-    out.append(PreScaledPair(cutTreeData,ht325,test,ref))
-  if int(bin) is 375:
-    out.append(PreScaledPair(cutTreeData,ht375,test,ref))
+# for ref,test in zip(refTrigList,TestTrigList):
+#   out.append(PreScaledPair(cutTreeData,muDr,test,ref))
+#   if int(bin) is 275:
+#     out.append(PreScaledPair(cutTreeData,ht275,test,ref))
+#   if int(bin) is 325:
+#     out.append(PreScaledPair(cutTreeData,ht325,test,ref))
+#   if int(bin) is 375:
+#     out.append(PreScaledPair(cutTreeData,ht375,test,ref))
 
 # refTrigList=
 # TestTrigList=
