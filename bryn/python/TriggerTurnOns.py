@@ -404,12 +404,11 @@ alphatTesting = {
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for key,vals in alphatTesting.iteritems():
-  for bin in vals[1]:
-    cut = eval("RECO_CommonHTCut(%f)"%(bin))
-    print key,vals[0],bin
+  for htbin in vals[1]:
+    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
     out.append(cut)
     cutTreeData.TAttach(muDr,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(bin)))
+    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
 #   if int(bin) is 275:
 #     out.append(PreScaledPair(cutTreeData,ht275,test,ref))
 #   if int(bin) is 325:
