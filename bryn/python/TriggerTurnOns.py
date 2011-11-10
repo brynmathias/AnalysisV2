@@ -426,7 +426,7 @@ TestTrigList = (["HLT_HT350_v2",],["HLT_HT350_v3",],["HLT_HT350_v4",],["HLT_HT35
 
                 ["HLT_HT400_v*",],["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",],["HLT_HT300_v*",],["HLT_HT350_v*",],["HLT_HT400_v*",],
 
-                ["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",]
+                ["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",],
                 ["HLT_HT450_v2",],["HLT_HT450_v3",],["HLT_HT450_v4",],["HLT_HT450_v5",],["HLT_HT450_v6",],["HLT_HT450_v7",],["HLT_HT450_v8",],
                 )
                 #"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
