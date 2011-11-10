@@ -203,8 +203,8 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
-  # op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = [NumeratorTrig], DenominatorTrigger = [DenominatorTrig]).ps() )
-  op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
+  op = SimplePreScaledTriggers( PSet(DirName = NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = [NumeratorTrig], DenominatorTrigger = [DenominatorTrig]).ps() )
+  # op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -544,7 +544,7 @@ sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
 # sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-outDir = "../%s_AlphaT/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s_AlphaT_withALTPlots/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
