@@ -433,7 +433,6 @@ TestTrigList = (["HLT_HT350_v2",],["HLT_HT350_v3",],["HLT_HT350_v4",],["HLT_HT35
 # refTrigList = ["HLT_*"]
 # TestTrigList = ["HLT_*"]
 for ref,test in zip(refTrigList,TestTrigList):
-  out.append(AddHistPair(cutTreeData,zeroMuon,ref,test))
   out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref))
 
 
