@@ -365,82 +365,51 @@ cutTreeData.TAttach(muDr,ht325)
 # cutTreeData.TAttach(ht375,htLess475)
 
 alphatTesting = {
-  "HLT_HT250_AlphaT0p55_v1": ("HLT_Mu5_HT200_v4" ,275.),
-  "HLT_HT250_AlphaT0p55_v2": ("HLT_Mu8_HT200_v4" ,275.),
-  "HLT_HT250_AlphaT0p53_v2": ("HLT_Mu15_HT200_v2",275.),
-  "HLT_HT250_AlphaT0p53_v3": ("HLT_Mu15_HT200_v3",275.),
-  "HLT_HT250_AlphaT0p53_v4": ("HLT_Mu15_HT200_v4",275.),
-  "HLT_HT250_AlphaT0p53_v5": ("HLT_Mu30_HT200_v1",275.),
-  "HLT_HT250_AlphaT0p53_v6": ("HLT_Mu40_HT200_v4",275.),
-  "HLT_HT250_AlphaT0p55_v2": ("HLT_Mu40_HT200_v4",275.),
-  "HLT_HT300_AlphaT0p52_v1": ("HLT_Mu5_HT200_v4" ,325.),
-  "HLT_HT300_AlphaT0p52_v2": ("HLT_Mu8_HT200_v4" ,325.),
-  "HLT_HT300_AlphaT0p52_v3": ("HLT_Mu15_HT200_v2",325.),
-  "HLT_HT300_AlphaT0p52_v4": ("HLT_Mu15_HT200_v3",325.),
-  "HLT_HT300_AlphaT0p52_v5": ("HLT_Mu15_HT200_v4",325.),
-  "HLT_HT300_AlphaT0p53_v5": ("HLT_Mu30_HT200_v1",325.),
-  "HLT_HT300_AlphaT0p53_v6": ("HLT_Mu40_HT200_v3",325.),
-  "HLT_HT300_AlphaT0p53_v6": ("HLT_Mu40_HT200_v4",325.),
-  "HLT_HT350_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,375.),
-  "HLT_HT350_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,375.),
-  "HLT_HT350_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",375.),
-  "HLT_HT350_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",375.),
-  "HLT_HT350_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",375.),
-  "HLT_HT350_AlphaT0p52_v1": ("HLT_Mu30_HT200_v1",375.),
-  "HLT_HT350_AlphaT0p52_v2": ("HLT_Mu40_HT200_v3",375.),
-  "HLT_HT350_AlphaT0p52_v2": ("HLT_Mu40_HT200_v4",375.),
-  "HLT_HT400_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,475.),
-  "HLT_HT400_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,475.),
-  "HLT_HT400_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",475.),
-  "HLT_HT400_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",475.),
-  "HLT_HT400_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",475.),
-  "HLT_HT400_AlphaT0p51_v6": ("HLT_Mu30_HT200_v1",475.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v3",475.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v4",475.),
-  "HLT_HT400_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,575.),
-  "HLT_HT400_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,575.),
-  "HLT_HT400_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",575.),
-  "HLT_HT400_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",575.),
-  "HLT_HT400_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",575.),
-  "HLT_HT400_AlphaT0p51_v6": ("HLT_Mu30_HT200_v1",575.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v3",575.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v4",575.),
-  "HLT_HT400_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,675.),
-  "HLT_HT400_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,675.),
-  "HLT_HT400_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",675.),
-  "HLT_HT400_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",675.),
-  "HLT_HT400_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",675.),
-  "HLT_HT400_AlphaT0p51_v6": ("HLT_Mu30_HT200_v1",675.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v3",675.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v4",675.),
-  "HLT_HT400_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,775.),
-  "HLT_HT400_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,775.),
-  "HLT_HT400_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",775.),
-  "HLT_HT400_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",775.),
-  "HLT_HT400_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",775.),
-  "HLT_HT400_AlphaT0p51_v6": ("HLT_Mu30_HT200_v1",775.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v3",775.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v4",775.),
-  "HLT_HT400_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,875.),
-  "HLT_HT400_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,875.),
-  "HLT_HT400_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",875.),
-  "HLT_HT400_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",875.),
-  "HLT_HT400_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",875.),
-  "HLT_HT400_AlphaT0p51_v6": ("HLT_Mu30_HT200_v1",875.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v3",875.),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v4",875.),
-  "HLT_HT250_AlphaT0p55_v*": ("HLT_Mu40_HT200_v*",275.),
+  "HLT_HT250_AlphaT0p55_v1": ("HLT_Mu5_HT200_v4" ,[275.,]),
+  "HLT_HT250_AlphaT0p55_v2": ("HLT_Mu8_HT200_v4" ,[275.,]),
+  "HLT_HT250_AlphaT0p53_v2": ("HLT_Mu15_HT200_v2",[275.,]),
+  "HLT_HT250_AlphaT0p53_v3": ("HLT_Mu15_HT200_v3",[275.,]),
+  "HLT_HT250_AlphaT0p53_v4": ("HLT_Mu15_HT200_v4",[275.,]),
+  "HLT_HT250_AlphaT0p53_v5": ("HLT_Mu30_HT200_v1",[275.,]),
+  "HLT_HT250_AlphaT0p53_v6": ("HLT_Mu40_HT200_v4",[275.,]),
+  "HLT_HT250_AlphaT0p55_v2": ("HLT_Mu40_HT200_v4",[275.,]),
+  "HLT_HT300_AlphaT0p52_v1": ("HLT_Mu5_HT200_v4" ,[325.,]),
+  "HLT_HT300_AlphaT0p52_v2": ("HLT_Mu8_HT200_v4" ,[325.,]),
+  "HLT_HT300_AlphaT0p52_v3": ("HLT_Mu15_HT200_v2",[325.,]),
+  "HLT_HT300_AlphaT0p52_v4": ("HLT_Mu15_HT200_v3",[325.,]),
+  "HLT_HT300_AlphaT0p52_v5": ("HLT_Mu15_HT200_v4",[325.,]),
+  "HLT_HT300_AlphaT0p53_v5": ("HLT_Mu30_HT200_v1",[325.,]),
+  "HLT_HT300_AlphaT0p53_v6": ("HLT_Mu40_HT200_v3",[325.,]),
+  "HLT_HT300_AlphaT0p53_v6": ("HLT_Mu40_HT200_v4",[325.,]),
+  "HLT_HT350_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,[375.,]),
+  "HLT_HT350_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,[375.,]),
+  "HLT_HT350_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",[375.,]),
+  "HLT_HT350_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",[375.,]),
+  "HLT_HT350_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",[375.,]),
+  "HLT_HT350_AlphaT0p52_v1": ("HLT_Mu30_HT200_v1",[375.,]),
+  "HLT_HT350_AlphaT0p52_v2": ("HLT_Mu40_HT200_v3",[375.,]),
+  "HLT_HT350_AlphaT0p52_v2": ("HLT_Mu40_HT200_v4",[375.,]),
+  "HLT_HT400_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v6": ("HLT_Mu30_HT200_v1",[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v3",[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v4",[475.,575.,675.,775.,875.]),
+
 
 }
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for key,vals in alphatTesting.iteritems():
-   print key,vals[0],vals[1]
-   cut = eval("RECO_CommonHTCut(%f)"%(vals[1]))
-   out.append(cut)
-   cutTreeData.TAttach(muDr,cut)
-   out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(vals[1])))
+  for bin in vals[1]:
+    cut = eval("RECO_CommonHTCut(%f)"%(bin))
+    print key,vals[0],bin
+    out.append(cut)
+    cutTreeData.TAttach(muDr,cut)
+    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(bin)))
 #   if int(bin) is 275:
 #     out.append(PreScaledPair(cutTreeData,ht275,test,ref))
 #   if int(bin) is 325:
@@ -545,7 +514,7 @@ sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
 # sample = HTRun2011AB
 #sample.File = sample.File[0:1]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 
-sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+#sample.File = ["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 outDir = "../%s_AlphaT_withALTPlots/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
