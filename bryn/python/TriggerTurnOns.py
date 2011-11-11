@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 375.
+bin = 275.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -310,14 +310,6 @@ zeroMuon = OP_NumComMuons("<=",0)
 
 numComPhotons = OP_NumComPhotons("<=",0)
 muDr = RECO_MuonJetDRCut(0.5)
-ht275= RECO_CommonHTCut(275.0)
-if bin == 275 or bin == 325:
-  htLow = RECO_CommonHTCut(bin)
-  htUp =  RECO_CommonHLTessThanCut(bin + 50.)
-  htUp = None
-else :
-  htUp = None
-  htLow = RECO_CommonHTCut(bin)
 VertexPtOverHT = OP_SumVertexPtOverHT(0.1)
 # -----------------------------------------------------------------------------
 # Definition of analyses
