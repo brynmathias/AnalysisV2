@@ -402,28 +402,12 @@ alphatTesting = {
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
-for key,vals in alphatTesting.iteritems():
-  for htbin in vals[1]:
-    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-    out.append(cut)
-    cutTreeData.TAttach(muDr,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
-#   if int(bin) is 275:
-#     out.append(PreScaledPair(cutTreeData,ht275,test,ref))
-#   if int(bin) is 325:
-#     out.append(PreScaledPair(cutTreeData,ht325,test,ref))
-#   if int(bin) is 375:
-#     out.append(PreScaledPair(cutTreeData,ht375,test,ref))
-
-# refTrigList=
-# TestTrigList=
-# for ref,test in zip(refTrigList,TestTrigList)
-#   out.append(AddHistPair(cutTreeData,muon,ref,test))
-# "HLT_HT150_v8","HLT_HT200_v8","HLT_HT250_v8","HLT_HT400_v8","HLT_HT450_v8","HLT_HT600_v1"
-# "HLT_HT200_v8","HLT_HT250_v8","HLT_HT300_v9","HLT_HT450_v8","HLT_HT500_v8","HLT_HT650_v1"
-
-
-
+# for key,vals in alphatTesting.iteritems():
+#   for htbin in vals[1]:
+#     cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+#     out.append(cut)
+#     cutTreeData.TAttach(muDr,cut)
+#     out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
 
 
 
