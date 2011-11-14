@@ -203,7 +203,7 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
-  op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = [NumeratorTrig], DenominatorTrigger = [DenominatorTrig]).ps() )
+  op = SimplePreScaledTriggers( PSet(DirName = Label+list(NumeratorTrig)[0]+"_"+list(DenominatorTrig)[0],NumeratorTrigger = list(NumeratorTrig), DenominatorTrigger = list(DenominatorTrig)).ps() )
   # op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
@@ -424,24 +424,24 @@ for key,vals in alphatTesting.iteritems():
 
 # If muon is not required
 refTrigList =  (
-                # ["HLT_HT250_v2",],["HLT_HT250_v3",],["HLT_HT250_v4",],["HLT_HT250_v5",],["HLT_HT250_v6",],["HLT_HT250_v7",],["HLT_HT250_v8",],["HLT_HT300_v3",],
+                ["HLT_HT250_v2",],["HLT_HT250_v3",],["HLT_HT250_v4",],["HLT_HT250_v5",],["HLT_HT250_v6",],["HLT_HT250_v7",],["HLT_HT250_v8",],["HLT_HT300_v3",],
               # ["HLT_HT350_v2",],["HLT_HT350_v3",],["HLT_HT350_v4",],["HLT_HT350_v5",],["HLT_HT350_v6",],["HLT_HT350_v7",],["HLT_HT350_v8",],["HLT_HT450_v2",],
-                # ["HLT_HT300_v4",],["HLT_HT300_v5",],["HLT_HT300_v6",],["HLT_HT300_v7",],["HLT_HT300_v8",],["HLT_HT300_v9",],["HLT_HT350_v2",],["HLT_HT350_v3",],
+                ["HLT_HT300_v4",],["HLT_HT300_v5",],["HLT_HT300_v6",],["HLT_HT300_v7",],["HLT_HT300_v8",],["HLT_HT300_v9",],["HLT_HT350_v2",],["HLT_HT350_v3",],
               # ["HLT_HT450_v3",],["HLT_HT450_v4",],["HLT_HT450_v5",],["HLT_HT450_v6",],["HLT_HT450_v7",],["HLT_HT450_v8",],["HLT_HT550_v2",],["HLT_HT550_v3",],
-                # ["HLT_HT350_v4",],["HLT_HT350_v5",],["HLT_HT350_v6",],["HLT_HT350_v7",],["HLT_HT350_v8",],["HLT_HT350_v8",],["HLT_HT250_v*",],["HLT_HT250_v*",],
-                # ["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],
-                # ["HLT_HT300_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],
-                "HLT_HT250_v2","HLT_HT250_v3","HLT_HT250_v4","HLT_HT250_v5","HLT_HT250_v6","HLT_HT250_v7","HLT_HT250_v8",
+                ["HLT_HT350_v4",],["HLT_HT350_v5",],["HLT_HT350_v6",],["HLT_HT350_v7",],["HLT_HT350_v8",],["HLT_HT350_v8",],["HLT_HT250_v*",],["HLT_HT250_v*",],
+                ["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT250_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],
+                ["HLT_HT300_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],["HLT_HT300_v*",],
+                # "HLT_HT250_v2","HLT_HT250_v3","HLT_HT250_v4","HLT_HT250_v5","HLT_HT250_v6","HLT_HT250_v7","HLT_HT250_v8",
                 )
 
                   #,"HLT_HT350_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT350_v8","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT200_v8","HLT_HT200_v8","HLT_HT300_v9","HLT_HT300_v9","HLT_HT250_v8","HLT_HT250_v8","HLT_HT600_v1"])
 TestTrigList = (
-                # ["HLT_HT350_v2",],["HLT_HT350_v3",],["HLT_HT350_v4",],["HLT_HT350_v5",],["HLT_HT350_v6",],["HLT_HT350_v7",],["HLT_HT350_v8",],["HLT_HT450_v2",],
-                # ["HLT_HT450_v3",],["HLT_HT450_v4",],["HLT_HT450_v5",],["HLT_HT450_v6",],["HLT_HT450_v7",],["HLT_HT450_v8",],["HLT_HT550_v2",],["HLT_HT550_v3",],
-                # ["HLT_HT550_v4",],["HLT_HT550_v5",],["HLT_HT550_v6",],["HLT_HT550_v7",],["HLT_HT550_v8",],["HLT_HT600_v1",],["HLT_HT300_v*",],["HLT_HT350_v*",],
-                # ["HLT_HT400_v*",],["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",],["HLT_HT300_v*",],["HLT_HT350_v*",],["HLT_HT400_v*",],
-                # ["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",],
-                "HLT_HT450_v2","HLT_HT450_v3","HLT_HT450_v4","HLT_HT450_v5","HLT_HT450_v6","HLT_HT450_v7","HLT_HT450_v8",
+                ["HLT_HT350_v2",],["HLT_HT350_v3",],["HLT_HT350_v4",],["HLT_HT350_v5",],["HLT_HT350_v6",],["HLT_HT350_v7",],["HLT_HT350_v8",],["HLT_HT450_v2",],
+                ["HLT_HT450_v3",],["HLT_HT450_v4",],["HLT_HT450_v5",],["HLT_HT450_v6",],["HLT_HT450_v7",],["HLT_HT450_v8",],["HLT_HT550_v2",],["HLT_HT550_v3",],
+                ["HLT_HT550_v4",],["HLT_HT550_v5",],["HLT_HT550_v6",],["HLT_HT550_v7",],["HLT_HT550_v8",],["HLT_HT600_v1",],["HLT_HT300_v*",],["HLT_HT350_v*",],
+                ["HLT_HT400_v*",],["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",],["HLT_HT300_v*",],["HLT_HT350_v*",],["HLT_HT400_v*",],
+                ["HLT_HT450_v*",],["HLT_HT500_v*",],["HLT_HT550_v*",],["HLT_HT600_v*",],
+                # "HLT_HT450_v2","HLT_HT450_v3","HLT_HT450_v4","HLT_HT450_v5","HLT_HT450_v6","HLT_HT450_v7","HLT_HT450_v8",
                 )
                 #"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
 # refTrigList = ["HLT_*"]
@@ -502,11 +502,11 @@ from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
-sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
+# sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
 #sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# sample = HTRun2011AB
+sample = HTRun2011AB
 
-outDir = "../%s_AlphaT_withALTPlots_WithCleaning/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
