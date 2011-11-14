@@ -200,11 +200,16 @@ Cross_Trigger_PS = PSet(
 
 
 def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None,Label = ""):
+  if str(type(NumeratorTrig)) != "<type 'list'>":
+    NumeratorTrig = [NumeratorTrig]
+  if str(type(DenominatorTrig)) != "<type 'list'>":
+    DenominatorTrig = [DenominatorTrig]
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
-  op = SimplePreScaledTriggers( PSet(DirName = Label+[NumeratorTrig][0]+"_"+[DenominatorTrig][0],NumeratorTrigger = [NumeratorTrig], DenominatorTrigger = [DenominatorTrig]).ps() )
-  # op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig+"_"+DenominatorTrig,NumeratorTrigger = NumeratorTrig, DenominatorTrigger= DenominatorTrig).ps() )
+  # if
+  op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
+  # op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -503,7 +508,7 @@ from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 # sample = MuHad_Run2011A_Complete_V15_03_14 #MuHad2011AB
-#sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+# sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 sample = HTRun2011AB
 
 outDir = "../%s/ht%dNoUpper/"%(sample.Name,bin)
