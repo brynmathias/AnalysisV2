@@ -29,3 +29,6 @@ AK5*
 *.sh
 *.csh
 __susyJob__*
+*.sh
+*.inc
+*.csh

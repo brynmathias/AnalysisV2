@@ -35,27 +35,23 @@ void PreScaledTriggers::Start( Event::Data& ev ) {
   initDir( ev.OutputFile(), dirName_.c_str() );
   BookHistos();
 }
-
 // -----------------------------------------------------------------------------
 //
 void PreScaledTriggers::BookHistos() {
   if ( Plots_ )           { Plots(); }
 }
-
 // -----------------------------------------------------------------------------
 //
 bool PreScaledTriggers::Process( Event::Data& ev ) {
   if ( Plots_ )               { Plots(ev); }
   return true;
 }
-
 // -----------------------------------------------------------------------------
 //
 std::ostream& PreScaledTriggers::Description( std::ostream& ostrm ) {
   ostrm << "PreScaled Trigger Plots ";
   return ostrm;
 }
-
 // -----------------------------------------------------------------------------
 //
 void PreScaledTriggers::Plots() {
@@ -80,9 +76,6 @@ void PreScaledTriggers::Plots() {
     ";Did Denom Fire given Nom did?",
     2,-0.5,1.5,
     50, 0, 1, true );
-
-
-
 
 
 }
@@ -157,14 +150,14 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     OverLapCheck_[hIdxTrack_]->SetName(Form("OverLapCheck_%sPre_%d_%sPre_%d",  NomTrigger_.c_str(),NomPre,DeNomTrigger_.c_str(),DenomPre));
     hIdxTrack_++;
   }
- histN = histMap_.find(key);
+  histN = histMap_.find(key);
   if( histN != histMap_.end() ) {
     if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
     if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
     if(DenomPass){
       HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
       if(NomPass){
-      HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
+        HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
       }
     }
   }
