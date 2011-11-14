@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 275.
+bin = 375.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
