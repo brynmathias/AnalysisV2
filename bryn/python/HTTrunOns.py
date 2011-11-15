@@ -429,12 +429,12 @@ AlphaTwithDiMu = {
   "HLT_HT250_AlphaT0p58_v3": ("HLT_DoubleMu8_Mass8_HT200_v5" ,[275.,]),
 
 }
-for key,vals in AlphaTwithDiMu.iteritems():
-  for htbin in vals[1]:
-    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-    out.append(cut)
-    cutTreeData.TAttach(ZMassCut,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"DiMu_HT%d_"%(htbin)))
+#for key,vals in AlphaTwithDiMu.iteritems():
+#  for htbin in vals[1]:
+#    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+#    out.append(cut)
+#    cutTreeData.TAttach(ZMassCut,cut)
+#    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"DiMu_HT%d_"%(htbin)))
 
 
 
@@ -507,7 +507,8 @@ htTesting = {
 
                   #
 for key,test in htTesting.iteritems():
-   out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = test, Label = ""))
+    print key,test
+    out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = test, Label = ""))
 
 
 
