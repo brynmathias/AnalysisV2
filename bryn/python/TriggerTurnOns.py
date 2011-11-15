@@ -447,8 +447,8 @@ TestTrigList = (
                 #"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
 # refTrigList = ["HLT_*"]
 # TestTrigList = ["HLT_*"]
-#for ref,test in zip(refTrigList,TestTrigList):
- # out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref, Label = ""))
+for ref,test in zip(refTrigList,TestTrigList):
+  out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref, Label = ""))
 
 
 
@@ -500,13 +500,13 @@ addCutFlowData(anal_ak5_pfData)
 
 from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
-from data.Run2011.MuHadRun2011AB import *
+from data.Run2011.MuHad2011AB import *
 from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
-sample = MuHadRun2011AB
+sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# sample = HTRun2011AB
+sample = HTRun2011AB
 
 outDir = "../%s_NewDataSet/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
