@@ -443,8 +443,8 @@ TestTrigList = (
                 #"HLT_HT500_v8","HLT_HT550_v8","HLT_HT600_v1","HLT_HT450_v8","HLT_HT400_v8","HLT_HT400_v8","HLT_HT350_v8","HLT_HT350_v8","HLT_HT300_v9","HLT_HT500_v8","HLT_HT450_v8","HLT_HT500_v8","HLT_HT450_v8","HLT_HT600_v1"])
 # refTrigList = ["HLT_*"]
 # TestTrigList = ["HLT_*"]
-for ref,test in zip(refTrigList,TestTrigList):
-  out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref, Label = ""))
+#for ref,test in zip(refTrigList,TestTrigList):
+ # out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = test, DenominatorTrig = ref, Label = ""))
 
 
 
