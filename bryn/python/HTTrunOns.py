@@ -429,30 +429,19 @@ AlphaTwithDiMu = {
   "HLT_HT250_AlphaT0p58_v3": ("HLT_DoubleMu8_Mass8_HT200_v5" ,[275.,]),
 
 }
-for key,vals in AlphaTwithDiMu.iteritems():
-  for htbin in vals[1]:
-    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-    out.append(cut)
-    cutTreeData.TAttach(ZMassCut,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"DiMu_HT%d_"%(htbin)))
+# for key,vals in AlphaTwithDiMu.iteritems():
+#   for htbin in vals[1]:
+#     cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+#     out.append(cut)
+#     cutTreeData.TAttach(ZMassCut,cut)
+#     out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"DiMu_HT%d_"%(htbin)))
 
 
 
 # If muon is not required
 htTesting = {
 # Test            Ref
-"HLT_HT300_v*"  : "HLT_HT250_v*"   ,
-"HLT_HT300_v*"  : "HLT_HT300_v*"   ,
-"HLT_HT350_v*"  : "HLT_HT250_v*"   ,
-"HLT_HT350_v*"  : "HLT_HT300_v*"   ,
-"HLT_HT500_v*"  : "HLT_HT250_v*"   ,
-"HLT_HT500_v*"  : "HLT_HT300_v*"   ,
-"HLT_HT550_v*"  : "HLT_HT250_v*"   ,
-"HLT_HT550_v*"  : "HLT_HT300_v*"   ,
-"HLT_HT400_v*"  : "HLT_HT250_v*"   ,
-"HLT_HT400_v*"  : "HLT_HT300_v*"   ,
-"HLT_HT450_v*"  : "HLT_HT250_v*"   ,
-"HLT_HT450_v*"  : "HLT_HT300_v*"   ,
+
 "HLT_HT350_v11" : "HLT_HT250_v11"  ,
 "HLT_HT350_v2"  : "HLT_HT250_v2"   ,
 "HLT_HT350_v3"  : "HLT_HT250_v3"   ,
@@ -496,8 +485,6 @@ htTesting = {
 "HLT_HT550_v6"  : "HLT_HT350_v6"   ,
 "HLT_HT550_v7"  : "HLT_HT350_v7"   ,
 "HLT_HT550_v8"  : "HLT_HT350_v8"   ,
-"HLT_HT600_v*"  : "HLT_HT250_v*"   ,
-"HLT_HT600_v*"  : "HLT_HT300_v*"   ,
 "HLT_HT600_v1"  : "HLT_HT350_v8"   ,
 
 }
