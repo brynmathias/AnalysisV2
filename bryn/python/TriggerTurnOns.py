@@ -311,7 +311,7 @@ badMuonInJet = OP_BadMuonInJet()
 numComElectrons = OP_NumComElectrons("<=",0)
 numComMuons = OP_NumComMuons("==",1)
 oneMuon = OP_NumComMuons("==",1)
-oneMuon = OP_NumComMuons("==",2)
+diMuon = OP_NumComMuons("==",2)
 zeroMuon = OP_NumComMuons("<=",0)
 ZMassCut = RECO_2ndMuonMass(25.0, 91.2, True, "all")
 
@@ -546,7 +546,7 @@ from data.Run2011.MuHad2011AB import *
 from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
-#sample = MuHad2011AB
+sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 #sample = HTRun2011AB
 
