@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 275.
+bin = 375.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -356,6 +356,7 @@ cutTreeData.TAttach(LeadingJetCut,secondJetET)
 cutTreeData.TAttach(secondJetET,oneMuon)
 cutTreeData.TAttach(secondJetET,zeroMuon)
 cutTreeData.TAttach(secondJetET,diMuon)
+cutTreeData.TAttach(diMuon,ZMassCut)
 # If no preslection:
 # cutTreeData.TAttach(json,AlphaT_Trigger_Filter)
 # cutTreeData.TAttach(AlphaT_Trigger_Filter,Plots_TriggerOnly)
@@ -432,7 +433,7 @@ for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     cut = eval("RECO_CommonHTCut(%f)"%(htbin))
     out.append(cut)
-    cutTreeData.TAttach(diMuon,cut)
+    cutTreeData.TAttach(ZMassCut,cut)
     out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"DiMu_HT%d_"%(htbin)))
 
 
@@ -488,8 +489,8 @@ htTesting = {
 
 
                   #
-# for key,test in htTesting.iteritems():
-  # out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = test, Label = ""))
+for key,test in htTesting.iteritems():
+   out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = test, Label = ""))
 
 
 
@@ -547,9 +548,9 @@ from SingleMu import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# sample = HTRun2011AB
+sample = HTRun2011AB
 
-outDir = "../%s_DiMuon/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s_HTTurnOns/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
