@@ -330,13 +330,13 @@ cutTreeData = Tree("Data")
 out = []
 cutTreeData.Attach(json)
 triggers = ["HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3","HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p58_v3","HLT_HT300_AlphaT0p52_v1","HLT_HT300_AlphaT0p52_v2","HLT_HT300_AlphaT0p52_v3","HLT_HT300_AlphaT0p52_v4","HLT_HT300_AlphaT0p52_v5","HLT_HT300_AlphaT0p53_v5","HLT_HT300_AlphaT0p53_v6","HLT_HT300_AlphaT0p53_v6","HLT_HT300_AlphaT0p54_v5","HLT_HT350_AlphaT0p51_v1","HLT_HT350_AlphaT0p51_v2","HLT_HT350_AlphaT0p51_v3","HLT_HT350_AlphaT0p51_v4","HLT_HT350_AlphaT0p51_v5","HLT_HT350_AlphaT0p52_v1","HLT_HT350_AlphaT0p52_v2","HLT_HT350_AlphaT0p52_v2","HLT_HT350_AlphaT0p53_v10","HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4","HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10"]
-for trig in triggers:
-  op = JSONOutput("%s"%(trig))
-  trigCut = CheckTrigExists( PSet(TrigExistsList = ["%s"%(trig)]).ps() )
-  cutTreeData.TAttach(json,trigCut)
-  cutTreeData.TAttach(trigCut,op)
-  out.append(trigCut)
-  out.append(op)
+#for trig in triggers:
+#  op = JSONOutput("%s"%(trig))
+#  trigCut = CheckTrigExists( PSet(TrigExistsList = ["%s"%(trig)]).ps() )
+#  cutTreeData.TAttach(json,trigCut)
+#  cutTreeData.TAttach(trigCut,op)
+#  out.append(trigCut)
+#  out.append(op)
 cutTreeData.TAttach(json,json_ouput)
 cutTreeData.TAttach(json,NoiseFilt)
 # cutTreeData.Attach(NoiseFilt)
@@ -413,12 +413,12 @@ alphatTesting = {
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
-for key,vals in alphatTesting.iteritems():
-  for htbin in vals[1]:
-    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-    out.append(cut)
-    cutTreeData.TAttach(muDr,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
+#for key,vals in alphatTesting.iteritems():
+#  for htbin in vals[1]:
+#    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+#    out.append(cut)
+#    cutTreeData.TAttach(muDr,cut)
+#    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
 
 
 
@@ -530,9 +530,9 @@ from data.Run2011.MuHad2011AB import *
 from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
-sample = MuHad2011AB
+#sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-#sample = HTRun2011AB
+sample = HTRun2011AB
 
 outDir = "../%s_NewDataSet/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)

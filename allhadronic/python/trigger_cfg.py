@@ -191,6 +191,8 @@ ps = PSet(
                "HLT_IsoMu*_v*",
                "HLT_IsoMu*_eta2p1_v*",
                "HLT_Mu*_v*",
+               "HLT_DoubleMu*_Mass*_HT*_v*",
+               "HLT_DoubleMu*_HT*_v*",
                ],
 
     Versus = 2,
@@ -247,7 +249,7 @@ anal=Analysis("Trigger")
 #anal.AddJetFilter("PreCC",JetCorrections)
 anal+=cut_flow
 
-anal.Run(".",conf,[MuHad_Run2011A_Complete_V15_03_14])
+anal.Run(".",conf,[HTRun2011AB])
 #anal.Run(".",conf,[Jet_35pb_WithTP_json051110])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011A_PromptReco_v1])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])

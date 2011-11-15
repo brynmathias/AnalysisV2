@@ -56,36 +56,44 @@ void trigger_hadd() {
   // root > .L hadd.C
   // root > hadd()
   
-  double lumi = 1080.;
+  double lumi = 4000.;
   
   //std::string file_name("Trigger_HT42_incomplete");
   //std::string file_name("Trigger_HT_Run2011A_L1OffSet");
 //  std::string file_name("Trigger_SingleMu");
   //std::string file_name("Trigger_HT_Run2011A_AllReco_17June");
-  std::string file_name("Trigger_MuHad_Run2011A_Complete_V15_03_14"); 
+  std::string file_name("Trigger_HTRun2011AB"); 
   std::string dir_name("Triggers");
   std::string his_name = "TriggersVsRunNumber";
   
   std::vector<std::string> filters;
   //filters.push_back("HLT_HT???_MHT??_v*");
+
+  filters.push_back("HLT_HT250_AlphaT0p??_v*");
+  filters.push_back("HLT_DoubleMu?_Mass?_HT???_v*");
+  filters.push_back("HLT_DoubleMu??_Mass??_HT???_v*");
+  filters.push_back("HLT_DoubleMu?_HT???_v*");
+  filters.push_back("HLT_DoubleMu??_HT???_v*");
+  //filters.push_back("HLT_HT300_AlphaT0p??_v*");
+  //filters.push_back("HLT_HT350_AlphaT0p??_v*");
+
   //filters.push_back("HLT_HT400_AlphaT0p??_v*");
-
-
+  //filters.push_back("HLT_HT450_AlphaT0p??_v*");
    //filters.push_back("HLT_HT1??_v*");
   // filters.push_back("HLT_HT25?_v*");
 
 //   filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
-   //filters.push_back("HLT_Mu?_HT200_v*");
-   //filters.push_back("HLT_Mu??_HT200_v*");
+   //filters.push_back("HLT_Mu?_HT???_v*");
+   //filters.push_back("HLT_Mu??_HT???_v*");
 
-   filters.push_back("HLT_HT25?_v*");
+//  filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
-  filters.push_back("HLT_HT300_v*");
-   filters.push_back("HLT_HT4??_v*");
- //  filters.push_back("HLT_HT5??_v*");
- //  filters.push_back("HLT_HT6??_v*");
- //  filters.push_back("HLT_HT7??_v*");
+//  filters.push_back("HLT_HT3??_v*");
+//  filters.push_back("HLT_HT4??_v*");
+//  filters.push_back("HLT_HT5??_v*");
+//  filters.push_back("HLT_HT6??_v*");
+//  filters.push_back("HLT_HT7??_v*");
  //  filters.push_back("HLT_HT8??_v*");
  //  filters.push_back("HLT_HT9??_v*");
  //  filters.push_back("HLT_HT9??_v*");
