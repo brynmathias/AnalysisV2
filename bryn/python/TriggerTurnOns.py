@@ -311,7 +311,9 @@ badMuonInJet = OP_BadMuonInJet()
 numComElectrons = OP_NumComElectrons("<=",0)
 numComMuons = OP_NumComMuons("==",1)
 oneMuon = OP_NumComMuons("==",1)
+oneMuon = OP_NumComMuons("==",2)
 zeroMuon = OP_NumComMuons("<=",0)
+ZMassCut = RECO_2ndMuonMass(25.0, 91.2, True, "all")
 
 numComPhotons = OP_NumComPhotons("<=",0)
 muDr = RECO_MuonJetDRCut(0.5)
@@ -353,7 +355,8 @@ cutTreeData.TAttach(oddJet,LeadingJetCut)
 cutTreeData.TAttach(LeadingJetCut,secondJetET)
 cutTreeData.TAttach(secondJetET,oneMuon)
 cutTreeData.TAttach(secondJetET,zeroMuon)
-
+cutTreeData.TAttach(secondJetET,diMuon)
+cutTreeData.TAttach(diMuon,ZMassCut)
 # If no preslection:
 # cutTreeData.TAttach(json,AlphaT_Trigger_Filter)
 # cutTreeData.TAttach(AlphaT_Trigger_Filter,Plots_TriggerOnly)
@@ -413,12 +416,25 @@ alphatTesting = {
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
-for key,vals in alphatTesting.iteritems():
+# for key,vals in alphatTesting.iteritems():
+#   for htbin in vals[1]:
+#     cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+#     out.append(cut)
+#     cutTreeData.TAttach(muDr,cut)
+#     out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
+
+AlphaTwithDiMu = {
+  "HLT_HT250_AlphaT0p55_v2": ("HLT_DoubleMu3_HT200_v4" ,[275.,]),
+  "HLT_HT250_AlphaT0p58_v3": ("HLT_DoubleMu8_Mass8_HT200_v4" ,[275.,]),
+  "HLT_HT250_AlphaT0p58_v3": ("HLT_DoubleMu8_Mass8_HT200_v5" ,[275.,]),
+
+}
+for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     cut = eval("RECO_CommonHTCut(%f)"%(htbin))
     out.append(cut)
-    cutTreeData.TAttach(muDr,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
+    cutTreeData.TAttach(ZMassCut,cut)
+    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"DiMu_HT%d_"%(htbin)))
 
 
 
@@ -473,8 +489,8 @@ htTesting = {
 
 
                   #
-for key,test in htTesting.iteritems():
-  out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = test, Label = ""))
+# for key,test in htTesting.iteritems():
+  # out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = test, Label = ""))
 
 
 
@@ -489,7 +505,7 @@ mu_id = PSet(
    MinPt = 10.,
    MaxEta = 2.5,
    MaxIsolation = 0.1,
-   DRMuJet = 0.3,
+   DRMuJet = 0.5,
    MaxGlbTrkDxy = 0.02,
    MinGlbTrkNumOfValidHits = 11,
    SegMatch2GlbMu = 1,
@@ -534,7 +550,7 @@ sample = MuHadRun2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 # sample = HTRun2011AB
 
-outDir = "../%s_NewDataSet/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s_DoubleMu/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
