@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 275.
+bin = 375.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -415,12 +415,12 @@ alphatTesting = {
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
-# for key,vals in alphatTesting.iteritems():
-#   for htbin in vals[1]:
-#     cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-#     out.append(cut)
-#     cutTreeData.TAttach(muDr,cut)
-#     out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
+for key,vals in alphatTesting.iteritems():
+  for htbin in vals[1]:
+    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+    out.append(cut)
+    cutTreeData.TAttach(muDr,cut)
+    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
 
 AlphaTwithDiMu = {
   "HLT_HT250_AlphaT0p55_v2": (["HLT_DoubleMu3_HT200_v4",] ,[275.,]),
