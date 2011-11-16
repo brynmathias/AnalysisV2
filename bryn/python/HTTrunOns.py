@@ -515,6 +515,7 @@ HTDebug = {
 "HLT_HT400_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
 "HLT_HT400_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
 "HLT_HT400_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
+"HLT_HT350_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
 }
 
 for key,test in HTDebug.iteritems():
