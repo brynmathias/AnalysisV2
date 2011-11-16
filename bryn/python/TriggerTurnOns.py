@@ -423,17 +423,18 @@ alphatTesting = {
 #     out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
 
 AlphaTwithDiMu = {
-  "HLT_HT250_AlphaT0p55_v2": ("HLT_DoubleMu3_HT200_v4" ,[275.,]),
-  "HLT_HT250_AlphaT0p58_v3": ("HLT_DoubleMu8_Mass8_HT200_v4" ,[275.,]),
-  "HLT_HT250_AlphaT0p58_v3": ("HLT_DoubleMu8_Mass8_HT200_v5" ,[275.,]),
+  "HLT_HT250_AlphaT0p55_v2": (["HLT_DoubleMu3_HT200_v4",] ,[275.,]),
+  "HLT_HT250_AlphaT0p58_v3": (["HLT_DoubleMu8_Mass8_HT200_v4","HLT_DoubleMu8_Mass8_HT200_v5"] ,[275.,]),
+
 
 }
 for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
-    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-    out.append(cut)
-    cutTreeData.TAttach(diMuon,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"DiMu_HT%d_"%(htbin)))
+    for ref in vals[0]
+      cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+      out.append(cut)
+      cutTreeData.TAttach(diMuon,cut)
+      out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
 
 
 
