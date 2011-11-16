@@ -476,7 +476,7 @@ htTesting = {
 "HLT_HT550_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
 "HLT_HT550_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
 "HLT_HT600_v1"  : ("HLT_HT250_v8",  ) ,
-"HLT_HT600_v4"  : "(HLT_HT250_v11", ) ,
+"HLT_HT600_v4"  : ("HLT_HT250_v11", ) ,
 "HLT_HT750_v3"  : ("HLT_HT250_v11", ) ,
 # "HLT_HT450_v11" : "HLT_HT300_v12"  ,
 # "HLT_HT450_v2"  : "HLT_HT300_v3"   ,
