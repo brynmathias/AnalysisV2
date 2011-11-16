@@ -199,7 +199,7 @@ Cross_Trigger_PS = PSet(
     )
 
 
-def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None,Label = ""):
+def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None,Label = "", Debug = False):
   if str(type(NumeratorTrig)) != "<type 'list'>":
     NumeratorTrig = [NumeratorTrig]
   if str(type(DenominatorTrig)) != "<type 'list'>":
@@ -207,9 +207,11 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   # print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
-  # if
-  op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
-  # op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
+  if Debug == True:
+    op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
+  if Debug == False:
+    op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
+
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -440,41 +442,42 @@ AlphaTwithDiMu = {
 
 # If muon is not required
 htTesting = {
-"HLT_HT350_v11" : "HLT_HT250_v11"  ,
-"HLT_HT350_v2"  : "HLT_HT250_v2"   ,
-"HLT_HT350_v3"  : "HLT_HT250_v3"   ,
-"HLT_HT350_v4"  : "HLT_HT250_v4"   ,
-"HLT_HT350_v5"  : "HLT_HT250_v5"   ,
-"HLT_HT350_v6"  : "HLT_HT250_v6"   ,
-"HLT_HT350_v7"  : "HLT_HT250_v7"   ,
-"HLT_HT350_v8"  : "HLT_HT250_v8"   ,
-"HLT_HT400_v11" : "HLT_HT250_v11"  ,
-"HLT_HT400_v2"  : "HLT_HT250_v2"   ,
-"HLT_HT400_v3"  : "HLT_HT250_v3"   ,
-"HLT_HT400_v4"  : "HLT_HT250_v4"   ,
-"HLT_HT400_v5"  : "HLT_HT250_v5"   ,
-"HLT_HT400_v6"  : "HLT_HT250_v6"   ,
-"HLT_HT400_v7"  : "HLT_HT250_v7"   ,
-"HLT_HT400_v8"  : "HLT_HT250_v8"   ,
-"HLT_HT450_v11" : "HLT_HT250_v11"  ,
-"HLT_HT450_v2"  : "HLT_HT250_v2"   ,
-"HLT_HT450_v3"  : "HLT_HT250_v3"   ,
-"HLT_HT450_v4"  : "HLT_HT250_v4"   ,
-"HLT_HT450_v5"  : "HLT_HT250_v5"   ,
-"HLT_HT450_v6"  : "HLT_HT250_v6"   ,
-"HLT_HT450_v7"  : "HLT_HT250_v7"   ,
-"HLT_HT450_v8"  : "HLT_HT250_v8"   ,
-"HLT_HT550_v11" : "HLT_HT250_v11"  ,
-"HLT_HT550_v2"  : "HLT_HT250_v2"   ,
-"HLT_HT550_v3"  : "HLT_HT250_v3"   ,
-"HLT_HT550_v4"  : "HLT_HT250_v4"   ,
-"HLT_HT550_v5"  : "HLT_HT250_v5"   ,
-"HLT_HT550_v6"  : "HLT_HT250_v6"   ,
-"HLT_HT550_v7"  : "HLT_HT250_v7"   ,
-"HLT_HT550_v8"  : "HLT_HT250_v8"   ,
-"HLT_HT600_v1"  : "HLT_HT250_v8"   ,
-"HLT_HT600_v4"  : "HLT_HT250_v11"  ,
-"HLT_HT750_v3"  : "HLT_HT250_v11"  ,
+
+"HLT_HT350_v11" : ("HLT_HT250_v11", "HLT_HT300_v12") ,
+"HLT_HT350_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" ) ,
+"HLT_HT350_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" ) ,
+"HLT_HT350_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" ) ,
+"HLT_HT350_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" ) ,
+"HLT_HT350_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" ) ,
+"HLT_HT350_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" ) ,
+"HLT_HT350_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" ) ,
+"HLT_HT400_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
+"HLT_HT400_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
+"HLT_HT400_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
+"HLT_HT400_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
+"HLT_HT400_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" )  ,
+"HLT_HT400_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
+"HLT_HT400_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
+"HLT_HT400_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
+"HLT_HT450_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
+"HLT_HT450_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
+"HLT_HT450_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
+"HLT_HT450_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
+"HLT_HT450_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" )  ,
+"HLT_HT450_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
+"HLT_HT450_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
+"HLT_HT450_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
+"HLT_HT550_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
+"HLT_HT550_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
+"HLT_HT550_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
+"HLT_HT550_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
+"HLT_HT550_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" )  ,
+"HLT_HT550_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
+"HLT_HT550_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
+"HLT_HT550_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
+"HLT_HT600_v1"  : ("HLT_HT250_v8",  ) ,
+"HLT_HT600_v4"  : "(HLT_HT250_v11", ) ,
+"HLT_HT750_v3"  : ("HLT_HT250_v11", ) ,
 # "HLT_HT450_v11" : "HLT_HT300_v12"  ,
 # "HLT_HT450_v2"  : "HLT_HT300_v3"   ,
 # "HLT_HT450_v3"  : "HLT_HT300_v4"   ,
@@ -501,9 +504,22 @@ htTesting = {
 
                   #
 for key,test in htTesting.iteritems():
-    print key,test
-    out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = test, Label = ""))
+   for ref in test:
+    out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = ref, Label = "", Debug = False))
+HTDebug = {
+"HLT_HT400_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
+"HLT_HT400_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
+"HLT_HT400_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
+"HLT_HT400_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
+"HLT_HT400_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" )  ,
+"HLT_HT400_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
+"HLT_HT400_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
+"HLT_HT400_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
+}
 
+for key,test in HTDebug.iteritems():
+   for ref in test:
+    out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = ref, Label = "", Debug = True))
 
 
 from ra1objectid.vbtfElectronId_cff import *
