@@ -507,14 +507,14 @@ for key,test in htTesting.iteritems():
    for ref in test:
     out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = ref, Label = "", Debug = False))
 HTDebug = {
-"HLT_HT400_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
-"HLT_HT400_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
-"HLT_HT400_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
-"HLT_HT400_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
-"HLT_HT400_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" )  ,
-"HLT_HT400_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
-"HLT_HT400_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
-"HLT_HT400_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
+"HLT_HT450_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
+"HLT_HT450_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
+"HLT_HT450_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
+"HLT_HT450_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
+"HLT_HT450_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" )  ,
+"HLT_HT450_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
+"HLT_HT450_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
+"HLT_HT450_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
 "HLT_HT350_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
 }
 
