@@ -88,6 +88,7 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
   int DenomPre = 0;
   bool NomPass = false;
   bool DenomPass = false;
+  bool canFill = true;
   if ( NomTrigger_.at(NomTrigger_.size()-1) != '*'){
     std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(NomTrigger_);
     std::map<std::string, bool>::const_iterator pass = ev.hlt()->find(NomTrigger_);
@@ -160,19 +161,20 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
   checkPreEvolution = runLumiMap_.find(ev.RunNumber());
   histN = histMap_.find(key);
   if( checkPreEvolution != runLumiMap_.end() ){
-    if(checkPreEvolution->second->first == NomPre && checkPreEvolution->second->second != DenomPre) continue;
-    if(checkPreEvolution->second->first != NomPre && checkPreEvolution->second->second == DenomPre) continue;
-    if( histN != histMap_.end() ) {
-      if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
-      if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
-      if(DenomPass){
-        HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
-        if(NomPass){
-          HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
+    if(checkPreEvolution->second.first == NomPre && checkPreEvolution->second.second != DenomPre) canFill = false;
+    if(checkPreEvolution->second.first != NomPre && checkPreEvolution->second.second == DenomPre) canFill = false;
+    if( canFill ){
+      if( histN != histMap_.end() ) {
+        if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
+        if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
+        if(DenomPass){
+          HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
+          if(NomPass){
+            HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
+          }
         }
       }
     }
   }
-
   return true;
 }
