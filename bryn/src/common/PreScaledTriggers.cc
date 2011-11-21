@@ -139,6 +139,13 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     }
   }
 
+
+  std::map<int, std::pair<int,int> >::const_iterator checkPreEvolution = runLumiMap_.find(ev.RunNumber());
+  if(checkPreEvolution == runLumiMap_.end()){
+    runLumiMap_.insert(make_pair( ev.RunNumber() ,make_pair(NomPre,DenomPre)));
+  }
+
+
   std::pair<int,int> key(NomPre,DenomPre);
   std::map<std::pair<int,int> , int >::const_iterator histN = histMap_.find(key);
   if( histN == histMap_.end() ) {
@@ -150,19 +157,22 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     OverLapCheck_[hIdxTrack_]->SetName(Form("OverLapCheck_%sPre_%d_%sPre_%d",  NomTrigger_.c_str(),NomPre,DeNomTrigger_.c_str(),DenomPre));
     hIdxTrack_++;
   }
+  checkPreEvolution = runLumiMap_.find(ev.RunNumber());
   histN = histMap_.find(key);
-  if( histN != histMap_.end() ) {
-    if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
-    if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
-    if(DenomPass){
-      HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
-      if(NomPass){
-        HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
+  if( checkPreEvolution != runLumiMap_.end() ){
+    if(checkPreEvolution->second->first == NomPre && checkPreEvolution->second->second != DenomPre) continue;
+    if(checkPreEvolution->second->first != NomPre && checkPreEvolution->second->second == DenomPre) continue;
+    if( histN != histMap_.end() ) {
+      if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
+      if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
+      if(DenomPass){
+        HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
+        if(NomPass){
+          HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
+        }
       }
     }
   }
-
-
 
   return true;
 }
