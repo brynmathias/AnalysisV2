@@ -455,14 +455,14 @@ AlphaTwithDiMu = {
 # If muon is not required
 htTesting = {
 
-"HLT_HT350_v11" : ("HLT_HT250_v11", "HLT_HT300_v12") ,
-"HLT_HT350_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" ) ,
-"HLT_HT350_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" ) ,
-"HLT_HT350_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" ) ,
-"HLT_HT350_v5"  : ("HLT_HT250_v5" , "HLT_HT300_v6" ) ,
-"HLT_HT350_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" ) ,
-"HLT_HT350_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" ) ,
-"HLT_HT350_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" ) ,
+"HLT_HT350_v11" : ("HLT_HT250_v11", "HLT_IsoMu24_eta2p1_v6") ,
+"HLT_HT350_v2"  : ("HLT_HT250_v2" , "HLT_IsoMu12_v1"  ) ,
+"HLT_HT350_v3"  : ("HLT_HT250_v3" , "HLT_IsoMu17_v6"  ) ,
+"HLT_HT350_v4"  : ("HLT_HT250_v4" , "HLT_IsoMu17_v8"  ) ,
+"HLT_HT350_v5"  : ("HLT_HT250_v5" , "HLT_IsoMu17_v9"  ) ,
+"HLT_HT350_v6"  : ("HLT_HT250_v6" , "HLT_IsoMu17_v10" ) ,
+"HLT_HT350_v7"  : ("HLT_HT250_v7" , "HLT_IsoMu17_v11" ) ,
+"HLT_HT350_v8"  : ("HLT_HT250_v8" , "HLT_IsoMu20_v8","HLT_IsoMu24_eta2p1_v3" ) ,
 "HLT_HT400_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
 "HLT_HT400_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
 "HLT_HT400_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
@@ -523,16 +523,16 @@ HTDebug = {
 #"HLT_HT450_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
 #"HLT_HT450_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
 #"HLT_HT450_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
-"HLT_HT450_v5"  : ("HLT_HT250_v5" , )#"HLT_HT300_v6" )  ,
+"HLT_HT450_v5"  : ("HLT_HT250_v5" , "HLT_IsoMu17_v9")#"HLT_HT300_v6" )  ,
 #"HLT_HT450_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
 #"HLT_HT450_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
 #"HLT_HT450_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
 #"HLT_HT350_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
 }
 
-#for key,test in HTDebug.iteritems():
-#   for ref in test:
-#    out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = ref, Label = "", Debug = True))
+for key,test in HTDebug.iteritems():
+  for ref in test:
+   out.append(PreScaledPair(cutTree = cutTreeData, cut = oneMuon, NumeratorTrig = key, DenominatorTrig = ref, Label = "", Debug = True))
 
 
 from ra1objectid.vbtfElectronId_cff import *
@@ -589,9 +589,9 @@ from SingleMu import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-sample = HTRun2011AB
+# sample = HTRun2011AB
 
-outDir = "../%s_PreEvolutionTest/ht%dNoUpper/"%(sample.Name,bin)
+outDir = "../%s_MuSeedHT/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
