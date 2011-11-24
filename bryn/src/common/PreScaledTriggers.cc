@@ -89,6 +89,7 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
   bool NomPass = false;
   bool DenomPass = false;
   bool canFill = true;
+
   if ( NomTrigger_.at(NomTrigger_.size()-1) != '*'){
     std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(NomTrigger_);
     std::map<std::string, bool>::const_iterator pass = ev.hlt()->find(NomTrigger_);
@@ -140,10 +141,9 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     }
   }
 
-
-  std::map<int, std::pair<int,int> >::const_iterator checkPreEvolution = runLumiMap_.find(ev.RunNumber());
+  std::map<std::pair<int,int> , std::pair<int,int> >::const_iterator checkPreEvolution = runLumiMap_.find(make_pair(ev.RunNumber(),ev.LumiSection()));
   if(checkPreEvolution == runLumiMap_.end()){
-    runLumiMap_.insert(make_pair( ev.RunNumber() ,make_pair(NomPre,DenomPre)));
+    runLumiMap_.insert(make_pair( make_pair(ev.RunNumber(), ev.LumiSection()) ,make_pair(NomPre,DenomPre)));
   }
 
 
@@ -158,23 +158,50 @@ bool PreScaledTriggers::Plots( Event::Data& ev ) {
     OverLapCheck_[hIdxTrack_]->SetName(Form("OverLapCheck_%sPre_%d_%sPre_%d",  NomTrigger_.c_str(),NomPre,DeNomTrigger_.c_str(),DenomPre));
     hIdxTrack_++;
   }
-  checkPreEvolution = runLumiMap_.find(ev.RunNumber());
+  checkPreEvolution = runLumiMap_.find(make_pair(ev.RunNumber(),ev.LumiSection()));
   histN = histMap_.find(key);
   if( checkPreEvolution != runLumiMap_.end() ){
-    if(checkPreEvolution->second.first == NomPre && checkPreEvolution->second.second != DenomPre) canFill = false;
-    if(checkPreEvolution->second.first != NomPre && checkPreEvolution->second.second == DenomPre) canFill = false;
-    if( canFill ){
-      if( histN != histMap_.end() ) {
-        if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
-        if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
-        if(DenomPass){
-          HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
-          if(NomPass){
-            HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
-          }
-        }
+    if(checkPreEvolution->second.first != NomPre && checkPreEvolution->second.second != DenomPre) {canFill = false;
+  // std::cout << "we are not going to process this event" << endl;
+    // printf("RunNo = %u, Lumi = %u, EventNo = %u, NomPre = %u, DenomPre = %u \n",ev.RunNumber(),ev.LumiSection(), ev.EventNumber(),NomPre,DenomPre);
+  }
+  if(checkPreEvolution->second.first != NomPre && checkPreEvolution->second.second == DenomPre) {canFill = false;
+   // std::cout << "we are not going to process this event" << endl;
+  // printf("RunNo = %u, Lumi = %u, EventNo = %u, NomPre = %u, DenomPre = %u \n",ev.RunNumber(),ev.LumiSection(), ev.EventNumber(),NomPre,DenomPre);
+}
+if(checkPreEvolution->second.first == NomPre && checkPreEvolution->second.second != DenomPre) {canFill = false;
+  // std::cout << "we are not going to process this event" << endl;
+// printf("RunNo = %u, Lumi = %u, EventNo = %u, NomPre = %u, DenomPre = %u \n",ev.RunNumber(),ev.LumiSection(), ev.EventNumber(),NomPre,DenomPre);
+}
+if( ev.RunNumber() == 166864 && ev.LumiSection() > 317)  canFill = false;
+if( ev.RunNumber() == 166960 && ev.LumiSection() > 59 )  canFill = false;
+if( ev.RunNumber() == 166034 && ev.LumiSection() > 202)  canFill = false;
+if( ev.RunNumber() == 166049 && ev.LumiSection() > 57 )  canFill = false;
+if( ev.RunNumber() == 166380 && ev.LumiSection() > 636)  canFill = false;
+if( ev.RunNumber() == 166514 && ev.LumiSection() > 11 )  canFill = false;
+if( ev.RunNumber() == 166565 && ev.LumiSection() > 11 )  canFill = false;
+
+
+// if ( canFill == false ){std::cout << "we are not going to process this event" << endl;
+// printf("RunNo = %u, Lumi = %u, EventNo = %u, NomPre = %u, DenomPre = %u \n",ev.RunNumber(),ev.LumiSection(), ev.EventNumber(),NomPre,DenomPre);
+// }
+// if( NomPre == 25 && DenomPre == 200){ printf("RunNo = %u, Lumi = %u, EventNo = %u, NomPre = %u, DenomPre = %u \n",ev.RunNumber(),ev.LumiSection(), ev.EventNumber(),NomPre,DenomPre);
+// if(canFill == false) std::cout << "we are ignoring this event"  <<  "it has HT = " << ev.CommonHT() <<std::endl;}
+
+if( canFill == true && ev.RunNumber() !=166033){
+  if( histN != histMap_.end() ) {
+    if(NomPass && DenomPass) OverLapCheck_[histN->second]->Fill(1.0,1.0);
+    if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
+    if(DenomPass){
+      HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
+      if(!NomPass && ev.CommonHT() > 500. && DenomPre%NomPre == 0){ printf("We should have passed! HT = %f, Run = %u, Lumi = %u, Event = %u,  NomPre = %u, DenomPre = %u \n",ev.CommonHT(),ev.RunNumber(),ev.LumiSection(),ev.EventNumber(), NomPre,DenomPre);}
+      if(NomPass){
+
+        HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
       }
     }
   }
-  return true;
+}
+}
+return true;
 }
