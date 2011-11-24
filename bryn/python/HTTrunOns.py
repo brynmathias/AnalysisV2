@@ -515,9 +515,9 @@ htTesting = {
 
 
                   #
-#for key,test in htTesting.iteritems():
-#   for ref in test:
-#    out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = ref, Label = "", Debug = False))
+for key,test in htTesting.iteritems():
+  for ref in test:
+   out.append(PreScaledPair(cutTree = cutTreeData, cut = zeroMuon, NumeratorTrig = key, DenominatorTrig = ref, Label = "", Debug = False))
 HTDebug = {
 #"HLT_HT450_v11" : ("HLT_HT250_v11", "HLT_HT300_v12")  ,
 #"HLT_HT450_v2"  : ("HLT_HT250_v2" , "HLT_HT300_v3" )  ,
