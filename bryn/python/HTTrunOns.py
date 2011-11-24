@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+!/usr/bin/env python
 
 """
 Created by Bryn Mathias on 2010-05-07.
@@ -524,8 +524,6 @@ HTDebug = {
 #"HLT_HT450_v3"  : ("HLT_HT250_v3" , "HLT_HT300_v4" )  ,
 #"HLT_HT450_v4"  : ("HLT_HT250_v4" , "HLT_HT300_v5" )  ,
 "HLT_HT450_v5"  : ("HLT_HT250_v5" , ),#"HLT_HT300_v6" )  ,
-# "HLT_HT500_v5"  : ("HLT_HT250_v5" , ),
-# "HLT_HT550_v5"  : ("HLT_HT250_v5" , ),
 #"HLT_HT450_v6"  : ("HLT_HT250_v6" , "HLT_HT300_v7" )  ,
 #"HLT_HT450_v7"  : ("HLT_HT250_v7" , "HLT_HT300_v8" )  ,
 #"HLT_HT450_v8"  : ("HLT_HT250_v8" , "HLT_HT300_v9" )  ,
@@ -626,8 +624,13 @@ from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 # sample = HTRun2011AB
+<<<<<<< HEAD
 sample.File = ["/Users/bryn/github/5e33Triggers/TotalEvents.root"]
 outDir = "../%s_rmAllProblems/ht%dNoUpper/"%(sample.Name,bin)
+=======
+#sample.File = ["/Users/bryn/github/5e33Triggers/TotalEvents.root"]
+outDir = "../%s_HTFromMUHT/ht%dNoUpper/"%(sample.Name,bin)
+>>>>>>> 334f6f4bca921b40a21a94b9931908c8dff0f1f0
 ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
