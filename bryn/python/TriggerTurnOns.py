@@ -199,7 +199,7 @@ Cross_Trigger_PS = PSet(
     )
 
 
-def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None,Label = ""):
+def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorTrig = None,Label = "", Debug = False):
   if str(type(NumeratorTrig)) != "<type 'list'>":
     NumeratorTrig = [NumeratorTrig]
   if str(type(DenominatorTrig)) != "<type 'list'>":
@@ -207,9 +207,11 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   print "RefTrig = %s, testTrig = %s"%(DenominatorTrig,NumeratorTrig)
   # print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
-  # if
-  op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
-  # op = PreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
+  if Debug == True:
+    op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
+  if Debug == False:
+    op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
+
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
