@@ -240,16 +240,32 @@ std::ostream& findLumisWithTwoPrescales::Description( std::ostream &ostrm){
   ostrm << "BLEUIGH.";
   return ostrm;
 }
-  // std::ostream& findLumisWithTwoPrescales::Description( std::ostream& );
 
 
-// private:
-  /* data */
-  // std::multimap<std::pair<int,int >,int> mm_;
+runLumiCutter_t::runLumiCutter_t( const Utils::ParameterSet& ps ) :
+   _run( ps.Get<std::vector<int> >("Run") ),
+  _lumi( ps.Get<std::vector<int> >("Lumi") )
+  {}
 
 
+ bool runLumiCutter_t::Process( Event::Data &ev){
+  if(_run.size() != _lumi.size()){
+    std::cout << " Please use same size vectors for each of RUN:LUMI" << std::endl;
+    return false;
+    }
+    std::vector<int>::iterator iRun  = _run.begin();
+    std::vector<int>::iterator jRun  = _run.end();
+    std::vector<int>::iterator iLumi = _lumi.begin();
 
-
-
-
+    while(iRun != jRun){
+      if( ev.RunNumber() == *iRun && ev.LumiSection() >= *iLumi ){ return false; }
+      ++iRun;
+      ++iLumi;
+    }
+    return true;
+}
+std::ostream& runLumiCutter_t::Description( std::ostream &ostrm ) {
+  ostrm << "selected on events " << " ";
+  return ostrm;
+}
 
