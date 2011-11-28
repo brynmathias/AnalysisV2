@@ -39,7 +39,6 @@ namespace Operation {
     void Plots();
     bool Plots( Event::Data& );
     std::map< std::pair<int, int>, int > histMap_;
-    std::map< std::pair<int,int>, std::pair<int,int> > runLumiMap_;
     int hIdxTrack_;
     };
 
