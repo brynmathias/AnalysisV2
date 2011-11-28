@@ -148,7 +148,9 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
         for( ; ipre != jpre; ++ipre ){
             std::string str = *it;
             str = str.substr(0, str.size() - 1 );
+            if(verb_){
             cout <<*it<< " compare with " << ipre->first << endl;
+            }
             found = ipre->first.find(str);
             if(found != string::npos){ preScaleVal = ipre->second; }
         }

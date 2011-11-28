@@ -4,6 +4,7 @@
 #include "EventData.hh"
 #include "Math/VectorUtil.h"
 #include "Operation.hh"
+#include <map>
 // #include "DeadECALDR.hh"
 
 
@@ -52,6 +53,23 @@ private:
   std::vector<std::string> trigList;
 };
 
+
+
+class findLumisWithTwoPrescales : public Operation::_Base
+{
+public:
+  findLumisWithTwoPrescales ();
+  void Start( Event::Data& );
+  bool Process( Event::Data& );
+  void End( Event::Data& );
+  ~findLumisWithTwoPrescales(){;}
+  std::ostream& Description( std::ostream& );
+
+
+private:
+  /* data */
+  std::map<std::pair<int,int >,std::vector<int> > mm_;
+};
 
 
 }
