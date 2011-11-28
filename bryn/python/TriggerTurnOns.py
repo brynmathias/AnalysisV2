@@ -344,7 +344,7 @@ for trig in triggers:
   out.append(op)
 cutTreeData.TAttach(json,json_ouput)
 cutTreeData.TAttach(json,NoiseFilt)
-# cutTreeData.Attach(NoiseFilt)
+cutTreeData.Attach(NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
 cutTreeData.TAttach(oddMuon,oddElectron)
