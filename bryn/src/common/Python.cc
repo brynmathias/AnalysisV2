@@ -43,6 +43,7 @@ BOOST_PYTHON_MODULE(libbryn) {
   class_<Operation::checkTrigExists, bases<Operation::_Base> >( "CheckTrigExists",
                     init<const Utils::ParameterSet&>());
 
+    class_<Operation::findLumisWithTwoPrescales, bases<Operation::_Base> >("CheckPreOverLaps", init<>());
 
 
 }

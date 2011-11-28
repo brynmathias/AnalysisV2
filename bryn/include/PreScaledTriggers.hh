@@ -5,6 +5,7 @@
 #include "Utils.hh"
 #include "Types.hh"
 #include <iostream>
+#include <map>
 class TH1D;
 class TH2D;
 
