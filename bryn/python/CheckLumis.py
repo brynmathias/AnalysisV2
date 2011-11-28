@@ -625,8 +625,8 @@ from SingleMu import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# sample = HTRun2011AB
-sample.File = ["/Users/bryn/github/5e33Triggers/TotalEvents.root"]
+sample = HTRun2011AB
+#sample.File = ["/Users/bryn/github/5e33Triggers/TotalEvents.root"]
 outDir = "../%s_rmAllProblems/ht%dNoUpper/"%(sample.Name,bin)
 
 ensure_dir(outDir)
