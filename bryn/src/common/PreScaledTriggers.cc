@@ -194,7 +194,7 @@ if( canFill == true && ev.RunNumber() !=166033){
     if(NomPass && !DenomPass) OverLapCheck_[histN->second]->Fill(0.0,1.0);
     if(DenomPass){
       HT_Denom[histN->second]->Fill(ev.CommonHT(),1.);
-      if(!NomPass && ev.CommonHT() > 500. && DenomPre%NomPre == 0){ printf("We should have passed! HT = %f, Run = %u, Lumi = %u, Event = %u,  NomPre = %u, DenomPre = %u \n",ev.CommonHT(),ev.RunNumber(),ev.LumiSection(),ev.EventNumber(), NomPre,DenomPre);}
+//      if(!NomPass && ev.CommonHT() > 500. && DenomPre%NomPre == 0){ printf("We should have passed! HT = %f, Run = %u, Lumi = %u, Event = %u,  NomPre = %u, DenomPre = %u \n",ev.CommonHT(),ev.RunNumber(),ev.LumiSection(),ev.EventNumber(), NomPre,DenomPre);}
       if(NomPass){
 
         HT_Nom[histN->second]->Fill(ev.CommonHT(),1.);
