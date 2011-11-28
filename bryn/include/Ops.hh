@@ -71,6 +71,21 @@ private:
   std::map<std::pair<int,int >,std::vector<int> > mm_;
 };
 
+  class runLumiCutter_t : public Operation::_Base
+  {
+  public:
+    runLumiCutter_t ( const Utils::ParameterSet& ps );
+    ~runLumiCutter_t (){;}
+    bool Process( Event::Data & ev );
+    std::ostream& Description(std::ostream& ostrm);
+
+
+  private:
+    /* data */
+    std::vector<int> _run;
+    std::vector<int> _lumi;
+  };
+
 
 }
 
