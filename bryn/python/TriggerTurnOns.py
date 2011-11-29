@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 375.
+bin = 325.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -313,7 +313,7 @@ badMuonInJet = OP_BadMuonInJet()
 numComElectrons = OP_NumComElectrons("<=",0)
 numComMuons = OP_NumComMuons("==",1)
 oneMuon = OP_NumComMuons("==",1)
-diMuon = OP_NumComMuons("==",2)
+diMuon = OP_NumComMuons(">=",1)
 zeroMuon = OP_NumComMuons("<=",0)
 ZMassCut = RECO_2ndMuonMass(25.0, 91.2, True, "all")
 
@@ -439,10 +439,14 @@ AlphaTwithDiMu = {
 for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     for ref in vals[0]:
-      cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-      out.append(cut)
-      cutTreeData.TAttach(diMuon,cut)
-      out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
+      for muDR in [0.3,0.4,0.5]:
+          cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+          out.append(cut)
+          muDRcut =  RECO_MuonJetDRCut(muDR)
+          out.append(muDRcut)
+          cutTreeData.TAttach(diMuon,muDRcut)
+          cutTreeData.TAttach(muDRcut,cut)
+          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin)))
 
 # If muon is not required
 htTesting = {
@@ -573,7 +577,7 @@ sample = MuHad2011AB
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
 
-outDir = "../FinalPlots/ht%dNoUpper/"%(bin)
+outDir = "../DiMuonPlots/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
