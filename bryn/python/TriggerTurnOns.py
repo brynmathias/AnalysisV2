@@ -347,7 +347,7 @@ for trig in triggers:
 cutTreeData.TAttach(json,badEvents)
 cutTreeData.FAttach(badEvents,json_lost)
 cutTreeData.TAttach(badEvents,json_ouput)
-cutTreeData.TAttach(badEvents,NoiseFilt)
+cutTreeData.TAttach(json,NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
 cutTreeData.TAttach(oddMuon,oddElectron)
@@ -380,53 +380,54 @@ cutTreeData.TAttach(muDr,ht325)
 # cutTreeData.TAttach(ht375,htLess475)
 
 alphatTesting = {
-  "HLT_HT250_AlphaT0p55_v1": ("HLT_Mu5_HT200_v4" ,[275.,375.,475.,]),
-  "HLT_HT250_AlphaT0p55_v2": ("HLT_Mu8_HT200_v4" ,[275.,375.,475.,]),
-  "HLT_HT250_AlphaT0p53_v2": ("HLT_Mu15_HT200_v2",[275.,375.,475.,]),
-  "HLT_HT250_AlphaT0p53_v3": ("HLT_Mu15_HT200_v3",[275.,375.,475.,]),
-  "HLT_HT250_AlphaT0p53_v4": ("HLT_Mu15_HT200_v4",[275.,375.,475.,]),
-  "HLT_HT250_AlphaT0p53_v5": ("HLT_Mu30_HT200_v1",[275.,375.,475.,]),
-  "HLT_HT250_AlphaT0p53_v6": ("HLT_Mu40_HT200_v4",[275.,375.,475.,]),
-  "HLT_HT250_AlphaT0p55_v2": ("HLT_Mu40_HT200_v4",[275.,375.,475.,]),
-  "HLT_HT300_AlphaT0p52_v1": ("HLT_Mu5_HT200_v4" ,[325.,]),
-  "HLT_HT300_AlphaT0p52_v2": ("HLT_Mu8_HT200_v4" ,[325.,]),
-  "HLT_HT300_AlphaT0p52_v3": ("HLT_Mu15_HT200_v2",[325.,]),
-  "HLT_HT300_AlphaT0p52_v4": ("HLT_Mu15_HT200_v3",[325.,]),
-  "HLT_HT300_AlphaT0p52_v5": ("HLT_Mu15_HT200_v4",[325.,]),
-  "HLT_HT300_AlphaT0p53_v5": ("HLT_Mu30_HT200_v1",[325.,]),
-  "HLT_HT300_AlphaT0p53_v6": ("HLT_Mu40_HT200_v3",[325.,]),
-  "HLT_HT300_AlphaT0p53_v6": ("HLT_Mu40_HT200_v4",[325.,]),
-  "HLT_HT350_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,[375.,]),
-  "HLT_HT350_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,[375.,]),
-  "HLT_HT350_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",[375.,]),
-  "HLT_HT350_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",[375.,]),
-  "HLT_HT350_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",[375.,]),
-  "HLT_HT350_AlphaT0p52_v1": ("HLT_Mu30_HT200_v1",[375.,]),
-  "HLT_HT350_AlphaT0p52_v2": ("HLT_Mu40_HT200_v3",[375.,]),
-  "HLT_HT350_AlphaT0p52_v2": ("HLT_Mu40_HT200_v4",[375.,]),
-  "HLT_HT350_AlphaT0p52_v2": ("HLT_Mu40_HT200_v4",[375.,]),
-  "HLT_HT350_AlphaT0p53_v10": ("HLT_Mu40_HT300_v4",[375.,]),
-  "HLT_HT350_AlphaT0p53_v10": ("HLT_Mu40_HT300_v5",[375.,]),
-  "HLT_HT400_AlphaT0p51_v1": ("HLT_Mu5_HT200_v4" ,[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v2": ("HLT_Mu8_HT200_v4" ,[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v3": ("HLT_Mu15_HT200_v2",[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v4": ("HLT_Mu15_HT200_v3",[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v5": ("HLT_Mu15_HT200_v4",[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v6": ("HLT_Mu30_HT200_v1",[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v3",[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v7": ("HLT_Mu40_HT200_v4",[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v10":("HLT_Mu40_HT300_v4",[475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v10":("HLT_Mu40_HT300_v5",[475.,575.,675.,775.,875.]),
+  "HLT_HT250_AlphaT0p55_v1": (["HLT_Mu5_HT200_v4" ,],[275.,375.,475.,]),
+  "HLT_HT250_AlphaT0p55_v2": (["HLT_Mu8_HT200_v4" ,"HLT_Mu8_HT200_v3"],[275.,375.,475.,]),
+  "HLT_HT250_AlphaT0p53_v2": (["HLT_Mu15_HT200_v2",],[275.,375.,475.,]),
+  "HLT_HT250_AlphaT0p53_v3": (["HLT_Mu15_HT200_v3",],[275.,375.,475.,]),
+  "HLT_HT250_AlphaT0p53_v4": (["HLT_Mu15_HT200_v4",],[275.,375.,475.,]),
+  "HLT_HT250_AlphaT0p53_v5": (["HLT_Mu30_HT200_v1",],[275.,375.,475.,]),
+  # "HLT_HT250_AlphaT0p53_v6": (["HLT_Mu40_HT200_v4",],[275.,375.,475.,]),
+  "HLT_HT250_AlphaT0p55_v2": (["HLT_Mu40_HT200_v4",],[275.,375.,475.,]),
+  "HLT_HT300_AlphaT0p52_v1": (["HLT_Mu5_HT200_v4" ,],[325.,]),
+  "HLT_HT300_AlphaT0p52_v2": (["HLT_Mu8_HT200_v4" ,],[325.,]),
+  "HLT_HT300_AlphaT0p52_v3": (["HLT_Mu15_HT200_v2",],[325.,]),
+  "HLT_HT300_AlphaT0p52_v4": (["HLT_Mu15_HT200_v3",],[325.,]),
+  "HLT_HT300_AlphaT0p52_v5": (["HLT_Mu15_HT200_v4",],[325.,]),
+  "HLT_HT300_AlphaT0p53_v5": (["HLT_Mu30_HT200_v1",],[325.,]),
+  "HLT_HT300_AlphaT0p53_v6": (["HLT_Mu40_HT200_v3",],[325.,]),
+  "HLT_HT300_AlphaT0p53_v6": (["HLT_Mu40_HT200_v4",],[325.,]),
+  "HLT_HT350_AlphaT0p51_v1": (["HLT_Mu5_HT200_v4" ,],[375.,]),
+  "HLT_HT350_AlphaT0p51_v2": (["HLT_Mu8_HT200_v4" ,],[375.,]),
+  "HLT_HT350_AlphaT0p51_v3": (["HLT_Mu15_HT200_v2",],[375.,]),
+  "HLT_HT350_AlphaT0p51_v4": (["HLT_Mu15_HT200_v3",],[375.,]),
+  "HLT_HT350_AlphaT0p51_v5": (["HLT_Mu15_HT200_v4",],[375.,]),
+  "HLT_HT350_AlphaT0p52_v1": (["HLT_Mu30_HT200_v1",],[375.,]),
+  "HLT_HT350_AlphaT0p52_v2": (["HLT_Mu40_HT200_v3",],[375.,]),
+  "HLT_HT350_AlphaT0p52_v2": (["HLT_Mu40_HT200_v4",],[375.,]),
+  "HLT_HT350_AlphaT0p52_v2": (["HLT_Mu40_HT200_v4",],[375.,]),
+  "HLT_HT350_AlphaT0p53_v10":(["HLT_Mu40_HT300_v4",],[375.,]),
+  "HLT_HT350_AlphaT0p53_v10":(["HLT_Mu40_HT300_v5",],[375.,]),
+  "HLT_HT400_AlphaT0p51_v1": (["HLT_Mu5_HT200_v4" ,],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v2": (["HLT_Mu8_HT200_v4" ,],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v3": (["HLT_Mu15_HT200_v2",],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v4": (["HLT_Mu15_HT200_v3",],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v5": (["HLT_Mu15_HT200_v4",],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v6": (["HLT_Mu30_HT200_v1",],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v7": (["HLT_Mu40_HT200_v3",],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v7": (["HLT_Mu40_HT200_v4",],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v10":(["HLT_Mu40_HT300_v4",],[475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v10":(["HLT_Mu40_HT300_v5",],[475.,575.,675.,775.,875.]),
 }
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 
 for key,vals in alphatTesting.iteritems():
-  for htbin in vals[1]:
-    cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-    out.append(cut)
-    cutTreeData.TAttach(muDr,cut)
-    out.append(PreScaledPair(cutTreeData,cut,key,vals[0],"HT%d_"%(htbin)))
+  for ref in vals[0]:
+    for htbin in vals[1]:
+      cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+      out.append(cut)
+      cutTreeData.TAttach(muDr,cut)
+      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
 
 AlphaTwithDiMu = {
   "HLT_HT250_AlphaT0p55_v2": (["HLT_DoubleMu3_HT200_v4",] ,[275.,]),
@@ -568,7 +569,7 @@ from SingleMu import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-samples = HTRun2011AB
+# samples = HTRun2011AB
 
 outDir = "../%s_FinalPlots/ht%dNoUpper/"%(sample.Name,bin)
 ensure_dir(outDir)
