@@ -387,7 +387,7 @@ alphatTesting = {
   "HLT_HT250_AlphaT0p53_v3": (["HLT_Mu15_HT200_v3",],[275.,375.,475.,]),
   "HLT_HT250_AlphaT0p53_v4": (["HLT_Mu15_HT200_v4",],[275.,375.,475.,]),
   "HLT_HT250_AlphaT0p53_v5": (["HLT_Mu30_HT200_v1",],[275.,375.,475.,]),
-  # "HLT_HT250_AlphaT0p53_v6": (["HLT_Mu40_HT200_v4",],[275.,375.,475.,]),
+  "HLT_HT250_AlphaT0p53_v6": (["HLT_Mu40_HT200_v4","HLT_Mu40_HT200_v3"],[275.,375.,475.,]),
   "HLT_HT250_AlphaT0p55_v2": (["HLT_Mu40_HT200_v4",],[275.,375.,475.,]),
   "HLT_HT300_AlphaT0p52_v1": (["HLT_Mu5_HT200_v4" ,],[325.,]),
   "HLT_HT300_AlphaT0p52_v2": (["HLT_Mu8_HT200_v4" ,],[325.,]),
