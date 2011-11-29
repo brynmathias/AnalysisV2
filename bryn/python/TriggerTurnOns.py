@@ -347,7 +347,9 @@ for trig in triggers:
 cutTreeData.TAttach(json,badEvents)
 cutTreeData.FAttach(badEvents,json_lost)
 cutTreeData.TAttach(badEvents,json_ouput)
-cutTreeData.TAttach(badEvents,NoiseFilt)
+#cutTreeData.TAttach(badEvents,NoiseFilt)
+cutTreeData.TAttach(json,NoiseFilt)
+
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
 cutTreeData.TAttach(oddMuon,oddElectron)
