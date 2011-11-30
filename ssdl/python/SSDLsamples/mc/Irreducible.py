@@ -1,5 +1,45 @@
 from icf.core import PSet
 
+WWZ=PSet(
+        Name="WWZ",
+        Format=("ICF",3),
+        File=[
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_10_1_sns.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_11_1_wnV.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_1_1_qRD.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_2_1_GhO.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_3_1_pde.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_4_1_WCy.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_5_1_9Xp.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_6_1_whh.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_7_1_U38.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_8_1_Ksy.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_51/SusyCAF_Tree_9_1_0vJ.root" ,], 
+  CrossSection=0.001854,
+  Events=200448,
+
+ )
+
+WZZ=PSet(
+        Name="WZZ",
+        Format=("ICF",3),
+        File=[
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_10_1_tvK.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_1_1_vWy.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_2_1_nVT.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_3_1_mtv.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_4_1_Rji.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_5_1_YxW.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_6_1_QpG.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_7_1_Xiy.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_8_1_62U.root" ,
+        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_11_04_13_02_91/SusyCAF_Tree_9_1_sZL.root" ,], 
+  CrossSection=0.001245,
+  Events=195339,
+
+ )
+
+
 TTW=PSet(
 	Name="TTW",
 	Format=("ICF",3),
@@ -14,7 +54,7 @@ TTW=PSet(
         "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_10_24_18_44_07/SusyCAF_Tree_7_2_3tF.root" ,
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_10_24_18_44_07/SusyCAF_Tree_8_1_8U4.root" ,
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/pioppi/ICF/automated/2011_10_24_18_44_07/SusyCAF_Tree_9_1_dgu.root" ,], 
-  CrossSection=0.079,
+  CrossSection=0.054,
   Events=179998,
  )
 

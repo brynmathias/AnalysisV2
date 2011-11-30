@@ -15,6 +15,9 @@
 #include "MCData.hh"
 #include "EventData.hh"
 #include "GenObject.hh"
+#include "GenMatrixBin.hh"
+
+#include "Functions.hh"
 
 using namespace Event;
 
@@ -72,6 +75,10 @@ namespace OneLepton{
     int NJet, NJet30, NJet40, NJet50, NJet60;
     double JetPt[50], JetEta[50], JetPhi[50], JetCor[50], JetEMF[50];
 
+    // Jet-Raw Variables
+    int NJetRaw;
+    double JetRawPt[100], JetRawEta[100], JetRawPhi[100], JetRawCor[100];
+
     // Muon Variables
     int NMuons, MuonType[20], MuongPar[20], MuonGenMother[20];
     double MuonPt[20], MuonEta[20], MuonPhi[20], MuonChrg[20];
@@ -99,8 +106,30 @@ namespace OneLepton{
     // General Kinematic Variables -std-
     double HT, HT_Lep, MHT, MHTEta, MHTPhi, CaloMET, CaloMETtypeII, CaloMETtypeIIPhi, MT, LP, Meff;
     double PFMET, PFMETPhi, PFMHT_h, PFMT_h, PFLP_h;
-    double HT12, MHT12, M2, MinvMax, M3_sca, M3_vec;
+    double PFMET_typeI;
+    double HT12, HT123;
+    double MHT12;
+    double M2_sca, MinvMax;
+    double M3_sca, M3_vec, M3lep_sca, M3lep_vec;
+    double M_LepClosestJet, M_LepHighestJet, M_LepHighestJet2;
+    double DPhi_LepMET, DPhi_LepMHT, DPhi_LepJetmin;
+    double DPhi_Jet1Jet2, DR_Jet1Jet2;
+    double DPhi_AllJetsMin, DR_AllJetsMin;
 
+    // Razor variables
+    double MR, MRt, R;
+
+
+    // Gen variables
+    int NGenLeptons, NGenNuLeptons;
+    double GenLeptonPt[20], GenLeptonEta[20], GenLeptonPhi[20], GenLeptonChrg[20];
+    double GenNuLeptonPt[20], GenNuLeptonEta[20], GenNuLeptonPhi[20];
+    double GenWPt, GenWEta, GenWPhi;
+    double DPhi_LepPtW, DPhi_LepNuLep;
+    int GenMuonFromW;
+
+    int NPartons;
+    double PartonPx[20], PartonPy[15], PartonPz[20], PartonPt[20], PartonEta[20], PartonPhi[20];
  
     const std::string mFolderName;
 

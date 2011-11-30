@@ -18,8 +18,10 @@ namespace allhadronic {
     
     void clear();
     void push_back( const LorentzV& );
+    
     void update();
     void print( std::stringstream& );
+    void print();
     
     const std::vector<LorentzV>& jets() const;
     const std::vector<bool>& pseudo() const;
@@ -42,6 +44,8 @@ namespace allhadronic {
     std::vector<bool> pseudo_;
     LorentzV j1_;
     LorentzV j2_;
+    double et1_;
+    double et2_;
     double ht_;
     double dht_;
     LorentzV mht_;

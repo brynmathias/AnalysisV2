@@ -86,6 +86,70 @@ std::ostream& PTlepCut::Description(std::ostream &ostrm) {
   ostrm <<mPTlep<< " > PTlep > " << mPTlep << " GeV ";
   return ostrm;
 }
+//================
+// Sum Pt lep cut
+//================
+
+  PTmuCut::PTmuCut(float Pt)
+    : mPTmu(Pt)
+  {;}
+  
+  bool PTmuCut::Process(Event::Data & ev) {
+    
+  
+    if(ev.LD_CommonMuons().accepted.size()<1) return false;
+    else return ev.LD_CommonMuons().accepted.at(0)->Pt()>mPTmu;
+    return false;
+ 
+}
+std::ostream& PTmuCut::Description(std::ostream &ostrm) {
+  ostrm <<mPTmu<< " > PTmu > ";
+  return ostrm;
+}
+
+
+  PTZCut::PTZCut(float Pt)
+    : mPTmu(Pt)
+  {;}
+  
+  bool PTZCut::Process(Event::Data & ev) {
+    
+  
+    if(ev.LD_CommonMuons().accepted.size()!=2) return false;
+     std::vector <Event::Lepton const *> theRECOLepton;
+     bool isMu = false;
+     
+     if ( (ev.LD_CommonMuons().accepted.size()>0) && (ev.LD_CommonElectrons().accepted.size()==0) ) {
+       theRECOLepton = ev.LD_CommonMuons().accepted;
+       isMu = true;
+     }
+     
+     if ( (ev.LD_CommonMuons().accepted.size()==0) && (ev.LD_CommonElectrons().accepted.size()>0) ) {
+       theRECOLepton = ev.LD_CommonElectrons().accepted;
+     }  
+     if ( (ev.LD_CommonMuons().accepted.size()>0) && (ev.LD_CommonElectrons().accepted.size()>0) ) {
+       //  cout << "WARNING: ANplots has common muon AND Electron, it does not know what to plot!!!"<<endl;
+       return true;
+     }
+
+
+     if(theRECOLepton.size()==2&theRECOLepton.at(0)->GetCharge()!=theRECOLepton.at(1)->GetCharge())
+       {
+	 LorentzV theZ = (*theRECOLepton.at(0))+(*theRECOLepton.at(1));
+	 
+	 if( ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1)))>76  &&   ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1)))<107&&theZ.Pt()>mPTmu) return true;
+	  
+       }
+
+    return false;
+ 
+}
+std::ostream& PTZCut::Description(std::ostream &ostrm) {
+  ostrm <<mPTmu<< " > PTmu > ";
+  return ostrm;
+}
+
+
 
 //================
 // Sum Pt lep cut
@@ -110,7 +174,18 @@ std::ostream& PTlepCut::Description(std::ostream &ostrm) {
     for ( std::vector<Event::Lepton const *>::const_iterator i = ev.LD_CommonMuons().accepted.begin();
 	i != ev.LD_CommonMuons().accepted.end();
 	  i++ ) {
-    HTlep+=(**i).Pt();
+  
+      // default adding all leptons
+      ///  HTlep+=(**i).Pt();
+      // +++++++++++++++++++
+
+      // update for Z events, taking leadin mu
+
+      if( ev.LD_CommonMuons().accepted.size()==1) HTlep+=(**i).Pt();
+      if( ev.LD_CommonMuons().accepted.size()==2){ 
+	HTlep = ev.LD_CommonMuons().accepted.at(1)->Pt() + (ev.PFMET()+(*(ev.LD_CommonMuons().accepted.at(0)))).Pt();
+	break;
+      }
   }
   //cout << "finally HT lep is : " << HTlep << endl;
   if( mSumPTlepUP < 0) return (HTlep > mSumPTlep);
@@ -221,6 +296,22 @@ std::ostream& HTPTCut::Description(std::ostream &ostrm) {
   return ostrm;
 }
 
+  HTthrustCut::HTthrustCut(float sumPt,float sumPtUp)
+    : mHTthrustCutVal(sumPt), mHTthrustCutValUp(sumPtUp)
+{;}
+
+bool HTthrustCut::Process(Event::Data & ev) {
+
+  ThrustStuff thrust = ev.CommonThrustStuff();
+  float HTthrust=thrust.HTFmin;
+  if (mHTthrustCutValUp<=0) return (mHTthrustCutVal < HTthrust);
+  return (mHTthrustCutVal < HTthrust&& mHTthrustCutValUp > HTthrust);
+}
+
+std::ostream& HTthrustCut::Description(std::ostream &ostrm) {
+  ostrm << "HT thrust minor > " << mHTthrustCutVal << " GeV ";
+  return ostrm;
+}
 
 
 //================

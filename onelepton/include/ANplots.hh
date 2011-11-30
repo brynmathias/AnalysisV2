@@ -20,6 +20,37 @@ namespace Operation {
   private:
     
     std::string mFolderName;
+
+    TH1D* Zmassmu; 
+    TH1D* Zmassmu_pos; 
+    TH1D* Zmassmu_neg; 
+    
+    TH1D* ZLP ;
+    TH1D* ZLP_pos ;
+    TH1D* ZLP_neg ;
+
+    TH1D* ZPT ;
+    TH1D* ZPT_pos ;
+    TH1D* ZPT_neg ;
+
+    TH1D* ZPTres;
+    TH1D* ZPTres_pos;
+    TH1D* ZPTres_neg;
+
+    TH2D* ZPTvsMHT; 
+    TH2D* ZLPvsLP ;
+    TH1D* ZmassmuRaw;
+
+    TH1D* ZLPMHT ;
+    TH1D* ZLPMHT_pos ;
+    TH1D* ZLPMHT_neg ;
+
+    TH1D* ZMHTpl;
+    TH1D* ZMHTpl_pos;
+    TH1D* ZMHTpl_neg;
+    TH1D* ZST;
+
+
     TH1D* CounterCtrl_pos;
     TH1D* CounterSgnl_pos;
     TH1D* NrOfJets_pos;

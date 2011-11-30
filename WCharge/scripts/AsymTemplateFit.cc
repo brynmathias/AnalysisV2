@@ -48,33 +48,20 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
     return;
   }
   TString TemplateLocation="./";
+  //TString TemplateLocation="./MT50/";
 
   TString DIR="Default_Asym";//"Templates" + str_eff + "_Ele" + "25";//This will be changed
   
   //Can use this to scale EWK or turn it off completely
   float EWKfrac = 1.0;
-   
-  //wShape = 1 Silvia's MET recoil templates
-  //wShape = 2 MIT Z recoil templates
-  //wShape = 3 MIT recoil templates with eta corrections
-  //wShape = 4 Silvia's Ersatz with eta corrections
-  //wShape = 5 DW Ersatz with eta corrections
-//   bool bUseMETRecoil = false;
-//   bool bUseMITMETRecoil = false;
-//   bool bUseMITMETRecoilCorr = false;
-//   bool bUseErsatz = false; 
+  bool corSigCon =true;// true;   
+  bool debug =false;// true;   
        
   //EventSelection
   TString data_Ev="h_eta_pfMET";
   TString data_AntiEv="h_eta_anti_pfMET";
-  //TString data_AntiEv="h_anti_pfMET";
   TString Ev="h_eta_pfMET";
   TString AntiEv="h_eta_anti_pfMET";
-  
-//  if (corr) {
-//    data_Ev+="cor";
-//    data_AntiEv+="cor"; //TODO CHANGE THIS BACK!
-//  }
   
   TString Suffix="";//ptStr;
   TString SAVDIR="./";//"~/public/html/";
@@ -92,8 +79,8 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
   int nbins=50;
   int rebinFactor=2;
 
-   double x[] =  {0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.7,1.9,2.1,2.3};
-   double ex[] = {0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1};
+  double x[] =  {0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.7,1.9,2.1,2.3};
+  double ex[] = {0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1};
 
   TString Titles[22]={
     "Positrons |#eta|<0.2"    ,"Electrons |#eta|<0.2"    ,
@@ -109,7 +96,7 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
     "Positrons 2.2<|#eta|<2.4","Electrons 2.2<|#eta|<2.4"};
   TFile *file[19];
 //Data
-  file[0] = TFile::Open(TemplateLocation+"Templates_SingleElectron_Run2011A.root");
+  file[0] = TFile::Open(TemplateLocation+"Templates_TP_SingleElectron_Run2011A.root");
 
 //MC
   file[1]=TFile::Open(TemplateLocation+"Templates_WToENu_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2.root");
@@ -153,6 +140,10 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
   TH1F* hh_data_sel_antisel[22];TH1F*  hh_bkg_sel_template[22]; TH1F *hh_ewk_sel_fit[22];
   TH1F* hh_wenu_sel_fit[22];
   TH1F* hh_tot_sel_fit[22];  TH1F* hh_wenuewk_sel[22];TH1F* hh_bkg_sel_template_fit[22];
+
+  float NTP_con[22];
+  float NTP_sig[22];
+
   for (int ib=0; ib<22;ib++){
     hh_data_sel[ib]= new TH1F("h_data_sel"+bins[ib], "data_sel"+bins[ib], 100,0.,100.);;
     hh_wenu_sel[ib]=new TH1F("h_wenu_sel"+bins[ib],"wenu_sel"+bins[ib],100,0.,100.);
@@ -201,30 +192,10 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
   TH1D *BPOS=new TH1D("BPOS","BPOS",11,0,2.4);
   TH1D *BNEG=new TH1D("BNEG","BNEG",11,0,2.4);
 
-
   TH1 *ASY;
   
   double w[19];
   for (unsigned i=1; i<19; i++) w[i]=(1/100.)*lumi;//All templates weighted to 100pb
-//  w[0] = 1;
-//  w[1] = (1.0/345.966)*lumi;
-//
-//  w[2] = (1.0/14.900)*lumi;
-//  w[3] = (1.0/17.810)*lumi;
-//  w[4] = (1.0/57.875)*lumi;
-//  w[5] = (1.0/16.975)*lumi;
-//  w[6] = (1.0/14.587)*lumi;
-//  w[7] = (1.0/111.473)*lumi;
-//  w[8] = (1.0/5.392)*lumi;
-//  w[9] = (1.0/61.443)*lumi;
-//
-//  w[11] = (1.0/345.966)*lumi;
-//  w[12] = (1.0/506.271)*lumi;
-//
-//  w[15] = (1.0/1176.095)*lumi;
-//  w[16] = (1.0/1238.53)*lumi;
-//  w[17] = (1.0/537.272)*lumi;
-//  w[18] = (1.0/10633.511)*lumi;
  
   //EWK XSEC UNC.
   for (unsigned i=15; i<19; i++) {
@@ -241,13 +212,14 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
     if (DATA){
       file[0]->cd(DIR);
       gDirectory->GetObject(data_Ev+bins[ib]+Suffix,h1);
- //    gDirectory->GetObject(Ev+bins[ib],h1);//(data_Ev+bins[ib],h1);
-	  //h1->Rebin(2);
       hh_data_sel[ib]->Add(h1);
       gDirectory->GetObject(data_AntiEv+bins[ib]+Suffix,h1);//
-      //h1->Rebin(2); //opps i changed the AS binning but no the selection
       hh_data_sel_antisel[ib]->Add(h1);
-	  //return;
+
+      gDirectory->GetObject("h_TPC"+bins[ib],h1);
+      NTP_con[ib] = h1->Integral();
+      gDirectory->GetObject("h_TPS"+bins[ib],h1);
+      NTP_sig[ib] = h1->Integral();
     }
     else{
       for (unsigned i=1; i<19; i++) {
@@ -266,86 +238,6 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
     gDirectory->GetObject(Ev+bins[ib]+Suffix,h1);
     h1->Sumw2();
     hh_wenu_sel[ib]->Add(h1,w[1]);
-
-//    //Wenuplus and minus
-//    file[11]->cd(DIR);
-//    gDirectory->GetObject(Ev+bins[ib]+Suffix,h1);
-//    h1->Sumw2();
-//    hh_wenu_sel[ib]->Add(h1,w[11]);
-//    
-//    file[12]->cd(DIR);
-//    gDirectory->GetObject(Ev+bins[ib],h1);
-//    h1->Sumw2();
-//    hh_wenu_sel[ib]->Add(h1,w[12]);
-   
-//     if (bUseMETRecoil) {
-//       cout<<"Using Silvia's MET Recoil W->e nu template shapes."<<endl;  
-//       TFile *Wenufile = TFile::Open(TemplateLocation+"Templates_Wenu_Silvia.root");//*******
-//       double nWenu = hh_wenu_sel[ib]->Integral();
-//       TString WenuDIR="Templates_00";
-//       hh_wenu_sel[ib]->Reset();				
-//       Wenufile->cd(WenuDIR);				
-//       gDirectory->GetObject("h_MC_sel"+bins[ib],h1);	//"h_corr"+bins[ib],h1);//
-//       //h1->Sumw2();
-//       h1->Rebin(2);//200 -> 100
-//       hh_wenu_sel[ib]->Add(h1,1.0*nWenu/(h1->Integral()));
-//     }
-//     else if (bUseMITMETRecoil) {
-//      cout<<"Using MIT's MET Recoil W->e nu template shapes."<<endl;  
-//      TFile *MITfile =  TFile::Open(TemplateLocation+"Templates_Wenu_dec22.root");
-//  TFile *MITfile;
-//  if (reco == 0) {
-//    MITfile = TFile::Open(TemplateLocation+"Templates_Wenu_nov4_v56.root");
-//  }
-//  else if (reco == 1 ){
-//    MITfile = TFile::Open(TemplateLocation+"Templates_Wenu_nov4_v56.root");
-//  }
-//  else if (reco == 2 ) {
-//    MITfile = TFile::Open(TemplateLocation+"Templates_Wenu_dec22_v70.root");//Not used
-//  }
-//  else if (reco == 3 ) {
-//    MITfile = TFile::Open(TemplateLocation+"Templates_Wenu_dec22.root");//
-//  }
-
-
-//      //hh_wenu_sel[ib]->Rebin(rebinFactor/2);
-//      double nWenu = hh_wenu_sel[ib]->Integral();
-//      TString WenuDIR;
-//      if (ptCut==25) {
-//	WenuDIR="midTree25";
-//      } else if (ptCut==30) {
-//	WenuDIR="midTree30";
-//      } else if (ptCut==35) {
-//	WenuDIR="midTree35";
-//      }
-//      hh_wenu_sel[ib]->Reset();				
-//      MITfile->cd(WenuDIR);				
-//      gDirectory->GetObject("h_pfMET"+bins[ib],h1);	
-//      //h1->Sumw2();
-//      hh_wenu_sel[ib]->Add(h1,1.000*nWenu/(h1->Integral()));	
-//     }
-//     else if (bUseMITMETRecoilCorr) {
-//       cout<<"Using MIT template shapes (with eta binning fudge factor)"<<endl;   
-//       TFile *MITfile =  TFile::Open(TemplateLocation+"Templates_Wenu_MITCorrected.root");
-//       //hh_wenu_sel[ib]->Rebin(rebinFactor/2);
-//       double nWenu = hh_wenu_sel[ib]->Integral();
-//       TString WenuDIR="corr";
-//       hh_wenu_sel[ib]->Reset();				
-//       MITfile->cd(WenuDIR);				
-//       gDirectory->GetObject("h_corr"+bins[ib],h1);	
-//       //h1->Sumw2();
-//       hh_wenu_sel[ib]->Add(h1,1.001*nWenu/(h1->Integral()));	
-//     }
-//     else if (bUseErsatz) {
-//       cout<<"ERROR: NOT UPDATED YET."<<endl;    
-//       return;
-//     }
-//     for (unsigned i=15; i<19; i++) {
-//       file[i]->cd(DIR);
-//       gDirectory->GetObject(Ev+bins[ib]+Suffix,h1);
-//       h1->Sumw2();  
-//       hh_ewk_sel[ib]->Add(h1,w[i]);
-//     } 
     
 //     15
       file[15]->cd(DIR);
@@ -361,7 +253,6 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
       hh_ewk_sel[ib]->Add(h1,w[16]);
       hh_dyee_sel[ib]->Add(h1,w[16]);
     
-    
 //     17
       file[17]->cd(DIR);
       gDirectory->GetObject(Ev+bins[ib]+Suffix,h1);
@@ -369,14 +260,12 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
       hh_ewk_sel[ib]->Add(h1,w[17]);
       hh_wtaunu_sel[ib]->Add(h1,w[17]);
     
-    
 //     18
       file[18]->cd(DIR);
       gDirectory->GetObject(Ev+bins[ib]+Suffix,h1);
       h1->Sumw2();  
       hh_ewk_sel[ib]->Add(h1,w[18]);
       hh_ttbar_sel[ib]->Add(h1,w[18]);
-    
  
 //    for (unsigned i=2; i<10; i++) {
 //      file[i]->cd(DIR);
@@ -395,26 +284,17 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
 	hh_dyee_sel[ib]->Rebin(rebinFactor);
 	hh_wtaunu_sel[ib]->Rebin(rebinFactor);
 	hh_ttbar_sel[ib]->Rebin(rebinFactor);
-    // & $0.0<| \eta |<0.4$  & 13791 & 4127 & 18138\\ 
-// Integral(Int_t binx1, Int_t binx2, Option_t* option = "") const
-    cout<<"Using range: "<<hh_wenu_sel[ib]->GetXaxis()->GetBinLowEdge(binMETCut)<<" to " <<hh_wenu_sel[ib]->GetXaxis()->GetBinUpEdge(nbins)<<endl;
-
-
-//       TH1F* [12];
-//   TH1F* [12];
-//   TH1F* [12];
-//   TH1F* hh_ttbar_sel[12];  
-
-    cout<<"MC Wenu = "      <<hh_wenu_sel[ib]->Integral(binMETCut,nbins)    <<endl;
-    cout<<"MC EWK = "       <<hh_ewk_sel[ib]->Integral(binMETCut,nbins)     <<endl;
-	cout<<"MC EWK DYtautau = "<<hh_dytautau_sel[ib]->Integral(binMETCut,nbins)<<endl;
-	cout<<"MC EWK DYee = "  <<hh_dyee_sel[ib]->Integral(binMETCut,nbins)    <<endl;
-	cout<<"MC EWK WTau= "   <<hh_wtaunu_sel[ib]->Integral(binMETCut,nbins)  <<endl;
-	cout<<"MC EWK ttbar= "  <<hh_ttbar_sel[ib]->Integral(binMETCut,nbins)   <<endl;
-    cout<<"MC QCD = "       <<hh_qcd_sel[ib]->Integral(binMETCut,nbins)     <<endl;
-
-
-//     cout<<"NEvents = "<<hh_data_sel[ib]->Integral(binMETCut,nbins)<<endl;     
+    if (debug){
+        cout<<"Using range: "<<hh_wenu_sel[ib]->GetXaxis()->GetBinLowEdge(binMETCut)
+            <<" to " <<hh_wenu_sel[ib]->GetXaxis()->GetBinUpEdge(nbins)<<endl;
+        cout<<"MC Wenu = "      <<hh_wenu_sel[ib]->Integral(binMETCut,nbins)    <<endl;
+        cout<<"MC EWK = "       <<hh_ewk_sel[ib]->Integral(binMETCut,nbins)     <<endl;
+        cout<<"MC EWK DYtautau = "<<hh_dytautau_sel[ib]->Integral(binMETCut,nbins)<<endl;
+        cout<<"MC EWK DYee = "  <<hh_dyee_sel[ib]->Integral(binMETCut,nbins)    <<endl;
+        cout<<"MC EWK WTau= "   <<hh_wtaunu_sel[ib]->Integral(binMETCut,nbins)  <<endl;
+        cout<<"MC EWK ttbar= "  <<hh_ttbar_sel[ib]->Integral(binMETCut,nbins)   <<endl;
+        cout<<"MC QCD = "       <<hh_qcd_sel[ib]->Integral(binMETCut,nbins)     <<endl;
+    }
     hh_wenuewk_sel[ib]->Add(hh_wenu_sel[ib]);
     hh_wenuewk_sel[ib]->Add(hh_ewk_sel[ib]);
     hh_bkg_sel_template[ib]->Add(hh_data_sel_antisel[ib]);
@@ -471,6 +351,21 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
     float NSignal =hh_wenu_sel_fit[ib]->Integral(binMETCut,nbins);//nwenuewk_fit*relfrac_wenu;
     float NQCD =hh_bkg_sel_template_fit[ib]->Integral(binMETCut,nbins);//nwenuewk_fit*relfrac_wenu;
     float NBackground =hh_bkg_sel_template_fit[ib]->Integral(binMETCut,nbins) + hh_ewk_sel_fit[ib]->Integral(binMETCut,nbins);//nbkg_fit+(nwenuewk_fit*(1-relfrac_wenu));
+
+    //Signal Contamination Correction
+    float NControl = hh_bkg_sel_template[ib]->Integral();//N events in QCD template
+    float NSignal_cor = 1.0/(1.0-(NQCD/NControl)*(NTP_con[ib]/NTP_sig[ib]));
+    float NSignal_true = NSignal*NSignal_cor;
+    float contamFrac = (NSignal_true/NControl)*(NTP_con[ib]/NTP_sig[ib]);
+
+    cout << "signal contamination fraction in QCD template = " << contamFrac << endl;
+    cout << "signal contamination correction factor = " << NSignal_cor << endl;
+    cout << "NSignal (contamination corrected) = " << NSignal_true << " ±" << sqrt(NSignal) << " ±" << NSignal*nwenuewk_fit_err << endl;
+
+    if (corSigCon){
+        NQCD = NQCD - (NSignal_true - NSignal);
+        NSignal = NSignal_true;
+    }
     if (ib%2 == 0) {
         POS->SetBinContent(ib/2+1,NSignal) ;
         POS->SetBinError(ib/2+1,NSignal*relSigErr);
@@ -531,7 +426,11 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
     hh_wenu_sel_fit[ib]->SetLineWidth(0.25);
     hh_ewk_sel_fit[ib]->SetLineWidth(0.25);
     hh_bkg_sel_template_fit[ib]->SetLineWidth(0.25);
-    
+
+    //if (corSigCon){
+    //    hh_bkg_sel_template_fit[ib]->Add(hh_wenu_sel_fit[ib], -(NSignal_cor -
+    //1.0));
+    //} 
     THStack *h_back_sel_fit = new THStack("h_back_sel_fit","Fit: " + Titles[ib]); 
     
     h_back_sel_fit->Add(hh_bkg_sel_template_fit[ib]); 
@@ -571,12 +470,11 @@ void AsymTemplateFit(int ieff=80, float lumi=869., int METCut=0, int reco = 0,bo
       float ErrTot=sqrt(dSig*dSig+dBkg*dBkg);
       hh_tot_sel_fit[ib]->SetBinError(j,ErrTot);
     }
-//     Double_t chi2ndof0 = hh_data_sel[ib]->Chi2Test(hh_tot_sel_fit[ib],"CHI2/NDF");
+    Double_t chi2ndof = hh_data_sel[ib]->Chi2Test(hh_tot_sel_fit[ib],"CHI2/NDF");
 //    Double_t chi2ndofUW = hh_data_sel[ib]->Chi2Test(hh_tot_sel_fit[ib],"UW CHI2/NDF");
-//    Double_t chi2 = hh_data_sel[ib]->Chi2Test(hh_tot_sel_fit[ib],"CHI2"); 
+    Double_t chi2 = hh_data_sel[ib]->Chi2Test(hh_tot_sel_fit[ib],"CHI2"); 
 //     Double_t chi2UW = hh_data_sel[ib]->Chi2Test(hh_tot_sel_fit[ib],"UW CHI2"); 
-//     cout<<"CHI2= "<<chi2<<", CHI2NDOF= "<<chi2ndof<<endl;
-//    cout<<"CHI2 "<<chi2UW<<"CHI2NDOF "<<chi2ndofUW<<endl;
+    cout<<"CHI2= "<<chi2<<", CHI2NDOF= "<<chi2ndof<<endl;
   
     if (ib==0){
       l5_2->AddEntry(hh_data_sel[ib],"data","p");

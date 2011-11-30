@@ -12,6 +12,9 @@ import SUSYSignalScan.utils as susy_utils
 from onelepton_TP_and_BE_data_filters import *
 from onelepton_CutCounters import *
 
+
+#Trigger #mu MC
+
 #Trigger
 trg_set1 = PSet(
     Triggers = ["HLT_Mu5_HT200_v*"],
@@ -48,13 +51,22 @@ etrg_set3 = PSet(
 
 ## Triggers after May's Technical Stop
 trg_set5 = PSet(
-    Triggers = ["HLT_Mu8_HT250_v*", #1e33
+    Triggers = [
+                "HLT_Mu8_HT200_v*",# may rereco
+                "HLT_HT200_Mu5_PFMHT35_v*", # may rereco
+                "HLT_Mu8_HT250_v*", #1e33
                 "HLT_Mu15_HT200_v*",
                 "HLT_Mu30_HT200_v*", #2e33
                 "HLT_Mu40_HT200_v*", #3e33
                 "HLT_HT250_Mu5_PFMHT35_v*", #1e33
                 "HLT_HT250_Mu15_PFMHT20_v*", #2e33
                 "HLT_HT250_Mu15_PFMHT40_v*", #3e33
+                "HLT_Mu40_HT300*", ##5e33
+                "HLT_Mu60_HT300*", ##5e33 - backUp
+                "HLT_HT300_Mu15_pfMHT40*", ##5e33
+                "HLT_HT300_Mu15_pfMHT50*", ##5e33 - backUp
+                "HLT_HT350_Mu5_PFMHT45*", ##5e33
+                "HLT_HT400_Mu5_PFMHT50*", ##5e33
 #                "HLT_HT300_Mu5_PFMHT40_v*", #2e33
 #                "HLT_HT350_Mu5_PFMHT45_v*" #2e33
                 ],
@@ -100,6 +112,27 @@ etrg_set2 = PSet(
     UsePreScaledTriggers = False
     )
 
+
+etrg_setFull = PSet(
+    Triggers = ["HLT_Ele10_CaloIdL_CaloIsoVL_TrkIdVL_TrkIsoVL_HT200_v*",
+                "HLT_Ele10_CaloIdT_CaloIsoVL_TrkIdT_TrkIsoVL_HT200_v*",
+                "HLT_Ele15_CaloIdT_CaloIsoVL_TrkIdT_TrkIsoVL_HT250_v*",
+                "HLT_Ele10_CaloIdL_CaloIsoVL_TrkIdVL_TrkIsoVL_HT200_v*",
+                "HLT_Ele25_CaloIdT_TrkIdT_HT350_v*",
+                "HLT_Ele15_CaloIdT_CaloIsoVL_TrkIdT_TrkIsoVL_HT250_PFMHT25_v*", #3e33
+                "HLT_HT350_Ele30_CaloIdT_TrkIdT_v*", #3e33
+                "HLT_Ele15_CaloIdT_CaloIsoVL_TrkIdT_TrkIsoVL_HT250_pfMHT40*", ##5e33
+                "HLT_Ele15_CaloIdT_CaloIsoVL_TrkIdT_TrkIsoVL_HT250_pfMHT50*", ##5e33 - backUp
+                "HLT_HT400_Ele60_CaloIdT_TrkIdT*", ##5e33
+                "HLT_HT450_Ele60_CaloIdT_TrkIdT*", ##5e33 - backUp
+                "HLT_HT350_Ele5_CaloIdVL_CaloIsoVL_TrkIdVL_TrkIsoVL_PFMHT45*", ## 5e33
+                "HLT_HT400_Ele5_CaloIdVL_CaloIsoVL_TrkIdVL_TrkIsoVL_PFMHT50*", ## 5e33
+                ],
+    Verbose = False,
+    UsePreScaledTriggers = False
+    )
+
+
 json = JSONFilter("Cert_160404-165542",
                   json_to_pset("%s/onelepton/json/Json_Latest.txt" % susyDir()))
 
@@ -118,7 +151,12 @@ etriggerData42X_PromptReco = OP_MultiTrigger(etrg_set2.ps())
 etriggerData42XCtrl_ReReco =  OP_TriggerCut("HLT_Ele27_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v3")
 etriggerData42XCtrl_PromptReco = OP_MultiTrigger(etrg_set3.ps())
 
+etriggerData42X_2011Full = OP_MultiTrigger(etrg_setFull.ps())
+
 triggerSyncMuHad = OP_MultiTrigger(trg_setSynch.ps())
+
+triggerMuMC =  OP_MultiTrigger(trg_setSynchMC.ps())
+
 
 # lepton specific cuts
 ZeroMu      = OP_NumComMuons("==",0)
@@ -186,7 +224,8 @@ selection = OP_GoodEventSelection()
 HBBEnoise = OP_HadronicHBHEnoiseFilter()
 BeamHalo = OP_beamHaloCSCTightHaloId()
 NoTracks = had.OP_SumVertexPtOverHT(0.1)
-
+RA2TrackingFailureFilterCut = OP_RA2TrackingFailureFilterCut()
+RA2ecaldeadcellfilterflagCut = OP_RA2ecaldeadcellfilterflagCut()
 
 AtLeast4Jts = OP_NumComJets(">=",4)
 AtLeast3Jts = OP_NumComJets(">=",3)
@@ -195,7 +234,7 @@ AtLeast2Jts = OP_NumComJets(">=",2)
 AtLeast1Jts = OP_NumComJets(">=",1)
 LessThan4Jts = OP_NumComJets("<",4)
 LessThan3Jts = OP_NumComJets("<",3)
-
+MonsterFilter = OP_MonsterFilter()
 
 NumOfGenLeptons = OP_GenNumberLepCut(1)
 
@@ -217,9 +256,17 @@ el_fillLightTree_cfg = PSet(
     LeptonType = "Electrons",
     MinNumOfObjs = 2,
     MaxNumOfObjs = 10,
-    GenInfo = False ## False for DATA, True for MC
+    GenInfo = True ## False for DATA, True for MC
     )
 AnalysisTree_El = AnalysisTree_HighPt("ElectronTree", el_fillLightTree_cfg.ps())
+
+el_fillLightTree_data_cfg = PSet(
+    LeptonType = "Electrons",
+    MinNumOfObjs = 2,
+    MaxNumOfObjs = 10,
+    GenInfo = False ## False for DATA, True for MC
+    )
+AnalysisTree_El_Data = AnalysisTree_HighPt_Data("ElectronTree", el_fillLightTree_data_cfg.ps())
 
 SumLepPT125= OP_SumPTlepCut(125,100000.)
 
@@ -245,7 +292,7 @@ msugra_pset = PSet(
     zHigh =1000.,
     verbose = True,
     NLO = None
-    )
+    ) 
 
 msugra_psets = {}
 
@@ -272,10 +319,10 @@ def tripleScale(model = "tanB10", cutTree = None, cut = None, label = "", SM=Fal
         else: op = OP_mSuGraPlottingOps(pset.ps())
         out.append(op)
         out.append(ps)
-       # if cut is not None:
-       #     cutTree.TAttach(cut, op)
-       # else:
-       #     cutTree.Attach(op)
+        if cut is not None:
+            cutTree.TAttach(cut, op)
+        else:
+            cutTree.Attach(op)
     return (op, out)
 
 def setupSUSYWeighting(a):
@@ -353,7 +400,7 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
         dataTriggers = {
             "data4X" : triggerData4X,
             "data42X_PromptReco" : triggerData42X_PromptReco,
-            "sample_Fall11_data" : triggerSyncMuHad,#triggerData42X_PromptReco,
+            "sample_Fall11_data" : triggerData42X_PromptReco,
             "data42X_ReReco" : triggerData42X_ReReco
             }
 
@@ -372,7 +419,16 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
         tree.TAttach(bsmgrid, selection)
         filters += store
     else:
-        tree.Attach(selection)
+        tree.Attach(myCountsAndBSMGrids_Json)
+        tree.TAttach(myCountsAndBSMGrids_Json,triggerMuMC)
+        tree.TAttach(triggerMuMC,myCountsAndBSMGrids_Trigger)
+        tree.TAttach(myCountsAndBSMGrids_Trigger,tt_Pythia6_Cut)
+        tree.TAttach(tt_Pythia6_Cut,myCountsAndBSMGrids_pythiabug)
+        tree.TAttach(myCountsAndBSMGrids_pythiabug,MonsterFilter)
+        tree.TAttach(MonsterFilter,myCountsAndBSMGrids_Monster)
+        tree.TAttach(myCountsAndBSMGrids_Monster,selection)
+
+
 
     # Add cut flow common to signal/control
     tree.TAttach(selection,myCountsAndBSMGrids_Sel)
@@ -380,8 +436,10 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
     tree.TAttach(HBBEnoise,myCountsAndBSMGrids_Noise)
     tree.TAttach(myCountsAndBSMGrids_Noise,BeamHalo)
     tree.TAttach(BeamHalo,myCountsAndBSMGrids_beam)
-    tree.TAttach(myCountsAndBSMGrids_beam,NoTracks)
-    tree.TAttach(NoTracks,myCountsAndBSMGrids_track)
+    tree.TAttach(myCountsAndBSMGrids_beam,RA2TrackingFailureFilterCut)
+    tree.TAttach(RA2TrackingFailureFilterCut,myCountsAndBSMGrids_track)
+    tree.TAttach(myCountsAndBSMGrids_track,RA2ecaldeadcellfilterflagCut)
+
     if  mode == "data42X_ReReco":
         tree.TAttach(myCountsAndBSMGrids_track,MuHad_May10ReReco_Cut_BE)
         tree.TAttach(MuHad_May10ReReco_Cut_BE,MuHad_May10ReReco_Cut_TP)
@@ -391,27 +449,23 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
         tree.TAttach(MuHad_Prompt_Cut_BE,MuHad_Prompt_Cut_TP)
         tree.TAttach(MuHad_Prompt_Cut_TP,myCountsAndBSMGrids_TPBE)
     elif mode == "sample_Fall11_data": 
-        tree.TAttach(myCountsAndBSMGrids_track,MuHad_Prompt6_Cut_TP)
- #       tree.TAttach(MuHad_Prompt6_Cut_BE,MuHad_Prompt6_Cut_TP)
- #       tree.TAttach(MuHad_Prompt6_Cut_TP,MuHad_Aug5ReReco_v1_Cut_TP)
- #       tree.TAttach(MuHad_Aug5ReReco_v1_Cut_TP,MuHad_Aug5ReReco_v1_Cut_BE)
-        tree.TAttach(MuHad_Prompt6_Cut_TP,myCountsAndBSMGrids_TPBE)
+        tree.TAttach(RA2ecaldeadcellfilterflagCut,MuHad_allBE_deadecal_Cut)
+        tree.TAttach(MuHad_allBE_deadecal_Cut,myCountsAndBSMGrids_TPBE)
     else:
-        tree.TAttach(myCountsAndBSMGrids_track,myCountsAndBSMGrids_TPBE)
+        tree.TAttach(RA2ecaldeadcellfilterflagCut,myCountsAndBSMGrids_TPBE)
  
     tree.TAttach(myCountsAndBSMGrids_TPBE,AtLeast2Jts)
     tree.TAttach(AtLeast2Jts,myCountsAndBSMGrids_2jets)
     tree.TAttach(myCountsAndBSMGrids_2jets,AtLeast3JtsSync)
     tree.TAttach(AtLeast3JtsSync,myCountsAndBSMGrids_3jets)
 ### FOR SYCHRONIZATION######################################
-    tree.TAttach(myCountsAndBSMGrids_3jets,AtLeast4Jts)
-    tree.TAttach(AtLeast4Jts,myCountsAndBSMGrids_4jets)
-    tree.TAttach(myCountsAndBSMGrids_4jets,OneMu)
+  #  tree.TAttach(myCountsAndBSMGrids_3jets,AtLeast4Jts)
+  #  tree.TAttach(AtLeast4Jts,myCountsAndBSMGrids_4jets)
+  #  tree.TAttach(myCountsAndBSMGrids_4jets,OneMu)
 ############################################################
-   # tree.TAttach(myCountsAndBSMGrids_3jets,OneMu)
+    tree.TAttach(myCountsAndBSMGrids_3jets,OneMu)
     tree.TAttach(OneMu,myCountsAndBSMGrids_1mu)
-    tree.TAttach(myCountsAndBSMGrids_1mu,PFMuonCheck)
-    tree.TAttach(PFMuonCheck,myCountsAndBSMGrids_1muPF)
+    tree.TAttach(myCountsAndBSMGrids_1mu,myCountsAndBSMGrids_1muPF)
     tree.TAttach(myCountsAndBSMGrids_1muPF,ZeroEl)
     tree.TAttach(ZeroEl,myCountsAndBSMGrids_0El)
     tree.TAttach(myCountsAndBSMGrids_0El,ZeroLooseMu)
@@ -528,7 +582,8 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
         dataTriggers = {
             "data4X" : etriggerData42XCtrl_ReReco,
             "data42X_PromptReco" : etriggerData42X_PromptReco,
-            "data42X_ReReco" : etriggerData42X_ReReco
+            "data42X_ReReco" : etriggerData42X_ReReco,
+            "data42X_Run2011Full" : etriggerData42X_2011Full
             }
 
     if mode == "data39":
@@ -536,10 +591,7 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
         a.TAttach(triggerData, selection)
     elif mode in dataTriggers:
         tree.Attach(json)
-        tree.TAttach(json,HBBEnoise)
-        tree.TAttach(HBBEnoise,BeamHalo)
-        tree.TAttach(BeamHalo,NoTracks)
-        tree.TAttach(NoTracks, dataTriggers[mode])
+        tree.TAttach(json,dataTriggers[mode])
         tree.TAttach(dataTriggers[mode],selection)
     elif mode == "MCGrid" or mode == "SMS":
         # Attach a BSM grid before any cuts have been applied so that we can
@@ -551,8 +603,12 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
         tree.Attach(selection)
 
     # Add cut flow common to signal/control
-    tree.TAttach(selection, OneEl)
-
+    tree.TAttach(selection,HBBEnoise)
+    tree.TAttach(HBBEnoise,BeamHalo)
+    tree.TAttach(BeamHalo,RA2TrackingFailureFilterCut)
+    tree.TAttach(RA2TrackingFailureFilterCut,RA2ecaldeadcellfilterflagCut)
+    tree.TAttach(RA2ecaldeadcellfilterflagCut,OneEl)
+    
     if qcd_antiselection:
         tree.TAttach(OneEl,ZeroLooseMu)
     else:
@@ -571,6 +627,7 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
             tree.TAttach(RECO_CommonHTCut500,ElHad_May10ReReco_Cut_BE)
             tree.TAttach(ElHad_May10ReReco_Cut_BE,ElHad_May10ReReco_Cut_TP)
             tree.TAttach(ElHad_May10ReReco_Cut_TP,AtLeast3Jts)
+            #            tree.TAttach(AtLeast3Jts,AnalysisTree_El_Data)
             tree.TAttach(ElHad_May10ReReco_Cut_TP,AtLeast4Jts)
 
         elif  mode == "data42X_PromptReco":
@@ -583,7 +640,13 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
             tree.TAttach(ElHad_Prompt_v6_Cut_TP,ElHad_PromptB_v1_Cut_BE)
             tree.TAttach(ElHad_PromptB_v1_Cut_BE,ElHad_PromptB_v1_Cut_TP)
             tree.TAttach(ElHad_PromptB_v1_Cut_TP,AtLeast3Jts)
+            #            tree.TAttach(AtLeast3Jts,AnalysisTree_El_Data)
             tree.TAttach(ElHad_PromptB_v1_Cut_TP,AtLeast4Jts)
+
+        elif mode == "data42X_Run2011Full":
+            tree.TAttach(RECO_CommonHTCut500,AtLeast3Jts)
+            #            tree.TAttach(AtLeast3Jts,AnalysisTree_El_Data)
+            tree.TAttach(RECO_CommonHTCut500,AtLeast4Jts)
             
         else:
             tree.TAttach(RECO_CommonHTCut500, AtLeast3Jts)
@@ -592,7 +655,6 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
             #            tree.TAttach(AtLeast3Jts , AnalysisTree_El)
             tree.TAttach(RECO_CommonHTCut500, AtLeast4Jts)
             
-
     return (a, tree, filters)
 ################################################################################
 

@@ -53,6 +53,34 @@ namespace Operation {
   };
 
 
+ class PTmuCut : public Operation::_Base {
+
+  public:
+
+   PTmuCut(float SumPTMu);
+    ~PTmuCut() {;}
+    bool Process(Event::Data & ev);
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+   float mPTmu;
+ 
+  };
+
+ class PTZCut : public Operation::_Base {
+
+  public:
+
+   PTZCut(float SumPTMu);
+    ~PTZCut() {;}
+    bool Process(Event::Data & ev);
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+   float mPTmu;
+ 
+  };
+
  class SumPTlepCut : public Operation::_Base {
 
   public:
@@ -135,6 +163,24 @@ class HTPTCut : public Operation::_Base {
     float mHTPTCutVal;
     float mHTPTCutValUp;
   };
+
+
+class HTthrustCut : public Operation::_Base {
+
+  public:
+
+  HTthrustCut(float mHTthrustCutVal,float mHTthrustCutValUp=-1 );
+    ~HTthrustCut() {;}
+    bool Process(Event::Data & ev);
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+
+    float mHTthrustCutVal;
+    float mHTthrustCutValUp;
+  };
+
+
 
   class HTlepCut : public Operation::_Base {
 
