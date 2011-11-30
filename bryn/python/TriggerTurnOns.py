@@ -431,24 +431,24 @@ alphatTesting = {
 #       out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
 
 AlphaTwithDiMu = {
-"HLT_HT250_AlphaT0p55_v2": (["HLT_DoubleMu3_HT200_v4",] 											 								,[275.,325.,375.,475.,575.,675.,775.,875.]),
-"HLT_HT250_AlphaT0p58_v3": (["HLT_DoubleMu8_Mass8_HT200_v4","HLT_DoubleMu8_Mass8_HT200_v5"] 	,[275.,325.,375.,475.,575.,675.,775.,875.]),
+"HLT_HT250_AlphaT0p55_v2": (["HLT_DoubleMu3_HT200_v4",]                                       ,[275.,325.,375.,475.,575.,675.,775.,875.]),
+"HLT_HT250_AlphaT0p58_v3": (["HLT_DoubleMu8_Mass8_HT200_v4","HLT_DoubleMu8_Mass8_HT200_v5"]   ,[275.,325.,375.,475.,575.,675.,775.,875.]),
 "HLT_HT250_v11":(["HLT_DoubleMu8_Mass8_HT200_v4" ,"HLT_DoubleMu8_Mass8_HT200_v5","HLT_DoubleMu8_Mass8_HT200_v5","HLT_IsoMu24_eta2p1_v6"],[0.,]) ,
-"HLT_HT250_v2" :(["HLT_Mu5_HT200_v4"  ,"HLT_IsoMu12_v1"]																				 							,[0.,]) ,
-"HLT_HT250_v3" :(["HLT_Mu8_HT200_v4"  ,"HLT_IsoMu17_v6"]																				 							,[0.,]) ,
-"HLT_HT250_v4" :(["HLT_Mu15_HT200_v2" ,"HLT_IsoMu17_v8"]																				 							,[0.,]) ,
-"HLT_HT250_v5" :(["HLT_Mu15_HT200_v3" ,"IsoMu17_v9"]																				 							,[0.,]) ,
-"HLT_HT250_v6" :(["HLT_Mu15_HT200_v4" ,"HLT_IsoMu17_v10"]																				 							,[0.,]) ,
-"HLT_HT250_v7" :(["HLT_Mu30_HT200_v1" ,"HLT_IsoMu17_v11"]																				 							,[0.,]) ,
-"HLT_HT250_v8" :(["IsoMu20_v8" ,"HLT_IsoMu24_eta2p1_v3"]																				 							,[0.,]) ,
-"HLT_HT300_v11":(["HLT_DoubleMu8_Mass8_HT200_v4" ,"HLT_DoubleMu8_Mass8_HT200_v5"]							,[0.,]) ,
-"HLT_HT300_v2" :(["HLT_Mu5_HT200_v4"  ,]																				 							,[0.,]) ,
-"HLT_HT300_v3" :(["HLT_Mu8_HT200_v4"  ,]																				 							,[0.,]) ,
-"HLT_HT300_v4" :(["HLT_Mu15_HT200_v2" ,]																				 							,[0.,]) ,
-"HLT_HT300_v5" :(["HLT_Mu15_HT200_v3" ,]																				 							,[0.,]) ,
-"HLT_HT300_v6" :(["HLT_Mu15_HT200_v4" ,]																				 							,[0.,]) ,
-"HLT_HT300_v7" :(["HLT_Mu30_HT200_v1" ,]																				 							,[0.,]) ,
-
+"HLT_HT250_v2" :(["HLT_Mu5_HT200_v4"  ,"HLT_IsoMu12_v1"]                                                      ,[0.,]) ,
+"HLT_HT250_v3" :(["HLT_Mu8_HT200_v4"  ,"HLT_IsoMu17_v6"]                                                      ,[0.,]) ,
+"HLT_HT250_v4" :(["HLT_Mu15_HT200_v2" ,"HLT_IsoMu17_v8"]                                                      ,[0.,]) ,
+"HLT_HT250_v5" :(["HLT_Mu15_HT200_v3" ,"IsoMu17_v9"]                                                      ,[0.,]) ,
+"HLT_HT250_v6" :(["HLT_Mu15_HT200_v4" ,"HLT_IsoMu17_v10"]                                                     ,[0.,]) ,
+"HLT_HT250_v7" :(["HLT_Mu30_HT200_v1" ,"HLT_IsoMu17_v11"]                                                     ,[0.,]) ,
+"HLT_HT250_v8" :(["IsoMu20_v8" ,"HLT_IsoMu24_eta2p1_v3"]                                                      ,[0.,]) ,
+"HLT_HT300_v11":(["HLT_DoubleMu8_Mass8_HT200_v4" ,"HLT_DoubleMu8_Mass8_HT200_v5","HLT_DoubleMu8_Mass8_HT200_v5","HLT_IsoMu24_eta2p1_v6"],[0.,]) ,
+"HLT_HT300_v2" :(["HLT_Mu5_HT200_v4"  ,"HLT_IsoMu12_v1"]                                                      ,[0.,]) ,
+"HLT_HT300_v3" :(["HLT_Mu8_HT200_v4"  ,"HLT_IsoMu17_v6"]                                                      ,[0.,]) ,
+"HLT_HT300_v4" :(["HLT_Mu15_HT200_v2" ,"HLT_IsoMu17_v8"]                                                      ,[0.,]) ,
+"HLT_HT300_v5" :(["HLT_Mu15_HT200_v3" ,"IsoMu17_v9"]                                                      ,[0.,]) ,
+"HLT_HT300_v6" :(["HLT_Mu15_HT200_v4" ,"HLT_IsoMu17_v10"]                                                     ,[0.,]) ,
+"HLT_HT300_v7" :(["HLT_Mu30_HT200_v1" ,"HLT_IsoMu17_v11"]                                                     ,[0.,]) ,
+"HLT_HT300_v8" :(["IsoMu20_v8" ,"HLT_IsoMu24_eta2p1_v3"]                                                      ,[0.,]) ,
 
 }
 for key,vals in AlphaTwithDiMu.iteritems():
@@ -606,6 +606,7 @@ from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
+sample = SingleMu
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
