@@ -421,25 +421,39 @@ alphatTesting = {
 }
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
-
-for key,vals in alphatTesting.iteritems():
-  for ref in vals[0]:
-    for htbin in vals[1]:
-      cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-      out.append(cut)
-      cutTreeData.TAttach(muDr,cut)
-      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
+#
+# for key,vals in alphatTesting.iteritems():
+#   for ref in vals[0]:
+#     for htbin in vals[1]:
+#       cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+#       out.append(cut)
+#       cutTreeData.TAttach(muDr,cut)
+#       out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
 
 AlphaTwithDiMu = {
   "HLT_HT250_AlphaT0p55_v2": (["HLT_DoubleMu3_HT200_v4",] ,[275.,325.,375.,475.,575.,675.,775.,875.]),
   "HLT_HT250_AlphaT0p58_v3": (["HLT_DoubleMu8_Mass8_HT200_v4","HLT_DoubleMu8_Mass8_HT200_v5"] ,[275.,325.,375.,475.,575.,675.,775.,875.]),
+"HLT_HT250_v11":(["HLT_DoubleMu8_Mass8_HT200_v4" ,"HLT_DoubleMu8_Mass8_HT200_v5"],[0.,]) ,
+"HLT_HT250_v2" :(["HLT_Mu5_HT200_v4"  ,],[0.,]) ,
+"HLT_HT250_v3" :(["HLT_Mu8_HT200_v4"  ,],[0.,]) ,
+"HLT_HT250_v4" :(["HLT_Mu15_HT200_v2" ,],[0.,]) ,
+"HLT_HT250_v5" :(["HLT_Mu15_HT200_v3" ,],[0.,]) ,
+"HLT_HT250_v6" :(["HLT_Mu15_HT200_v4" ,],[0.,]) ,
+"HLT_HT250_v7" :(["HLT_Mu30_HT200_v1" ,],[0.,]) ,
+"HLT_HT300_v11":(["HLT_DoubleMu8_Mass8_HT200_v4" ,"HLT_DoubleMu8_Mass8_HT200_v5"],[0.,]) ,
+"HLT_HT300_v2" :(["HLT_Mu5_HT200_v4"  ,],[0.,]) ,
+"HLT_HT300_v3" :(["HLT_Mu8_HT200_v4"  ,],[0.,]) ,
+"HLT_HT300_v4" :(["HLT_Mu15_HT200_v2" ,],[0.,]) ,
+"HLT_HT300_v5" :(["HLT_Mu15_HT200_v3" ,],[0.,]) ,
+"HLT_HT300_v6" :(["HLT_Mu15_HT200_v4" ,],[0.,]) ,
+"HLT_HT300_v7" :(["HLT_Mu30_HT200_v1" ,],[0.,]) ,
 
 
 }
 for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     for ref in vals[0]:
-      for muDR in [0.3,0.4,0.5]:
+      for muDR in [0.3]:
           cut = eval("RECO_CommonHTCut(%f)"%(htbin))
           out.append(cut)
           muDRcut =  RECO_MuonJetDRCut(muDR)
@@ -447,20 +461,21 @@ for key,vals in AlphaTwithDiMu.iteritems():
           cutTreeData.TAttach(diMuon,muDRcut)
           cutTreeData.TAttach(muDRcut,cut)
           out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin)))
+          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin),Debug = True))
 
 # If muon is not required
 htTesting = {
 
 
 
-"HLT_HT250_v11":("HLT_Mu40_HT300_v4" ,) ,
+"HLT_HT250_v11":("HLT_DoubleMu8_Mass8_HT200_v4" ,"HLT_DoubleMu8_Mass8_HT200_v5") ,
 "HLT_HT250_v2" :("HLT_Mu5_HT200_v4"  ,) ,
 "HLT_HT250_v3" :("HLT_Mu8_HT200_v4"  ,) ,
 "HLT_HT250_v4" :("HLT_Mu15_HT200_v2" ,) ,
 "HLT_HT250_v5" :("HLT_Mu15_HT200_v3" ,) ,
 "HLT_HT250_v6" :("HLT_Mu15_HT200_v4" ,) ,
 "HLT_HT250_v7" :("HLT_Mu30_HT200_v1" ,) ,
-"HLT_HT300_v11":("HLT_Mu40_HT300_v4" ,) ,
+"HLT_HT300_v11":("HLT_DoubleMu8_Mass8_HT200_v4" ,"HLT_DoubleMu8_Mass8_HT200_v5") ,
 "HLT_HT300_v2" :("HLT_Mu5_HT200_v4"  ,) ,
 "HLT_HT300_v3" :("HLT_Mu8_HT200_v4"  ,) ,
 "HLT_HT300_v4" :("HLT_Mu15_HT200_v2" ,) ,
@@ -594,7 +609,7 @@ sample = MuHad2011AB
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
 
-outDir = "../RobRequests_FINALTRIGGERS/ht%dNoUpper/"%(bin)
+outDir = "../TestLowHTTriggers/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
