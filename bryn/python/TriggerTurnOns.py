@@ -446,6 +446,22 @@ for key,vals in AlphaTwithDiMu.iteritems():
 # If muon is not required
 htTesting = {
 
+
+
+"HLT_HT250_v11":("HLT_Mu40_HT300_v4" ,) ,
+"HLT_HT250_v2" :("HLT_Mu5_HT200_v4"  ,) ,
+"HLT_HT250_v3" :("HLT_Mu8_HT200_v4"  ,) ,
+"HLT_HT250_v4" :("HLT_Mu15_HT200_v2" ,) ,
+"HLT_HT250_v5" :("HLT_Mu15_HT200_v3" ,) ,
+"HLT_HT250_v6" :("HLT_Mu15_HT200_v4" ,) ,
+"HLT_HT250_v7" :("HLT_Mu30_HT200_v1" ,) ,
+"HLT_HT300_v11":("HLT_Mu40_HT300_v4" ,) ,
+"HLT_HT300_v2" :("HLT_Mu5_HT200_v4"  ,) ,
+"HLT_HT300_v3" :("HLT_Mu8_HT200_v4"  ,) ,
+"HLT_HT300_v4" :("HLT_Mu15_HT200_v2" ,) ,
+"HLT_HT300_v5" :("HLT_Mu15_HT200_v3" ,) ,
+"HLT_HT300_v6" :("HLT_Mu15_HT200_v4" ,) ,
+"HLT_HT300_v7" :("HLT_Mu30_HT200_v1" ,) ,
 "HLT_HT350_v11" : ("HLT_HT250_v11","HLT_Mu40_HT300_v4") ,
 "HLT_HT350_v2"  : ("HLT_HT250_v2" ,"HLT_Mu5_HT200_v4" ) ,
 "HLT_HT350_v3"  : ("HLT_HT250_v3" ,"HLT_Mu8_HT200_v4") ,
@@ -487,6 +503,7 @@ htTesting = {
 "HLT_HT550_v8"  : ("HLT_HT250_v8" ,"HLT_Mu30_HT200_v3","HLT_Mu40_HT200_v4" ) ,
 "HLT_HT600_v1"  : ("HLT_HT250_v8",  ) ,
 "HLT_HT600_v4"  : ("HLT_HT250_v11", ) ,
+"HLT_HT700_v2"  : ("HLT_HT250_v11", ) ,
 "HLT_HT750_v3"  : ("HLT_HT250_v11", ) ,
 # "HLT_HT450_v11" : "HLT_HT300_v12"  ,
 # "HLT_HT450_v2"  : "HLT_HT300_v3"   ,
