@@ -198,8 +198,8 @@ std::ostream& MuonCheck::Description(std::ostream &ostrm) {
   }
 
 
-HTPTCut::HTPTCut(float sumPt)
- : mHTPTCutVal(sumPt)
+  HTPTCut::HTPTCut(float sumPt,float sumPtUp)
+    : mHTPTCutVal(sumPt), mHTPTCutValUp(sumPtUp)
 {;}
 
 bool HTPTCut::Process(Event::Data & ev) {
@@ -212,8 +212,8 @@ bool HTPTCut::Process(Event::Data & ev) {
 	  HTPT+=(**j).Pt();
 	}
       }
-
-  return (mHTPTCutVal < HTPT);
+   if (mHTPTCutValUp<=0) return (mHTPTCutVal < HTPT);
+   return (mHTPTCutVal < HTPT&& mHTPTCutValUp > HTPT);
 }
 
 std::ostream& HTPTCut::Description(std::ostream &ostrm) {
@@ -610,6 +610,13 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
 	if(myGenMatrixBin.the_GenTau.size()==2)	  return true;
 	else return false;
       }
+    if(mNoLep==4)
+      {
+	int muEliSum = myGenMatrixBin.the_GenMuon.size()+myGenMatrixBin.the_GenEli.size();
+	if(myGenMatrixBin.the_GenTau.size()==2)	  return true;
+	return false;
+      }
+
     if(aNLepton==mNoLep) return true;
 
     return false;

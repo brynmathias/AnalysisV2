@@ -4,25 +4,16 @@ CVS
 .hg
 .hgignore
 
-bin
-obj
-Debug
-Release
 TestResults
-*.obj
-*.suo
-*.ncb
-*.user
-*.tli
-*.tlh
-*.idb
-*.pdb
+*.cvsignore
 
-build
-*.pbxuser
-*.perspectivev3
+*filtered.json
+*Trigger*.json
 .DS_Store
-
+AK5*
+*.so
+*.cxx
+*.csh
 *.old
 *.log
 *.out
@@ -32,3 +23,12 @@ build
 *.o
 *.d
 .svn
+*.pyc
+*.cxx
+*.so
+*.sh
+*.csh
+__susyJob__*
+*.sh
+*.inc
+*.csh

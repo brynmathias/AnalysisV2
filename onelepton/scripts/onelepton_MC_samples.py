@@ -10,7 +10,7 @@ from montecarlo.WJetsMadgraphFall2010Z2 import *
 from montecarlo.Zjets_madgraph_NNLO import *
 from montecarlo.LMsignal38  import *
 from montecarlo.WJets_TuneZ2_7TeV_alpgen_tauola_CMSSW_3_8_5 import *
-from montecarlo.TTJets_TuneZ2_7TeV_madgraph_tauola_Fall10_START38_V12_v3 import * 
+from montecarlo.TTJets_TuneZ2_7TeV_madgraph_tauola_Fall10_START38_V12_v3 import *
 
 ## import the 311X MC PSets
 from montecarlo.Spring11.TTJets_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1 import *
@@ -33,7 +33,7 @@ from montecarlo.Spring11.DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU
 
 from montecarlo.Summer11.TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
 from montecarlo.Summer11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
-from montecarlo.Summer11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13 import * 
+from montecarlo.Summer11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13 import *
 
 from montecarlo.Summer11.QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2 import *
 from montecarlo.Summer11.QCD_Pt_120to170_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2 import *
@@ -50,20 +50,22 @@ from montecarlo.Summer11.QCD_Pt_800to1000_TuneZ2_7TeV_pythia6_Summer11_PU_S3_STA
 from montecarlo.Summer11.QCD_Pt_80to120_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2 import *
 from montecarlo.Summer11.QCD_Pt_150_MuPt5Enriched_TuneZ2_7TeV_pythia6_Summer11_PU_S4_START42_V11_v1 import *
 
- 
+
 from montecarlo.Summer11.TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14 import *
-from montecarlo.Summer11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13 import * 
+from montecarlo.Summer11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13 import *
 from montecarlo.Summer11.WJets_HT300toInf_Madgraph_Summer11_GEN_V2_leo_TuneZ2_Fastsim_4_2_4_p1_NoPU_V2_651176baf0801b18003b251b106ec60b import *
 from montecarlo.Summer11.WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14 import *
 
+from montecarlo.Summer11.WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
 
 samplesMCQCDmu = [QCD_Pt_150_MuPt5Enriched_TuneZ2_7TeV_pythia6_Summer11_PU_S4_START42_V11_v1]
 
 samplesSynMC = [
-TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
-WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13,
-DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
-QCD_Pt_150_MuPt5Enriched_TuneZ2_7TeV_pythia6_Summer11_PU_S4_START42_V11_v1
+    WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
+    TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
+    WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13,
+    DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
+# QCD_Pt_150_MuPt5Enriched_TuneZ2_7TeV_pythia6_Summer11_PU_S4_START42_V11_v1
     ]
 
 samplesSynMC = [
@@ -81,12 +83,11 @@ samplesSynMC = [
 
 ## 311X MC samples
 samplesMC311X = [#
-LM3_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
-LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
-    
+    LM3_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
+    LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
+    WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
     LM1_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
-    WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
-    TTJets_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
+    TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
  #    QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
     DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
  #    QCD_Pt_120to170_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
@@ -106,9 +107,12 @@ LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
 
 
 samplesMC42Wtt = [
-    TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
-    WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
-    DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1
+WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
+    #TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
+    # WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
+    TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
+    DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
+    WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13,
 ]
 samplesMC42QCD = [
 QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
@@ -134,9 +138,9 @@ samplesMC42X = [
     #    TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
     TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
     #    WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
-    WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13,
-    DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
-    
+    # WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13,
+    # DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
+
     QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
     QCD_Pt_120to170_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
     QCD_Pt_1400to1800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
@@ -168,7 +172,8 @@ samplesMC_Approval = [
     
     DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
     
-    WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
+    #WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14,
+    WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1,
     
     QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
     QCD_Pt_120to170_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
@@ -184,4 +189,22 @@ samplesMC_Approval = [
     ]
 
 
- 
+samplesMC_WandTT = [
+    WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1,
+    TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14
+    ]
+
+samplesMC_QCD = [
+    QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_120to170_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_1400to1800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_170to300_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_1800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_300to470_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_470to600_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_50to80_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_600to800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_800to1000_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2,
+    QCD_Pt_80to120_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2
+    ]
+

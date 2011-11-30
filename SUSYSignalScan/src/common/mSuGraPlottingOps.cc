@@ -19,6 +19,8 @@
 #include <strstream>
 #include <iostream>
 #include <fstream>
+
+
 #include "JetData.hh"
 #include "CommonOps.hh"
 
@@ -26,7 +28,34 @@
 using namespace Operation;
 
 
+SMPlottingOps::SMPlottingOps(const Utils::ParameterSet & ps) :
+    dirName_( ps.Get<std::string>("DirectoryName"))
+{}
 
+
+SMPlottingOps::~SMPlottingOps(){}
+
+void SMPlottingOps::Start(Event::Data & ev){
+  initDir(ev.OutputFile(), dirName_.c_str());
+  BookHistos();
+}
+
+void SMPlottingOps::BookHistos(){
+  SMHist= new TH1D("SM_Events",";;events",1,0,2);
+  SMHist->Sumw2();
+  SMHist_noweight = new TH1D("SM_Events_noweight", ";;events", 1, 0, 2);
+}
+
+bool SMPlottingOps::Process(Event::Data & ev){
+  Double_t weight = ev.GetEventWeight();
+  SMHist->Fill(1,weight);
+  SMHist_noweight->Fill(1);
+  return true;
+}
+
+std::ostream & SMPlottingOps::Description(std::ostream & ostrm){
+  ostrm << "mSUGRA Standard Model Plotting Op"; return ostrm;
+}
 
 //----------------------------------------------------------------------
 mSuGraPlottingOps::mSuGraPlottingOps(  const Utils::ParameterSet& ps ) :
@@ -52,7 +81,9 @@ dirName_( ps.Get<std::string>("DirectoryName")),
   TB_ (ps.Get<std::vector<double> >("NLO.tb")),
   BB_ (ps.Get<std::vector<double> >("NLO.bb")),
   GG_ (ps.Get<std::vector<double> >("NLO.gg")),
-  SG_ (ps.Get<std::vector<double> >("NLO.sg"))
+  SG_ (ps.Get<std::vector<double> >("NLO.sg")),
+  SM_(ps.Contains("SM") ? ps.Get<bool>("SM") : false)
+
 {
   // std::map< std::pair<int, int>, std::vector<double> > M0_M12_NLO_;
   for(size_t i = 0; i < M0_.size(); ++i)
@@ -78,182 +109,169 @@ mSuGraPlottingOps::~mSuGraPlottingOps(){}
 
 //
 void mSuGraPlottingOps::Start( Event::Data& ev ) {
-
-
   initDir( ev.OutputFile(), dirName_.c_str() );
-
   BookHistos();
-
 }
 
 //
 void mSuGraPlottingOps::BookHistos() {
-
   BookHistArray( H_M0_M12_mChi,
-    "m0_m12_mChi",
-    ";m0;m12;mChi;",
-    xBins_,xLow_,xHigh_, //m0
-    yBins_,yLow_,yHigh_, //m12
-    zBins_,zLow_,zHigh_, //mChi
-    1,0,1,false);
+                 "m0_m12_mChi",
+                 ";m0;m12;mChi;",
+                 xBins_,xLow_,xHigh_, //m0
+                 yBins_,yLow_,yHigh_, //m12
+                 zBins_,zLow_,zHigh_, //mChi
+                 1,0,1,false);
 
-  BookHistArray( H_M0_M12_mChi_noweight,
-    "m0_m12_mChi_noweight",
-    ";m0;m12;mChi;",
-    xBins_,xLow_,xHigh_, //m0
-    yBins_,yLow_,yHigh_, //m12
-    zBins_,zLow_,zHigh_, //mChi
-    1,0,1,false);
+    BookHistArray( H_M0_M12_mChi_noweight,
+                   "m0_m12_mChi_noweight",
+                   ";m0;m12;mChi;",
+                   xBins_,xLow_,xHigh_, //m0
+                   yBins_,yLow_,yHigh_, //m12
+                   zBins_,zLow_,zHigh_, //mChi
+                   1,0,1,false);
 
-  BookHistArray( H_M0_M12_sb,
-    "m0_m12_sb",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_sb,
+                   "m0_m12_sb",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_sb_noweight,
-    "m0_m12_sb_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_sb_noweight,
+                   "m0_m12_sb_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_ss,
-    "m0_m12_ss",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_ss,
+                   "m0_m12_ss",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_ss_noweight,
-    "m0_m12_ss_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_ss_noweight,
+                   "m0_m12_ss_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_sg,
-    "m0_m12_sg",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_sg,
+                   "m0_m12_sg",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_sg_noweight,
-    "m0_m12_sg_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_sg_noweight,
+                   "m0_m12_sg_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_gg,
-    "m0_m12_gg",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_gg,
+                   "m0_m12_gg",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_gg_noweight,
-    "m0_m12_gg_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-
-  BookHistArray( H_M0_M12_ll,
-    "m0_m12_ll",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-  BookHistArray( H_M0_M12_ll_noweight,
-    "m0_m12_ll_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-  BookHistArray( H_M0_M12_nn,
-    "m0_m12_nn",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-  BookHistArray( H_M0_M12_nn_noweight,
-    "m0_m12_nn_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-  BookHistArray( H_M0_M12_ng,
-    "m0_m12_ng",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-  BookHistArray( H_M0_M12_ng_noweight,
-    "m0_m12_ng_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-  BookHistArray( H_M0_M12_ns,
-    "m0_m12_ns",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
-
-  BookHistArray( H_M0_M12_ns_noweight,
-    "m0_m12_ns_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_gg_noweight,
+                   "m0_m12_gg_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
 
-  BookHistArray( H_M0_M12_bb,
-    "m0_m12_bb",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_ll,
+                   "m0_m12_ll",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_bb_noweight,
-    "m0_m12_bb_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_ll_noweight,
+                   "m0_m12_ll_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_tb,
-    "m0_m12_tb",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_nn,
+                   "m0_m12_nn",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  BookHistArray( H_M0_M12_tb_noweight,
-    "m0_m12_tb_noweight",
-    ";m0;m12",
-    xBins_,xLow_,xHigh_,//m0
-    yBins_,yLow_,yHigh_,//m12
-    1, 0, 1,false );
+    BookHistArray( H_M0_M12_nn_noweight,
+                   "m0_m12_nn_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_ng,
+                   "m0_m12_ng",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_ng_noweight,
+                   "m0_m12_ng_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_ns,
+                   "m0_m12_ns",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_ns_noweight,
+                   "m0_m12_ns_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
 
+    BookHistArray( H_M0_M12_bb,
+                   "m0_m12_bb",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
+    BookHistArray( H_M0_M12_bb_noweight,
+                   "m0_m12_bb_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-  SMHist= new TH1D("SM_Events",";;events",1,0,2);
+    BookHistArray( H_M0_M12_tb,
+                   "m0_m12_tb",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 
-
-
+    BookHistArray( H_M0_M12_tb_noweight,
+                   "m0_m12_tb_noweight",
+                   ";m0;m12",
+                   xBins_,xLow_,xHigh_,//m0
+                   yBins_,yLow_,yHigh_,//m12
+                   1, 0, 1,false );
 }
 
 
@@ -284,13 +302,19 @@ bool mSuGraPlottingOps::Process( Event::Data& ev ) {
     MChi = ev.MChi();
   }
 
-  //all jet mult
-
+  //NLO stuff: for the calculation of the NLO cross-section the processes are filled separately
+  if(verbose_){
+    std::cout << "The following branches are enabled/disabled\n" <<
+        "M0" << ev.M0.enabled() << "\n" <<
+        "MG" << ev.MG.enabled() << "\n" <<
+        "M12" << ev.M12.enabled() << "\n" <<
+        "MLSP" << ev.MLSP.enabled() << "\n" <<
+        "MChi" << ev.MChi.enabled() << "\n";
+  }
+  //    if(ev.M0.enabled() || ev.M12.enabled()){
   H_M0_M12_mChi[0]->Fill(M0,M12,MChi,weight);
   H_M0_M12_mChi_noweight[0]->Fill(M0,M12,MChi,1);
-
-
-  //NLO stuff: for the calculation of the NLO cross-section the processes are filled separately
+      //    }
   if((ev.M0.enabled() || ev.MG.enabled())){
 
     process = NLO::GetProcess(ev);
@@ -298,9 +322,10 @@ bool mSuGraPlottingOps::Process( Event::Data& ev ) {
     Double_t NLOcrosssection = 0.; // if we dont find a NLO x section, fill with zero - this will help with debugging
     if(verbose_ )cout << " Leading order XC is " << weight << endl;
     std::map<std::pair<int,int> , std::vector<double> >::const_iterator nloXsec = M0_M12_NLO_.find(make_pair(int(M0),int(M12)));
-    if(nloXsec != M0_M12_NLO_.end() && nloXsec->second.size() > process) {NLOcrosssection = nloXsec->second[process]; //if no valid kFactorFile has been given simply fill LO eventweight
+    if(nloXsec != M0_M12_NLO_.end() && nloXsec->second.size() > process) {
+      NLOcrosssection = nloXsec->second[process]; //if no valid kFactorFile has been given simply fill LO eventweight
       if(verbose_ )cout << " Event Weight is now set to xsection = " << nloXsec->second[process] << endl;
-    }
+      }
 
 
     if(verbose_ == true)cout << " m0 " << M0 << " m12 " << M12 << " nlocross " << NLOcrosssection << endl;
@@ -318,14 +343,8 @@ bool mSuGraPlottingOps::Process( Event::Data& ev ) {
       case NLO::NotFound: cout << " DID NOT FIND A SUBPROCESS " << endl; break;
     }
 
-
-  }
-  else{
-    SMHist->Fill(1,weight);
-    return true;
   }
   return true;
-
 }
 
 

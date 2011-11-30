@@ -1101,6 +1101,46 @@ std::ostream& MonsterFilter::Description(std::ostream &ostrm) {
 
 
 
+RA2TrackingFailureFilterCut::RA2TrackingFailureFilterCut() {}
+RA2TrackingFailureFilterCut::~RA2TrackingFailureFilterCut() {}
+
+bool RA2TrackingFailureFilterCut::Process(Event::Data & ev) {
+  // cout << " nop" <<endl;
+  try{
+    // cout << " yep" <<endl;
+      return ev.GetRA2TrackingFailureFilter();
+  }
+  catch(std::invalid_argument & e) {return true;}
+  
+  return true;
+}
+
+std::ostream& RA2TrackingFailureFilterCut::Description(std::ostream &ostrm) {
+  ostrm << "Check RA2TrackingFailureFilter";
+  return ostrm;
+}
+
+RA2ecaldeadcellfilterflagCut::RA2ecaldeadcellfilterflagCut() {}
+RA2ecaldeadcellfilterflagCut::~RA2ecaldeadcellfilterflagCut() {}
+
+bool RA2ecaldeadcellfilterflagCut::Process(Event::Data & ev) {
+  //cout << " nop" <<endl;
+  try{
+    // cout << " yep" <<endl;
+      return ev.GetRA2ecaldeadcellfilterflag();
+  }
+  catch(std::invalid_argument & e) {return true;}
+  
+  return true;
+}
+
+std::ostream& RA2ecaldeadcellfilterflagCut::Description(std::ostream &ostrm) {
+  ostrm << "RA2ecaldeadcellfilterflagCut";
+  return ostrm;
+}
+
+
+
 
 GoodEventSelection::GoodEventSelection() {}
 GoodEventSelection::~GoodEventSelection() {}
@@ -1820,6 +1860,8 @@ EventSelector::EventSelector(const Utils::ParameterSet & ps):
       run_it != runs.end(); ++ run_it){
     int idx = run_it - runs.begin();
     select_.insert(boost::make_tuple(*run_it, lumis[idx], events[idx]));
+    cout << *run_it<<" "<< lumis[idx]<< "  "<< events[idx] << endl;
+
   }
 }
 

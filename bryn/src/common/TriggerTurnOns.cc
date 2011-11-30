@@ -23,7 +23,9 @@ dirName_( ps.Get<std::string>("DirName") ),
 // MT2
   Plots_( ps.Get<bool>("Plots") ),
   ReWeight_(ps.Contains("ReWeight") ? ps.Get<bool>("ReWeight") : false ),
+  ReWeightL1_(ps.Contains("ReWeightL1") ? ps.Get<bool>("ReWeightL1") : false ),
   ReWeightVec_(ps.Get< std::vector<std::string> >("TriggerReWeight") ),
+  L1ReWeightVec_(ps.Get< std::vector<std::string> >("L1TriggerReWeight") ),
   verb_(ps.Contains("Verbose") ? ps.Get<bool>("Verbose") : false )
   {}
 
@@ -88,12 +90,32 @@ void TriggerTurnOns::Plots() {
     100,0.,1000.,
     nMax_+1, 0, 1, true );
 
-  BookHistArray( preScale_,
-    "PreScale",
-    ";M_{eff} GeV",
-    100000,0.,100000.,
+  BookHistArray( preScaleHLT_,
+    "preScaleHLT",
+    ";Prescale",
+    10000,0.,10000.,
     1, 0, 1, true );
 
+
+  BookHistArray( preScaleL1andHLT_,
+    "PreScale_L1AndHT",
+    ";Prescale",
+    10000,0.,10000.,
+    1, 0, 1, true );
+
+
+
+  BookHistArray( MHT_HT_,
+    "MHTovHT",
+    ";#slash{H}_{T}/H_{T}",
+    100,0.,1.,
+    nMax_+1, 0, 1, true );
+
+  BookHistArray( MHT_MEff_,
+    "MHTovMeff",
+    ";#slash{H}_{T}/M_{Eff}",
+    100,0.,1.,
+    nMax_+1, 0, 1, true );
 
 }
 
@@ -101,7 +123,7 @@ void TriggerTurnOns::Plots() {
 bool TriggerTurnOns::Plots( Event::Data& ev ) {
   UInt_t n = ev.CommonObjects().size();
   Double_t weight = ev.GetEventWeight();
-  int preScaleVal = 99999;
+  int preScaleVal = 9999999;
   if(ReWeight_ ){
     if(verb_){
       std::cout << "New Event" << std::endl;
@@ -110,34 +132,33 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
     std::vector<std::string>::const_iterator ite = ReWeightVec_.end();
     for( ; it != ite; ++it){
       if( it->at(it->size()-1) != '*'){
-        std::map<std::string, bool>::const_iterator trig = ev.hlt()->find(*it);
-        std::map<std::string, int>::const_iterator prescale =ev.hlt_prescaled()->find(*it);
-        if( (trig != ev.hlt()->end() && trig->second) && (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
-          preScaleVal = prescale->second ;
+        std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*it);
           if(verb_){
             std::cout << "Trigger " << (*it) << " Has a prescale of " << prescale->second << " " << std::endl;
           }
+        if( (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
+          preScaleVal = prescale->second ;
+
         }
       }else{
         size_t found;
     // now loop though the map and test the string part -- slow!
-        std::map<std::string, bool>::const_iterator itrig = ev.hlt()->begin();
-        std::map<std::string, bool>::const_iterator jtrig = ev.hlt()->end();
         std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
-        for( ; itrig != jtrig; ++itrig, ++ipre ){
-          if(itrig->second){
+        std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
+        for( ; ipre != jpre; ++ipre ){
             std::string str = *it;
             str = str.substr(0, str.size() - 1 );
-          // cout <<*it<< " compare with " << itrig->first << endl;
-            found = itrig->first.find(str);
+            if(verb_){
+            cout <<*it<< " compare with " << ipre->first << endl;
+            }
+            found = ipre->first.find(str);
             if(found != string::npos){ preScaleVal = ipre->second; }
-          }
         }
       }
     }
     if(verb_){
       cout << " The lowest prescale in the event is " << preScaleVal << std::endl;
-      if(preScaleVal == 99999) {
+      if(preScaleVal == 9999999) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
         cout << "Triggers that exist in the event:" <<endl;
         for(std::map<std::string,bool>::const_iterator it2 = ev.hlt()->begin();
@@ -147,13 +168,38 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
       }
     }
-    if(preScaleVal == 99999) preScaleVal = 1;
+    if(preScaleVal == 9999999) preScaleVal = 0;
     double factor = double(preScaleVal);
     weight *= factor;
-
   }
 
-  preScale_[0]->Fill(weight,1.);
+  preScaleHLT_[0]->Fill(weight,1.);
+
+if(ReWeightL1_){
+    std::map<std::string, bool>::const_iterator itrig = ev.l1t()->begin();
+    std::map<std::string, bool>::const_iterator jtrig = ev.l1t()->end();
+    std::map<std::string, int>::const_iterator ipre = ev.l1t_prescaled()->begin();
+    // std::cout << "Starting to look at the L1 trigger info"<< std::endl;
+      if(verb_){
+         for( ; itrig != jtrig; ++itrig, ++ipre ){
+              std::cout << itrig->first << " its prescale is: " << ipre->second << std::endl;
+            }
+      }
+      int L1PreScale = -1;
+      // Search the L1 prescale collection to find the L1 prescale do this for a vector of inputs
+      // Most of the time it will be a single trigger, but we want to handle the case when it is not.
+      std::vector<std::string>::const_iterator it =  L1ReWeightVec_.begin();
+      std::vector<std::string>::const_iterator ite = L1ReWeightVec_.end();
+          for( ; it != ite; ++it){
+            std::map<std::string, int>::const_iterator prescale = ev.l1t_prescaled()->find(*it);
+            if(L1PreScale == -1) L1PreScale = prescale->second;
+            else if( L1PreScale > prescale->second) L1PreScale = prescale->second;
+          }
+          if(L1PreScale != -1 && L1PreScale != 0){
+          weight *= L1PreScale;
+        }
+  }
+  preScaleL1andHLT_[0]->Fill(weight,1.);
 
   if ( n >= nMin_ && n <= nMax_ && n < HT_.size()) {
     HT_[0]->Fill(ev.CommonHT(),weight);
@@ -163,6 +209,11 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
     AlphaT_[0]->Fill(ev.CommonAlphaT(),weight);
     AlphaT_[n]->Fill(ev.CommonAlphaT(),weight);
   }
+  if ( n >= nMin_ && n <= nMax_ && n < MHT_HT_.size()) {
+    MHT_HT_[0]->Fill(ev.CommonMHT().Pt()/ev.CommonHT(),weight);
+    MHT_HT_[n]->Fill(ev.CommonMHT().Pt()/ev.CommonHT(),weight);
+  }
+
   if ( n >= nMin_ && n <= nMax_ && n < MHT_.size()) {
     MHT_[0]->Fill(ev.CommonMHT().Pt(),weight);
     MHT_[n]->Fill(ev.CommonMHT().Pt(),weight);
@@ -170,6 +221,10 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
   if ( n >= nMin_ && n <= nMax_ && n < MEff_.size()) {
     MEff_[0]->Fill(ev.CommonMHT().Pt()+ev.CommonHT(),weight);
     MEff_[n]->Fill(ev.CommonMHT().Pt()+ev.CommonHT(),weight);
+  }
+  if ( n >= nMin_ && n <= nMax_ && n < MHT_MEff_.size()) {
+    MHT_MEff_[0]->Fill(ev.CommonMHT().Pt()/(ev.CommonMHT().Pt()+ev.CommonHT()),weight);
+    MHT_MEff_[n]->Fill(ev.CommonMHT().Pt()/(ev.CommonMHT().Pt()+ev.CommonHT()),weight);
   }
 
   return true;

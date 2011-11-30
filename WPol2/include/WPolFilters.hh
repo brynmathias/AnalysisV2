@@ -502,6 +502,7 @@ namespace WPol{
   public:
     pfMETJECUnc(const Utils::ParameterSet & ps) :
       mJECUncFile(ps.Get<string>("jecuncfile")),
+      mJECUncFileResisual(ps.Get<string>("jecuncfileresidual")),
       mLepton(ps.Get<string>("lepton")),
       mPFJetThresh(ps.Get<double>("pfjetthresh")),
       mUnclusteredShift(ps.Get<double>("unclusteredshift")),
@@ -513,7 +514,7 @@ namespace WPol{
     bool Apply(ICF_LorentzV* ob) {
 
       Operation::JetCorrectionUncertainty jecUnc(mJECUncFile);
-
+      Operation::JetCorrectionUncertainty jecUncRes(mJECUncFileResisual);
       LorentzV pfUnclustered, scaledjets, myscaledjet;
       double unc = 0.0;
       Event::Lepton const * theRECOLepton;
@@ -532,7 +533,13 @@ namespace WPol{
 	  //calculate the uncertainty on the JEC according to corrected PT and Eta
 	  jecUnc.setJetEta(mEv->JD_Jets().at(i).Eta());
 	  jecUnc.setJetPt(mEv->JD_Jets().at(i).Pt());
-	  unc = jecUnc.getUncertainty(true);
+	  float uncI = jecUnc.getUncertainty(true);
+
+	  jecUncRes.setJetEta(mEv->JD_Jets().at(i).Eta());
+	  jecUncRes.setJetPt(mEv->JD_Jets().at(i).Pt());
+	  float uncII = jecUncRes.getUncertainty(true)-1.;
+	  //  cout << " JEC uncerties " << uncI<<" "<< uncII<<endl;
+	  unc = sqrt(uncII*uncII+uncI*uncI);
 	  //add in the jets to the (lepton + neutrino) to leave you with unclustered energy
 	  pfUnclustered += (mEv->JD_Jets().at(i));
 	  //scale the jets by the JECUnc either up or down
@@ -564,6 +571,7 @@ namespace WPol{
 
   private:
     std::string mJECUncFile;
+    std::string mJECUncFileResisual;
     std::string mLepton;
     double mPFJetThresh;
     double mUnclusteredShift;

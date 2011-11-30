@@ -67,13 +67,15 @@ from data.Run2011.ElectronHad_Run2011A_PromptReco_v4_V15_03_14  import *
 
 from data.Run2011.ElectronHad_Run2011A_May10ReReco_v1_V15_03_14_residual import *
 from data.Run2011.ElectronHad_Run2011A_PromptReco_v4_V15_03_14_residual  import *
+from data.Run2011.ElectronHad_Run2011A_May10ReReco_v1_V15_03_14_residual import *
 
 from data.Run2011.ElectronHad_Run2011A_05Aug2011_v1_V15_03_14_residual    import *
 from data.Run2011.ElectronHad_Run2011A_PromptReco_v6_V15_03_14_residual   import *
 from data.Run2011.ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_a import *
 from data.Run2011.ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_b import *
 from data.Run2011.ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_c import *
-
+from data.Run2011.ElectronHad_Run2011B_PromptReco_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_d import *
+from data.Run2011.ElectronHad_Run2011B_PromptReco_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_e import *
 
 
 from data.Run2011.MuHad_Run2011A_05Aug2011_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
@@ -125,8 +127,16 @@ samplesDataMuHadresidualPrompt = [
 MuHad_Run2011A_PromptReco_v4_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1
     ]
 
+samplesData42X_ElHad_PR_V15_03_14_residual  = [
+    ElectronHad_Run2011A_PromptReco_v4_V15_03_14_residual
+    ]
 
-samplesData = [Mu_Run2010A_Nov4ReReco_v1,Mu_Run2010B_Nov4ReReco_v1]    
+
+samplesData42X_ElHad_RR_V15_03_14_residual = [
+    ElectronHad_Run2011A_May10ReReco_v1_V15_03_14_residual
+]
+
+samplesData = [Mu_Run2010A_Nov4ReReco_v1,Mu_Run2010B_Nov4ReReco_v1]
 #samplesData = [SingleMu_Run2011A_PromptReco_v1, SingleMu_Run2011A_PromptReco_v2]
 
 samplesData311 = [
@@ -263,7 +273,9 @@ samplesData42X_ElHad_PR_V15_03_14_residual = [
     ElectronHad_Run2011A_PromptReco_v6_V15_03_14_residual,
     ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_a,
     ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_b,
-    ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_c
+    ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_c,
+    ElectronHad_Run2011B_PromptReco_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_d,
+    ElectronHad_Run2011B_PromptReco_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_e
     ]
 
 

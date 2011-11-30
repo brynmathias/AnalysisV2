@@ -17,6 +17,7 @@ def metScaleSystematic(a, shiftdir, lepton):
     pfmet_jecunc = PSet(
         #the location of the JECUncertainty txt file
         jecuncfile = "/vols/cms01/as1604/SUSY-svn/WPol2/scripts/GR_R_38X_V15_AK5PF_Uncertainty.txt",
+        jecuncfileresidual = "/vols/cms01/mstoye/SVNtestKill/SUSYv2/onelepton/scripts/GR_R_42_V19_AK5PF_L2L3Residual.txt",
         #either Muon or Electron
         lepton = lepton,
         #the jet threshold to consider for the JEC Uncertainties
@@ -30,13 +31,15 @@ def metScaleSystematic(a, shiftdir, lepton):
     a.AddMETFilter("pfMET", pfmetjecunc)
     return pfmetjecunc
 
+def metScaleSystematicJets(a, shiftdir):
+    myJESCorrectionsFromFile = one.JESCorrectionsFromFile(shiftdir,"/vols/cms01/as1604/SUSY-svn/WPol2/scripts/GR_R_38X_V15_AK5PF_Uncertainty.txt")
+    a.AddJetFilter("PreCC",myJESCorrectionsFromFile)
+    return myJESCorrectionsFromFile
+
 def metScaleSystematicFlat(a, lepton, shiftdir):
     shift = {True:1.05, False:0.95}[shiftdir]
     filt = one.pfMETScale(lepton, shift)
     a.AddMETFilter("pfMET", filt)
- #   jetshift = {True:5., False:-5.}[shiftdir]
-#    filtJets = fwk.JESCorrectionsTrivial(jetshift)
- #   a.AddJetFilter("PreCC",filtJets)
     return filt
 def JESjetsFlat(a, shiftdir):
     jetshift = {True:5., False:-5.}[shiftdir]
@@ -125,8 +128,10 @@ def muonSystematics(a, mode):
         return
     elif mode == "metup":
         filters += [metScaleSystematic(a, True, "Muon")]
+        filters += [metScaleSystematicJets(a, True)]
     elif mode == "metdown":
         filters += [metScaleSystematic(a, False, "Muon")]
+        filters += [metScaleSystematicJets(a, False)]
     elif mode == "metup_flat":
         filters += [metScaleSystematicFlat(a, "Muon", True)]
         filters += [JESjetsFlat(a, True)]

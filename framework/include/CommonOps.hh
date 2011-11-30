@@ -1387,6 +1387,22 @@ namespace Operation {
 
  }; // ~RecoilMHTCut class
 
+ class RA2TrackingFailureFilterCut : public Operation::_Base {
+  public:
+  RA2TrackingFailureFilterCut();
+  ~RA2TrackingFailureFilterCut();
+  bool Process(Event::Data & ev);
+  std::ostream& Description(std::ostream& ostrm);
+};
+
+ class RA2ecaldeadcellfilterflagCut : public Operation::_Base {
+  public:
+  RA2ecaldeadcellfilterflagCut();
+  ~RA2ecaldeadcellfilterflagCut();
+  bool Process(Event::Data & ev);
+  std::ostream& Description(std::ostream& ostrm);
+};
+
 
  class GoodEventSelection : public Operation::_Base {
   public:

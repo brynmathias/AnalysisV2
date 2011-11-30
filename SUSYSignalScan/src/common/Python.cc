@@ -2,6 +2,7 @@
 #include "Ops.hh"
 #include "mSuGraPlottingOps.hh"
 #include "SUSYSignalScanFilters.hh"
+#include "smsPlottingOps.hh"
 // #include "PdfPlottingOps.hh"
 
 using namespace boost::python;
@@ -10,6 +11,13 @@ BOOST_PYTHON_MODULE(libSUSYSignalScan) {
 
   class_<Operation::mSuGraPlottingOps, bases<Operation::_Base> >( "OP_mSuGraPlottingOps",
                     init<const Utils::ParameterSet&>() );
+
+  class_<Operation::smsPlottingOps, bases<Operation::_Base> >( "OP_smsPlottingOps",
+                    init<const Utils::ParameterSet&>() );
+
+  class_<Operation::SMPlottingOps, bases<Operation::_Base> >( "OP_SMPlottingOps",
+                    init<const Utils::ParameterSet&>() );
+
   class_<SUSYSignalScan::SignalScanLOCrossSectionWeighting,   bases<Compute::ObjectFilter<double> > >("SignalScanLOCrossSectionWeighting",   init<const Utils::ParameterSet &>());
 
 

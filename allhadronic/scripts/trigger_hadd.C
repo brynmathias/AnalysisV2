@@ -56,40 +56,66 @@ void trigger_hadd() {
   // root > .L hadd.C
   // root > hadd()
   
-  double lumi = 1080.;
+  double lumi = 4000.;
   
   //std::string file_name("Trigger_HT42_incomplete");
   //std::string file_name("Trigger_HT_Run2011A_L1OffSet");
-  std::string file_name("Trigger_HT_Run2011A");
+//  std::string file_name("Trigger_SingleMu");
   //std::string file_name("Trigger_HT_Run2011A_AllReco_17June");
-  
+  std::string file_name("Trigger_HTRun2011AB"); 
   std::string dir_name("Triggers");
   std::string his_name = "TriggersVsRunNumber";
   
   std::vector<std::string> filters;
-  filters.push_back("HLT_HT???_MHT??_v*");
-//   filters.push_back("HLT_HT250_AlphaT0p??_v*");
+  //filters.push_back("HLT_HT???_MHT??_v*");
 
-//   filters.push_back("HLT_HT1??_v*");
-//   filters.push_back("HLT_HT2??_v*");
+  //filters.push_back("HLT_HT250_AlphaT0p??_v*");
+  //filters.push_back("HLT_DoubleMu?_Mass?_HT???_v*");
+  //filters.push_back("HLT_DoubleMu??_Mass??_HT???_v*");
+  //filters.push_back("HLT_DoubleMu?_HT???_v*");
+  //filters.push_back("HLT_DoubleMu??_HT???_v*");
+  //filters.push_back("HLT_HT300_AlphaT0p??_v*");
+  //filters.push_back("HLT_HT350_AlphaT0p??_v*");
+
+  //filters.push_back("HLT_HT400_AlphaT0p??_v*");
+  //filters.push_back("HLT_HT450_AlphaT0p??_v*");
+   //filters.push_back("HLT_HT1??_v*");
+  // filters.push_back("HLT_HT25?_v*");
 
 //   filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
-//   filters.push_back("HLT_Mu?_HT200_v*");
-//   filters.push_back("HLT_Mu??_HT200_v*");
+   //filters.push_back("HLT_Mu?_HT???_v*");
+   //filters.push_back("HLT_Mu??_HT???_v*");
 
-//   filters.push_back("HLT_HT25?_v*");
+ // filters.push_back("HLT_Mu?_v*");
+ // filters.push_back("HLT_Mu??_v*");
+ // filters.push_back("HLT_Mu2?_v*");
+ // filters.push_back("HLT_Mu3?_v*");
+  //filters.push_back("HLT_Mu4?_v*");
+  //filters.push_back("HLT_IsoMu??_eta2p1_v*");
+  //filters.push_back("HLT_IsoMu?_eta2p1_v*");
+
+  //filters.push_back("HLT_IsoMu?_v*");
+  //filters.push_back("HLT_IsoMu??_v*");
+ filters.push_back("HLT_Mu?_HT???_v*");
+ filters.push_back("HLT_Mu??_HT???_v*");
+ filters.push_back("HLT_HT25?_v*");
 //   filters.push_back("HLT_HT26?_v*");
-//   filters.push_back("HLT_HT3??_v*");
-//   filters.push_back("HLT_HT4??_v*");
-//   filters.push_back("HLT_HT5??_v*");
-//   filters.push_back("HLT_HT6??_v*");
-//   filters.push_back("HLT_HT7??_v*");
-//   filters.push_back("HLT_HT8??_v*");
-//   filters.push_back("HLT_HT9??_v*");
-//   filters.push_back("HLT_HT9??_v*");
-//   filters.push_back("HLT_HT1???_v*");
-  
+ // filters.push_back("HLT_HT3??_v*");
+  //filters.push_back("HLT_HT4??_v*");
+//  filters.push_back("HLT_HT5??_v*");
+//  filters.push_back("HLT_HT6??_v*");
+//  filters.push_back("HLT_HT7??_v*");
+ //  filters.push_back("HLT_HT8??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT1???_v*");
+  // filters.push_back("HLT_Mu?_v*");
+  // filters.push_back("HLT_Mu??_v*");
+  // filters.push_back("HLT_IsoMu?_v*");
+  // filters.push_back("HLT_IsoMu??_v*");
+  // filters.push_back("HLT_IsoMu?_eta2p1_v*");
+  // filters.push_back("HLT_IsoMu??_eta2p1_v*");
   typedef std::map<int,float> Runs;
   typedef std::map<std::string,Runs> Triggers;
   Triggers trigs;
@@ -99,7 +125,7 @@ void trigger_hadd() {
     
     // Construct file name
     std::stringstream ss;
-    ss << "./" << file_name << "_" << ii << ".root";
+    ss << "../python/" << file_name << "_" << ii << ".root";
     
     // Attempt to open file
     TFile* file = new TFile(ss.str().c_str());

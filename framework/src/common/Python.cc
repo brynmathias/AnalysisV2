@@ -283,6 +283,8 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
   //               init<const Utils::ParameterSet &>());
   class_<Operation::SkimOp,
     bases<Operation::_Base> >("SkimOp", init<const Utils::ParameterSet &>());
+  class_<Operation::RA2TrackingFailureFilterCut, bases<Operation::_Base> >("OP_RA2TrackingFailureFilterCut");
+  class_<Operation::RA2ecaldeadcellfilterflagCut, bases<Operation::_Base> >("OP_RA2ecaldeadcellfilterflagCut");
     class_<Operation::NoiseFilter, bases<Operation::_Base> >("OP_HadronicHBHEnoiseFilter");
     class_<Operation::beamHaloCSCTightHaloId, bases<Operation::_Base> >("OP_beamHaloCSCTightHaloId");
     class_<Operation::MonsterFilter, bases<Operation::_Base> >("OP_MonsterFilter");

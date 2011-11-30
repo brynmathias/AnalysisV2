@@ -80,6 +80,8 @@ NtupleData::NtupleData(const std::string & fileName,
     MGluino(mDataTree, "susyScanMassGluino", this),
     MSquark(mDataTree, "susyScanMassSquark", this),
     MChi0(mDataTree, "susyScanChi0", this),
+    RA2TrackingFailureFilter(mDataTree, "Result", this),
+    RA2ecaldeadcellfilterflag(mDataTree, "ecaldeadcellfilterflag", this),
     hbheNoiseFilter(mDataTree, "hbheNoiseFilterResult", this),
     beamHaloCSCTightHaloId(mDataTree, "beamHaloCSCTightHaloId", this),
     tracksNEtaLT0p9AllTracks(mDataTree, "tracksNEtaLT0p9AllTracks", this),
@@ -417,6 +419,12 @@ NtupleData::NtupleData(const std::string & fileName,
     hlt(mDataTree,"triggered",this),
     hlt_prescaled(mDataTree,"prescaled",this),
     hltHandleValid(mDataTree,"hltHandleValid",this),
+    // L1T
+    l1t(mDataTree,"L1triggered",this),
+    l1t_prescaled(mDataTree,"L1prescaled",this),
+    l1tHandleValid(mDataTree,"L1HandleValid",this),
+
+
 
     // Dirty Rec Hits
     rechitCaloHandleValidEb(mDataTree, "rechitCaloHandleValidEb", this),

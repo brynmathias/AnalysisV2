@@ -187,7 +187,14 @@ ps = PSet(
                "HLT_HT????_v*",
                "HLT_HT*_MHT*_v*",
                "HLT_HT*_AlphaT*_v*",
-               "HLT_Mu*_HT*_v*"],
+               "HLT_Mu*_HT*_v*",
+               "HLT_IsoMu*_v*",
+               "HLT_IsoMu*_eta2p1_v*",
+               "HLT_Mu*_v*",
+               "HLT_DoubleMu*_Mass*_HT*_v*",
+               "HLT_DoubleMu*_HT*_v*",
+               ],
+
     Versus = 2,
     )
 test = Trigger(ps.ps())
@@ -198,9 +205,9 @@ test = Trigger(ps.ps())
 #JsonFileOption = "/allhadronic/python/Cert_160404-166861_7TeV_PromptReco_Collisions11_JSON.txt"
 #JsonFileOption = "/allhadronic/python/Cert_160404-166502_7TeV_PromptReco_Collisions11_JSON.txt"
 #JsonFileOption = "/allhadronic/python/Cert_160404-167151_7TeV_PromptReco_Collisions11_JSON.txt"
-JsonFileOption = "/hadronic/python/hadronic/ReProcessing_PromptJson_Merged.txt"
+JsonFileOption = "/home/hep/db1110/public_html/Golden2011.json"
 
-json = JSONFilter("JSON",json_to_pset(pwd+JsonFileOption))
+json = JSONFilter("JSON",json_to_pset(JsonFileOption))
 json_output = JSONOutput("_filtered")
 
 cut_flow = Tree("CutFlow")
@@ -214,7 +221,7 @@ cut_flow.TAttach(oddPhoton,numComElectrons)
 cut_flow.TAttach(numComElectrons,oddElectron)
 cut_flow.TAttach(oddElectron,numComMuons)
 cut_flow.TAttach(numComMuons,oddMuon)
-cut_flow.TAttach(oddMuon,test)
+cut_flow.TAttach(json,test)
 
 # -----------------------------------------------------------------------------
 # Dataset
@@ -230,13 +237,9 @@ data=PSet(
     LastEntry = 10,
     )
 
-from data.Run2011.HT_Run2011A_PromptReco_v1 import HT_Run2011A_PromptReco_v1
-from data.Run2011.HT_Run2011_promptReco_DCS import HT_Run2011_promptReco_DCS
-from data.Run2011.HT42_incomplete import HT42_incomplete
-from data.Run2011.HT_Run2011A_L1OffSet import HT_Run2011A_L1OffSet
-from data.Run2011.HT_Run2011A import HT_Run2011A
-from data.Run2011.HT_Run2011A_AllReco_17June import HT_Run2011A_AllReco_17June
-
+from data.Run2011.HTRun2011AB import *
+from SingleMu import *
+from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 # -----------------------------------------------------------------------------
 # Analysis
 
@@ -246,7 +249,7 @@ anal=Analysis("Trigger")
 #anal.AddJetFilter("PreCC",JetCorrections)
 anal+=cut_flow
 
-anal.Run(".",conf,[data])
+anal.Run(".",conf,[HTRun2011AB])
 #anal.Run(".",conf,[Jet_35pb_WithTP_json051110])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011A_PromptReco_v1])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])

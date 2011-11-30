@@ -44,13 +44,13 @@ def checkSwitches(d) :
 
 def switches() :
   d = {}
-  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2"][1]
+  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2"][5]
   d["selection"] = ["had", "muon"][0]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
   d["jes"] = ["", "+ve", "-ve"][0]
   checkSwitches(d)
   return d
-
+MChiCut = 0.8
 default_common.Jets.PtCut = switches()["thresholds"][0]
 secondJetET = OP_SecondJetEtCut(switches()["thresholds"][1])
 numComPhotons = OP_NumComPhotons("<=",0)
@@ -128,52 +128,52 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(MHToverMET,alphaT70)
     cutTreeMC.FAttach(alphaT70,alphaT55)
     cutTreeMC.FAttach(alphaT55,alphaT53)
-  out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = alphaT,
-                            htBins = [250, 300, 350, 450],
-                            label2 = "") )
+  # out.append( addBinnedStuff(model = switches()["model"],
+  #                           cutTree = cutTreeMC,
+  #                           cut = alphaT,
+  #                           htBins = [250, 300, 350, 450],
+  #                           label2 = "") )
   out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = alphaT,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = ""))
+                            label2 = ""),extra = MChiCut)
+
+  # out.append( addBinnedStuff(model = switches()["model"],
+  #                           cutTree = cutTreeMC,
+  #                           cut = alphaT53,
+  #                           htBins = [250, 300, 350, 450],
+  #                           label2 = "AlphaT53_55_") )
 
   out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = alphaT53,
-                            htBins = [250, 300, 350, 450],
-                            label2 = "AlphaT53_55_") )
-
-  out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = alphaT53,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "AlphaT53_55_"))
+                            label2 = "AlphaT53_55_"),extra = MChiCut)
 
-  out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = alphaT55,
-                            htBins = [250, 300, 350, 450],
-                            label2 = "AlphaT55_70_") )
+  # out.append( addBinnedStuff(model = switches()["model"],
+  #                           cutTree = cutTreeMC,
+  #                           cut = alphaT55,
+  #                           htBins = [250, 300, 350, 450],
+  #                           label2 = "AlphaT55_70_") )
 
   out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = alphaT55,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "AlphaT55_70_"))
+                            label2 = "AlphaT55_70_"),extra = MChiCut)
 
-  out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = alphaT70,
-                            htBins = [250, 300, 350, 450],
-                            label2 = "AlphaT70_inf") )
+  # out.append( addBinnedStuff(model = switches()["model"],
+  #                           cutTree = cutTreeMC,
+  #                           cut = alphaT70,
+  #                           htBins = [250, 300, 350, 450],
+  #                           label2 = "AlphaT70_inf") )
 
   out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = alphaT70,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "AlphaT70_inf_"))
+                            label2 = "AlphaT70_inf_"),extra = MChiCut)
   return out
 
 from ra1objectid.vbtfElectronId_cff import *
@@ -212,8 +212,9 @@ addCutFlowMC(anal_ak5_caloMC,cutTreeMC)
 from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1 import *
 from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1 import *
 from SUSYSignalScan.SMS_T1 import *
+from SUSYSignalScan.SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt import *
 def outputDir() :
-  o = "../results_WithPdfUnCert_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
+  o = "../results_%s_%s_%g_%s_MChiCut_%d"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"],MChiCut)
   mkdir(o)
   return o
 
@@ -221,9 +222,9 @@ def sample() :
   if isCmssm(switches()["model"]) :
     if switches()["model"] == "tanB10":return mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1
     if switches()["model"] == "tanB40":return mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1
-  elif isSms(switches()["model"]) : return SMS_T1
+  elif isSms(switches()["model"]) : return SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt
   else :         return None
 
-sample().File = sample().File[0:5]
-print sample().File
+# sample().File = sample().File[0:5]
+# print sample().File
 anal_ak5_caloMC.Run(outputDir(), conf_ak5_calo_msugra,[sample()])
