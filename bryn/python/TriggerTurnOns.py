@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 375.
+bin = 275.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -313,7 +313,7 @@ badMuonInJet = OP_BadMuonInJet()
 numComElectrons = OP_NumComElectrons("<=",0)
 numComMuons = OP_NumComMuons("==",1)
 oneMuon = OP_NumComMuons("==",1)
-diMuon = OP_NumComMuons("==",2)
+diMuon = OP_NumComMuons(">=",1)
 zeroMuon = OP_NumComMuons("<=",0)
 ZMassCut = RECO_2ndMuonMass(25.0, 91.2, True, "all")
 
@@ -347,6 +347,7 @@ cutTreeData.Attach(json)
 cutTreeData.TAttach(json,badEvents)
 cutTreeData.FAttach(badEvents,json_lost)
 cutTreeData.TAttach(badEvents,json_ouput)
+#cutTreeData.TAttach(badEvents,NoiseFilt)
 cutTreeData.TAttach(json,NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
 cutTreeData.TAttach(selection,oddMuon)
@@ -438,10 +439,14 @@ AlphaTwithDiMu = {
 for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     for ref in vals[0]:
-      cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-      out.append(cut)
-      cutTreeData.TAttach(diMuon,cut)
-      out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
+      for muDR in [0.3,0.4,0.5]:
+          cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+          out.append(cut)
+          muDRcut =  RECO_MuonJetDRCut(muDR)
+          out.append(muDRcut)
+          cutTreeData.TAttach(diMuon,muDRcut)
+          cutTreeData.TAttach(muDRcut,cut)
+          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin)))
 
 # If muon is not required
 htTesting = {
@@ -586,10 +591,10 @@ from SingleMu import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# samples = HTRun2011AB
-
-outDir = "../RobRequests_FINALTRIGGERS/ht%dNoUpper/"%(sample.Name,bin)
-ensure_dir(outDir)
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
+#sample = HTRun2011AB
+
+outDir = "../RobRequests_FINALTRIGGERS/ht%dNoUpper/"%(bin)
+ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
