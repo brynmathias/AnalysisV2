@@ -10,6 +10,10 @@
 //  
 int qcdBkgdEst_dev() {
 
+  bool use_sumw2 = true;
+
+  std::string label = "";
+
   int last_bin = 7;
 
   setTDRStyle();
@@ -24,8 +28,10 @@ int qcdBkgdEst_dev() {
   bool syst_ratio = true;
   bool killer = false;
   bool min_max_with_errors = true;
+
+  //bool use_meff = true;
   
-  double axis_offset1 = 0.5;
+  double axis_offset1 = 2.;
   double axis_offset2 = 0.;
   
   int bin = 0;
@@ -48,7 +54,8 @@ int qcdBkgdEst_dev() {
   double pt1_default = 100.;
   double pt2_default = 100.;
   double pt3_default = 50.;
-  double ht_default = 350. + offset;
+  double ht_default = 375. + offset;
+  //if ( use_meff ) { ht_default *= 1.4; }
   double meff_default = ht_default + pt3_default;
   double x1_default = pt1_default / meff_default;
   double x2_default = pt2_default / meff_default;
@@ -59,50 +66,84 @@ int qcdBkgdEst_dev() {
   std::string dir = "/vols/cms02/bainbrid/qcd/trigger/SUSY2/results/";
   
   std::vector<int> at;
-  //at.push_back(510);
-  //at.push_back(520);
-  //at.push_back(530);
+  //   at.push_back(510);
+  //   at.push_back(520);
+  //   at.push_back(530);
+  //   at.push_back(540);
   at.push_back(550);
-//   at.push_back(510);
-//   at.push_back(520);
-//   for ( int iii = 0; iii < 60; ++iii ) { at.push_back(530+iii); }
-//   at.push_back(590);
-//   at.push_back(600);
+  //   at.push_back(560);
+  //   at.push_back(570);
+  //   at.push_back(580);
+  //   at.push_back(590);
+  //   at.push_back(600);
+  //   at.push_back(650);
+  //   at.push_back(700);
+  //   at.push_back(510);
+  //   at.push_back(520);
+  //   for ( int iii = 0; iii < 60; ++iii ) { at.push_back(530+iii); }
+  //   at.push_back(590);
+  //   at.push_back(600);
   const uint nat = at.size();
   
   std::vector<int> multi;
-  multi.push_back(-2);
+  //multi.push_back(-2);
   //multi.push_back(2);
-  //multi.push_back(-3);
+  multi.push_back(-2);
   const uint nmulti = multi.size();
   
+  int nht = -1;
   std::vector<double> ht;
   std::vector<double> ht_step;
+  
+//   for ( uint iht = uint(ht_min); iht <= uint(ht_max); iht += uint(ht_step) ) { ht.push_back(iht); }
+//   const uint nht = ht.size();
+   
+  //   if (true) {
+  //     if (use_meff) {
+  //       if (false) {
+  // 	ht.push_back(275.*1.4);
+  // 	ht_step.push_back(50.*1.4);
+  // 	ht.push_back(325.*1.4);
+  // 	ht_step.push_back(50.*1.4);
+  // 	for ( uint iht = 0; iht < 7; ++iht ) { ht.push_back((375+iht*100.)*1.4); ht_step.push_back(100.*1.4); }
+  //       } else { 
+  // 	ht.push_back(400.);
+  // 	ht_step.push_back(50.);
+  // 	ht.push_back(450.);
+  // 	ht_step.push_back(50.);
+  // 	for ( uint iht = 0; iht < 7; ++iht ) { ht.push_back(500+iht*100.); ht_step.push_back(100.); }
+  //       }
+  //     } else {
+        ht.push_back(275.);
+        ht_step.push_back(50.);
+        ht.push_back(325.);
+        ht_step.push_back(50.);
+        for ( uint iht = 0; iht < 7; ++iht ) { ht.push_back(375+iht*100.); ht_step.push_back(100.); }
+  //     }
+  //   } else {
+  //     for ( uint iht = 0; iht < 11; ++iht ) { ht.push_back(250.+iht*20.); ht_step.push_back(20.); }
+  //   }
+  //   nht = ht.size() - 1;
+  
+//   for ( uint iht = 0; iht <= 8; ++iht ) { ht.push_back(475.+iht*100.); ht_step.push_back(100.); }
 
-  //   for ( uint iht = uint(ht_min); iht <= uint(ht_max); iht += uint(ht_step) ) { ht.push_back(iht); }
-  //   const uint nht = ht.size();
-  
-  if (true) {
-    ht.push_back(275.);
-    ht_step.push_back(50.);
-    ht.push_back(325.);
-    ht_step.push_back(50.);
-    for ( uint iht = 0; iht < 7; ++iht ) { ht.push_back(375+iht*100.); ht_step.push_back(100.); }
-  } else {
-    for ( uint iht = 0; iht < 11; ++iht ) { ht.push_back(250.+iht*20.); ht_step.push_back(20.); }
-  }
-  
-  const uint nht = ht.size() - 1;
+	nht = ht.size() - 1;
 
   StringVV files;
   
   bool test = false;
   if ( test ) {
-//      std::string dir1 = "/vols/cms02/bainbrid/qcd/trigger/SUSY2/allhadronic/python/";
-//      files.push_back(StringV(1,dir1+"Ratio_Data.root"));
-//     files.push_back(StringV(1,dir+"v90/Ratio__data.root"));
-//     files.push_back(StringV(1,dir+"v100/Ratio__data.root"));
-    files.push_back(StringV(1,dir+"v101/Ratio__data.root"));
+    std::string trunk = dir + "v40/Ratio__";
+    StringV q; q.push_back(trunk+"qcdpy.root"); 
+    //StringV w(q); w.push_back(trunk+"wjets.root");
+    //StringV z(q); z.push_back(trunk+"zinv.root");
+    StringV tt(q); tt.push_back(trunk+"ttbar.root");
+    files.push_back(tt);
+    //std::string dir1 = "/vols/cms02/bainbrid/qcd/trigger/SUSY2/allhadronic/python/";
+    //files.push_back(StringV(1,dir1+"Ratio_Data.root"));
+    //files.push_back(StringV(1,dir+"v90/Ratio__data.root"));
+    //files.push_back(StringV(1,dir+"v100/Ratio__data.root"));
+    //files.push_back(StringV(1,dir+"v09/Ratio__data.root"));
     //files.push_back(StringV(1,dir+"v60/Ratio__data.root"));
     //files.push_back(StringV(1,dir+"v70/Ratio__data.root"));
     //files.push_back(dir+"v42/Ratio__data.root"));
@@ -150,7 +191,7 @@ int qcdBkgdEst_dev() {
   bool ewk = false;
   bool sm_closure = false;
   if ( sm_closure ) {
-    std::string version = "v24";
+    std::string version = "v13";
     std::string generator = "pythia";
     files.push_back(StringV(1,dir+""+version+"/Ratio_sm_"+generator+".root"));
     if (ewk){
@@ -187,25 +228,55 @@ int qcdBkgdEst_dev() {
     files.push_back(StringV(1,dir+"v103/Ratio__data.root"));
   }
  
-  bool data = true;
-  if ( data ) {
-    std::string trunk = dir + "v90/Ratio__";
-    StringV sm; 
+  bool results = true;
+  if ( results ) {
+
+    std::string trunk = dir + "v37/Ratio__";
+    StringV q; q.push_back(trunk+"qcdpy.root"); 
+    StringV sm(q); 
     sm.push_back(trunk+"wjets.root");
     sm.push_back(trunk+"zinv.root");
     sm.push_back(trunk+"ttbar.root");
-    sm.push_back(trunk+"top.root");
-    sm.push_back(trunk+"qcd_pythia.root");
-    StringV lm1(sm); //lm1.push_back(trunk+"lm1.root"); files.push_back(lm1);
-    StringV lm4(sm); lm4.push_back(trunk+"lm4.root"); files.push_back(lm4);
-    StringV lm6(sm); lm6.push_back(trunk+"lm6.root"); files.push_back(lm6);
+    //sm.push_back(trunk+"top.root");
+
+    //StringV lm6(sm); lm6.push_back(trunk+"lm6.root"); 
+    StringV w(q); w.push_back(trunk+"wjets.root");
+    StringV z(q); z.push_back(trunk+"zinv.root");
+    StringV tt(q); tt.push_back(trunk+"ttbar.root");
+    //StringV t(q); t.push_back(trunk+"top.root");
+    
+    //files.push_back(lm6);
     files.push_back(sm);
-    //files.push_back(StringV(1,dir+"v90/Ratio__data.root"));
-    files.push_back(StringV(1,dir+"v01/Ratio__data.root"));
-    //files.push_back(StringV(1,trunk+"wjets.root"));
-    //files.push_back(StringV(1,trunk+"zinv.root"));
-    //files.push_back(StringV(1,trunk+"ttbar.root"));
-    //files.push_back(StringV(1,trunk+"top.root"));
+    files.push_back(w);
+    files.push_back(z);
+    files.push_back(tt);
+    //files.push_back(t);
+
+    //files.push_back(StringV(1,dir+"v14/Ratio__data.root"));
+
+//     std::string trunk = dir + "v36/Ratio__";
+//     StringV sm1; 
+//     sm1.push_back(trunk+"qcdpy.root");
+//     //sm1.push_back(trunk+"wjets.root");
+//     sm1.push_back(trunk+"zinv.root");
+//     sm1.push_back(trunk+"ttbar.root");
+//     sm1.push_back(trunk+"top.root");
+//     trunk = dir + "v37/Ratio__";
+//     StringV sm2; 
+//     sm2.push_back(trunk+"qcdpy.root");
+//     sm2.push_back(trunk+"wjets.root");
+//     sm2.push_back(trunk+"zinv.root");
+//     sm2.push_back(trunk+"ttbar.root");
+//     trunk = dir + "v40/Ratio__";
+//     StringV sm3; 
+//     sm3.push_back(trunk+"qcdpy.root");
+//     sm3.push_back(trunk+"wjets.root");
+//     sm3.push_back(trunk+"zinv.root");
+//     sm3.push_back(trunk+"ttbar.root");
+//     files.push_back(sm1);
+//     files.push_back(sm2);
+//     files.push_back(sm3);
+
   }
   
   bool syst = false;
@@ -341,6 +412,7 @@ int qcdBkgdEst_dev() {
   const uint nfile = files.size();
   
   std::vector<std::string> his;
+  //if ( his.size() < nfile ) { his.resize(nfile,"HtAfterAlphaT"); }
   if ( his.size() < nfile ) { his.resize(nfile,"HtAfterRecHit"); }
   
   std::vector<std::string> type;
@@ -382,17 +454,17 @@ int qcdBkgdEst_dev() {
     type.push_back("Data       ");
   }
 
-  if ( data ) {
-    //type.push_back("SM+LM1   ");
-    type.push_back("SM+LM4   ");
-    type.push_back("SM+LM6   ");
-    type.push_back("SM       ");
-    //type.push_back("Madgraph ");
-    type.push_back("Data     ");
-    type.push_back("Wjets    ");
-    type.push_back("Zinv     ");
-    type.push_back("TTbar    ");
-    type.push_back("SingleTop");
+  if ( results ) {
+    //type.push_back("SM + LM6 (Spring11)");
+    //type.push_back("Spring11");
+    //type.push_back("Summer11(Wincl)");
+    //type.push_back("Summer11(W300)");
+    type.push_back("SM          ");
+    type.push_back("Wjets       ");
+    type.push_back("Zinv        ");
+    type.push_back("TTbar       ");
+    type.push_back("Single top  ");
+    type.push_back("Data, 2.7/fb");
   }
 
   if ( syst ) {
@@ -441,13 +513,12 @@ int qcdBkgdEst_dev() {
   
   if ( type.size() < nfile ) { type.resize(nfile,"unknown"); }
   
-  double lumi = 1100.;
+  double lumi = 30000.;
   std::vector<double> lumis;
 
   if ( test ) {
-    lumis.push_back(100.);
-    lumis.push_back(100.);
-    lumis.push_back(100.);
+    //lumis.push_back(100.);
+    lumis.push_back(30000.);
   }
 
   if ( lykken ) { 
@@ -489,16 +560,16 @@ int qcdBkgdEst_dev() {
     lumis.push_back(100.);
   }
 
-  if ( data ) { 
-    double tmp = 1077.;
+  if ( results ) { 
+    double tmp = 100.;
+    lumi = tmp;
+    //lumis.push_back(tmp);
+    lumis.push_back(tmp);
+    lumis.push_back(tmp);
     lumis.push_back(tmp);
     lumis.push_back(tmp);
     lumis.push_back(tmp);
     lumis.push_back(100.);
-    lumis.push_back(tmp);
-    lumis.push_back(tmp);
-    lumis.push_back(tmp);
-    lumis.push_back(tmp);
   }
 
   if ( syst ) { 
@@ -596,15 +667,14 @@ int qcdBkgdEst_dev() {
     style.push_back(20);
   }
 
-  if ( data ) {
+  if ( results ) {
+    //style.push_back(24);
     style.push_back(24);
-    style.push_back(24);
-    style.push_back(24);
-    style.push_back(20);
-    style.push_back(25);
     style.push_back(26);
     style.push_back(28);
     style.push_back(30);
+    style.push_back(27);
+    style.push_back(20);
   }
 
   if ( syst ) {
@@ -669,7 +739,7 @@ int qcdBkgdEst_dev() {
     col.push_back(4);
     col.push_back(4);
   }
-
+  
   if ( no_qcd_present ) {
     col.push_back(2);
     col.push_back(4);
@@ -697,16 +767,14 @@ int qcdBkgdEst_dev() {
     col.push_back(1);
   }
 
-  if ( data ) {
-    col.push_back(4);
-    col.push_back(3);
+  if ( results ) {
+    //col.push_back(4);
     col.push_back(2);
-    col.push_back(6);
     col.push_back(1);
     col.push_back(6);
     col.push_back(6);
     col.push_back(6);
-    col.push_back(6);
+    col.push_back(1);
   }
 
   if ( syst ) {
@@ -812,12 +880,27 @@ int qcdBkgdEst_dev() {
 	     numer, numer_errh, numer_errl, 
 	     denom, denom_errh, denom_errl, 
 	     ratio, errh, errl, length,
-	     data_file, lumi,
-	     efficiency );
+	     data_file, lumi, label,
+	     efficiency, use_sumw2 );
+  
+  ht_step.clear();
+  for ( uint iht = 0; iht < nht; ++iht ) { ht_step.push_back( ht[iht+1] - ht[iht] ); }
 
   //eff(denom,"EfficiencyDenom");
   //eff(numer,"EfficiencyNumer");
   
+  std::cout << " size " << ht.size()
+	    << " nbins " << nht 
+	    << " htmin " << ht_min 
+	    << " htmax " << ht_max
+	    << std::endl;
+  for ( uint iht = 0; iht <= nht; ++iht ) {
+    std::cout << " ibin " << iht
+	      << " ht " << ht[iht]
+	      << " htstep " << ht_step[iht]
+	      << std::endl;
+  }
+
   // -----------------------------------------------------------------------------
   // R(aT) vs HT for "truth", "MC gen", "MC reco" and "data" with fixed (x1,x2,x3)
   
@@ -2230,11 +2313,13 @@ int qcdBkgdEst_dev() {
 	  
 	if (plots) {
 	  mg->Draw("a");
-	  mg->GetXaxis()->SetTitle("H_{T} (GeV)");
+	  mg->GetXaxis()->SetTitle(label.c_str());
+	  //if (!use_meff) mg->GetXaxis()->SetTitle("H_{T} (GeV)");
+	  //else mg->GetXaxis()->SetTitle("M_{eff} (GeV)");
 	  mg->GetYaxis()->SetTitle(TString(ss_axis.str()));
 	  mg->GetYaxis()->SetTitleOffset(1.3);
 	  mg->GetXaxis()->SetRangeUser(ht_min+offset,ht_max+offset);
-	  mg->GetYaxis()->SetRangeUser(min[imulti][iat]/10.,max[imulti][iat]*100.);
+	  mg->GetYaxis()->SetRangeUser(min[imulti][iat]/2.,max[imulti][iat]*2.);
 	  //if (ewk) mg->GetYaxis()->SetRangeUser(1.e-7,1.e-2);
 	  //else mg->GetYaxis()->SetRangeUser(0.,0.12e-3);
 	  //mg->GetYaxis()->SetNoExponent(true);
@@ -2242,7 +2327,7 @@ int qcdBkgdEst_dev() {
 	  //mg->GetXaxis()->SetRangeUser(250.,450.);
 	  //mg->GetYaxis()->SetRangeUser(0.1,1000.);
 	  //mg->GetYaxis()->SetRangeUser(0.,0.05e-3);
-	  mg->GetYaxis()->SetRangeUser(0.,0.1e-3);
+	  mg->GetYaxis()->SetRangeUser(0.,0.04e-3);
 	  //canvas->SetLogy();
 	    
 	  if      (choice==1) mg->GetYaxis()->SetRangeUser(0.1,1.e4);

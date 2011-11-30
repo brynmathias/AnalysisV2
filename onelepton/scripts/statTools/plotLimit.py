@@ -8,25 +8,8 @@ import utils
 files = [
     # ("limit_data", "limit500pbdata.pkl"),
     # ("limit_mc", "limit_mc.pkl"),
-#    ("limit_mc", "lim_mc.pkl"),
 #    ("limit_data_nlo_pl", "limit_nlo_data_16082011.pkl"),
-
-#    ("limit_data_nlo_cls", "limit_data_nlo_cls_17082011_3.pkl"),
-    ("limit_data_nlo_cls", "limit_data_nlo_cls_21082011_2.pkl"),
-    ("limit_data_nlo_cls_up", "limit_data_nlo_cls_22082011.pkl"),
- #   ("limit_data_nlo_cls_sigcontam", "limit_data_nlo_cls_21082011_sigcontam2.pkl"),
-    ("limit_exp_nlo_cls", "limit_exp_nlo_cls_21082011_2.pkl"),
-    ("limit_exp_nlo_cls_up", "limit_exp_nlo_cls_22082011.pkl"),
-#    ("limit_data_nlo_cls_186", "limit_data_nlo_cls_19082011_electrons1.86.pkl"),
-#    ("limit_data_nlo_cls_225", "limit_data_nlo_cls_19082011_electrons2.25.pkl"),
-
- #   ("limit_exp_nlo_cls", "limit_exp_nlo_cls_17082011_3.pkl"),
-    # ("limit_sz", "limit_sweetzone_test_is_badly_sweetzone.pkl"),
-    # ("limit_2_mcstats", "limit_2_mcstats.pkl"),
-    # ("limit_data_lo", "limit_13082011_obs_lo.pkl"),
-    # ("limit_exp", "limit_exp_15082011_500.pkl"),
-#    ("limit_data_lo", "limit_data_fixed_lo.pkl"),
-#    ("limit_data_nlo", "limit_data_fixed_nlo.pkl"),
+    ("limit_data_nlo_cls", "data_obs_limit.pkl"),
     ]
 
 nogc = []

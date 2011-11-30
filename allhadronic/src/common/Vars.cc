@@ -20,6 +20,8 @@ Vars::Vars()
     pseudo_(),
     j1_(),
     j2_(),
+    et1_(0.),
+    et2_(0.),
     ht_(0.),
     dht_(0.),
     mht_(),
@@ -41,6 +43,8 @@ void Vars::clear() {
   pseudo_.reserve(16);
   j1_ = LorentzV(0.,0.,0.,0.);
   j2_ = LorentzV(0.,0.,0.,0.);
+  et1_ = 0.;
+  et2_ = 0.;
   ht_ = 0.;
   dht_ = 0.;
   mht_ = LorentzV(0.,0.,0.,0.);
@@ -78,20 +82,23 @@ void Vars::update() {
   at_ = AlphaT()( jets_, pseudo_ );
   
   // Construct pseudo di-jets
-  std::vector<LorentzV> dijets(2);
+  j1_ = LorentzV(0.,0.,0.,0.);
+  j2_ = LorentzV(0.,0.,0.,0.);
+  et1_ = 0.;
+  et2_ = 0.;
   for ( unsigned int i = 0; i < jets_.size(); ++i ) {
-    if ( pseudo_[i] ) { dijets[0] += jets_[i]; }
-    else              { dijets[1] += jets_[i]; }
+    if ( pseudo_[i] ) { j1_ += jets_[i]; et1_ += jets_[i].Et(); }
+    else              { j2_ += jets_[i]; et2_ += jets_[i].Et(); }
   }
-  //std::sort( dijets.begin(), dijets.end(), SortByEt );
-  std::sort( dijets.begin(), dijets.end(), SortByPt );
-  j1_ = dijets[0];
-  j2_ = dijets[1];
+
+  // Calculate DHT
+  dht_ = fabs( et1_ - et2_ );
   
-  // Calculate dht, x1, x2
-  dht_ = j1_.Et() - j2_.Et();
+  // Calculate x1, x2
   x1_ = ( j1_.Pt() ) / ( j1_.Pt() + j2_.Pt() + mht_.Pt() );
   x2_ = ( j2_.Pt() ) / ( j1_.Pt() + j2_.Pt() + mht_.Pt() );
+
+  if ( x2_ > x1_ ) { double tmp = x2_; x2_ = x1_; x1_ = tmp; }
   
 }
 
@@ -106,6 +113,46 @@ void Vars::print( std::stringstream& ss ) {
      << " Meff: " << meff_ << std::endl
      << " x1: " << x1_ << std::endl
      << " x2: " << x2_ << std::endl;
+}
+
+// -----------------------------------------------------------------------------
+//
+void Vars::print() {
+  std::cout << "[Vars::print] " 
+	    << std::fixed 
+	    << std::setprecision(0)
+	    << " ht: " << ht_ 
+	    << std::setprecision(0)
+	    << " mht: " << mht_.Pt() 
+	    << std::setprecision(0)
+	    << " dht: " << dht_
+	    << std::setprecision(2)
+	    << " at: " << at_ 
+	    << std::setprecision(0)
+	    << " meff: " << meff_ 
+	    << std::setprecision(3)
+	    << " et: " << ( jets_.empty() ? 0. : jets_.back().Et() )
+	    << std::setprecision(0)
+// 	    << " et1: " << j1_.Pt() 
+// 	    << std::setprecision(0)
+// 	    << " et2: " << j2_.Pt() 
+// 	    << std::setprecision(0)
+// 	    << " et1: " << j1_.Et() 
+// 	    << std::setprecision(0)
+// 	    << " et2: " << j2_.Et() 
+	    << std::setprecision(0)
+	    << " et1: " << et1_
+	    << std::setprecision(0)
+	    << " et2: " << et2_
+	    << std::setprecision(2)
+	    << " x1: " << x1_ 
+	    << std::setprecision(2)
+	    << " x2: " << x2_ 
+	    << std::setprecision(0)
+	    << " nj: " << njets() 
+	    << std::setprecision(3)
+	    << " mht/meff: " << ( meff() > 0. ? mht_.Pt() / meff() : 0. )
+	    << std::endl;
 }
 
 

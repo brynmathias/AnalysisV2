@@ -25,13 +25,29 @@
   - truth!!
 */
 
-using namespace Operation;
+namespace Operation {
 
-// -----------------------------------------------------------------------------
-//
-bool SortByPt( const LorentzV& first, const LorentzV& second ) {
-  return ( first.Pt() > second.Pt() );
+  // -----------------------------------------------------------------------------
+  // 
+  inline LorentzV massless( const LorentzV& jet ) { 
+    return LorentzV( jet.Et(), jet.Eta(), jet.Phi(), 0. ); 
+  }
+
+  // -----------------------------------------------------------------------------
+  //
+  inline bool SortByPt( const LorentzV& first, const LorentzV& second ) {
+    return ( first.Pt() > second.Pt() );
+  }
+
+  // -----------------------------------------------------------------------------
+  //
+  inline bool SortByEt( const LorentzV& first, const LorentzV& second ) {
+    return ( first.Et() > second.Et() );
+  }
+
 }
+
+using namespace Operation;
 
 // -----------------------------------------------------------------------------
 //
@@ -51,6 +67,9 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
   maxLeadingJetEta_(0.),
   babyCut_(0.),
   addMuon_(false),
+  onlyGenPtHat_(false),
+  onlyFull_(false),
+  useMeff_(false),
   // Dead ECAL
   deadEcalRegionDrCut_(0.),
   deadEcalRegionEtaCut_(0.),
@@ -80,22 +99,38 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
   htPt3Bins_(),
   offset_(0.),
   // Histograms
-  hPtHat_(),
+  hGenPtHat_(),
   hSMS_(),
   cutFlowHistos_(false),
   hCutFlow_(),
   htHistos_(false),
   hHtDistr_(),
+  meffHistos_(false),
+  hMeffDistr_(),
   mhtHistos_(false),
   hMhtDistr_(),
+  mhtOverHtHistos_(false),
+  hMhtOverHtDistr_(),
+  mhtOverMeffHistos_(false),
+  hMhtOverMeffDistr_(),
   multiHistos_(false),
   hMultiplicity_(),
-  vertexHisto_(false),
-  hNumVertices_(),
+  jetPtHistos_(false),
+  hAllJetsPt_(),
+  hRecoJetsPt_(),
+  hBabyJetsPt_(),
+  vertexHistos_(false),
+  hNumVertex_(),
+  atHistos_(false),
+  hAlphaT_(),
+  dalitzHistos_(false),
+  hDalitz_(),
   minBiasDeltaPhiHistos_(false),
   hMinBiasDeltaPhi_(),
   babyJetsHistos_(false),
   hBabyJets_(),
+  babyJetsMhtHistos_(false),
+  hBabyJetsMht_(),
   hPassAlphaT_(),
   hPassDeadEcal_(),
   hPassBaby_(),
@@ -123,12 +158,14 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
   epochs_(),
   signal_(),
   monitor_(),
+  monitorRef_(),
   reweight_(),
   names_()
 {
   
   vstring signal;
   vstring monitor;
+  vstring monitorRef;
   vdouble reweight;
   
   // Optional parameters
@@ -144,20 +181,31 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
   if ( ps.Contains("TriggerEpochs") ) epochs_ = ps.Get< std::vector<double> >("TriggerEpochs"); 
   if ( ps.Contains("SignalTriggers") ) signal = ps.Get< vstring >("SignalTriggers"); 
   if ( ps.Contains("MonitorTriggers") ) monitor = ps.Get< vstring >("MonitorTriggers"); 
+  if ( ps.Contains("MonitorRefTriggers") ) monitorRef = ps.Get< vstring >("MonitorRefTriggers"); 
   if ( ps.Contains("VertexReweighting") ) reweight = ps.Get< vdouble >("VertexReweighting"); 
   if ( ps.Contains("Inclusive") ) inclusive_ = ps.Get<bool>("Inclusive"); 
-  if ( ps.Contains("AlphaTDefault") ) aT_ = ps.Get<int>("AlphaTDefault");
+  if ( ps.Contains("AlphaTDefault") ) aT_ = (uint)ps.Get<int>("AlphaTDefault");
   if ( ps.Contains("HtOffset") ) offset_ = ps.Get<double>("HtOffset"); 
   
   if ( ps.Contains("CutFlowHistos") ) cutFlowHistos_ = ps.Get<bool>("CutFlowHistos"); 
   if ( ps.Contains("HtHistos") ) htHistos_ = ps.Get<bool>("HtHistos"); 
+  if ( ps.Contains("MeffHistos") ) meffHistos_ = ps.Get<bool>("MeffHistos"); 
   if ( ps.Contains("MhtHistos") ) mhtHistos_ = ps.Get<bool>("MhtHistos"); 
+  if ( ps.Contains("MhtOverHtHistos") ) mhtOverHtHistos_ = ps.Get<bool>("MhtOverHtHistos"); 
+  if ( ps.Contains("MhtOverMeffHistos") ) mhtOverMeffHistos_ = ps.Get<bool>("MhtOverMeffHistos"); 
   if ( ps.Contains("MultiplicityHistos") ) multiHistos_ = ps.Get<bool>("MultiplicityHistos"); 
-  if ( ps.Contains("NumVerticesHistos") ) vertexHisto_ = ps.Get<bool>("NumVerticesHistos"); 
+  if ( ps.Contains("JetPtHistos") ) jetPtHistos_ = ps.Get<bool>("JetPtHistos"); 
+  if ( ps.Contains("NumVertexHistos") ) vertexHistos_ = ps.Get<bool>("NumVertexHistos"); 
+  if ( ps.Contains("AlphaTHistos") ) atHistos_ = ps.Get<bool>("AlphaTHistos"); 
+  if ( ps.Contains("DalitzHistos") ) dalitzHistos_ = ps.Get<bool>("DalitzHistos"); 
   if ( ps.Contains("BabyJetsHistos") ) babyJetsHistos_ = ps.Get<bool>("BabyJetsHistos"); 
+  if ( ps.Contains("BabyJetsMhtHistos") ) babyJetsMhtHistos_ = ps.Get<bool>("BabyJetsMhtHistos"); 
   if ( ps.Contains("MinBiasDPhiHistos") ) minBiasDeltaPhiHistos_ = ps.Get<bool>("MinBiasDPhiHistos"); 
 
   if ( ps.Contains("AddMuon") ) addMuon_ = ps.Get<bool>("AddMuon"); 
+  if ( ps.Contains("OnlyGenPtHat") ) onlyGenPtHat_ = ps.Get<bool>("OnlyGenPtHat"); 
+  if ( ps.Contains("OnlyFull") ) onlyFull_ = ps.Get<bool>("OnlyFull"); 
+  if ( ps.Contains("UseMeff") ) useMeff_ = ps.Get<bool>("UseMeff"); 
   
   // Required parameters
   maxLeadingJetEta_ = ps.Get<double>("MaxLeadingJetEta");
@@ -244,7 +292,7 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
     }
   }
 
-  // Parse monitor trigger strings
+  // Parse monitor reference trigger strings
   if ( !monitor.empty() ) {
     unsigned int ii = 0;
     unsigned int jj = 0;
@@ -269,6 +317,33 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
       }
       std::cout << std::endl;
     }
+  }
+
+  // Parse monitor trigger strings
+  if ( !monitorRef.empty() ) {
+    unsigned int ii = 0;
+    unsigned int jj = 0;
+    monitorRef_.clear();
+    monitorRef_.resize( htNbins_, vstring(100) );
+    vstring::const_iterator iter = monitorRef.begin();
+    vstring::const_iterator jter = monitorRef.end();
+    for ( ; iter != jter; ++iter ) { 
+      if ( *iter == "" ) { monitorRef_[ii].resize(jj); ii++; jj = 0; }
+      else { 
+	if ( ii < monitorRef_.size() && jj < monitorRef_[ii].size() ) { monitorRef_[ii][jj] = *iter; } 
+	else { break; }
+	jj++; 
+      }
+    }
+    if ( ii < htNbins_ ) { monitorRef_.resize(ii); monitorRef_.resize(htNbins_,vstring(monitorRef_[ii-1])); }
+
+//     for ( vvstring::const_iterator i = monitorRef_.begin(); i != monitorRef_.end(); ++i ) {
+//       std::cout << i->size() << ": ";
+//       for ( vstring::const_iterator j = i->begin(); j != i->end(); ++j ) {
+// 	std::cout << "\"" << *j << "\" ";
+//       }
+//       std::cout << std::endl;
+//     }
   }
   
   // Parse vertex reweight factors
@@ -341,6 +416,7 @@ QcdBkgdEst::~QcdBkgdEst() {
 // -----------------------------------------------------------------------------
 //
 std::ostream& QcdBkgdEst::Description( std::ostream& ss ) {
+
   ss << "[QcdBkgdEst::Description]" 
      << std::endl
      << " Writing histograms to directory \"" << dirName_ << "\""
@@ -354,16 +430,16 @@ std::ostream& QcdBkgdEst::Description( std::ostream& ss ) {
      << " |  HT  |    (pT1,pT2,pT3) | Meff |          (x1,x2,x3) |" << std::endl
      << " --------------------------------------------------------" << std::endl;
   for ( uint ii = 0; ii < htNbins_; ++ii ) {
-    double ht = htBins_[ii];
+    double ht = useMeff_ ? htBins_[ii] - htPt3Bins_[ii] : htBins_[ii];
     double pt1 = htPt1Bins_[ii];
     double pt2 = htPt2Bins_[ii];
     double pt3 = htPt3Bins_[ii];
-    double meff = htBins_[ii] + htPt3Bins_[ii];
+    double meff = useMeff_ ? htBins_[ii] : htBins_[ii] + htPt3Bins_[ii];
     ss << " | " << std::setw(4) << std::setprecision(3) << ht
        << " | (" << std::setw(4) << std::setprecision(3) << pt1
        << "," << std::setw(4) << std::setprecision(3) << pt2
        << "," << std::setw(4) << std::setprecision(3) << pt3
-       << ") | " << std::setw(4) << std::setprecision(3) << meff
+       << ") | " << std::setw(4) << std::setprecision(4) << meff
        << " | (" << std::setw(5) << std::setprecision(3) << (norm_*pt1/meff)
        << "," << std::setw(5) << std::setprecision(3) << (norm_*pt2/meff) 
        << "," << std::setw(5) << std::setprecision(3) << (norm_*pt3/meff) 
@@ -379,7 +455,7 @@ std::ostream& QcdBkgdEst::Description( std::ostream& ss ) {
 // -----------------------------------------------------------------------------
 //
 void QcdBkgdEst::binning() {
-
+  
   // HT binning
   if ( htBins_.empty() ) {
     for ( uint ii = 0; ii < htNbins_; ++ii ) { 
@@ -388,22 +464,24 @@ void QcdBkgdEst::binning() {
     }
     htBins_.push_back(htXhigh_);
   }
-
+  
   // Normalisation: x_{1} + x_{2} + x_{3} = norm
-
+  
   // pT thresholds that scale with HT
   double meff_default = htBins_[ht_] + pt3_;
   double x3_default = ( norm_ * pt3_ ) / meff_default; 
   double x3_factor = ( norm_ - x3_default ) / x3_default;
-  for ( unsigned int iht = 0; iht < htNbins_; ++iht ) {
+
+  for ( unsigned int iht = 0; iht <= htNbins_; ++iht ) {
     double ht = htBins_[iht];
     double pt3 = ht / x3_factor;
-    double meff = pt3 + ht;
+    double meff = ht + pt3;
     double pt1 = pt1_ * meff / meff_default;
     double pt2 = pt2_ * meff / meff_default;
     htPt1Bins_.push_back( scale_ && ( ht <= htBins_[ht_] || scaleSignal_ ) ? pt1 : pt1_ );
     htPt2Bins_.push_back( scale_ && ( ht <= htBins_[ht_] || scaleSignal_ ) ? pt2 : pt2_ );
     htPt3Bins_.push_back( scale_ && ( ht <= htBins_[ht_] || ( scaleSignal_ && scaleSingle_ ) ) ? pt3 : pt3_ );
+
   }
 
   // Apply offset to HT binning
@@ -428,8 +506,9 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
   // Histogram of pT hat 
   try {
     double pt_hat = ev.pthat(); 
-    if ( hPtHat_[0] ) hPtHat_[0]->Fill( pt_hat, weight ); 
+    if ( hGenPtHat_[0] ) hGenPtHat_[0]->Fill( pt_hat, weight ); 
   } catch (...){}
+  if ( onlyGenPtHat_ ) { return true; }
   
   // SMS 
   try {
@@ -493,8 +572,8 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
   
   // Number of vertices
   int nvertices = 0;
-  if ( vertexHisto_ ) {
-    for ( uint ii = 0; ii < ev.GetVertexSize(); ++ii ) {
+  if ( vertexHistos_ ) {
+    for ( int ii = 0; ii < ev.GetVertexSize(); ++ii ) {
       if( !ev.GetvertexIsFake(ii) && 
 	  fabs( ev.GetvertexPosition(ii).Z() ) < 24. && 
 	  ev.GetvertexNdof(ii)> 4 && 
@@ -508,8 +587,8 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     
     // Re-weight according to nBVertex distributions
     reweight = 1.;
-    if ( !reweight_.empty() && ibin < reweight_.size() ) {
-      if( nvertices < reweight_[ibin].size() ) {
+    if ( !reweight_.empty() && ibin < (int)reweight_.size() ) {
+      if( nvertices < (int)reweight_[ibin].size() ) {
 	reweight = reweight_[ibin][nvertices];
 // 	std::cout << " jbin " << jbin
 // 		  << " ibin " << ibin
@@ -536,9 +615,13 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     double x1_reco = 0.;
     double x2_reco = 0.;
     
+    // Baby jets for dead ECAL cut
+    std::vector<LorentzV> baby_jets_for_dead_ecal; 
+    baby_jets_for_dead_ecal.reserve(20);
+    
     // Baby jets
     std::vector<LorentzV> baby_jets; 
-    baby_jets.reserve(10);
+    baby_jets.reserve(20);
     LorentzV baby_mht(0.,0.,0.,0.);
     double baby_ht = 0.;
     
@@ -550,15 +633,23 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 	reco.push_back(**ireco); 
 	ht_reco += (*ireco)->Et();
 	mht_reco -= **ireco;
-      } else if ( (*ireco)->Pt() > 10. ) {
-	baby_jets.push_back(**ireco); 
-	baby_ht += (*ireco)->Et();
-	baby_mht -= **ireco;
+      } else {
+	double scale = htPt3Bins_[0] > 0. ? pt3_threshold / htPt3Bins_[0] : 1.;
+	if ( (*ireco)->Pt() > scale*5. ) {
+	  baby_jets.push_back(**ireco); 
+	  baby_ht += (*ireco)->Et();
+	  baby_mht -= **ireco;
+	}
+	if ( (*ireco)->Pt() > 10. ) {
+	  baby_jets_for_dead_ecal.push_back(**ireco); 
+	}
       }
     }
 
     // Meff
     meff_reco = ht_reco + mht_reco.Pt();
+
+    double var_reco = useMeff_ ? meff_reco : ht_reco;
 
     // Calc AlphaT and Dalitz variables
     std::vector<bool> pseudo_reco;
@@ -572,7 +663,7 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     for ( ; iodd != jodd; ++iodd ) {
       if ( (*iodd)->Pt() >= pt3_threshold ) { odd_jet_veto = true; }
     }
-      
+    
     // Bad muon in jets
     bool bad_muon_in_jet = false;
     std::vector<Event::Lepton>::const_iterator imuon = ev.LD_Muons().begin();
@@ -607,22 +698,25 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     correct_reco_bin = false;
     double ht_lower = htBins_[ibin];
     double ht_upper = ( (nbins-ibin) != 1 ? htBins_[ibin+1] : 10000. ); 
-    if ( inclusive_ ) { if ( ht_reco > ht_lower ) { correct_reco_bin = true; } }
-    else { if ( ht_reco > ht_lower && ht_reco < ht_upper ) { correct_reco_bin = true; } }
-    
-//     std::cout << " event " << ev.GetEventNumber()
-// 	      << " ibin " << ibin
-// 	      << " htBins_[ibin] " << htBins_[ibin]
-// 	      << " ht_lower " << ht_lower
-// 	      << " ht_upper " << ht_upper
-// 	      << " ht_reco " << ht_reco
-// 	      << " reco.size() " << reco.size()
-// 	      << " nodd " << odd.size()
-// 	      << " correct_reco_bin " << correct_reco_bin
-// 	      << std::endl;
+    if ( inclusive_ ) { if ( var_reco > ht_lower ) { correct_reco_bin = true; } }
+    else { if ( var_reco > ht_lower && var_reco < ht_upper ) { correct_reco_bin = true; } }
+
+//     if (correct_reco_bin)
+//       std::cout << std::fixed << std::setprecision(0)
+// 		<< "# " << ev.GetCurrentEntry()
+// 		<< " e " << ev.GetEventNumber()
+// 		<< " b " << ibin
+// 		<< " ht " << htBins_[ibin]
+// 	//<< " ht_lower " << ht_lower
+// 	//<< " ht_upper " << ht_upper
+// 		<< " v " << var_reco
+// 		<< " j " << reco.size()
+// 	//<< " nodd " << odd.size()
+// 	//<< " correct_reco_bin " << correct_reco_bin
+// 		<< std::endl;
     
     // Check if event passes "dead ECAL" cut
-    bool pass_dead_ecal = dead_ ? dead_->Process( ev, reco, baby_jets ) : true;
+    bool pass_dead_ecal = dead_ ? dead_->Process( ev, reco, baby_jets_for_dead_ecal ) : true;
       
     // Track Sum Pt over HT cut
     bool pass_pt_over_ht = passVertexSumPtOverHt( ev, ht_reco );
@@ -641,11 +735,45 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     // Check if correct reco bin
     if ( correct_reco_bin ) { 
       pass_cntr = 1; 
-
-//       std::cout << " correct reco bin " << htBins_[ibin] << " " << ht_reco << std::endl;
       
       // Record number of jets 
       njets = reco.size();
+
+//       std::cout << " correct reco bin " << htBins_[ibin] << " " << var_reco << std::endl;
+//       std::cout << "[QcdBkgdEst::Process] Event Summary:" << std::endl
+// 		<< " Entry: " << ev.GetCurrentEntry() << std::endl
+// 		<< " Event: " << ev.GetEventNumber() << std::endl
+// 	//<< " Signal trigger prescale: " << signal
+// 	//<< " Monitor trigger prescale: " << monitor
+// 		<< " Njets: " << reco.size() << std::endl
+// 		<< " Binning variable: " << var_reco << std::endl
+// 		<< " HT: " << ht_reco << std::endl
+// 		<< " (HT bin: " << ibin << ")" << std::endl
+// 		<< " MHT: " << mht_reco.Pt() << std::endl
+// 		<< " Meff: " << meff_reco << std::endl
+// 		<< " AlphaT: " << at_reco << std::endl
+// 		<< " MET consistency: " << baby_val << std::endl
+// 		<< " x1: " << x1_reco << std::endl
+// 		<< " x2: " << x2_reco << std::endl
+// 		<< " njets: " << reco.size() << std::endl
+// 		<< " Njets>=2: " << jet_multiplicity << std::endl
+// 		<< " pT1>threshold: " << leading_jet_pt << std::endl
+// 		<< " pT2>threshold: " << second_jet_pt << std::endl
+// 		<< " eta1<threshold: " << leading_jet_eta << std::endl
+// 		<< " OddJet: " << odd_jet_veto << std::endl
+// 		<< " BadMuonInJet: " << bad_muon_in_jet << std::endl
+// 		<< " PassDeadECAL: " << pass_dead_ecal << std::endl
+// 		<< " PassMetConsistency: " << pass_baby_cut << std::endl;
+//       std::vector<LorentzV>::const_iterator ireco = reco.begin();
+//       std::vector<LorentzV>::const_iterator jreco = reco.end();
+//       for ( ; ireco != jreco; ++ireco ) {
+// 	std::cout << "  ET: " << ireco->Et() 
+// 		  << "  E: " << ireco->E() 
+// 		  << "  pT: " << ireco->Pt() 
+// 		  << " eta: " << ireco->eta()
+// 		  << " phi: " << ireco->phi() 
+// 		  << std::endl;
+//       }
 
 //       std::cout << " signal.size(): " << ( signal_.size() ? signal_[ibin].size() : 0 )
 //  		<< " monitor.size(): " << ( monitor_.size() ? monitor_[ibin].size() : 0 )
@@ -670,12 +798,18 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 		  if ( !bad_muon_in_jet ) {
 		    pass_cntr = 8; 
 
-		    // Number of vertices
-		    if ( vertexHisto_ ) {
-		      fill( reco.size(), hNumVertices_[0], nvertices, prescale*weight*reweight ); 
-		      fill( reco.size(), hNumVertices_[ibin+1], nvertices, prescale*weight*reweight ); 
+		    // AlphaT histos
+		    if ( atHistos_ ) {
+		      fill( reco.size(), hAlphaT_[0], at_reco, prescale*weight*reweight ); 
+		      fill( reco.size(), hAlphaT_[ibin+1], at_reco, prescale*weight*reweight ); 
 		    }
 
+		    // Dalitz plots
+		    if ( dalitzHistos_ ) {
+		      fill( reco.size(), hDalitz_[0], x2_reco, x1_reco, prescale*weight*reweight ); 
+		      fill( reco.size(), hDalitz_[ibin+1], x2_reco, x1_reco, prescale*weight*reweight ); 
+		    }
+		    
 		    // AlphaT loop
 		    for ( uint iat = 0; iat < ( noQcd_ ? 1 : alphaT_.size() ); ++iat ) {
 		      
@@ -690,57 +824,100 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 			if ( iat == aT_ ) pass_cntr = 9; 
 
 			// Defines HT bin to be used in case of inclusive binning
-			double ht_binned = inclusive_ ? htBins_[ibin] + 1.e-3 : ht_reco;
+			double ht_binned = inclusive_ ? htBins_[ibin] + 1.e-3 : var_reco;
 			
 			// Histograms after "bare" AlphaT cut
 			fill( reco.size(), hPassAlphaT_[iat], ht_binned, prescale*weight*reweight ); 
-	
+			
+			// Additional histograms 
+			
+			if ( jetPtHistos_ ) {
+			  for ( uint ijet = 0; ijet < common.size(); ++ijet ) {
+			    fill( ijet, hAllJetsPt_[0][iat], common[ijet]->Pt(), prescale*weight*reweight ); 
+			    fill( ijet, hAllJetsPt_[ibin+1][iat], common[ijet]->Pt(), prescale*weight*reweight ); 
+			  }
+			  for ( uint ijet = 0; ijet < reco.size(); ++ijet ) {
+			    fill( ijet, hRecoJetsPt_[0][iat], reco[ijet].Pt(), prescale*weight*reweight ); 
+			    fill( ijet, hRecoJetsPt_[ibin+1][iat], reco[ijet].Pt(), prescale*weight*reweight ); 
+			  }
+			  for ( uint ijet = 0; ijet < baby_jets.size(); ++ijet ) {
+			    fill( ijet, hBabyJetsPt_[0][iat], baby_jets[ijet].Pt(), prescale*weight*reweight ); 
+			    fill( ijet, hBabyJetsPt_[ibin+1][iat], baby_jets[ijet].Pt(), prescale*weight*reweight ); 
+			  }
+			}
+			
+			if ( vertexHistos_ ) {
+			  fill( reco.size(), hNumVertex_[0][iat], nvertices, prescale*weight*reweight ); 
+			  fill( reco.size(), hNumVertex_[ibin+1][iat], nvertices, prescale*weight*reweight ); 
+			}
+
+			if ( htHistos_ ) {
+			  fill( reco.size(), hHtDistr_[0][iat], ht_reco, prescale*weight*reweight ); 
+			  fill( reco.size(), hHtDistr_[ibin+1][iat], ht_reco, prescale*weight*reweight ); 
+			}
+
+			if ( meffHistos_ ) {
+			  fill( reco.size(), hMeffDistr_[0][iat], meff_reco, prescale*weight*reweight ); 
+			  fill( reco.size(), hMeffDistr_[ibin+1][iat], meff_reco, prescale*weight*reweight ); 
+			}
+
+			if ( mhtOverHtHistos_ ) {
+			  fill( reco.size(), hMhtOverHtDistr_[0][iat], (ht_reco>0.?mht_reco.Pt()/ht_reco:0.), prescale*weight*reweight ); 
+			  fill( reco.size(), hMhtOverHtDistr_[ibin+1][iat], (ht_reco>0.?mht_reco.Pt()/ht_reco:0.), prescale*weight*reweight ); 
+			}
+
+			if ( mhtOverMeffHistos_ ) {
+			  fill( reco.size(), hMhtOverMeffDistr_[0][iat], (meff_reco>0.?mht_reco.Pt()/meff_reco:0.), prescale*weight*reweight ); 
+			  fill( reco.size(), hMhtOverMeffDistr_[ibin+1][iat], (meff_reco>0.?mht_reco.Pt()/meff_reco:0.), prescale*weight*reweight ); 
+			}
+			
 			if ( mhtHistos_ ) {
 			  fill( reco.size(), hMhtDistr_[0][iat], mht_reco.Pt(), prescale*weight*reweight ); 
 			  fill( reco.size(), hMhtDistr_[ibin+1][iat], mht_reco.Pt(), prescale*weight*reweight ); 
 			}
-		
+			
+			if ( multiHistos_ ) {
+			  fill( reco.size(), hMultiplicity_[0][iat], reco.size(), prescale*weight*reweight ); 
+			  fill( reco.size(), hMultiplicity_[ibin+1][iat], reco.size(), prescale*weight*reweight ); 
+			}
+			if ( minBiasDeltaPhiHistos_ ) {
+			  fill( reco.size(), hMinBiasDeltaPhi_[0][iat], min_bias_dphi, prescale*weight*reweight ); 
+			  fill( reco.size(), hMinBiasDeltaPhi_[ibin+1][iat], min_bias_dphi, prescale*weight*reweight ); 
+			}
+			
 			// Histograms filled after cleaning cuts
 			bool ok = ( noCleaningInDenom_ && ( iat == 0 ) );
 			if ( pass_dead_ecal || ok ) { 
 			  if ( iat == aT_ ) pass_cntr = 10; 
-			  fill( reco.size(), hPassDeadEcal_[iat], ht_binned, prescale*weight*reweight ); 
+			  if ( !onlyFull_ ) fill( reco.size(), hPassDeadEcal_[iat], ht_binned, prescale*weight*reweight ); 
 	  
 			  // Additional histograms
 			  if ( babyJetsHistos_ ) {
 			    fill( reco.size(), hBabyJets_[0][iat], baby_val, prescale*weight*reweight ); 
 			    fill( reco.size(), hBabyJets_[ibin+1][iat], baby_val, prescale*weight*reweight ); 
 			  }
-	  
+
+			  // Additional histograms
+			  if ( babyJetsMhtHistos_ ) {
+			    fill( reco.size(), hBabyJetsMht_[0][iat], baby_mht.Pt(), prescale*weight*reweight ); 
+			    fill( reco.size(), hBabyJetsMht_[ibin+1][iat], baby_mht.Pt(), prescale*weight*reweight ); 
+			  }
+
 			  if ( pass_baby_cut || ok ) { 
 			    if ( iat == aT_ ) pass_cntr = 11; 
-			    fill( reco.size(), hPassBaby_[iat], ht_binned, prescale*weight*reweight ); 
+			    if ( !onlyFull_ ) fill( reco.size(), hPassBaby_[iat], ht_binned, prescale*weight*reweight ); 
 
 			    if ( pass_pt_over_ht || ok ) { 
 			      if ( iat == aT_ ) pass_cntr = 12; 
-			      fill( reco.size(), hPassTrackless_[iat], ht_binned, prescale*weight*reweight ); 
+			      if ( !onlyFull_ ) fill( reco.size(), hPassTrackless_[iat], ht_binned, prescale*weight*reweight ); 
 	      
 			      if ( pass_rechit || ok ) { 
 				if ( iat == aT_ ) pass_cntr = 13; 
 				fill( reco.size(), hPassRecHit_[iat], ht_binned, prescale*weight*reweight ); 
 		
-				// Additional histograms 
-				if ( htHistos_ ) {
-				  fill( reco.size(), hHtDistr_[0][iat], ht_reco, prescale*weight*reweight ); 
-				  fill( reco.size(), hHtDistr_[ibin+1][iat], ht_reco, prescale*weight*reweight ); 
-				}
-				if ( multiHistos_ ) {
-				  fill( reco.size(), hMultiplicity_[0][iat], reco.size(), prescale*weight*reweight ); 
-				  fill( reco.size(), hMultiplicity_[ibin+1][iat], reco.size(), prescale*weight*reweight ); 
-				}
-				if ( minBiasDeltaPhiHistos_ ) {
-				  fill( reco.size(), hMinBiasDeltaPhi_[0][iat], min_bias_dphi, prescale*weight*reweight ); 
-				  fill( reco.size(), hMinBiasDeltaPhi_[ibin+1][iat], min_bias_dphi, prescale*weight*reweight ); 
-				}
-		
 				if ( pass_min_bias_dphi || ok ) { 
 				  if ( iat == aT_ ) pass_cntr = 14; 
-				  fill( reco.size(), hPassMinBiasDPhi_[iat], ht_binned, prescale*weight*reweight ); 
+				  if ( !onlyFull_ ) fill( reco.size(), hPassMinBiasDPhi_[iat], ht_binned, prescale*weight*reweight ); 
 				  
 				} // MinBiasDPhi cut
 			      } // RecHit cleaning cut
@@ -756,41 +933,50 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 		    // 		       pass_dead_ecal &&
 		    // 		       pass_baby_cut &&
 		    // 		       pass_pt_over_ht ) { 
-
+		    
 		    // 		    if ( filter_ >= nbins || ibin == filter_ ) { 
 		    // 		      keep_event = true; 
 		    // 		      if ( verbose_ ) { 
-		    // 			std::cout << "[QcdBkgdEst::Process] Event Summary:" << std::endl
-		    // 				  << " Entry: " << ev.GetCurrentEntry() << std::endl
-		    // 				  << " Event: " << ev.GetEventNumber() << std::endl
-		    // 				  << " Signal trigger prescale: " << signal
-		    // 				  << " Monitor trigger prescale: " << monitor
-		    // 				  << " Njets: " << reco.size() << std::endl
-		    // 				  << " HT: " << ht_reco << std::endl
-		    // 				  << " (HT bin: " << ibin << ")" << std::endl
-		    // 				  << " MHT: " << mht_reco.Pt() << std::endl
-		    // 				  << " AlphaT: " << at_reco << std::endl
-		    // 				  << " Meff: " << meff_reco << std::endl
-		    // 				  << " MET consistency: " << baby_val << std::endl
-		    // 				  << " x1: " << x1_reco << std::endl
-		    // 				  << " x2: " << x2_reco << std::endl
-		    // 				  << " njets: " << reco.size() << std::endl;
-		    // 			std::vector<LorentzV>::const_iterator ireco = reco.begin();
-		    // 			std::vector<LorentzV>::const_iterator jreco = reco.end();
-		    // 			for ( ; ireco != jreco; ++ireco ) {
-		    // 			  std::cout << "  ET: " << ireco->Et() 
-		    // 				    << "  E: " << ireco->E() 
-		    // 				    << "  pT: " << ireco->Pt() 
-		    // 				    << " eta: " << ireco->eta()
-		    // 				    << " phi: " << ireco->phi() 
-		    // 				    << std::endl;
-		    // 			}
+// 		    			std::cout << "[QcdBkgdEst::Process] Event Summary:" << std::endl
+// 		    				  << " Entry: " << ev.GetCurrentEntry() << std::endl
+// 		    				  << " Event: " << ev.GetEventNumber() << std::endl
+// 					  //<< " Signal trigger prescale: " << signal
+// 					  //<< " Monitor trigger prescale: " << monitor
+// 		    				  << " Njets: " << reco.size() << std::endl
+// 		    				  << " Binning variable: " << var_reco << std::endl
+// 		    				  << " HT: " << ht_reco << std::endl
+// 		    				  << " (HT bin: " << ibin << ")" << std::endl
+// 		    				  << " MHT: " << mht_reco.Pt() << std::endl
+// 		    				  << " Meff: " << meff_reco << std::endl
+// 		    				  << " AlphaT: " << at_reco << std::endl
+// 		    				  << " MET consistency: " << baby_val << std::endl
+// 		    				  << " x1: " << x1_reco << std::endl
+// 		    				  << " x2: " << x2_reco << std::endl
+// 		    				  << " njets: " << reco.size() << std::endl
+// 						  << " Njets>=2: " << jet_multiplicity << std::endl
+// 						  << " pT1>threshold: " << leading_jet_pt << std::endl
+// 						  << " pT2>threshold: " << second_jet_pt << std::endl
+// 						  << " eta1<threshold: " << leading_jet_eta << std::endl
+// 						  << " OddJet: " << odd_jet_veto << std::endl
+// 						  << " BadMuonInJet: " << bad_muon_in_jet << std::endl
+// 						  << " PassDeadECAL: " << pass_dead_ecal << std::endl
+// 						  << " PassMetConsistency: " << pass_baby_cut << std::endl;
+// 		    			std::vector<LorentzV>::const_iterator ireco = reco.begin();
+// 		    			std::vector<LorentzV>::const_iterator jreco = reco.end();
+// 		    			for ( ; ireco != jreco; ++ireco ) {
+// 		    			  std::cout << "  ET: " << ireco->Et() 
+// 		    				    << "  E: " << ireco->E() 
+// 		    				    << "  pT: " << ireco->Pt() 
+// 		    				    << " eta: " << ireco->eta()
+// 		    				    << " phi: " << ireco->phi() 
+// 		    				    << std::endl;
+// 		    			}
 		    // 		      }
 		    // 		    }
 		    // 		  }
       
 		    //       // Determine HT used to fill histograms
-		    //       double ht_binned = inclusive_ ? htBins_[ibin] + 1.e-3 : ht_reco;
+		    //       double ht_binned = inclusive_ ? htBins_[ibin] + 1.e-3 : var_reco;
       
 		    //       // HT distributions
 		    //       for ( uint iat = 0; iat < ( noQcd_? 1 : alphaT_.size() ); ++iat ) {
@@ -867,7 +1053,7 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     // -------------------- Debug --------------------
 
 //     if ( true && correct_reco_bin ) {
-//       //if ( true ) {
+// //       //if ( true ) {
 //       std::cout << "[QcdBkgdEst::Process] RECO info:" << std::endl
 // 		<< " Entry: " << ev.GetCurrentEntry() << std::endl
 // 		<< " Event: " << ev.GetEventNumber() << std::endl
@@ -946,8 +1132,8 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
   
   // Cut flow histograms
   if ( cutFlowHistos_ ) {
-    if ( njets > nMax_ ) { njets = nMax_; }
-    for ( uint ipass = 0; ipass <= pass_cntr; ++ipass ) {
+    if ( njets > (int)nMax_ ) { njets = nMax_; }
+    for ( int ipass = 0; ipass <= pass_cntr; ++ipass ) {
       hCutFlow_[0][0]->Fill( ipass*1., prescale*weight*reweight ); 
       hCutFlow_[ibin+1][0]->Fill( ipass*1., prescale*weight*reweight ); 
       hCutFlow_[0][njets]->Fill( ipass*1., prescale*weight*reweight ); 
@@ -968,17 +1154,36 @@ void QcdBkgdEst::calcDalitzVars( const std::vector<LorentzV>& jets,
 				 double& x2 ) {
   
   // Construct pseudo di-jets
+  LorentzV mht_massless(0.,0.,0.,0.);
   std::vector<LorentzV> dijets(2,LorentzV(0.,0.,0.,0.));
   for ( unsigned int i = 0; i < jets.size(); ++i ) {
-    if ( pseudo[i] ) { dijets[0] += jets[i]; }
-    else { dijets[1] += jets[i]; }
+    mht_massless -= massless(jets[i]);
+//     std::cout << " i: " << i
+// 	      << " massive ET: " << jets[i].Et()
+// 	      << " pT: " << jets[i].Pt()
+// 	      << " massless ET: " << massless(jets[i]).Et()
+// 	      << " pT: " << massless(jets[i]).Pt()
+// 	      << std::endl;
+    if ( pseudo[i] ) { dijets[0] += massless(jets[i]); }
+    else             { dijets[1] += massless(jets[i]); }
   }
-  std::sort( dijets.begin(), dijets.end(), SortByPt );
-  
-  // Calculate x1, x2
-  x1 = ( norm_ * dijets[0].Pt() ) / ( dijets[0].Pt() + dijets[1].Pt() + mht.Pt() );
-  x2 = ( norm_ * dijets[1].Pt() ) / ( dijets[0].Pt() + dijets[1].Pt() + mht.Pt() );
+  std::sort( dijets.begin(), dijets.end(), SortByEt );
 
+  // Calculate x1, x2
+  x1 = ( norm_ * dijets[0].Et() ) / ( dijets[0].Et() + dijets[1].Et() + mht_massless.Pt() );
+  x2 = ( norm_ * dijets[1].Et() ) / ( dijets[0].Et() + dijets[1].Et() + mht_massless.Pt() );
+
+//   std::cout << " ET1: " << dijets[0].Et()
+// 	    << " pT1: " << dijets[0].Pt()
+// 	    << " ET2: " << dijets[1].Et()
+// 	    << " pT2: " << dijets[1].Pt()
+// 	    << " MHT: " << mht_massless.Pt()
+// 	    << " HT: " << ( dijets[0].Et() + dijets[1].Et() )
+// 	    << " Meff: " << ( dijets[0].Et() + dijets[1].Et() + mht_massless.Pt() )
+// 	    << " x1: " << x1
+// 	    << " x2: " << x2
+// 	    << std::endl;
+  
 }
 
 // // -----------------------------------------------------------------------------
@@ -1013,7 +1218,7 @@ void QcdBkgdEst::fill( uint multiplicity,
 		       double weight ) {
   
   if ( his.empty() ) { return; }
-  if ( multiplicity < nMin_ ) { return; }
+  //if ( multiplicity < nMin_ ) { return; }
   
   if ( his[0] ) his[0]->Fill( valx, weight ); 
   
@@ -1079,13 +1284,14 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 
   try {
     ev.pthat(); 
-    BookHistArray( hPtHat_,
+    BookHistArray( hGenPtHat_,
 		   "GenPtHat",
 		   ";#hat{p_{T}} [GeV];", 
 		   400,0.,2000.,
 		   1, 0, 1, true );
   } catch (...){}
-
+  if ( onlyGenPtHat_ ) { return; }
+  
   try {
     if ( ev.SMSvalid.enabled() && ev.SMSvalid() ) { 
       BookHistArray( hSMS_,
@@ -1140,16 +1346,88 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
     }
 
   }
-    
-  if ( vertexHisto_ ) {
-    hNumVertices_.resize( htNbins_+1, vTH1D() );
+  
+  if ( jetPtHistos_ ) {
+
+    hAllJetsPt_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "JetsAllPt_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hAllJetsPt_[ii][jj], 
+		       ss.str(),
+		       ";P_{T}^{all};", 
+		       500, 0., 1000., 
+		       nMax_+1, 0, 1, true );
+      }
+    }
+
+    hRecoJetsPt_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "JetsRecoPt_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hRecoJetsPt_[ii][jj], 
+		       ss.str(),
+		       ";P_{T}^{jet};", 
+		       500, 0., 1000., 
+		       nMax_+1, 0, 1, true );
+      }
+    }
+
+    hBabyJetsPt_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "JetsBabyPt_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hBabyJetsPt_[ii][jj], 
+		       ss.str(),
+		       ";P_{T}^{baby};", 
+		       500, 0., 1000., 
+		       nMax_+1, 0, 1, true );
+      }
+    }
+
+  }
+  
+  if ( vertexHistos_ ) {
+    hNumVertex_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "NumVertex_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hNumVertex_[ii][jj], 
+		       ss.str(),
+		       ";N_{vertex};", 
+		       51, -0.5, 50.5, 
+		       nMax_+1, 0, 1, true );
+      }
+    }
+  }
+
+  if ( atHistos_ ) {
+    hAlphaT_.resize( htNbins_+1, vTH1D() );
     for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
       std::stringstream ss;
-      ss << "NumVertices_" << ht(ii);
-      BookHistArray( hNumVertices_[ii], 
+      ss << "AlphaT_" << ht(ii);
+      BookHistArray( hAlphaT_[ii], 
 		     ss.str(),
-		     ";N_{vertex};", 
-		     21, -0.5, 20.5, 
+		     ";#alpha_{T};", 
+		     200, 0., 2., 
+		     nMax_+1, 0, 1, true );
+    }
+  }
+  
+  if ( dalitzHistos_ ) {
+    hDalitz_.resize( htNbins_+1, vTH2D() );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      std::stringstream ss;
+      ss << "Dalitz_" << ht(ii);
+      BookHistArray( hDalitz_[ii], 
+		     ss.str(),
+		     ";x_{2};x_{1};", 
+		     100, 0., 1., 
+		     50, 0.5, 1., 
 		     nMax_+1, 0, 1, true );
     }
   }
@@ -1163,27 +1441,99 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 	BookHistArray( hMultiplicity_[ii][jj], 
 		       ss.str(),
 		       ";N_{jet};", 
-		       21, -0.5, 20.5, 
+		       51, -0.5, 50.5, 
 		       1, 0, 1, true );
       }
     }
   }
   
   if ( htHistos_ ) {
+
+    double low = 1.*int( useMeff_ ? htXlow_ - htPt3Bins_[0] : htXlow_ );
+    double high = 1.*int( useMeff_ ? htXhigh_ - htPt3Bins_[htNbins_] : htXhigh_ );
+    int nbin = int(high - low);
+
     hHtDistr_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
     for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
       for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
 	std::stringstream ss;
-	ss << "HtDistrPassTrackless_" << ht(ii) << "_" << at(jj);
+	ss << "HtDistr_" << ht(ii) << "_" << at(jj);
 	BookHistArray( hHtDistr_[ii][jj],
 		       ss.str(),
 		       ";HT (GeV);", 
-		       int((htXhigh_-htXlow_)/10.),  htXlow_, htXhigh_, 
+		       nbin, low, high,
+		       nMax_+1, 0, 1, true );
+      }
+    }
+
+  }
+
+  if ( meffHistos_ ) {
+
+    double low = 1.*int( useMeff_ ? htXlow_ : htXlow_ + htPt3Bins_[0] );
+    double high = 1.*int( useMeff_ ? htXhigh_ : htXhigh_ + htPt3Bins_[htNbins_] );
+    int nbin = int(high - low);
+
+    hMeffDistr_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "MeffDistr_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hMeffDistr_[ii][jj],
+		       ss.str(),
+		       ";M_{eff} (GeV);",
+		       nbin, low, high,
+		       nMax_+1, 0, 1, true );
+      }
+    }
+
+  }
+  
+  if ( mhtHistos_ ) {
+    hMhtDistr_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "MhtDistr_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hMhtDistr_[ii][jj],
+		       ss.str(),
+		       ";MHT (GeV);", 
+		       500, 0., 1000., 
 		       nMax_+1, 0, 1, true );
       }
     }
   }
 
+  if ( mhtOverHtHistos_ ) {
+    hMhtOverHtDistr_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "MhtOverHtDistr_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hMhtOverHtDistr_[ii][jj],
+		       ss.str(),
+		       ";MHT/HT (GeV);", 
+		       500, 0., 1., 
+		       nMax_+1, 0, 1, true );
+      }
+    }
+  }
+
+  if ( mhtOverMeffHistos_ ) {
+    hMhtOverMeffDistr_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "MhtOverMeffDistr_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hMhtOverMeffDistr_[ii][jj],
+		       ss.str(),
+		       ";MHT/Meff (GeV);", 
+		       500, 0., 1., 
+		       nMax_+1, 0, 1, true );
+      }
+    }
+  }
+  
   if ( minBiasDeltaPhiHistos_ ) {
     hMinBiasDeltaPhi_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
     for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
@@ -1193,7 +1543,7 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 	BookHistArray( hMinBiasDeltaPhi_[ii][jj], 
 		       ss.str(),
 		       ";#Delta#phi^{*}_{min} [radians];", 
-		       32, 0., 3.2,
+		       320, 0., 3.2,
 		       nMax_+1, 0, 1, true );
       }
     }
@@ -1208,7 +1558,22 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 	BookHistArray( hBabyJets_[ii][jj],
 		       ss.str(),
 		       ";Baby jet cleaning variable;", 
-		       200,0.,10.,
+		       500,0.,10.,
+		       nMax_+1, 0, 1, true );
+      }
+    }
+  }
+
+  if ( babyJetsMhtHistos_ ) {
+    hBabyJetsMht_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
+    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
+      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
+	std::stringstream ss;
+	ss << "BabyJetsMht_" << ht(ii) << "_" << at(jj);
+	BookHistArray( hBabyJetsMht_[ii][jj],
+		       ss.str(),
+		       ";Baby jets MHT;", 
+		       500,0.,1000.,
 		       nMax_+1, 0, 1, true );
       }
     }
@@ -1220,42 +1585,57 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
     ss << "HtAfterAlphaT_" << at(ii);
     BookHistArray( hPassAlphaT_[ii], 
 		   ss.str(),
-		   ";HT (GeV);", 
+		   useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
 		   htNbins_, &htBins_.front(), 
 		   nMax_+1, 0, 1, true );
   }
   
-  hPassDeadEcal_.resize( alphaT_.size(), vTH1D() );
-  for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
-    std::stringstream ss;
-    ss << "HtAfterDeadEcal_" << at(ii);
-    BookHistArray( hPassDeadEcal_[ii], 
-		   ss.str(),
-		   ";HT (GeV);", 
-		   htNbins_, &htBins_.front(), 
-		   nMax_+1, 0, 1, true );
-  }
+  if ( !onlyFull_ ) {
+
+    hPassDeadEcal_.resize( alphaT_.size(), vTH1D() );
+    for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
+      std::stringstream ss;
+      ss << "HtAfterDeadEcal_" << at(ii);
+      BookHistArray( hPassDeadEcal_[ii], 
+		     ss.str(),
+		     useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
+		     htNbins_, &htBins_.front(), 
+		     nMax_+1, 0, 1, true );
+    }
   
-  hPassBaby_.resize( alphaT_.size(), vTH1D() );
-  for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
-    std::stringstream ss;
-    ss << "HtAfterBaby_" << at(ii);
-    BookHistArray( hPassBaby_[ii], 
-		   ss.str(),
-		   ";HT (GeV);", 
-		   htNbins_, &htBins_.front(), 
-		   nMax_+1, 0, 1, true );
-  }
+    hPassBaby_.resize( alphaT_.size(), vTH1D() );
+    for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
+      std::stringstream ss;
+      ss << "HtAfterBaby_" << at(ii);
+      BookHistArray( hPassBaby_[ii], 
+		     ss.str(),
+		     useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
+		     htNbins_, &htBins_.front(), 
+		     nMax_+1, 0, 1, true );
+    }
   
-  hPassTrackless_.resize( alphaT_.size(), vTH1D() );
-  for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
-    std::stringstream ss;
-    ss << "HtAfterTrackless_" << at(ii);
-    BookHistArray( hPassTrackless_[ii], 
-		   ss.str(),
-		   ";HT (GeV);", 
-		   htNbins_, &htBins_.front(), 
-		   nMax_+1, 0, 1, true );
+    hPassTrackless_.resize( alphaT_.size(), vTH1D() );
+    for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
+      std::stringstream ss;
+      ss << "HtAfterTrackless_" << at(ii);
+      BookHistArray( hPassTrackless_[ii], 
+		     ss.str(),
+		     useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
+		     htNbins_, &htBins_.front(), 
+		     nMax_+1, 0, 1, true );
+    }
+
+    hPassMinBiasDPhi_.resize( alphaT_.size(), vTH1D() );
+    for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
+      std::stringstream ss;
+      ss << "HtAfterMinBiasDPhi_" << at(ii);
+      BookHistArray( hPassMinBiasDPhi_[ii], 
+		     ss.str(),
+		     useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
+		     htNbins_, &htBins_.front(), 
+		     nMax_+1, 0, 1, true );
+    }
+
   }
 
   hPassRecHit_.resize( alphaT_.size(), vTH1D() );
@@ -1264,18 +1644,7 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
     ss << "HtAfterRecHit_" << at(ii);
     BookHistArray( hPassRecHit_[ii], 
 		   ss.str(),
-		   ";HT (GeV);", 
-		   htNbins_, &htBins_.front(), 
-		   nMax_+1, 0, 1, true );
-  }
-  
-  hPassMinBiasDPhi_.resize( alphaT_.size(), vTH1D() );
-  for ( uint ii = 0; ii < alphaT_.size(); ++ii ) { 
-    std::stringstream ss;
-    ss << "HtAfterMinBiasDPhi_" << at(ii);
-    BookHistArray( hPassMinBiasDPhi_[ii], 
-		   ss.str(),
-		   ";HT (GeV);", 
+		   useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
 		   htNbins_, &htBins_.front(), 
 		   nMax_+1, 0, 1, true );
   }
@@ -1286,7 +1655,7 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 //     ss << "HtFailingAlphaT_" << at(ii);
 //     BookHistArray( hFailAlphaT_[ii], 
 // 		   ss.str(),
-// 		   ";HT (GeV);", 
+// 		   useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
 // 		   htNbins_, &htBins_.front(), 
 // 		   nMax_+1, 0, 1, true );
 //   }
@@ -1297,7 +1666,7 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 //     ss << "HtFailingDeadEcal_" << at(ii);
 //     BookHistArray( hFailDeadEcal_[ii], 
 // 		   ss.str(),
-// 		   ";HT (GeV);", 
+// 		   useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
 // 		   htNbins_, &htBins_.front(), 
 // 		   nMax_+1, 0, 1, true );
 //   }
@@ -1308,7 +1677,7 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 //     ss << "HtFailingBaby_" << at(ii);
 //     BookHistArray( hFailBaby_[ii], 
 // 		   ss.str(),
-// 		   ";HT (GeV);", 
+// 		   useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
 // 		   htNbins_, &htBins_.front(), 
 // 		   nMax_+1, 0, 1, true );
 //   }
@@ -1319,7 +1688,7 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 //     ss << "HtFailingTrackless_" << at(ii);
 //     BookHistArray( hFailTrackless_[ii], 
 // 		   ss.str(),
-// 		   ";HT (GeV);", 
+// 		   useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
 // 		   htNbins_, &htBins_.front(), 
 // 		   nMax_+1, 0, 1, true );
 //   }
@@ -1330,25 +1699,10 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 //     ss << "HtFailingMinBiasDPhi_" << at(ii);
 //     BookHistArray( hFailMinBiasDPhi_[ii], 
 // 		   ss.str(),
-// 		   ";HT (GeV);", 
+// 		   useMeff_?";M_{eff} (GeV);":";HT (GeV);", 
 // 		   htNbins_, &htBins_.front(), 
 // 		   nMax_+1, 0, 1, true );
 //   }
-  
-  if ( mhtHistos_ ) {
-    hMhtDistr_.resize( htNbins_+1, vvTH1D( alphaT_.size(), vTH1D() ) );
-    for ( uint ii = 0; ii <= htNbins_; ++ii ) { 
-      for ( uint jj = 0; jj < alphaT_.size(); ++jj ) { 
-	std::stringstream ss;
-	ss << "MhtDistrPassAlphaT_" << ht(ii) << "_" << at(jj);
-	BookHistArray( hMhtDistr_[ii][jj],
-		       ss.str(),
-		       ";MHT (GeV);", 
-		       1000, 0., 1000., 
-		       nMax_+1, 0, 1, true );
-      }
-    }
-  }
   
 }
 
@@ -1356,8 +1710,9 @@ void QcdBkgdEst::Start( Event::Data& ev ) {
 //
 std::string QcdBkgdEst::ht( int ii ) {
   std::stringstream ss;
-  if ( ii == 0 ) { ss << "HT0"; }
-  else { ss << "HT" << (int(10.*htBins_[ii-1])/10.); }
+  ss << ( useMeff_ ? "Meff" : "HT" );
+  if ( ii == 0 ) { ss << "0"; }
+  else { ss << (int(10.*htBins_[ii-1])/10.); }
   return ss.str();
 }
 
@@ -1565,7 +1920,7 @@ int QcdBkgdEst::trigger( const Event::Data& ev, const vstring& triggers ) {
     for ( uint ii = 0; ii < epochs_.size(); ++ii ) {
       if ( rdm < epochs_[ii] ) { index = ii; break; }
     }
-    if ( index < 0 || index >= triggers.size() ) { return prescale; }
+    if ( index < 0 || index >= (int)triggers.size() ) { return prescale; }
     
     // Extract trigger thresholds
     double ht = 0., mht = 0., at = 0.;

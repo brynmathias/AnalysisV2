@@ -44,6 +44,7 @@ public:
 	~AsymTemplateHistos(); //!< Destructor.
 
 	void Start(Event::Data & ev); //!< Start processing
+	void End(Event::Data & ev) ;  //!< End processing
 	bool Process(Event::Data & ev); //!< Processes the event, returning true if it passes the operation.
 
 	std::ostream& Description(std::ostream& ostrm); //!< Describes the operation, for analysis output to terminal/log file.
@@ -53,11 +54,14 @@ public:
 	bool passConv (int v_missHits, double v_DCot, double v_Dist, int ieff);
 	bool passID_AS(double v_dfi, double v_dhi, double eta);  
 	bool fid(double eta);
-	int getEta(std::vector<Lepton const *>::const_iterator lep);
-	int getWpt(std::vector<Lepton const *>::const_iterator lep, double met, double met_phi);
-	int getJet(std::vector<Lepton const *>::const_iterator lep, int nJet);
+	int getEta(Lepton const * lep);
+	int getWpt(Lepton const * lep, double met, double met_phi);
+	int getJet(Lepton const * lep, int nJet);
 	double cor(double et,double eta,int runNumber);
 	bool CheckCuts(double v_trk,double v_ecal,double v_hcal,double v_sihih,double v_dfi,double v_dhi,double v_hoe,double eta,int ieff);
+	void SetTree(TTree * tree);
+	void SetTreeVariables(float pt, float phi, int njet, float u1, float u2, float met );
+	void SetTreeVariables(TLorentzVector *genBoson, TLorentzVector *recoBoson, TVector2 *sumLepton, TVector2 *pfMET, TVector2 *trkMET, float wt, int nJet, TTree *tree);
 
 private:
   	RecoilCorrector *corrector;
@@ -69,12 +73,21 @@ private:
 	TH1F * h_mt;
 	TH1F * h_eta_sel[EtaChBins_]; 
 	TH1F * h_eta_antisel[EtaChBins_];
+	TH1F * h_TP[EtaChBins_];
+	TH1F * h_TPC[EtaChBins_];
+	TH1F * h_TPS[EtaChBins_];
 	TH1F * h_wpt_sel[WptChBins_];
 	TH1F * h_wpt_antisel[WptChBins_];
 	TH1F * h_jet_sel[JetChBins_]; 
 	TH1F * h_jet_antisel[JetChBins_];
+	TH1F * h_TP_all;
+	TH1F * h_TPC_all;
+	TH1F * h_TPS_all;
 
 	bool doRecoil;
+	bool doTP;
+	bool doRecoilNtuple;
+	int recType;
 	double jet_ET;
 	double lep_ET;
 	double lep_MT;
@@ -110,6 +123,37 @@ private:
 	double lep_Dphi_ee[6];
 	double lep_Deta_ee[6];
 	double lep_HoE_ee[6];
+
+	// lepton properties
+	float _leppt;
+	float _lepphi;
+
+	// boson properties
+	float _genpt;
+	float _genphi;
+	float _mass;
+	float _pt;
+	float _y;
+	float _phi;
+
+	//pfmet
+	float _pfmet;
+	float _pfmetphi;
+	float _pfmt;
+	float _pfu1;
+	float _pfu2;
+
+	//track met
+	float _trkmet;
+	float _trkmetphi;
+	float _trkmt;
+	float _trku1;
+	float _trku2;
+
+	float _weight;
+	int _njet;
+
+        TTree * iTree;
 
 	double w;
 }; //

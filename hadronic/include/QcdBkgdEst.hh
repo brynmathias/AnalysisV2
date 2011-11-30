@@ -18,7 +18,7 @@ typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<float> > PtEtaPhiE;
 namespace temp { class mSuGraPlottingOps; } //@@ below!
 
 namespace Operation {
-
+  
   class QcdBkgdEst : public PlottingBase {
     
   public:
@@ -92,6 +92,9 @@ namespace Operation {
     double maxLeadingJetEta_;
     double babyCut_;
     bool addMuon_;
+    bool onlyGenPtHat_;
+    bool onlyFull_;
+    bool useMeff_;
 
     double deadEcalRegionDrCut_;
     double deadEcalRegionEtaCut_;
@@ -106,7 +109,7 @@ namespace Operation {
     
     // Analysis defaults (that define signal region)
     std::vector<double> alphaT_; 
-    int aT_; 
+    uint aT_; 
     unsigned int ht_;
     double pt1_;
     double pt2_;
@@ -124,22 +127,38 @@ namespace Operation {
     double offset_;
     
     // HT RECO histograms
-    vTH1D hPtHat_;
+    vTH1D hGenPtHat_;
     vTH2D hSMS_;
     bool cutFlowHistos_;
     vvTH1D hCutFlow_;
     bool htHistos_;
     vvvTH1D hHtDistr_; 
+    bool meffHistos_;
+    vvvTH1D hMeffDistr_; 
     bool mhtHistos_;
     vvvTH1D hMhtDistr_; 
+    bool mhtOverHtHistos_;
+    vvvTH1D hMhtOverHtDistr_; 
+    bool mhtOverMeffHistos_;
+    vvvTH1D hMhtOverMeffDistr_; 
     bool multiHistos_; 
     vvvTH1D hMultiplicity_;
-    bool vertexHisto_;
-    vvTH1D hNumVertices_;
+    bool jetPtHistos_;
+    vvvTH1D hAllJetsPt_;
+    vvvTH1D hRecoJetsPt_;
+    vvvTH1D hBabyJetsPt_;
+    bool vertexHistos_;
+    vvvTH1D hNumVertex_;
+    bool atHistos_;
+    vvTH1D hAlphaT_;
+    bool dalitzHistos_;
+    vvTH2D hDalitz_;
     bool minBiasDeltaPhiHistos_; 
     vvvTH1D hMinBiasDeltaPhi_; 
     bool babyJetsHistos_;
     vvvTH1D hBabyJets_; 
+    bool babyJetsMhtHistos_;
+    vvvTH1D hBabyJetsMht_; 
 
     vvTH1D hPassAlphaT_; 
     vvTH1D hPassDeadEcal_; 
@@ -170,6 +189,7 @@ namespace Operation {
     std::vector<double> epochs_;
     vvstring signal_;
     vvstring monitor_;
+    vvstring monitorRef_;
     vvdouble reweight_;
     vstring names_;
 

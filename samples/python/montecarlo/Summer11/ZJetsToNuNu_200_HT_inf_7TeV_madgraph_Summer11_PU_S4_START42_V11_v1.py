@@ -161,5 +161,5 @@ ZJetsToNuNu_200_HT_inf_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1=PSet(
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/dburton/ICF/automated/2011_10_10_13_33_29/ZJetsToNuNu_200_HT_inf_7TeV-madgraph.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_9_1_nWd.root" ,
 	],
 	CrossSection=42.1376, #LO From RA2 AN
-      Events = 3926114,
+      Events = 3067017,
 )

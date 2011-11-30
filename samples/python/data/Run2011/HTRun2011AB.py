@@ -7031,5 +7031,5 @@ HTRun2011AB=PSet(
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bm409/ICF/automated/2011_11_11_13_34_14/HT.Run2011B-PromptReco-v1.AOD/SusyCAF_Tree_99_1_EPt.root" ,
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bm409/ICF/automated/2011_11_11_13_34_14/HT.Run2011B-PromptReco-v1.AOD/SusyCAF_Tree_9_1_8Kw.root" ,
 	],
-	Weight=1.0,
+	    Weight=1.0,
 )

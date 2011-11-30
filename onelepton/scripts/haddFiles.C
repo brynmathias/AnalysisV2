@@ -15,6 +15,10 @@ hadd qcd.root Electrons_QCD*.root
 hadd w.root   Electrons_W*.root
 hadd tt.root  Electrons_TT*.root
 hadd z.root   Electrons_DY*.root
+hadd lm1.root Electrons_LM1*.root
+hadd lm3.root Electrons_LM3*.root
+hadd lm6.root Electrons_LM6*.root
+hadd lm9.root Electrons_LM9*.root
 
 hadd ewk.root z.root w.root tt.root
 

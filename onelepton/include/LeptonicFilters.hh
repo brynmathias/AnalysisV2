@@ -689,6 +689,109 @@ class MuPtScale : public Compute::ObjectFilter<Event::Lepton> {
   };
 
 
+ class pfMETRESUnc : public Compute::ObjectFilter<ICF_LorentzV> {
+  public:
+   pfMETRESUnc( float factor) 
+    
+    { mModifies = true; }
+
+    ~pfMETRESUnc() {}
+
+    bool Apply(ICF_LorentzV* ob) {
+
+    
+      LorentzV pfUnclustered, scaledjets, myscaledjet;
+      //    double unc = 0.0;
+      Event::Lepton const * theRECOLepton;
+      if(mLepton == "Muon") theRECOLepton = mEv->LD_CommonMuons().accepted.at(0);
+      else if(mEv->LD_CommonElectrons().accepted.size() > 0) theRECOLepton = mEv->LD_CommonElectrons().accepted.at(0);
+      else if(mEv->LD_Electrons().size() > 0) theRECOLepton = &mEv->LD_Electrons()[0];
+      else return true;
+
+     //decide whether the lepton is electron or muon, then add it back into the MET calculation
+      cout << " before Res increment" << (*ob+*(theRECOLepton)).Pt() << endl;
+   pfUnclustered = *ob + *(theRECOLepton);
+   
+      //to change to use SecJets, use JD_SecJets, TerJets, JD_TerJets
+      for(unsigned int i=0; i< mEv->JD_Jets().size(); i++) {
+	//loop through all jets above threshold (in this case the Jets relate to AK5PF2PAT)
+	if(mEv->JD_Jets().at(i).Pt() > 10.) {
+	  float unc = FindResScale(mEv->JD_Jets().at(i)); // unc is the relative change og the jet PT
+	  //add in the jets to the (lepton + neutrino) to leave you with unclustered energy
+	  pfUnclustered += (mEv->JD_Jets().at(i));
+	  //scale the jets by the Jet RES 
+	  myscaledjet = mEv->JD_Jets().at(i) * unc;	  
+	  //make a negative vector sum of all the scaled jets
+	  scaledjets = -myscaledjet;	
+	}
+      }
+      //shift the unclustered energy either up or down
+      //   pfUnclustered *= (1.0 + mUnclusteredShift);
+      
+      pfUnclustered += scaledjets;
+
+      //std::cout << "scaled MHT: " << pfUnclustered.Pt() << std::endl;
+      //finally, add the lepton back into the calculation
+      ob->operator=(pfUnclustered - *(theRECOLepton));
+
+      cout << " after Res increment" << (*ob+*(theRECOLepton)).Pt() << endl;
+      return true;
+    }
+
+   float FindResScale(const Event::Jet& aJet)
+   {
+
+     float factor_Res_Corl =1;
+     if(fabs(aJet.Eta())<1.1) factor_Res_Corl =1.062;
+     if(fabs(aJet.Eta())<1.7&&fabs(aJet.Eta())>1.1) factor_Res_Corl =1.084;
+     if(fabs(aJet.Eta())>1.7&&fabs(aJet.Eta())<2.3) factor_Res_Corl =1.029;
+     if(fabs(aJet.Eta())>2.3) factor_Res_Corl =1.153;
+     
+     int index=-1;
+     float DR = 0.55;
+     int idx=0;
+     // find the closest Genjet
+     for(std::vector<ICF_LorentzV >::const_iterator ii = mEv->genJetP4()->begin();ii!=mEv->muonP4()->end(); ++ii,++idx)
+       {
+	 float DR_i = fabs(ROOT::Math::VectorUtil::DeltaPhi(aJet,*ii));
+	 if(DR_i<DR)
+	   {
+	     DR = DR_i;
+	     index=idx;
+	   }
+       }
+     float Delta_Meas; // This is the mismeasurement of a jet
+     if (index>-1) // if a close jet has been found (0.55 or closer)
+       {
+	 Delta_Meas = aJet.Pt()-mEv->genJetP4()->at(index).Pt();
+       }
+
+     float Increment; // This is the amount by wnich to increase the mismeasurement Delta_Meas
+     Increment = Delta_Meas*(factor_Res_Corl-1.);
+     float RelError; // This is the relative increment
+     RelError = (aJet.Pt()+Increment)/aJet.Pt();
+     return RelError;    
+   }
+   
+
+   std::ostream & Description(std::ostream & ostrm) {
+     ostrm << "pfMET systematic from JEC Uncertainties";
+     return ostrm;
+   }
+   
+ private:
+   std::string mJECUncFile;
+   std::string mJECUncFileResisual;
+   std::string mLepton;
+   double mPFJetThresh;
+   double mUnclusteredShift;
+   bool mShiftUp;
+ };
+
+
+
+
+
 class JESCorrectionsFromFile : public Compute::ObjectFilter<Event::Jet> {
     
   public:

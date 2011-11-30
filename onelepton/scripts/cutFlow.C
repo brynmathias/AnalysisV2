@@ -8,26 +8,29 @@ float lumi;
 //lumi = 203; //Electron RR
 //lumi = 960; //Muon
 //lumi = 1084; //Electron
- lumi = 1076; //Muon
-TString dirname("resultsUNCOR4jtsHT750");
-
+lumi = 5000; //Muon
+TString dirname("");
+TString HTbin("");
+ 
 bool data = true;
-bool susy = true;
+bool susy = false;
 bool qcd = false;
-
+ 
 bool counterFromANplots=true; //if true it will require ANplots in ST bins, otherwise Counter_BSMGrid_SumLepPT is used
 
-TString ttPath = "/Muons_ttST125muonskim.root" ;
-TString wPath = "/Muons_wST125muonskim.root" ;
-TString zPath = "/Muons_zST125muonskim.root" ;
-TString qcdPath = "/Muons_LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1.root";
-TString dataPath = "/data.root"; 
-TString bkgPath = "/BKG.root" ;
-TString lm1Path = "/Muons_LM1_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_3.root";
-TString lm3Path = "/Muons_LM3_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_1.root";
-TString lm6Path = "/Muons_LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_2.root";
+TString ttPath = "resultsSync/tt.root" ;
+TString wPath = "resultsSync/w.root" ;
+TString zPath = "resultsSync/z.root" ;
+TString qcdPath = "resultsSyncHTbinsThrustST350/qcd.root";
+TString dataPath = "resultsSync/data.root"; 
+//TString bkgPath = "resultsSyncResTest_metres_HT/BKG.root" ;
+TString bkgPath = "resultsSync/BKG.root"; 
+TString lm1Path = "/lm5.root";
+TString lm3Path = "resultsSyncHTbinsThrustST350/lm9.root";
+TString lm6Path = "resultsSyncHTbinsThrustST350/lm6.root";
 
-cutFlow(){
+cutFlow(TString HTbin_){
+  HTbin =  HTbin_;
   TString lumiString;
   lumiString+=lumi;
   ostream.precision(3);
@@ -51,8 +54,8 @@ cutFlow(){
     cutFlowostream(dirname+TString(dataPath),TString("data"),SumLepPT,1,true);
   }
   if(susy){
-    cutFlowostream(dirname+TString(lm1Path),TString("LM1"),SumLepPT,true);
-    cutFlowostream(dirname+TString(lm3Path),TString("LM3"),SumLepPT,true);
+    //    cutFlowostream(dirname+TString(lm1Path),TString("LM1"),SumLepPT,true);
+    cutFlowostream(dirname+TString(lm3Path),TString("LM9"),SumLepPT,true);
     cutFlowostream(dirname+TString(lm6Path),TString("LM6"),SumLepPT,true);
   }
   tabEnd();
@@ -71,13 +74,12 @@ cutFlow(){
     pred(dirname+TString(bkgPath),TString("prediction"),SumLepPT,false);
   }
   if(susy) {
-    cutFlowostream(dirname+TString(lm1Path),TString("lm1"),SumLepPT,false);
-    cutFlowostream(dirname+TString(lm3Path),TString("lm3"),SumLepPT,false);
-    cutFlowostream(dirname+TString(lm6Path),TString("lm6"),SumLepPT,false);
+    //   cutFlowostream(dirname+TString(lm1Path),TString("lm1"),SumLepPT,false);
+    cutFlowostream(dirname+TString(lm3Path),TString("LM9"),SumLepPT,false);
+    cutFlowostream(dirname+TString(lm6Path),TString("LM6"),SumLepPT,false);
   }
  
-  tabEnd();
-  
+  tabEnd(); 
   cout << ostream.str();
   writeLatex("cutFlow.tex");
   
@@ -109,7 +111,7 @@ pred(TString filename, TString name, TString option,int i)
   TFile* MCfile = new TFile(filename);
   TString SGNL;
   if(counterFromANplots) {
-    SGNL = TString("_NOLP/CounterSgnl_tot");
+    SGNL = TString("_NOLPsecondD"+HTbin+"/CounterSgnl_tot");
   }
   else {
     SGNL = TString("_scale1/SM_Events");
@@ -125,7 +127,7 @@ pred(TString filename, TString name, TString option,int i)
   
   // get MC events and error in control region
   if(counterFromANplots) {
-    BKG = TString("_NOLP/CounterCtrl_tot");
+    BKG = TString("_NOLPsecondD"+HTbin+"/CounterCtrl_tot");
   }
   else {
     BKG = TString("_BKG_scale1/SM_Events");
@@ -254,21 +256,22 @@ pred(TString filename, TString name, TString option,int i)
 cutFlowostream(TString filename, TString name, TString option,bool isBKG, bool isData=false)
 {
   float lu = lumi;
-  if(isData) {
-    lu = 100.;
-  }
-  cout << "trying to open " << filename << endl;
-  TFile* thefile = new TFile(filename);
-  cout << "opened " << filename << endl;
-  thefile->ls();
-  if(counterFromANplots) {
-    SGNL = TString("_NOLP/CounterSgnl_tot");
-    BKG = TString("_NOLP/CounterCtrl_tot");
-  }
-  else {
-    BKG = TString("_BKG_scale1/SM_Events");
-    SGNL = TString("_scale1/SM_Events");
-  }
+   if(isData) {
+     lu = 100.;
+   }
+   cout << "trying to open " << filename << endl;
+   TFile* thefile = new TFile(filename);
+   cout << "opened " << filename << endl;
+  cout << "opened " << TString("_NOLPsecondD"+HTbin+"/CounterSgnl_tot") << endl;
+   thefile->ls();
+   if(counterFromANplots) {
+     SGNL = TString("_NOLPsecondD"+HTbin+"/CounterSgnl_tot");
+     BKG = TString("_NOLPsecondD"+HTbin+"/CounterCtrl_tot");
+   }
+   else {
+     BKG = TString("_BKG_scale1/SM_Events");
+     SGNL = TString("_scale1/SM_Events");
+   }
   TString REGION;
   if (isBKG) {
     REGION = BKG;
@@ -276,6 +279,8 @@ cutFlowostream(TString filename, TString name, TString option,bool isBKG, bool i
   else {
     REGION = SGNL;
   }
+
+  cout <<option+"150"+REGION<<endl;
   float HT150Bin = lu/100.*((TH1D*)thefile->Get(option+"150"+REGION))->GetBinContent(1);
   float HT150errBin = lu/100.*((TH1D*)thefile->Get(option+"150"+REGION))->GetBinError(1);
   float HT250Bin = lu/100.*((TH1D*)thefile->Get(option+"250"+REGION))->GetBinContent(1);

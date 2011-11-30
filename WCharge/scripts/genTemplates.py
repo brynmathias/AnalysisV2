@@ -9,13 +9,13 @@ from icf.utils import json_to_pset
 
 
 #Import DATA PSETS
-from data.SingleElectron_Run2011A_May10ReReco_v1 import *
-from data.SingleElectron_Run2011A_PromptReco_v4_213 import *
-from data.SingleElectron_Run2011A_PromptReco_v4_228 import *
-from data.SingleElectron_Run2011A_PromptReco_v4_245 import *
-from data.SingleElectron_Run2011A_PromptReco_v4_268 import *
-from data.SingleElectron_Run2011A_PromptReco_v4_285 import *
-from data.SingleElectron_Run2011A_PromptReco_v4_299 import *
+from SingleElectron_Run2011A_May10ReReco_v1 import *
+from SingleElectron_Run2011A_PromptReco_v4_213 import *
+from SingleElectron_Run2011A_PromptReco_v4_228 import *
+from SingleElectron_Run2011A_PromptReco_v4_245 import *
+from SingleElectron_Run2011A_PromptReco_v4_268 import *
+from SingleElectron_Run2011A_PromptReco_v4_285 import *
+from SingleElectron_Run2011A_PromptReco_v4_299 import *
 
 #Import MC PSETS
 #from DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1 import *
@@ -33,8 +33,9 @@ from WToTauNu_TuneZ2_7TeV_pythia6_tauola_Summer11_PU_S3_START42_V11_v2 import *
 
 
 ##User defined Variables
-bData = True#False#True#False#False? True?
-bRecoil = False
+bData =False#False? True?
+bTP = False#True#True
+bRecoil = True#False
 
 #Standard Cuts
 conf = defaultConfig.copy()
@@ -62,18 +63,18 @@ conf.Ntuple.TerJets.Suffix = "Pat"
 conf.Ntuple.TerJets.Prefix = "ak7JetPF"
 
 # Create the analysis
-a = Analysis("Templates_MT50")
+a = Analysis("Templates")
 
 # Create a Tree called Main
 tree = Tree("Main")
 
-trigger_bits = ("HLT_Ele27_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v2",
-            "HLT_Ele32_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v1",
-            "HLT_Ele45_CaloIdVT_TrkIdT_v2"
-		    )
-      
-triggers = PSet(Triggers=trigger_bits)
-Trigg = OP_MultiTrigger(triggers.ps())
+#trigger_bits = ("HLT_Ele27_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v2",
+#            "HLT_Ele32_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v1",
+#            "HLT_Ele45_CaloIdVT_TrkIdT_v2"
+#		    )
+#      
+#triggers = PSet(Triggers=trigger_bits)
+#Trigg = OP_MultiTrigger(triggers.ps())
 
 # Additional Cuts
 ZeroMuons = OP_NumComMuons("==", 0)
@@ -81,7 +82,7 @@ ZeroMuons = OP_NumComMuons("==", 0)
 default_Asym = PSet(
     jet_ET = 40.,
     lep_ET = 35.,
-    lep_MT = 50.,
+    lep_MT = 0.,
     lep_VetoET = 25.,
     lep_WP = 3,
     lep_VetoWP = 0,
@@ -200,10 +201,13 @@ default_Asym = PSet(
     lep_Deta_ee_WP60 = 0.005,
     lep_HoE_ee_WP60 = 0.15,
 
-    do_recoil = bRecoil,
-    ZDat_file = "recoilfitZDat.root",
-    ZMC_file  = "recoilfitZMC.root",
-    W_file  = "recoilfit-new.root",
+    do_Recoil = False,#bRecoil,
+    do_TP = bTP,
+    do_RecoilNtuple = False,
+    rec_Type = 0,
+    ZDat_File = "./RecoilFit/recoilfits/Recoil_SingleElectron.root",
+    ZMC_File = "./RecoilFit/recoilfits/Recoil_SingleElectron.root",
+    W_File = "./RecoilFit/recoilfits/Recoil_SingleElectron.root",
 )
 
 Default_Asym=AsymTemplateHistos("Default_Asym",default_Asym.ps())
@@ -235,7 +239,7 @@ if bData :
     SingleElectron_Run2011A_PromptReco_v4_299
   ]
 elif bRecoil :
-  samples =[
+  samples =[ 
     #TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1, 
     TT_TuneZ2_7TeV_pythia6_tauola_Summer11_PU_S3_START42_V11_v2, 
     #WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1, 
@@ -252,5 +256,5 @@ else :
     DYToTauTau_M_10To20_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1, 
     DYToTauTau_M_20_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1, 
   ]
-
+print samples
 a.Run(".", conf, samples)

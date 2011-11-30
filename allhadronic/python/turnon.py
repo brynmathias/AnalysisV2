@@ -174,20 +174,20 @@ numComPhotons = OP_NumComPhotons("<=",0)
 # Test module
 
 from allhadronic.algorithms_cfi import *
-AlgorithmsPSet.Nbins = 8
-AlgorithmsPSet.Low = 200.
-AlgorithmsPSet.High = 600.
-AlgorithmsPSet.MinJetPt1 = 100.*550./350.
-AlgorithmsPSet.MinJetPt2 = 100.*550./350.
-AlgorithmsPSet.MinJetPt3 = 50.*550./350.
+AlgorithmsPSet.Nbins = 1
+AlgorithmsPSet.Low = 450.
+AlgorithmsPSet.High = 500.
+AlgorithmsPSet.MinJetPt1 = 100.
+AlgorithmsPSet.MinJetPt2 = 100.
+AlgorithmsPSet.MinJetPt3 = 50.
 #AlgorithmsPSet.MinJetPt1 = 40.
 #AlgorithmsPSet.MinJetPt2 = 40.
 #AlgorithmsPSet.MinJetPt3 = 40.
 #AlgorithmsPSet.Scale = False
 
-AlgorithmsPSet.Pt1Bins = [100.*200./350.,100.*250./350.,100.*300./350.,100.,100.,100.,100.,100.,]
-AlgorithmsPSet.Pt2Bins = [100.*200./350.,100.*250./350.,100.*300./350.,100.,100.,100.,100.,100.,]
-AlgorithmsPSet.Pt3Bins = [ 50.*200./350., 50.*250./350., 50.*300./350., 50., 50., 50., 50., 50.,]
+AlgorithmsPSet.Pt1Bins = [100.,]
+AlgorithmsPSet.Pt2Bins = [100.,]
+AlgorithmsPSet.Pt3Bins = [50.,]
 
 ps = PSet(
     Verbose = False,
@@ -196,27 +196,31 @@ ps = PSet(
     nMax = 4,
     Algorithms = AlgorithmsPSet,
     Triggers = [
-    "HLT_HT260_MHT60_v2","HLT_HT260_MHT60_v2","HLT_HT260_MHT60_v2","HLT_HT240_v2","HLT_HT260_v2",
-    "HLT_HT250_MHT60_v2","HLT_HT250_MHT60_v2","HLT_HT250_MHT60_v2","HLT_HT250_v2",
-    "HLT_HT250_MHT60_v3","HLT_HT250_MHT60_v3","HLT_HT250_MHT60_v3","HLT_HT250_v3",
+    "HLT_HT450_v8"
+    #"HLT_HT260_MHT60_v2","HLT_HT260_MHT60_v2","HLT_HT260_MHT60_v2","HLT_HT240_v2","HLT_HT260_v2",
+    #"HLT_HT250_MHT60_v2","HLT_HT250_MHT60_v2","HLT_HT250_MHT60_v2","HLT_HT250_v2",
+    #"HLT_HT250_MHT60_v3","HLT_HT250_MHT60_v3","HLT_HT250_MHT60_v3","HLT_HT250_v3",
     ],
     
     PreFilters = [
-    "HLT_HT260_v2","HLT_HT260_v2","HLT_HT260_v2","HLT_HT160_v2","HLT_HT240_v2",
-    "HLT_HT250_v2","HLT_HT250_v2","HLT_HT250_v2","HLT_HT200_v2",
-    "HLT_HT250_v3","HLT_HT250_v3","HLT_HT250_v3","HLT_HT200_v3",
+    "HLT_HT250_v8"
+    #"HLT_HT260_v2","HLT_HT260_v2","HLT_HT260_v2","HLT_HT160_v2","HLT_HT240_v2",
+    #"HLT_HT250_v2","HLT_HT250_v2","HLT_HT250_v2","HLT_HT200_v2",
+    #"HLT_HT250_v3","HLT_HT250_v3","HLT_HT250_v3","HLT_HT200_v3",
     ],
 
     Variables = [
-    "MHT","MHToverHT","AlphaT","HT","HT",
-    "MHT","MHToverHT","AlphaT","HT",
-    "MHT","MHToverHT","AlphaT","HT",
+    "HT"
+    #"MHT","MHToverHT","AlphaT","HT","HT",
+    #"MHT","MHToverHT","AlphaT","HT",
+    #"MHT","MHToverHT","AlphaT","HT",
     ],
     
     Bins = [
-    1,1,1,1,1,
-    1,1,1,1,
-    1,1,1,1,
+    0
+    #1,1,1,1,
+    #1,1,1,1,
+    #1,1,1,1,
     ],
     )
 
@@ -226,7 +230,7 @@ test = TurnOn(ps.ps())
 # Cut flow
 
 pwd = commands.getoutput('echo $SUSY_WORKING_SW_DIR')
-json = JSONFilter("JSON", json_to_pset(pwd+"/allhadronic/python/Cert_160404-163869_7TeV_PromptReco_Collisions11_JSON.txt"))
+json = JSONFilter("JSON", json_to_pset(pwd+"/hadronic/python/hadronic/ReProcessing_PromptJson_Merged.txt"))
 
 cut_flow = Tree("CutFlow")
 cut_flow.Attach(json)
@@ -291,9 +295,9 @@ anal.AddElectronFilter("PreCC",vbtf_electron)
 anal.AddPhotonFilter("PreCC",ra3_photon)
 anal+=cut_flow
 
-#anal.Run(".",conf,[data])
+anal.Run(".",conf,[data])
 #anal.Run(".",conf,[tmp])
 #anal.Run(".",conf,[lm1])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011A_PromptReco_v1])
-anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])
+#anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])
 
