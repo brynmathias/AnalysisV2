@@ -461,8 +461,8 @@ for key,vals in AlphaTwithDiMu.iteritems():
           out.append(muDRcut)
           cutTreeData.TAttach(diMuon,muDRcut)
           cutTreeData.TAttach(muDRcut,cut)
-          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin)))
-          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin),Debug = True))
+          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
+          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin),Debug = True))
 
 # If muon is not required
 htTesting = {
@@ -606,7 +606,7 @@ from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
-sample = SingleMu
+#sample = SingleMu
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
