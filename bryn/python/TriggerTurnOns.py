@@ -456,7 +456,7 @@ AlphaTwithDiMu = {
 for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     for ref in vals[0]:
-      for muDR in [0.0,0.3]:
+      for muDR in [0.3]:
           cut = eval("RECO_CommonHTCut(%f)"%(htbin))
           out.append(cut)
           muDRcut =  RECO_MuonJetDRCut(muDR)
