@@ -106,7 +106,7 @@ default_cc.ResolveConflicts=True
 default_cc.Jets.PtCut=10.0
 default_cc.Jets.EtaCut=10.0
 default_cc.Muons.ModifyJetEnergy=True
-default_cc.Muons.PtCut=10.0
+default_cc.Muons.PtCut=5.0
 default_cc.Muons.EtaCut=2.5
 default_cc.Muons.TrkIsoCut=-1.
 default_cc.Muons.CombIsoCut=0.15
@@ -144,8 +144,8 @@ default_common.Electrons.CombIsoCut=0.15
 default_common.Electrons.ApplyID = True
 default_common.Electrons.TightID = False
 default_common.Electrons.RequireLooseForOdd = True
-default_common.Muons.PtCut=40.0
-default_common.Muons.EtaCut=2.5
+default_common.Muons.PtCut=5.0
+default_common.Muons.EtaCut=2.1
 default_common.Muons.TrkIsoCut=-1.
 default_common.Muons.CombIsoCut=0.15
 default_common.Muons.ApplyID = True
@@ -380,6 +380,10 @@ cutTreeData.TAttach(muDr,ht275)
 cutTreeData.TAttach(muDr,ht325)
 # cutTreeData.TAttach(ht375,htLess475)
 
+
+
+
+
 alphatTesting = {
   "HLT_HT250_AlphaT0p55_v1": (["HLT_Mu5_HT200_v4" ,]                   ,[275.,325.,375.,475.,575.,675.,775.,875.]),
   "HLT_HT250_AlphaT0p55_v2": (["HLT_Mu8_HT200_v4" ,"HLT_Mu8_HT200_v3"] ,[275.,325.,375.,475.,575.,675.,775.,875.]),
@@ -389,25 +393,23 @@ alphatTesting = {
   "HLT_HT250_AlphaT0p53_v5": (["HLT_Mu30_HT200_v1",]                   ,[275.,325.,375.,475.,575.,675.,775.,875.]),
   "HLT_HT250_AlphaT0p53_v6": (["HLT_Mu40_HT200_v4","HLT_Mu40_HT200_v3"],[275.,325.,375.,475.,575.,675.,775.,875.]),
   "HLT_HT250_AlphaT0p55_v2": (["HLT_Mu40_HT200_v4",]                   ,[275.,325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT300_AlphaT0p52_v1": (["HLT_Mu5_HT200_v4" ,],[325.,]),
-  "HLT_HT300_AlphaT0p52_v2": (["HLT_Mu8_HT200_v4" ,],[325.,]),
-  "HLT_HT300_AlphaT0p52_v3": (["HLT_Mu15_HT200_v2",],[325.,]),
-  "HLT_HT300_AlphaT0p52_v4": (["HLT_Mu15_HT200_v3",],[325.,]),
-  "HLT_HT300_AlphaT0p52_v5": (["HLT_Mu15_HT200_v4",],[325.,]),
-  "HLT_HT300_AlphaT0p53_v5": (["HLT_Mu30_HT200_v1",],[325.,]),
-  "HLT_HT300_AlphaT0p53_v6": (["HLT_Mu40_HT200_v3",],[325.,]),
-  "HLT_HT300_AlphaT0p53_v6": (["HLT_Mu40_HT200_v4",],[325.,]),
+  "HLT_HT300_AlphaT0p52_v1": (["HLT_Mu5_HT200_v4" ,],[325.,375.]),
+  "HLT_HT300_AlphaT0p52_v2": (["HLT_Mu8_HT200_v4" ,],[325.,375.]),
+  "HLT_HT300_AlphaT0p52_v3": (["HLT_Mu15_HT200_v2",],[325.,375.]),
+  "HLT_HT300_AlphaT0p52_v4": (["HLT_Mu15_HT200_v3",],[325.,375.]),
+  "HLT_HT300_AlphaT0p52_v5": (["HLT_Mu15_HT200_v4",],[325.,375.]),
+  "HLT_HT300_AlphaT0p53_v5": (["HLT_Mu30_HT200_v1",],[325.,375.]),
+  "HLT_HT300_AlphaT0p53_v6": (["HLT_Mu40_HT200_v3","HLT_Mu40_HT200_v4",],[325.,375.]),
+  "HLT_HT300_AlphaT0p54_v5": (["HLT_Mu40_HT300_v4","HLT_Mu40_HT300_v5",],[325.,375.]),
+  "HLT_HT300_AlphaT0p55_v3": (["HLT_Mu40_HT300_v4","HLT_Mu40_HT300_v5",],[325.,375.]),
   "HLT_HT350_AlphaT0p51_v1": (["HLT_Mu5_HT200_v4" ,],[375.,475.,575.,675.,775.,875.]),
   "HLT_HT350_AlphaT0p51_v2": (["HLT_Mu8_HT200_v4" ,],[375.,475.,575.,675.,775.,875.]),
   "HLT_HT350_AlphaT0p51_v3": (["HLT_Mu15_HT200_v2",],[375.,475.,575.,675.,775.,875.]),
   "HLT_HT350_AlphaT0p51_v4": (["HLT_Mu15_HT200_v3",],[375.,475.,575.,675.,775.,875.]),
   "HLT_HT350_AlphaT0p51_v5": (["HLT_Mu15_HT200_v4",],[375.,475.,575.,675.,775.,875.]),
   "HLT_HT350_AlphaT0p52_v1": (["HLT_Mu30_HT200_v1",],[375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p52_v2": (["HLT_Mu40_HT200_v3",],[375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p52_v2": (["HLT_Mu40_HT200_v4",],[375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p52_v2": (["HLT_Mu40_HT200_v4",],[375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p53_v10":(["HLT_Mu40_HT300_v4",],[375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p53_v10":(["HLT_Mu40_HT300_v5",],[375.,475.,575.,675.,775.,875.]),
+  "HLT_HT350_AlphaT0p52_v2": (["HLT_Mu40_HT200_v3","HLT_Mu40_HT200_v4"],[375.,475.,575.,675.,775.,875.]),
+  "HLT_HT350_AlphaT0p53_v10":(["HLT_Mu40_HT300_v4","HLT_Mu40_HT300_v5"],[375.,475.,575.,675.,775.,875.]),
   "HLT_HT400_AlphaT0p51_v1": (["HLT_Mu5_HT200_v4" ,],[475.,575.,675.,775.,875.]),
   "HLT_HT400_AlphaT0p51_v2": (["HLT_Mu8_HT200_v4" ,],[475.,575.,675.,775.,875.]),
   "HLT_HT400_AlphaT0p51_v3": (["HLT_Mu15_HT200_v2",],[475.,575.,675.,775.,875.]),
@@ -422,13 +424,13 @@ alphatTesting = {
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 #
-# for key,vals in alphatTesting.iteritems():
-#   for ref in vals[0]:
-#     for htbin in vals[1]:
-#       cut = eval("RECO_CommonHTCut(%f)"%(htbin))
-#       out.append(cut)
-#       cutTreeData.TAttach(muDr,cut)
-#       out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
+for key,vals in alphatTesting.iteritems():
+  for ref in vals[0]:
+    for htbin in vals[1]:
+      cut = eval("RECO_CommonHTCut(%f)"%(htbin))
+      out.append(cut)
+      cutTreeData.TAttach(muDr,cut)
+      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
 
 AlphaTwithDiMu = {
 "HLT_HT250_AlphaT0p55_v2": (["HLT_DoubleMu3_HT200_v4",]                                       ,[275.,325.,375.,475.,575.,675.,775.,875.]),
@@ -441,20 +443,20 @@ AlphaTwithDiMu = {
 "HLT_HT250_v6" :(["HLT_Mu15_HT200_v4" ,"HLT_IsoMu17_v10"]                                                     ,[0.,]) ,
 "HLT_HT250_v7" :(["HLT_Mu30_HT200_v1" ,"HLT_IsoMu17_v11"]                                                     ,[0.,]) ,
 "HLT_HT250_v8" :(["IsoMu20_v8" ,"HLT_IsoMu24_eta2p1_v3"]                                                      ,[0.,]) ,
-"HLT_HT300_v11":(["HLT_DoubleMu8_Mass8_HT200_v4","HLT_DoubleMu8_Mass8_HT200_v5","HLT_IsoMu24_eta2p1_v6"],[0.,]) ,
-"HLT_HT300_v2" :(["HLT_Mu5_HT200_v4"  ,"HLT_IsoMu12_v1"]                                                      ,[0.,]) ,
-"HLT_HT300_v3" :(["HLT_Mu8_HT200_v4"  ,"HLT_IsoMu17_v6"]                                                      ,[0.,]) ,
-"HLT_HT300_v4" :(["HLT_Mu15_HT200_v2" ,"HLT_IsoMu17_v8"]                                                      ,[0.,]) ,
-"HLT_HT300_v5" :(["HLT_Mu15_HT200_v3" ,"IsoMu17_v9"]                                                      ,[0.,]) ,
-"HLT_HT300_v6" :(["HLT_Mu15_HT200_v4" ,"HLT_IsoMu17_v10"]                                                     ,[0.,]) ,
-"HLT_HT300_v7" :(["HLT_Mu30_HT200_v1" ,"HLT_IsoMu17_v11"]                                                     ,[0.,]) ,
-"HLT_HT300_v8" :(["IsoMu20_v8" ,"HLT_IsoMu24_eta2p1_v3"]                                                      ,[0.,]) ,
+"HLT_HT300_v12":(["HLT_DoubleMu8_Mass8_HT200_v4","HLT_DoubleMu8_Mass8_HT200_v5","HLT_IsoMu24_eta2p1_v6"],[0.,]) ,
+"HLT_HT300_v3" :(["HLT_Mu5_HT200_v4"  ,"HLT_IsoMu12_v1"]                                                      ,[0.,]) ,
+"HLT_HT300_v4" :(["HLT_Mu8_HT200_v4"  ,"HLT_IsoMu17_v6"]                                                      ,[0.,]) ,
+"HLT_HT300_v5" :(["HLT_Mu15_HT200_v2" ,"HLT_IsoMu17_v8"]                                                      ,[0.,]) ,
+"HLT_HT300_v6" :(["HLT_Mu15_HT200_v3" ,"IsoMu17_v9"]                                                      ,[0.,]) ,
+"HLT_HT300_v7" :(["HLT_Mu15_HT200_v4" ,"HLT_IsoMu17_v10"]                                                     ,[0.,]) ,
+"HLT_HT300_v8" :(["HLT_Mu30_HT200_v1" ,"HLT_IsoMu17_v11"]                                                     ,[0.,]) ,
+"HLT_HT300_v9" :(["IsoMu20_v8" ,"HLT_IsoMu24_eta2p1_v3"]                                                      ,[0.,]) ,
 
 }
 for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     for ref in vals[0]:
-      for muDR in [0.3]:
+      for muDR in [0.0,0.3]:
           cut = eval("RECO_CommonHTCut(%f)"%(htbin))
           out.append(cut)
           muDRcut =  RECO_MuonJetDRCut(muDR)
@@ -561,8 +563,8 @@ vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 mu_id = PSet(
    MuID = "Tight",
-   MinPt = 10.,
-   MaxEta = 2.5,
+   MinPt = 5.,
+   MaxEta = 2.1,
    MaxIsolation = 0.1,
    DRMuJet = 0.5,
    MaxGlbTrkDxy = 0.02,
@@ -607,11 +609,7 @@ from SingleMu import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
 #sample = SingleMu
-# sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
-#sample = HTRun2011AB
-
-outDir = "../FindLumisForALphaT/ht%dNoUpper/"%(bin)
+outDir = "../MoreAlphaTandHTTurnOns/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
