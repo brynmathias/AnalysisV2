@@ -37,6 +37,6 @@ for i,line in enumerate(lines):
 #    sum += int(val)
 
 
-outF = open("./sizefile.txt")
+outF = open("./sizefile.txt",'w')
 outF.write(sumList)
 print "Total Size = %f Mb"%(float(sum)/(1024**2))

@@ -350,8 +350,9 @@ cutTreeData.TAttach(badEvents,json_ouput)
 #cutTreeData.TAttach(badEvents,NoiseFilt)
 cutTreeData.TAttach(json,NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
-cutTreeData.TAttach(selection,oddMuon)
-cutTreeData.TAttach(oddMuon,oddElectron)
+cutTreeData.TAttach(selection,# oddMuon)
+# cutTreeData.TAttach(oddMuon,
+oddElectron)
 cutTreeData.TAttach(oddElectron,oddPhoton)
 cutTreeData.TAttach(oddPhoton,numComElectrons)
 cutTreeData.TAttach(numComElectrons,numComPhotons)
@@ -609,8 +610,12 @@ from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
 sample = MuHad2011AB
-#sample = SingleMu
-outDir = "../MoreAlphaTandHTTurnOns/ht%dNoUpper/"%(bin)
+
+# sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+# MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
+#sample = HTRun2011AB
+
+outDir = "../RemoveOddMuonVeto/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
