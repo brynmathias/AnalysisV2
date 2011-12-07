@@ -467,8 +467,8 @@ for key,vals in AlphaTwithDiMu.iteritems():
           out.append(muDRcut)
           cutTreeData.TAttach(diMuon,muDRcut)
           cutTreeData.TAttach(muDRcut,cut)
-          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin)))
-          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_%f_HT%d_"%(muDR,htbin),Debug = True))
+          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
+          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin),Debug = True))
 
 # If muon is not required
 htTesting = {

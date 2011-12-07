@@ -100,10 +100,42 @@ void trigger_hadd() {
 //   filters.push_back("HLT_HT9??_v*");
 //   filters.push_back("HLT_HT1???_v*");
 
+<<<<<<< HEAD:allhadronic/scripts/trigger_hadd.C
+ // filters.push_back("HLT_Mu?_v*");
+ // filters.push_back("HLT_Mu??_v*");
+ // filters.push_back("HLT_Mu2?_v*");
+ // filters.push_back("HLT_Mu3?_v*");
+  //filters.push_back("HLT_Mu4?_v*");
+  filters.push_back("HLT_IsoMu??_eta2p1_v*");
+  filters.push_back("HLT_IsoMu?_eta2p1_v*");
+
+  filters.push_back("HLT_IsoMu?_v*");
+  filters.push_back("HLT_IsoMu??_v*");
+// filters.push_back("HLT_Mu?_HT???_v*");
+// filters.push_back("HLT_Mu??_HT???_v*");
+  filters.push_back("HLT_HT25?_v*");
+//   filters.push_back("HLT_HT26?_v*");
+ // filters.push_back("HLT_HT3??_v*");
+  //filters.push_back("HLT_HT4??_v*");
+//  filters.push_back("HLT_HT5??_v*");
+//  filters.push_back("HLT_HT6??_v*");
+//  filters.push_back("HLT_HT7??_v*");
+ //  filters.push_back("HLT_HT8??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT1???_v*");
+  // filters.push_back("HLT_Mu?_v*");
+  // filters.push_back("HLT_Mu??_v*");
+  // filters.push_back("HLT_IsoMu?_v*");
+  // filters.push_back("HLT_IsoMu??_v*");
+  // filters.push_back("HLT_IsoMu?_eta2p1_v*");
+  // filters.push_back("HLT_IsoMu??_eta2p1_v*");
+=======
 //   filters.push_back("HLT_Mu?_HT???_v*");
 //   filters.push_back("HLT_Mu??_HT???_v*");
 
   
+>>>>>>> c7a7acbe340950cb6ed9f9b1d818b61bafdde065:allhadronic/scripts/trigger_hadd.C
   typedef std::map<int,float> Runs;
   typedef std::map<std::string,Runs> Triggers;
   Triggers trigs;

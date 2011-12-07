@@ -1,7 +1,7 @@
 from icf.core import PSet
 
-MuHad_Run2011AB=PSet(
-	Name="MuHad_Run2011AB",
+MuHad2011AB=PSet(
+	Name="MuHad2011AB",
 	Format=("ICF",3),
 	File=[
 	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/elaird/ICF/automated/2011_11_11_15_48_22/MuHad.Run2011A-05Aug2011-v1.AOD/SusyCAF_Tree_100_0_h7r.root" ,
