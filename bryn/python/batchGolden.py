@@ -370,6 +370,7 @@ NVertexJets = OP_NumComJets(">=",3)
 LessThan375 = RECO_CommonHTLessThanCut(375.)
 ht250_Trigger = RECO_CommonHTCut(250.)
 htCut275_2 = RECO_CommonHTCut(275.)
+HT875Cut = RECO_CommonHTCut(875.)
 
 ht275_Fail     = RECO_CommonHTCut(275.)
 ht325_Fail     = RECO_CommonHTCut(325.)
@@ -488,24 +489,52 @@ datatriggerps = PSet(
     Verbose = False,
     UsePreScaledTriggers = False,
     Triggers = [
-"HLT_HT250_AlphaT0p53_v2",
-"HLT_HT250_AlphaT0p53_v3",
-"HLT_HT250_AlphaT0p53_v4",
-"HLT_HT250_AlphaT0p53_v5",
-"HLT_HT250_AlphaT0p53_v6",
-"HLT_HT250_AlphaT0p54_v2",
-"HLT_HT250_AlphaT0p54_v3",
-"HLT_HT250_AlphaT0p54_v4",
-"HLT_HT250_AlphaT0p55_v1",
-"HLT_HT250_AlphaT0p62_v1",
-"HLT_HT250_AlphaT0p62_v2",
-  ]
+"HLT_HT250_AlphaT0p55_v1" ,
+"HLT_HT250_AlphaT0p55_v2" ,
+"HLT_HT250_AlphaT0p53_v2" ,
+"HLT_HT250_AlphaT0p53_v3" ,
+"HLT_HT250_AlphaT0p53_v4" ,
+"HLT_HT250_AlphaT0p53_v5" ,
+"HLT_HT250_AlphaT0p55_v2" ,
+"HLT_HT300_AlphaT0p52_v1" ,
+"HLT_HT300_AlphaT0p52_v2" ,
+"HLT_HT300_AlphaT0p52_v3" ,
+"HLT_HT300_AlphaT0p53_v3" ,
+"HLT_HT300_AlphaT0p53_v4" ,
+"HLT_HT300_AlphaT0p52_v4" ,
+"HLT_HT300_AlphaT0p52_v5" ,
+"HLT_HT300_AlphaT0p53_v5" ,
+"HLT_HT300_AlphaT0p53_v6" ,
+"HLT_HT300_AlphaT0p54_v5" ,
+"HLT_HT300_AlphaT0p55_v3" ,
+"HLT_HT350_AlphaT0p51_v1" ,
+"HLT_HT350_AlphaT0p51_v2" ,
+"HLT_HT350_AlphaT0p51_v3" ,
+"HLT_HT350_AlphaT0p51_v4" ,
+"HLT_HT350_AlphaT0p51_v5" ,
+"HLT_HT350_AlphaT0p52_v1" ,
+"HLT_HT350_AlphaT0p52_v2" ,
+"HLT_HT350_AlphaT0p53_v10",
+"HLT_HT400_AlphaT0p51_v1" ,
+"HLT_HT400_AlphaT0p51_v2" ,
+"HLT_HT400_AlphaT0p51_v3" ,
+"HLT_HT400_AlphaT0p51_v4" ,
+"HLT_HT400_AlphaT0p51_v5" ,
+"HLT_HT400_AlphaT0p51_v6" ,
+"HLT_HT400_AlphaT0p51_v7" ,
+"HLT_HT400_AlphaT0p51_v10",
+"HLT_HT400_AlphaT0p52_v5" ,
+"HLT_HT250_AlphaT0p58_v3" ,
+"HLT_HT250_AlphaT0p60_v3" ,
+"HLT_HT300_AlphaT0p54_v5" ,
+"HLT_HT300_AlphaT0p55_v3" ,
+"HLT_HT350_AlphaT0p53_v10",]
 )
 DataTrigger = OP_MultiTrigger( datatriggerps.ps() )
 
 JetAdd = JetAddition(0.)
-json = JSONFilter("Json Mask", json_to_pset("~rjb3/public_html/golden.json"))
 
+json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden2011.json"))
 # AlphatTriggerCut(0.52414,50)#
 # vertex_reweight = VertexReweighting(
 # PSet(
@@ -575,18 +604,17 @@ def MakeDataTree(Threshold):
   cutTreeData.TAttach(htCut375,alphaT1)
   cutTreeData.TAttach(NJet4,nHadStandard375_after_DeadEcal)
   #Here be plots after all the cuts!!
-  # cutTreeData.TAttach(DeadEcalCutData,
-  cutTreeData.TAttach(htCut275,MHT_METCut)
+  cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
   cutTreeData.TAttach(MHT_METCut,htCut375All)
   cutTreeData.TAttach(htCut375All,NJet5)
   cutTreeData.TAttach(htCut375All,DiJet5)
-  cutTreeData.TAttach(htCut375All,alphat)
   # cutTreeData.TAttach(alphat,eventDump)
 #  cutTreeData.TAttach(alphat,skim)
   cutTreeData.TAttach(NJet5,nHadStandardAllCuts)
   cutTreeData.TAttach(DiJet5,HadStandardAllCuts)
-  # cutTreeData.TAttach(MHT_METCut, alphat)
-  # cutTreeData.TAttach(alphat,eventDump)#skim)
+  cutTreeData.TAttach(MHT_METCut, alphat)
+  cutTreeData.TAttach(alphat,HT875Cut)
+  cutTreeData.TAttach(HT875Cut,eventDump)#skim)
   # avobe here does one big inclusive bin!
   # Now lets start binning in HT bins
   # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
@@ -663,8 +691,7 @@ def MakeMCTree(Threshold):
 
 
   #Here be plots after all the cuts!!
-  # cutTreeMC.TAttach(DeadEcalCutMC,
-  cutTreeMC.TAttach(htCut275,MHT_METCut)
+  cutTreeMC.TAttach(DeadEcalCutMC,MHT_METCut)
   cutTreeMC.TAttach(MHT_METCut,alphaT2)
   cutTreeMC.TAttach(MHT_METCut,htCut375All)
   cutTreeMC.TAttach(htCut375All,NJet5)
