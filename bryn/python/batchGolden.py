@@ -186,8 +186,8 @@ skim = SkimOp(skim_ps.ps())
 
 genericPSet = PSet(
 DirName      = "275_325Gev",
-MinObjects   = 2,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
