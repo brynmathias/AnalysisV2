@@ -243,8 +243,8 @@ StandardPlots     = True,
 
 Npset1 = PSet(
 DirName      = "n275_325Gev",
-MinObjects   = 3,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
@@ -257,8 +257,8 @@ StandardPlots     = True,
 
 Npset2 = PSet(
 DirName      = "n325Gev",
-MinObjects   = 3,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
@@ -271,8 +271,8 @@ StandardPlots     = True,
 
 Npset3 = PSet(
 DirName      = "n375Gev",
-MinObjects   = 3,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
@@ -286,8 +286,8 @@ StandardPlots     = True,
 
 Npset5 = PSet(
 DirName      = "n375Gev_afterDeadEcal",
-MinObjects   = 3,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
@@ -300,15 +300,15 @@ StandardPlots     = True,
 
 Npset4 = PSet(
 DirName      = "nAll",
-MinObjects   = 3,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
 Npset6 = PSet(
 DirName      = "nAllCuts",
-MinObjects   = 3,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
@@ -405,7 +405,7 @@ HadStandardAllCuts=  WeeklyUpdatePlots(pset6.ps())
 t1 = PSet(
     DirName      = "HadronicCommon_1",
     MinObjects   = 2,
-    MaxObjects   = 15,
+    MaxObjects   = 2,
     StandardPlots     = False,
     DeadECALPlots = True,
     CleaningControlPlots = False,
@@ -428,8 +428,8 @@ StandardPlots     = True,
 
 Npset = PSet(
 DirName      = "n275_infGev",
-MinObjects   = 3,
-MaxObjects   = 15,
+MinObjects   = 1,
+MaxObjects   = 2,
 StandardPlots     = True,
 )
 
