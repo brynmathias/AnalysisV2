@@ -143,29 +143,30 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
   hFailTrackless_(),
   hFailMinBiasDPhi_(),
   // RECO cntrs
-//   cntr_baseline(0.),
-//   cntr_leading_jet_eta(0.),
-//   cntr_odd_jet_veto(0.),
-//   cntr_bad_muon_in_jet(0.),
-//   cntr_leading_jet_pt(0.),
-//   cntr_second_jet_pt(0.),
-//   cntr_correct_reco_bin(0.),
-//   cntr_jet_multiplicity(0.),
-//   cntr_at(0.),
-//   cntr_pass_dead_ecal(0.),
-//   cntr_pass_baby_cut(0.),
-//   cntr_pass_pt_over_ht(0.),
+  cntr_baseline(0.),
+  cntr_correct_reco_bin(0.),
+  cntr_trigger_fired(0.),
+  cntr_jet_multiplicity(0.),
+  cntr_leading_jet_pt(0.),
+  cntr_second_jet_pt(0.),
+  cntr_leading_jet_eta(0.),
+  cntr_odd_jet_veto(0.),
+  cntr_bad_muon_in_jet(0.),
+  cntr_at(0.),
+  cntr_pass_dead_ecal(0.),
+  cntr_pass_baby_cut(0.),
+  cntr_pass_pt_over_ht(0.),
+  cntr_pass_rechit(0.),
   epochs_(),
   signal_(),
   monitor_(),
-  monitorRef_(),
   reweight_(),
-  names_()
+  names_(),
+  usePrescaled_(false)
 {
   
   vstring signal;
   vstring monitor;
-  vstring monitorRef;
   vdouble reweight;
   
   // Optional parameters
@@ -181,7 +182,7 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
   if ( ps.Contains("TriggerEpochs") ) epochs_ = ps.Get< std::vector<double> >("TriggerEpochs"); 
   if ( ps.Contains("SignalTriggers") ) signal = ps.Get< vstring >("SignalTriggers"); 
   if ( ps.Contains("MonitorTriggers") ) monitor = ps.Get< vstring >("MonitorTriggers"); 
-  if ( ps.Contains("MonitorRefTriggers") ) monitorRef = ps.Get< vstring >("MonitorRefTriggers"); 
+  if ( ps.Contains("PrescaledSignalTriggers") ) usePrescaled_ = ps.Get<bool>("PrescaledSignalTriggers"); 
   if ( ps.Contains("VertexReweighting") ) reweight = ps.Get< vdouble >("VertexReweighting"); 
   if ( ps.Contains("Inclusive") ) inclusive_ = ps.Get<bool>("Inclusive"); 
   if ( ps.Contains("AlphaTDefault") ) aT_ = (uint)ps.Get<int>("AlphaTDefault");
@@ -319,33 +320,6 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
     }
   }
 
-  // Parse monitor trigger strings
-  if ( !monitorRef.empty() ) {
-    unsigned int ii = 0;
-    unsigned int jj = 0;
-    monitorRef_.clear();
-    monitorRef_.resize( htNbins_, vstring(100) );
-    vstring::const_iterator iter = monitorRef.begin();
-    vstring::const_iterator jter = monitorRef.end();
-    for ( ; iter != jter; ++iter ) { 
-      if ( *iter == "" ) { monitorRef_[ii].resize(jj); ii++; jj = 0; }
-      else { 
-	if ( ii < monitorRef_.size() && jj < monitorRef_[ii].size() ) { monitorRef_[ii][jj] = *iter; } 
-	else { break; }
-	jj++; 
-      }
-    }
-    if ( ii < htNbins_ ) { monitorRef_.resize(ii); monitorRef_.resize(htNbins_,vstring(monitorRef_[ii-1])); }
-
-//     for ( vvstring::const_iterator i = monitorRef_.begin(); i != monitorRef_.end(); ++i ) {
-//       std::cout << i->size() << ": ";
-//       for ( vstring::const_iterator j = i->begin(); j != i->end(); ++j ) {
-// 	std::cout << "\"" << *j << "\" ";
-//       }
-//       std::cout << std::endl;
-//     }
-  }
-  
   // Parse vertex reweight factors
   if ( reweight.size() > 1 ) {
     unsigned int ii = 0;
@@ -389,20 +363,23 @@ QcdBkgdEst::QcdBkgdEst( const Utils::ParameterSet& ps ) :
 // -----------------------------------------------------------------------------
 //
 QcdBkgdEst::~QcdBkgdEst() {
-//   std::cout << std::fixed 
-// 	    << "RECO cut flow:" << std::endl
-//     //<< "cntr_signal_region: " << cntr_baseline << std::endl
-// 	    << "cntr_correct_reco_bin: " << cntr_correct_reco_bin << std::endl
-// 	    << "cntr_leading_jet_eta: " << cntr_leading_jet_eta << std::endl
-// 	    << "cntr_bad_muon_in_jet: " << cntr_bad_muon_in_jet << std::endl
-// 	    << "cntr_odd_jet_veto: " << cntr_odd_jet_veto << std::endl
-// 	    << "cntr_leading_jet_pt: " << cntr_leading_jet_pt << std::endl
-// 	    << "cntr_second_jet_pt: " << cntr_second_jet_pt << std::endl
-// 	    << "cntr_jet_multiplicity: " << cntr_jet_multiplicity << std::endl
-// 	    << "cntr_at: " << cntr_at << std::endl
-// 	    << "cntr_pass_dead_ecal: " << cntr_pass_dead_ecal << std::endl 
-// 	    << "cntr_pass_baby_cut: " << cntr_pass_baby_cut << std::endl
-// 	    << "cntr_pass_pt_over_ht: " << cntr_pass_pt_over_ht << std::endl;
+
+  std::cout << std::fixed 
+	    << "RECO cut flow:" << std::endl
+    //<< "Baseline:         " << cntr_baseline << std::endl
+ 	    << "Correct RECO bin: " << cntr_correct_reco_bin << std::endl
+ 	    << "Trigger fired:    " << cntr_trigger_fired << std::endl
+ 	    << "Jet Multiplicity: " << cntr_jet_multiplicity << std::endl
+ 	    << "Leading jet pT:   " << cntr_leading_jet_pt << std::endl
+ 	    << "Second jet pT:    " << cntr_second_jet_pt << std::endl
+ 	    << "Leading jet eta:  " << cntr_leading_jet_eta << std::endl
+ 	    << "Odd jet veto:     " << cntr_odd_jet_veto << std::endl
+ 	    << "Bad muon in jet:  " << cntr_bad_muon_in_jet << std::endl
+ 	    << "AlphaT:           " << cntr_at << std::endl
+ 	    << "Dead ECAL:        " << cntr_pass_dead_ecal << std::endl 
+ 	    << "MHT/MET:          " << cntr_pass_baby_cut << std::endl
+ 	    << "Vertex pT / HT:   " << cntr_pass_pt_over_ht << std::endl
+ 	    << "RecHit cleaning:  " << cntr_pass_rechit << std::endl;
 
   std::cout << " HT triggers found:  " << std::endl;
   vstring::const_iterator ii = names_.begin();
@@ -729,7 +706,7 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     bool pass_rechit = rechit_ ? rechit_->Process(ev) : true; 
     
     // Extract trigger prescale based on if AlphaT is above nominal threshold
-    if ( at_reco >= alphaT_[aT_] ) { if ( !signal_.empty() ) prescale = trigger( ev, signal_[ibin] ); }
+    if ( at_reco >= alphaT_[aT_] ) { if ( !signal_.empty() ) prescale = trigger( ev, signal_[ibin], usePrescaled_ ); }
     else                           { if ( !monitor_.empty() ) prescale = trigger( ev, monitor_[ibin] ); }
     
     // Check if correct reco bin
@@ -821,8 +798,8 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 
 		      // Check AlphaT is above threshold
 		      if ( at_reco >= alphaT_[iat] ) { 
-			if ( iat == aT_ ) pass_cntr = 9; 
-
+			if ( iat == aT_ ) pass_cntr = 9;
+			
 			// Defines HT bin to be used in case of inclusive binning
 			double ht_binned = inclusive_ ? htBins_[ibin] + 1.e-3 : var_reco;
 			
@@ -890,7 +867,7 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 			if ( pass_dead_ecal || ok ) { 
 			  if ( iat == aT_ ) pass_cntr = 10; 
 			  if ( !onlyFull_ ) fill( reco.size(), hPassDeadEcal_[iat], ht_binned, prescale*weight*reweight ); 
-	  
+			  
 			  // Additional histograms
 			  if ( babyJetsHistos_ ) {
 			    fill( reco.size(), hBabyJets_[0][iat], baby_val, prescale*weight*reweight ); 
@@ -912,7 +889,12 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 			      if ( !onlyFull_ ) fill( reco.size(), hPassTrackless_[iat], ht_binned, prescale*weight*reweight ); 
 	      
 			      if ( pass_rechit || ok ) { 
-				if ( iat == aT_ ) pass_cntr = 13; 
+				
+				if ( iat == aT_ ) {
+				  pass_cntr = 13; 
+				  if ( filter_ >= nbins || ibin == filter_ ) { keep_event = true; }
+				}
+				
 				fill( reco.size(), hPassRecHit_[iat], ht_binned, prescale*weight*reweight ); 
 		
 				if ( pass_min_bias_dphi || ok ) { 
@@ -1141,6 +1123,23 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     }
   }
   
+  if ( correct_reco_bin ) {
+    if ( pass_cntr >= 0 ) { cntr_baseline += weight*reweight; }
+    if ( pass_cntr >= 1 ) { cntr_correct_reco_bin += weight*reweight; }
+    if ( pass_cntr >= 2 ) { cntr_trigger_fired += weight*reweight; }
+    if ( pass_cntr >= 3 ) { cntr_jet_multiplicity += weight*reweight; }
+    if ( pass_cntr >= 4 ) { cntr_leading_jet_pt += weight*reweight; }
+    if ( pass_cntr >= 5 ) { cntr_second_jet_pt += weight*reweight; }
+    if ( pass_cntr >= 6 ) { cntr_leading_jet_eta += weight*reweight; }
+    if ( pass_cntr >= 7 ) { cntr_odd_jet_veto += weight*reweight; }
+    if ( pass_cntr >= 8 ) { cntr_bad_muon_in_jet += weight*reweight; }
+    if ( pass_cntr >= 9 ) { cntr_at += weight*reweight; }
+    if ( pass_cntr >= 10 ) { cntr_pass_dead_ecal += weight*reweight; }
+    if ( pass_cntr >= 11 ) { cntr_pass_baby_cut += weight*reweight; }
+    if ( pass_cntr >= 12 ) { cntr_pass_pt_over_ht += weight*reweight; }
+    if ( pass_cntr >= 13 ) { cntr_pass_rechit += weight*reweight; }
+  }
+
   return keep_event;
   
 }
@@ -1906,7 +1905,7 @@ bool QcdBkgdEst::passVertexSumPtOverHt( Event::Data& ev, double ht ) {
 
 // -----------------------------------------------------------------------------
 //
-int QcdBkgdEst::trigger( const Event::Data& ev, const vstring& triggers ) { 
+int QcdBkgdEst::trigger( const Event::Data& ev, const vstring& triggers, bool use_prescaled ) { 
   
   if ( epochs_.empty() && triggers.empty() ) { return 1; }
   
@@ -1961,8 +1960,9 @@ int QcdBkgdEst::trigger( const Event::Data& ev, const vstring& triggers ) {
     std::map<std::string,int>::const_iterator iprescale = ev.hlt_prescaled()->find(itrigger->first);
     if ( iprescale == ev.hlt_prescaled()->end() ) { continue; }
     
-    // Store lowest prescale of triggers that fire
-    if ( prescale < 0 || iprescale->second < prescale ) { prescale = iprescale->second; }
+    // Store lowest prescale of triggers that fire (checking first if prescaled triggers should be used or not)
+    if ( ( use_prescaled || prescale == 1 ) &&
+	 prescale < 0 || iprescale->second < prescale ) { prescale = iprescale->second; }
     
   }
   

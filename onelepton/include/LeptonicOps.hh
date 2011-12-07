@@ -471,6 +471,8 @@ class HTthrustCut : public Operation::_Base {
     bool mDeltaEta, mDeltaPhi;
     bool mShh;
     bool mConv;
+    double mPtMin;
+    double mD0BS;
     //      bool mConvExtra;
     double mRelCombIsoBarrel, mRelCombIsoEndcap;
     double mTrkIsoBarrel, mTrkIsoEndcap;

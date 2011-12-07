@@ -61,15 +61,16 @@ void mainFunction(bool print = false) {
   vector<int> rebinFactor;
 // CHOOSE FOLDERS	==================================
 
-//  folderNames.push_back("ANplots150_NOLP");
+//  folderNames.push_back("ANplots150_NOLPsecondD500");
 //  rebinFactor.push_back(1);
-  folderNames.push_back("ANplots250_NOLP");
+  
+  folderNames.push_back("ANplots250_NOLPsecondD500");
   rebinFactor.push_back(1);
-  folderNames.push_back("ANplots350_NOLP");
+  folderNames.push_back("ANplots350_NOLPsecondD500");
   rebinFactor.push_back(1); // 2 for search reg
-  folderNames.push_back("ANplots450_NOLP");
+  folderNames.push_back("ANplots450_NOLPsecondD500");
   rebinFactor.push_back(1);
-
+  
 //  folderNames.push_back("OP_ANplots_ST150_inf");
 //  rebinFactor.push_back(1);
 // =================================================
@@ -139,14 +140,14 @@ void mainFunction(bool print = false) {
   // Parameters.intLumi = 881.; //Electron PR
   // Parameters.intLumi = 201.; //Electron RR
   // Parameters.intLumi = 203.; //Muon PR
-  Parameters.intLumi = 1140.; //Muon PR
+  Parameters.intLumi = 4700.; //Muon PR
   //  Parameters.intLumi = 1080.; //Electron total
   // path to files
   //  TString path = "/vols/cms02/gouskos/onelepton/20110817_El_Sel_COR/";
   //  TString path = "/vols/cms02/gouskos/onelepton/20110820_MuFromMarkus/";
   //  TString path = "/vols/cms01/mstoye/Markus8/SUSYv2/onelepton/scripts/resultsMC_lt3j/";
   //  TString path = "/vols/cms01/mstoye/Markus8/SUSYv2/onelepton/scripts/resultsMC_lt3j_St150infPlots/";
-  TString path = "./20110822_ElHad/";
+  TString path = "/vols/cms02/gouskos/onelepton/20111201_El_Sel/";
   //  TString path = "/vols/cms02/gouskos/onelepton/20110827_Mu_lt3jts_HT350/";
   // MC filenames
   TString filename_MCqcd = path+"qcd.root";
@@ -628,7 +629,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   TLatex *lPreliminary = new TLatex(0.19,0.96,"CMS Preliminary 2011");
 
   //  TLatex *lIntLumi = new TLatex(0.15,0.89,"#scale[0.8]{#int L dt = "+lumi+" pb^{-1}, #sqrt{s} = 7 TeV}");
-  TLatex *lIntLumi  = new TLatex(0.2,0.86,"#scale[1.]{1.14 fb^{-1}, #sqrt{s} = 7 TeV}");
+  TLatex *lIntLumi  = new TLatex(0.2,0.86,"#scale[1.]{4.7 fb^{-1}, #sqrt{s} = 7 TeV}");
   TLatex *lIntLumiB = new TLatex(0.2,0.77,"#scale[1.]{#sqrt{s} = 7 TeV}");
   lPreliminary->SetNDC();
   lIntLumi->SetNDC();
@@ -683,7 +684,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   for(unsigned int i=hRatio.size()-1; i<hRatio.size(); i--) {
     if(i==hRatio.size()-1) {
       hRatio[i]->Draw();
-      unity->Draw("same");
+      //      unity->Draw("same");
       hRatio[i]->Draw("same");
     }
     else

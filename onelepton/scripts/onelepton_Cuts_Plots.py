@@ -521,7 +521,7 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
 
     # Muon-jet DR cut
     #    mu_jet_dr = MuonJetDRFilter(0.1, Mus.ps())
-    mu_jet_dr = MuonJetDRFilterRA4Sync(0.1, Mus.ps())
+    mu_jet_dr = MuonJetDRFilterRA4Sync(0.3, Mus.ps())
     a.AddJetFilter("PreCC", mu_jet_dr)
     filters += [mu_jet_dr]
 
@@ -644,9 +644,10 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
             tree.TAttach(ElHad_PromptB_v1_Cut_TP,AtLeast4Jts)
 
         elif mode == "data42X_Run2011Full":
-            tree.TAttach(RECO_CommonHTCut500,AtLeast3Jts)
+            tree.TAttach(RECO_CommonHTCut500,ElHad_allBE_deadecal_Cut)
+            tree.TAttach(ElHad_allBE_deadecal_Cut,AtLeast3Jts)
             #            tree.TAttach(AtLeast3Jts,AnalysisTree_El_Data)
-            tree.TAttach(RECO_CommonHTCut500,AtLeast4Jts)
+            tree.TAttach(ElHad_allBE_deadecal_Cut,AtLeast4Jts)
             
         else:
             tree.TAttach(RECO_CommonHTCut500, AtLeast3Jts)

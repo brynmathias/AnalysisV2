@@ -16,7 +16,7 @@ def metScaleSystematic(a, shiftdir, lepton):
     """
     pfmet_jecunc = PSet(
         #the location of the JECUncertainty txt file
-        jecuncfile = "/vols/cms01/as1604/SUSY-svn/WPol2/scripts/GR_R_38X_V15_AK5PF_Uncertainty.txt",
+        jecuncfile = "GR_R_42_V19_AK5PF_Uncertainty.txt",
         jecuncfileresidual = "/vols/cms01/mstoye/SVNtestKill/SUSYv2/onelepton/scripts/GR_R_42_V19_AK5PF_L2L3Residual.txt",
         #either Muon or Electron
         lepton = lepton,
@@ -32,7 +32,7 @@ def metScaleSystematic(a, shiftdir, lepton):
     return pfmetjecunc
 
 def metScaleSystematicJets(a, shiftdir):
-    myJESCorrectionsFromFile = one.JESCorrectionsFromFile(shiftdir,"/vols/cms01/as1604/SUSY-svn/WPol2/scripts/GR_R_38X_V15_AK5PF_Uncertainty.txt")
+    myJESCorrectionsFromFile = one.JESCorrectionsFromFile(shiftdir,"GR_R_42_V19_AK5PF_Uncertainty.txt")
     a.AddJetFilter("PreCC",myJESCorrectionsFromFile)
     return myJESCorrectionsFromFile
 
@@ -108,7 +108,7 @@ def reweightVertices(a):
 def polarisationReweighting(a, lepton, shift = 0.15, debug=False,plus_only=False):
     """ Apply polarisation reweighting factors for MC """
     ps = loadPolarisationReweightingFactors(
-        "/vols/cms03/as1604/ra4/onelepton/scripts/systTools/reweightFactors.txt"
+        "systTools/reweightFactors.txt"
         )
     ps._quiet_set("Lepton", lepton)
     ps._quiet_set("fLmfRShift", shift)
@@ -172,8 +172,6 @@ def muonSystematics(a, mode):
         filters += [polarisationReweighting(a, "Muon", 0.05, False,True)]
     elif mode == "poldown_plus":
         filters += [polarisationReweighting(a, "Muon", -0.05, False,True)]
-
-
     elif mode == "ttpolup":
         filters += [ttpolarisationReweighting(a, "Muon", 0.05)]
     elif mode == "ttpoldown":

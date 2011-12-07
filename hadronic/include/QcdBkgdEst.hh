@@ -37,7 +37,7 @@ namespace Operation {
     typedef std::vector<vdouble> vvdouble;
     typedef std::vector<std::string> vstring;
     typedef std::vector<vstring> vvstring;
-    int trigger( const Event::Data& ev, const vstring& triggers );
+    int trigger( const Event::Data& ev, const vstring& triggers, bool use_prescaled = true );
     
     void binning();
     void BookHistos() {;} //@@ everything is done in Start()
@@ -172,26 +172,28 @@ namespace Operation {
     vvTH1D hFailTrackless_; 
     vvTH1D hFailMinBiasDPhi_; 
 
-//     // Cntrs
-//     double cntr_baseline;
-//     double cntr_leading_jet_eta;
-//     double cntr_odd_jet_veto;
-//     double cntr_bad_muon_in_jet;
-//     double cntr_leading_jet_pt;
-//     double cntr_second_jet_pt;
-//     double cntr_correct_reco_bin;
-//     double cntr_jet_multiplicity;
-//     double cntr_at;
-//     double cntr_pass_dead_ecal;  
-//     double cntr_pass_baby_cut;
-//     double cntr_pass_pt_over_ht;
+    // Cntrs
+    double cntr_baseline;
+    double cntr_correct_reco_bin;
+    double cntr_trigger_fired;
+    double cntr_jet_multiplicity;
+    double cntr_leading_jet_pt;
+    double cntr_second_jet_pt;
+    double cntr_leading_jet_eta;
+    double cntr_odd_jet_veto;
+    double cntr_bad_muon_in_jet;
+    double cntr_at;
+    double cntr_pass_dead_ecal;  
+    double cntr_pass_baby_cut;
+    double cntr_pass_pt_over_ht;
+    double cntr_pass_rechit;
 
     std::vector<double> epochs_;
     vvstring signal_;
     vvstring monitor_;
-    vvstring monitorRef_;
     vvdouble reweight_;
     vstring names_;
+    bool usePrescaled_;
 
   }; 
 

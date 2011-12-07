@@ -16,17 +16,19 @@ from onelepton.filters import electronSystematics
 from icf.utils import autoname
 
 # here a few flags to ensure you correct all instances
-mode = "MC311"
+#mode = "MC311"
 #mode = "MC38"
 #mode = "data39"
 #mode = "data311"
 #mode = "data4X"
 #mode = "data42X_PromptReco"
 #mode = "data42X_ReReco"
+mode = "data42X_Run2011Full"
 #mode = "MC42ttw_Z41"
 #mode  = "MC42QCD"
 #mode  = "MCGrid"
 #mode = "SMS"
+#mode = "data42X_Sync"
 ##AUTOMATE_MODE##
 
 isSM = not (mode in ["MCGrid", "SMS"])
@@ -59,7 +61,8 @@ sig, tree, extra = setupElectronPreselection(MET, "Electrons", mode, qcd_antisel
 bins = [0,150, 250, 350, 450]
 
 # Define HT bins to use
-HTbins = [500,999999999999999999]
+#HTbins = [500,999999999999999999]
+HTbins = [500, 750, 1000, 999999999999999999]
 #HTbins = []
 BinnedHTPTCut = []
 backtuple_list = []
@@ -116,15 +119,18 @@ syst_filters = electronSystematics(sig, systematics)
 # List of samples available. Please add here.
 samplesList = {
     "MCGrid"             : samplesBSMgrids42,
-    "MC311"              : samplesMC_Approval, #samplesMC_QCD, #samplesMC_Approval, #samplesMC42X, #samplesMC_WandTT,
+    "MC311"              : samplesMC_WandTT, #samplesMC_QCD, #samplesMC_Approval, #samplesMC42X, #samplesMC_WandTT,
     "data39"             : samplesData,
     "data311"            : samplesData311,
     "data4X"             : samplesData311,
     "data42X_PromptReco" : samplesData42X_ElHad_PR_V15_03_14_residual,#samplesData42X_ElHad_PromptReco,
     "data42X_ReReco"     : samplesData42X_ElHad_RR_V15_03_14_residual,#samplesData42X_ElHad_ReReco,
+    "data42X_Run2011Full": samplesData42X_ElHad_V15_03_19_residual,
+    #    "data42X_Sync"       : samplesData42X_ElHad_May10Sync,
     "MC42ttw_Z41"        : samplesMC42Wtt,
     "MC42QCD"            : samplesMC42QCD,
     "SMS"                : samplesSMS
+
     }
 
 if systematics: syst_str = "_"+systematics
@@ -132,7 +138,7 @@ else: syst_str = ""
 
 #if mode.startswith("data"): output_dir = autoname("./resultsData")
 #else: output_dir = autoname("./resultsMC%(syst_mode)s", syst_mode=syst_str)
-output_dir = "/vols/cms02/gouskos/onelepton/20111031_El_Sel_Tree"
+output_dir = "/vols/cms02/gouskos/onelepton/20111201_TMP2"
 #output_dir = "./data"
 
 # Run the analysis!

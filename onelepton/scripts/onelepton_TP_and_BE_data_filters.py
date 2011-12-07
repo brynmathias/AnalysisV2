@@ -89,3 +89,7 @@ w_Pythia6_Cut = EventSelector(w_Pythia6_ps.ps())
 #ElHad_PromptB_v1_TP_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_Run2011B_Prompt_v1_filteredEventsTP_cfi.py")
 #ElHad_PromptB_v1_TP_deadecal_ps._quiet_set("Accept", False)
 #ElHad_PromptB_v1_Cut_TP = EventSelector(ElHad_PromptB_v1_TP_deadecal_ps.ps())
+
+ElHad_May10ReReco_deadecal_ps = getDeadECALList("../python/deadecal/veto_ElHad_Run2011_filteredEventsBE.py")
+ElHad_May10ReReco_deadecal_ps._quiet_set("Accept", False)
+ElHad_allBE_deadecal_Cut = EventSelector(ElHad_May10ReReco_deadecal_ps.ps())

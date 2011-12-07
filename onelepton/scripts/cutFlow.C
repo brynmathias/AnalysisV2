@@ -8,32 +8,34 @@ float lumi;
 //lumi = 203; //Electron RR
 //lumi = 960; //Muon
 //lumi = 1084; //Electron
-lumi = 5000; //Muon
+lumi =100; //Muon
 TString dirname("");
 TString HTbin("");
  
 bool data = true;
-bool susy = false;
-bool qcd = false;
+bool susy = true;
+bool qcd = true;
  
 bool counterFromANplots=true; //if true it will require ANplots in ST bins, otherwise Counter_BSMGrid_SumLepPT is used
 
-TString ttPath = "resultsSync/tt.root" ;
-TString wPath = "resultsSync/w.root" ;
-TString zPath = "resultsSync/z.root" ;
-TString qcdPath = "resultsSyncHTbinsThrustST350/qcd.root";
+//TString ttPath = "resultsSync/tt.root" ;
+TString ttPath = "resultsSyncSyst/BKG.root" ;
+TString wPath = "resultsSyncSyst/BKG.root" ;
+TString zPath = "resultsSyncSyst/BKG.root";
+TString qcdPath = "resultsSync/qcdmu.root";
 TString dataPath = "resultsSync/data.root"; 
 //TString bkgPath = "resultsSyncResTest_metres_HT/BKG.root" ;
-TString bkgPath = "resultsSync/BKG.root"; 
+TString bkgPath = "resultsSync/data.root"; 
 TString lm1Path = "/lm5.root";
-TString lm3Path = "resultsSyncHTbinsThrustST350/lm9.root";
-TString lm6Path = "resultsSyncHTbinsThrustST350/lm6.root";
+TString lm3Path = "resultsSync/lm9p.root";
+TString lm6Path = "resultsSync/lm6.root";
 
 cutFlow(TString HTbin_){
   HTbin =  HTbin_;
   TString lumiString;
   lumiString+=lumi;
-  ostream.precision(3);
+  ostream.setf(ios::fixed,ios::floatfield);;
+  ostream.precision(1);
   tabStart(TString(" XXX for "+lumiString+" pb$^{-1}$ XXX"));
   ostream <<"$L_{P}$ $>$ 0.3& \\stlep$\\in[150-250]$ & \\stlep$\\in[250-350]$& \\stlep$\\in[350-450]$ &\\stlep$\\in$[450-inf] \\\\ \\hline  \\hline"<<endl;
   TString SumLepPT;
@@ -51,8 +53,11 @@ cutFlow(TString HTbin_){
   }
   cutFlowostream(dirname+TString(bkgPath),TString("Total MC"),SumLepPT,true);
   if(data){
+    ostream.precision(0);
     cutFlowostream(dirname+TString(dataPath),TString("data"),SumLepPT,1,true);
-  }
+    ostream.precision(1);
+
+ }
   if(susy){
     //    cutFlowostream(dirname+TString(lm1Path),TString("LM1"),SumLepPT,true);
     cutFlowostream(dirname+TString(lm3Path),TString("LM9"),SumLepPT,true);
@@ -70,7 +75,11 @@ cutFlow(TString HTbin_){
   }
   cutFlowostream(dirname+TString(bkgPath),TString("Total MC"),SumLepPT,false);
   if(data) {
+
+ostream.precision(0);
     cutFlowostream(dirname+TString(dataPath),TString("data"),SumLepPT,false,true);
+ostream.precision(1);
+
     pred(dirname+TString(bkgPath),TString("prediction"),SumLepPT,false);
   }
   if(susy) {
@@ -204,7 +213,7 @@ pred(TString filename, TString name, TString option,int i)
   float preDall=HT150Bin/HT150BinB*HT150BinD+HT450Bin/HT450BinB*HT450BinD+ HT250Bin/HT250BinB*HT250BinD + HT350Bin/HT350BinB*HT350BinD-HT450BinDS-HT250BinDS- HT350BinDS-HT150BinDS;
 
   // output difference between prediction and observed
-  //  ostream << "$\\Delta$pred. & " << preD150 << "$\\pm$"<< preerr150 << " & " << preD250 << "$\\pm$" << preerr250  << " & " << preD350 << "$\\pm$"<< preerr350  << " & " <<preD450<< "$\\pm$"<< preerr450 << " \\\\ \\hline"<<endl;
+  ostream << "$\\Delta$pred. & " << preD150/pre150 << "$\\pm$"<< preerr150 << " & " << preD250/pre250<< "$\\pm$" << preerr250  << " & " << preD350/pre350 << "$\\pm$"<< preerr350  << " & " <<preD450/pre450<< "$\\pm$"<< preerr450 << " \\\\ \\hline"<<endl;
 
   //plot histos
 
@@ -223,8 +232,7 @@ pred(TString filename, TString name, TString option,int i)
   ploterr->SetBinError(4,sqrt(preerr450*preerr450+MCerr450*MCerr450));
   ploterr->SetLineColor(kBlue);
 
-
-  TH1D* plotda = new TH1D("plotda",";ST_{lep};",4,150,550);
+  TH1D* plotda = new TH1D("plotda",";S_{T}^{lep};number of events",4,150,550);
   plotda->SetBinContent(1,HT150BinDS);
   plotda->SetBinContent(2,HT250BinDS);
   plotda->SetBinContent(3,HT350BinDS);
@@ -240,13 +248,10 @@ pred(TString filename, TString name, TString option,int i)
   plotpre->SetLineColor(kRed);  plotpre->SetLineWidth(3);
   plotpre->Draw("samee1");
 
-
-
-
   TLegend * aleg = new TLegend(0.6,0.6,0.9,0.9);
   //  aleg->AddEntry(ploterr,"prediction (MC+data err)","lp");
   aleg->AddEntry(plotpre,"prediction","lp");
-  aleg->AddEntry(plotda,"data","lp");
+  aleg->AddEntry(plotda,"unsmeared MC","lp");
   aleg->SetFillColor(0);
   aleg->Draw("same");
 
@@ -256,9 +261,9 @@ pred(TString filename, TString name, TString option,int i)
 cutFlowostream(TString filename, TString name, TString option,bool isBKG, bool isData=false)
 {
   float lu = lumi;
-   if(isData) {
-     lu = 100.;
-   }
+  // if(isData) {
+  //   lu = 100.;
+  //  }
    cout << "trying to open " << filename << endl;
    TFile* thefile = new TFile(filename);
    cout << "opened " << filename << endl;

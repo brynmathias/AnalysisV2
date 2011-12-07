@@ -105,7 +105,7 @@ void ANplots::BookHistos() {
   HT_pos = new TH1D("HT_pos",";H_{T}^{+} [GeV];",80,0,2000);
   HT_neg = new TH1D("HT_neg",";H_{T}^{-} [GeV];",80,0,2000);
   HT_tot = new TH1D("HT_tot",";H_{T} [GeV];",80,0,2000);
-  HT_tot_thru = new TH1D("HT_tot_thru",";H_{T} [GeV];",80,0,2000);
+  //HT_tot_thru = new TH1D("HT_tot_thru",";H_{T} [GeV];",80,0,2000);
   
   MHT_pos = new TH1D("MHT_pos",";MH_{T}^{+} [GeV];",1000,0,2000);
   MHT_neg = new TH1D("MHT_neg",";MH_{T}^{-} [GeV];",1000,0,2000);
@@ -156,12 +156,12 @@ void ANplots::BookHistos() {
   STHT_tot = new TH2D("STHT_tot","; S_{T}[lep] ;HT;",50,0,2500,50,0,2500);
 
 
-Thrust = new TH1D("Thrust",";Thrust;",100,0,1);
- ThrustPhi = new TH1D("ThrustPhi",";ThrustPhi;",100,0,TMath::Pi());
+  //Thrust = new TH1D("Thrust",";Thrust;",100,0,1);
+  //ThrustPhi = new TH1D("ThrustPhi",";ThrustPhi;",100,0,TMath::Pi());
 
   PFMETtypeVSPFMET = new TH2D("PFMETtypeVSPFMET",";PFMet typeI;PFMet;",100,0,2000,100,0,2000);
 
-  HTthrust = new TH2D("HTthrust",";HT [GeV];Thrust;",40,0,2000,20,0,1);
+  //HTthrust = new TH2D("HTthrust",";HT [GeV];Thrust;",40,0,2000,20,0,1);
   PFMETtypeOVPFMET = new TH1D("PFMETtypeOVPFMET",";PFMet typeI/PFMet;",200,0,2);
 
   MT_lt03_tot = new TH1D("MT_lt03_tot",";M_{T} [GeV];",1000,0,2000);
@@ -361,11 +361,11 @@ bool ANplots::Process(Event::Data & ev) {
 
   }
 
-  ThrustStuff thrust = ev.CommonThrustStuff();
-  Thrust->Fill(1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
-ThrustPhi->Fill(thrust.pjetDphi,ev.GetEventWeight());
-HTthrust->Fill(ev.CommonHT(),1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
- HT_tot_thru ->Fill(thrust.HTFmin,ev.GetEventWeight());
+  //  ThrustStuff thrust = ev.CommonThrustStuff();
+  //  Thrust->Fill(1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
+  //ThrustPhi->Fill(thrust.pjetDphi,ev.GetEventWeight());
+  //HTthrust->Fill(ev.CommonHT(),1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
+  // HT_tot_thru ->Fill(thrust.HTFmin,ev.GetEventWeight());
   //  ev.PrintGen();->Fill(ev.CommonHT(),1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
 
  RelCombIso_tot->Fill((theRECOLepton.at(0)->GetCombIsolation()),ev.GetEventWeight());

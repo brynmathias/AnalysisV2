@@ -35,8 +35,8 @@ isSM = not (mode in ["MCGrid", "SMS"])
 
 # Systematics
 systematics = None
-#systematics = "metup_flat"
-#systematics = "metdown_flat"
+#systematics = "metup"
+#systematics = "metdown"
 #systematics = "metres_conservative"
 #systematics = "polup"
 #systematics = "poldown"

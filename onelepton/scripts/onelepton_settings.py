@@ -24,7 +24,7 @@ conf.Common.Muons.CombIsoCut=0.1
 conf.Common.Muons.TightID=False
 conf.Common.Muons.ApplyID=False
 # electrons
-conf.Common.Electrons.PtCut = 20.0 #it was 15 put it so again
+conf.Common.Electrons.PtCut = 15.0 #it was 15 put it so again
 conf.Common.Electrons.EtaCut = 2.5
 conf.Common.Electrons.TrkIsoCut=5.
 conf.Common.Electrons.CombIsoCut=0.15
@@ -92,6 +92,7 @@ id_sig = eid.eff_80
 
 Els_Sig = PSet(
     Cuts = id_sig,
+    PtMin = 20.,
     Isolation = 1,
     HoverE = 1,
     DeltaEtaAtVtx = 1,
@@ -99,7 +100,8 @@ Els_Sig = PSet(
     SigmaIEtaIEta = 1,
     Conversions = 1,
     ConversionsExtra = 1,
-    SupressErrors = True
+    SupressErrors = True,
+    D0BS = 0.02
     )
 
 # Anti-selection electron ID
@@ -112,6 +114,7 @@ id_qcd = eid.eff_custom
 
 Els_QCD = PSet(
     Cuts = id_qcd,
+    PtMin = 20.,
     # Apply Isolation and HoE cuts
     Isolation = 1,
     HoverE = 1,
@@ -132,13 +135,15 @@ id_veto = eid.eff_95
 
 Els_Veto = PSet(
     Cuts = id_veto,
-    Isolation = True,
-    HoverE = True,
-    DeltaEtaAtVtx = True,
-    DeltaPhiAtVtx = True,
-    SigmaIEtaIEta = True,
-    Conversions = True,
-    ConversionsExtra = True,
-    SupressErrors = True
+    PtMin = 15.,
+    Isolation = 1,
+    HoverE = 1,
+    DeltaEtaAtVtx = 1,
+    DeltaPhiAtVtx = 1,
+    SigmaIEtaIEta = 1,
+    Conversions = 1,
+    ConversionsExtra = 1,
+    SupressErrors = 1,
+    D0BS = 0.1
     )
 
