@@ -140,7 +140,8 @@ def extractSignalEffs(channel, fset, sample, asdict = False, label=""):
     sigbins = []
     nloeffs = []
     for b in cfg.bins:
-        bin_fmt = "Counter_BSMGrid_%s%d%s_scale1/%s"
+        bin_fmt = "Counter_BSMGrid_%s%dsecondDcut500%s_scale1/%s"
+        #bin_fmt = "Counter_BSMGrid_%s%d%s_scale1/%s"
         bin_name = bin_fmt  % (cfg.binName, b, label, "m0_m12_mChi_noweight")
         sigbin = hist(tfiles[sample], bin_name)
         sigbin.Divide(nocuts_noweight)
@@ -160,10 +161,10 @@ def extractSignalEffs(channel, fset, sample, asdict = False, label=""):
                 (x, y, z) = (int(sigbins[0].GetXaxis().GetBinLowEdge(xx)),
                              int(sigbins[0].GetYaxis().GetBinLowEdge(yy)),
                              int(sigbins[0].GetZaxis().GetBinLowEdge(zz)))
-                if xs.GetBinContent(xx, yy, zz) < cfg.minXSToConsider: continue
-                if nocuts_noweight.GetBinContent(xx, yy, zz) != 10000:
+#                if xs.GetBinContent(xx, yy, zz) < cfg.minXSToConsider: continue
+#                if nocuts_noweight.GetBinContent(xx, yy, zz) != 10000:
 #                    print "WARNING: Found hole in scan (%d, %d)" % (x,y)
-                    continue
+#                    continue
                 point = {"loefficiencies": [],
                          "nloefficiencies": [],
                          "loxs" : xs.GetBinContent(xx, yy, zz),

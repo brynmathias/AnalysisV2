@@ -1,6 +1,6 @@
 from icf.core import PSet
 
-path="root://gfe02.grid.hep.ph.ic.ac.uk/"
+path="root://xrootd.grid.hep.ph.ic.ac.uk//"
 
 spsPos=PSet(
   Name="spsPos",

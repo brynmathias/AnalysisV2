@@ -513,7 +513,7 @@ SMS_test = PSet(
     Name = 'test',
     Format = ('ICF',3),
     File = [
-        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/arlogb/SimplifiedModel_T1TauNu_Second/0.5_100.0_50.0to325.0_50.0.lhe_1.root"
+        "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/arlogb/SimplifiedModel_T1TauNu_Second/0.5_100.0_50.0to325.0_50.0.lhe_1.root"
         ],
     Weight = 1.0,
     # LastEntry = 10
@@ -523,7 +523,7 @@ SMS_test2 = PSet(
     Name = 'test2',
     Format = ('ICF',3),
     File = [
-        'root://gfe02.grid.hep.ph.ic.ac.uk/store/user/arlogb/ICF/automated/2011_08_23_16_46_43/SusyCAF_Tree_79_3_rar.root'
+        'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/arlogb/ICF/automated/2011_08_23_16_46_43/SusyCAF_Tree_79_3_rar.root'
         ],
     Weight = 1.0
     )

@@ -602,7 +602,7 @@ elif ( dataset == 103 ) :
             Name="QCD_Pythia6_38_AllPtBins",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_10_17_20_12_27//QCD_Pt_800to1000_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_100_1_u1V.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_17_20_12_27//QCD_Pt_800to1000_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_100_1_u1V.root" ,
             ],
             CrossSection=48440000000.0,
             LastEntry = 10000,
@@ -614,12 +614,12 @@ elif ( dataset == 109 ) :
             Name="QCD_Madgraph_ALL",
             Format=("ICF",2),
             File= [
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt-50To100_7TeV-madgraph.Spring10-START3X_V26-v1.GEN-SIM-RECO/SusyCAF_Tree_6_1.root",
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt100to250-madgraph.Spring10-START3X_V26_S09-v2.GEN-SIM-RECO/SusyCAF_Tree_99_3.root",
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt250to500-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_34_2.root",
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt500to1000-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_9_3.root",
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33/QCD_Pt1000toInf-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_8_2.root",
-            #"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt500to1000-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_9_3.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt-50To100_7TeV-madgraph.Spring10-START3X_V26-v1.GEN-SIM-RECO/SusyCAF_Tree_6_1.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt100to250-madgraph.Spring10-START3X_V26_S09-v2.GEN-SIM-RECO/SusyCAF_Tree_99_3.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt250to500-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_34_2.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt500to1000-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_9_3.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/as1604/ICF/automated/2010_08_15_23_34_33/QCD_Pt1000toInf-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_8_2.root",
+            #"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt500to1000-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_9_3.root",
             ],
             CrossSection=5200.,
             #LastEntry = 10000,
@@ -647,7 +647,7 @@ elif ( dataset == 104 ) :
             Events=100000,
             Format=("ICF",2),
             File= [
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bainbrid/ICF/automated/2010_07_12_17_52_54/LM1.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_1_1.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bainbrid/ICF/automated/2010_07_12_17_52_54/LM1.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_1_1.root",
             ],
             CrossSection=4.888,
             LastEntry = 1000,
@@ -662,7 +662,7 @@ elif ( dataset == 110 ) :
             Name="PhysicsProcesses_mSUGRA_tanbeta3Fall10v1",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_11_10_19_34_17//SusyCAF_Tree_100_1_75v.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_11_10_19_34_17//SusyCAF_Tree_100_1_75v.root",
             ],
             CrossSection=0.,
             LastEntry = 1000,
@@ -674,7 +674,7 @@ elif ( dataset == 111 ) :
             Name="PhysicsProcesses_mSUGRA_tanbeta10Fall10v1",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_11_07_00_18_19//SusyCAF_Tree_1000_1_UH4.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_11_07_00_18_19//SusyCAF_Tree_1000_1_UH4.root" ,
             ],
             CrossSection=0.,
             LastEntry = 1000,
@@ -686,7 +686,7 @@ elif ( dataset == 112 ) :
             Name="PhysicsProcesses_mSUGRA_tanbeta50Fall10_spadhi",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/trommers//ICF/automated/2011_01_08_18_18_16/SusyCAF_Tree_100_1_h2E.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/trommers//ICF/automated/2011_01_08_18_18_16/SusyCAF_Tree_100_1_h2E.root" ,
             ],
             CrossSection=0.,
             LastEntry = 1000,
@@ -698,7 +698,7 @@ elif ( dataset == 113 ) :
             Name="PhysicsProcesses_TopologyT1_38xFall10",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_01_24_18_09_42///SusyCAF_Tree_100_1_myY.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2011_01_24_18_09_42///SusyCAF_Tree_100_1_myY.root" ,
             ],
             CrossSection=0.,
             LastEntry = 1000,
@@ -710,7 +710,7 @@ elif ( dataset == 114 ) :
             Name="PhysicsProcesses_TopologyT2_38xFall10",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/elaird/ICF/automated/2011_03_08_23_04_26//SusyCAF_Tree_20_1_Ofi.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/elaird/ICF/automated/2011_03_08_23_04_26//SusyCAF_Tree_20_1_Ofi.root",
             ],
             CrossSection=0.,
             #LastEntry = 1000,
@@ -722,7 +722,7 @@ elif ( dataset == 115 ) :
             Name="PhysicsProcesses_TopologyT3_38xFall10",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_01_25_21_33_22///SusyCAF_Tree_100_1_LOa.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2011_01_25_21_33_22///SusyCAF_Tree_100_1_LOa.root" ,
             ],
             CrossSection=0.,
             LastEntry = 1000,
@@ -734,7 +734,7 @@ elif ( dataset == 116 ) :
             Name="PhysicsProcesses_TopologyT4_38xFall10",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_01_27_12_39_13///SusyCAF_Tree_100_1_hOd.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_01_27_12_39_13///SusyCAF_Tree_100_1_hOd.root" ,
             ],
             CrossSection=0.,
             LastEntry = 10000,

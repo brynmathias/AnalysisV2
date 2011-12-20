@@ -1,6 +1,6 @@
 from icf.core import PSet
 
-#path="root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_10_11_06_35_32//G_Pt_1400to1800_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO/"
+#path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_11_06_35_32//G_Pt_1400to1800_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO/"
 path="/vols/cms03/rnandi/PhotonJet_Pythia6_Pt1400to1800/"
 
 PhotonJet_38_Pythia6_Pt1400to1800=PSet(

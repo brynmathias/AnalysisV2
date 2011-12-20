@@ -86,6 +86,70 @@ std::ostream& PTlepCut::Description(std::ostream &ostrm) {
   ostrm <<mPTlep<< " > PTlep > " << mPTlep << " GeV ";
   return ostrm;
 }
+//================
+// Sum Pt lep cut
+//================
+
+  PTmuCut::PTmuCut(float Pt)
+    : mPTmu(Pt)
+  {;}
+  
+  bool PTmuCut::Process(Event::Data & ev) {
+    
+  
+    if(ev.LD_CommonMuons().accepted.size()<1) return false;
+    else return ev.LD_CommonMuons().accepted.at(0)->Pt()>mPTmu;
+    return false;
+ 
+}
+std::ostream& PTmuCut::Description(std::ostream &ostrm) {
+  ostrm <<mPTmu<< " > PTmu > ";
+  return ostrm;
+}
+
+
+  PTZCut::PTZCut(float Pt)
+    : mPTmu(Pt)
+  {;}
+  
+  bool PTZCut::Process(Event::Data & ev) {
+    
+  
+    if(ev.LD_CommonMuons().accepted.size()!=2) return false;
+     std::vector <Event::Lepton const *> theRECOLepton;
+     bool isMu = false;
+     
+     if ( (ev.LD_CommonMuons().accepted.size()>0) && (ev.LD_CommonElectrons().accepted.size()==0) ) {
+       theRECOLepton = ev.LD_CommonMuons().accepted;
+       isMu = true;
+     }
+     
+     if ( (ev.LD_CommonMuons().accepted.size()==0) && (ev.LD_CommonElectrons().accepted.size()>0) ) {
+       theRECOLepton = ev.LD_CommonElectrons().accepted;
+     }  
+     if ( (ev.LD_CommonMuons().accepted.size()>0) && (ev.LD_CommonElectrons().accepted.size()>0) ) {
+       //  cout << "WARNING: ANplots has common muon AND Electron, it does not know what to plot!!!"<<endl;
+       return true;
+     }
+
+
+     if(theRECOLepton.size()==2&theRECOLepton.at(0)->GetCharge()!=theRECOLepton.at(1)->GetCharge())
+       {
+	 LorentzV theZ = (*theRECOLepton.at(0))+(*theRECOLepton.at(1));
+	 
+	 if( ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1)))>76  &&   ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1)))<107&&theZ.Pt()>mPTmu) return true;
+	  
+       }
+
+    return false;
+ 
+}
+std::ostream& PTZCut::Description(std::ostream &ostrm) {
+  ostrm <<mPTmu<< " > PTmu > ";
+  return ostrm;
+}
+
+
 
 //================
 // Sum Pt lep cut
@@ -110,7 +174,18 @@ std::ostream& PTlepCut::Description(std::ostream &ostrm) {
     for ( std::vector<Event::Lepton const *>::const_iterator i = ev.LD_CommonMuons().accepted.begin();
 	i != ev.LD_CommonMuons().accepted.end();
 	  i++ ) {
-    HTlep+=(**i).Pt();
+  
+      // default adding all leptons
+      ///  HTlep+=(**i).Pt();
+      // +++++++++++++++++++
+
+      // update for Z events, taking leadin mu
+
+      if( ev.LD_CommonMuons().accepted.size()==1) HTlep+=(**i).Pt();
+      if( ev.LD_CommonMuons().accepted.size()==2){ 
+	HTlep = ev.LD_CommonMuons().accepted.at(1)->Pt() + (ev.PFMET()+(*(ev.LD_CommonMuons().accepted.at(0)))).Pt();
+	break;
+      }
   }
   //cout << "finally HT lep is : " << HTlep << endl;
   if( mSumPTlepUP < 0) return (HTlep > mSumPTlep);
@@ -221,6 +296,22 @@ std::ostream& HTPTCut::Description(std::ostream &ostrm) {
   return ostrm;
 }
 
+  HTthrustCut::HTthrustCut(float sumPt,float sumPtUp)
+    : mHTthrustCutVal(sumPt), mHTthrustCutValUp(sumPtUp)
+{;}
+
+bool HTthrustCut::Process(Event::Data & ev) {
+
+  ThrustStuff thrust = ev.CommonThrustStuff();
+  float HTthrust=thrust.HTFmin;
+  if (mHTthrustCutValUp<=0) return (mHTthrustCutVal < HTthrust);
+  return (mHTthrustCutVal < HTthrust&& mHTthrustCutValUp > HTthrust);
+}
+
+std::ostream& HTthrustCut::Description(std::ostream &ostrm) {
+  ostrm << "HT thrust minor > " << mHTthrustCutVal << " GeV ";
+  return ostrm;
+}
 
 
 //================
@@ -891,12 +982,13 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
 
   NumOfLooseElectronsRA4::NumOfLooseElectronsRA4(const std::string & comparison, int numOfLooseEls,
 						 const Utils::ParameterSet & ps, const std::string & prefix) :
-  mIso(ps.Get<bool>("Isolation")),
-  mHoE(ps.Get<bool>("HoverE")),
-  mDeltaEta(ps.Get<bool>("DeltaEtaAtVtx")),
-  mDeltaPhi(ps.Get<bool>("DeltaPhiAtVtx")),
-  mShh(ps.Get<bool>("SigmaIEtaIEta")),
-  mConv(ps.Get<bool>("Conversions")),
+  mPtMin(ps.Get<double>("PtMin")),
+  mIso(ps.Get<int>("Isolation")),
+  mHoE(ps.Get<int>("HoverE")),
+  mDeltaEta(ps.Get<int>("DeltaEtaAtVtx")),
+  mDeltaPhi(ps.Get<int>("DeltaPhiAtVtx")),
+  mShh(ps.Get<int>("SigmaIEtaIEta")),
+  mConv(ps.Get<int>("Conversions")),
   mRelCombIsoBarrel(ps.Get<double>(prefix+".RelCombIso.Barrel")),
   mRelCombIsoEndcap(ps.Get<double>(prefix+".RelCombIso.Endcap")),
   mTrkIsoBarrel(ps.Get<double>(prefix+".TrkIso.Barrel")),
@@ -916,8 +1008,9 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
   mDCot(ps.Get<double>(prefix+".Conversions.DCot")),
   mDist(ps.Get<double>(prefix+".Conversions.Dist")),
   mMissingHits(ps.Get<int>(prefix+".Conversions.MissingHits")),
-  mSupressErrors(ps.Contains("SupressErrors") ? ps.Get<bool>("SupressErrors") : false),
-  mCorrEEMisalig(ps.Contains("CorrEEMisalig") ? ps.Get<bool>("CorrEEMisalig") : false),
+  mSupressErrors(ps.Contains("SupressErrors") ? ps.Get<int>("SupressErrors") : false),
+  mCorrEEMisalig(ps.Contains("CorrEEMisalig") ? ps.Get<int>("CorrEEMisalig") : false),
+  mD0BS(ps.Get<double>("D0BS")),
   mNumOfLooseEls(numOfLooseEls) {
     if ( strcmp("==",comparison.c_str()) == 0 ) {
       mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, EQ>);
@@ -970,6 +1063,7 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
 
   bool NumOfLooseElectronsRA4::Process(Event::Data & ev) {
 
+    bool passPtMin = false;
     bool passIso = false;
     bool passHoE = false;
     bool passDeltaEta = false; bool passDeltaPhi = false;
@@ -992,70 +1086,68 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
 	}
      
     if (isCommon) continue;
-    if ((iEl)->Pt()<15)  continue;
+    if ((iEl)->Pt()<mPtMin)  continue;
     if (fabs((iEl)->Eta())>2.5)  continue;
 
-
-
-      //passConv = ev.GetElectronHasValidHitInFirstPixelBarrel(iM);
-      try{
-	passConv = (fabs(ev.GetElectronDCot(iM)) > mDCot || fabs(ev.GetElectronDist(iM)) > mDist);
-	passConv &= (ev.GetElectronGsfTrackTrackerExpectedHitsInner(iM) <= mMissingHits);
-      }
-      catch(std::invalid_argument & e){
-	
-	if(!mSupressErrors) throw e;
-      }
+    try{
+      passConv = (fabs(ev.GetElectronDCot(iM)) > mDCot || fabs(ev.GetElectronDist(iM)) > mDist);
+      passConv &= (ev.GetElectronGsfTrackTrackerExpectedHitsInner(iM) <= mMissingHits);
+    }
+    catch(std::invalid_argument & e){
       
-      //      if (fabs(iEl->Eta()) < 1.4442) {
-      if (fabs(ev.GetElectronESuperClusterEta(iM)) < 1.4442) {
-	
-	// Barrel
-	passIso = ( (((iEl->GetTrkIsolation()) + max(0., iEl->GetEcalIsolation()-1.) + iEl->GetHcalIsolation())/(iEl->Pt())) < mRelCombIsoBarrel );
-	passHoE = ( ev.GetElectronHoE(iM) < mHoEBarrel );
-	passDeltaPhi = ( fabs(ev.GetElectronDeltaPhiAtVtx(iM)) < mDeltaPhiBarrel );
-	passDeltaEta = ( fabs(ev.GetElectronDeltaEtaAtVtx(iM)) < mDeltaEtaBarrel );
-	passShh = ( ev.GetElectronSigmaIetaIeta(iM) < mSigmaIEtaIEtaBarrel );
-      }
+      if(!mSupressErrors) throw e;
+    }
+    
 
-      //      else if (fabs(iEl->Eta()) > 1.560 ) {
-      else if ( (fabs(ev.GetElectronESuperClusterEta(iM)) > 1.562) && (fabs(ev.GetElectronESuperClusterEta(iM)) < 2.5) ) {
-	// End-caps
-	passIso = ( iEl->GetCombIsolation() < mRelCombIsoEndcap );
-	passHoE = ( ev.GetElectronHoE(iM) < mHoEEndcap );
-	if (mCorrEEMisalig){
-	  passDeltaPhi = ( fabs(ev.GetElectronDeltaPhiAtVtx(iM)-dPhiCorr(iEl->Phi(),iEl->Eta())) < mDeltaPhiEndcap ) ;
-	  passDeltaEta = ( fabs(ev.GetElectronDeltaEtaAtVtx(iM)-dEtaCorr(iEl->Phi(),iEl->Eta())) < mDeltaEtaEndcap);
-	}
-	else{
-	  passDeltaPhi = ( fabs(ev.GetElectronDeltaPhiAtVtx(iM)) < mDeltaPhiEndcap );
-	  passDeltaEta = ( fabs(ev.GetElectronDeltaEtaAtVtx(iM)) < mDeltaEtaEndcap);
-	}
-	passShh = ( ev.GetElectronSigmaIetaIeta(iM) < mSigmaIEtaIEtaEndcap );
-	
+    // Barrel
+    if (fabs(ev.GetElectronESuperClusterEta(iM)) < 1.4442) {
+     
+      passIso = ( (((iEl->GetTrkIsolation()) + max(0., iEl->GetEcalIsolation()-1.) + iEl->GetHcalIsolation())/(iEl->Pt())) < mRelCombIsoBarrel );
+      passHoE = ( ev.GetElectronHoE(iM) < mHoEBarrel );
+      passDeltaPhi = ( fabs(ev.GetElectronDeltaPhiAtVtx(iM)) < mDeltaPhiBarrel );
+      passDeltaEta = ( fabs(ev.GetElectronDeltaEtaAtVtx(iM)) < mDeltaEtaBarrel );
+      passShh = ( ev.GetElectronSigmaIetaIeta(iM) < mSigmaIEtaIEtaBarrel );
+
+    }
+
+    // End-caps    
+    else if ( (fabs(ev.GetElectronESuperClusterEta(iM)) > 1.566) && (fabs(ev.GetElectronESuperClusterEta(iM)) < 2.5) ) {
+
+      passIso = ( iEl->GetCombIsolation() < mRelCombIsoEndcap );
+      passHoE = ( ev.GetElectronHoE(iM) < mHoEEndcap );
+      if (mCorrEEMisalig){
+	passDeltaPhi = ( fabs(ev.GetElectronDeltaPhiAtVtx(iM)-dPhiCorr(iEl->Phi(),iEl->Eta())) < mDeltaPhiEndcap ) ;
+	passDeltaEta = ( fabs(ev.GetElectronDeltaEtaAtVtx(iM)-dEtaCorr(iEl->Phi(),iEl->Eta())) < mDeltaEtaEndcap);
       }
+      else{
+	passDeltaPhi = ( fabs(ev.GetElectronDeltaPhiAtVtx(iM)) < mDeltaPhiEndcap );
+	passDeltaEta = ( fabs(ev.GetElectronDeltaEtaAtVtx(iM)) < mDeltaEtaEndcap);
+      }
+      passShh = ( ev.GetElectronSigmaIetaIeta(iM) < mSigmaIEtaIEtaEndcap );
+      
+    }
       
       
-      try {
-	// 2011 definition
-	if (
-	    ( fabs(ev.GetElectronD0BS(iM)) < 0.02) &&
-	    ( fabs(ev.electronGsfTrackVertexz()->at(iM) - (ev.GetvertexPosition(0).Z())) < 1. )
-	    ) { passExtra = true; }
-      }
-      catch (std::invalid_argument & e) {
-	// 2010 definition
-	if (
-	    ( fabs(ev.GetElectronD0BS(iM)) < 0.02)
-	    ) { passExtra = true; }
-      }
-
-      if (mIso==passIso && mHoE==passHoE && mDeltaEta==passDeltaEta && mDeltaPhi==passDeltaPhi && mShh==passShh && mConv == passConv && passExtra==true) { numOfLooseEls++; }
-
+    try {
+      // 2011 definition
+      if (
+	  ( fabs(ev.GetElectronD0BS(iM)) < mD0BS) &&
+	  ( fabs(ev.electronGsfTrackVertexz()->at(iM) - (ev.GetvertexPosition(0).Z())) < 1. )
+	  ) { passExtra = true; }
+    }
+    catch (std::invalid_argument & e) {
+      // 2010 definition
+      if (
+	  ( fabs(ev.GetElectronD0BS(iM)) < 0.02)
+	  ) { passExtra = true; }
+    }
+    
+    if (mIso==passIso && mHoE==passHoE && mDeltaEta==passDeltaEta && mDeltaPhi==passDeltaPhi && mShh==passShh && mConv == passConv && passExtra==true) { numOfLooseEls++; }
+    
     
     } // end of looping over the "raw" electrons
-
-
+    
+    
     return (*mComparison)(numOfLooseEls,mNumOfLooseEls);
   } // end of bool
 

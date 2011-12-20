@@ -1,6 +1,6 @@
 from icf.core import PSet
 
-#path="root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_10_17_20_12_27/"
+#path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_17_20_12_27/"
 path="/vols/cms02/rnandi/QCD_Pythia6_Pt1000to1400/"
 
 QCD_38_Pythia6_Pt1000to1400=PSet(

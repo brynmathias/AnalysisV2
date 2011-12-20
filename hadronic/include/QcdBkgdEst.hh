@@ -18,7 +18,7 @@ typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<float> > PtEtaPhiE;
 namespace temp { class mSuGraPlottingOps; } //@@ below!
 
 namespace Operation {
-
+  
   class QcdBkgdEst : public PlottingBase {
     
   public:
@@ -37,7 +37,7 @@ namespace Operation {
     typedef std::vector<vdouble> vvdouble;
     typedef std::vector<std::string> vstring;
     typedef std::vector<vstring> vvstring;
-    int trigger( const Event::Data& ev, const vstring& triggers );
+    int trigger( const Event::Data& ev, const vstring& triggers, bool use_prescaled = true );
     
     void binning();
     void BookHistos() {;} //@@ everything is done in Start()
@@ -92,6 +92,9 @@ namespace Operation {
     double maxLeadingJetEta_;
     double babyCut_;
     bool addMuon_;
+    bool onlyGenPtHat_;
+    bool onlyFull_;
+    bool useMeff_;
 
     double deadEcalRegionDrCut_;
     double deadEcalRegionEtaCut_;
@@ -106,7 +109,7 @@ namespace Operation {
     
     // Analysis defaults (that define signal region)
     std::vector<double> alphaT_; 
-    int aT_; 
+    uint aT_; 
     unsigned int ht_;
     double pt1_;
     double pt2_;
@@ -124,22 +127,38 @@ namespace Operation {
     double offset_;
     
     // HT RECO histograms
-    vTH1D hPtHat_;
+    vTH1D hGenPtHat_;
     vTH2D hSMS_;
     bool cutFlowHistos_;
     vvTH1D hCutFlow_;
     bool htHistos_;
     vvvTH1D hHtDistr_; 
+    bool meffHistos_;
+    vvvTH1D hMeffDistr_; 
     bool mhtHistos_;
     vvvTH1D hMhtDistr_; 
+    bool mhtOverHtHistos_;
+    vvvTH1D hMhtOverHtDistr_; 
+    bool mhtOverMeffHistos_;
+    vvvTH1D hMhtOverMeffDistr_; 
     bool multiHistos_; 
     vvvTH1D hMultiplicity_;
-    bool vertexHisto_;
-    vvTH1D hNumVertices_;
+    bool jetPtHistos_;
+    vvvTH1D hAllJetsPt_;
+    vvvTH1D hRecoJetsPt_;
+    vvvTH1D hBabyJetsPt_;
+    bool vertexHistos_;
+    vvvTH1D hNumVertex_;
+    bool atHistos_;
+    vvTH1D hAlphaT_;
+    bool dalitzHistos_;
+    vvTH2D hDalitz_;
     bool minBiasDeltaPhiHistos_; 
     vvvTH1D hMinBiasDeltaPhi_; 
     bool babyJetsHistos_;
     vvvTH1D hBabyJets_; 
+    bool babyJetsMhtHistos_;
+    vvvTH1D hBabyJetsMht_; 
 
     vvTH1D hPassAlphaT_; 
     vvTH1D hPassDeadEcal_; 
@@ -153,25 +172,28 @@ namespace Operation {
     vvTH1D hFailTrackless_; 
     vvTH1D hFailMinBiasDPhi_; 
 
-//     // Cntrs
-//     double cntr_baseline;
-//     double cntr_leading_jet_eta;
-//     double cntr_odd_jet_veto;
-//     double cntr_bad_muon_in_jet;
-//     double cntr_leading_jet_pt;
-//     double cntr_second_jet_pt;
-//     double cntr_correct_reco_bin;
-//     double cntr_jet_multiplicity;
-//     double cntr_at;
-//     double cntr_pass_dead_ecal;  
-//     double cntr_pass_baby_cut;
-//     double cntr_pass_pt_over_ht;
+    // Cntrs
+    double cntr_baseline;
+    double cntr_correct_reco_bin;
+    double cntr_trigger_fired;
+    double cntr_jet_multiplicity;
+    double cntr_leading_jet_pt;
+    double cntr_second_jet_pt;
+    double cntr_leading_jet_eta;
+    double cntr_odd_jet_veto;
+    double cntr_bad_muon_in_jet;
+    double cntr_at;
+    double cntr_pass_dead_ecal;  
+    double cntr_pass_baby_cut;
+    double cntr_pass_pt_over_ht;
+    double cntr_pass_rechit;
 
     std::vector<double> epochs_;
     vvstring signal_;
     vvstring monitor_;
     vvdouble reweight_;
     vstring names_;
+    bool usePrescaled_;
 
   }; 
 

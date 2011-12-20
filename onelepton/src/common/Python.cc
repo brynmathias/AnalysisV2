@@ -6,6 +6,7 @@
 #include "LeptonicPlottingOps.hh"
 #include "AnalysisTree.hh"
 #include "AnalysisTree_HighPt.hh"
+#include "AnalysisTree_HighPt_Data.hh"
 #include "CountsAndBSMGrids.hh"
 #include "Utils.hh"
 #include "Lepton.hh"
@@ -21,6 +22,9 @@ BOOST_PYTHON_MODULE(libOneLepton) {
  class_<Operation::DphiPTW_muCut, bases<Operation::_Base> >("OP_DphiPTW_muCut",init<float>() );
 
  class_<Operation::SumPTlepCut, bases<Operation::_Base> >("OP_SumPTlepCut",init<float,float>() );
+ class_<Operation::PTmuCut, bases<Operation::_Base> >("OP_PTmuCut",init<float>() );
+ class_<Operation::PTZCut, bases<Operation::_Base> >("OP_PTZCut",init<float>() );
+
  class_<Operation::PFMETCutBin, bases<Operation::_Base> >("OP_PFMETCutBin",init<float,float>() );
  class_<Operation::UnCorLeadCut, bases<Operation::_Base> >("OP_UnCorLeadJetCut",init<float>() );
  class_<OneLepton::EleJetDRFilter, bases<Compute::ObjectFilter<Event::Jet> > >("EleJetDRFilter",
@@ -44,6 +48,9 @@ BOOST_PYTHON_MODULE(libOneLepton) {
 
   class_<Operation::HTPTCut, bases<Operation::_Base> >("OP_HTPTCut",
 						       init<float,float>());
+  class_<Operation::HTthrustCut, bases<Operation::_Base> >("OP_HTthrustCut",
+						       init<float,float>());
+
   class_<Operation::HTlepCut, bases<Operation::_Base> >("RECO_LeptonicHTCut",
 						     init<float>());
 
@@ -71,6 +78,7 @@ BOOST_PYTHON_MODULE(libOneLepton) {
  //        							   init <const std::string>() );
   class_<OneLepton::AnalysisTree, bases<Operation::_Base> >("AnalysisTree",init<const std::string &,const Utils::ParameterSet &>());
   class_<OneLepton::AnalysisTree_HighPt, bases<Operation::_Base> >("AnalysisTree_HighPt",init<const std::string &,const Utils::ParameterSet &>());
+  class_<OneLepton::AnalysisTree_HighPt_Data, bases<Operation::_Base> >("AnalysisTree_HighPt_Data",init<const std::string &,const Utils::ParameterSet &>());
 
   class_<Operation::NumOfLooseElectrons, bases<Operation::_Base> >("NumOfLooseElectrons", init<const std::string &,int>());
   class_<Operation::NumOfLooseMuons, bases<Operation::_Base> >("NumOfLooseMuons", init<const std::string &,int>());

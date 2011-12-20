@@ -1,5 +1,5 @@
 from icf.core import PSet
-#path = "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/rnandi//ICF/automated/2011_01_28_14_27_00/"
+#path = "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/rnandi//ICF/automated/2011_01_28_14_27_00/"
 path = "/vols/cms03/rnandi/GGMSignalScan/"
 
 GGMSignalScan=PSet(

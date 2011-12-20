@@ -19,6 +19,34 @@ void ANplots::Start(Event::Data & ev) {
 
 void ANplots::BookHistos() {
   TH1::SetDefaultSumw2(kTRUE);
+  ZmassmuRaw = new TH1D("Zmass",";Z mass GeV;",200,0,400); 
+  Zmassmu = new TH1D("ZmassoppSign",";Z mass GeV;",200,0,400); 
+  Zmassmu_pos = new TH1D("ZmassoppSign_pos",";Z mass GeV;",200,0,400); 
+  Zmassmu_neg = new TH1D("ZmassoppSign_neg",";Z mass GeV;",200,0,400); 
+  
+  ZLP = new TH1D("ZLP","ZLP",80,-2,2); 
+  ZLP_pos = new TH1D("ZLP_pos","ZLP_pos",80,-2,2); 
+  ZLP_neg = new TH1D("ZLP_neg","ZLP_neg",80,-2,2); 
+  
+  ZLPMHT= new TH1D("ZLPMHT","ZLPMHT",80,-2,2);
+  ZLPMHT_pos = new TH1D("ZLPMHT_pos","ZLPMHT_pos",80,-2,2);
+  ZLPMHT_neg= new TH1D("ZLPMHT_neg","ZLPMHT_neg",80,-2,2);
+
+  ZLPvsLP = new TH2D("ZLPvsLP",";LP(Z);LP(MH_{T})",80,-2,2,80,-2,2);  
+  ZPT  = new TH1D("ZPT",";P_{T}(Z);",200,0,1000); 
+  ZPT_pos  = new TH1D("ZPT_pos",";P_{T}(Z);",200,0,1000); 
+  ZPT_neg  = new TH1D("ZPT_neg",";P_{T}(Z);",200,0,1000); 
+  
+  ZPTres = new TH1D("ZPTres",";(P_{T}(Z)-MH_{T})/P_{T}(Z);",160,-2,2); 
+  ZPTres_pos  = new TH1D("ZPTres_pos ",";(P_{T}(Z)-MH_{T})/P_{T}(Z);",160,-2,2); 
+  ZPTres_neg = new TH1D("ZPTres_neg",";(P_{T}(Z)-MH_{T})/P_{T}(Z);",160,-2,2); 
+  
+  ZPTvsMHT= new TH2D("ZPTvsMHT",";P_{T}(Z);MH_{T}",50,0.,400.,50,0.,400.); 
+  ZMHTpl  = new TH1D("ZMHTpl",";MHT(Z);",200,0,1000); 
+  ZMHTpl_pos  = new TH1D("ZMHTpl_pos",";MHT(Z);",200,0,1000); 
+  ZMHTpl_neg  = new TH1D("ZMHTpl_neg",";MHT(Z);",200,0,1000); 
+  
+  ZST  = new TH1D("ZST",";ZST;",200,0,1000); 
   
   CounterCtrl_pos = new TH1D("CounterCtrl_pos","Ctrl Region Events [+]",1,-1,1);
   CounterCtrl_neg = new TH1D("CounterCtrl_neg","Ctrl Region Events [-]",1,-1,1);
@@ -27,11 +55,11 @@ void ANplots::BookHistos() {
   CounterSgnl_pos = new TH1D("CounterSgnl_pos","Sgnl Region Events [+]",1,-1,1);
   CounterSgnl_neg = new TH1D("CounterSgnl_neg","Sgnl Region Events [-]",1,-1,1);
   CounterSgnl_tot = new TH1D("CounterSgnl_tot","Sgnl Region Events [+and-]",1,-1,1);
-
+  
   LPctrl_pos = new TH1D("LPctrl_pos",";L_{P}[+] (ctrl);",450,0.3,2.1);
   LPctrl_neg = new TH1D("LPctrl_neg",";L_{P}[-] (ctrl);",450,0.3,2.1);
   LPctrl_tot = new TH1D("LPctrl_tot",";L_{P} (ctrl);",450,0.3,2.1);
-
+  
   LPsig_pos = new TH1D("LPsig_pos",";L_{P}[+] (sig);",400,-0.65,0.15);
   LPsig_neg = new TH1D("LPsig_neg",";L_{P}[-] (sig);",400,-0.65,0.15);
   LPsig_tot = new TH1D("LPsig_tot",";L_{P} (sig);",400,-0.65,0.15);
@@ -39,17 +67,17 @@ void ANplots::BookHistos() {
   LP_pos = new TH1D("LP_pos",";L_{P}[+];",168,-2.1,2.1);
   LP_neg = new TH1D("LP_neg",";L_{P}[-];",168,-2.1,2.1);
   LP_tot = new TH1D("LP_tot",";L_{P};",168,-2.1,2.1);
-
+  
   LPmht_pos = new TH1D("LPmht_pos",";L_{P}[+];",168,-2.1,2.1);
   LPmht_neg = new TH1D("LPmht_neg",";L_{P}[-];",168,-2.1,2.1);
   LPmht_tot = new TH1D("LPmht_tot",";L_{P};",168,-2.1,2.1);
   
   LPfit_tot = new TH1D("LPfit_tot",";L_{P};",21,-2.1,2.1);
-
+  
   MT_pos = new TH1D("MT_pos",";M_{T}^{+} [GeV];",1000,0,2000);
   MT_neg = new TH1D("MT_neg",";M_{T}^{-} [GeV];",1000,0,2000);
   MT_tot = new TH1D("MT_tot",";M_{T} [GeV];",1000,0,2000);
-     
+  
   SumLepPt_pos = new TH1D("SumLepPt_pos",";ME_{T}+p_{T}[lep]^{+} [GeV];",1000,0,2000);
   SumLepPt_neg = new TH1D("SumLepPt_neg",";ME_{T}+p_{T}[lep]^{-} [GeV];",1000,0,2000);
   SumLepPt_tot = new TH1D("SumLepPt_tot",";ME_{T}+p_{T}[lep] [GeV];",1000,0,2000);
@@ -57,7 +85,7 @@ void ANplots::BookHistos() {
   LepPt_pos = new TH1D("LepPt_pos",";p_{T}[lep]^{+} [GeV];",1000,20,2000);
   LepPt_neg = new TH1D("LepPt_neg",";p_{T}[lep]^{-} [GeV];",1000,20,2000);
   LepPt_tot = new TH1D("LepPt_tot",";p_{T}[lep] [GeV];",1000,20,2000);
-
+  
   LepEta_pos = new TH1D("LepEta_pos",";#eta[lep]^{+};",180,-6.,6.);
   LepEta_neg = new TH1D("LepEta_neg",";#eta[lep]^{-};",180,-6.,6.);
   LepEta_tot = new TH1D("LepEta_tot",";#eta[lep];",180,-6.,6.);
@@ -65,11 +93,11 @@ void ANplots::BookHistos() {
   LepPhi_pos = new TH1D("LepPhi_pos",";#phi[lep]^{+};",160,-TMath::Pi(),TMath::Pi());
   LepPhi_neg = new TH1D("LepPhi_neg",";#phi[lep]^{-};",160,-TMath::Pi(),TMath::Pi());
   LepPhi_tot = new TH1D("LepPhi_tot",";#phi[lep];",160,-TMath::Pi(),TMath::Pi());
-
+  
   PFMET_pos = new TH1D("PFMET_pos",";ME_{T}^{+} [GeV];",1000,0,2000);
   PFMET_neg = new TH1D("PFMET_neg",";ME_{T}^{-} [GeV];",1000,0,2000);
   PFMET_tot = new TH1D("PFMET_tot",";ME_{T} [GeV];",1000,0,2000);
-
+  
   PFMHT_pos = new TH1D("PFMHT_pos",";MH_{T}^{+} [GeV];",1000,0,2000);
   PFMHT_neg = new TH1D("PFMHT_neg",";MH_{T}^{-} [GeV];",1000,0,2000);
   PFMHT_tot = new TH1D("PFMHT_tot",";MH_{T} [GeV];",1000,0,2000);
@@ -77,9 +105,8 @@ void ANplots::BookHistos() {
   HT_pos = new TH1D("HT_pos",";H_{T}^{+} [GeV];",80,0,2000);
   HT_neg = new TH1D("HT_neg",";H_{T}^{-} [GeV];",80,0,2000);
   HT_tot = new TH1D("HT_tot",";H_{T} [GeV];",80,0,2000);
-  HT_tot_thru = new TH1D("HT_tot_thru",";H_{T} [GeV];",80,0,2000);
-
-
+  //HT_tot_thru = new TH1D("HT_tot_thru",";H_{T} [GeV];",80,0,2000);
+  
   MHT_pos = new TH1D("MHT_pos",";MH_{T}^{+} [GeV];",1000,0,2000);
   MHT_neg = new TH1D("MHT_neg",";MH_{T}^{-} [GeV];",1000,0,2000);
   MHT_tot = new TH1D("MHT_tot",";MH_{T} [GeV];",1000,0,2000);
@@ -104,13 +131,13 @@ void ANplots::BookHistos() {
   DeltaPhiMuWPT_neg = new TH1D("DeltaPhiMuWPT_neg", "<#mu,WPT>#Delta #phi^{-}",120,0,TMath::Pi());
   DeltaPhiMuWPT_tot = new TH1D("DeltaPhiMuWPT_tot", "<#mu,WPT>#Delta #phi",120,0,TMath::Pi());
 
-  LPTvsPFMET_pos = new TH2D("LPTvsPFMET_pos",";LPT;MET^{+}",200,20.,1000.,200,0,1000); 
-  LPTvsPFMET_neg  = new TH2D("LPTvsPFMET_neg",";LPT;MET^{-}",200,20.,1000.,200,0,1000);
-  LPTvsPFMET_tot  = new TH2D("LPTvsPFMET_tot",";LPT;MET",200,20.,1000.,200,0,1000); 
+  LPTvsPFMET_pos = new TH2D("LPTvsPFMET_pos",";LPT;MET^{+}",100,20.,1000.,100,0,1000); 
+  LPTvsPFMET_neg  = new TH2D("LPTvsPFMET_neg",";LPT;MET^{-}",100,20.,1000.,100,0,1000);
+  LPTvsPFMET_tot  = new TH2D("LPTvsPFMET_tot",";LPT;MET",100,20.,1000.,100,0,1000); 
 
-  LepPtvsLP_pos = new TH2D("LepPtvsLP_pos","LepPtvsLP_pos",168,-2.1,2.1,200,0.,1000.);
-  LepPtvsLP_neg = new TH2D("LepPtvsLP_neg","LepPtvsLP_neg",168,-2.1,2.1,200,0.,1000.);
-  LepPtvsLP_tot = new TH2D("LepPtvsLP_tot","LepPtvsLP_tot",168,-2.1,2.1,200,0.,1000.);
+  LepPtvsLP_pos = new TH2D("LepPtvsLP_pos","LepPtvsLP_pos",168,-2.1,2.1,100,0.,1000.);
+  LepPtvsLP_neg = new TH2D("LepPtvsLP_neg","LepPtvsLP_neg",168,-2.1,2.1,100,0.,1000.);
+  LepPtvsLP_tot = new TH2D("LepPtvsLP_tot","LepPtvsLP_tot",168,-2.1,2.1,100,0.,1000.);
 
   PFMETvsLP_pos = new TH2D("PFMETvsLP_pos","PFMETvsLP_pos",168,-2.1,2.1,200,0.,1000.);
   PFMETvsLP_neg = new TH2D("PFMETvsLP_neg","PFMETvsLP_neg",168,-2.1,2.1,200,0.,1000.);
@@ -120,24 +147,21 @@ void ANplots::BookHistos() {
   WPTvsST_neg = new TH2D("WPTvsST_neg",";WPT;ST^{-}",200,0.,1000.,200,0,1000); 
   WPTvsST_tot = new TH2D("WPTvsST_tot",";WPT;ST",200,0.,1000.,200,0,1000); 
   
-  PFMETtypeIvsLepPt_pos = new TH2D("PFMETtypeIvsLepPt_pos","; p_{T}[lep]^{+} ;ME_{T};",500,0,2000,500,0,2000);
-  PFMETtypeIvsLepPt_neg = new TH2D("PFMETtypeIvsLepPt_neg","; p_{T}[lep]^{-} ;ME_{T};",500,0,2000,500,0,2000);
-  PFMETtypeIvsLepPt_tot = new TH2D("PFMETtypeIvsLepPt_tot","; p_{T}[lep] ;ME_{T};",500,0,2000,500,0,2000);
+  PFMETtypeIvsLepPt_pos = new TH2D("PFMETtypeIvsLepPt_pos","; p_{T}[lep]^{+} ;ME_{T};",50,0,2000,50,0,2000);
+  PFMETtypeIvsLepPt_neg = new TH2D("PFMETtypeIvsLepPt_neg","; p_{T}[lep]^{-} ;ME_{T};",50,0,2000,50,0,2000);
+  PFMETtypeIvsLepPt_tot = new TH2D("PFMETtypeIvsLepPt_tot","; p_{T}[lep] ;ME_{T};",50,0,2000,50,0,2000);
 
   //PFMETtypeIvsLepPt_pos = new TH2D("PFMETtypeIvsLepPt_pos","; p_{T}[lep]^{+} ;ME_{T};",500,0,2000,500,0,2000);
   //  PFMETtypeIvsLepPt_neg = new TH2D("PFMETtypeIvsLepPt_neg","; p_{T}[lep]^{-} ;ME_{T};",500,0,2000,500,0,2000);
   STHT_tot = new TH2D("STHT_tot","; S_{T}[lep] ;HT;",50,0,2500,50,0,2500);
 
 
-Thrust = new TH1D("Thrust",";Thrust;",100,0,1);
- ThrustPhi = new TH1D("ThrustPhi",";ThrustPhi;",100,0,TMath::Pi());
+  //Thrust = new TH1D("Thrust",";Thrust;",100,0,1);
+  //ThrustPhi = new TH1D("ThrustPhi",";ThrustPhi;",100,0,TMath::Pi());
 
-  PFMETtypeVSPFMET = new TH2D("PFMETtypeVSPFMET",";PFMet typeI;PFMet;",200,0,2000,200,0,2000);
+  PFMETtypeVSPFMET = new TH2D("PFMETtypeVSPFMET",";PFMet typeI;PFMet;",100,0,2000,100,0,2000);
 
-  HTthrust = new TH2D("HTthrust",";HT [GeV];Thrust;",40,0,2000,20,0,1);
-
-
-
+  //HTthrust = new TH2D("HTthrust",";HT [GeV];Thrust;",40,0,2000,20,0,1);
   PFMETtypeOVPFMET = new TH1D("PFMETtypeOVPFMET",";PFMet typeI/PFMet;",200,0,2);
 
   MT_lt03_tot = new TH1D("MT_lt03_tot",";M_{T} [GeV];",1000,0,2000);
@@ -185,6 +209,8 @@ bool ANplots::Process(Event::Data & ev) {
     // cout << "  ANplots does require at least one lepton: plots not filled "<<endl;
     return true;
   } 
+
+
   
   // define variables
   LorentzV pfMHT = ev.PFMET() + *(theRECOLepton.at(0));
@@ -335,14 +361,71 @@ bool ANplots::Process(Event::Data & ev) {
 
   }
 
-  ThrustStuff thrust = ev.CommonThrustStuff();
-  Thrust->Fill(1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
-ThrustPhi->Fill(thrust.pjetDphi,ev.GetEventWeight());
-HTthrust->Fill(ev.CommonHT(),1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
- HT_tot_thru ->Fill(thrust.HTFmin,ev.GetEventWeight());
+  //  ThrustStuff thrust = ev.CommonThrustStuff();
+  //  Thrust->Fill(1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
+  //ThrustPhi->Fill(thrust.pjetDphi,ev.GetEventWeight());
+  //HTthrust->Fill(ev.CommonHT(),1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
+  // HT_tot_thru ->Fill(thrust.HTFmin,ev.GetEventWeight());
   //  ev.PrintGen();->Fill(ev.CommonHT(),1-(thrust.HTFmin/thrust.HTFmax),ev.GetEventWeight());
 
  RelCombIso_tot->Fill((theRECOLepton.at(0)->GetCombIsolation()),ev.GetEventWeight());
+
+
+
+  if(theRECOLepton.size()==2)
+    {
+      ZmassmuRaw->Fill(ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1))) ,ev.GetEventWeight());
+
+      if(theRECOLepton.at(0)->GetCharge()!=theRECOLepton.at(1)->GetCharge())
+	{
+	  Zmassmu->Fill(   ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1))) ,ev.GetEventWeight());
+	  if( ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1)))>76  &&   ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1)))<107 )
+	    {
+	      LorentzV ZMHT = ev.PFMET() + *(theRECOLepton.at(0))+ *(theRECOLepton.at(1));
+	      LorentzV theZ = (*theRECOLepton.at(0))+(*theRECOLepton.at(1));
+	      float  theZLP = (theRECOLepton.at(0)->Px()*theZ.Px()+theRECOLepton.at(0)->Py()*theZ.Py())/(theZ.Pt()*theZ.Pt());
+	      float  theZLPSm = (theRECOLepton.at(1)->Px()*theZ.Px()+theRECOLepton.at(1)->Py()*theZ.Py())/(theZ.Pt()*theZ.Pt());
+	      float  theZLPMHTSm = (theRECOLepton.at(1)->Px()*ZMHT.Px()+theRECOLepton.at(1)->Py()*ZMHT.Py())/(ZMHT.Pt()*ZMHT.Pt());
+	      float  theZLPMHT = (theRECOLepton.at(0)->Px()*ZMHT.Px()+theRECOLepton.at(0)->Py()*ZMHT.Py())/(ZMHT.Pt()*ZMHT.Pt());
+	      Zmassmu->Fill(   ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1))) ,ev.GetEventWeight());
+	      ZLP->Fill(theZLP ,ev.GetEventWeight());
+	      //  ZLP->Fill(theZLPSm,ev.GetEventWeight());
+	      ZLPMHT->Fill(theZLPMHT,ev.GetEventWeight());
+	      ZLPMHT->Fill(theZLPMHTSm,ev.GetEventWeight());
+	      ZLPvsLP->Fill(theZLP,theZLPMHT ,ev.GetEventWeight());
+	      ZPT->Fill(theZ.Pt(),ev.GetEventWeight());
+	      ZPTres->Fill((theZ.Pt()-ZMHT.Pt())/(theZ.Pt()),ev.GetEventWeight());
+	      ZPTvsMHT->Fill(ZMHT.Pt(),theZ.Pt(),ev.GetEventWeight());
+	      ZMHTpl->Fill(ZMHT.Pt(),ev.GetEventWeight());
+	      ZST->Fill(theRECOLepton.at(0)->Pt()+(ev.PFMET() + *(theRECOLepton.at(1))).Pt(),ev.GetEventWeight());
+	      if(theRECOLepton.at(0)->GetCharge()>0)
+		{
+		  Zmassmu_pos->Fill(   ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1))) ,ev.GetEventWeight());
+		  ZLP_pos->Fill(theZLP ,ev.GetEventWeight());
+		  ZPT_pos->Fill(theZ.Pt(),ev.GetEventWeight());
+		  ZPTres_pos->Fill((theZ.Pt()-ZMHT.Pt())/(theZ.Pt()),ev.GetEventWeight());
+		  ZLPMHT_pos->Fill(theZLPMHT,ev.GetEventWeight());
+		  ZLPMHT_pos->Fill(theZLPMHTSm,ev.GetEventWeight());
+		  ZMHTpl_pos->Fill(ZMHT.Pt(),ev.GetEventWeight());
+		}
+	       if(theRECOLepton.at(0)->GetCharge()<0)
+		{
+		  Zmassmu_neg->Fill(   ROOT::Math::VectorUtil::InvariantMass(*(theRECOLepton.at(0)),*(theRECOLepton.at(1))) ,ev.GetEventWeight());
+		  ZLP_neg->Fill(theZLP ,ev.GetEventWeight());
+		  ZPT_neg->Fill(theZ.Pt(),ev.GetEventWeight());
+		  ZPTres_neg->Fill((theZ.Pt()-ZMHT.Pt())/(theZ.Pt()),ev.GetEventWeight());
+		  ZLPMHT_neg->Fill(theZLPMHT,ev.GetEventWeight());
+		  ZLPMHT_neg->Fill(theZLPMHTSm,ev.GetEventWeight());
+		  ZMHTpl_neg->Fill(ZMHT.Pt(),ev.GetEventWeight());
+		}
+
+
+
+	    }
+	}
+																										  
+    }
+
 
    return true;
 }

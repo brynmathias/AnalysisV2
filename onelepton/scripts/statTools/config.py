@@ -56,20 +56,21 @@ if run4jets:
     path = dict([(k,v.replace("resultsData", "resultsData_4jts")) for k, v in path.iteritems()])
 
 # Name format of the histogram path
-bin_fmt = "Counter_BSMGrid_%s%d%s_scale1/%s"
+bin_fmt = "Counter_BSMGrid_%s%dsecondDcut500%s_scale1/%s"
+#bin_fmt = "Counter_BSMGrid_%s%d%s_scale1/%s"
 # Name of the counter histogram for SM MC
 hname = "SM_Events"
 hname_noweight = "SM_Events_noweight"
 # Which susyScan to use
-susyScan = "sms" #"tanbeta10"
+susyScan = "tanbeta10"
 # use NLO signal xs for limit?
-use_nloxs = False
+use_nloxs = True
 
 processes = ["gg", "sb", "ss", "sg", "ll", "nn", "ng", "bb", "tb", "ns"]
 
 pdfUncertainty = 0.1
 
-run_sms = True
+run_sms = False
 
 # Benchmark points to use in limits plotting
 lmPoints = [
@@ -111,7 +112,7 @@ plusMinus = {"OneSigma" : 1.0}
 class Muon:
     name = "muon"
     # Integrated luminosity to use for limit setting/systs
-    lumi = 1082.0*lumiCorrection
+    lumi = 3800.0 #1082.0*lumiCorrection
     # Trigger efficiency
     triggerEfficiency = 0.91
     # background MC to use in pseudo-data
@@ -131,17 +132,15 @@ class Muon:
     # These give the paths for each MC sample according to their short name
     # The %s will be replaced with a base directory from the dictionary above
     files = {
-#        "w" : "%s/Muons_WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1.root",
-#        "w" : "%s/Muons_WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13.root",
         "w" : "%s/Muons_WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14.root",
         "tt" : "%s/Muons_TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14.root",
-        "z" : "%s/Muons_DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1.root",
+        "z" : "%s/Muons_DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14.root",
         # "lm1" : "%s/Muons_LM1_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1.root",
         # "lm3" : "%s/Muons_LM3_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1.root",
         # "lm6" : "%s/Muons_LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1.root",
         "tanbeta10" : "%s/Muons_mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1.root",
-#	"sms" : "%s/Muons_SMS_T3wb_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1.root",
-        "sms" : "%s/Muons_SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt.root",
+        "sms" : "%s/../resultsSMS/Muons_SMS_T3w_x_0p25to0p75_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v2_V15_03_18_scan_T3w.root",
+        #"sms" : "%s/../resultsSMS/Muons_SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt.root",
         "data42x" : "%s/../resultsData/Muons_data.root"
         }
 
@@ -173,7 +172,7 @@ class Muon:
 class Electron:
     name = "electron"
     # Integrated luminosity to use for limit setting/systs
-    lumi = 1079.0*lumiCorrection
+    lumi = 4000.0 #1079.0*lumiCorrection
     # Trigger efficiency
     triggerEfficiency = 0.96
 
@@ -248,7 +247,7 @@ class Electron:
     # else: bkgPrediction = "QCDFit" # "OtherChannel", None
     ttPolarisationUncertainty = [0.05, 0.05, 0.05, 0.05][1:]
 
-channels = [Muon, Electron]
+channels = [Muon] #, Electron]
 
 
 

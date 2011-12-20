@@ -254,7 +254,7 @@ int eff( const DoubleVVVV& num, const std::string& str ) {
     DoubleV pass(num[2*ii+0][0][0]);
     DoubleV total(num[2*ii+1][0][0]);
     
-    for ( int iii = 0; iii < num[0][0][0].size(); ++iii ) {
+    for ( uint iii = 0; iii < num[0][0][0].size(); ++iii ) {
       eff[ii][iii] = total[iii] > 0. ? pass[iii]/total[iii] : 0.;
       err[ii][iii] = total[iii] > 0. ? sqrt( (eff[ii][iii]*(1.-eff[ii][iii])) / total[iii] ) : 0.;
     }
@@ -290,7 +290,7 @@ int eff( const DoubleVVVV& num, const std::string& str ) {
   // Correction factor 
   std::vector<double> corr(num[0][0][0].size(),0.);
   std::vector<double> cerr(num[0][0][0].size(),0.);
-  for ( int iii = 0; iii < num[0][0][0].size(); ++iii ) {
+  for ( uint iii = 0; iii < num[0][0][0].size(); ++iii ) {
     corr[iii] = eff[1][iii] > 0. ? eff[0][iii] / eff[1][iii] : 1.;
     cerr[iii] = corr[iii] * sqrt( (eff[0][iii]>0.?(err[0][iii]/eff[0][iii])*(err[0][iii]/eff[0][iii]):0.) +
 				  (eff[1][iii]>0.?(err[1][iii]/eff[1][iii])*(err[1][iii]/eff[1][iii]):0.) );
@@ -967,6 +967,9 @@ TH1D* rebin( TFile* file, const char* name, int multi, double width, double xlow
 //TH1D* rebinNew( TFile* file, const char* name, int multi, int nbins = -1, double xlow = -1., double xhigh = -1. ) {
 TH1D* rebinNew( TFile* file, TString name, int multi, int nbins = -1, double* xarray = 0 ) {
 
+  nbins;
+  xarray;
+  
   bool debug = false;
 
   // Check for null pointer
@@ -1229,17 +1232,17 @@ TH1D* integral( TH1D* input ) {
 void calcRatio( const uint nfile, 
 		const uint nmulti, 
 		const uint nat, 
-		const uint nht, 
+		int& nht, 
  		StringV his, 
  		StringVV files,
  		DoubleV lumis,
  		DoubleV weights,
  		IntV multi, 
  		IntV at, 
- 		DoubleV ht, 
- 		int    ht_nbin,
- 		double ht_min, 
- 		double ht_max,
+ 		DoubleV& ht, 
+ 		int&    ht_nbin,
+ 		double& ht_min, 
+ 		double& ht_max,
  		DoubleVVVV& numer, 
  		DoubleVVVV& numer_errh, 
  		DoubleVVVV& numer_errl, 
@@ -1252,14 +1255,16 @@ void calcRatio( const uint nfile,
  		IntVVV& length,
  		int data_file,
  		double lumi,
-		bool efficiency = false
+		std::string& label,
+		bool efficiency = false,
+		bool use_sumw2 = true
 		) {
 
-  std::map<std::string,double> slumi;
-  slumi["wjets"] = 320.5;
-  slumi["zinv"]  = 351.8;
-  slumi["ttbar"] = 13500.;
-  slumi["top"]   = lumi;
+//   std::map<std::string,double> slumi;
+//   slumi["wjets"] = 320.5;
+//   slumi["zinv"]  = 351.8;
+//   slumi["ttbar"] = 13500.;
+//   slumi["top"]   = lumi;
   
   // Reset
   for ( uint ifile = 0; ifile < nfile; ++ifile ) {
@@ -1323,7 +1328,19 @@ void calcRatio( const uint nfile,
 	  // Create ratio histo
 	  TH1D* above = rebinNew( file, TString(post.str()), multi[imulti] );
 	  TH1D* below = rebinNew( file, TString(pre.str()), multi[imulti] );
-	    
+	  
+	  if ( above ) {// && ht.empty() ) {
+	    int nbins = above->GetXaxis()->GetNbins();
+	    const TArrayD* bins = above->GetXaxis()->GetXbins();
+	    ht.clear();
+	    for ( int i = 0; i < nbins; ++i ) { ht.push_back((*bins)[i]); }
+	    nht = ht.size();
+	    ht.push_back( above->GetXaxis()->GetXmax() );
+	    ht_min = above->GetXaxis()->GetXmin();
+	    ht_max = above->GetXaxis()->GetXmax();
+	    label = above->GetXaxis()->GetTitle();
+	  }
+	  
 	  file->cd();
 	    
 	  if ( above && below ) {
@@ -1352,47 +1369,62 @@ void calcRatio( const uint nfile,
 // 	    double bw  = 1.;
 	    for ( uint iht = 0; iht < nht; ++iht ) {
 	      
-	      double aw = -1., an = 0., aeh = 0., ael = 0.;
-	      for ( uint jht = 0; jht < nht; ++jht ) {
-		double a  = above->GetBinContent((iht+jht+1)%nht);
-		double ae = above->GetBinError((iht+jht+1)%nht);
-		if ( a > 0. ) { aw = (ae*ae)/a; break; } 
-	      }
-	      double a  = above->GetBinContent(iht+1);
-	      double ae = above->GetBinError(iht+1);
-	      if ( aw > 0. ) { //@@ if no weight can be determined, likely the sample is QCD (no QCD in numerator)
-		an  = a/aw;
-		aeh = an > 20. ? ae : aw * poissonErrH(an);
-		ael = an > 20. ? ae : aw * poissonErrL(an);
-	      }
+	      //@@ If no entries in any bins, no weight can be determined. (Likely the sample is QCD, with no QCD in numerator)
 
-	      double bw = -1., bn = 0., beh = 0., bel = 0.;
-	      for ( uint jht = 0; jht < nht; ++jht ) {
-		double b  = below->GetBinContent((iht+jht+1)%nht);
-		double be = below->GetBinError((iht+jht+1)%nht);
-		if ( b > 0. ) { bw = (be*be)/b; break; } 
-	      }
-	      double b  = below->GetBinContent(iht+1);
-	      double be = below->GetBinError(iht+1);
-	      if ( bw > 0. ) { //@@ if no weight can be determined, likely the sample is QCD (no QCD in numerator)
-		bn  = b/bw;
-		beh = bn > 20. ? be : bw * poissonErrH(bn);
-		bel = bn > 20. ? be : bw * poissonErrL(bn);
-	      }
+	      double a   = above->GetBinContent(iht+1);
+	      double ae  = above->GetBinError(iht+1);
+	      double aw  = -1.;
+	      double an  = a;
+	      double aeh = ae;
+	      double ael = ae;
 
-// 	      double b   = below->GetBinContent(iht+1);
-// 	      double be  = below->GetBinError(iht+1);
-// 	      if ( b > 0. ) { bw = (be*be)/b; } // calc, otherwise use cached value from previous bin 
-// 	      double bn  = b/bw;
-// 	      double beh = bn > 20. ? be : bw * poissonErrH(bn);
-// 	      double bel = bn > 20. ? be : bw * poissonErrL(bn);
+	      for ( uint jht = 0; jht < nht; ++jht ) {
+		double aa = above->GetBinContent((iht+jht+1)%nht);
+		double ee = above->GetBinError((iht+jht+1)%nht);
+		if ( aa > 0. ) { aw = (ee*ee)/aa; break; } 
+	      } 
 	      
+	      if ( !use_sumw2 ) { 
+		an = a;
+		ae = sqrt(a);
+		aeh = a > 10. ? ae : poissonErrH(a);
+		ael = a > 10. ? ae : poissonErrL(a);
+	      } else if ( aw > 0. ) {
+		an  = a/aw;
+		aeh = an > 10. ? ae : aw * poissonErrH(an);
+		ael = an > 10. ? ae : aw * poissonErrL(an);
+	      }
+	      
+	      double b   = below->GetBinContent(iht+1);
+	      double be  = below->GetBinError(iht+1);
+	      double bw  = -1.;
+	      double bn  = a;
+	      double beh = be;
+	      double bel = be;
+
+	      for ( uint jht = 0; jht < nht; ++jht ) {
+		double bb  = below->GetBinContent((iht+jht+1)%nht);
+		double ee = below->GetBinError((iht+jht+1)%nht);
+		if ( bb > 0. ) { bw = (ee*ee)/bb; break; } 
+	      }
+	      
+	      if ( !use_sumw2 ) { 
+		bn = b;
+		be = sqrt(b);
+		beh = b > 10. ? be : poissonErrH(b);
+		bel = b > 10. ? be : poissonErrL(b);
+	      } else if ( bw > 0. ) {
+		bn  = b/bw;
+		beh = bn > 10. ? be : bw * poissonErrH(bn);
+		bel = bn > 10. ? be : bw * poissonErrL(bn);
+	      }
+
 	      numer[ifile][imulti][iat][iht]      += a;
 	      numer_errh[ifile][imulti][iat][iht] += aeh*aeh;
 	      numer_errl[ifile][imulti][iat][iht] += ael*ael;
 	      denom[ifile][imulti][iat][iht]      += b;
-	      denom_errh[ifile][imulti][iat][iht] += beh*beh; 
-	      denom_errl[ifile][imulti][iat][iht] += bel*bel; 
+	      denom_errh[ifile][imulti][iat][iht] += beh*beh;
+	      denom_errl[ifile][imulti][iat][iht] += bel*bel;
 
 	      std::cout << " ifile: " << ifile
 			<< " jfile: " << jfile
@@ -1401,11 +1433,13 @@ void calcRatio( const uint nfile,
 			<< " iat: " << iat
 			<< " iht: " << iht
 			<< " a: " << a
- 			<< " e: " << ae
- 			<< " w: " << aw
- 			<< " n: " << an
-			<< " eh: " << aeh
-			<< " el: " << ael
+ 			<< " ae: " << ae
+//  			<< " seh: " << sqrt(numer_errh[ifile][imulti][iat][iht])
+//  			<< " sel: " << sqrt(numer_errl[ifile][imulti][iat][iht])
+ 			<< " aw: " << aw
+ 			<< " an: " << an
+			<< " aeh: " << aeh
+			<< " ael: " << ael
 // 			<< " r: " << (a>0.?aeh/a:0.)
 // 			<< " b: " << b
 // 			<< " e: " << be
@@ -1448,12 +1482,12 @@ void calcRatio( const uint nfile,
 	  double bel = sqrt(denom_errl[ifile][imulti][iat][iht]);
 	  denom_errh[ifile][imulti][iat][iht] = beh;
 	  denom_errl[ifile][imulti][iat][iht] = bel;
-	      
+	  
 	  double r  = b > 0. ? a/b : 0.;
 	  double rerrl = 0.;
 	  double rerrh = 0.;
-	  calcErr( r, rerrh, rerrl, a, aeh, ael, b, beh, bel );
-	      
+ 	  calcErr( r, rerrh, rerrl, a, aeh, ael, b, beh, bel ); 
+	  
 	  ratio[ifile][imulti][iat][iht] = r;
 	  if ( r > 0. ) { length[ifile][imulti][iat]++; }
 	  errh[ifile][imulti][iat][iht] = rerrh;
@@ -1525,17 +1559,17 @@ void calcRatio( const uint nfile,
 void calcRatio( const uint nfile, 
 		const uint nmulti, 
 		const uint nat, 
-		const uint nht, 
+		int& nht, 
  		StringV his, 
  		StringVV files,
  		DoubleV lumis,
  		DoubleV weights,
  		IntV multi, 
  		IntV at, 
- 		DoubleV ht, 
- 		double ht_min, 
- 		double ht_max,
- 		double ht_step,
+ 		DoubleV& ht, 
+ 		double& ht_min, 
+ 		double& ht_max,
+ 		double& ht_step,
  		DoubleVVVV& numer, 
  		DoubleVVVV& numer_errh, 
  		DoubleVVVV& numer_errl, 
@@ -1548,16 +1582,18 @@ void calcRatio( const uint nfile,
  		IntVVV& length,
  		int data_file,
  		double lumi,
-		bool efficiency = false
+		std::string& label,
+		bool efficiency = false,
+		bool use_sumw2 = true
 		) {
   
   calcRatio( nfile, nmulti, nat, nht, 
 	     his, files, lumis, weights, multi, at, ht, 
-	     (int)nht, ht_min, ht_max, 
+	     nht, ht_min, ht_max, 
 	     numer, numer_errh, numer_errl, 
 	     denom, denom_errh, denom_errl, 
 	     ratio, errh, errl, length, 
 	     data_file, lumi,
-	     efficiency );
+	     label, efficiency, use_sumw2 );
   
 }

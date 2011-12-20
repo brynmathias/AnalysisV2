@@ -1082,10 +1082,10 @@ MonsterFilter::MonsterFilter() {}
 MonsterFilter::~MonsterFilter() {}
 
 bool MonsterFilter::Process(Event::Data & ev) {
+  if(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks() > 10 && ev.GettracksNEtaLT0p9HighPurityTracks()+ev.GettracksNEta0p9to1p5HighPurityTracks()+ev.GettracksNEtaGT1p5HighPurityTracks()  <= 0.25*(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks()) ) {    return false;} // this line removes moster events
+  //  if(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks() <= 10) cout <<"few tracks"<<endl;
+  return true;
 
-  if(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks() > 10 && ev.GettracksNEtaLT0p9HighPurityTracks()+ev.GettracksNEta0p9to1p5HighPurityTracks()+ev.GettracksNEtaGT1p5HighPurityTracks()  <= 0.25*(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks()) ) {return false;} // this line removes moster events
-
- return false;
 }
 
 std::ostream& MonsterFilter::Description(std::ostream &ostrm) {

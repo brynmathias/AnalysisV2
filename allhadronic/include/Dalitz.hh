@@ -4,14 +4,11 @@
 #include "PlottingBase.hh"
 #include "Utils.hh"
 #include "Types.hh"
+#include "Utility.hh"
 #include <Math/PtEtaPhiE4D.h>
 
 class TH1D;
 class TH2D;
-
-typedef unsigned int uint;
-typedef std::vector<LorentzV> LorentzVs;
-typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiE4D<double> > PtEtaPhiE;
 
 namespace Operation {
 

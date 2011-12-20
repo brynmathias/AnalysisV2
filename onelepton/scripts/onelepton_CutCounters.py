@@ -3,6 +3,35 @@ from icf.core import PSet, Analysis, susyDir
 from libOneLepton import *
 #Trigger
 
+myCountsAndBSMGrids_Monster= CountsAndBSMGrids(
+    PSet(
+    DirectoryName = "Counter_Monster",
+    xBins = 100,
+    xLow =0.,
+    xHigh =1000.,
+    yBins =100,
+    yLow =0.,
+    yHigh =1000.,
+    mSUGRAFile = "scale_xsection_nlo0.5_tandat50.txt",#"msugraTanbeta3_05down.txt",
+    ).ps()
+
+    )
+
+myCountsAndBSMGrids_pythiabug= CountsAndBSMGrids(
+    PSet(
+    DirectoryName = "pythiabug",
+    xBins = 100,
+    xLow =0.,
+    xHigh =1000.,
+    yBins =100,
+    yLow =0.,
+    yHigh =1000.,
+    mSUGRAFile = "scale_xsection_nlo0.5_tandat50.txt",#"msugraTanbeta3_05down.txt",
+    ).ps()
+
+    )
+
+
 myCountsAndBSMGrids_Trigger= CountsAndBSMGrids(
     PSet(
     DirectoryName = "Counter_Trigger",

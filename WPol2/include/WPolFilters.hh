@@ -529,7 +529,7 @@ namespace WPol{
       //to change to use SecJets, use JD_SecJets, TerJets, JD_TerJets
       for(unsigned int i=0; i< mEv->JD_Jets().size(); i++) {
 	//loop through all jets above threshold (in this case the Jets relate to AK5PF2PAT)
-	if(mEv->JD_Jets().at(i).Pt() > mPFJetThresh) {
+	if(mEv->JD_Jets().at(i).Pt() > mPFJetThresh&&fabs(mEv->JD_Jets().at(i).Eta())<4.7) {
 	  //calculate the uncertainty on the JEC according to corrected PT and Eta
 	  jecUnc.setJetEta(mEv->JD_Jets().at(i).Eta());
 	  jecUnc.setJetPt(mEv->JD_Jets().at(i).Pt());

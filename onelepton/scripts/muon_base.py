@@ -21,13 +21,13 @@ from icf.utils import autoname
 #mode = "data42X_PromptReco"
 #mode = "data42X_ReReco"
 #mode  = "MCGrid"
-#mode = "MC42ttw_Z41"
+mode = "MC42ttw_Z41"
 #mode  = "MC42QCD"
 #mode = "MCskims"
 #mode = "data42_muHadSkims"
 ##AUTOMATE_MODE##
 #mode = "MC42QCDMu"
-mode = "sample_Fall11_data"
+#mode = "sample_Fall11_data"
 
 #mode = "SMS"
 
@@ -35,8 +35,8 @@ isSM = not (mode in ["MCGrid", "SMS"])
 
 # Systematics
 systematics = None
-#systematics = "metup_flat"
-#systematics = "metdown_flat"
+#systematics = "metup"
+#systematics = "metdown"
 #systematics = "metres_conservative"
 #systematics = "polup"
 #systematics = "poldown"
@@ -57,8 +57,6 @@ MET = "Uncor"
 # You can attach more cuts by doing tree.TAttach(cut, my_cut)
 sig, tree, extra = setupMuonPreselection(MET, "Muons", mode)
 
-
-
 # This function sets up the signal and control bins requested and attaches them
 # to the tree (after the 3 jet cut).
 # Setup bins in LP
@@ -66,7 +64,7 @@ sig, tree, extra = setupMuonPreselection(MET, "Muons", mode)
 # Define ST bins to use
 bins = [150, 250, 350, 450]
 # Define HT bins to use
-HTbins = [500,1000]
+HTbins = [500]
 BinnedHTPTCut = []
 backtuple_list = []
 sig_plots = []
@@ -87,7 +85,7 @@ for idxHT, sbinHT in enumerate(HTbins):
     sig_plots +=  [makePlots(tree, backtuple_list[idxHT][0], OP_ANplots, "ANplots%d_LP"+nameAdd)]
     nolp_plots += [makePlots(tree,backtuple_list[idxHT][2] , OP_ANplots, "ANplots%d_NOLP"+nameAdd)]
     bkg_plots +=  [makePlots(tree,backtuple_list[idxHT][1] , OP_ANplots, "ANplots%d_ConLP"+nameAdd)]
-
+ 
 
 # Systematics
 syst_filters = muonSystematics(sig, systematics)
@@ -119,8 +117,8 @@ if systematics: syst_str = "_"+systematics
 else: syst_str = ""
 
 
-if mode.startswith("data"): output_dir = autoname("./resultsData")
-else: output_dir = autoname("./resultsMC%(syst_mode)s", syst_mode=syst_str)
+if mode.startswith("data"): output_dir = autoname("./results")
+else: output_dir = autoname("./resultsSync%(syst_mode)s", syst_mode=syst_str)
 
 #output_dir = "./notrigger"
 

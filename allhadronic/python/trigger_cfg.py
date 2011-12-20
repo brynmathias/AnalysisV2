@@ -14,7 +14,7 @@ from allhadronic.golden_cff import *
 from copy import deepcopy
 
 pwd = commands.getoutput('echo $SUSY_WORKING_SW_DIR')
-output_dir = pwd + "/results/v01/"
+output_dir = pwd + "/results/v81/"
 
 # -----------------------------------------------------------------------------
 # Reading the collections from the ntuple
@@ -205,7 +205,8 @@ test = Trigger(ps.ps())
 #JsonFileOption = "/allhadronic/python/Cert_160404-166861_7TeV_PromptReco_Collisions11_JSON.txt"
 #JsonFileOption = "/allhadronic/python/Cert_160404-166502_7TeV_PromptReco_Collisions11_JSON.txt"
 #JsonFileOption = "/allhadronic/python/Cert_160404-167151_7TeV_PromptReco_Collisions11_JSON.txt"
-JsonFileOption = "/home/hep/db1110/public_html/Golden2011.json"
+#JsonFileOption = "/hadronic/python/hadronic/ReProcessing_PromptJson_Merged.txt"
+JsonFileOption = "/hadronic/python/hadronic/2011GoldenJson.json"
 
 json = JSONFilter("JSON",json_to_pset(JsonFileOption))
 json_output = JSONOutput("_filtered")
@@ -237,9 +238,16 @@ data=PSet(
     LastEntry = 10,
     )
 
-from data.Run2011.HTRun2011AB import *
-from SingleMu import *
-from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
+from data.Jet_35pb_WithTP_json051110 import Jet_35pb_WithTP_json051110
+from data.Run2011.HT42_incomplete import HT42_incomplete
+from data.Run2011.HT_Run2011_promptReco_DCS import HT_Run2011_promptReco_DCS
+from data.Run2011.HT_Run2011A import HT_Run2011A
+from data.Run2011.HT_Run2011A_PromptReco_v1 import HT_Run2011A_PromptReco_v1
+from data.Run2011.HT_Run2011A_AllReco_17June import HT_Run2011A_AllReco_17June
+from data.Run2011.HT_Run2011A_L1OffSet import HT_Run2011A_L1OffSet
+from data.Run2011.HTRun2011AB import HTRun2011AB
+from allhadronic.HT_Run2011A_1fb import HT_Run2011A_1fb
+
 # -----------------------------------------------------------------------------
 # Analysis
 
@@ -249,7 +257,7 @@ anal=Analysis("Trigger")
 #anal.AddJetFilter("PreCC",JetCorrections)
 anal+=cut_flow
 
-anal.Run(".",conf,[HTRun2011AB])
+#anal.Run(".",conf,[data])
 #anal.Run(".",conf,[Jet_35pb_WithTP_json051110])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011A_PromptReco_v1])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])
@@ -257,4 +265,5 @@ anal.Run(".",conf,[HTRun2011AB])
 #anal.Run(output_dir,conf_ak5_calo,[HT_Run2011A_L1OffSet])
 #anal.Run(output_dir,conf_ak5_calo,[HT_Run2011A])
 #anal.Run(output_dir,conf_ak5_calo,[HT_Run2011A_AllReco_17June])
+anal.Run(output_dir,conf_ak5_calo,[HTRun2011AB])
 

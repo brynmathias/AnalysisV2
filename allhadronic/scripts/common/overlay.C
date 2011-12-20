@@ -139,7 +139,7 @@ TCanvas* createPlot( TDirectory* output_file,
   }
   
   // Create legend
-  TLegend* legend = new TLegend( 0.7, 0.52-0.03*his.size(), 0.9, 0.52,  NULL, "brNDC" );
+  TLegend* legend = new TLegend( 0.65, 0.52-0.03*his.size(), 0.9, 0.52,  NULL, "brNDC" );
   legend->SetFillColor(0);
   legend->SetLineColor(0); 
   legend->SetTextAlign(31);

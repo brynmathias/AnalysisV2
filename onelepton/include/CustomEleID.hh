@@ -16,6 +16,7 @@ namespace OneLepton{
   class CustomEleIdRA4Sync : public Compute::ObjectFilter<Event::Lepton> {
   public:
     CustomEleIdRA4Sync(const Utils::ParameterSet & ps, const std::string & prefix = "Cuts") :
+      mPtMin(ps.Get<double>("PtMin")),
       mIso(ps.Get<int>("Isolation")),
       mHoE(ps.Get<int>("HoverE")),
       mDeltaEta(ps.Get<int>("DeltaEtaAtVtx")),
@@ -24,6 +25,7 @@ namespace OneLepton{
       mConv(ps.Get<int>("Conversions")),
       mPassExtra(ps.Contains("d0dzCutApplied") ? ps.Get<bool>("d0dzCutApplied") : true),
       mPassDetaOrDphi(ps.Contains("DetaOrDphi") ? ps.Get<bool>("DetaOrDphi") : false),
+      mD0BS(ps.Get<double>("D0BS")),
 
       mRelCombIsoBarrel(ps.Get<double>(prefix+".RelCombIso.Barrel")),
       mRelCombIsoEndcap(ps.Get<double>(prefix+".RelCombIso.Endcap")),
@@ -79,6 +81,8 @@ namespace OneLepton{
     }
 
     bool Apply(const Event::Lepton* ob){
+
+      bool passMinPt = false;
       bool passIso = false;
       bool passHoE = false;
       bool passDeltaEta = false; bool passDeltaPhi = false;
@@ -101,27 +105,25 @@ namespace OneLepton{
 	if(!mSupressErrors) throw e;
       }
 
-      //      if (fabs(ob->Eta()) < 1.4442) {
+
+      if ((ob->Pt())>=mPtMin) { passMinPt = true; } else { passMinPt = false; }
+
+      // Barrel
       if (fabs(mEv->GetElectronESuperClusterEta(iM)) < 1.4442) {
 
-	// Barrel
 	passIso = ( (((ob->GetTrkIsolation()) + max(0., ob->GetEcalIsolation()-1.) + ob->GetHcalIsolation())/(ob->Pt())) < mRelCombIsoBarrel );
-	//	passIso = ( ob->GetCombIsolation() < mRelCombIsoBarrel );
-	//	      ( ob->GetTrkIsolation() < mTrkIsoBarrel &&
-	//           ob->GetEcalIsolation()< mEcalIsoBarrel &&
-	//           ob->GetHcalIsolation()< mHcalIsoBarrel );
 	passHoE = ( mEv->GetElectronHoE(iM) < mHoEBarrel );
 	passDeltaPhi = ( fabs(mEv->GetElectronDeltaPhiAtVtx(iM)) < mDeltaPhiBarrel );
 	passDeltaEta = ( fabs(mEv->GetElectronDeltaEtaAtVtx(iM)) < mDeltaEtaBarrel );
 	passShh = ( mEv->GetElectronSigmaIetaIeta(iM) < mSigmaIEtaIEtaBarrel );
+
       }
-      //      else if (fabs(ob->Eta()) > 1.560 ) {
-      else if ( (fabs(mEv->GetElectronESuperClusterEta(iM)) > 1.560) && (fabs(mEv->GetElectronESuperClusterEta(iM)) < 2.5) ) {
-	// End-caps
+
+
+      // End-caps
+      else if ( (fabs(mEv->GetElectronESuperClusterEta(iM)) > 1.566) && (fabs(mEv->GetElectronESuperClusterEta(iM)) < 2.5) ) {
+
 	passIso = ( ob->GetCombIsolation() < mRelCombIsoEndcap );
-	//( ob->GetTrkIsolation() < mTrkIsoEndcap &&
-	//        ob->GetEcalIsolation() < mEcalIsoEndcap &&
-	//        ob->GetHcalIsolation() < mHcalIsoEndcap );
 	passHoE = ( mEv->GetElectronHoE(iM) < mHoEEndcap );
 	if (mCorrEEMisalig){
 	  passDeltaPhi = ( fabs(mEv->GetElectronDeltaPhiAtVtx(iM)-dPhiCorr(ob->Phi(),ob->Eta())) < mDeltaPhiEndcap ) ;
@@ -133,20 +135,21 @@ namespace OneLepton{
 	}
 	passShh = ( mEv->GetElectronSigmaIetaIeta(iM) < mSigmaIEtaIEtaEndcap );
 
-      } else { return false; }
+      } 
 
+      else { return false; }
 
       try {
 	// 2011 definition
 	if (
-	    ( fabs(mEv->GetElectronD0BS(iM)) < 0.02) &&
+	    ( fabs(mEv->GetElectronD0BS(iM)) < mD0BS) &&
 	    ( fabs(mEv->electronGsfTrackVertexz()->at(iM) - (mEv->GetvertexPosition(0).Z())) < 1. )
 	    ) { passExtra = true; }
       }
       catch (std::invalid_argument & e) {
 	// 2010 definition
 	if (
-	    ( fabs(mEv->GetElectronD0BS(iM)) < 0.02)
+	    ( fabs(mEv->GetElectronD0BS(iM)) < mD0BS)
 	    ) { passExtra = true; }
       }
 
@@ -155,23 +158,17 @@ namespace OneLepton{
       else { passExtraOut = true; }
 
 
-      //      cout << "mDeltaEta = " << mDeltaEta << " , mDeltaPhi = " << mDeltaEta << " , mPassDetaOrDphi = " << mPassDetaOrDphi << "\n";  
-
       // invert one of Deta or Dphi cuts - antiselection
       if ( (mDeltaEta==0) && (mDeltaPhi==0) && (mPassDetaOrDphi) ) {
 
-        //      cout << "TRUE" << "\n";
-        //      cout << "passDeltaEta " << passDeltaEta << " , " << "passDeltaPhi " << passDeltaPhi << "\n";
         if ((!passDeltaEta) || (!passDeltaPhi)) { passDetaAndDphiCuts = true; }
         else { passDetaAndDphiCuts = false; }
-
+	
       }
 
       // invert both Deta and Dphi cuts - antiselection
       else if ( (mDeltaEta==0) && (mDeltaPhi==0) && (!mPassDetaOrDphi) ) {
 
-        //      cout << "FALSE" << "\n";
-        //      cout << "passDeltaEta " << passDeltaEta << " , " << "passDeltaPhi " << passDeltaPhi << "\n";
         if ((!passDeltaEta) && (!passDeltaPhi)) { passDetaAndDphiCuts = true; }
         else { passDetaAndDphiCuts = false; }
 
@@ -179,9 +176,10 @@ namespace OneLepton{
 
       // apply as usual the Deta and Dphi cuts - selection                                         
       else {
-        //      cout << "NOTHING" << "\n";                                                         
+
         if (passDeltaEta && passDeltaPhi) { passDetaAndDphiCuts = true; }
 	else { passDetaAndDphiCuts = false; }
+
       }
 
 
@@ -203,7 +201,8 @@ namespace OneLepton{
               (mShh < 0 ? true : int(passShh) == mShh) &&
               (mConv < 0 ? true : int(passConv) == mConv) &&
               passDetaAndDphiCuts &&
-              passExtraOut
+              passExtraOut &&
+	      passMinPt
               );
 
 
@@ -236,6 +235,8 @@ namespace OneLepton{
     double mDeltaEtaBarrel, mDeltaEtaEndcap;
     double mSigmaIEtaIEtaBarrel, mSigmaIEtaIEtaEndcap;
     double mDCot, mDist;
+    double mPtMin;
+    double mD0BS;
     int mMissingHits;
     bool mSupressErrors;
     bool mCorrEEMisalig;

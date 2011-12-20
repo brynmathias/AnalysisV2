@@ -55,18 +55,39 @@ mFolderName(folderName)
         lep_Deta_ee[ieff]  = pset.Get<double>("lep_Deta_ee"+wp[ieff]);
         lep_HoE_ee[ieff]   = pset.Get<double>("lep_HoE_ee"+wp[ieff]);
     }
-    ZDat = pset.Get<std::string>("ZDat_file");
-    ZMC  = pset.Get<std::string>("ZMC_file");
-    WNew = pset.Get<std::string>("W_file");
-    doRecoil = pset.Get<bool>("do_recoil");
-  	if (doRecoil)
-        corrector = new RecoilCorrector(ZDat,ZMC,WNew,123456) ;
+    doTP = pset.Get<bool>("do_TP");
+    doRecoilNtuple = pset.Get<bool>("do_RecoilNtuple");
+    recType = pset.Get<int>("rec_Type");
+    ZDat = pset.Get<std::string>("ZDat_File");
+    ZMC  = pset.Get<std::string>("ZMC_File");
+    WNew = pset.Get<std::string>("W_File");
+    doRecoil = pset.Get<bool>("do_Recoil");
+  	if (doRecoil){
+        corrector = new RecoilCorrector(WNew);
+        corrector->addMCFile(ZMC);
+        corrector->addDataFile(ZDat);
+    }
 }
 
 
 void AsymTemplateHistos::Start(Event::Data & ev) {
+    if (doRecoilNtuple){
+	    //TString outFileName("test_" + ev.OutputFile());
+        //treeFile = TFile::Open( outFileName, "RECREATE" );
+        ev.OutputFile()->cd(); 
+        iTree = new TTree("FitRecoil","FitRecoil");
+        SetTree(iTree);
+    }
 	initDir(ev.OutputFile(), mFolderName.c_str());
 	BookHistos();
+}
+void AsymTemplateHistos::End(Event::Data & ev) {
+    // Apparently not needed. if you create a ttree in a tfile, when you close
+    // the tfile the ttree is automaticaly written...
+  	//if (doRecoilNtuple){
+    //    ev.OutputFile()->cd(); 
+    //    iTree->Write("name");
+    //}
 }
 AsymTemplateHistos::~AsymTemplateHistos() {
   	if (doRecoil)
@@ -87,10 +108,16 @@ void  AsymTemplateHistos::BookHistos() {
 
     //Template shapes for Asym vs Eta
 	for (int ih=0;ih<EtaChBins_;ih++){
-        TString sel          = "h_eta_pfMET"+etabin[ih];
-        TString antisel      = "h_eta_anti_pfMET"+etabin[ih];
+        TString sel         = "h_eta_pfMET"+etabin[ih];
+        TString antisel     = "h_eta_anti_pfMET"+etabin[ih];
         h_eta_sel[ih]       = new TH1F(sel,sel,nBins,0,100.);
         h_eta_antisel[ih]   = new TH1F(antisel,antisel,nBins,0,100.);
+        TString s_TP        = "h_TP"+etabin[ih];
+        TString s_TPS       = "h_TPS"+etabin[ih];
+        TString s_TPC       = "h_TPC"+etabin[ih];
+        h_TP[ih]            = new TH1F(s_TP,s_TP,60,60.,120.);
+        h_TPS[ih]           = new TH1F(s_TPS,s_TPS,60,60.,120.);
+        h_TPC[ih]           = new TH1F(s_TPC,s_TPC,60,60.,120.);
     }   
     //Template shapes for Asym vs Wpt
 	for (int ih=0;ih<WptChBins_;ih++){
@@ -106,6 +133,11 @@ void  AsymTemplateHistos::BookHistos() {
         h_jet_sel[ih]    = new TH1F(sel,sel,nBins,0,100.);
         h_jet_antisel[ih]= new TH1F(antisel,antisel,nBins,0,100.);	 
 	}  
+
+   h_TP_all = new TH1F("h_TP_all","TP_all",60,60.,120.);
+   h_TPS_all = new TH1F("h_TPS_all","TPS_all",60,60.,120.);
+   h_TPC_all = new TH1F("h_TPC_all","TPC_all",60,60.,120.);
+
 }
 /*
 ~~~PROCESS~~~
@@ -119,9 +151,11 @@ bool AsymTemplateHistos::Process(Event::Data & ev) {
 	int nSelVeto=0;
 	int nAntiSel=0;
 
-	std::vector<Lepton const *>::const_iterator goodLep;
-	std::vector<Lepton const *>::const_iterator antiLep;
+//	std::vector<Lepton const *>::const_iterator goodLep;
+//	std::vector<Lepton const *>::const_iterator antiLep;
 
+    std::vector<Lepton const *> goodLep;  //define Electron Container
+    std::vector<Lepton const *> antiLep;  //define Electron Container
 
     //loop over all jets and find njets
     int nJet = 0;
@@ -177,7 +211,8 @@ bool AsymTemplateHistos::Process(Event::Data & ev) {
 		if (iso && id && chargeOk && convOk){
 			if (et>lep_ET){
 					nSel++;
-					goodLep=lep;
+					//goodLep=lep;
+					goodLep.push_back(*lep);
             }
 		}
 		if (veto_iso && veto_id && veto_convOk){
@@ -189,20 +224,26 @@ bool AsymTemplateHistos::Process(Event::Data & ev) {
                                       (*lep)->GetEcalIsolation()/(*lep)->Pt(), 
                                       (*lep)->GetHcalIsolation()/(*lep)->Pt(),eta,lep_AntiWP);//WP80
 		bool anti_id = passID(0., 0., 0., ev.GetElectronHoE(i),eta,lep_AntiWP);//WP80 //only HoE
-		bool pass_dfi = passID_AS (ev.GetElectronDeltaPhiAtVtx(i), 0., eta);
+	//	bool pass_dfi = passID_AS (ev.GetElectronDeltaPhiAtVtx(i), 0., eta);
 		bool pass_dhi = passID_AS (0., ev.GetElectronDeltaEtaAtVtx(i), eta);
-    
+        bool pass_upper_dhi = fabs(ev.GetElectronDeltaEtaAtVtx(i))<0.02;
+                                    // ^ Additional cut futyan requires         
         if (et>lep_ET){
-            if (anti_convOk && anti_iso && anti_id && (!pass_dfi) && (!pass_dhi)){
+            if (anti_convOk && anti_iso && anti_id 
+            && (!pass_dhi) && pass_upper_dhi){
                 nAntiSel++;
-                antiLep=lep;
+                //antiLep=lep;
+		        antiLep.push_back(*lep);
             }
 		}
 	}
 
-    if (nSel==0&&nAntiSel==0) return false;
-    if (doRecoil){
+    if (nSel==0&&nAntiSel==0) {
+        return false;
+    }
+    if (doRecoil){//Correct recoil
         std::vector<Event::GenObject > boson;
+        int nBosons = 0;
         for (std::vector<Event::GenObject>::const_iterator  j = ev.GenParticles().begin();
 	                                                        j != ev.GenParticles().end();
                                                            ++j) { 
@@ -210,27 +251,187 @@ bool AsymTemplateHistos::Process(Event::Data & ev) {
 	            int ID = abs(j->GetID());
                 if (ID==24){//W bosons
 	                boson.push_back(*j);
+                    nBosons++;
 	            }//End if
             }//End If
         }//End Gen Loop
         //cout<<">>> met: "<<met<<endl;
-        if (boson.size()>=0){
-            if (nSel==1)
-                 corrector->Correct(met,met_phi,boson.at(0).Pt(),boson.at(0).Phi(),(*goodLep)->Pt(),(*goodLep)->Phi());
-            else if (nAntiSel==1)
-                 corrector->Correct(met,met_phi,boson.at(0).Pt(),boson.at(0).Phi(),(*antiLep)->Pt(),(*antiLep)->Phi());
+        //cout<<"nBosons = "<<nBosons<<endl;
+        if (boson.size()>0){
+            double pfU1 = 0.;
+            double pfU2 = 0.;
+            if (nSel>=1){
+                corrector->CorrectAll(met,met_phi,
+                                  boson.at(0).Pt(),boson.at(0).Phi(),
+                                  goodLep.at(0)->Pt(),goodLep.at(0)->Phi(),
+                                  pfU1,pfU2, 0.);
+            }
+            else if (nAntiSel>=1){
+                corrector->CorrectAll(met,met_phi,
+                                  boson.at(0).Pt(),boson.at(0).Phi(),
+                                  antiLep.at(0)->Pt(),antiLep.at(0)->Phi(),
+                                  pfU1,pfU2, 0.);
+            }
+        }
+        else{
+            return false;
+            cout<<"no boson"<<endl;
         }
         //cout<<"met cor: "<<met<<endl;
     }
-    if ((nSel==1)&&(nSelVeto==1)){
+
+    if (doRecoilNtuple && nSel>=1){// Fill ntuple for Recoil Fitting
+
+        TVector2 * pfMET = new TVector2(0.,0.);
+        pfMET->SetMagPhi(ev.PFMET().Pt(),ev.PFMET().Phi());
+        TVector2 * trkMET = new TVector2(0.,0.);
+        trkMET->SetMagPhi(ev.TCMET().Pt(),ev.TCMET().Phi());
+
+        if (nSel==2 && recType ==0 ){// Z data
+            //select a Z
+            TLorentzVector elec1,elec2,Z,gen;
+            double invariantMass = 0.0;
+            elec1.SetPtEtaPhiM(goodLep.at(0)->Et(),goodLep.at(0)->Eta(),goodLep.at(0)->Phi(),0.);
+            elec2.SetPtEtaPhiM(goodLep.at(1)->Et(),goodLep.at(1)->Eta(),goodLep.at(1)->Phi(),0.);
+            Z = (elec1+elec2);
+            invariantMass = Z.M();
+            if (invariantMass<120. && invariantMass>60. ) {
+                TVector2 electron1, electron2, sumLepton;
+                electron1.SetMagPhi(goodLep.at(0)->Et(),goodLep.at(0)->Phi());
+                electron2.SetMagPhi(goodLep.at(1)->Et(),goodLep.at(1)->Phi());
+                sumLepton = electron1+electron2;
+                SetTreeVariables(&Z, &Z, &sumLepton, pfMET, trkMET, w, nJet, iTree);
+                delete pfMET;
+                delete trkMET; 
+                return true;
+            }
+        }
+
+        if (nSel==2 && recType ==1 ){// Z MC
+            std::vector<Event::GenObject > boson;
+            for (std::vector<Event::GenObject>::const_iterator  j = ev.GenParticles().begin();
+                 j != ev.GenParticles().end(); ++j) { 
+                if (j->GetStatus()==3 && abs(j->GetID())==23){ //All stable Z
+                    boson.push_back(*j);
+                }
+            }
+            if (boson.size()>0){
+                TLorentzVector elec1,elec2,Z,gen;
+                double invariantMass = 0.0;
+                elec1.SetPtEtaPhiM(goodLep.at(0)->Et(),goodLep.at(0)->Eta(),goodLep.at(0)->Phi(),0.);
+                elec2.SetPtEtaPhiM(goodLep.at(1)->Et(),goodLep.at(1)->Eta(),goodLep.at(1)->Phi(),0.);
+                Z = (elec1+elec2);
+                gen.SetPtEtaPhiM(boson.at(0).Pt(),boson.at(0).Eta(),boson.at(0).Phi(),boson.at(0).M()); 
+                invariantMass = Z.M();
+                if (invariantMass<120. && invariantMass>60. ) {
+                    TVector2 electron1, electron2, sumLepton;
+                    electron1.SetMagPhi(goodLep.at(0)->Et(),goodLep.at(0)->Phi());
+                    electron2.SetMagPhi(goodLep.at(1)->Et(),goodLep.at(1)->Phi());
+                    sumLepton = electron1+electron2;
+                    SetTreeVariables(&gen, &Z, &sumLepton, pfMET, trkMET, w, nJet, iTree);
+                    delete pfMET;
+                    delete trkMET; 
+                    return true;
+                }
+            }
+        }
+
+        if (nSel==1 && recType ==2 ){// W MC
+            std::vector<Event::GenObject > boson;
+            for (std::vector<Event::GenObject>::const_iterator  j = ev.GenParticles().begin();
+                j != ev.GenParticles().end(); ++j) { 
+                if (j->GetStatus()==3 && abs(j->GetID())==24){ //All stable W
+                    boson.push_back(*j);
+                }
+            }
+            if (boson.size()>0){
+                TLorentzVector elec1,W,gen,MET;
+                elec1.SetPtEtaPhiM(goodLep.at(0)->Et(),goodLep.at(0)->Eta(),goodLep.at(0)->Phi(),0.);
+                MET.SetPtEtaPhiM(ev.PFMET().Et(),ev.PFMET().Eta(),ev.PFMET().Phi(),ev.PFMET().M());
+                W = (elec1+MET);
+                gen.SetPtEtaPhiM(boson.at(0).Pt(),boson.at(0).Eta(),boson.at(0).Phi(),boson.at(0).M()); 
+                    TVector2 electron1, electron2, sumLepton;
+                    electron1.SetMagPhi(goodLep.at(0)->Et(),goodLep.at(0)->Phi());
+                    electron2.SetMagPhi(0.0,0.0);// no second lepton in W events
+                    sumLepton = electron1+electron2;
+                    SetTreeVariables(&gen, &W, &sumLepton, pfMET, trkMET, w, nJet, iTree);
+                delete pfMET;
+                delete trkMET; 
+                return true;
+            }
+        }
+        if (nSel==1 && recType ==3 ){// W Data just for diagnosis plots, doesn't make sense otherwise
+            std::vector<Event::GenObject > boson;
+                TLorentzVector elec1,W,gen,MET;
+                elec1.SetPtEtaPhiM(goodLep.at(0)->Et(),goodLep.at(0)->Eta(),goodLep.at(0)->Phi(),0.);
+                MET.SetPtEtaPhiM(ev.PFMET().Et(),ev.PFMET().Eta(),ev.PFMET().Phi(),ev.PFMET().M());
+                W = (elec1+MET);
+                TVector2 electron1, electron2, sumLepton;
+                electron1.SetMagPhi(goodLep.at(0)->Et(),goodLep.at(0)->Phi());
+                electron2.SetMagPhi(0.0,0.0);// no second lepton in W events
+                sumLepton = electron1+electron2;
+                SetTreeVariables(&W, &W, &sumLepton, pfMET, trkMET, w, nJet, iTree);
+                delete pfMET;
+                delete trkMET; 
+                return true;
+        }
+        delete pfMET;
+        delete trkMET; 
+
+        return false;
+    }
+
+    if (doTP && nSel+nAntiSel==2){//Fill T&P studies for antiselection
+        //==2 or >=2?
+        ////cout<<"nSel="<<nSel<<endl;
+        ////cout<<"nAntiSel="<<nAntiSel<<endl;
+        //At least 1 tag (passing selection)
+        //And 1 signal probe (passing selection)
+        //or 1 control probe (passing Antiselection)
+        TLorentzVector electron1,electron2,Z;
+        double invariantMass = 0.0;
+        int ih = -1;
+        if (nSel==2){//Probe is signal
+            //cout<<"probe is signal"<<endl;
+            electron1.SetPtEtaPhiM(goodLep.at(0)->Et(),goodLep.at(0)->Eta(),goodLep.at(0)->Phi(),0.);
+            electron2.SetPtEtaPhiM(goodLep.at(1)->Et(),goodLep.at(1)->Eta(),goodLep.at(1)->Phi(),0.);
+            Z = (electron1+electron2);
+            invariantMass = Z.M();
+            ih = getEta(goodLep.at(0));	
+        }
+        else if (nSel==1&&nAntiSel==1){//Probe is control
+            //cout<<"probe is control"<<endl;
+            electron1.SetPtEtaPhiM(goodLep.at(0)->Et(),goodLep.at(0)->Eta(),goodLep.at(0)->Phi(),0.);
+            electron2.SetPtEtaPhiM(antiLep.at(0)->Et(),antiLep.at(0)->Eta(),antiLep.at(0)->Phi(),0.);
+            Z = (electron1+electron2);
+            invariantMass = Z.M();
+            ih = getEta(antiLep.at(0));	
+        }
+        else { invariantMass = 0.;}//shouldn't reach this
+        //cout<<"invMass= "<<invariantMass<<endl;
+        if (invariantMass<120. && invariantMass>60. && ih>=0) {
+            //cout<<"test2"<<endl;
+            h_TP_all->Fill(invariantMass,w);
+            h_TP[ih]->Fill(invariantMass,w);
+            if (nSel==2){//Probe is signal
+                h_TPS_all->Fill(invariantMass,w);
+                h_TPS[ih]->Fill(invariantMass,w);
+            } 
+            else if (nSel==1&&nAntiSel==1){//Probe is control
+                h_TPC_all->Fill(invariantMass,w);
+                h_TPC[ih]->Fill(invariantMass,w);
+            }
+        }
+    }
+    if ((nSel==1)&&(nSelVeto==1)){//Fill selection histograms
         double mt =  sqrt(2)*sqrt(
-                     (*goodLep)->Pt()*met
-                    -(*goodLep)->Pt()*met*cos(met_phi-(*goodLep)->Phi()
+                     (goodLep.at(0))->Pt()*met
+                    -(goodLep.at(0))->Pt()*met*cos(met_phi-(goodLep.at(0))->Phi()
         ));
-        int ih = getEta(goodLep);	
-        int iwpt = getWpt(goodLep,met,met_phi);
-        int ijet = getJet(goodLep,nJet);
-        if (fabs((*goodLep)->Eta())<1.5){  
+        int ih = getEta(goodLep.at(0));	
+        int iwpt = getWpt(goodLep.at(0),met,met_phi);
+        int ijet = getJet(goodLep.at(0),nJet);
+        if (fabs((goodLep.at(0))->Eta())<1.5){  
             h_met->Fill(met,w);
             h_mt->Fill(mt,w);
         }
@@ -239,10 +440,10 @@ bool AsymTemplateHistos::Process(Event::Data & ev) {
         if (ijet>=0) h_jet_sel[ijet]->Fill(met,w);
         return true;
     }
-    if (nAntiSel==1){
-        int ih = getEta(antiLep);	
-        int iwpt = getWpt(antiLep,met,met_phi);
-        int ijet = getJet(antiLep,nJet);
+    if (nAntiSel==1){//Fill anti-selection histograms
+        int ih = getEta(antiLep.at(0));	
+        int iwpt = getWpt(antiLep.at(0),met,met_phi);
+        int ijet = getJet(antiLep.at(0),nJet);
         if (ih>=0) h_eta_antisel[ih]->Fill(met,w);
         if (iwpt>=0) h_wpt_antisel[iwpt]->Fill(met,w);
         if (ijet>=0) h_jet_antisel[ijet]->Fill(met,w);
@@ -288,9 +489,9 @@ bool AsymTemplateHistos::fid(double eta) {
 	return  (fabs(eta)<2.4 && (  fabs(eta) < 1.4  || fabs(eta) > 1.6 ));//(  fabs(eta) < 1.4442  || fabs(eta) > 1.56 ));
 }
 
-int AsymTemplateHistos::getEta(std::vector<Lepton const *>::const_iterator lep){
-	double eta= (*lep)->Eta();
-	double charge = (*lep)->GetCharge();
+int AsymTemplateHistos::getEta(Lepton const * lep){
+	double eta= (lep)->Eta();
+	double charge = (lep)->GetCharge();
 	//double pt= (*lep)->Pt();
 	bool acc= (((fabs(eta)<1.6)&&(fabs(eta)>1.4))|| (fabs(eta)>2.4));
 	bool cha = (charge==0);
@@ -309,12 +510,12 @@ int AsymTemplateHistos::getEta(std::vector<Lepton const *>::const_iterator lep){
 	return ih;
 }
 
-int AsymTemplateHistos::getWpt(std::vector<Lepton const *>::const_iterator lep, double met, double met_phi){
-	double charge = (*lep)->GetCharge();
-	double pt= (*lep)->Pt();
+int AsymTemplateHistos::getWpt(Lepton const * lep, double met, double met_phi){
+	double charge = (lep)->GetCharge();
+	double pt= (lep)->Pt();
 	int wpt = -1;
 	for (int iwpt=0;iwpt<WptBins;iwpt++){ 
-		double measured_Wpt = sqrt(met*met+pt*pt+pt*met*cos(met_phi-(*lep)->Phi()));
+		double measured_Wpt = sqrt(met*met+pt*pt+pt*met*cos(met_phi-(lep)->Phi()));
 		if (measured_Wpt>wptbinlow[iwpt]){
 			wpt = iwpt; // note: no +1 since we do not have an inclusive bin here
 			//note : no break since these are the lower bin edges
@@ -325,8 +526,8 @@ int AsymTemplateHistos::getWpt(std::vector<Lepton const *>::const_iterator lep, 
 	return wpt;
 }
 
-int AsymTemplateHistos::getJet(std::vector<Lepton const *>::const_iterator lep,int nJet){
-	double charge = (*lep)->GetCharge();
+int AsymTemplateHistos::getJet(Lepton const * lep,int nJet){
+	double charge = (lep)->GetCharge();
 	int ijet = nJet;
 	if (nJet < 0) return -1; // no ijet bin found 
 	if (nJet > JetBins-1) return -1; //unlikely
@@ -361,3 +562,107 @@ double eta, int ieff){
 	return false;
 }
 
+void AsymTemplateHistos::SetTree(TTree *tree){
+
+	// lepton properties
+	tree->Branch("leppt", &_leppt ,"leppt/F");
+	tree->Branch("lepphi", &_lepphi ,"lepphi/F");
+
+	// boson properties
+	tree->Branch("genpt", &_genpt ,"genpt/F");
+	tree->Branch("genphi", &_genphi ,"genphi/F");
+	tree->Branch("mass", &_mass ,"mass/F");
+	tree->Branch("pt", &_pt ,"pt/F");
+	tree->Branch("y", &_y ,"y/F");
+	tree->Branch("phi", &_phi ,"phi/F");
+
+	//pfmet
+	tree->Branch("pfmet", &_pfmet ,"pfmet/F");
+	tree->Branch("pfmetphi", &_pfmetphi ,"pfmetphi/F");
+	tree->Branch("pfmt", &_pfmt ,"pfmt/F");
+	tree->Branch("pfu1", &_pfu1 ,"pfu1/F");
+	tree->Branch("pfu2", &_pfu2 ,"pfu2/F");
+
+	//track met
+	tree->Branch("trkmet", &_trkmet ,"trkmet/F");
+	tree->Branch("trkmetphi", &_trkmetphi ,"trkmetphi/F");
+	tree->Branch("trkmt", &_trkmt ,"trkmt/F");
+	tree->Branch("trku1", &_trku1 ,"trku1/F");
+	tree->Branch("trku2", &_trku2 ,"trku2/F");
+
+        tree->Branch("weight", &_weight ,"weight/F");
+	tree->Branch("njet", &_njet ,"njet/I");
+}
+
+void AsymTemplateHistos::SetTreeVariables(TLorentzVector *genBoson, TLorentzVector *recoBoson,
+                                          TVector2 *sumLepton,
+                                          TVector2 *pfMET, TVector2 *trkMET,
+                                          float wt, int nJet, TTree *tree){
+
+
+	// Transverse Recoil Vector
+    TVector2 * pfU = new TVector2(0.,0.);
+    (*pfU) -= *pfMET;
+    (*pfU) -= *sumLepton;
+
+    TVector2 * trkU = new TVector2(0.,0.);
+    (*trkU) -= *trkMET;
+    (*trkU) -= *sumLepton;
+
+	// Transverse Decomposed in to components parallel and perpendicular to
+	// boson PT
+    TVector2 qT;
+    qT.SetMagPhi(genBoson->Pt(),genBoson->Phi());
+    // I think this is correct, it doesn;t make sense with the W boson, to use the
+    // Reco since the W boson = MET+Lepton, which it equal and oposite to the
+    // Recoil = -Met-Lepton
+    //
+    // For the Z data, I use the reco Z. I think this is correct
+    // Indeed this is all correct, more detailed in Phil's Thesis.
+    float dPhi = pfU->DeltaPhi(qT);
+    //cout<<"~~~~~~~~~~~~~~~~"<<endl;
+    //cout<<"TEST: pfU  ="<<pfU->Mod()<<endl;
+    //cout<<"TEST: pfUfi="<<pfU->Phi()<<endl;
+    //cout<<"TEST: qTU  ="<<qT.Mod()<<endl;
+    //cout<<"TEST: qTfi ="<<qT.Phi()<<endl;
+    //cout<<"TEST: dphi ="<<dPhi<<endl;
+    _pfu1 = pfU->Mod()*cos(dPhi);
+    //cout<<"TEST: pfU1 ="<<_pfu1<<endl;
+    _pfu2 = pfU->Mod()*sin(dPhi);
+    //cout<<"TEST: pfU2 ="<<_pfu2<<endl;
+
+    dPhi = trkU->DeltaPhi(qT);
+    _trku1 = trkU->Mod()*cos(dPhi);
+    _trku2 = trkU->Mod()*sin(dPhi);
+
+
+	// boson properties
+	_genpt = genBoson->Pt();
+	_genphi = genBoson->Phi();
+	_mass = recoBoson->M();
+	_pt = recoBoson->Pt();
+	_y = recoBoson->Rapidity();
+	_phi = recoBoson->Phi();
+
+	// lepton properties
+	_leppt = sumLepton->Mod();
+	_lepphi = sumLepton->Phi();
+
+	//pfmet
+	_pfmet = pfMET->Mod();
+	_pfmetphi = pfMET->Phi_mpi_pi(pfMET->Phi());
+	_pfmt = sqrt(2)*sqrt(sumLepton->Mod()*pfMET->Mod() 
+            -sumLepton->Mod()*pfMET->Mod()
+            *cos(pfMET->DeltaPhi(*sumLepton)));
+
+	//track met
+	_trkmet = trkMET->Mod();
+	_trkmetphi = trkMET->Phi_mpi_pi(trkMET->Phi());
+	_trkmt = sqrt(2)*sqrt(sumLepton->Mod()*trkMET->Mod() 
+            -sumLepton->Mod()*trkMET->Mod()
+            *cos(trkMET->DeltaPhi(*sumLepton)));
+
+	_weight = wt;
+	_njet = nJet;
+    tree->Fill();
+}

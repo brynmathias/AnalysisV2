@@ -48,6 +48,13 @@ namespace OneLepton{
     tree->Branch("JetCor",JetCor,"JetCor[NJet]/D");
     tree->Branch("JetEMF",JetEMF,"JetEMF[NJet]/D");
 
+    // Jet-Raw variables
+    tree->Branch("NJetRaw",&NJetRaw,"NJetRaw/I");
+    tree->Branch("JetRawPt",JetRawPt,"JetRawPt[NJetRaw]/D");
+    tree->Branch("JetRawEta",JetRawEta,"JetRawEta[NJetRaw]/D");
+    tree->Branch("JetRawPhi",JetRawPhi,"JetRawPhi[NJetRaw]/D");
+    tree->Branch("JetRawCor",JetRawCor,"JetRawCor[NJetRaw]/D");
+
     // Muon variables 
     tree->Branch("NMuons",&NMuons,"NMuons/I");
     tree->Branch("MuonPt",MuonPt,"MuonPt[NMuons]/D");
@@ -81,6 +88,9 @@ namespace OneLepton{
     tree->Branch("ElectronEta",ElectronEta,"ElectronEta[NElectrons]/D");
     tree->Branch("ElectronPhi",ElectronPhi,"ElectronPhi[NElectrons]/D");
     tree->Branch("ElectronChrg",ElectronChrg,"ElectronChrg[NElectrons]/D");
+    tree->Branch("ElectronType",ElectronType,"ElectronType[NElectrons]/I");
+    tree->Branch("ElectrongPar",ElectrongPar,"ElectrongPar[NElectrons]/I");
+    tree->Branch("ElectronGenMother",ElectronGenMother,"ElectronGenMother[NElectrons]/I");
 
     // Jet-Electron variables
     tree->Branch("ElectronClosestPreJetDR",ElectronClosestPreJetDR,"ElectronClosestPreJetDR[NElectrons]/D");
@@ -111,6 +121,7 @@ namespace OneLepton{
     // General kinematic variables -pf-
     tree->Branch("PFMET",&PFMET,"PFMET/D");
     tree->Branch("PFMETPhi",&PFMETPhi,"PFMETPhi/D");
+    tree->Branch("PFMET_typeI",&PFMET_typeI,"PFMET_typeI/D");
 
     // General kinematic variables -hybrid-
     tree->Branch("PFMHT_h",&PFMHT_h,"PFMHT_h/D");
@@ -118,11 +129,63 @@ namespace OneLepton{
     tree->Branch("PFLP_h",&PFLP_h,"PFLP_h/D");
 
     tree->Branch("HT12",&HT12,"HT12/D");
+    tree->Branch("HT123",&HT123,"HT123/D");
+
     tree->Branch("MHT12",&MHT12,"MHT12/D");
+
+    tree->Branch("M2_sca",&M2_sca,"M2_sca/D");
     tree->Branch("MinvMax",&MinvMax,"MinvMax/D");
-    tree->Branch("M2",&M2,"M2/D");
+
     tree->Branch("M3_sca",&M3_sca,"M3_sca/D");
     tree->Branch("M3_vec",&M3_vec,"M3_vec/D");
+    tree->Branch("M3lep_sca",&M3lep_sca,"M3lep_sca/D");
+    tree->Branch("M3lep_vec",&M3lep_vec,"M3lep_vec/D");
+
+    tree->Branch("M_LepClosestJet",&M_LepClosestJet,"M_LepClosestJet/D");
+    tree->Branch("M_LepHighestJet",&M_LepHighestJet,"M_LepHighestJet/D");
+    tree->Branch("M_LepHighestJet2",&M_LepHighestJet2,"M_LepHighestJet2/D");
+
+    tree->Branch("DPhi_LepMET",&DPhi_LepMET,"DPhi_LepMET/D");
+    tree->Branch("DPhi_LepMHT",&DPhi_LepMHT,"DPhi_LepMHT/D");
+    tree->Branch("DPhi_LepJetmin",&DPhi_LepJetmin,"DPhi_LepJetmin/D");
+
+    tree->Branch("DPhi_Jet1Jet2",&DPhi_Jet1Jet2,"DPhi_Jet1Jet2/D");
+    tree->Branch("DR_Jet1Jet2",&DR_Jet1Jet2,"DR_Jet1Jet2/D");
+
+    tree->Branch("DPhi_AllJetsMin",&DPhi_AllJetsMin,"DPhi_AllJetsMin/D");
+    tree->Branch("DR_AllJetsMin",&DR_AllJetsMin,"DR_AllJetsMin/D");
+
+    // Razor Variables
+    tree->Branch("MR",&MR,"MR/D");
+    tree->Branch("MRt",&MRt,"MRt/D");
+    tree->Branch("R",&R,"R/D");
+
+
+    // Gen variables
+    tree->Branch("NPartons",&NPartons,"NPartons/I");
+    tree->Branch("PartonPt",PartonPt,"PartonPt[NPartons]/D");
+    tree->Branch("PartonEta",PartonEta,"PartonEta[NPartons]/D");
+    tree->Branch("PartonPhi",PartonPhi,"PartonPhi[NPartons]/D");
+
+    tree->Branch("NGenLeptons",&NGenLeptons,"NGenLeptons/I");
+    tree->Branch("GenLeptonPt",GenLeptonPt,"GenLeptonPt[NGenLeptons]/D");
+    tree->Branch("GenLeptonEta",GenLeptonEta,"GenLeptonEta[NGenLeptons]/D");
+    tree->Branch("GenLeptonPhi",GenLeptonPhi,"GenLeptonPhi[NGenLeptons]/D");
+    tree->Branch("GenLeptonChrg",GenLeptonChrg,"GenLeptonChrg[NGenLeptons]/D");
+
+    tree->Branch("NGenNuLeptons",&NGenNuLeptons,"NGenNuLeptons/I");
+    tree->Branch("GenNuLeptonPt",GenNuLeptonPt,"GenNuLeptonPt[NGenNuLeptons]/D");
+    tree->Branch("GenNuLeptonEta",GenNuLeptonEta,"GenNuLeptonEta[NGenNuLeptons]/D");
+    tree->Branch("GenNuLeptonPhi",GenNuLeptonPhi,"GenNuLeptonPhi[NGenNuLeptons]/D");
+    
+    tree->Branch("GenWPt",&GenWPt,"GenWPt/D");
+    tree->Branch("GenWEta",&GenWEta,"GenWEta/D");
+    tree->Branch("GenWPhi",&GenWPhi,"GenWPhi/D");
+
+    tree->Branch("DPhi_LepPtW",&DPhi_LepPtW,"DPhi_LepPtW/D");
+    tree->Branch("DPhi_LepNuLep",&DPhi_LepNuLep,"DPhi_LepNuLep/D");
+
+    tree->Branch("GenMuonFromW",&GenMuonFromW,"GenMuonFromW/I");
 
   }  
   
@@ -160,9 +223,9 @@ namespace OneLepton{
       
     // Fill Event variables 
     wgt = ev.GetEventWeight();
-    RunNumber = ev.RunNumber();     // cout << "RunNumber:   " << ev.RunNumber()   << " " << RunNumber   << "\n";
-    EventNumber = ev.EventNumber(); // cout << "EventNumber: " << ev.EventNumber() << " " << EventNumber << "\n";
-    LumiSection = ev.LumiSection(); // cout << "LumiSection: " << ev.LumiSection() << " " << LumiSection << "\n";
+    RunNumber = ev.RunNumber();      //cout << "RunNumber:   " << ev.RunNumber()   << " " << RunNumber   << "\n";
+    EventNumber = ev.EventNumber();  //cout << "EventNumber: " << ev.EventNumber() << " " << EventNumber << "\n";
+    LumiSection = ev.LumiSection();  //cout << "LumiSection: " << ev.LumiSection() << " " << LumiSection << "\n";
     NumPVs = ev.GetVertexSize();
 
     // Fill the HLT variables
@@ -282,6 +345,20 @@ namespace OneLepton{
     NJet40 = countJts40;
     NJet50 = countJts50;
     NJet60 = countJts60;
+
+
+    // Fill the Raw Jet variables
+    NJetRaw = ev.JD_Jets().size();
+    UInt_t countJtsRaw = 0;
+    for (std::vector<Event::Jet>::const_iterator irj1=ev.JD_Jets().begin(); irj1!=ev.JD_Jets().end(); ++irj1) {
+
+      JetRawPt[countJtsRaw]  = (irj1)->Pt();
+      JetRawEta[countJtsRaw] = (irj1)->Eta();
+      JetRawPhi[countJtsRaw] = (irj1)->Phi();
+      JetRawCor[countJtsRaw] = ev.GetJetCorrFactor((irj1)->GetIndex());
+    
+      countJtsRaw++;
+  } // ~end of loop over the PreJets
 
 
     // Fill the Muon variables
@@ -427,6 +504,7 @@ namespace OneLepton{
 
     PFMET    = ev.PFMET().Pt();
     PFMETPhi = ev.PFMET().Phi();
+    PFMET_typeI = ev.metP4pfTypeI()->Pt();
 
 
     // "hybrid" version of PFMHT, PFMT, PFLP
@@ -437,22 +515,36 @@ namespace OneLepton{
     																	
 
 
-    // Fill the M3 variables
+    TLorentzVector lep;
+    lep.SetPxPyPzE(theLepton_.at(0)->Px(),theLepton_.at(0)->Py(),theLepton_.at(0)->Pz(),theLepton_.at(0)->E());
+    
 
+    // ----- at least 1 jet
+    if (ev.JD_CommonJets().accepted.size()>=1) {
+
+      //      ROOT::Math::VectorUtil::DeltaPhi(*(theRECOLepton.at(0)), ev.PFMET() ) // DPhi calculation
+    } // ~ end of cheking if there are at least 2 jets in the event
+    //    else {}
+
+
+    // ----- at least 2 jets
     if (ev.JD_CommonJets().accepted.size()>=2) {
 
       TLorentzVector jeta1;  TLorentzVector jeta2;
       jeta1.SetPxPyPzE(ev.JD_CommonJets().accepted[0]->Px(),ev.JD_CommonJets().accepted[0]->Py(),ev.JD_CommonJets().accepted[0]->Pz(),ev.JD_CommonJets().accepted[0]->E());
       jeta2.SetPxPyPzE(ev.JD_CommonJets().accepted[1]->Px(),ev.JD_CommonJets().accepted[1]->Py(),ev.JD_CommonJets().accepted[1]->Pz(),ev.JD_CommonJets().accepted[1]->E());
 
+
       HT12 = jeta1.Pt()+jeta2.Pt();
       TLorentzVector tmpJet; tmpJet = jeta1 + jeta2; MHT12 = tmpJet.Pt();
-      M2 = (jeta1 + jeta2).M();
+      M2_sca = (jeta1 + jeta2).M();
+      M3lep_sca = (lep +jeta1 + jeta2).M();
 
 
-      // calculate MinvMax
-      MinvMax = -10.;
+
+      MinvMax = -999.; M3lep_vec = -999.;
       int count1j = 0; int count2j = 0;
+      TLorentzVector ja; ja.SetPxPyPzE(0.,0.,0.,0.);
       for (std::vector<Event::Jet const *>::const_iterator ij1=ev.JD_CommonJets().accepted.begin(); ij1!=ev.JD_CommonJets().accepted.end(); ij1++) {
 
         TLorentzVector jj1;
@@ -465,33 +557,34 @@ namespace OneLepton{
           count2j++;
           if (count2j>count1j) { jj2.SetPxPyPzE((*ij2)->Px(),(*ij2)->Py(),(*ij2)->Pz(),(*ij2)->E()); }
 
-
-          //      cout << ev.EventNumber() << " " << ev.JD_CommonJets().accepted.size() << " " << count1j << " " << count2j << " ";
-          //      cout << MinvMax << " " << (jj1+jj2).Pt() << "\n";
-          if ( ((jj1+jj2).M()) > MinvMax) { MinvMax = (jj1+jj2).M(); }
+	  if ( ((jj1+jj2).Pt()) > ja.Pt()) { ja.SetPxPyPzE((jj1+jj2).Px(),(jj1+jj2).Py(),(jj1+jj2).Pz(),(jj1+jj2).E()); M3lep_vec = (lep+jj1+jj2).M(); }
+	  if ( ((jj1+jj2).M()) > MinvMax) { MinvMax = (jj1+jj2).M(); }
 
         } // 2nd iteration over jets
       } // 1st iteration over jets
       
-    } // ~ end of cheking if there are at leasy 2 jets in the event
-    else { M2 = -999.; HT12 = -999.; MHT12 = -999.; MinvMax = -999.; }
+    } // ~ end of cheking if there are at least 2 jets in the event
+    else { 
+      HT12 = -999.; MHT12 = -999.; M2_sca = -999.; MinvMax = -999.;
+      M3lep_sca = -999.; M3lep_vec = -999.;
+    }
 
 
-
+    // ----- at least 3 jets
     if (ev.JD_CommonJets().accepted.size()>=3) {
 
-      // calculate M3_sca
       TLorentzVector jetb1;  TLorentzVector jetb2; TLorentzVector jetb3;
       jetb1.SetPxPyPzE(ev.JD_CommonJets().accepted[0]->Px(),ev.JD_CommonJets().accepted[0]->Py(),ev.JD_CommonJets().accepted[0]->Pz(),ev.JD_CommonJets().accepted[0]->E());
       jetb2.SetPxPyPzE(ev.JD_CommonJets().accepted[1]->Px(),ev.JD_CommonJets().accepted[1]->Py(),ev.JD_CommonJets().accepted[1]->Pz(),ev.JD_CommonJets().accepted[1]->E());
       jetb3.SetPxPyPzE(ev.JD_CommonJets().accepted[2]->Px(),ev.JD_CommonJets().accepted[2]->Py(),ev.JD_CommonJets().accepted[2]->Pz(),ev.JD_CommonJets().accepted[2]->E());
 
+
+      HT123 = jetb1.Pt()+jetb2.Pt()+jetb3.Pt();
       M3_sca = (jetb1 + jetb2 + jetb3).M();
 
 
-      // calculate M3_vec
-      TLorentzVector j; j.SetPxPyPzE(0.,0.,0.,0.);
-      M3_vec = -10.;
+      TLorentzVector jb; jb.SetPxPyPzE(0.,0.,0.,0.);
+      M3_vec = -9999.;
       int count1 = 0; int count2 = 0; int count3 = 0;
       for (std::vector<Event::Jet const *>::const_iterator ija=ev.JD_CommonJets().accepted.begin(); ija!=ev.JD_CommonJets().accepted.end(); ija++) {
 
@@ -513,14 +606,243 @@ namespace OneLepton{
 	    
             //      cout << ev.EventNumber() << " " << ev.JD_CommonJets().accepted.size() << " " << count1 << " " << count2 << " " << count3 << " ";
             //      cout << M3_vec << " " << j.Pt() << " " << (j1+j2+j3).Pt() << "\n";
-            if ( ((j1+j2+j3).Pt()) > j.Pt()) { j.SetPxPyPzE((j1+j2+j3).Px(),(j1+j2+j3).Py(),(j1+j2+j3).Pz(),(j1+j2+j3).E()); M3_vec = (j1+j2+j3).M(); }
+            if ( ((j1+j2+j3).Pt()) > jb.Pt()) { jb.SetPxPyPzE((j1+j2+j3).Px(),(j1+j2+j3).Py(),(j1+j2+j3).Pz(),(j1+j2+j3).E()); M3_vec = (j1+j2+j3).M(); }
 
           } // 3nd iteration over jets
         } // 2nd iteration over jets
       } // 1st iteration over jets
 
-    } else { M3_sca = -999.;  M3_vec = -999.; }
+    } else { 
+      HT123 = -999.;
+      M3_sca = -999.;  M3_vec = -999.;
+    }
 
+    TLorentzVector mht;
+    mht.SetPxPyPzE((ev.PFMET() + *(theLepton_.at(0))).Px(),(ev.PFMET() + *(theLepton_.at(0))).Py(),(ev.PFMET() + *(theLepton_.at(0))).Pz(),(ev.PFMET() + *(theLepton_.at(0))).E());
+
+    DPhi_LepMET = ROOT::Math::VectorUtil::DeltaPhi(lep,ev.PFMET());
+    DPhi_LepMHT = ROOT::Math::VectorUtil::DeltaPhi(lep,mht);
+
+
+    DPhi_LepJetmin = 999.; double DR_LepJet = 99999.;
+
+    UInt_t count1c = 0;
+    for (std::vector<Event::Jet const *>::const_iterator ijc=ev.JD_CommonJets().accepted.begin(); ijc!=ev.JD_CommonJets().accepted.end(); ijc++) {
+
+      TLorentzVector jc1;
+      jc1.SetPxPyPzE((*ijc)->Px(),(*ijc)->Py(),(*ijc)->Pz(),(*ijc)->E());
+
+      double tmpDPhi_LepJetmin = ROOT::Math::VectorUtil::DeltaPhi(lep,jc1);
+      if (DPhi_LepJetmin>tmpDPhi_LepJetmin) { DPhi_LepJetmin = tmpDPhi_LepJetmin; }
+
+      if (count1c==0) { M_LepHighestJet = (lep+jc1).M(); }
+      if (count1c==1) { M_LepHighestJet2 = (lep+jc1).M(); }
+
+      double tmpDR_LepJet = ROOT::Math::VectorUtil::DeltaR(lep,jc1);
+      if (DR_LepJet>tmpDR_LepJet) { M_LepClosestJet = (lep+jc1).M(); }
+
+      count1c++;
+      }
+
+
+    MR  = ev.Razor_MR();
+    MRt = ev.Razor_MRt();
+    R = ev.Razor_MRt()/ev.Razor_MR();
+
+
+
+    // Fill the GenVariables
+
+    if (genInfo_) {
+      //      cout << "--HERE--0" << "\n";
+      GenMatrixBin myGenMatrixBin(&ev);
+      
+      const Event::GenObject* genW_;
+      
+      
+      TLorentzVector genLep;
+      TLorentzVector genW;
+      TLorentzVector genNuLep;
+      
+      
+      bool lepRecoGenMatching = false;
+      UInt_t tmpGenCounter = 0;     UInt_t countGenLep = 0;
+      double tmpGenLeptonMotherIndx = -9999999.;
+
+      //      cout << "--HERE--1" << "\n";
+      if (leptonType_ == "Muons") {
+	//	cout << "--HERE--2" << "\n";
+	for ( std::vector<Event::GenObject const *>::const_iterator iGMu = myGenMatrixBin.the_GenMuon.begin();
+	      iGMu != myGenMatrixBin.the_GenMuon.end();
+	      iGMu++ ) {
+	  
+	  tmpGenCounter++;
+	  
+	  
+	  // condition 1: is there a GenLepton for the RecoLepton?
+	  double tmpDRLep = fabs(ROOT::Math::VectorUtil::DeltaR(lep,**iGMu));
+	  if (tmpDRLep>0.3) { continue; }
+	  lepRecoGenMatching = true;
+	  
+	  tmpGenLeptonMotherIndx = (*iGMu)->GetMother();
+
+	  
+	  GenLeptonPt[countGenLep]  = myGenMatrixBin.the_GenMuon.at(tmpGenCounter-1)->Pt();
+	  GenLeptonEta[countGenLep] = myGenMatrixBin.the_GenMuon.at(tmpGenCounter-1)->Eta();
+	  GenLeptonPhi[countGenLep] = myGenMatrixBin.the_GenMuon.at(tmpGenCounter-1)->Phi();
+	  if (((*iGMu)->GetID())>0) { GenLeptonChrg[countGenLep] = -1.; } else { GenLeptonChrg[countGenLep] = 1.; }
+	  
+	  genLep.SetPxPyPzE(
+			    myGenMatrixBin.the_GenMuon.at(tmpGenCounter-1)->Px(),
+			    myGenMatrixBin.the_GenMuon.at(tmpGenCounter-1)->Py(),
+			    myGenMatrixBin.the_GenMuon.at(tmpGenCounter-1)->Pz(),
+			    myGenMatrixBin.the_GenMuon.at(tmpGenCounter-1)->E()
+			    );
+	  
+	  countGenLep++;
+	} // ~end of looping over the GenMuons
+	NGenLeptons = countGenLep;
+	//	cout << "--HERE--3" << "\n";
+      } else {
+	//	cout << "--HERE--4" << "\n";
+	for ( std::vector<Event::GenObject const *>::const_iterator iGEl = myGenMatrixBin.the_GenEli.begin();
+	      iGEl != myGenMatrixBin.the_GenEli.end();
+	      iGEl++ ) {
+
+	  tmpGenCounter++;
+	  
+	  
+	  // condition 1: is there a GenLepton for the RecoLepton?
+	  double tmpDRLep = fabs(ROOT::Math::VectorUtil::DeltaR(lep,**iGEl));
+	  if (tmpDRLep>0.3) { continue; }
+	  lepRecoGenMatching = true;
+	  
+	  tmpGenLeptonMotherIndx = (*iGEl)->GetMother();
+	  //      GenMuonMother = (*iGEl)->GetMotherID();
+	  
+	  GenLeptonPt[countGenLep]  = myGenMatrixBin.the_GenEli.at(tmpGenCounter-1)->Pt();
+	  GenLeptonEta[countGenLep] = myGenMatrixBin.the_GenEli.at(tmpGenCounter-1)->Eta();
+	  GenLeptonPhi[countGenLep] = myGenMatrixBin.the_GenEli.at(tmpGenCounter-1)->Phi();
+	  if (((*iGEl)->GetID())>0) { GenLeptonChrg[countGenLep] = -1.; } else { GenLeptonChrg[countGenLep] = 1.; }
+	  
+	  genLep.SetPxPyPzE(
+			    myGenMatrixBin.the_GenEli.at(tmpGenCounter-1)->Px(),
+			    myGenMatrixBin.the_GenEli.at(tmpGenCounter-1)->Py(),
+			    myGenMatrixBin.the_GenEli.at(tmpGenCounter-1)->Pz(),
+			    myGenMatrixBin.the_GenEli.at(tmpGenCounter-1)->E()
+			    );
+	  
+	  countGenLep++;
+	} // ~end of looping over the GenMuons
+	NGenLeptons = countGenLep;
+	//	cout << "--HERE--5" << "\n";
+      }
+      //      cout << "--HERE--6" << "\n";
+      // condition 2: is the GenMuon from a W?
+      bool lepIsFromW = false;
+      //      cout << "--HERE--7" << "\n";
+      for ( std::vector<Event::GenObject const *>::const_iterator iGW = myGenMatrixBin.the_GenW.begin();
+	    iGW != myGenMatrixBin.the_GenW.end();
+	    iGW++ ) {
+	
+	if ( ((*iGW)->GetIndex()) == (tmpGenLeptonMotherIndx) ) { genW_ = (*iGW);  lepIsFromW = true; }
+	
+      } // ~end of looping over the GenWs
+      
+      //      cout << "--HERE--8" << "\n";
+      
+      if ( (lepRecoGenMatching) && (lepIsFromW) ) {
+	//	cout << "--HERE--9" << "\n";
+	GenMuonFromW = 1;
+	
+	UInt_t tmpGenNuCounter = 0;     UInt_t countGenNuLep = 0;
+
+	if (leptonType_ == "Muons") {
+	  //	  cout << "--HERE--10" << "\n";
+	  for ( std::vector<Event::GenObject const *>::const_iterator iGNuMu = myGenMatrixBin.the_GenMuonNu.begin();
+		iGNuMu != myGenMatrixBin.the_GenMuonNu.end();
+		iGNuMu++ ) {
+	    
+	    if ((*iGNuMu)->GetMother() != tmpGenLeptonMotherIndx) { continue; }
+	    
+	    tmpGenNuCounter++;
+	    
+	    GenNuLeptonPt[countGenNuLep]  = myGenMatrixBin.the_GenMuonNu.at(tmpGenNuCounter-1)->Pt();
+	    GenNuLeptonEta[countGenNuLep] = myGenMatrixBin.the_GenMuonNu.at(tmpGenNuCounter-1)->Eta();
+	    GenNuLeptonPhi[countGenNuLep] = myGenMatrixBin.the_GenMuonNu.at(tmpGenNuCounter-1)->Phi();
+	    
+	    genNuLep.SetPxPyPzE(
+				myGenMatrixBin.the_GenMuonNu.at(tmpGenNuCounter-1)->Px(),
+				myGenMatrixBin.the_GenMuonNu.at(tmpGenNuCounter-1)->Py(),
+				myGenMatrixBin.the_GenMuonNu.at(tmpGenNuCounter-1)->Pz(),
+				myGenMatrixBin.the_GenMuonNu.at(tmpGenNuCounter-1)->E()
+				);
+	    
+	    countGenNuLep++;
+	  } // ~end of looping over the GenNuMuons
+	  NGenNuLeptons = countGenNuLep;	
+	  //	  cout << "--HERE--11" << "\n";
+	} else {
+	  //	  cout << "--HERE--12" << "\n";
+	  for ( std::vector<Event::GenObject const *>::const_iterator iGNuMu = myGenMatrixBin.the_GenEliNu.begin();
+                iGNuMu != myGenMatrixBin.the_GenEliNu.end();
+                iGNuMu++ ) {
+
+            if ((*iGNuMu)->GetMother() != tmpGenLeptonMotherIndx) { continue; }
+	    
+            tmpGenNuCounter++;
+	    
+            GenNuLeptonPt[countGenNuLep]  = myGenMatrixBin.the_GenEliNu.at(tmpGenNuCounter-1)->Pt();
+            GenNuLeptonEta[countGenNuLep] = myGenMatrixBin.the_GenEliNu.at(tmpGenNuCounter-1)->Eta();
+            GenNuLeptonPhi[countGenNuLep] = myGenMatrixBin.the_GenEliNu.at(tmpGenNuCounter-1)->Phi();
+
+            genNuLep.SetPxPyPzE(
+                                myGenMatrixBin.the_GenEliNu.at(tmpGenNuCounter-1)->Px(),
+                                myGenMatrixBin.the_GenEliNu.at(tmpGenNuCounter-1)->Py(),
+                                myGenMatrixBin.the_GenEliNu.at(tmpGenNuCounter-1)->Pz(),
+                                myGenMatrixBin.the_GenEliNu.at(tmpGenNuCounter-1)->E()
+                                );
+
+            countGenNuLep++;
+          } // ~end of looping over the GenNuElectrons
+          NGenNuLeptons = countGenNuLep;
+	  //	  cout << "--HERE--13" << "\n";
+	}
+	//	cout << "--HERE--14" << "\n";
+      } 
+
+      else { GenMuonFromW = 0; }
+      //      cout << "--HERE--16" << "\n";
+
+      // Fill the Partons --
+      NPartons = myGenMatrixBin.the_GenJets.size();
+      UInt_t countPartons = 0;
+      for ( std::vector<Event::GenObject const *>::const_iterator iGJ = myGenMatrixBin.the_GenJets.begin();
+	    iGJ != myGenMatrixBin.the_GenJets.end();
+	    iGJ++ ) {
+	
+	PartonPt[countPartons]  = myGenMatrixBin.the_GenJets.at(countPartons)->Pt();
+	PartonEta[countPartons] = myGenMatrixBin.the_GenJets.at(countPartons)->Eta();
+	PartonPhi[countPartons] = myGenMatrixBin.the_GenJets.at(countPartons)->Phi();
+	
+	countPartons++;
+      } // ~end of looping over the Partons
+      
+      //      cout << "--HERE--17" << "\n";
+      
+      
+      genW = TLVConvert(genW_);
+     
+      GenWPt  = genW.Pt();
+      GenWEta = genW.Eta();
+      GenWPhi = genW.Phi();
+
+      DPhi_LepNuLep = ROOT::Math::VectorUtil::DeltaPhi(genLep,genW);
+      DPhi_LepPtW   = ROOT::Math::VectorUtil::DeltaPhi(genLep,genNuLep);
+      //      cout << "--HERE--18" << "\n";
+    }
+    //    cout << "--HERE--19" << "\n";
+    //    if ( (lepRecoGenMatching) && (lepIsFromW) ) { tree->Fill(); }
 
     tree->Fill();
 

@@ -16,7 +16,7 @@ def metScaleSystematic(a, shiftdir, lepton):
     """
     pfmet_jecunc = PSet(
         #the location of the JECUncertainty txt file
-        jecuncfile = "/vols/cms01/as1604/SUSY-svn/WPol2/scripts/GR_R_38X_V15_AK5PF_Uncertainty.txt",
+        jecuncfile = "GR_R_42_V19_AK5PF_Uncertainty.txt",
         jecuncfileresidual = "/vols/cms01/mstoye/SVNtestKill/SUSYv2/onelepton/scripts/GR_R_42_V19_AK5PF_L2L3Residual.txt",
         #either Muon or Electron
         lepton = lepton,
@@ -32,7 +32,7 @@ def metScaleSystematic(a, shiftdir, lepton):
     return pfmetjecunc
 
 def metScaleSystematicJets(a, shiftdir):
-    myJESCorrectionsFromFile = one.JESCorrectionsFromFile(shiftdir,"/vols/cms01/as1604/SUSY-svn/WPol2/scripts/GR_R_38X_V15_AK5PF_Uncertainty.txt")
+    myJESCorrectionsFromFile = one.JESCorrectionsFromFile(shiftdir,"GR_R_42_V19_AK5PF_Uncertainty.txt")
     a.AddJetFilter("PreCC",myJESCorrectionsFromFile)
     return myJESCorrectionsFromFile
 
@@ -73,16 +73,33 @@ def reweightVertices(a):
     """
     vertex_reweight = fwk.VertexReweighting(
         PSet(
+
+        ## Spring11 Re-Weighting factors
+        #        VertexWeights = [0.000, 0.114, 0.403, 0.866, 1.302, 1.351,
+        #                         1.314, 1.279, 1.063, 1.027, 0.977, 1.015,
+        #                         1.080, 0.945, 1.127, 1.420, 1.253, 1.207,
+        #                         4.618, 1.358, 0.000, 0.000, 0.000, 0.000,
+        #                         0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
+        #                         0.000, 0.000, 0.000, 0.000, 0.000]
+        
         ## Pre-LP Vertex Re-Weigting factors
         #        VertexWeights = [0.0, 0.169, 0.511, 1.276, 1.688, 1.564,
         #        1.715, 1.135, 1.042, 0.476, 0.469, 0.385,
         #        0.359, 0.37, 0.502, 0.489, 0.0, 0.0, 0.0, 0.0]
         
-        ## Full sample Re-Weightiung factors
-        VertexWeights = [0.000, 0.074, 0.424, 0.869, 1.295, 1.477,
-                         1.457, 1.377, 1.376, 1.206, 1.075, 1.304,
-                         1.061, 0.896, 0.968, 0.926, 0.752, 1.223,
-                         0.000, 0.000]
+        ##  Re-Weightiung factors
+        #        VertexWeights = [0.000, 0.074, 0.424, 0.869, 1.295, 1.477,
+        #                         1.457, 1.377, 1.376, 1.206, 1.075, 1.304,
+        #                         1.061, 0.896, 0.968, 0.926, 0.752, 1.223,
+        #                         0.000, 0.000]
+
+        ## Full 2011 data Re-Weightiung factors
+        VertexWeights = [0.000, 0.057, 0.358, 0.723, 1.041, 1.232,
+                         1.337, 1.356, 1.365, 1.410, 1.483, 1.541,
+                         1.643, 1.876, 1.872, 2.241, 2.860, 2.806,
+                         3.186, 5.018, 2.389, 4.460, 0.000, 0.000,
+                         0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
+                         0.000, 0.000, 0.000, 0.000, 0.000]
         ).ps()
         )
     a.AddWeightFilter("Weight", vertex_reweight)
@@ -91,7 +108,7 @@ def reweightVertices(a):
 def polarisationReweighting(a, lepton, shift = 0.15, debug=False,plus_only=False):
     """ Apply polarisation reweighting factors for MC """
     ps = loadPolarisationReweightingFactors(
-        "/vols/cms03/as1604/ra4/onelepton/scripts/systTools/reweightFactors.txt"
+        "systTools/reweightFactors.txt"
         )
     ps._quiet_set("Lepton", lepton)
     ps._quiet_set("fLmfRShift", shift)
@@ -155,8 +172,6 @@ def muonSystematics(a, mode):
         filters += [polarisationReweighting(a, "Muon", 0.05, False,True)]
     elif mode == "poldown_plus":
         filters += [polarisationReweighting(a, "Muon", -0.05, False,True)]
-
-
     elif mode == "ttpolup":
         filters += [ttpolarisationReweighting(a, "Muon", 0.05)]
     elif mode == "ttpoldown":

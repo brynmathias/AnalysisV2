@@ -16,17 +16,19 @@ from onelepton.filters import electronSystematics
 from icf.utils import autoname
 
 # here a few flags to ensure you correct all instances
-mode = "MC311"
+#mode = "MC311"
 #mode = "MC38"
 #mode = "data39"
 #mode = "data311"
 #mode = "data4X"
 #mode = "data42X_PromptReco"
 #mode = "data42X_ReReco"
+mode = "data42X_Run2011Full"
 #mode = "MC42ttw_Z41"
 #mode  = "MC42QCD"
 #mode  = "MCGrid"
 #mode = "SMS"
+#mode = "data42X_Sync"
 ##AUTOMATE_MODE##
 
 isSM = not (mode in ["MCGrid", "SMS"])
@@ -55,17 +57,44 @@ run_qcd_antiselection = False
 # You can attach more cuts by doing tree.TAttach(cut, my_cut)
 sig, tree, extra = setupElectronPreselection(MET, "Electrons", mode, qcd_antiselection = run_qcd_antiselection)
 
-# Define bins to use
+# Define ST bins to use
 bins = [0,150, 250, 350, 450]
+
+# Define HT bins to use
+#HTbins = [500,999999999999999999]
+HTbins = [500, 750, 1000, 999999999999999999]
+#HTbins = []
+BinnedHTPTCut = []
+backtuple_list = []
+sig_plots = []
+nolp_plots = []
+bkg_plots = []
+
+
+for idxHT, sbinHT in enumerate(HTbins):
+    if len(HTbins)-1==idxHT:
+        BinnedHTPTCut += [OP_HTPTCut(HTbins[idxHT],-1.)]
+    else:
+        BinnedHTPTCut += [OP_HTPTCut(HTbins[idxHT],HTbins[idxHT+1])]
+        
+        tree.TAttach(AtLeast3Jts,BinnedHTPTCut[idxHT])
+        backtuple_list  += [setupSignalBins(tree, BinnedHTPTCut[idxHT], bins, HTbins[idxHT],
+                                            mode = "lp", sig_cut_value = 0.15,
+                                            bg_cut_value = 0.3, SM = isSM)]
+        nameAdd = "secondD%d" % HTbins[idxHT]
+        sig_plots +=  [makePlots(tree, backtuple_list[idxHT][0], OP_ANplots, "ANplots%d_LP"+nameAdd)]
+        nolp_plots += [makePlots(tree,backtuple_list[idxHT][2] , OP_ANplots, "ANplots%d_NOLP"+nameAdd)]
+        bkg_plots +=  [makePlots(tree,backtuple_list[idxHT][1] , OP_ANplots, "ANplots%d_ConLP"+nameAdd)]
+        
 # This function sets up the signal and control bins requested and attaches them
 # to the tree (after the 3 jet cut).
 # Setup bins in LP
-lp_sig_bins, lp_bkg_bins, nolp_bins, lp_ops = setupSignalBins(tree, AtLeast3Jts, bins,
-                                                   mode = "lp", sig_cut_value = 0.15,
-                                                   bg_cut_value = 0.3, SM=isSM)
+#lp_sig_bins, lp_bkg_bins, nolp_bins, lp_ops = setupSignalBins(tree, AtLeast3Jts, bins,
+#                                                   mode = "lp", sig_cut_value = 0.15,
+#                                                   bg_cut_value = 0.3, SM=isSM)
 # Setup bins in pfmet/leppt
-pfmet_sig_bins, pfmet_bkg_bins, _, pfmet_ops = setupSignalBins(tree, AtLeast3Jts, bins,
-                                                               mode = "pfmet", SM = isSM)
+#pfmet_sig_bins, pfmet_bkg_bins, _, pfmet_ops = setupSignalBins(tree, AtLeast3Jts, bins,
+#                                                               mode = "pfmet", SM = isSM)
 
 # Define some plots
 #sig_plots = makePlots(tree, lp_sig_bins, LeptonicPlots, "MuonStandardPlots_%d", mu_plots_cfg.ps())
@@ -80,9 +109,9 @@ pfmet_sig_bins, pfmet_bkg_bins, _, pfmet_ops = setupSignalBins(tree, AtLeast3Jts
 #bkg_plots = makePlots(tree, lp_bkg_bins, OP_ANplots,"MuonANPlots_%d_BKG")
 #nolp_plots = makePlots(tree, nolp_bins, OP_ANplots, "MuonANPlots_%d_NOLP")
 
-bkg_plots =  makePlots(tree, lp_bkg_bins, OP_ANplots, "ANplots%d_BKG")
-sig_plots =  makePlots(tree, lp_sig_bins, OP_ANplots, "ANplots%d_LP")
-nolp_plots = makePlots(tree, nolp_bins, OP_ANplots, "ANplots%d_NOLP")
+#bkg_plots =  makePlots(tree, lp_bkg_bins, OP_ANplots, "ANplots%d_BKG")
+#sig_plots =  makePlots(tree, lp_sig_bins, OP_ANplots, "ANplots%d_LP")
+#nolp_plots = makePlots(tree, nolp_bins, OP_ANplots, "ANplots%d_NOLP")
 
 # Systematics
 syst_filters = electronSystematics(sig, systematics)
@@ -90,24 +119,26 @@ syst_filters = electronSystematics(sig, systematics)
 # List of samples available. Please add here.
 samplesList = {
     "MCGrid"             : samplesBSMgrids42,
-    "MC311"              : samplesMC42X, #samplesMC_QCD, #samplesMC_Approval, #samplesMC42X, #samplesMC_WandTT,
-    "MC38"               : samplesMC,
+    "MC311"              : samplesMC_WandTT, #samplesMC_QCD, #samplesMC_Approval, #samplesMC42X, #samplesMC_WandTT,
     "data39"             : samplesData,
     "data311"            : samplesData311,
     "data4X"             : samplesData311,
     "data42X_PromptReco" : samplesData42X_ElHad_PR_V15_03_14_residual,#samplesData42X_ElHad_PromptReco,
     "data42X_ReReco"     : samplesData42X_ElHad_RR_V15_03_14_residual,#samplesData42X_ElHad_ReReco,
+    "data42X_Run2011Full": samplesData42X_ElHad_V15_03_19_residual,
+    #    "data42X_Sync"       : samplesData42X_ElHad_May10Sync,
     "MC42ttw_Z41"        : samplesMC42Wtt,
     "MC42QCD"            : samplesMC42QCD,
     "SMS"                : samplesSMS
+
     }
 
 if systematics: syst_str = "_"+systematics
 else: syst_str = ""
 
-if mode.startswith("data"): output_dir = autoname("./resultsData")
-else: output_dir = autoname("./resultsMC%(syst_mode)s", syst_mode=syst_str)
-#output_dir = "/vols/cms02/gouskos/onelepton/20111026_El_Sel"
+#if mode.startswith("data"): output_dir = autoname("./resultsData")
+#else: output_dir = autoname("./resultsMC%(syst_mode)s", syst_mode=syst_str)
+output_dir = "/vols/cms02/gouskos/onelepton/20111201_TMP2"
 #output_dir = "./data"
 
 # Run the analysis!

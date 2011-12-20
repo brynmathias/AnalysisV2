@@ -17,9 +17,6 @@
 #include <string>
 #include <math.h>
 
-#include "Math/GenVector/PtEtaPhiM4D.h"
-typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiM4D<double> > PolarLV;
-
 /*
   - pthat
   - mht cleaning
@@ -339,7 +336,7 @@ bool Dalitz::Process( Event::Data& ev ) {
 // 	  ht_reco += (*ireco)->Et();
 // 	  mht_reco -= **ireco;
 //  	}
-	LorentzV tmp(**ireco);// PolarLV((*ireco)->Et(),(*ireco)->Eta(),(*ireco)->Phi(),0.) );
+	LorentzV tmp(**ireco);
 
 // 	std::cout << " orig: " 
 // 		  << (*ireco)->E() << " "
