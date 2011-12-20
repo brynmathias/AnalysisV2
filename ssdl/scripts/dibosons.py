@@ -1,6 +1,6 @@
 from icf.core import PSet
 
-path="root://gfe02.grid.hep.ph.ic.ac.uk/store/user/volper//ICF/automated/"
+path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/volper//ICF/automated/"
 
 WW=PSet(
     Name="WW",

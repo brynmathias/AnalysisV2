@@ -1,6 +1,6 @@
 from icf.core import PSet
 
-path="root://gfe02.grid.hep.ph.ic.ac.uk/store/user/rnandi//ICF/automated/2011_01_28_19_48_04//"
+path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/rnandi//ICF/automated/2011_01_28_19_48_04//"
 path="/vols/cms02/rnandi/JetMETTau/"
 
 JetMETTau_Run2010A_Nov4ReReco_v1=PSet(

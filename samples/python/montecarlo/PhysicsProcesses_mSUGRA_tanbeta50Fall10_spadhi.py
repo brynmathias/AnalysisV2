@@ -1,6 +1,6 @@
 from icf.core import PSet
 
-path="root://gfe02.grid.hep.ph.ic.ac.uk/store/user/trommers//ICF/automated/2011_01_08_18_18_16/"
+path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/trommers//ICF/automated/2011_01_08_18_18_16/"
 
 PhysicsProcesses_mSUGRA_tanbeta50Fall10_spadhi=PSet(
     Name="PhysicsProcesses_mSUGRA_tanbeta50Fall10_spadhi",

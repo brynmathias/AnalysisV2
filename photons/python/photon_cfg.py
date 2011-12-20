@@ -24,7 +24,7 @@ OneFile = PSet(
   Name="OneFile",
   Format=("ICF",3),
   File=[
-	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/rnandi/ICF/automated/2011_08_02_17_39_36/SusyCAF_Tree_272_1_lFZ.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/rnandi/ICF/automated/2011_08_02_17_39_36/SusyCAF_Tree_272_1_lFZ.root" ,
   ],
   Weight=1.
 )

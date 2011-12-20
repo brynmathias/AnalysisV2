@@ -1,6 +1,6 @@
 from icf.core import PSet
 
-#path="root://gfe02.grid.hep.ph.ic.ac.uk/store/user/rnandi//ICF/automated/2011_02_04_13_51_20//"
+#path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/rnandi//ICF/automated/2011_02_04_13_51_20//"
 path="/vols/cms03/rnandi/MultiJet/"
 
 MultiJet_Run2010B_Nov4ReReco_v1=PSet(

@@ -18,7 +18,7 @@ from icf.config import defaultConfig
 from copy import deepcopy
 from icf.JetCorrections import *
 
-path="dcap://gfe02.grid.hep.ph.ic.ac.uk:22128//pnfs/hep.ph.ic.ac.uk/data/cms/store/user/bainbrid/ICF/automated/"
+path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bainbrid/ICF/automated/"
 name=".Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/"
 
 LM0=PSet(
