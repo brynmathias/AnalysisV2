@@ -598,7 +598,7 @@ def MakeDataTree(Threshold):
       out.append(htCutup)
       out.append(htCutlow)
       cutTreeData.TAttach(trigCut,htCutlow)
-      cutTreeData.TAttach(htBinlow,htCutup)
+      cutTreeData.TAttach(htCutlow,htCutup)
       out.append(makePlotOp(OP = ("WeeklyUpdatePlots",genericPSet), cutTree = cutTreeData, cut = htCutup, label = "%d_%d"%(htBin[0],htBin[1])))
 
 
