@@ -571,7 +571,7 @@ def MakeDataTree(Threshold):
   # cutTreeData.TAttach(evFilter,skim)
   # cutTreeData.TAttach(evFilter,eventDump)
   cutTreeData.TAttach(json#,DataTrigger)
-  cutTreeData.TAttach(json,json_ouput)
+  # cutTreeData.TAttach(json,json_ouput)
   # cutTreeData.Attach(DataTrigger)
   # cutTreeData.TAttach(DataTrigger
   # ,MHTCut)
