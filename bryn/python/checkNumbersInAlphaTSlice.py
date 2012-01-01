@@ -597,8 +597,8 @@ def MakeDataTree(Threshold):
       htCutup = RECO_CommonHTLessThanCut(htBin[1])
       out.append(htCutup)
       out.append(htCutlow)
-      trigCut.TAttach(trigCut,htBinlow)
-      trigCut.TAttach(htBinlow,htCutup)
+      cutTreeData.TAttach(trigCut,htBinlow)
+      cutTreeData.TAttach(htBinlow,htCutup)
       out.append(makePlotOp(OP = ("WeeklyUpdatePlots",genericPSet), cutTree = cutTreeData, cut = htCutup, label = "%d_%d"%(htBin[0],htBin[1])))
 
 
