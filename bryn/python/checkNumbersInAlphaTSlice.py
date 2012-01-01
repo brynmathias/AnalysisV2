@@ -708,6 +708,6 @@ conf_ak5_caloData.Common = deepcopy(default_common)
 anal_ak5_caloData=Analysis("AK5Calo")
 addCutFlowData(anal_ak5_caloData)
 from data.Run2011.HT_Run2011AB import *
-outdir = "../results_"+strftime("%d_%b_%H")+"/Data/%d"%JetBin
+outdir = "../results_"+strftime("%d_%b_%H")+"/DataCheckStatsInLowATbins/%d"%JetBin
 ensure_dir(outdir)
 anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])#HT_Run2011A])
