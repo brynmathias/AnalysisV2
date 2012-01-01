@@ -600,7 +600,8 @@ def MakeDataTree(Threshold):
       cutTreeData.TAttach(trigCut,htCutlow)
       cutTreeData.TAttach(htCutlow,htCutup)
       out.append(makePlotOp(OP = ("WeeklyUpdatePlots",genericPSet), cutTree = cutTreeData, cut = htCutup, label = "%d_%d"%(htBin[0],htBin[1])))
-
+  return (cutTreeData,secondJetET,out)
+  
 
 #Second MC!
 
