@@ -1,0 +1,9 @@
+from icf.core import PSet
+
+QCD_Pt_470to600_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute jetCollections_ak5calo_ak5pf hbheNoiseFilterDefaultIsoReq_1=PSet(
+	Name="QCD_Pt_470to600_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute jetCollections_ak5calo_ak5pf hbheNoiseFilterDefaultIsoReq_1",
+	Format=("ICF",3),
+	File=[
+	],
+	CrossSection=0,
+)

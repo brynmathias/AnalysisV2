@@ -1,0 +1,52 @@
+%latex file template for object tables
+\documentclass[a4paper,11pt]{article}
+\usepackage[a4paper]{geometry}
+%\documentclass[hyperref={pdfpagelabels=false},9pt,table]{beamer}
+%\let\Tiny=\tiny
+%\usepackage{beamerthemesplit}
+%\beamertemplatenavigationsymbolsempty
+%\usetheme{Madrid}
+%
+\usepackage{verbatim}
+\usepackage{amsmath}
+%\renewcommand\mathfamilydefault{\rmdefault} % ditto for math 
+\usepackage{cancel}
+\usepackage{rotating}
+\usepackage{dcolumn}
+\usepackage{xcolor}
+
+
+%tables
+\renewcommand{\arraystretch}{1.2}
+\newcolumntype{.}{D{.}{.}{2}}
+\newcommand{\gev}{\, \textrm{GeV}}
+\newcommand{\MHT}{\cancel{H}_{T}}
+\newcommand{\MET}{\cancel{E}_{T}}
+\newcommand{\code}[1]{\textcolor[rgb]{0,.8,0}{\texttt{#1}}}
+
+\begin{document}
+
+%\title[Cut flow]{Cut flow}
+%\author{SUSY Team}
+%\institute{ICF}
+
+\begin{sidewaystable}[t]
+\caption{
+CAPTION
+%Observed and expected number of dijet events after each
+%selection cut for data and background samples (QCD, \znunu\, W+jets, \ttbar).
+%      Note that the Standard Model total also includes very small contributions from
+%         $\gamma+$jet and \zj samples.
+}
+  \label{tab:diyields}
+  \begin{center}
+  \footnotesize
+TABLECONTENTS
+%  \begin{tabular}{|l|ccccccc|}
+%  \hline
+%  \hline
+%  \end{tabular}
+  \end{center}
+\end{sidewaystable}
+
+\end{document}

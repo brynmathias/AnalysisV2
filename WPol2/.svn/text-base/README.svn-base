@@ -1,0 +1,7 @@
+This is a re-organized version of the code in the WPol module.
+
+The code in the WPol directory should be replaced by this one, after having been tagged, as soon as an accurate validation had taken place.
+
+BE CAREFUL !!!
+The name of this module is WPol (even if the directory's name is different) because this is written in many parts of the code that it's not good to change just for validation.
+So be sure to NOT compile the production copy of the WPol otherwise you don't know which module the python is importing and using.

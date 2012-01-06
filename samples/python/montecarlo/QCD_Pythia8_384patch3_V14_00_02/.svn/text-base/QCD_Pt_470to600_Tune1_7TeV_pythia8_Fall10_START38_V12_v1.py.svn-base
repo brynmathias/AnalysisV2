@@ -1,0 +1,38 @@
+from icf.core import PSet
+
+QCD_Pt_470to600_Tune1_7TeV_pythia8_Fall10_START38_V12_v1=PSet(
+	Name="QCD_Pt_470to600_Tune1_7TeV_pythia8_Fall10_START38_V12_v1",
+	Format=("ICF",2),
+	File=[
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_10_1_VPY.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_11_2_FfX.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_12_1_WdN.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_13_2_mXH.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_14_3_h7B.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_15_3_QKi.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_16_2_ctV.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_17_2_h5K.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_18_2_Ei9.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_19_1_rIH.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_1_1_NfK.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_20_1_BYO.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_21_1_pRd.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_22_1_uRO.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_23_1_p66.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_24_1_cDr.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_25_2_gLs.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_26_1_TP6.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_27_3_mP6.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_28_1_VOW.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_2_1_u8X.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_3_1_Z6Z.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_4_1_EIY.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_5_2_2cA.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_6_2_quR.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_7_1_Z6G.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_8_1_R87.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2010_10_06_02_22_48//QCD_Pt_470to600_Tune1_7TeV_pythia8.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_9_1_NRh.root" ,
+	],
+    #taken from https://twiki.cern.ch/twiki/bin/view/CMS/ProductionFall2010#PYTHIA8
+	CrossSection=74.16,
+)

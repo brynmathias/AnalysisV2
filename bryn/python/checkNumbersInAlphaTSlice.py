@@ -688,7 +688,7 @@ vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 PreScaleWeights      = PreScaleReweighting(datatriggerps.ps())
 
-JetBin = (375./375.)*100.
+JetBin = (275./375.)*100.
 cutTree,blah,l = MakeDataTree(JetBin)
 
 

@@ -1,0 +1,13 @@
+include ../config.inc
+include ../Makefile_Release.inc
+
+MODULE=SSDL
+
+INCDIR+=-I$(ROOTSYS_INC) \
+	-I$(PYTHON_INC) \
+	-I ../framework/include
+CXXFLAGS+= $(shell $(ROOTSYS_BIN)/root-config --cflags)
+LINK_SEARCH+= -L$(ROOTSYS_LIB) -L$(SUSY_WORKING_SW_DIR)/lib
+LIBS+= $(shell $(ROOTSYS_BIN)/root-config --cflags --libs) \
+       $(BOOST_PYTHON_LIB) \
+       $(PYTHON_LIB) -lMathCore -lMathMore -lFrameworkSUSY

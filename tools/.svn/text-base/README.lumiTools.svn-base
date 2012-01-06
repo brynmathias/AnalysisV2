@@ -1,0 +1,34 @@
+lumiTools
+-----------------------------------------------------
+
+There are three scripts. They accept a number of command line
+flags. To see them run with --help.
+
+./runLumiTree.py PSET_FILE.py
+This will run over the lumiTree for psets in the given PSET_FILE. It
+will present the list of psets in the file. Enter a number to choose
+one. A JSON file with the same name as the PSet will be output. The
+run/ls ranges in here will reflect the CRAB efficiency of the PSet.
+
+./fetchLumi.py [ -o LUMI_INFO_JSON_FILE] JSON_FILE 
+This should be run with the most complete JSON we have (i.e. DCS
+ONLY). It checks out CMSSW with the lumiCalc script and fetches
+recorded/delivered lumi per run/ls for all run/ls in the input JSON
+file. This is then stored into the LUMI_INFO_JSON_FILE (by default
+x.json -> x.lumiinfo.json). This avoids us having to use the dog slow
+lumiCalc script for every single dataset. It works fine at IC.
+                                                                                                                                                                      
+ 
+./calcLumi.py JSON_FILE LUMI_INFO_JSON_FILE
+This scripts takes a JSON input file, and the complete luminosity dump
+from the fetchLumi script and calculates the total recorded/delivered
+luminosity.  So for instance use with the output of runLumiTree.py to
+calculate the luminosity in a given pset. The script will warn you if
+it cant find lumi info for a given run/ls (meaning you need to rerun
+fetchLumi with a more recent JSON).
+                                                                                                                                                                       
+So the procedure would be something like: 
+1) ./fetchLumi.py DCS_ONLY.json (only needs to be performed
+periodically i.e. with new data)
+2) ./runLumiTree.py ../samples/python/data/blah.py 
+3) ./calcLumit.py DCS_ONLY.lumiinfo.json PSET_NAME.json

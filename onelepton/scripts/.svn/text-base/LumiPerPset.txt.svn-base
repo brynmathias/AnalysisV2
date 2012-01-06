@@ -1,0 +1,19 @@
+## SingleMuon PSets
+
+- SingleMu_Run2011A_May10ReReco_v1.py  = 181.4 pb-1
+- SingleMu_Run2011A_PromptReco_v4.py   =  65.5 pb-1
+- SingleMu_Run2011A_PromptReco_v4_b.py = 107.2 pb-1
+- SingleMu_Run2011A_PromptReco_v4_c.py =  75.5 pb-1
+                       PromptReco Lumi = 248.2 pb-1
+                            Total Lumi = 429.6 pb-1
+
+
+
+## MuHad PSets
+
+- MuHad_Run2011A_May10ReReco_v1.py  = 201.5 pb-1
+- MuHad_Run2011A_PromptReco_v4.py   =  70.8 pb-1
+- MuHad_Run2011A_PromptReco_v4_b.py = 101.2 pb-1
+- MuHad_Run2011A_PromptReco_v4_c.py =  74.8 pb-1
+                    PromptReco Lumi = 246.8 pb-1
+                         Total Lumi = 448.3 pb-1

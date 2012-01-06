@@ -1,0 +1,16 @@
+#Trigger for SameSign Dileptons
+#199 HT300_MHT100
+#198 HT500
+#11 Single jet 180
+#21 DiJet Ave 130
+#30 MET50
+#44 IsoEle15_L1I
+#82 IsoMu9
+#122 LooseIsoTai_MET30_L1M
+#33 MET35_HT350
+#SSTriggerPaths 30
+## XTrigger
+#SSTriggerPaths 44 82 122
+#20 DiJet Ave 70
+#10 single jet 110 
+SSTriggerPaths 10

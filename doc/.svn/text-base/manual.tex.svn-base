@@ -1,0 +1,179 @@
+% Created 2009-12-14 Mon 20:02
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{hyperref}
+
+
+\title{manual}
+\author{Alex Sparrow}
+\date{14 December 2009}
+
+\begin{document}
+
+\maketitle
+
+\setcounter{tocdepth}{3}
+\tableofcontents
+\vspace*{1cm}
+
+\section{SUSYNTUPLA v2 User's Guide}
+\label{sec-1}
+
+\subsection{Setup}
+\label{sec-1.1}
+
+\subsubsection{Installation and Configuration}
+\label{sec-1.1.1}
+
+     Once you have extracted the source code to a folder of your choice, open
+     the file setup.(c)sh in a text editor. Change the value of the variable,
+     SUSY\_WORKING\_SW\_DIR to the absolute path of the folder containing the
+     SUSYNTUPLA code. It should look something like this:
+
+\begin{verbatim}
+     setenv SUSY_WORKING_SW_DIR $HOME/susy_code
+
+\end{verbatim}
+
+
+
+     You may also alter the other variables to change the version of ROOT you
+     are using or the Python path. If you are running on LXPLUS, these should
+     already be correctly set. If you are running on your own machine, you may
+     need to change the value of MY\_ROOTSYS.
+
+     Finally, open the file config.inc. If you are running on LXPLUS, these
+     values should be set correctly. If you are running on your own machine, you
+     may need to change them. This will depend on how ROOT is installed on your
+     machine. For Ubuntu, I have:
+
+\begin{verbatim}
+     ROOTSYS_INC=/usr/include/root
+     ROOTSYS_LIB=/usr/lib
+     ROOTSYS_BIN=/usr/bin
+     PYTHON_INC=/usr/include/python2.6
+     PYTHON_LIB=-lpython2.6
+     BOOST_PYTHON_LIB=-lboost_python-mt
+
+\end{verbatim}
+
+
+
+     For LXPLUS, it should be:
+
+\begin{verbatim}
+     ROOTSYS_INC=$(ROOTSYS)/include
+     ROOTSYS_LIB=$(ROOTSYS)/lib
+     ROOTSYS_BIN=$(ROOTSYS)/bin
+     PYTHON_INC=/usr/include/python2.3
+     PYTHON_LIB=-lpython2.3
+     BOOST_PYTHON_LIB=-lboost_python-mt
+
+\end{verbatim}
+
+
+
+     Now, everything should be configured correctly. Simply source the file
+     setup.(c)sh and your environment will be setup.
+
+\subsubsection{Compiling}
+\label{sec-1.1.2}
+
+    The code structure for V2 of the code has changed. Common aspects of the
+    code are in the directory framework/. These are compiled into a shared
+    library which libFrameworkSUSY.so which can then be linked against your own
+    analysis code. All code specific to a given analysis should reside in a
+    separate folder within the SUSY code structure. For instance the single
+    lepton analysis would reside in the folder onelepton. Each analysis' code is
+    built into a separate shared library which will be stored in the lib/ folder
+    in the root of the codebase. Each module has two makefiles Debug and
+    Release. Most of the time, the Debug file should be used so that the
+    resulting library can be debugged.
+
+    In order to build the onelepton module, you must first build the core
+    framework by changing in to the framework directory and typing:
+
+
+\begin{verbatim}
+    make -f Debug
+
+\end{verbatim}
+
+
+
+    This compiles the core framework code. This should only be needed when the
+    core code has been changed. NOTE: You do not need to make clean. To compile
+    the onelepton code itself, change to the onelepton directory and type the
+    same command.
+
+\subsection{The Code}
+\label{sec-1.2}
+
+\subsubsection{The Python.cc file}
+\label{sec-1.2.1}
+
+    This file is used to expose the operations defined in your shared library so
+    that they can be accessed from a Python script. The magic that connects C++
+    to Python is done by the BOOST Python library so you should look at \href{http://www.boost.org/doc/libs/1_41_0/libs/python/doc/index.html}{the manual} for proper documentation.
+
+    The essential element of this file is the class\_ directive. This has the
+    following syntax:
+
+\begin{verbatim}
+    class_<ClassName,bases<BaseClassName>("PythonName",init<ArgType1,ArgType2...>());
+
+\end{verbatim}
+
+
+
+    This tells Python that the C++ class ClassName should be exposed as the
+    Python class PythonName with a constructor that takes ArgType1,
+    ArgType2\ldots{} as arguments. It also tells Python that the class ClassName
+    inherits from BaseClassName. For the purposes of simply exposing an
+    operation to Python, this should be enough. So to expose the NumComMuons
+    operation we do the following:
+
+\begin{verbatim}
+    class_<Operation::NumComMuons, bases<Operation::_Base> >("OP_NumComMuons",
+                                                           init<const std::string &,
+                                                           UInt_t>());
+
+\end{verbatim}
+
+
+
+    This tells Python to register the class NumComMuons in the Operation
+    namespace as Python class OP\_NumComMuons. The constructor will take a
+    reference to a string and an unsinged integer. Also, the operation will inherit
+    from the Operation::\_Base class.
+
+    Once you have done this, simply rebuild the module and the class will be
+    available from Python.
+
+
+\subsection{Frequently Asked Questions}
+\label{sec-1.3}
+
+\subsubsection{I get weird Symbol Not Found errors}
+\label{sec-1.3.1}
+
+    These look a lot more confusing than they actually are. They occur because
+    when the code is built as a shared library it will not complain about not
+    being able to find bits of your code (since they may be in another shared
+    library).
+
+    To decipher them, use the c++filt command to untangle the problematic symbol
+    name.
+
+\begin{verbatim}
+    c++filt <symbol_name>
+
+\end{verbatim}
+
+
+    This will tell you where the problem is in your code.
+
+\end{document}

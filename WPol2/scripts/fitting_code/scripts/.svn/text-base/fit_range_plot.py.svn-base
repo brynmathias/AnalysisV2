@@ -1,0 +1,120 @@
+#!/usr/bin/env python
+import ROOT as r
+
+def make_legend(syst, total):
+    leg = r.TLegend(0.75, 0.85, 0.95, 0.98)
+    leg.AddEntry(syst, "Systematic Error", "L")
+    leg.AddEntry(total, "Total Error", "L")
+    return leg
+
+rf = r.TFile("./Plots/systematicsOthers.root")
+r.gROOT.SetStyle("Plain")
+
+c = r.TCanvas("brun")
+h = rf.Get("f0_plus")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0, 0.5)
+h.Draw("box")
+c.SaveAs("Plots/f0_value_plus.pdf")
+
+c = r.TCanvas("brun")
+h = rf.Get("fLfR_plus")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0.2, 0.4)
+h.Draw("box")
+c.SaveAs("Plots/fLfR_value_plus.pdf")
+
+c = r.TCanvas("brun")
+h = rf.Get("f0_minus")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0, 0.5)
+h.Draw("box")
+c.SaveAs("Plots/f0_value_minus.pdf")
+
+c = r.TCanvas("brun")
+h = rf.Get("fLfR_minus")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0.2, 0.4)
+h.Draw("box")
+c.SaveAs("Plots/fLfR_value_minus.pdf")
+
+c = r.TCanvas("brun")
+h = rf.Get("f0_plus_err")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0, 0.2)
+h.Draw("box")
+c.SaveAs("Plots/f0_staterr_plus.pdf")
+
+c = r.TCanvas("brun")
+h = rf.Get("fLfR_plus_err")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0., 0.1)
+h.Draw("box")
+c.SaveAs("Plots/fLfR_staterr_plus.pdf")
+
+c = r.TCanvas("brun")
+h = rf.Get("f0_minus_err")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0, 0.2)
+h.Draw("box")
+c.SaveAs("Plots/f0_staterr_minus.pdf")
+
+c = r.TCanvas("brun")
+h = rf.Get("fLfR_minus_err")
+h.GetXaxis().SetRangeUser(0, 40)
+h.GetYaxis().SetRangeUser(0., 0.1)
+h.Draw("box")
+c.SaveAs("Plots/fLfR_staterr_minus.pdf")
+
+
+# Plot f0 plus
+c = r.TCanvas("test")
+g2 = rf.Get("g_err_plus_f0_syst")
+g1 = rf.Get("g_err_plus_f0_total")
+g1.GetYaxis().SetTitle("Percentage Error")
+g1.GetXaxis().SetTitle("Fit Range")
+g1.Draw("AP")
+g1.SetLineColor(r.kRed)
+g2.Draw("P")
+leg = make_legend(g2, g1)
+leg.Draw()
+c.SaveAs("Plots/f0_error_fitrange_plus.pdf")
+
+# Plot (fL-fR) plus
+c = r.TCanvas("test")
+g2 = rf.Get("g_err_plus_fLfR_syst")
+g1 = rf.Get("g_err_plus_fLfR_total")
+g1.GetYaxis().SetTitle("Percentage Error")
+g1.GetXaxis().SetTitle("Fit Range")
+g1.Draw("AP")
+g1.SetLineColor(r.kRed)
+g2.Draw("P")
+leg = make_legend(g2, g1)
+leg.Draw()
+c.SaveAs("Plots/fLfR_error_fitrange_plus.pdf")
+
+# Plot f0 minus
+c = r.TCanvas("test")
+g2 = rf.Get("g_err_minus_f0_syst")
+g1 = rf.Get("g_err_minus_f0_total")
+g1.GetYaxis().SetTitle("Percentage Error")
+g1.GetXaxis().SetTitle("Fit Range")
+g1.Draw("AP")
+g1.SetLineColor(r.kRed)
+g2.Draw("P")
+leg = make_legend(g2, g1)
+leg.Draw()
+c.SaveAs("Plots/f0_error_fitrange_minus.pdf")
+
+# Plot (fL-fR) minus
+c = r.TCanvas("test")
+g2 = rf.Get("g_err_minus_fLfR_syst")
+g1 = rf.Get("g_err_minus_fLfR_total")
+g1.GetYaxis().SetTitle("Percentage Error")
+g1.GetXaxis().SetTitle("Fit Range")
+g1.Draw("AP")
+g1.SetLineColor(r.kRed)
+g2.Draw("P")
+leg = make_legend(g2, g1)
+leg.Draw()
+c.SaveAs("Plots/fLfR_error_fitrange_minus.pdf")

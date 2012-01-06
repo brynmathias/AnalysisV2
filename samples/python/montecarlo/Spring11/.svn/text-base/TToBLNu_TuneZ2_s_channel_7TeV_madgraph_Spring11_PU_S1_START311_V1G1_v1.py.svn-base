@@ -1,0 +1,35 @@
+from icf.core import PSet
+
+TToBLNu_TuneZ2_s_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1=PSet(
+  Name="TToBLNu_TuneZ2_s_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1",
+  Format=("ICF",3),
+  File=[
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_10_1_3Qc.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_11_1_1AI.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_12_1_6mY.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_13_1_VNv.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_14_1_AwB.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_15_1_OVM.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_16_1_fX5.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_17_1_H2C.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_18_1_hv0.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_19_1_glt.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_1_1_eNC.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_20_1_nXY.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_21_1_QEb.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_22_1_SxA.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_23_1_s7Z.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_24_1_evI.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_25_1_iEK.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_2_1_4dL.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_3_1_LLQ.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_4_1_alu.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_5_1_muV.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_6_1_eIn.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_7_1_905.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_8_1_qo4.root" ,
+  "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning//ICF/automated/2011_05_21_17_41_53//SusyCAF_Tree_9_1_7Bi.root" ,
+  ],
+  CrossSection=4.6,
+  Events = 494967
+)
