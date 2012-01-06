@@ -22,7 +22,6 @@ AK5*
 *.pdf
 *.o
 *.d
-.svn
 *.pyc
 *.cxx
 *.so

@@ -1,0 +1,151 @@
+================================================
+|             SUSY ntupla macro                |
+================================================
+Output from run over dataset: SD_EG_SKMD
+Found in: /vols/cms02/bm409/EG_AllDataSkim_skim.root
+
+-------------------------------
+Configuration
+-------------------------------
+Common.ApplyXCleaning = 0
+Common.Electrons.ApplyID = 0
+Common.Electrons.CombIsoCut = 0.1
+Common.Electrons.EtaCut = 2.4
+Common.Electrons.PtCut = 5
+Common.Electrons.TightID = 1
+Common.Electrons.TrkIsoCut = -1
+Common.Jets.ApplyID = 1
+Common.Jets.EtCut = 20
+Common.Jets.EtaCut = 5
+Common.Jets.TightID = 0
+Common.Muons.ApplyID = 1
+Common.Muons.CombIsoCut = 0.1
+Common.Muons.EtaCut = 2.1
+Common.Muons.PtCut = 15
+Common.Muons.TightID = 0
+Common.Muons.TrkIsoCut = -1
+Common.Photons.AllIsoCut = 0.2
+Common.Photons.EcalIsoCut = 99999
+Common.Photons.EtCut = 25
+Common.Photons.EtaCut = 2.5
+Common.Photons.HcalIsoCut = 99999
+Common.Photons.IDReq = 3
+Common.Photons.TrkIsoCut = 9
+Common.Taus.ElecClean = 0
+Common.Taus.JetClean = 0
+Common.Taus.MuonClean = 0
+Gen.Electrons.EtaCut = -1
+Gen.Electrons.PtCut = -1
+Gen.Muons.EtaCut = 999
+Gen.Muons.PtCut = -1
+NT7.GenMatch.ElecPzLTReqForMatch = 998
+NT7.GenMatch.JetEtaLTReq = 100
+NT7.GenMatch.MuonPzLTReqForMatch = 998
+NT7.JetCorrType = MC
+NT7.Smear.IsJetSmeared = 0
+NT7.Smear.SmearJetFactor = 0
+NT7.Smear.SmearJetNonGaussNorm = 0
+NT7.Smear.SmearJetRespFuncFileName = ./Response.root
+NT7.Smear.SmearJetType = pT
+NT7.Xclean.ElecCcAssocElecReq = 0
+NT7.Xclean.JetCcAssocJetReq = 0
+NT7.Xclean.MuonCcAssocMuonReq = 0
+NT7.Xclean.PhotCcAssocPhotReq = 0
+Ntuple.Electrons.LooseID = EIDLoose
+Ntuple.Electrons.Prefix = electron
+Ntuple.Electrons.Suffix = Pat
+Ntuple.Electrons.TightID = EIDTight
+Ntuple.Jets.Prefix = ak5Jet
+Ntuple.Jets.Suffix = Pat
+Ntuple.Muons.LooseID = IsGlobalMuon
+Ntuple.Muons.Prefix = muon
+Ntuple.Muons.Suffix = Pat
+Ntuple.Muons.TightID = IDGlobalMuonPromptTight
+Ntuple.Photons.Prefix = photon
+Ntuple.Photons.Suffix = Pat
+Ntuple.Taus.Prefix = tau
+Ntuple.Taus.Suffix = Pat
+Ntuple.Weight = User
+XCleaning.ElectronJet = 0
+XCleaning.Electrons.CombIsoCut = 10
+XCleaning.Electrons.EtaCut = 2.5
+XCleaning.Electrons.PtCut = 5
+XCleaning.Electrons.TrkIsoCut = 10
+XCleaning.Jets.EtCut = 10
+XCleaning.Jets.EtaCut = 2.5
+XCleaning.MuonJet = 0
+XCleaning.Muons.CombIsoCut = 10
+XCleaning.Muons.EtaCut = 2.5
+XCleaning.Muons.PtCut = 5
+XCleaning.Muons.TrkIsoCut = 10
+XCleaning.PhotonJet = 0
+XCleaning.Photons.AllIsoCut = 99999
+XCleaning.Photons.EtCut = 10
+XCleaning.Photons.EtaCut = 5
+XCleaning.Photons.IDReq = 0
+XCleaning.Photons.TrkIsoCut = 99999
+XCleaning.ResolveConflicts = 0
+XCleaning.Verbose = 0
+-------------------------------
+Dataset Configuration:
+-------------------------------
+CrossSection = 1
+File = /vols/cms02/bm409/EG_AllDataSkim_skim.root
+FirstEntry = 0
+LastEntry = 0
+LogFile = eTrees/eWPol_Control_p15_SD_EG_SKMD.log
+Name = SD_EG_SKMD
+NtupleFormat = ICF
+NtupleVersion = 2
+OutputFile = eTrees/eWPol_Control_p15_SD_EG_SKMD.root
+Reweight = -1
+Weight = 1
+-------------------------------
+
+Weighting:
+Event weights will be set to constant value: 1
+
+-------------------------------
+ Common Object Filters
+-------------------------------
+[Jet:PreCC] Custom DR(e-jet) Cut > 0.3
+[Electron:PreCC] Custom EleID 
+
+-------------------------------
+
+
+------------------------------------
+Initial tree status
+------------------------------------
+Tree name: p15
+TriggerBit HLT_Photon15_L1R passed [T=0, F=0]
+T:
+ Check if an event failed noise filtering criteria[T=0, F=0]
+ T:
+  NumComElectrons Operation (num unsigned int >= 1)[T=0, F=0]
+  T:
+   NumComMuons Operation (num unsigned int = 0)[T=0, F=0]
+   T:
+    Electron basic tree : eTree_PreMHT[T=0, F=0]
+Dataset info recorded in: eTrees/eWPol_Control_p15_SD_EG_SKMD.log
+
+Total events processed by all operations: 1.00558e+06
+---------------------------------------------------------------
+-------------------------------------------------------------
+
+Total events passing all straight-chain operations: 1.00558e+06
+
+
+------------------------------------
+Tree status
+------------------------------------
+Tree name: p15
+TriggerBit HLT_Photon15_L1R passed [T=244911, F=760670]
+T:
+ Check if an event failed noise filtering criteria[T=244657, F=254]
+ T:
+  NumComElectrons Operation (num unsigned int >= 1)[T=3774, F=240883]
+  T:
+   NumComMuons Operation (num unsigned int = 0)[T=3774, F=0]
+   T:
+    Electron basic tree : eTree_PreMHT[T=3774, F=0]

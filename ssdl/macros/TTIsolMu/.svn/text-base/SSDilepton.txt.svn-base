@@ -1,0 +1,55 @@
+#============================================
+# Configuration file for CMS SUSY susyntupla
+#============================================
+# See Alex Tapper's ControlCard class for
+# more info.
+
+# Pre-configured electron options
+ElectronGenElectronPzLTReqForMatch 998.0
+ElectronCcAssocElectronRequired 0
+
+
+
+# Pre-configured muon options
+MuonGenMuonPzLTReqForMatch 998.0
+MuonCcAssocMuonRequired 0
+
+
+
+# Pre-configured jet options
+JetGenJetEtaLTReqForMatch 100.0
+JetCcAssocJetRequired 1
+JetCorrectionsRequired 1
+
+# Common jet options
+CommonJetEtCut_GeV 10.0
+CommonJetFemCut 0.9
+CommonJetEtaCut 5.0
+
+
+#MUON SELECTION
+CommonMuonEtCut_GeV 5.
+CommonMuonEtaCut 2.1
+CommonMuonCombIsolationCut 9990.1
+LowptMuonIsolation 1
+CommonMuonCombIsoLowPt 9995.
+
+#ELECTRON SELECTION
+CommonElectronCombIsolationCut 9990.1
+LowptElectronIsolation 1
+CommonElectronCombIsoLowPt 9993.0
+CommonElectronEtCut_GeV 5.
+CommonElectronEtaCut 2.5
+
+
+# LEPTON CLEANING
+ElectronMuonCleaning 1
+TauElectronCleaning 1
+TauJetCleaning 1
+TauMuonCleaning 1
+SSHTCut 350
+SSMHTCut 50
+
+
+
+

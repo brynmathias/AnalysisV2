@@ -293,7 +293,7 @@ testFile = PSet(
 Name = "TestFile",
 Format = ("ICF",3),
 Weight = 1.0,
-File = ["dcap://gfe02.grid.hep.ph.ic.ac.uk:22128//pnfsstore/user/arlogb//ICF/automated/2011_04_19_23_17_45///SusyCAF_Tree_10_1_izY.root"]
+File = ["root://xrootd.grid.hep.ph.ic.ac.uk//user/arlogb//ICF/automated/2011_04_19_23_17_45///SusyCAF_Tree_10_1_izY.root"]
 )
 
 # Triggersamples =[LM0,LM1,LM2,LM3,LM4]

@@ -1,0 +1,32 @@
+from icf.core import PSet
+
+W3Jets_ptW_0to100_TuneZ2_7TeV_alpgen_tauola_Fall10_START38_V12_v1=PSet(
+	Name="W3Jets_ptW_0to100_TuneZ2_7TeV_alpgen_tauola_Fall10_START38_V12_v1",
+	Format=("ICF",2),
+	File=[
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_10_1_9Tl.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_11_1_QUK.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_12_1_JMu.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_13_1_rwW.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_14_1_FUE.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_15_1_tcT.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_16_1_WsB.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_17_1_A5c.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_18_1_76u.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_19_1_SvS.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_1_1_4BS.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_20_1_4vJ.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_21_1_RNL.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_22_1_Z8o.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_23_1_Fts.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_2_1_c89.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_3_1_kHl.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_4_1_agQ.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_5_1_mIW.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_6_1_eaj.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_7_1_ukB.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_8_1_1Pr.root" ,
+	"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/gouskos//ICF/automated/2011_01_27_15_56_52//SusyCAF_Tree_9_1_UI3.root" ,
+	],
+	CrossSection=208.7,
+)

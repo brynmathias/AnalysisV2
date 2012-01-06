@@ -1,0 +1,29 @@
+import setupSUSY
+from icf.core import PSet
+xclean=PSet(
+    MuonJet=True,
+    ElectronJet=True,
+    PhotonJet=False,
+    Verbose=False,
+    Muons=PSet(
+        PtCut=2.,
+        EtaCut=5.,
+        TrkIsoCut=5.,
+        CombIsoCut=0.1
+        ),
+    Electrons=PSet(
+        PtCut=2.,
+        EtaCut=5.,
+        TrkIsoCut=3.,
+        CombIsoCut=0.1
+        ),
+    Jets=PSet(
+        EtCut=10.,
+        EtaCut=5.
+        ),
+    Photons=PSet(
+        EtCut=0.0,
+        EtaCut=1000.0,
+        IDReq=3
+        )
+)

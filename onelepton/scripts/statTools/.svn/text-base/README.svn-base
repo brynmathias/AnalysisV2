@@ -1,0 +1,61 @@
+Optimisation tools 
+----------------------------------- 
+
+The file predict.C contains the main logic of predicting background
+and calculating errors. This can be steered via a python (recommended)
+or Cint script. The file run.py is an example of a python script to do
+it.
+
+./run.py
+
+Limit tool
+--------------------------------------
+The limit code is in the statTools directory as you say. I'm afraid
+during the stress it became quite messy and complicated. The most
+important files are:
+
+root_svn.sh - source this first to get the needed version of ROOT
+
+runLimit.py - this is the main script for launching jobs
+
+e.g.  runLimit.py -s -l clsviatoys -p4
+
+will read the ROOT files output by the analysis code and launch batch
+jobs (CLS limits, 4 susy grid points per job). It creates output
+directories for each job inside a __limit__<timestamp> directory. In
+each of these subdirectories, the job.json file tells you the parameters
+that went into the fit. The results.json tells you the returned limits
+once the jobs is complete.
+
+Once the batch jobs have completed,
+> ./runLimit.py -m __limit__... -o mylimit.pkl
+
+will merge all the results.json files together (each containing a
+different part of SUSY parameter space) into the file mylimit.pkl. You
+can then produce plots from this file by editing and running
+plotLimit.py.
+
+To run a single SUSY point locally for testing purposes:
+
+> ./runLimit.py -r -l clsviatoys -N1
+
+likelihood.py
+this contains the RooFit implementation of the likelihood
+PDF. For the statistics aspect, this is the most important file.
+
+config.py
+This contains all the steering variables I use. The most important is
+switching between the expected and observed limits, using real data vs
+mc pseudodata and setting the systematics included. You can also edit
+the names of the ROOT files to read in here.
+
+utils.py, limit_utils.py and runInverter.py
+These are various support functions for evaluating the systematics and
+running the CLs method.
+
+To get an idea of the statistical procedure, I think its most useful to
+look into the files likelihood.py and limit_utils.py. These contains
+almost all of the code related directly to the limit. The other files
+are mostly for reading in data and dealing with batch jobs (which is
+unfortunately necessary due to how long the CLS method takes).
+

@@ -209,7 +209,7 @@ lm1=PSet(
     Events=100000,
     Format=("ICF",2),
     File= [
-    "dcap://gfe02.grid.hep.ph.ic.ac.uk:22128//pnfs/hep.ph.ic.ac.uk/data/cms/store/user/bainbrid/ICF/automated/2010_07_12_17_52_54/LM1.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_1_1.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bainbrid/ICF/automated/2010_07_12_17_52_54/LM1.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_1_1.root",
     ],
     CrossSection=4.888,
     FirstEntry = 50,
@@ -220,7 +220,7 @@ data=PSet(
     Name="Data",
     Format=("ICF",3),
     File= [
-    "dcap://gfe02.grid.hep.ph.ic.ac.uk:22128//pnfs/hep.ph.ic.ac.uk/data/cms/store/user/georgia//ICF/automated/2011_04_09_18_07_10///SusyCAF_Tree_100_1_OjA.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/georgia//ICF/automated/2011_04_09_18_07_10///SusyCAF_Tree_100_1_OjA.root" ,
     #"/vols/cms02/bainbrid/qcd/data/HT_Run2011A_PromptReco_v1.root",
     ],
     Weight=1.,
