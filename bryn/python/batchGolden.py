@@ -635,7 +635,7 @@ def MakeMCTree(Threshold):
   cutTreeMC.TAttach(DeadEcalCutMC,MHT_METCut)
 
   cutTreeMC.TAttach(MHT_METCut,btag)
-  out.append(AddBinedHist(cutTree = cutTreeData,
+  out.append(AddBinedHist(cutTree = cutTreeMC,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
             htBins = HTBins,lab ="btag_") )
   out.append(AddBinedHist(cutTree = cutTreeMC,
