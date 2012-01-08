@@ -237,7 +237,7 @@ def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],TriggerDict = 
         triggerps = PSet(Verbose = False,
         UsePreScaledTriggers = False,
         Triggers = [])
-        triggerps.Triggers = Trigger["%d%s"%(lower, "_%d"%upper if upper else "")]
+        triggerps.Triggers = TriggerDict["%d%s"%(lower, "_%d"%upper if upper else "")]
         Trigger = OP_MultiTrigger( triggerps.ps() )
         out.append(triggerps)
         out.append(Trigger)
