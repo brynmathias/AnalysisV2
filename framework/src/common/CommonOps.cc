@@ -199,10 +199,13 @@ namespace Operation {
     UInt_t nBtags = 0;
     bool NumCommonBtagJets::Process(Event::Data & ev){
       for(unsigned int i=0; i<ev.JD_CommonJets().accepted.size(); i++) {
+        std::cout << "we are on jet " << i << " the btag discriminator is " << ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), 4) << std::endl
        if(ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), 4) > mCut) {
          nBtags++;
          //if we make it into here, the jet has passed the b-tag requirement
+         
        }
+       std::cout<< "Number of btags so far = " << nBtags << std::endl;
       }
       return (*mComparison)(nBtags,mNumber);
     }
