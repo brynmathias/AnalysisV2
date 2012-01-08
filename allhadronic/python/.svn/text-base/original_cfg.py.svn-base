@@ -28,10 +28,12 @@ UseMeffOption = False
 
 Summer11Option = True
 
-output_dir = pwd + "/results/v80"
+output_dir = pwd + "/results/v13/"
 
-FilterOption = 0
+FilterOption = -1
 OffsetOption = 0.
+
+AlternativeTriggersOption = True
 
 DataOption = False
 if ( DatasetOption == 0 or DatasetOption == 1 or DatasetOption == 10 ) :
@@ -41,15 +43,15 @@ JsonOption = False
 if ( DatasetOption == 1 ) :
     JsonOption = True
         
-#JsonFileOption = "/allhadronic/python/allhadronic/ReProcessing_PromptJson_Merged_1fb_new.txt"
+#JsonFileOption = "/allhadronic/python/allhadronic/ReProcessing_PromptJson_Merged_1fb.txt"
 #JsonFileOption = "/hadronic/python/hadronic/ReProcessing_PromptJson_Merged.txt"
 JsonFileOption = "/hadronic/python/hadronic/2011GoldenJson.json"
 
 NoQcdOption = False
-#if ( DatasetOption == 2 or DatasetOption == 3 ) :
-#    NoQcdOption = True
+if ( DatasetOption == 2 or DatasetOption == 3 ) :
+    NoQcdOption = True
 
-VetoesOption = "AllVetoes"
+VetoesOption = "NoOddMuon"
 AddMuonOption = False
 if ( UseGenJetsOption == True ) :
     VetoesOption = "NoVetoes"
@@ -96,7 +98,6 @@ if ( False and DataOption == False ) :
 TriggerEpochsOption = [0.]
 SignalTriggersOption = [""]
 MonitorTriggersOption = [""]
-MonitorRefTriggersOption = [""]
 
 if ( False and DataOption == False ) :
     
@@ -104,59 +105,93 @@ if ( False and DataOption == False ) :
 
 if ( DataOption == True ) :
 
-    SignalTriggersOption = [
-        "HLT_HT250_AlphaT0p55_v1",
-        "HLT_HT250_AlphaT0p55_v2",
-        "HLT_HT250_AlphaT0p53_v2",
-        "HLT_HT250_AlphaT0p53_v3",
-        "HLT_HT250_AlphaT0p53_v4",
-        "HLT_HT250_AlphaT0p53_v5",
-        "HLT_HT250_AlphaT0p55_v2",
-        "HLT_HT250_AlphaT0p58_v3",
-        "HLT_HT250_AlphaT0p60_v3",
-        ""
-        ]
+    if ( AlternativeTriggersOption == False ) :
 
-    MonitorTriggersOption = [
-        "HLT_HT250_v2","HLT_HT250_v3","HLT_HT250_v4","HLT_HT250_v5","HLT_HT250_v6","HLT_HT250_v7","HLT_HT250_v8","HLT_HT250_v11","",#275
-        "HLT_HT300_v3","HLT_HT300_v4","HLT_HT300_v5","HLT_HT300_v6","HLT_HT300_v7","HLT_HT300_v8","HLT_HT300_v9","HLT_HT300_v12","",#325
-        "HLT_HT350_v2","HLT_HT350_v3","HLT_HT350_v4","HLT_HT350_v5","HLT_HT350_v6","HLT_HT350_v7","HLT_HT350_v8","HLT_HT350_v11","",#375
-        "HLT_HT450_v2","HLT_HT450_v3","HLT_HT450_v4","HLT_HT450_v5","HLT_HT450_v6","HLT_HT450_v7","HLT_HT450_v8","HLT_HT450_v11","",#475
-        "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5","HLT_HT550_v6","HLT_HT550_v7","HLT_HT550_v8","HLT_HT550_v11","",#575
-        "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5","HLT_HT550_v6","HLT_HT550_v7","HLT_HT600_v1","HLT_HT600_v4","",#675
-        "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5","HLT_HT550_v6","HLT_HT550_v7","HLT_HT600_v1","HLT_HT700_v2","",#775
-        "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5","HLT_HT550_v6","HLT_HT550_v7","HLT_HT600_v1","HLT_HT750_v3","",#875
-        ]
+        SignalTriggersOption = [
+            # 275
+            "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3",
+            "HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p58_v3",
+            "HLT_HT250_AlphaT0p60_v3",
+            "",
+            ]
+        
+        MonitorTriggersOption = [
+            #275
+            "HLT_HT250_v2","HLT_HT250_v3","HLT_HT250_v4","HLT_HT250_v5",
+            "HLT_HT250_v6","HLT_HT250_v7","HLT_HT250_v8","HLT_HT250_v11","",
+            #325
+            "HLT_HT300_v3","HLT_HT300_v4","HLT_HT300_v5","HLT_HT300_v6",
+            "HLT_HT300_v7","HLT_HT300_v8","HLT_HT300_v9","HLT_HT300_v12","",
+            #375
+            "HLT_HT350_v2","HLT_HT350_v3","HLT_HT350_v4","HLT_HT350_v5",
+            "HLT_HT350_v6","HLT_HT350_v7","HLT_HT350_v8","HLT_HT350_v11","",
+            #475
+            "HLT_HT400_v2","HLT_HT400_v3","HLT_HT400_v4","HLT_HT400_v5",
+            "HLT_HT400_v6","HLT_HT400_v7","HLT_HT400_v8","HLT_HT400_v11","",
+            #575
+            "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5",
+            "HLT_HT550_v6","HLT_HT550_v7","HLT_HT550_v8","HLT_HT550_v11","",
+            #675
+            "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5",
+            "HLT_HT550_v6","HLT_HT550_v7","HLT_HT600_v1","HLT_HT600_v4","",
+            #775
+            "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5",
+            "HLT_HT550_v6","HLT_HT550_v7","HLT_HT600_v1","HLT_HT700_v2","",
+            #875
+            "HLT_HT550_v2","HLT_HT550_v3","HLT_HT550_v4","HLT_HT550_v5",
+            "HLT_HT550_v6","HLT_HT550_v7","HLT_HT600_v1","HLT_HT750_v3","",
+            ]
 
-    MonitorRefTriggersOption = [
-        "HLT_HT300_v3","HLT_HT300_v4","HLT_HT300_v5","HLT_HT300_v6","HLT_HT300_v7","HLT_HT300_v8","HLT_HT300_v9","HLT_HT300_v12","",#475
-        ]
-    
-#SignalTriggersOption = [
-#    "HLT_HT250_MHT60_v2",
-#    "HLT_HT250_MHT60_v3",
-#    "HLT_HT250_MHT60_v4",
-#    "HLT_HT250_MHT60_v6",
-#    "HLT_HT250_MHT60_v7",
-#    "HLT_HT250_MHT70_v1",
-#    "HLT_HT250_MHT70_v3",
-#    "HLT_HT250_MHT70_v4",
-#    "HLT_HT250_MHT80_v3",
-#    "HLT_HT250_MHT80_v4",
-#    "HLT_HT250_MHT90_v1",
-#    ""
-#    ]
+    else :
 
-#SignalTriggersOption = [
-#    "HLT_HT250_MHT60_v2",
-#    "HLT_HT250_MHT60_v3",
-#    "HLT_HT250_MHT70_v1",
-#    "HLT_HT250_MHT70_v3",
-#    "HLT_HT250_MHT70_v4", 
-#    "HLT_HT250_MHT90_v1",
-#    "HLT_HT250_MHT90_v2",
-#    ""
-#    ]
+        SignalTriggersOption = [
+            # 275
+            "HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3",
+            "HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p58_v3",
+            "HLT_HT250_AlphaT0p60_v3",
+            "",
+            # 325
+            "HLT_HT300_AlphaT0p52_v1","HLT_HT300_AlphaT0p52_v2","HLT_HT300_AlphaT0p52_v3","HLT_HT300_AlphaT0p53_v3",
+            "HLT_HT300_AlphaT0p53_v4","HLT_HT300_AlphaT0p53_v5","HLT_HT300_AlphaT0p53_v6","HLT_HT300_AlphaT0p54_v5",
+            "HLT_HT300_AlphaT0p55_v3",
+            "",
+            # 375
+            "HLT_HT350_AlphaT0p51_v1","HLT_HT350_AlphaT0p51_v2","HLT_HT350_AlphaT0p51_v3","HLT_HT350_AlphaT0p51_v4",
+            "HLT_HT350_AlphaT0p51_v5","HLT_HT350_AlphaT0p52_v1","HLT_HT350_AlphaT0p52_v2","HLT_HT350_AlphaT0p53_v10",
+            "",
+            # 475
+            "HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+            "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+            "HLT_HT400_AlphaT0p52_v5",
+            "",
+            ]
+
+        MonitorTriggersOption = [
+            #275
+            "HLT_HT250_v2","HLT_HT250_v3","HLT_HT250_v4","HLT_HT250_v5",
+            "HLT_HT250_v6","HLT_HT250_v7","HLT_HT250_v8","HLT_HT250_v11","",
+            #325
+            "HLT_HT300_v3","HLT_HT300_v4","HLT_HT300_v5","HLT_HT300_v6",
+            "HLT_HT300_v7","HLT_HT300_v8","HLT_HT300_v9","HLT_HT300_v12","",
+            #375
+            "HLT_HT350_v2","HLT_HT350_v3","HLT_HT350_v4","HLT_HT350_v5",
+            "HLT_HT350_v6","HLT_HT350_v7","HLT_HT350_v8","HLT_HT350_v11","",
+            #475
+            "HLT_HT400_v2","HLT_HT400_v3","HLT_HT400_v4","HLT_HT400_v5",
+            "HLT_HT400_v6","HLT_HT400_v7","HLT_HT400_v8","HLT_HT400_v11","",
+            #575
+            "HLT_HT400_v2","HLT_HT400_v3","HLT_HT400_v4","HLT_HT400_v5",
+            "HLT_HT400_v6","HLT_HT400_v7","HLT_HT400_v8","HLT_HT400_v11","",
+            #675
+            "HLT_HT400_v2","HLT_HT400_v3","HLT_HT400_v4","HLT_HT400_v5",
+            "HLT_HT400_v6","HLT_HT400_v7","HLT_HT400_v8","HLT_HT400_v11","",
+            #775
+            "HLT_HT400_v2","HLT_HT400_v3","HLT_HT400_v4","HLT_HT400_v5",
+            "HLT_HT400_v6","HLT_HT400_v7","HLT_HT400_v8","HLT_HT400_v11","",
+            #875
+            "HLT_HT400_v2","HLT_HT400_v3","HLT_HT400_v4","HLT_HT400_v5",
+            "HLT_HT400_v6","HLT_HT400_v7","HLT_HT400_v8","HLT_HT400_v11","",
+            ]
 
 # -----------------------------------------------------------------------------
 # Reading the collections from the ntuple
@@ -372,7 +407,7 @@ qcdBkgdEst = QcdBkgdEst( PSet(DirName = "QcdBkgdEst",
                               TriggerEpochs = TriggerEpochsOption,
                               SignalTriggers = SignalTriggersOption,
                               MonitorTriggers = MonitorTriggersOption,
-                              MonitorRefTriggers = MonitorRefTriggersOption,
+                              PrescaledSignalTriggers = False,
                               VertexReweighting = VertexReweightingOption,
                               # Miscellaneous
                               Verbose=False,
@@ -514,6 +549,11 @@ else :
         cut_flow.TAttach(oddMuon,qcdBkgdEst)
     elif ( VetoesOption == "NoVetoes" ) :
         cut_flow.TAttach(selection_duplicate,qcdBkgdEst)
+    elif ( VetoesOption == "NoOddVetoes" ) :
+        cut_flow.TAttach(selection_duplicate,numComPhotons)
+        cut_flow.TAttach(numComPhotons,numComElectrons)
+        cut_flow.TAttach(numComElectrons,numComMuons)
+        cut_flow.TAttach(numComMuons,qcdBkgdEst)
 
     if ( True and FilterOption > -1 ) :
         skim_ps = PSet(
@@ -527,13 +567,41 @@ else :
 # -----------------------------------------------------------------------------
 # dataset 
 
+Darren=PSet(
+    Name="Darren",
+    Format=("ICF",3),
+    File=[
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1000_2_5ze.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1001_2_QRR.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1002_2_56x.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1003_2_Z7B.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1004_2_jeP.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1005_2_ObZ.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1006_2_JqJ.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1007_2_BoI.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1008_2_r2q.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1009_2_8as.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_100_1_9gW.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1010_2_25j.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1011_2_wl5.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1012_2_tdy.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1013_2_XyE.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1014_2_ktn.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning/ICF/automated/2011_11_11_14_03_49/HT.Run2011A-May10ReReco-v1.AOD/SusyCAF_Tree_1015_2_R95.root" ,
+    ],
+    Weight=1.0,
+    #FirstEntry = 1,
+    #LastEntry = 1000,
+    )
+
 data2011=PSet(
     Name="Data",
     Format=("ICF",3),
     File= [
+    "file:/home/hep/db1110/public_html/275_Had_Data.root",
     #"file:/home/hep/elaird1/73_candidates/v8/375.root",
     #"/Users/bainbrid/Desktop/work/data/HT_Run2011_promptReco_DCS.root",
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_13_17_17_19///SusyCAF_Tree_9_1_zCe.root" ,
+    #"root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_13_17_17_19///SusyCAF_Tree_9_1_zCe.root" ,
     #"file:./skim.root" ,
     #"file:/vols/cms02/bainbrid/qcd/trigger/SUSY2/results/v23/Ratio_HT42_incomplete.root",
     ],
@@ -577,7 +645,7 @@ test_lm=PSet(
     Name="LM1",
     Format=("ICF",3),
     File=[
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_12_14_13_06//LM1_SUSY_sftsht_7TeV-pythia6.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_10_1_ICZ.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_12_14_13_06//LM1_SUSY_sftsht_7TeV-pythia6.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_10_1_ICZ.root" ,
     ],
     CrossSection=4.888,
     Events = 219190,
@@ -589,15 +657,15 @@ test_qcdpy=PSet(
     Name="QCDPY",
     Format=("ICF",3),
     File=[
-#    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-120to170_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_DHE.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-170to300_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_osA.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-300to470_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_101_4_dG3.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-470to600_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_2IT.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-600to800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_gJa.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-800to1000_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_Iou.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1000to1400_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_Nz0.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1400to1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_jXG.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_10_1_n6q.root" ,
+#    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-120to170_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_DHE.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-170to300_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_osA.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-300to470_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_101_4_dG3.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-470to600_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_2IT.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-600to800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_gJa.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-800to1000_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_Iou.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1000to1400_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_Nz0.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1400to1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_jXG.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_10_1_n6q.root" ,
     ],
     Weight=1.,
     FirstEntry=1,
@@ -608,10 +676,10 @@ test_qcdmg=PSet(
     Name="QCDMG",
     Format=("ICF",3),
     File=[
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-100To250_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_mfS.root",
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-250To500_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_how.root",
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-500To1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_100_1_wjO.root",
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_9_1_OBL.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-100To250_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_mfS.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-250To500_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_how.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-500To1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_100_1_wjO.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_9_1_OBL.root",
     ],
     Weight=1.,
     FirstEntry=1,
@@ -622,7 +690,7 @@ test_sms=PSet(
     Name="SMS",
     Format=("ICF",3),
     File=[
-    #"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/dburton/ICF/T1datasettest/100.0_50.0To425.0_250.0.lhe_270000.root"
+    #"root://xrootd.grid.hep.ph.ic.ac.uk/store/user/dburton/ICF/T1datasettest/100.0_50.0To425.0_250.0.lhe_270000.root"
     "file:./sms.root",
     ],
     Weight=1.,
@@ -641,9 +709,8 @@ from data.Run2011.HT42_incomplete import HT42_incomplete
 from data.Run2011.HT_Run2011_promptReco_DCS import HT_Run2011_promptReco_DCS
 from data.Run2011.HT_Run2011A import HT_Run2011A
 from data.Run2011.HT_Run2011A_PromptReco_v1 import HT_Run2011A_PromptReco_v1
-from data.Run2011.HT_Run2011A_AllReco_17June import HT_Run2011A_AllReco_17June
 from data.Run2011.HT_Run2011A_L1OffSet import HT_Run2011A_L1OffSet
-from data.Run2011.HTRun2011AB import HTRun2011AB
+from data.Run2011.HT_Run2011AB import HT_Run2011AB
 from allhadronic.HT_Run2011A_1fb import HT_Run2011A_1fb
 
 # -----------------------------------------------------------------------------
@@ -663,13 +730,13 @@ dataset = []
 if   ( DatasetOption == 0 ) : 
     dataset = [Jet_35pb_WithTP_json051110]
 elif ( DatasetOption == 1 ) : 
-    dataset = [HTRun2011AB] # ~7000 files (and growing)
+    dataset = [HT_Run2011AB] # ~7930 files (and growing)
 elif ( DatasetOption == 2 ) : 
-    dataset = qcdpy
+    dataset = qcdpy600
 elif ( DatasetOption == 3 ) : 
     dataset = qcdmg
 elif ( DatasetOption == 4 ) :
-    dataset = [wjets300]
+    dataset = wjets
 elif ( DatasetOption == 5 ) :
     dataset = zinv
 elif ( DatasetOption == 6 ) :
@@ -681,10 +748,9 @@ elif ( DatasetOption == 8 ) :
                LM4_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
                LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1
                ]
-elif ( DatasetOption == 9 ) :
-    dataset = [SMS_T1]
 elif ( DatasetOption == 10 ) : 
     dataset = [data2011]
+    #dataset = [Darren]
 elif ( DatasetOption == 11 ) :
     #dataset = [test_lm]
     dataset = [test_qcdpy]
@@ -694,4 +760,6 @@ if ( DatasetOption != 10 and DatasetOption != 11 ) :
     anal.Run(output_dir,conf_ak5_calo,dataset) 
 else :
     anal.Run(".",conf_ak5_calo,dataset)
+
+
 

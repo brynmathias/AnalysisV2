@@ -33,51 +33,10 @@ conf_ak5_caloMC.Common.print_out()
 anal_ak5_caloMC=Analysis("AK5Calo")
 addCutFlowMC(anal_ak5_caloMC)
 
-# AK5 PF
-
-conf_ak5_pfMC = deepcopy(defaultConfig)
-conf_ak5_pfMC.Ntuple = deepcopy(ak5_pf)
-conf_ak5_pfMC.XCleaning = deepcopy(default_cc)
-conf_ak5_pfMC.Common = deepcopy(default_common)
-anal_ak5_pfMC=Analysis("AK5PF")
-addCutFlowMC(anal_ak5_pfMC)
-
-# AK5 JPT
-
-conf_ak5_jptMC = deepcopy(defaultConfig)
-conf_ak5_jptMC.Ntuple = deepcopy(ak5_jpt)
-conf_ak5_jptMC.XCleaning = deepcopy(default_cc)
-conf_ak5_jptMC.Common = deepcopy(default_common)
-# conf_ak5_jMCpt.Common.print_out()
-anal_ak5_jptMC=Analysis("AK5JPT")
-addCutFlowMC(anal_ak5_jptMC)
-
-
-# AK7 Calo
-
-conf_ak7_caloMC = deepcopy(defaultConfig)
-conf_ak7_caloMC.Ntuple = deepcopy(ak7_calo)
-conf_ak7_caloMC.XCleaning = deepcopy(default_cc)
-conf_ak7_caloMC.Common = deepcopy(default_common)
-# conf_ak5_calo.Common.print_out()
-anal_ak7_caloMC=Analysis("AK7Calo")
-addCutFlowMC(anal_ak7_caloMC)
 outDir = "../results_"+strftime("%d_%b_%H")+"//NoSmear/"
 ensure_dir(outDir)
 
-testFile =PSet(
-Name="SingleEvent",
-Format =("ICF",3),
-File ="/home/hep/elaird1/84_darrens_event/event.root",
-Weight =1.0,
-)
+from montecarlo.Summer11.QCD_Summer11_madgraph_All import *
 
-
-anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,MC)
-# anal_ak5_pfMC.Run(outDir,conf_ak5_pfMC,MC)
-# anal_ak5_pfMC.Run("../results_"+strftime("%d_%b_%H")+"//NoSmear",conf_ak5_pfMC,[QCD_AllPtBins_7TeV_Pythia])
-# anal_ak5_jptMC.Run("../results_"+strftime("%d_%b_%H")+"//NoSmear",conf_ak5_jptMC,MC)
-# anal_ak5_jptMC.Run("../results_"+strftime("%d_%b_%H")+"//NoSmear",conf_ak5_jptMC,[QCD_AllPtBins_7TeV_Pythia])
-# anal_ak7_caloMC.Run("../results_"+strftime("%d_%b_%H")+"//NoSmear",conf_ak7_caloMC,MC)
-# anal_ak7_caloMC.Run("../results_"+strftime("%d_%b_%H")+"//NoSmear",conf_ak7_caloMC,[QCD_AllPtBins_7TeV_Pythia])
-
+from montecarlo.Summer11.TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
+anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,[TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1])

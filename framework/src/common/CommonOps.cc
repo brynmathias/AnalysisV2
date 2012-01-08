@@ -172,6 +172,47 @@ namespace Operation {
     return ostrm;
   }
 
+  
+    NumCommonBtagJets::NumCommonBtagJets (const std::string & comparison, UInt_t number, float cutValue):
+    mCut(cutValue),
+    mNumber(number) {
+    if ( strcmp("==",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, EQ>);
+    } else if ( strcmp("!=",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, NEQ>);
+    } else if ( strcmp("<",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LT>);
+      } else if ( strcmp(">",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GT>);
+      } else if ( strcmp(">=",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GTEQ>);
+  } else if ( strcmp("<=",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LTEQ>);
+    } else {
+      throw std::invalid_argument(std::string("Invalid operation"));
+    }
+  }
+
+  
+
+    NumCommonBtagJets::~NumCommonBtagJets(){ delete mComparison; }
+    UInt_t nBtags = 0;
+    bool NumCommonBtagJets::Process(Event::Data & ev){
+      for(unsigned int i=0; i<ev.JD_CommonJets().accepted.size(); i++) {
+       if(ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), 4) > mCut) {
+         nBtags++;
+         //if we make it into here, the jet has passed the b-tag requirement
+       }
+      }
+      return (*mComparison)(nBtags,mNumber);
+    }
+    std::ostream& NumCommonBtagJets::Description(std::ostream& ostrm) {
+    ostrm << "NumComBtagsJets Operation (num " << mComparison->type();
+    ostrm << " " << mNumber << ") with BTag cut " << mCut << " ";
+    return ostrm;
+  }
+  
+
   //================
   // Recoil MET Cut
   //================
@@ -746,6 +787,25 @@ namespace Operation {
   }
 
 
+  //===========
+  // Alpha_t Cut Less than value
+  //===========
+  alpha_tCut_Less::alpha_tCut_Less(float value) :
+  mCut(value) {}
+
+  alpha_tCut_Less::~alpha_tCut_Less() {}
+
+  bool alpha_tCut_Less::Process(Event::Data & ev) {
+    if(ev.JD_CommonJets().accepted.size()<2) return false;
+    return ( ev.HadronicAlphaT()< mCut);
+  }
+
+  std::ostream& alpha_tCut_Less::Description(std::ostream &ostrm) {
+    ostrm << "Alpha_t  < " << mCut << " GeV): ";
+    return ostrm;
+  }
+
+
   //===========================
   // "Number of good jets" Cut
   //===========================
@@ -991,10 +1051,10 @@ std::ostream& BtagResponse::Description(std::ostream &ostrm) {
     bool aMuon=true;
     std::vector<Event::Lepton>::const_iterator iph = ev.LD_Muons().begin();
     std::vector<Event::Lepton>::const_iterator jph = ev.LD_Muons().end();
-    std::vector<Event::Jet const *>::const_iterator iJ = ev.JD_CommonJets().accepted.begin();
-    std::vector<Event::Jet const *>::const_iterator jJ = ev.JD_CommonJets().accepted.end();
     for ( ; iph != jph; ++iph) {
       if(iph->Pt()<10.) continue;
+      std::vector<Event::Jet const *>::const_iterator iJ = ev.JD_CommonJets().accepted.begin();
+      std::vector<Event::Jet const *>::const_iterator jJ = ev.JD_CommonJets().accepted.end();
       for ( ; iJ != jJ; ++iJ) {
       if( fabs( ROOT::Math::VectorUtil::DeltaR (**iJ,*iph) ) < 0.5 )
         {
@@ -1151,7 +1211,7 @@ if(!ev.pthat.enabled()){
   if( !ev.GetphysicsDeclared() ){ return false; } // requires physics decalared if running on data!
 }
 
-//  if(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks() > 10 && ev.GettracksNEtaLT0p9HighPurityTracks()+ev.GettracksNEta0p9to1p5HighPurityTracks()+ev.GettracksNEtaGT1p5HighPurityTracks()  <= 0.25*(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks()) ) {return false;} // this line removes moster events
+  if(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks() > 10 && ev.GettracksNEtaLT0p9HighPurityTracks()+ev.GettracksNEta0p9to1p5HighPurityTracks()+ev.GettracksNEtaGT1p5HighPurityTracks()  <= 0.25*(ev.GettracksNEtaLT0p9AllTracks()+ev.GettracksNEta0p9to1p5AllTracks()+ev.GettracksNEtaGT1p5AllTracks()) ) {return false;} // this line removes moster events
 
 for( int i = 0; i<ev.GetVertexSize(); i++)
   {

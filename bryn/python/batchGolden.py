@@ -213,7 +213,7 @@ def makePlotOp(OP = (), cutTree = None, cut = None, label = ""):
   return out
   pass
 
-def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = []):
+def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],lab = ""):
   """docstring for AddBinedHist"""
   out = []
   for lower,upper in zip(htBins,htBins[1:]+[None]):
@@ -228,7 +228,7 @@ def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = []):
       upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
       out.append(upperCut)
       cutTree.TAttach(lowerCut,upperCut)
-    pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%d%s"%(lower, "_%d"%upper if upper else ""))
+    pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
     out.append(pOps)
   return out
   pass
@@ -541,7 +541,7 @@ json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden
 # VertexWeights =[0.20, 0.63, 1.19, 1.57, 1.62, 1.42, 1.09, 0.80 ,0.57, 0.42, 0.30, 0.20]
 # # VertexWeights = [0.0, 0.027442995662725636, 0.12682983875287387, 0.28326829632076572, 0.40618954180036759, 0.41605144586432974, 0.33147399297403923, 0.21562021576661147, 0.1140047132529971]
 # ).ps())
-
+btag = OP_NumCommonBtagJets(">=",1,2.)
 # PreScaleWeights = PreScaleReweighting(datatriggerps.ps())
 recHitCut = OP_SumRecHitPtCut(30.)
 json_ouput = JSONOutput("filtered")
@@ -619,10 +619,14 @@ def MakeDataTree(Threshold):
   # Now lets start binning in HT bins
   # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
   # we arrange the HT bins so they are not repoduced though out threshold runs.
+  cutTreeData.TAttach(MHT_METCut,btag)
+  out.append(AddBinedHist(cutTree = cutTreeData,
+            OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
+            htBins = HTBins,lab ="btag_") )
 
   out.append(AddBinedHist(cutTree = cutTreeData,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins) )
+            htBins = HTBins,lab = "") )
 
   return (cutTreeData,secondJetET,out)
 
@@ -698,8 +702,12 @@ def MakeMCTree(Threshold):
   cutTreeMC.TAttach(htCut375All,DiJet5)
   cutTreeMC.TAttach(NJet5,nHadStandardAllCuts)
   cutTreeMC.TAttach(DiJet5,HadStandardAllCuts)
+  cutTreeMC.TAttach(MHT_METCut,btag)
+  out.append(AddBinedHist(cutTree = cutTreeData,
+            OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
+            htBins = HTBins,lab ="btag_") )
   out.append(AddBinedHist(cutTree = cutTreeMC,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins) )
+            htBins = HTBins,lab = "") )
   return (cutTreeMC,secondJetET,out)
 

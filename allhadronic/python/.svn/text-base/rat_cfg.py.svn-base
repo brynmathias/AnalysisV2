@@ -21,7 +21,7 @@ pwd = commands.getoutput('echo $SUSY_WORKING_SW_DIR')
 # 0=2010, 1=2011, 2=QCDpythia, 3=QCDmagdraph, 4=Wjets, 5=Zinv, 6=TTbar, 7=SingleTop, 8=LM1, 9=SMS, 10=DATAtest, 11==MCtest
 DatasetOption = 2
 
-LastEntryOption = 100
+LastEntryOption = 10
 
 UseGenJetsOption = True
 
@@ -31,7 +31,7 @@ UseMeffOption = True
 
 Summer11Option = True
 
-output_dir = pwd + "/results/v78"
+output_dir = pwd + "/results/v90"
 
 FilterOption = 0
 OffsetOption = 0.
@@ -351,20 +351,20 @@ if ( True ) :
     alphat = 0.55
     factor = math.sqrt(1.-(1./(4.*alphat*alphat)))
     if ( UseMeffOption == False ) :
-        HtBinOption = 2
         #HtBinningOptions = [275.,325.,375.,425.,475.,525.,575.,625.,675.,725.,775.,825.,875.,925.,975.,]
         #HtBinningOptions = [275.,325.,375.,475.,575.,675.,775.,875.,975.,]
         #HtBinningOptions = [270.,360.,450.,540.,630.,720.,810.,900.,990.,]
-        HtBinningOptions = [300.,400.,500.,600.,700.,800.,900.,1000.,1100.,]
-        UpBinningOptions = [330.,440.,550.,660.,770.,880.,990.,1100.,]
+        HtBinOption = 3
+        HtBinningOptions = [200.,300.,400.,500.,600.,700.,800.,900.,1000.,1100.,1200.,]
+        #UpBinningOptions = [330.,440.,550.,660.,770.,880.,990.,1100.,]
     else :
-        HtBinOption = 2
+        HtBinOption = 3
         #HtBinningOptions = [400.,450.,500.,600.,700.,800.,900.,1000.,1100.,]
         #HtBinningOptions = [275.*1.4,325.*1.4,375.*1.4,475.*1.4,575.*1.4,675.*1.4,775.*1.4,875.*1.4,975.*1.4,]
         #HtBinningOptions = [350.*1.4,400.*1.4,500.*1.4,600.*1.4,700.*1.4,800.*1.4,900.*1.4,1000.*1.4,1100.*1.4,]
         #HtBinningOptions = [300.*1.4,400.*1.4,500.*1.4,600.*1.4,700.*1.4,800.*1.4,900.*1.4,1000.*1.4,1100.*1.4,]
-        HtBinningOptions = [300.,400.,500.,600.,700.,800.,900.,1000.,1100.,]
-        UpBinningOptions = [330.,440.,550.,660.,770.,880.,990.,1100.,]
+        HtBinningOptions = [200.,300.,400.,500.,600.,700.,800.,900.,1000.,1100.,1200.,]
+        #UpBinningOptions = [330.,440.,550.,660.,770.,880.,990.,1100.,]
         #HtBinningOptions = [400.,450.,500.,550.,600.,650.,700.,750.,800.,]
 else :
     for n in range(0,31) :
@@ -390,19 +390,20 @@ qcdBkgdEst = RaT( PSet(DirName = "QcdBkgdEst",
                        MinObjects=2,
                        MaxObjects=4,
                        HtHistos=False,
-                       MeffHistos=True,
-                       MhtHistos=True,
+                       MeffHistos=False,
+                       MhtHistos=False,
                        MhtOverHtHistos=False,
-                       MhtOverMeffHistos=True,
+                       MhtOverMeffHistos=False,
                        MultiplicityHistos=True,
-                       JetPtHistos=True,
+                       JetPtHistos=False,
                        NumVertexHistos=False,
                        BabyJetsHistos=False,
                        BabyJetsMhtHistos=False,
                        MinBiasDPhiHistos=False,
                        CutFlowHistos=False,
                        AlphaTHistos=True,
-                       DalitzHistos=True,
+                       DalitzHistos=False,
+                       GenHistos=True,
                        # Baby jets cleaning
                        NoCleaningInDenom=True,
                        BabyJetsCut=1.25,
@@ -418,7 +419,7 @@ qcdBkgdEst = RaT( PSet(DirName = "QcdBkgdEst",
                        SumRecHitPtCut = 30.,
                        # Binning
                        AlphaTDefault=1,
-                       AlphaT=[0.5001,0.501,0.51,0.55,
+                       AlphaT=[0.5001,0.501,
                                #0.51,0.52,0.53,0.54,0.55,0.56,0.57,0.58,0.59,0.60,0.65,0.7,
                                #0.51,0.52,
                                #0.53,0.531,0.532,0.533,0.534,0.535,0.536,0.537,0.538,0.539,
@@ -538,7 +539,7 @@ data2011=PSet(
     File= [
     "file:/home/hep/elaird1/73_candidates/v8/375.root",
     #"/Users/bainbrid/Desktop/work/data/HT_Run2011_promptReco_DCS.root",
-    #"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_13_17_17_19///SusyCAF_Tree_9_1_zCe.root" ,
+    #"root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_13_17_17_19///SusyCAF_Tree_9_1_zCe.root" ,
     #"file:./skim.root" ,
     #"file:/vols/cms02/bainbrid/qcd/trigger/SUSY2/results/v23/Ratio_HT42_incomplete.root",
     ],
@@ -582,7 +583,7 @@ test_lm=PSet(
     Name="LM1",
     Format=("ICF",3),
     File=[
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_12_14_13_06//LM1_SUSY_sftsht_7TeV-pythia6.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_10_1_ICZ.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/henning//ICF/automated/2011_04_12_14_13_06//LM1_SUSY_sftsht_7TeV-pythia6.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_10_1_ICZ.root" ,
     ],
     CrossSection=4.888,
     Events = 219190,
@@ -594,15 +595,17 @@ test_qcdpy=PSet(
     Name="QCDPY",
     Format=("ICF",3),
     File=[
-#    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-120to170_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_DHE.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-170to300_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_osA.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-300to470_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_101_4_dG3.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-470to600_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_2IT.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-600to800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_gJa.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-800to1000_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_Iou.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1000to1400_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_Nz0.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1400to1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_jXG.root" ,
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_10_1_n6q.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-170to300_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_osA.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-300to470_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_101_4_dG3.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-470to600_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_2IT.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-600to800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_gJa.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-800to1000_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_Iou.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1000to1400_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_Nz0.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1400to1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_jXG.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-1800_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_10_1_n6q.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-50to80_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_2_vml.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-80to120_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_1_kr2.root" ,
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar/ICF/automated/2011_06_12_05_20_30/QCD_Pt-120to170_TuneZ2_7TeV_pythia6.Summer11-PU_S3_START42_V11-v2.AODSIM/SusyCAF_Tree_100_0_DHE.root" ,
     ],
     Weight=1.,
     FirstEntry=1,
@@ -613,10 +616,10 @@ test_qcdmg=PSet(
     Name="QCDMG",
     Format=("ICF",3),
     File=[
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-100To250_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_mfS.root",
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-250To500_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_how.root",
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-500To1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_100_1_wjO.root",
-    "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_9_1_OBL.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-100To250_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_mfS.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-250To500_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM/SusyCAF_Tree_100_1_how.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-500To1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_100_1_wjO.root",
+    "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_20_30_16//QCD_TuneD6T_HT-1000_7TeV-madgraph.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_9_1_OBL.root",
     ],
     Weight=1.,
     FirstEntry=1,
@@ -627,7 +630,7 @@ test_sms=PSet(
     Name="SMS",
     Format=("ICF",3),
     File=[
-    #"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/dburton/ICF/T1datasettest/100.0_50.0To425.0_250.0.lhe_270000.root"
+    #"root://xrootd.grid.hep.ph.ic.ac.uk/store/user/dburton/ICF/T1datasettest/100.0_50.0To425.0_250.0.lhe_270000.root"
     "file:./sms.root",
     ],
     Weight=1.,

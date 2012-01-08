@@ -6,7 +6,7 @@ echo "================================"
 #-----------------------------------------------------------------------------
 # Set your ROOTSYS and PYTHONDIR here
 export SUSY_WORKING_SW_DIR=$HOME/github/AnalysisV2
-MY_ROOTSYS='/opt/root_5_32'
+MY_ROOTSYS='/opt/root'
 MY_PYTHONPATH=$SUSY_WORKING_SW_DIR/lib
 MY_LD_LIBRARY_PATH=$MY_ROOTSYS/lib::$SUSY_WORKING_SW_DIR/lib
 

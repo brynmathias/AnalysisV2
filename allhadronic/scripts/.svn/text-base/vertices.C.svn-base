@@ -35,6 +35,7 @@ int vertices() {
 
   std::vector<std::string> bins;
   bins.push_back("0");
+  bins.push_back("200");
   bins.push_back("300");
   bins.push_back("400");
   bins.push_back("500");
@@ -44,6 +45,7 @@ int vertices() {
   bins.push_back("900");
   bins.push_back("1000");
   bins.push_back("1100");
+  bins.push_back("1200");
   
 //   bins.push_back("0");
 //   bins.push_back("275");
@@ -56,23 +58,26 @@ int vertices() {
 //   bins.push_back("875");
 //   bins.push_back("975");
 
-  std::string dir = "/vols/cms02/bainbrid/qcd/trigger/SUSY2/results/v73/";
+  std::string dir = "/vols/cms02/bainbrid/qcd/latest/SUSY2/results/v86/";
   
-//   std::string var = "Multiplicity";  // DistrAfterAlphaT NumVertex AlphaT BabyJetsMht MeffDistr JetsBabyPt MeffDistr
-//   std::string atcut = "_aT0";
-//   std::string njets = "";
+//    std::string var = "Multiplicity";  // DistrAfterAlphaT NumVertex AlphaT BabyJetsMht MeffDistr JetsBabyPt MeffDistr
+//    std::string atcut = "_aT0";
+//    std::string njets = "";
 
-  std::string var = "MeffDistr";  // DistrAfterAlphaT NumVertex  BabyJetsMht MeffDistr JetsBabyPt MeffDistr
-  std::string atcut = "_aT0";
+  std::string var = "AlphaT";  // DistrAfterAlphaT NumVertex  BabyJetsMht MeffDistr JetsBabyPt MeffDistr
+  std::string atcut = "";
   std::string njets = "_2";
-
-  bool log = true;
+  
+  bool log = false;
   bool norm = true;
   int rebin = 1;
   int integral = -1;
   
   std::string binvar = "Meff";//"HT"; 
   std::string binnice = "M_{eff}";//"H_{T}"; 
+
+//   std::string binvar = "HT"; 
+//   std::string binnice = "H_{T}"; 
   
   for ( int i = 0; i < bins.size()-1; ++i ) {
     names.push_back(var+"_"+binvar+bins[i]+atcut+njets);
@@ -156,37 +161,15 @@ int vertices() {
   // SM
   
   if (1) {
-    
-    std::string file(dir+"Ratio__qcdpy.root");
-    //std::string file("../python/Ratio_Data.root");
-    
+        
     std::vector<std::string> files, titles;
     std::vector<int> marker_style; 
     std::vector<int> marker_colour; 
     std::vector<float> marker_size; 
     std::vector<float> lumis; 
 
-    files.push_back(file);
-    files.push_back(file);
-    files.push_back(file);
-    files.push_back(file);
-    files.push_back(file);
-    files.push_back(file);
-    files.push_back(file);
-    files.push_back(file);
-    files.push_back(file);
-    
-//     titles.push_back("H_{T} > 275");
-//     titles.push_back("275 < H_{T} #leq 325");
-//     titles.push_back("325 < H_{T} #leq 375");
-//     titles.push_back("375 < H_{T} #leq 475");
-//     //titles.push_back("H_{T} > 375");
-//     titles.push_back("475 < H_{T} #leq 575");
-//     //titles.push_back("H_{T} > 475");
-//     titles.push_back("575 < H_{T} #leq 675");
-//     titles.push_back("675 < H_{T} #leq 775");
-//     titles.push_back("775 < H_{T} #leq 875");
-//     titles.push_back("H_{T} > 875");
+    std::string file(dir+"Ratio__qcdpy.root");
+    for ( int i = 0; i < bins.size()-1; ++i ) { files.push_back(file); }
     
     titles.push_back(binnice+" > "+bins[1]); 
     for ( int ii = 1; ii < bins.size()-2; ++ii ) {

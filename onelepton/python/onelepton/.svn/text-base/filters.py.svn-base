@@ -94,12 +94,21 @@ def reweightVertices(a):
         #                         0.000, 0.000]
 
         ## Full 2011 data Re-Weightiung factors
-        VertexWeights = [0.000, 0.057, 0.358, 0.723, 1.041, 1.232,
-                         1.337, 1.356, 1.365, 1.410, 1.483, 1.541,
-                         1.643, 1.876, 1.872, 2.241, 2.860, 2.806,
-                         3.186, 5.018, 2.389, 4.460, 0.000, 0.000,
+        #        VertexWeights = [0.000, 0.057, 0.358, 0.723, 1.041, 1.232,
+        #                         1.337, 1.356, 1.365, 1.410, 1.483, 1.541,
+        #                         1.643, 1.876, 1.872, 2.241, 2.860, 2.806,
+        #                         3.186, 5.018, 2.389, 4.460, 0.000, 0.000,
+        #                         0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
+        #                         0.000, 0.000, 0.000, 0.000, 0.000]
+
+        ## Fall11 MC sample Re-Weighting factors using the full 2011 dataset
+        VertexWeights = [0.000, 0.495, 0.867, 1.159, 1.348, 1.375,
+                         1.371, 1.276, 1.177, 1.033, 0.877, 0.697,
+                         0.531, 0.399, 0.285, 0.234, 0.158, 0.111,
+                         0.074, 0.074, 0.034, 0.061, 0.000, 0.000,
                          0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
                          0.000, 0.000, 0.000, 0.000, 0.000]
+        
         ).ps()
         )
     a.AddWeightFilter("Weight", vertex_reweight)
@@ -125,6 +134,20 @@ def muPtScaleSystematic(a, gen=False):
     pfmet_pt_scalePSet = PSet(
         Lepton = "Muon",
         Gen = gen
+        ).ps()
+    pfmet_pt_scale = one.pfMETLeptonScale(pfmet_pt_scalePSet)
+    a.AddMETFilter("pfMET",pfmet_pt_scale)
+    return (pt_scale, pfmet_pt_scale)
+
+def elPtScaleSystematic(a, gen = False, shiftVal = 0.01, shiftDir = True):
+    """ Apply muon pT Scale systematic from wpol code """
+    pt_scale = one.ElPtScaleFilter(shiftVal, shiftDir)
+    a.AddElectronFilter("PreCC", pt_scale)
+    pfmet_pt_scalePSet = PSet(
+        Lepton = "Electron",
+        Gen = gen ,
+        ElPtScaleValue = shiftVal,
+        ElPtScaleDirection = shiftDir
         ).ps()
     pfmet_pt_scale = one.pfMETLeptonScale(pfmet_pt_scalePSet)
     a.AddMETFilter("pfMET",pfmet_pt_scale)
@@ -219,8 +242,10 @@ def electronSystematics(a, mode):
         filters += [ttpolarisationReweighting(a, "Electron", 0.05)]
     elif mode == "ttpoldown":
         filters += [ttpolarisationReweighting(a, "Electron", -0.05)]
-    elif mode == "mupt":
-        filters += [muPtScaleSystematic(a)]
+    elif mode == "elpt_up":
+        filters += [elPtScaleSystematic(a, False, 0.01, True)]
+    elif mode == "elpt_down":
+        filters += [elPtScaleSystematic(a, False, 0.01, False)]
     else: raise ValueError("Invalid systematics mode: %s" % mode)
 
     return filters

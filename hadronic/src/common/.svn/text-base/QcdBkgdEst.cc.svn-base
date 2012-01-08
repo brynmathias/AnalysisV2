@@ -706,8 +706,9 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
     bool pass_rechit = rechit_ ? rechit_->Process(ev) : true; 
     
     // Extract trigger prescale based on if AlphaT is above nominal threshold
-    if ( at_reco >= alphaT_[aT_] ) { if ( !signal_.empty() ) prescale = trigger( ev, signal_[ibin], usePrescaled_ ); }
+    if ( at_reco >= alphaT_[aT_] ) { if ( !signal_.empty() ) { prescale = trigger( ev, signal_[ibin], usePrescaled_ ); } }
     else                           { if ( !monitor_.empty() ) prescale = trigger( ev, monitor_[ibin] ); }
+    //if ( !monitor_.empty() ) prescale = trigger( ev, monitor_[ibin] ); 
     
     // Check if correct reco bin
     if ( correct_reco_bin ) { 
@@ -790,15 +791,19 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 		    // AlphaT loop
 		    for ( uint iat = 0; iat < ( noQcd_ ? 1 : alphaT_.size() ); ++iat ) {
 		      
-// 		      std::cout << " test iat: " << iat
-// 				<< " at_reco: " << at_reco
-// 				<< " aT_: " << aT_
-// 				<< " alphaT_[iat]: " << alphaT_[iat]
-// 				<< std::endl;
+//  		      std::cout << " test iat: " << iat
+//  				<< " at_reco: " << at_reco
+//  				<< " aT_: " << aT_
+//  				<< " alphaT_[iat]: " << alphaT_[iat]
+//  				<< std::endl;
 
 		      // Check AlphaT is above threshold
 		      if ( at_reco >= alphaT_[iat] ) { 
-			if ( iat == aT_ ) pass_cntr = 9;
+			
+			if ( iat == aT_ ) {
+			  pass_cntr = 9;
+			  if ( filter_ >= nbins || ibin == filter_ ) { keep_event = true; }
+			}
 			
 			// Defines HT bin to be used in case of inclusive binning
 			double ht_binned = inclusive_ ? htBins_[ibin] + 1.e-3 : var_reco;
@@ -890,10 +895,7 @@ bool QcdBkgdEst::Process( Event::Data& ev ) {
 	      
 			      if ( pass_rechit || ok ) { 
 				
-				if ( iat == aT_ ) {
-				  pass_cntr = 13; 
-				  if ( filter_ >= nbins || ibin == filter_ ) { keep_event = true; }
-				}
+				if ( iat == aT_ ) pass_cntr = 13; 
 				
 				fill( reco.size(), hPassRecHit_[iat], ht_binned, prescale*weight*reweight ); 
 		
@@ -1961,7 +1963,7 @@ int QcdBkgdEst::trigger( const Event::Data& ev, const vstring& triggers, bool us
     if ( iprescale == ev.hlt_prescaled()->end() ) { continue; }
     
     // Store lowest prescale of triggers that fire (checking first if prescaled triggers should be used or not)
-    if ( ( use_prescaled || prescale == 1 ) &&
+    if ( ( use_prescaled || iprescale->second == 1 ) &&
 	 prescale < 0 || iprescale->second < prescale ) { prescale = iprescale->second; }
     
   }

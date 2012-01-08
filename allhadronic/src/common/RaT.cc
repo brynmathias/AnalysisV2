@@ -83,6 +83,9 @@ RaT::RaT( const Utils::ParameterSet& ps ) :
   htPt3Bins_(),
   offset_(0.),
   // Histograms
+  genHistos_(false),
+  hVarVsScale_(),
+  hVarOverScaleVsJetPt_(),
   hGenPtHat_(),
   hGenPdgId_(),
   hGenStatus_(),
@@ -154,14 +157,12 @@ RaT::RaT( const Utils::ParameterSet& ps ) :
   epochs_(),
   signal_(),
   monitor_(),
-  monitorRef_(),
   reweight_(),
   names_()
 {
   
   vstring signal;
   vstring monitor;
-  vstring monitorRef;
   vdouble reweight;
   
   // Optional parameters
@@ -177,7 +178,6 @@ RaT::RaT( const Utils::ParameterSet& ps ) :
   if ( ps.Contains("TriggerEpochs") ) epochs_ = ps.Get< std::vector<double> >("TriggerEpochs"); 
   if ( ps.Contains("SignalTriggers") ) signal = ps.Get< vstring >("SignalTriggers"); 
   if ( ps.Contains("MonitorTriggers") ) monitor = ps.Get< vstring >("MonitorTriggers"); 
-  if ( ps.Contains("MonitorRefTriggers") ) monitorRef = ps.Get< vstring >("MonitorRefTriggers"); 
   if ( ps.Contains("VertexReweighting") ) reweight = ps.Get< vdouble >("VertexReweighting"); 
   if ( ps.Contains("Inclusive") ) inclusive_ = ps.Get<bool>("Inclusive"); 
   if ( ps.Contains("AlphaTDefault") ) aT_ = (uint)ps.Get<int>("AlphaTDefault");
@@ -197,6 +197,7 @@ RaT::RaT( const Utils::ParameterSet& ps ) :
   if ( ps.Contains("BabyJetsHistos") ) babyJetsHistos_ = ps.Get<bool>("BabyJetsHistos"); 
   if ( ps.Contains("BabyJetsMhtHistos") ) babyJetsMhtHistos_ = ps.Get<bool>("BabyJetsMhtHistos"); 
   if ( ps.Contains("MinBiasDPhiHistos") ) minBiasDeltaPhiHistos_ = ps.Get<bool>("MinBiasDPhiHistos"); 
+  if ( ps.Contains("GenHistos") ) genHistos_ = ps.Get<bool>("GenHistos"); 
 
   if ( ps.Contains("AddMuon") ) addMuon_ = ps.Get<bool>("AddMuon"); 
   if ( ps.Contains("OnlyGenPtHat") ) onlyGenPtHat_ = ps.Get<bool>("OnlyGenPtHat"); 
@@ -315,33 +316,6 @@ RaT::RaT( const Utils::ParameterSet& ps ) :
     }
   }
 
-  // Parse monitor trigger strings
-  if ( !monitorRef.empty() ) {
-    unsigned int ii = 0;
-    unsigned int jj = 0;
-    monitorRef_.clear();
-    monitorRef_.resize( htNbins_, vstring(100) );
-    vstring::const_iterator iter = monitorRef.begin();
-    vstring::const_iterator jter = monitorRef.end();
-    for ( ; iter != jter; ++iter ) { 
-      if ( *iter == "" ) { monitorRef_[ii].resize(jj); ii++; jj = 0; }
-      else { 
-	if ( ii < monitorRef_.size() && jj < monitorRef_[ii].size() ) { monitorRef_[ii][jj] = *iter; } 
-	else { break; }
-	jj++; 
-      }
-    }
-    if ( ii < htNbins_ ) { monitorRef_.resize(ii); monitorRef_.resize(htNbins_,vstring(monitorRef_[ii-1])); }
-
-    for ( vvstring::const_iterator i = monitorRef_.begin(); i != monitorRef_.end(); ++i ) {
-      std::cout << i->size() << ": ";
-      for ( vstring::const_iterator j = i->begin(); j != i->end(); ++j ) {
-	std::cout << "\"" << *j << "\" ";
-      }
-      std::cout << std::endl;
-    }
-  }
-  
   // Parse vertex reweight factors
   if ( reweight.size() > 1 ) {
     unsigned int ii = 0;
@@ -511,20 +485,21 @@ bool RaT::Process( Event::Data& ev ) {
   Double_t weight = ev.GetEventWeight();
 
   // Toy MC using gen jets
-  bool do_toy = true;
+  bool do_toy = false;
   std::vector<LorentzV> toy;
-  
-  // Histogram of pT hat 
-  try {
-    double pt_hat = ev.pthat(); 
-    if ( hGenPtHat_[0] ) hGenPtHat_[0]->Fill( pt_hat, weight ); 
-  } catch (...){}
-  if ( onlyGenPtHat_ ) { return true; }
+
+  double mass_scale = 0;
   
   // Gen-level info
   try {
-
-//     std::cout << std::endl;
+    
+    //std::cout << std::endl;
+    
+    // Histogram of pT hat 
+    double pt_hat = ev.pthat(); 
+    if ( hGenPtHat_[0] ) hGenPtHat_[0]->Fill( pt_hat, weight ); 
+    mass_scale = 2. * pt_hat;
+    if ( onlyGenPtHat_ ) { return true; }
 
     // MHT
     int ngenjets = 0;
@@ -544,20 +519,19 @@ bool RaT::Process( Event::Data& ev ) {
     LorentzV el_mht(0.,0.,0.,0.);
     LorentzV ph_mht(0.,0.,0.,0.);
 
-
     // Construct decay chains
     
-    std::vector<const Event::GenObject*> products;
-    typedef std::map<int,const Event::GenObject*> Objects;
-    std::vector<Objects> chains;
-    chains.resize( 2, Objects() ); 
-    std::vector<LorentzV> partons;
-    partons.resize( 2, LorentzV(0.,0.,0.,0.) ); 
+//     std::vector<const Event::GenObject*> products;
+//     typedef std::map<int,const Event::GenObject*> Objects;
+//     std::vector<Objects> chains;
+//     chains.resize( 2, Objects() ); 
+//     std::vector<LorentzV> partons;
+//     partons.resize( 2, LorentzV(0.,0.,0.,0.) ); 
     
-    std::vector<Event::GenObject> obj = ev.GenParticles(); 
-    for ( uint ii = 0; ii < obj.size(); ++ii ) {
+//     std::vector<Event::GenObject> obj = ev.GenParticles(); 
+//     for ( uint ii = 0; ii < obj.size(); ++ii ) {
       
-      Event::GenObject gen = obj[ii];
+//       Event::GenObject gen = obj[ii];
       
 //       if ( gen.GetStatus() == 3 ) {
 //   	std::cout << std::fixed
@@ -589,27 +563,27 @@ bool RaT::Process( Event::Data& ev ) {
 // 	}
 //       }
 
-      if ( gen.GetStatus() == 3 ) {
-	if ( gen.GetID() != 2212 && 
-	     gen.GetMother() >= 0 && 
-	     gen.GetIndex() >= 2 ) { // not the colliding protons
-	  products.push_back( &obj[ii] );
-	}
-      }
+//       if ( gen.GetStatus() == 3 ) {
+// 	if ( gen.GetID() != 2212 && 
+// 	     gen.GetMother() >= 0 && 
+// 	     gen.GetIndex() >= 2 ) { // not the colliding protons
+// 	  products.push_back( &obj[ii] );
+// 	}
+//       }
       
-    }
+//     }
     
-    // Keep 2 leading jets and balance with third jet
-    //sort( products.begin(), products.end(), SortByPt );
-    std::vector<LorentzV> tmp; 
-    for ( uint i = 0; i < products.size(); ++i ) { tmp.push_back( *products[i] ); }
-    std::sort( tmp.begin(), tmp.end(), SortByPt );
-    if ( tmp.size() > 2 ) {
-      //chains[0][tmp[0].GetIndex()] = tmp[0];
-      //chains[1][tmp[1].GetIndex()] = tmp[1];
-      partons[0] += tmp[0];
-      partons[1] += tmp[1];
-    }
+//     // Keep 2 leading jets and balance with third jet
+//     //sort( products.begin(), products.end(), SortByPt );
+//     std::vector<LorentzV> tmp; 
+//     for ( uint i = 0; i < products.size(); ++i ) { tmp.push_back( *products[i] ); }
+//     std::sort( tmp.begin(), tmp.end(), SortByPt );
+//     if ( tmp.size() > 1 ) {
+//       //chains[0][tmp[0].GetIndex()] = tmp[0];
+//       //chains[1][tmp[1].GetIndex()] = tmp[1];
+//       partons[0] += tmp[0];
+//       partons[1] += tmp[1];
+//     }
     
 //     // Assign jets to pseudo-jets assuming ET-balancing scheme
 //     std::vector<bool> pseudo;
@@ -661,23 +635,33 @@ bool RaT::Process( Event::Data& ev ) {
 // 	       << std::endl;
 //     }
     
-    for ( uint i = 0; i < partons.size(); ++i ) {
-      partons[i].SetPxPyPzE( partons[i].Px(), partons[i].Py(), 0., partons[i].E() );
-      //partons[i] = massless(partons[i]);
-      partons[i].SetM(0.);
-    }
+//     for ( uint i = 0; i < partons.size(); ++i ) {
+//       partons[i].SetPxPyPzE( partons[i].Px(), partons[i].Py(), 0., partons[i].E() );
+//       //partons[i] = massless(partons[i]);
+//       partons[i].SetM(0.);
+//     }
     
-    partons.resize( 3, LorentzV(0.,0.,0.,0.) ); 
-    partons[2] -= partons[0];
-    partons[2] -= partons[1];
-    partons[2].SetM(0.);
-    //partons[2] = massless(partons[2]);
+//     partons.resize( 3, LorentzV(0.,0.,0.,0.) ); 
+//     partons[2] -= partons[0];
+//     partons[2] -= partons[1];
+//     partons[2].SetM(0.);
+//     //partons[2] = massless(partons[2]);
+
+//     std::cout << " scale: " << ht_scale
+// 	      << " " << partons[0].Pt() + partons[1].Pt() 
+// 	      << " " << ( partons[0] + partons[1] ).mass() 
+// 	      << " " << ( partons[0] + partons[1] + partons[2] ).mass() 
+// 	      << " " << partons[2].Pt()
+// 	      << " " << partons[2].Px()
+// 	      << " " << partons[2].Py()
+// 	      << " " << partons[2].Pz()
+// 	      << std::endl;
     
-    // Copy parton LV into toy MC container
-    if ( do_toy ) {
-      toy.reserve( partons.size() );
-      std::copy( partons.begin(), partons.end(), back_inserter(toy) );
-    }
+//     // Copy parton LV into toy MC container
+//     if ( do_toy ) {
+//       toy.reserve( partons.size() );
+//       std::copy( partons.begin(), partons.end(), back_inserter(toy) );
+//     }
     
 //     partons.resize( 4, LorentzV(0.,0.,0.,0.) ); 
 //     partons[3] -= partons[0];
@@ -779,11 +763,11 @@ bool RaT::Process( Event::Data& ev ) {
     //hGenNuPtMax_[0]->Fill( nu_max.Pt(), weight ); 
     //hGenMetVsGenNuPtMax_[0]->Fill( nu_max.Pt(), gen_met.Pt(), weight ); 
     
-//     // Event selection
-//     if ( nu_mht.Pt() > 10. || 
-// 	 mu_mht.Pt() > 10. || 
-// 	 el_mht.Pt() > 10. || 
-// 	 ph_mht.Pt() > 10. ) { return false; }
+    // Event selection
+    if ( nu_mht.Pt() > 10. || 
+ 	 mu_mht.Pt() > 10. || 
+ 	 el_mht.Pt() > 10. || 
+ 	 ph_mht.Pt() > 10. ) { return false; }
     
     // Histograms
     fill( ngenjets, hGenJetMht_, jets_mht.Pt(), weight ); //hGenJetMht_->Fill( jets_mht.Pt(), weight ); 
@@ -813,7 +797,7 @@ bool RaT::Process( Event::Data& ev ) {
   std::vector<Event::Jet const*> common(0); 
   if ( do_toy ) {
     for ( uint i = 0; i < toy.size(); ++i ) {
-      if ( toy[i].Et() > 5. ) { common.push_back( new Event::Jet( massless(toy[i]), 0., i, true, true, true ) ); }
+      common.push_back( new Event::Jet( massless(toy[i]), 0., i, true, true, true ) ); 
     }
   } else { common = ev.JD_CommonJets().accepted; }
 
@@ -859,19 +843,21 @@ bool RaT::Process( Event::Data& ev ) {
   double pt3_threshold = 0.;
 
   bool third = true;
+  Vars tmp;
   
   if (!third) {
-    
+
     // (Reverse!) Loop through HT/Meff bins 
     for ( int jbin = 0; jbin < nbins; ++jbin ) {
       ibin = (nbins-1) - jbin;
-    
+      
       double ht_reco = 0.;
       LorentzV mht_reco(0.,0.,0.,0.);
       std::vector<Event::Jet const*>::const_iterator ireco = common.begin();
       std::vector<Event::Jet const*>::const_iterator jreco = common.end();
       for ( ; ireco != jreco; ++ireco ) {
 	if ( (*ireco)->Pt() > htPt3Bins_[ibin] ) { 
+	  tmp.push_back( massless(**ireco) );
 	  ht_reco += (*ireco)->Et();
 	  mht_reco -= **ireco;
 	}
@@ -884,7 +870,7 @@ bool RaT::Process( Event::Data& ev ) {
       if ( inclusive_ ) { if ( var_reco > ht_lower ) { correct_reco_bin = true; } }
       else { if ( var_reco > ht_lower && var_reco < ht_upper ) { correct_reco_bin = true; } }
       
-      // Define jet pT thresholds 
+      // Define jet pT threshold
       pt1_threshold = htPt1Bins_[ibin];
       pt2_threshold = htPt2Bins_[ibin];
       pt3_threshold = htPt3Bins_[ibin];
@@ -895,68 +881,151 @@ bool RaT::Process( Event::Data& ev ) {
 
   } else {
 
-    double meff_reco = 0.;
-    double ht_reco = 0.;
+    // Mass scale
+    double var_reco = mass_scale;
 
-//     std::cout << "BEGIN njets = " << common.size() << std::endl;
-
-    double max = -1.;
-    Vars tmp;
-    for ( uint i = 0; i < common.size(); ++i ) {
-      tmp.push_back( massless(*common[i]) );
-      tmp.update();
-
-      if ( tmp.jets().size() < 2 ) { continue; }
-      
-      //double val = ( tmp.meff() > 0. ? tmp.mht().Pt() / tmp.ht() : 0. );
-      double val = ( tmp.meff() > 0. ? tmp.mht().Pt() / tmp.meff() : 0. );
-      
-      // If MHT/Meff < pT3 / HT .and. greatest value so far
-      //if ( val < ( htPt3Bins_[ht_] / ( htBins_[ht_] - htPt3Bins_[ht_] ) ) && val > max ) { 
-      //if ( val < ( htPt3Bins_[ht_] / htBins_[ht_] ) && val > max ) { 
-      //if ( max < 0. || ( val > ( htPt3Bins_[ht_] / htBins_[ht_] ) && val < max ) ) { 
-      if ( max < 0. || ( fabs( val - ( htPt3Bins_[ht_] / htBins_[ht_] ) ) < max ) ) { 
-	max = fabs( val - ( htPt3Bins_[ht_] / htBins_[ht_] ) );
-	//max = val;
-	meff_reco = tmp.meff();
-	ht_reco = tmp.ht();
-	njets = tmp.jets().size(); 
-	
-	// Define jet pT thresholds 
-	pt3_threshold = (int(100.*tmp.jets().back().Pt()))/100.;
-	pt1_threshold = (htPt1Bins_[ht_]/htPt3Bins_[ht_]) * pt3_threshold;
-	pt2_threshold = (htPt2Bins_[ht_]/htPt3Bins_[ht_]) * pt3_threshold;
-	
-      }
-      
-//       tmp.print();
-//       std::cout << "TEST"
-//  		<< " i = " << i 
-//  		<< " val = " << val
-// 		<< " diff = " << fabs( val - ( htPt3Bins_[ht_] / htBins_[ht_] ) )
-//  		<< " max = " << max
-//  		<< std::endl;
-      
-    }
-    
-    // Identify bin
-    double var_reco = useMeff_ ? meff_reco : ht_reco;
+    // Loop through bins
     for ( int jbin = 0; jbin < nbins; ++jbin ) {
+      
+      // Find appropriate bin
       ibin = (nbins-1) - jbin;
       ht_lower = htBins_[ibin];
       ht_upper = upBins_.empty() ? ( (nbins-ibin) != 1 ? htBins_[ibin+1] : 10000. ) : upBins_[ibin]; 
       if ( inclusive_ ) { if ( var_reco > ht_lower ) { correct_reco_bin = true; } }
       else { if ( var_reco > ht_lower && var_reco < ht_upper ) { correct_reco_bin = true; } }
+      
+      // Define jet pT thresholds 
+      pt1_threshold = htPt1Bins_[ibin];
+      pt2_threshold = htPt2Bins_[ibin];
+      pt3_threshold = htPt3Bins_[ibin];
+      
       if ( correct_reco_bin ) { break; }
+      
     }
     
-//     std::cout << "SELECTED:"
-// 	      << " njets " << njets
-// 	      << " pt3 " << pt3_threshold
-// 	      << " pt1 " << pt1_threshold
-// 	      << " ibin " << ibin
-// 	      << " correct_reco_bin " << correct_reco_bin
-// 	      << std::endl;
+//     // Event does not fall in bin
+//     if ( !correct_reco_bin ) { return false; }
+    
+    for ( uint i = 0; i < common.size(); ++i ) {
+      if ( common[i]->Pt() > htPt3Bins_[0] ) { 
+	tmp.push_back( massless(*common[i]) );
+	tmp.update();
+	
+// 	std::cout << std::fixed
+// 		  << std::setprecision(4)
+// 		  << "TEST"
+// 		  << " nj=" << tmp.njets()
+// 		  << " et=" << tmp.jets().back().Et()
+// 		  << " ht=" << tmp.ht()
+// 		  << " mht=" << tmp.mht().Pt() 
+// 		  << " meff=" << tmp.meff()
+// 	  //<< " et/meff=" << val
+// 	  //<< " ref=" << test
+// 	  //<< " diff=" << ( val - test )
+// 	  //<< " cache=" << cache
+// 		  << std::endl;
+
+       }
+     }
+    
+    // Useful histos
+    
+    if ( genHistos_ ) { 
+
+      fill( tmp.njets(), hVarVsScale_[0], mass_scale, (1.*tmp.njets()), weight );
+      fill( tmp.njets(), hVarVsScale_[1], mass_scale, tmp.ht(), weight );
+      fill( tmp.njets(), hVarVsScale_[2], mass_scale, tmp.dht(), weight );
+      fill( tmp.njets(), hVarVsScale_[3], mass_scale, tmp.mht().Pt(), weight );
+      fill( tmp.njets(), hVarVsScale_[4], mass_scale, tmp.at(), weight );
+      fill( tmp.njets(), hVarVsScale_[5], mass_scale, tmp.meff(), weight );
+      fill( tmp.njets(), hVarVsScale_[6], mass_scale, tmp.jets().back().Et(), weight );
+      fill( tmp.njets(), hVarVsScale_[7], mass_scale, tmp.jets().front().Et(), weight );
+      fill( tmp.njets(), hVarVsScale_[8], mass_scale, (tmp.ht()/(1.*tmp.njets())), weight );
+    
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[0], tmp.jets().back().Et(), (1.*tmp.njets())/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[1], tmp.jets().back().Et(), tmp.ht()/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[2], tmp.jets().back().Et(), tmp.dht()/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[3], tmp.jets().back().Et(), tmp.mht().Pt()/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[4], tmp.jets().back().Et(), tmp.at()/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[5], tmp.jets().back().Et(), tmp.meff()/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[6], tmp.jets().back().Et(), tmp.jets().back().Et()/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[7], tmp.jets().back().Et(), tmp.jets().front().Et()/mass_scale, weight );
+      fill( tmp.njets(), hVarOverScaleVsJetPt_[8], tmp.jets().back().Et(), (tmp.ht()/(1.*tmp.njets()))/mass_scale, weight );
+
+    }
+    
+//     std::cout << std::fixed
+//  	      << std::setprecision(3)
+//  	      << "SELECTED"
+//   	      << " njets=" << tmp.njets()
+//   	      << " pt3=" << pt3_threshold
+//       //<< " pt1=" << pt1_threshold
+//   	      << " mass=" << mass_scale
+//   	      << " ibin=" << ibin
+//   	      << " correct_reco_bin=" << correct_reco_bin
+//   	      << std::endl;
+
+//     // Identify bin using mass scale
+//     double var_reco = mass_scale; //useMeff_ ? meff_reco : ht_reco;
+//     for ( int jbin = 0; jbin < nbins; ++jbin ) {
+//       ibin = (nbins-1) - jbin;
+//       ht_lower = htBins_[ibin];
+//       ht_upper = upBins_.empty() ? ( (nbins-ibin) != 1 ? htBins_[ibin+1] : 10000. ) : upBins_[ibin]; 
+//       if ( inclusive_ ) { if ( var_reco > ht_lower ) { correct_reco_bin = true; } }
+//       else { if ( var_reco > ht_lower && var_reco < ht_upper ) { correct_reco_bin = true; } }
+//       if ( correct_reco_bin ) { break; }
+//     }
+  
+//     // Event does not fall in bin
+//     if ( !correct_reco_bin ) { return false; }
+    
+//     double test = htPt3Bins_[ht_] / htBins_[ht_];
+//     double cache = -1.;
+//     for ( uint i = 0; i < common.size(); ++i ) {
+//       tmp.push_back( massless(*common[i]) );
+//       tmp.update();
+      
+//       //double val =  useMeff_ ? tmp.jets().back().Et() / tmp.meff() :  tmp.jets().back().Et() / tmp.ht();
+//       double val =  tmp.jets().back().Et() / mass_scale;
+      
+//       if ( cache < 0. || ( val > test && val < cache ) ) { 
+// 	cache = val;
+// 	njets = tmp.jets().size(); 
+	
+// 	// Define jet pT thresholds 
+// 	pt3_threshold = (int(100.*tmp.jets().back().Pt()))/100.;
+// 	pt1_threshold = (htPt1Bins_[ht_]/htPt3Bins_[ht_]) * pt3_threshold;
+// 	pt2_threshold = (htPt2Bins_[ht_]/htPt3Bins_[ht_]) * pt3_threshold;
+	
+//       }
+    
+//       //tmp.print();
+//       std::cout << std::fixed
+// 		<< std::setprecision(4)
+// 		<< "TEST"
+// 		<< " nj=" << tmp.njets()
+// 		<< " et=" << tmp.jets().back().Et()
+// 		<< " ht=" << tmp.ht()
+// 		<< " mht=" << tmp.mht().Pt() 
+// 		<< " meff=" << tmp.meff()
+// 		<< " et/meff=" << val
+// 		<< " ref=" << test
+// 		<< " diff=" << ( val - test )
+// 		<< " cache=" << cache
+// 		<< std::endl;
+
+//     }
+    
+//     std::cout << std::fixed
+// 	      << std::setprecision(3)
+// 	      << "SELECTED"
+//  	      << " njets=" << njets
+//  	      << " pt3=" << pt3_threshold
+//       //<< " pt1=" << pt1_threshold
+//  	      << " mass=" << mass_scale
+//  	      << " ibin=" << ibin
+//  	      << " correct_reco_bin=" << correct_reco_bin
+//  	      << std::endl;
     
   }
   
@@ -1039,7 +1108,7 @@ bool RaT::Process( Event::Data& ev ) {
   // Meff
   meff_reco = ht_reco + mht_reco.Pt();
 
-  double var_reco = useMeff_ ? meff_reco : ht_reco;
+  double var_reco = mass_scale; //useMeff_ ? meff_reco : ht_reco;
 
   // Calc AlphaT and Dalitz variables
   std::vector<bool> pseudo_reco;
@@ -1181,6 +1250,8 @@ bool RaT::Process( Event::Data& ev ) {
   //  		<< " monitor.size(): " << ( monitor_.size() ? monitor_[ibin].size() : 0 )
   //  		<< " prescale: "<< prescale
   //  		<< std::endl;
+  
+  do_toy = true;
       
   // If trigger fired, weight event and continue
   if ( prescale > 0. ) { 
@@ -1695,7 +1766,58 @@ void RaT::Start( Event::Data& ev ) {
   try {
 
     ev.pthat(); 
+    
+    std::vector<std::string> var;
+    var.push_back("N_{jets}");
+    var.push_back("H_{T} (GeV)");
+    var.push_back("#DeltaH_{T} (GeV)");
+    var.push_back("H_{T}^{miss} (GeV)");
+    var.push_back("#alpha_{T}");
+    var.push_back("M_{eff} (GeV)");
+    var.push_back("E_{T}^{jet,min} (GeV)");
+    var.push_back("E_{T}^{jet,max} (GeV)");
+    var.push_back("#hat{E_{T}^{jet}} (GeV)");
+    
+    std::vector<double> range;
+    range.resize( var.size(), 1000. );
+    range[0] = 10.;
+    range[1] = 1000.;
+    range[2] = 500.;
+    range[3] = 200.;
+    range[4] = 1.;
+    range[5] = 1000.;
+    range[6] = 500.;
+    range[7] = 500.;
+    range[8] = 500.;
+    
+    if ( genHistos_ ) {
 
+      hVarVsScale_.resize( var.size(), vTH2D() );
+      for ( uint i = 0; i < var.size(); ++i ) {
+	std::stringstream ss; ss << "hVarVsScale_" << i;
+	std::stringstream sss; sss << ";2.#hat{p_{T}} (GeV);" << var[i]; 
+	BookHistArray( hVarVsScale_[i],
+		       ss.str().c_str(),
+		       sss.str().c_str(),
+		       100,0.,1000.,
+		       100,0.,range[i],
+		       nMax_+1, 0, 1, true );
+      }
+      
+      hVarOverScaleVsJetPt_.resize( var.size(), vTH2D() );
+      for ( uint i = 0; i < var.size(); ++i ) {
+	std::stringstream ss; ss << "VarOverScaleVsJetPt_" << i;
+	std::stringstream sss; sss << ";E_{T}^{jet,min} (GeV);" << var[i] << " / 2.#hat{p_{T}} (GeV)"; 
+	BookHistArray( hVarOverScaleVsJetPt_[i],
+		       ss.str().c_str(),
+		       sss.str().c_str(),
+		       100,0.,500.,
+		       100,0.,2.*range[i]/1000,
+		       nMax_+1, 0, 1, true );
+      }
+
+    }
+    
     BookHistArray( hGenPtHat_,
 		   "GenPtHat",
 		   ";#hat{p_{T}} [GeV];", 

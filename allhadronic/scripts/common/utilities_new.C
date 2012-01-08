@@ -17,9 +17,11 @@
 #include <sstream>
 #include <vector>
 
-typedef unsigned int uint;
+bool trigger_effs = false;
 
 // -----------------------------------------------------------------------------
+
+typedef unsigned int uint;
 
 typedef std::vector<std::string> StringV;
 typedef std::vector<StringV> StringVV;
@@ -897,8 +899,62 @@ void calcRatio( const uint nfile,
  		IntVVV& length,
 		std::string& label,
 		bool efficiency = false,
-		bool use_sumw2 = true
-		) {
+		bool use_sumw2 = true,
+		int data_file = -1 ) {
+
+  std::vector<double> seff;
+  seff.push_back(0.8775);
+  seff.push_back(0.9546);
+  seff.push_back(0.9756);
+  seff.push_back(0.9712);
+  seff.resize(8,1.);
+  
+  std::vector<double> seffh;
+  seffh.push_back(0.0171);
+  seffh.push_back(0.0158);
+  seffh.push_back(0.0166);
+  seffh.push_back(0.0284);
+  seffh.resize(8,0.);
+
+  std::vector<double> seffl;
+  seffl.push_back(0.0171);
+  seffl.push_back(0.0158);
+  seffl.push_back(0.0166);
+  seffl.push_back(0.0284);
+  seffl.resize(8,0.);
+
+  std::vector<double> beff;
+  beff.push_back(0.8784);
+  beff.push_back(0.9061);
+  beff.push_back(0.9823);
+  beff.push_back(0.9876);
+  beff.push_back(0.9735);
+  beff.push_back(0.9996);
+  beff.push_back(1.0000);
+  beff.push_back(0.9999);
+  beff.resize(8,1.);
+  
+  std::vector<double> beffh;
+  beffh.push_back(0.0192);
+  beffh.push_back(0.0293);
+  beffh.push_back(0.0007);
+  beffh.push_back(0.0012);
+  beffh.push_back(0.0016);
+  beffh.push_back(0.0002);
+  beffh.push_back(0.0000);
+  beffh.push_back(0.0001);
+  beffh.resize(8,0.);
+
+  std::vector<double> beffl;
+  beffl.push_back(0.0192);
+  beffl.push_back(0.0293);
+  beffl.push_back(0.0007);
+  beffl.push_back(0.0012);
+  beffl.push_back(0.0016);
+  beffl.push_back(0.0002);
+  beffl.push_back(0.0000);
+  beffl.push_back(0.0001);
+  beffl.resize(8,0.);
   
   // Reset
   for ( uint ifile = 0; ifile < nfile; ++ifile ) {
@@ -1058,28 +1114,28 @@ void calcRatio( const uint nfile,
 	      denom_errh[ifile][imulti][iat][iht] += beh*beh;
 	      denom_errl[ifile][imulti][iat][iht] += bel*bel;
 
-	      std::cout << " ifile: " << ifile
-			<< " jfile: " << jfile
-			<< " file: " << short_name
-			<< " imulti: " << imulti
-			<< " iat: " << iat
-			<< " iht: " << iht
-			<< " a: " << a
- 			<< " ae: " << ae
-//  			<< " seh: " << sqrt(numer_errh[ifile][imulti][iat][iht])
-//  			<< " sel: " << sqrt(numer_errl[ifile][imulti][iat][iht])
- 			<< " aw: " << aw
- 			<< " an: " << an
-			<< " aeh: " << aeh
-			<< " ael: " << ael
-// 			<< " r: " << (a>0.?aeh/a:0.)
-// 			<< " b: " << b
-// 			<< " e: " << be
-// 			<< " w: " << bw
-// 			<< " n: " << bn
-// 			<< " eh: " << beh
-// 			<< " el: " << bel
-			<< std::endl;
+// 	      std::cout << " ifile: " << ifile
+// 			<< " jfile: " << jfile
+// 			<< " file: " << short_name
+// 			<< " imulti: " << imulti
+// 			<< " iat: " << iat
+// 			<< " iht: " << iht
+// 			<< " a: " << a
+//  			<< " ae: " << ae
+// //  			<< " seh: " << sqrt(numer_errh[ifile][imulti][iat][iht])
+// //  			<< " sel: " << sqrt(numer_errl[ifile][imulti][iat][iht])
+//  			<< " aw: " << aw
+//  			<< " an: " << an
+// 			<< " aeh: " << aeh
+// 			<< " ael: " << ael
+// // 			<< " r: " << (a>0.?aeh/a:0.)
+// // 			<< " b: " << b
+// // 			<< " e: " << be
+// // 			<< " w: " << bw
+// // 			<< " n: " << bn
+// // 			<< " eh: " << beh
+// // 			<< " el: " << bel
+// 			<< std::endl;
 	      
 	    } 
 	  }
@@ -1102,16 +1158,49 @@ void calcRatio( const uint nfile,
     for ( uint imulti = 0; imulti < nmulti; ++imulti ) {
       for ( uint iat = 0; iat < nat; ++iat ) {
 	for ( int iht = 0; iht < nht; ++iht ) {
-	    
+
 	  double a   = numer[ifile][imulti][iat][iht];
 	  double aeh = sqrt(numer_errh[ifile][imulti][iat][iht]);
 	  double ael = sqrt(numer_errl[ifile][imulti][iat][iht]);
-	  numer_errh[ifile][imulti][iat][iht] = aeh;
-	  numer_errl[ifile][imulti][iat][iht] = ael;
 	      
 	  double b   = denom[ifile][imulti][iat][iht];
 	  double beh = sqrt(denom_errh[ifile][imulti][iat][iht]);
 	  double bel = sqrt(denom_errl[ifile][imulti][iat][iht]);
+	    
+	  // Trigger efficiencies
+	  if ( trigger_effs && data_file > -1 ) {
+	    std::cout << " get here 0: " << a << std::endl;
+	    double n  = 0.;
+	    double eh = 0.;
+	    double el = 0.;
+	    // Efficiency of aT leg on aT trigger
+	    if (true) {
+	      n  = a / seff[iht]; eh = 0.; el = 0.;
+	      calcErr( n, eh, el, a, aeh, ael, seff[iht], seffh[iht], seffl[iht] ); 
+	      a = n; aeh = eh; ael = el;
+	    }
+	    // Efficiency of HT leg on aT trigger
+	    if (true) {
+	      n  = a / beff[iht]; eh = 0.; el = 0.;
+	      calcErr( n, eh, el, a, aeh, ael, beff[iht], beffh[iht], beffl[iht] ); 
+	      a = n; aeh = eh; ael = el;
+	    }
+	    // Efficiency of HT trigger
+	    if (true) {
+	      n  = b / beff[iht]; eh = 0.; el = 0.;
+	      calcErr( n, eh, el, b, beh, bel, beff[iht], beffh[iht], beffl[iht] ); 
+	      b = n; beh = eh; bel = el;
+	    }
+	    std::cout << " get here 1: " << a << std::endl;
+	  } else {
+	    std::cout << " get here 2: " << std::endl;
+	  }
+
+	  numer[ifile][imulti][iat][iht]      = a;
+	  numer_errh[ifile][imulti][iat][iht] = aeh;
+	  numer_errl[ifile][imulti][iat][iht] = ael;
+
+	  denom[ifile][imulti][iat][iht]      = b;
 	  denom_errh[ifile][imulti][iat][iht] = beh;
 	  denom_errl[ifile][imulti][iat][iht] = bel;
 	  

@@ -134,6 +134,51 @@ myCountsAndBSMGrids_TPBE = CountsAndBSMGrids(
     )
 
 
+myCountsAndBSMGrids_TP = CountsAndBSMGrids(
+    PSet(
+    DirectoryName = "TP",
+    xBins = 100,
+    xLow =0.,
+    xHigh =1000.,
+    yBins =100,
+    yLow =0.,
+    yHigh =1000.,
+    mSUGRAFile = "scale_xsection_nlo0.5_tandat50.txt",#"msugraTanbeta3_05down.txt",
+    ).ps()
+
+    )
+
+
+myCountsAndBSMGrids_RA2TPflag = CountsAndBSMGrids(
+    PSet(
+    DirectoryName = "RA2TPflag",
+    xBins = 100,
+    xLow =0.,
+    xHigh =1000.,
+    yBins =100,
+    yLow =0.,
+    yHigh =1000.,
+    mSUGRAFile = "scale_xsection_nlo0.5_tandat50.txt",#"msugraTanbeta3_05down.txt",
+    ).ps()
+
+    )
+
+
+myCountsAndBSMGrids_BE = CountsAndBSMGrids(
+    PSet(
+    DirectoryName = "BE",
+    xBins = 100,
+    xLow =0.,
+    xHigh =1000.,
+    yBins =100,
+    yLow =0.,
+    yHigh =1000.,
+    mSUGRAFile = "scale_xsection_nlo0.5_tandat50.txt",#"msugraTanbeta3_05down.txt",
+    ).ps()
+
+    )
+
+
 
 myCountsAndBSMGrids_2jets = CountsAndBSMGrids(
     PSet(
@@ -189,6 +234,20 @@ myCountsAndBSMGrids_1mu = CountsAndBSMGrids(
     ).ps()
 
     )
+
+myCountsAndBSMGrids_1el = CountsAndBSMGrids(
+    PSet(
+    DirectoryName = "Counter_1el",
+    xBins = 100,
+    xLow =0.,
+    xHigh =1000.,
+    yBins =100,
+    yLow =0.,
+    yHigh =1000.,
+    mSUGRAFile = "scale_xsection_nlo0.5_tandat50.txt",#"msugraTanbeta3_05down.txt",
+    ).ps()
+
+    )
  
 myCountsAndBSMGrids_1muPF = CountsAndBSMGrids(
     PSet(
@@ -216,6 +275,21 @@ myCountsAndBSMGrids_0El = CountsAndBSMGrids(
     ).ps()
 
     )
+
+myCountsAndBSMGrids_0Mu = CountsAndBSMGrids(
+    PSet(
+    DirectoryName = "Counter_0Mu",
+    xBins = 100,
+    xLow =0.,
+    xHigh =1000.,
+    yBins =100,
+    yLow =0.,
+    yHigh =1000.,
+    mSUGRAFile = "scale_xsection_nlo0.5_tandat50.txt",#"msugraTanbeta3_05down.txt",
+    ).ps()
+
+    )
+
 
 myCountsAndBSMGrids_0Eloose = CountsAndBSMGrids(
     PSet(

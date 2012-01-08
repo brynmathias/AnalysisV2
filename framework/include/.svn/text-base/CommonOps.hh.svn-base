@@ -158,6 +158,23 @@ namespace Operation {
 
  }; // ~NumComMuons class
 
+ class NumCommonBtagJets : public Operation::_Base
+ {
+ public:
+   NumCommonBtagJets (const std::string & comparison, UInt_t number, float cutValue);
+   ~NumCommonBtagJets ();
+   bool Process(Event::Data & ev);
+   std::ostream& Description(std::ostream& ostrm);
+  
+ private:
+   Operation::_Compare<UInt_t> *mComparison; //!< Comparison string, i.e. "==", ">=", etc.
+   UInt_t mNumber;           //!< Number of common leptons with which to compare.
+   float mCut; // !< value at which the btaging variable cuts.
+   /* data */
+ };
+
+
+
   /*! \brief Cuts on the basis of the HT of the the event's common objects.
    *
    * \author Dunno
@@ -1065,6 +1082,39 @@ namespace Operation {
 
   }; // ~alpha_tCut class
 
+ class  alpha_tCut_Less : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     *
+     * @param [in] comparison Comparison string, i.e. "==", ">=", etc.
+     * @param [in] mMHTvalue
+     */
+     alpha_tCut_Less(float mMHTvalue );
+
+    ~ alpha_tCut_Less(); //!< Destructor.
+
+    /*! \brief
+     *
+     * \param Reference to the event data container.
+     * \return True if the
+     */
+   bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+    // Operation private data members
+    //--------------------------------
+    float mCut;           //!<
+
+  }; // ~alpha_tCut_Less class
+
  ////////////////////////////////////////////////////////
 
   /*! \brief "Number of good jets" cut.
@@ -1765,6 +1815,9 @@ class MultiTrigger : public Operation::_Base{
     bool accept_;
 
   }; // ~EventSelector class
+
+
+
 
 
 

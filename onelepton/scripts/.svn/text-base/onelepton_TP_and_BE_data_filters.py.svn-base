@@ -48,15 +48,20 @@ w_Pythia6_ps._quiet_set("Accept", False)
 w_Pythia6_Cut = EventSelector(w_Pythia6_ps.ps())
 
 
-# run B still missing 
+# run B still missing
 
-#ElHad_May10ReReco_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_Run2011A_May10ReReco_filteredEventsBE_cfi.py")
-#ElHad_May10ReReco_deadecal_ps._quiet_set("Accept", False)
-#ElHad_May10ReReco_Cut_BE = EventSelector(ElHad_May10ReReco_deadecal_ps.ps())
+ElHad_May10ReReco_BE_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_Run2011A_May10ReReco_filteredEventsBE_cfi.py")
+ElHad_May10ReReco_BE_deadecal_ps._quiet_set("Accept", False)
+ElHad_May10ReReco_Cut_BE = EventSelector(ElHad_May10ReReco_BE_deadecal_ps.ps())
 
-#ElHad_May10ReReco_TP_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_Run2011A_May10ReReco_filteredEventsTP_cfi.py")
-#ElHad_May10ReReco_TP_deadecal_ps._quiet_set("Accept", False)
-#ElHad_May10ReReco_Cut_TP = EventSelector(ElHad_May10ReReco_TP_deadecal_ps.ps())
+ElHad_May10ReReco_TP_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_Run2011A_May10ReReco_filteredEventsTP_cfi.py")
+ElHad_May10ReReco_TP_deadecal_ps._quiet_set("Accept", False)
+ElHad_May10ReReco_Cut_TP = EventSelector(ElHad_May10ReReco_TP_deadecal_ps.ps())
+
+
+ElHad_TPandBE_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_filteredEventsTPandBE_cfi.py")
+ElHad_TPandBE_deadecal_ps._quiet_set("Accept", False)
+ElHad_Cut_TPandBE = EventSelector(ElHad_TPandBE_deadecal_ps.ps())
 
 #ElHad_Prompt_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_Run2011A_Prompt_v4_filteredEventsBE_cfi.py")
 #ElHad_Prompt_deadecal_ps._quiet_set("Accept", False)
@@ -90,6 +95,7 @@ w_Pythia6_Cut = EventSelector(w_Pythia6_ps.ps())
 #ElHad_PromptB_v1_TP_deadecal_ps._quiet_set("Accept", False)
 #ElHad_PromptB_v1_Cut_TP = EventSelector(ElHad_PromptB_v1_TP_deadecal_ps.ps())
 
-ElHad_May10ReReco_deadecal_ps = getDeadECALList("../python/deadecal/veto_ElHad_Run2011_filteredEventsBE.py")
-ElHad_May10ReReco_deadecal_ps._quiet_set("Accept", False)
-ElHad_allBE_deadecal_Cut = EventSelector(ElHad_May10ReReco_deadecal_ps.ps())
+##
+#ElHad_May10ReReco_deadecal_ps = getDeadECALList("../python/deadecal/veto_ElHad_Run2011_filteredEventsBE.py")
+#ElHad_May10ReReco_deadecal_ps._quiet_set("Accept", False)
+#ElHad_allBE_deadecal_Cut = EventSelector(ElHad_May10ReReco_deadecal_ps.ps())

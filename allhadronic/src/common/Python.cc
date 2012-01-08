@@ -5,6 +5,7 @@
 #include "Trigger.hh"
 #include "Validation.hh"
 #include "RaT.hh"
+#include "GenPtHat.hh"
 
 using namespace boost::python;
 
@@ -16,5 +17,6 @@ BOOST_PYTHON_MODULE(liballhadronic) {
   class_<allhadronic::Trigger, bases<Operation::_Base> >( "Trigger", init<const Utils::ParameterSet&>() );
   class_<allhadronic::Validation, bases<Operation::_Base> >( "Validation", init<const Utils::ParameterSet&>() );
   class_<Operation::RaT, bases<Operation::_Base> >( "RaT", init<const Utils::ParameterSet&>() );
+  class_<Operation::GenPtHat, bases<Operation::_Base> >( "GenPtHat", init<const Utils::ParameterSet&>() );
   
 }

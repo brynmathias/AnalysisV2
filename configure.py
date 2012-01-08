@@ -147,6 +147,22 @@ iclx_root_527={"name":"IC LX (64bit ROOT 5.27)",
       "python_env" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/bin"),
       }
 
+bristol_root_527={"name":"Bristol (64bit ROOT 5.27)",
+      "platform" : (False,"linux"),
+      "root_sys" : (True,"/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14/"),
+      "root_sys_inc" : (False,"/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14/include/"),
+      "root_sys_lib" : (False,"/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14/lib/"),
+      "root_sys_bin" : (False,"/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14/bin/"),
+      "python_inc" : (False,"/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/include/python2.6/"),
+      "python_lib" : (False,"-lpython2.6"),
+      "boost_python_lib" : (False,"-lboost_python"),
+      "root_extra_libs" : (False,"-lMathCore -lMathMore -lGenVector"),
+      "link_search_extra" : (False,"-L/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/lib -L/cms/slc5_amd64_gcc434/external/boost/1.44.0-cms3/lib"),
+      "incdir_extra" : (False,"-I/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/include/python2.6 -I/cms/slc5_amd64_gcc434/external/boost/1.44.0-cms3/include"),
+      "ld_path_extra" :
+(False,"/cms/slc5_amd64_gcc434/external/libjpg/8b/lib:/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/lib:/cms/slc5_amd64_gcc434/external/boost/1.44.0-cms3/lib:/opt/g/ui/3.2.7-0/d-cache/dcap/lib64:/opt/g/ui/3.2.7-0/d-cache/dcap/lib:/opt/g/ui/3.2.7-0/glite/lib:/opt/g/ui/3.2.7-0/glite/lib64:/opt/g/ui/3.2.7-0/globus/lib:/opt/g/ui/3.2.7-0/lcg/lib:/opt/g/ui/3.2.7-0/lcg/lib64:/cms/slc5_amd64_gcc434/external/gcc/4.3.4/lib64:/cms/slc5_amd64_gcc434/external/xrootd/5.28.00d/lib"),
+      "python_env" : (False,"/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/bin"),
+      }
 ubuntu_1004={"name":"Ubuntu 10.04",
              "platform":(False,"linux"),
              "root_sys" : (False,""),
@@ -179,7 +195,7 @@ linux_custom={"name":"Linux Generic (With Custom ROOTSYS)",
         "python_env" : (False,""),
         }
 
-inst_types=[iclx_root_527, iclx, slc4_32, slc4_64, slc5_64,linux_other,macosx,macosxLion,ubuntu_1004, linux_custom]
+inst_types=[iclx_root_527, iclx, bristol_root_527,slc4_32, slc4_64, slc5_64,linux_other,macosx,macosxLion,ubuntu_1004, linux_custom]
 
 print "Please enter path to the directory containing the SUSY code."
 base_dir=my_input("Code directory",sys.path[0])
