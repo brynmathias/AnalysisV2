@@ -57,7 +57,7 @@ outDir = "../results_"+strftime("%d_%b_%H")+"//Data37"
 ensure_dir(outDir)
 # HT42_incomplete.LastEntry = 100
 # HT42_incomplete.File = HT42_incomplete.File[0:1]
-anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HTRun2011AB])
+anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011AB])
 
 # from data.MultiJet_Run2010B_Nov4ReReco_v1 import *
 

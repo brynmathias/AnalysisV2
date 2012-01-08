@@ -51,6 +51,6 @@ Name = "test",
 Format = ("ICF",3),
 Weight = 1.0,
 File = "../../Ntuples/375_newFormat.root")
-outdir = "../results_"+strftime("%d_%b_%H")+"/Data/"
+outdir = "../results_NoOddVeto_"+strftime("%d_%b_%H")+"/Data/"
 ensure_dir(outdir)
-anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HTRun2011AB])#HT_Run2011A])
+anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])#HT_Run2011A])

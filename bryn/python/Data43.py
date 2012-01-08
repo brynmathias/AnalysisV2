@@ -56,7 +56,7 @@ from data.Run2011.RA1ToBurn import *
 from data.Run2011.HTRun2011AB import *
 outDir = "../results_"+strftime("%d_%b_%H")+"//Data43"
 ensure_dir(outDir)
-anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HTRun2011AB])
+anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011AB])
 
 # from data.MultiJet_Run2010B_Nov4ReReco_v1 import *
 

@@ -218,7 +218,7 @@ def makePlotOp(OP = (), cutTree = None, cut = None, label = ""):
   out.append(skim_ps)
   cutTree.TAttach(cut,alpha)
   cutTree.TAttach(alpha,dump)
-  cutTree.TAttach(alpha,skim)
+  #cutTree.TAttach(alpha,skim)
   out.append(alpha)
   out.append(dump)
   return out
@@ -613,8 +613,9 @@ def MakeDataTree(Threshold):
   cutTreeData.TAttach(LeadingJetEta,secondJetET)
   cutTreeData.TAttach(secondJetET,oddJet)
   cutTreeData.TAttach(oddJet,badMuonInJet)
-  cutTreeData.TAttach(badMuonInJet,oddMuon)
-  cutTreeData.TAttach(oddMuon,oddElectron)
+  cutTreeData.TAttach(badMuonInJet,#oddMuon)
+  #cutTreeData.TAttach(oddMuon,
+  oddElectron)
   cutTreeData.TAttach(oddElectron,oddPhoton)
   cutTreeData.TAttach(oddPhoton,numComLeptons)
   cutTreeData.TAttach(numComLeptons,numComPhotons)
@@ -663,8 +664,10 @@ def MakeMCTree(Threshold):
   cutTreeMC.TAttach(LeadingJetEta,secondJetET)
   cutTreeMC.TAttach(secondJetET,oddJet)
   cutTreeMC.TAttach(oddJet,badMuonInJet)
-  cutTreeMC.TAttach(badMuonInJet,oddMuon)
-  cutTreeMC.TAttach(oddMuon,oddElectron)
+  cutTreeMC.TAttach(badMuonInJet,
+  #oddMuon)
+  #cutTreeMC.TAttach(oddMuon,
+  oddElectron)
   cutTreeMC.TAttach(oddElectron,oddPhoton)
   cutTreeMC.TAttach(oddPhoton,numComLeptons)
   cutTreeMC.TAttach(numComLeptons,numComPhotons)
