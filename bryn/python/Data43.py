@@ -41,15 +41,6 @@ conf_ak5_caloData.Common = deepcopy(default_common)
 anal_ak5_caloData=Analysis("AK5Calo")
 addCutFlowData(anal_ak5_caloData)
 
-# AK5 PF
-
-conf_ak5_pfData = deepcopy(defaultConfig)
-conf_ak5_pfData.Ntuple = deepcopy(ak5_pf)
-conf_ak5_pfData.XCleaning = deepcopy(default_cc)
-conf_ak5_pfData.Common = deepcopy(default_common)
-anal_ak5_pfData=Analysis("AK5PF")
-addCutFlowData(anal_ak5_pfData)
-
 
 tedSkim = PSet(
 Name="TedSkim",

@@ -206,30 +206,65 @@ def makePlotOp(OP = (), cutTree = None, cut = None, label = ""):
   cutTree.TAttach(cut,op)
   alpha = OP_CommonAlphaTCut(0.55)
   dump = EventDump()
+  skim_ps=PSet(
+    SkimName = "myskim",
+    DropBranches = False,
+    Branches = [
+        " keep * "
+        ]
+  )
+  skim = SkimOp(skim_ps.ps())
+  out.append(skim)
+  out.append(skim_ps)
   cutTree.TAttach(cut,alpha)
   cutTree.TAttach(alpha,dump)
+  cutTree.TAttach(alpha,skim)
   out.append(alpha)
   out.append(dump)
   return out
   pass
 
-def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],lab = ""):
+def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],Trigger = None,lab = ""):
   """docstring for AddBinedHist"""
   out = []
-  for lower,upper in zip(htBins,htBins[1:]+[None]):
-    # print "Lower , Upper =", lower , upper
-    if int(lower) == 325 and upper is None: continue
-    if int(lower) == 375 and upper is None: continue
-    # print "continue should have happened now"
-    lowerCut = eval("RECO_CommonHTCut(%d)"%lower)
-    out.append(lowerCut)
-    cutTree.TAttach(cut,lowerCut)
-    if upper:
-      upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
-      out.append(upperCut)
-      cutTree.TAttach(lowerCut,upperCut)
-    pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
-    out.append(pOps)
+  if Trigger is not None:
+      for lower,upper in zip(htBins[0],htBins[0][1:]+[None]):
+        # print "Lower , Upper =", lower , upper
+        if int(lower) == 325 and upper is None: continue
+        if int(lower) == 375 and upper is None: continue
+        # print "continue should have happened now"
+        lowerCut = eval("RECO_CommonHTCut(%d)"%lower)
+        triggerps = PSet(Verbose = False,
+        UsePreScaledTriggers = False,
+        Triggers = [])
+        triggerps.Triggers = Trigger["%d%s"%(lower, "_%d"%upper if upper else ""]
+        Trigger = OP_MultiTrigger( triggerps.ps() )
+        out.append(triggerps)
+        out.append(Trigger)
+        out.append(lowerCut)
+        cutTree.TAttach(cut,Trigger)
+        cutTree.TAttach(Trigger,lowerCut)
+        if upper:
+          upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
+          out.append(upperCut)
+          cutTree.TAttach(lowerCut,upperCut)
+        pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
+        out.append(pOps) 
+  else:
+      for lower,upper in zip(htBins[0],htBins[0][1:]+[None]):
+        # print "Lower , Upper =", lower , upper
+        if int(lower) == 325 and upper is None: continue
+        if int(lower) == 375 and upper is None: continue
+        # print "continue should have happened now"
+        lowerCut = eval("RECO_CommonHTCut(%d)"%lower)
+        out.append(lowerCut)
+        cutTree.TAttach(cut,lowerCut)
+        if upper:
+          upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
+          out.append(upperCut)
+          cutTree.TAttach(lowerCut,upperCut)
+        pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
+        out.append(pOps)
   return out
   pass
 
@@ -394,7 +429,7 @@ alphat = OP_CommonAlphaTCut(0.55)
 DeadEcalCutData = OP_DeadECALCut(0.3,0.3,0.5,30.,10,0,"./deadRegionList_GR10_P_V10.txt")
 DeadEcalCutMC =   OP_DeadECALCut(0.3,0.3,0.5,30.,10,0,"./deadRegionList_START38_V12.txt")
 #MHTCut = OP_TriggerMHT_Emu(90.,30.)
-MHTCut = OP_CommonMHTCut(100.)
+MHTCut = OP_CommonMHTCut(0.)
 MHT_METCut = OP_MHToverMET(1.25,50.)
 NJet5 = OP_NumComJets(">=",3)
 DiJet5 = OP_NumComJets("==",2)
@@ -489,24 +524,7 @@ datatriggerps = PSet(
     Verbose = False,
     UsePreScaledTriggers = False,
     Triggers = [
-"HLT_HT250_AlphaT0p55_v1" ,
-"HLT_HT250_AlphaT0p55_v2" ,
-"HLT_HT250_AlphaT0p53_v2" ,
-"HLT_HT250_AlphaT0p53_v3" ,
-"HLT_HT250_AlphaT0p53_v4" ,
-"HLT_HT250_AlphaT0p53_v5" ,
-"HLT_HT250_AlphaT0p55_v2" ,
-"HLT_HT300_AlphaT0p52_v1" ,
-"HLT_HT300_AlphaT0p52_v2" ,
-"HLT_HT300_AlphaT0p52_v3" ,
-"HLT_HT300_AlphaT0p53_v3" ,
-"HLT_HT300_AlphaT0p53_v4" ,
-"HLT_HT300_AlphaT0p52_v4" ,
-"HLT_HT300_AlphaT0p52_v5" ,
-"HLT_HT300_AlphaT0p53_v5" ,
-"HLT_HT300_AlphaT0p53_v6" ,
-"HLT_HT300_AlphaT0p54_v5" ,
-"HLT_HT300_AlphaT0p55_v3" ,
+
 "HLT_HT350_AlphaT0p51_v1" ,
 "HLT_HT350_AlphaT0p51_v2" ,
 "HLT_HT350_AlphaT0p51_v3" ,
@@ -530,6 +548,31 @@ datatriggerps = PSet(
 "HLT_HT300_AlphaT0p55_v3" ,
 "HLT_HT350_AlphaT0p53_v10",]
 )
+triggers = {
+    "275_325":["HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3",
+           "HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p58_v3",
+           "HLT_HT250_AlphaT0p60_v3",],
+    "325_375":["HLT_HT300_AlphaT0p52_v1","HLT_HT300_AlphaT0p52_v2","HLT_HT300_AlphaT0p52_v3","HLT_HT300_AlphaT0p53_v3",
+           "HLT_HT300_AlphaT0p53_v4","HLT_HT300_AlphaT0p53_v5","HLT_HT300_AlphaT0p53_v6","HLT_HT300_AlphaT0p54_v5",
+           "HLT_HT300_AlphaT0p55_v3",],
+    "375_475":["HLT_HT350_AlphaT0p51_v1","HLT_HT350_AlphaT0p51_v2","HLT_HT350_AlphaT0p51_v3","HLT_HT350_AlphaT0p51_v4",
+           "HLT_HT350_AlphaT0p51_v5","HLT_HT350_AlphaT0p52_v1","HLT_HT350_AlphaT0p52_v2","HLT_HT350_AlphaT0p53_v10",,
+    "475_575":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "575_675":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "675_775":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "775_875":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "875":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+}
 DataTrigger = OP_MultiTrigger( datatriggerps.ps() )
 
 JetAdd = JetAddition(0.)
@@ -593,11 +636,11 @@ def MakeDataTree(Threshold):
   cutTreeData.TAttach(MHT_METCut,btag)
   out.append(AddBinedHist(cutTree = cutTreeData,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
-            htBins = HTBins,lab ="btag_") )
+            htBins = HTBins,Trigger = triggers,lab ="btag_") )
 
   out.append(AddBinedHist(cutTree = cutTreeData,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins,lab = "") )
+            htBins = HTBins,Trigger = triggers,lab = "") )
 
   return (cutTreeData,secondJetET,out)
 
@@ -637,9 +680,9 @@ def MakeMCTree(Threshold):
   cutTreeMC.TAttach(MHT_METCut,btag)
   out.append(AddBinedHist(cutTree = cutTreeMC,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
-            htBins = HTBins,lab ="btag_") )
+            htBins = HTBins,Trigger = None,lab ="btag_") )
   out.append(AddBinedHist(cutTree = cutTreeMC,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins,lab = "") )
+            htBins = HTBins,Trigger = None,lab = "") )
   return (cutTreeMC,secondJetET,out)
 
