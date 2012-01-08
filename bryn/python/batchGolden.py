@@ -187,7 +187,7 @@ skim = SkimOp(skim_ps.ps())
 genericPSet = PSet(
 DirName      = "275_325Gev",
 MinObjects   = 1,
-MaxObjects   = 2,
+MaxObjects   = 15,
 StandardPlots     = True,
 )
 
@@ -541,7 +541,7 @@ json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden
 # VertexWeights =[0.20, 0.63, 1.19, 1.57, 1.62, 1.42, 1.09, 0.80 ,0.57, 0.42, 0.30, 0.20]
 # # VertexWeights = [0.0, 0.027442995662725636, 0.12682983875287387, 0.28326829632076572, 0.40618954180036759, 0.41605144586432974, 0.33147399297403923, 0.21562021576661147, 0.1140047132529971]
 # ).ps())
-btag = OP_NumCommonBtagJets(">=",1,2.)
+btag = OP_NumCommonBtagJets(">=",1,2.0)
 # PreScaleWeights = PreScaleReweighting(datatriggerps.ps())
 recHitCut = OP_SumRecHitPtCut(30.)
 json_ouput = JSONOutput("filtered")
@@ -578,40 +578,11 @@ def MakeDataTree(Threshold):
   cutTreeData.TAttach(numComPhotons,VertexPtOverHT)
   cutTreeData.TAttach(VertexPtOverHT,htCut275)
   #FOR HT > 275Gev Plot
-  cutTreeData.TAttach(htCut275,DiJet3)
-  cutTreeData.TAttach(htCut275,NJet3)
-  cutTreeData.TAttach(DiJet3,HadStandardAll)
-  cutTreeData.TAttach(NJet3,nHadStandardAll)
   #END HT 275GEV Plot
   #Begin MHT/MET plot inthe low region.
   cutTreeData.TAttach(htCut275,DeadEcalCutData)
-  cutTreeData.TAttach(DeadEcalCutData,LessThan375)
-  cutTreeData.TAttach(LessThan375,DiJet0)
-  cutTreeData.TAttach(LessThan375,NJet0)
-  cutTreeData.TAttach(DiJet0,HadStandard275_375)
-  cutTreeData.TAttach(NJet0,nHadStandard275_375)
-  #for Vertext multiplicity plot at 325geV
-  cutTreeData.TAttach(htCut275,htCut375GeV)
-  cutTreeData.TAttach(htCut375GeV,DiJet2)
-  cutTreeData.TAttach(htCut375GeV,NJet2)
-  cutTreeData.TAttach(DiJet2,HadStandard375)
-  cutTreeData.TAttach(NJet2,nHadStandard375)
-  cutTreeData.TAttach(DeadEcalCutData,htCut375)
-  #Here be plots for baby jet MHT and MHT/MET in the signal region after dead ecal cuts
-  cutTreeData.TAttach(htCut375,DiJet4)
-  cutTreeData.TAttach(DiJet4,HadStandard375_after_DeadEcal)
-  cutTreeData.TAttach(htCut375,NJet4)
-  cutTreeData.TAttach(htCut375,alphaT1)
-  cutTreeData.TAttach(NJet4,nHadStandard375_after_DeadEcal)
   #Here be plots after all the cuts!!
   cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
-  cutTreeData.TAttach(MHT_METCut,htCut375All)
-  cutTreeData.TAttach(htCut375All,NJet5)
-  cutTreeData.TAttach(htCut375All,DiJet5)
-  # cutTreeData.TAttach(alphat,eventDump)
-#  cutTreeData.TAttach(alphat,skim)
-  cutTreeData.TAttach(NJet5,nHadStandardAllCuts)
-  cutTreeData.TAttach(DiJet5,HadStandardAllCuts)
   cutTreeData.TAttach(MHT_METCut, alphat)
   cutTreeData.TAttach(alphat,HT875Cut)
   cutTreeData.TAttach(HT875Cut,eventDump)#skim)
@@ -656,52 +627,13 @@ def MakeMCTree(Threshold):
   cutTreeMC.TAttach(numComLeptons,numComPhotons)
   cutTreeMC.TAttach(numComPhotons,VertexPtOverHT)
   cutTreeMC.TAttach(VertexPtOverHT,htCut275)
-  # cutTreeMC.TAttach(numComPhotons,ht275_Fail)
-  # cutTreeMC.TAttach(numComPhotons,ht325_Fail)
-  # cutTreeMC.TAttach(ht275_Fail,htLess325_Fail)
-  # cutTreeMC.TAttach(ht325_Fail,htLess375_Fail)
-  # cutTreeMC.TAttach(numComPhotons,ht375_Fail)
-  # cutTreeMC.TAttach(htLess325_Fail,Plot_275_325Fail)
-  # cutTreeMC.TAttach(htLess375_Fail,Plot_325_375Fail)
-  # cutTreeMC.TAttach(ht375_Fail,Plot_375Fail)
-  #FOR HT > 275Gev Plot
-  cutTreeMC.TAttach(htCut275,DiJet3)
-  cutTreeMC.TAttach(htCut275,NJet3)
-  cutTreeMC.TAttach(DiJet3,HadStandardAll)
-  cutTreeMC.TAttach(NJet3,nHadStandardAll)
-  #END HT 275GEV Plot
-  #Begin MHT/MET plot inthe low region.
   cutTreeMC.TAttach(htCut275,DeadEcalCutMC)
-  cutTreeMC.TAttach(DeadEcalCutMC,LessThan375)
-  cutTreeMC.TAttach(LessThan375,DiJet0)
-  cutTreeMC.TAttach(LessThan375,NJet0)
-  cutTreeMC.TAttach(DiJet0,HadStandard275_375)
-  cutTreeMC.TAttach(NJet0,nHadStandard275_375)
 
-  cutTreeMC.TAttach(DeadEcalCutMC,htCut375)
-  cutTreeMC.TAttach(htCut275,htCut375GeV)
-  cutTreeMC.TAttach(htCut375GeV,DiJet2)
-  cutTreeMC.TAttach(htCut375GeV,NJet2)
-
-  cutTreeMC.TAttach(DiJet2,HadStandard375)
-  cutTreeMC.TAttach(NJet2,nHadStandard375)
-
-  #Here be plots for baby jet MHT and MHT/MET in the signal region after dead ecal cuts
-  cutTreeMC.TAttach(htCut375,DiJet4)
-  cutTreeMC.TAttach(DiJet4,HadStandard375_after_DeadEcal)
-  cutTreeMC.TAttach(htCut375,NJet4)
-  cutTreeMC.TAttach(htCut375,alphaT1)
-  cutTreeMC.TAttach(NJet4,nHadStandard375_after_DeadEcal)
 
 
   #Here be plots after all the cuts!!
   cutTreeMC.TAttach(DeadEcalCutMC,MHT_METCut)
-  cutTreeMC.TAttach(MHT_METCut,alphaT2)
-  cutTreeMC.TAttach(MHT_METCut,htCut375All)
-  cutTreeMC.TAttach(htCut375All,NJet5)
-  cutTreeMC.TAttach(htCut375All,DiJet5)
-  cutTreeMC.TAttach(NJet5,nHadStandardAllCuts)
-  cutTreeMC.TAttach(DiJet5,HadStandardAllCuts)
+
   cutTreeMC.TAttach(MHT_METCut,btag)
   out.append(AddBinedHist(cutTree = cutTreeData,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
