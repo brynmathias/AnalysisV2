@@ -1,7 +1,7 @@
 10
 
 dir
-3573
+3575
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/ssdl/python/SSDLsamples/data/FastJetCorr
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
@@ -25,40 +25,6 @@ pioppi
 
 
 53b2a5e2-b89b-4778-b471-5fcb16a2c67a
-
-HT_Run2011A_PromptReco_v6.py
-file
-
-
-
-
-2011-10-18T17:03:13.000000Z
-55458207e8afec407289b3675e93b6c0
-2011-10-14T13:43:37.522596Z
-3301
-pioppi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-104785
 
 TauPlusX_Run2011A_05Aug2011_v1.py
 file
@@ -94,16 +60,16 @@ pioppi
 
 20437
 
-ElectronHad_Run2011A_05Aug2011_v1.py
+HT_Run2011A_PromptReco_v6.py
 file
 
 
 
 
 2011-10-18T17:03:13.000000Z
-92d99061495567a6970ecafe073dfe2c
-2011-10-16T20:49:42.374287Z
-3308
+55458207e8afec407289b3675e93b6c0
+2011-10-14T13:43:37.522596Z
+3301
 pioppi
 
 
@@ -126,7 +92,7 @@ pioppi
 
 
 
-41583
+104785
 
 HT_Run2011A_All.py
 file
@@ -162,6 +128,40 @@ arlogb
 
 481297
 
+ElectronHad_Run2011A_05Aug2011_v1.py
+file
+
+
+
+
+2011-10-18T17:03:13.000000Z
+92d99061495567a6970ecafe073dfe2c
+2011-10-16T20:49:42.374287Z
+3308
+pioppi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+41583
+
 Tau_Run2011A_05Aug2011_v1.py
 file
 
@@ -195,74 +195,6 @@ pioppi
 
 
 12581
-
-__init__.py
-file
-
-
-
-
-2011-10-18T17:03:13.000000Z
-d41d8cd98f00b204e9800998ecf8427e
-2011-06-29T16:43:17.342864Z
-2852
-arlogb
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-0
-
-Tau_Run2011A_May10ReReco_v1.py
-file
-
-
-
-
-2011-10-18T17:03:13.000000Z
-b1ceaf38a9186bcfbff8caeb0bd6e67e
-2011-10-14T13:50:59.921620Z
-3302
-pioppi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-64209
 
 TauPlusX_Run2011B_PromptReco_v1.py
 file
@@ -298,16 +230,16 @@ pioppi
 
 160251
 
-ElectronHad_Run2011B_PromptReco_v1.py
+Tau_Run2011A_May10ReReco_v1.py
 file
 
 
 
 
-2011-11-30T15:34:47.000000Z
-9cce6eb02635a09c9f0bcbd711dd3b3f
-2011-11-16T12:39:15.376418Z
-3448
+2011-10-18T17:03:13.000000Z
+b1ceaf38a9186bcfbff8caeb0bd6e67e
+2011-10-14T13:50:59.921620Z
+3302
 pioppi
 
 
@@ -330,7 +262,41 @@ pioppi
 
 
 
-263702
+64209
+
+__init__.py
+file
+
+
+
+
+2011-10-18T17:03:13.000000Z
+d41d8cd98f00b204e9800998ecf8427e
+2011-06-29T16:43:17.342864Z
+2852
+arlogb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+0
 
 MuHad_Run2011A_05Aug2011_v1.py
 file
@@ -366,16 +332,16 @@ pioppi
 
 63586
 
-Tau_Run2011B_PromptReco_v1.py
+ElectronHad_Run2011B_PromptReco_v1.py
 file
 
 
 
 
 2011-11-30T15:34:47.000000Z
-7eb510d1434b8d9737d53fc707b79276
-2011-11-12T10:31:02.733145Z
-3429
+9cce6eb02635a09c9f0bcbd711dd3b3f
+2011-11-16T12:39:15.376418Z
+3448
 pioppi
 
 
@@ -398,7 +364,7 @@ pioppi
 
 
 
-98273
+263702
 
 TauPlusX_Run2011A_PromptReco_v6.py
 file
@@ -434,6 +400,40 @@ pioppi
 
 32890
 
+Tau_Run2011B_PromptReco_v1.py
+file
+
+
+
+
+2011-11-30T15:34:47.000000Z
+7eb510d1434b8d9737d53fc707b79276
+2011-11-12T10:31:02.733145Z
+3429
+pioppi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+98273
+
 Tau_Run2011A_PromptReco_v4.py
 file
 
@@ -468,40 +468,6 @@ pioppi
 
 61085
 
-ElectronHad_Run2011A_PromptReco_v6.py
-file
-
-
-
-
-2011-10-18T17:03:13.000000Z
-b0a284231e756a2b9624791c36daafae
-2011-10-14T13:43:37.522596Z
-3301
-pioppi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-61248
-
 TauPlusX_Run2011A_All.py
 file
 
@@ -535,6 +501,40 @@ arlogb
 
 
 238859
+
+ElectronHad_Run2011A_PromptReco_v6.py
+file
+
+
+
+
+2011-10-18T17:03:13.000000Z
+b0a284231e756a2b9624791c36daafae
+2011-10-14T13:43:37.522596Z
+3301
+pioppi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+61248
 
 Tau_Run2011A_PromptReco_v6.py
 file

@@ -54,7 +54,7 @@ from data.Run2011.HT_Run2011_promptReco_DCS import *
 from data.Run2011.HT42_incomplete import *
 from data.Run2011.RA1ToBurn import *
 from data.Run2011.HTRun2011AB import *
-outDir = "../results_"+strftime("%d_%b_%H")+"//Data43"
+outDir = "../results_NoOddVeto_"+strftime("%d_%b_%H")+"//Data43"
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011AB])
 

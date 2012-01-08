@@ -53,7 +53,7 @@ from data.Run2011.HT42_incomplete import *
 from data.Run2011.RA1ToBurn import *
 from data.Run2011.HTRun2011AB import *
 
-outDir = "../results_"+strftime("%d_%b_%H")+"//Data37"
+outDir = "../results_NoOddVeto_"+strftime("%d_%b_%H")+"//Data37"
 ensure_dir(outDir)
 # HT42_incomplete.LastEntry = 100
 # HT42_incomplete.File = HT42_incomplete.File[0:1]

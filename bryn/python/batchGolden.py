@@ -520,34 +520,7 @@ HadStandard_3 = HadronicCommonPlots(t3.ps())
 HadStandard_4 = HadronicCommonPlots(t4.ps())
 VertexPtOverHT = OP_SumVertexPtOverHT(0.1)
 eventDump = EventDump()
-datatriggerps = PSet(
-    Verbose = False,
-    UsePreScaledTriggers = False,
-    Triggers = [
 
-"HLT_HT350_AlphaT0p51_v1" ,
-"HLT_HT350_AlphaT0p51_v2" ,
-"HLT_HT350_AlphaT0p51_v3" ,
-"HLT_HT350_AlphaT0p51_v4" ,
-"HLT_HT350_AlphaT0p51_v5" ,
-"HLT_HT350_AlphaT0p52_v1" ,
-"HLT_HT350_AlphaT0p52_v2" ,
-"HLT_HT350_AlphaT0p53_v10",
-"HLT_HT400_AlphaT0p51_v1" ,
-"HLT_HT400_AlphaT0p51_v2" ,
-"HLT_HT400_AlphaT0p51_v3" ,
-"HLT_HT400_AlphaT0p51_v4" ,
-"HLT_HT400_AlphaT0p51_v5" ,
-"HLT_HT400_AlphaT0p51_v6" ,
-"HLT_HT400_AlphaT0p51_v7" ,
-"HLT_HT400_AlphaT0p51_v10",
-"HLT_HT400_AlphaT0p52_v5" ,
-"HLT_HT250_AlphaT0p58_v3" ,
-"HLT_HT250_AlphaT0p60_v3" ,
-"HLT_HT300_AlphaT0p54_v5" ,
-"HLT_HT300_AlphaT0p55_v3" ,
-"HLT_HT350_AlphaT0p53_v10",]
-)
 triggers = {
     "275_325":["HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3",
            "HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p58_v3",
@@ -602,10 +575,10 @@ def MakeDataTree(Threshold):
   # cutTreeData.TAttach(json,evFilter)
   # cutTreeData.TAttach(evFilter,skim)
   # cutTreeData.TAttach(evFilter,eventDump)
-  cutTreeData.TAttach(json,DataTrigger)
+  cutTreeData.TAttach(json,MHTCut)
   cutTreeData.TAttach(json,json_ouput)
   # cutTreeData.Attach(DataTrigger)
-  cutTreeData.TAttach(DataTrigger,MHTCut)
+
   cutTreeData.TAttach(MHTCut,NoiseFilt)
   cutTreeData.TAttach(NoiseFilt,GoodVertexMonster)
   cutTreeData.TAttach(GoodVertexMonster,recHitCut)
