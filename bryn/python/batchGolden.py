@@ -228,7 +228,7 @@ def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],Trigger = None
   """docstring for AddBinedHist"""
   out = []
   if Trigger is not None:
-      for lower,upper in zip(htBins[0],htBins[1:]+[None]):
+      for lower,upper in zip(htBins,htBins[1:]+[None]):
         # print "Lower , Upper =", lower , upper
         if int(lower) == 325 and upper is None: continue
         if int(lower) == 375 and upper is None: continue
@@ -251,7 +251,7 @@ def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],Trigger = None
         pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
         out.append(pOps) 
   else:
-      for lower,upper in zip(htBins[0],htBins[1:]+[None]):
+      for lower,upper in zip(htBins,htBins[1:]+[None]):
         # print "Lower , Upper =", lower , upper
         if int(lower) == 325 and upper is None: continue
         if int(lower) == 375 and upper is None: continue
