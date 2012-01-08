@@ -224,7 +224,7 @@ def makePlotOp(OP = (), cutTree = None, cut = None, label = ""):
   return out
   pass
 
-def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],Trigger = None,lab = ""):
+def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],TriggerDict = None,lab = ""):
   """docstring for AddBinedHist"""
   out = []
   if Trigger is not None:
@@ -636,11 +636,11 @@ def MakeDataTree(Threshold):
   cutTreeData.TAttach(MHT_METCut,btag)
   out.append(AddBinedHist(cutTree = cutTreeData,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
-            htBins = HTBins,Trigger = triggers,lab ="btag_") )
+            htBins = HTBins,TriggerDict = triggers,lab ="btag_") )
 
   out.append(AddBinedHist(cutTree = cutTreeData,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins,Trigger = triggers,lab = "") )
+            htBins = HTBins,TriggerDict = triggers,lab = "") )
 
   return (cutTreeData,secondJetET,out)
 
@@ -680,9 +680,9 @@ def MakeMCTree(Threshold):
   cutTreeMC.TAttach(MHT_METCut,btag)
   out.append(AddBinedHist(cutTree = cutTreeMC,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = btag,
-            htBins = HTBins,Trigger = None,lab ="btag_") )
+            htBins = HTBins,TriggerDict = None,lab ="btag_") )
   out.append(AddBinedHist(cutTree = cutTreeMC,
             OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins,Trigger = None,lab = "") )
+            htBins = HTBins,TriggerDict = None,lab = "") )
   return (cutTreeMC,secondJetET,out)
 
