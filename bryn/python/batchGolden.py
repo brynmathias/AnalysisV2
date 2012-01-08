@@ -227,7 +227,7 @@ def makePlotOp(OP = (), cutTree = None, cut = None, label = ""):
 def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],TriggerDict = None,lab = ""):
   """docstring for AddBinedHist"""
   out = []
-  if Trigger is not None:
+  if TriggerDict is not None:
       for lower,upper in zip(htBins,htBins[1:]+[None]):
         # print "Lower , Upper =", lower , upper
         if int(lower) == 325 and upper is None: continue
