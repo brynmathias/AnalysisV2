@@ -196,8 +196,8 @@ namespace Operation {
   
 
     NumCommonBtagJets::~NumCommonBtagJets(){ delete mComparison; }
-    UInt_t nBtags = 0;
     bool NumCommonBtagJets::Process(Event::Data & ev){
+      UInt_t nBtags = 0;
       for(unsigned int i=0; i<ev.JD_CommonJets().accepted.size(); i++) {
         std::cout << "we are on jet " << i << " the btag discriminator is " << ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), 4) << std::endl;
        if(ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), 4) > mCut) {
