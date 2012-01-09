@@ -355,9 +355,7 @@ triggers = {
            "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
            "HLT_HT400_AlphaT0p52_v5"],
 }
-DataTrigger = OP_MultiTrigger( datatriggerps.ps() )
 
-JetAdd = JetAddition(0.)
 
 json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden2011.json"))
 # AlphatTriggerCut(0.52414,50)#
@@ -366,7 +364,10 @@ json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden
 # VertexWeights =[0.20, 0.63, 1.19, 1.57, 1.62, 1.42, 1.09, 0.80 ,0.57, 0.42, 0.30, 0.20]
 # # VertexWeights = [0.0, 0.027442995662725636, 0.12682983875287387, 0.28326829632076572, 0.40618954180036759, 0.41605144586432974, 0.33147399297403923, 0.21562021576661147, 0.1140047132529971]
 # ).ps())
-btag = OP_NumCommonBtagJets(">=",1,2.0)
+
+btagDiMuon= OP_NumCommonBtagJets(">=",1,2.0)
+btagOneMuon= OP_NumCommonBtagJets(">=",1,2.0)
+ZeroMuonbtag= OP_NumCommonBtagJets(">=",1,2.0)
 # PreScaleWeights = PreScaleReweighting(datatriggerps.ps())
 recHitCut = OP_SumRecHitPtCut(30.)
 json_ouput = JSONOutput("filtered")
