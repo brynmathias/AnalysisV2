@@ -371,29 +371,17 @@ btagOneMuon= OP_NumCommonBtagJets(">=",1,2.0)
 ZeroMuonbtag= OP_NumCommonBtagJets(">=",1,2.0)
 # PreScaleWeights = PreScaleReweighting(datatriggerps.ps())
 recHitCut = OP_SumRecHitPtCut(30.)
+ZeroMuon = OP_NumComMuons("<=",0)
 json_ouput = JSONOutput("filtered")
+OneMuon = OP_NumComMuons("==",1)
+ZMassCut = RECO_2ndMuonMass(25.0, 91.2, False, "all")
+PFMTCut30 = RECO_PFMTCut(30.0)
+DiMuon = OP_NumComMuons("==",2)
+ZMass_2Muons = RECO_2ndMuonMass(25.0, 91.2, True, "OS")
+minDRMuonJetCut = RECO_MuonJetDRCut(0.5)
+minDRMuonJetCutDiMuon = RECO_MuonJetDRCut(0.5)
 def MakeDataTree(Threshold,Muon = None):
   out = []
-  ZeroMuon = OP_NumComMuons("<=",0)
-  muText = ""
-  out.append(muText)
-  OneMuon = OP_NumComMuons("==",1)
-  ZMassCut = RECO_2ndMuonMass(25.0, 91.2, False, "all")
-  PFMTCut30 = RECO_PFMTCut(30.0)
-  muText = "OneMuon_"
-  out.append(minDRMuonJetCut)
-  out.append(ZMassCut)
-  out.append(PFMTCut30)
-  out.append(muText)
-  out.append(NumCommonMuons)
-  DiMuon = OP_NumComMuons("==",2)
-  ZMass_2Muons = RECO_2ndMuonMass(25.0, 91.2, True, "OS")
-  minDRMuonJetCut = RECO_MuonJetDRCut(0.5)
-  muText = "DiMuon_"
-  out.append(NumCommonMuons)
-  out.append(ZMass_2Muons)
-  out.append(minDRMuonJetCut)
-  out.append(muText)
   print int(Threshold)
 
   secondJetET = OP_SecondJetEtCut(Threshold)
@@ -445,23 +433,24 @@ def MakeDataTree(Threshold,Muon = None):
   
   else:
       cutTreeData.TAttach(MHT_METCut,minDRMuonJetCut)
-      cutTreeData.TAttach(minDRMuonJetCut,ZMassCut)
+      cutTreeData.TAttach(minDRMuonJetCut,OneMuon)
+      cutTreeData.TAttach(OneMuon,ZMassCut)
       cutTreeData.TAttach(ZMassCut,PFMTCut30)
-      cutTreeData.TAttach(PFMTCut30,OneMuon)
-      cutTree.TAttach(OneMuon,btagOneMuon)
+      cutTreeData.TAttach(PFMTCut30,btagOneMuon)
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
       htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
     
       out.append(AddBinedHist(cutTree = cutTreeData,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = OneMuon,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
       htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
     
     
       
-      cutTreeData.TAttach(minDRMuonJetCut,ZMass_2Muons)
       cutTreeData.TAttach(minDRMuonJetCut,DiMuon)
-      cutTreeData.TAttach(DiMuon,btagDiMuon)
+      cutTreeData.TAttach(DiMuon,ZMass_2Muons)
+      cutTreeData.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
+      cutTreeData.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
       # avobe here does one big inclusive bin!
       # Now lets start binning in HT bins
       # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
@@ -472,7 +461,7 @@ def MakeDataTree(Threshold,Muon = None):
       htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
     
       out.append(AddBinedHist(cutTree = cutTreeData,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = DiMuon,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
     
   return (cutTreeData,secondJetET,out)
@@ -481,23 +470,7 @@ def MakeDataTree(Threshold,Muon = None):
 
 def MakeMCTree(Threshold, Muon = None):
   out = []
-  ZeroMuon = OP_NumComMuons("<=",0)
-  muText = ""
-  out.append(muText)
-  OneMuon = OP_NumComMuons("==",1)
-  ZMassCut = RECO_2ndMuonMass(25.0, 91.2, False, "all")
-  PFMTCut30 = RECO_PFMTCut(30.0)
-  muText = "OneMuon_"
-  out.append(ZMassCut)
-  out.append(PFMTCut30)
-  out.append(muText)
-  DiMuon = OP_NumComMuons("==",2)
-  ZMass_2Muons = RECO_2ndMuonMass(25.0, 91.2, True, "OS")
-  minDRMuonJetCut = RECO_MuonJetDRCut(0.5)
-  muText = "DiMuon_"
-  out.append(ZMass_2Muons)
-  out.append(minDRMuonJetCut)
-  out.append(muText)
+
   HTBins = []
   
   if int(Threshold) is 100 : HTBins = [375+100*i for i in range(6)]
@@ -538,36 +511,39 @@ def MakeMCTree(Threshold, Muon = None):
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "" + muText) )
       
-  else:  
+  else:
       cutTreeMC.TAttach(MHT_METCut,minDRMuonJetCut)
-      cutTreeMC.TAttach(minDRMuonJetCut,ZMassCut)
+      cutTreeMC.TAttach(minDRMuonJetCut,OneMuon)
+      cutTreeMC.TAttach(OneMuon,ZMassCut)
       cutTreeMC.TAttach(ZMassCut,PFMTCut30)
-      cutTreeMC.TAttach(PFMTCut30,OneMuon)
-      cutTreeMC.TAttach(OneMuon,btagOneMuon)
+      cutTreeMC.TAttach(PFMTCut30,btagOneMuon)
       out.append(AddBinedHist(cutTree = cutTreeMC,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
       htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
     
       out.append(AddBinedHist(cutTree = cutTreeMC,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = OneMuon,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
       htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
     
     
       
-      cutTreeMC.TAttach(minDRMuonJetCut,ZMass_2Muons)
       cutTreeMC.TAttach(minDRMuonJetCut,DiMuon)
-      cutTreeMC.TAttach(DiMuon,btagDiMuon)
+      cutTreeMC.TAttach(DiMuon,ZMass_2Muons)
+      cutTreeMC.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
+      cutTreeMC.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
       # avobe here does one big inclusive bin!
       # Now lets start binning in HT bins
       # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
       # we arrange the HT bins so they are not repoduced though out threshold runs.
+      cutTreeMC.TAttach(DiMuon,btagDiMuon)
       out.append(AddBinedHist(cutTree = cutTreeMC,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
       htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
     
       out.append(AddBinedHist(cutTree = cutTreeMC,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = DiMuon,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
+
 
   return (cutTreeMC,secondJetET,out)
 
