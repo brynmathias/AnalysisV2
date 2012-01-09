@@ -1,9 +1,6 @@
 #!/usr/bin/sh
 ./Data37.py         -b -n50   
 ./Data43.py         -b -n50
-./DataAtrigger2.py  -b -n50
-./DataAtrigger3.py  -b -n50
-./DataAtrigger.py   -b -n50
 ./Data.py           -b -n50
 ./MuonData37.py     -b -n50
 ./MuonData43.py     -b -n50
