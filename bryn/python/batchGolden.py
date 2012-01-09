@@ -455,7 +455,7 @@ def MakeDataTree(Threshold,Muon = None):
       # Now lets start binning in HT bins
       # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
       # we arrange the HT bins so they are not repoduced though out threshold runs.
-      cutTreeData.TAttach(DiMuon,btagDiMuon)
+
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
       htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
