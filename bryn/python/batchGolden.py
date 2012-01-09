@@ -197,11 +197,11 @@ def makePlotOp(OP = (), cutTree = None, cut = None, label = ""):
         ]
   )
   skim = SkimOp(skim_ps.ps())
-  out.append(skim)
-  out.append(skim_ps)
+  # out.append(skim)
+  # out.append(skim_ps)
   cutTree.TAttach(cut,alpha)
   cutTree.TAttach(alpha,dump)
-  cutTree.TAttach(alpha,skim)
+  # cutTree.TAttach(alpha,skim)
   out.append(alpha)
   out.append(dump)
   return out
