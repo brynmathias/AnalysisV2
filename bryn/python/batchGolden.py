@@ -9,6 +9,7 @@ import os
 import setupSUSY
 from libFrameworkSUSY import *
 from libHadronic import *
+from libWPol import *
 from libbryn import *
 from icf.core import PSet,Analysis
 from time import strftime
