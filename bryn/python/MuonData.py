@@ -40,7 +40,7 @@ addCutFlowData(anal_ak5_caloData)
 
 from data.Run2011.HT_Run2011AB import *
 
-outDir = "../results_"+strftime("%d_%b")+"//MuonData/"
+outdir = "../results_"+strftime("%d_%b")+"//MuonData/"
 
 ensure_dir(outdir)
 anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])
