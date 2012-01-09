@@ -10,7 +10,7 @@ from batchGolden import *
 from ra1objectid.vbtfElectronId_cff import *
 from ra1objectid.vbtfMuonId_cff import *
 from ra1objectid.ra3PhotonId_cff import *
-
+from libOneLepton import *
 
 vbtfMuonId_cff = Muon_IDFilter( vbtfmuonidps.ps()  )
 default_common.Jets.PtCut=50.*(325./375.)
