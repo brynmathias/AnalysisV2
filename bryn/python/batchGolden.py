@@ -425,11 +425,11 @@ def MakeDataTree(Threshold,Muon = None):
       cutTreeData.TAttach(ZeroMuon,ZeroMuonbtag)
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
-      htBins = HTBins,TriggerDict = triggers,lab ="btag_"+muText) )
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_") )
     
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
-      htBins = HTBins,TriggerDict = triggers,lab = "" + muText) )
+      htBins = HTBins,TriggerDict = triggers,lab = "") )
   
   else:
       cutTreeData.TAttach(MHT_METCut,minDRMuonJetCut)
@@ -505,11 +505,11 @@ def MakeMCTree(Threshold, Muon = None):
       cutTreeMC.TAttach(ZeroMuon,ZeroMuonbtag)
       out.append(AddBinedHist(cutTree = cutTreeMC,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
-      htBins = HTBins,TriggerDict = triggers,lab ="btag_"+muText) )
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_") )
     
       out.append(AddBinedHist(cutTree = cutTreeMC,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
-      htBins = HTBins,TriggerDict = triggers,lab = "" + muText) )
+      htBins = HTBins,TriggerDict = triggers,lab = "") )
       
   else:
       cutTreeMC.TAttach(MHT_METCut,minDRMuonJetCut)
