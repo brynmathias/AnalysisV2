@@ -34,7 +34,7 @@ anal_ak5_caloMC=Analysis("AK5Calo")
 addCutFlowMC(anal_ak5_caloMC)
 
 
-outDir = "../results_"+strftime("%d_%b_%H")+"//NoSmear43/"
+outDir = "../results_"+strftime("%d_%b")+"//NoSmear43/"
 ensure_dir(outDir)
 
 anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,Summer11_MC_Lower_Bins)
