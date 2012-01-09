@@ -375,7 +375,6 @@ def MakeDataTree(Threshold,Muon = None):
   out = []
   ZeroMuon = OP_NumComMuons("<=",0)
   muText = ""
-  out.append(NumCommonMuons)
   out.append(muText)
   OneMuon = OP_NumComMuons("==",1)
   ZMassCut = RECO_2ndMuonMass(25.0, 91.2, False, "all")
