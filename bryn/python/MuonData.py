@@ -6,22 +6,24 @@ from libbryn import *
 from libHadronic import *
 from icf.core import PSet,Analysis
 from time import strftime
+from time import strftime
 from batchGolden import *
+
 from ra1objectid.vbtfElectronId_cff import *
 from ra1objectid.vbtfMuonId_cff import *
 from ra1objectid.ra3PhotonId_cff import *
 vbtfMuonId_cff = Muon_IDFilter( vbtfmuonidps.ps()  )
 vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
-#  Change the settings from golden to use the lowest scaled bin.
-default_common.Jets.PtCut=50.*(275./375.)
-cutTree,blah,l = MakeDataTree(100.*(275./375.) Muon = None)
-print cutTree
+CustomMuID = OL_CustomVBTFMuID(mu_id.ps())
+cutTree,blah,l = MakeDataTree(100., Muon = True)
+
+
 
 def addCutFlowData(a) :
   a.AddPhotonFilter("PreCC",ra3PhotonIdFilter)
   a.AddElectronFilter("PreCC",vbtfElectronIdFilter)
-  a.AddMuonFilter("PreCC",vbtfMuonId_cff)
+  a.AddMuonFilter("PreCC",CustomMuID)
   a+=cutTree
 
 # AK5 Calo
@@ -37,9 +39,7 @@ addCutFlowData(anal_ak5_caloData)
 
 from data.Run2011.HT_Run2011AB import *
 
-outDir = "../results_"+strftime("%d_%b_%H")+"//Data37"
-ensure_dir(outDir)
-# HT42_incomplete.LastEntry = 100
-# HT42_incomplete.File = HT42_incomplete.File[0:1]
-anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011AB])
+outDir = "../results_"+strftime("%d_%b_%H")+"//MuonData/"
 
+ensure_dir(outdir)
+anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])

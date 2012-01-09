@@ -17,11 +17,10 @@ vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 PreScaleWeights      = PreScaleReweighting(datatriggerps.ps())
 
-cutTree,blah,l = MakeDataTree(100.)
+cutTree,blah,l = MakeDataTree(100., Muon = None)
 
 
 def addCutFlowData(a) :
-  # a.AddJetFilter("PreCC",JetCorrections)
   a.AddPhotonFilter("PreCC",ra3PhotonIdFilter)
   a.AddElectronFilter("PreCC",vbtfElectronIdFilter)
   a.AddMuonFilter("PreCC",vbtfMuonId_cff)
@@ -38,19 +37,9 @@ anal_ak5_caloData=Analysis("AK5Calo")
 addCutFlowData(anal_ak5_caloData)
 
 
-
-
-from data.Run2011.HT_Run2011_promptReco_DCS import *
-from data.Run2011.RA1ToBurn import *
-from data.Run2011.HT42_incomplete import *
-from data.Run2011.HT_Run2011A import *
 from data.Run2011.HT_Run2011AB import *
-from data.Run2011.HTRun2011AB import *
-test = PSet(
-Name = "test",
-Format = ("ICF",3),
-Weight = 1.0,
-File = "../../Ntuples/375_newFormat.root")
-outdir = "../results_NoOddVeto_"+strftime("%d_%b_%H")+"/Data/"
+
+
+outdir = "../results"+strftime("%d_%b_%H")+"/Data/"
 ensure_dir(outdir)
 anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])#HT_Run2011A])

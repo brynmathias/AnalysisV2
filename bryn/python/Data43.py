@@ -17,15 +17,9 @@ PreScaleWeights = PreScaleReweighting(datatriggerps.ps())
 
 default_common.Jets.PtCut=50.*(325./375.)
 #  Change the settings from golden to use the lowest scaled bin.
-cutTree,blah,l = MakeDataTree(100.*(325./375.))
-
-
-
-
+cutTree,blah,l = MakeDataTree(100.*(325./375.), Muon = None)
 
 def addCutFlowData(a) :
- # a.AddWeightFilter("Weight",PreScaleWeights)
-  # a.AddJetFilter("PreCC",JetCorrections)
   a.AddPhotonFilter("PreCC",ra3PhotonIdFilter)
   a.AddElectronFilter("PreCC",vbtfElectronIdFilter)
   a.AddMuonFilter("PreCC",vbtfMuonId_cff)
@@ -42,25 +36,8 @@ anal_ak5_caloData=Analysis("AK5Calo")
 addCutFlowData(anal_ak5_caloData)
 
 
-tedSkim = PSet(
-Name="TedSkim",
-Format=("ICF",3),
-Weight= 1.0,
-File="../results_"+strftime("%d_%b_%H")+"/WithSingleTop//Data/AK5Calo_Jets.root")
-#"~elaird1/public_html/73_candidates/v3/350_bin/calo.root")
+from data.Run2011.HT_Run2011AB import *
 
-
-from data.Run2011.HT_Run2011_promptReco_DCS import *
-from data.Run2011.HT42_incomplete import *
-from data.Run2011.RA1ToBurn import *
-from data.Run2011.HTRun2011AB import *
-outDir = "../results_NoOddVeto_"+strftime("%d_%b_%H")+"//Data43"
+outDir = "../results_"+strftime("%d_%b_%H")+"//Data43"
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011AB])
-
-# from data.MultiJet_Run2010B_Nov4ReReco_v1 import *
-
-#
-# anal_ak5_pfData.Run("../results_"+strftime("%d_%b_%H")+"//Data",conf_ak5_pfData,[HT_Run2011_promptReco_DCS])
-# anal_ak5_jptData.Run("../results_"+strftime("%d_%b_%H")+"//",conf_ak5_jptData,data)
-# anal_ak7_caloData.Run("../results_"+strftime("%d_%b_%H")+"//",conf_ak7_caloData,data)

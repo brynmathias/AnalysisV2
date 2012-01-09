@@ -12,14 +12,17 @@ from ra1objectid.vbtfMuonId_cff import *
 from ra1objectid.ra3PhotonId_cff import *
 
 
-#JetSmear = JetSmear(0.1,30)
 vbtfMuonId_cff = Muon_IDFilter( vbtfmuonidps.ps()  )
-cutTreeMC,junkVar,l = MakeMCTree(100.,Muon = None)
+default_common.Jets.PtCut=50.*(325./375.)
+cutTreeMC, junkVar,l = MakeMCTree(100.*(325./375.), Muon = True)
+
 vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
+CustomMuID = OL_CustomVBTFMuID(mu_id.ps())
+
 def addCutFlowMC(b) :
 #  b.AddWeightFilter("Weight", vertex_reweight)
-  b.AddMuonFilter("PreCC",vbtfMuonId_cff)
+  b.AddMuonFilter("PreCC",CustomMuID)
   b.AddPhotonFilter("PreCC",ra3PhotonIdFilter)
   b.AddElectronFilter("PreCC",vbtfElectronIdFilter)
   b+=cutTreeMC
@@ -33,7 +36,7 @@ conf_ak5_caloMC.Common.print_out()
 anal_ak5_caloMC=Analysis("AK5Calo")
 addCutFlowMC(anal_ak5_caloMC)
 
-outDir = "../results_"+strftime("%d_%b_%H")+"//NoSmear/"
+outDir = "../results_"+strftime("%d_%b_%H")+"//MuonNoSmear43/"
 ensure_dir(outDir)
 
-anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,Summer11_MC_Higher_Bins)
+anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,Summer11_MC_Lower_Bins)
