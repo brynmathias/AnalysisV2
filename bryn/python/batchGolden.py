@@ -448,6 +448,7 @@ def MakeDataTree(Threshold,Muon = None):
       cutTreeData.TAttach(minDRMuonJetCut,ZMassCut)
       cutTreeData.TAttach(ZMassCut,PFMTCut30)
       cutTreeData.TAttach(PFMTCut30,OneMuon)
+      cutTree.TAttach(OneMuon,btagOneMuon)
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
       htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
@@ -460,7 +461,7 @@ def MakeDataTree(Threshold,Muon = None):
       
       cutTreeData.TAttach(minDRMuonJetCut,ZMass_2Muons)
       cutTreeData.TAttach(minDRMuonJetCut,DiMuon)
-    
+      cutTreeData.TAttach(DiMuon,btagDiMuon)
       # avobe here does one big inclusive bin!
       # Now lets start binning in HT bins
       # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
@@ -482,22 +483,18 @@ def MakeMCTree(Threshold, Muon = None):
   out = []
   ZeroMuon = OP_NumComMuons("<=",0)
   muText = ""
-  out.append(NumCommonMuons)
   out.append(muText)
   OneMuon = OP_NumComMuons("==",1)
   ZMassCut = RECO_2ndMuonMass(25.0, 91.2, False, "all")
   PFMTCut30 = RECO_PFMTCut(30.0)
   muText = "OneMuon_"
-  out.append(minDRMuonJetCut)
   out.append(ZMassCut)
   out.append(PFMTCut30)
   out.append(muText)
-  out.append(NumCommonMuons)
   DiMuon = OP_NumComMuons("==",2)
   ZMass_2Muons = RECO_2ndMuonMass(25.0, 91.2, True, "OS")
   minDRMuonJetCut = RECO_MuonJetDRCut(0.5)
   muText = "DiMuon_"
-  out.append(NumCommonMuons)
   out.append(ZMass_2Muons)
   out.append(minDRMuonJetCut)
   out.append(muText)
@@ -546,6 +543,7 @@ def MakeMCTree(Threshold, Muon = None):
       cutTreeMC.TAttach(minDRMuonJetCut,ZMassCut)
       cutTreeMC.TAttach(ZMassCut,PFMTCut30)
       cutTreeMC.TAttach(PFMTCut30,OneMuon)
+      cutTreeMC.TAttach(OneMuon,btagOneMuon)
       out.append(AddBinedHist(cutTree = cutTreeMC,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
       htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
@@ -558,7 +556,7 @@ def MakeMCTree(Threshold, Muon = None):
       
       cutTreeMC.TAttach(minDRMuonJetCut,ZMass_2Muons)
       cutTreeMC.TAttach(minDRMuonJetCut,DiMuon)
-    
+      cutTreeMC.TAttach(DiMuon,btagDiMuon)
       # avobe here does one big inclusive bin!
       # Now lets start binning in HT bins
       # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
