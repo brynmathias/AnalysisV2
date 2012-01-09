@@ -15,7 +15,6 @@ from ra1objectid.ra3PhotonId_cff import *
 vbtfMuonId_cff = Muon_IDFilter( vbtfmuonidps.ps()  )
 vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
-PreScaleWeights      = PreScaleReweighting(datatriggerps.ps())
 
 cutTree,blah,l = MakeDataTree(100., Muon = None)
 
