@@ -33,7 +33,7 @@ conf_ak5_caloMC.Common.print_out()
 anal_ak5_caloMC=Analysis("AK5Calo")
 addCutFlowMC(anal_ak5_caloMC)
 
-outDir = "../results_"+strftime("%d_%b_%H")+"//NoSmear37/"
+outDir = "../results_"+strftime("%d_%b")+"//NoSmear37/"
 ensure_dir(outDir)
 
 

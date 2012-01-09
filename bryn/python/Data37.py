@@ -37,7 +37,7 @@ addCutFlowData(anal_ak5_caloData)
 
 from data.Run2011.HT_Run2011AB import *
 
-outDir = "../results_"+strftime("%d_%b_%H")+"//Data37"
+outDir = "../results_"+strftime("%d_%b")+"//Data37"
 ensure_dir(outDir)
 # HT42_incomplete.LastEntry = 100
 # HT42_incomplete.File = HT42_incomplete.File[0:1]

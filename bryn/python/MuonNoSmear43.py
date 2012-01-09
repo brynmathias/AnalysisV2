@@ -36,7 +36,7 @@ conf_ak5_caloMC.Common.print_out()
 anal_ak5_caloMC=Analysis("AK5Calo")
 addCutFlowMC(anal_ak5_caloMC)
 
-outDir = "../results_"+strftime("%d_%b_%H")+"//MuonNoSmear43/"
+outDir = "../results_"+strftime("%d_%b")+"//MuonNoSmear43/"
 ensure_dir(outDir)
 
 anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,Summer11_MC_Lower_Bins)
