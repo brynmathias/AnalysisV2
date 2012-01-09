@@ -537,7 +537,7 @@ Double_t WeeklyUpdatePlots::MT2( Event::Data& ev){
 
 bool WeeklyUpdatePlots::StandardPlots( Event::Data& ev ) {
 
-  UInt_t n = ev.JD_CommonJets().size();
+  UInt_t n = ev.JD_CommonJets().accepted.size();
 
   Double_t weight = ev.GetEventWeight();
 
