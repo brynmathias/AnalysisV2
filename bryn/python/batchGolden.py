@@ -369,7 +369,6 @@ json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden
 btagDiMuon= OP_NumCommonBtagJets(">=",1,2.0)
 btagOneMuon= OP_NumCommonBtagJets(">=",1,2.0)
 ZeroMuonbtag= OP_NumCommonBtagJets(">=",1,2.0)
-# PreScaleWeights = PreScaleReweighting(datatriggerps.ps())
 recHitCut = OP_SumRecHitPtCut(30.)
 ZeroMuon = OP_NumComMuons("<=",0)
 json_ouput = JSONOutput("filtered")
