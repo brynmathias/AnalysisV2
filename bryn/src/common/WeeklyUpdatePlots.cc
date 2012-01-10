@@ -187,7 +187,7 @@ void WeeklyUpdatePlots::StandardPlots() {
 
   BookHistArray( BabyJetMHT_StandardAlphaT_,
     "BabyJetMHT_vs_AlphaT",
-    "Cos(Dphi(MHT,MHTbaby));CommonAlphaT;",
+    "Cos(Dphi(MHT,MHTbaby));HadronicAlphaT;",
     400,0.,10.,
     20,-1.,1.,
     nMax_+1, 0, 1, true );
@@ -650,24 +650,24 @@ bool WeeklyUpdatePlots::StandardPlots( Event::Data& ev ) {
 
 
     if ( n >= nMin_ && n <= nMax_ && n < AlphaTVsNoVertex_.size()) {
-      AlphaTVsNoVertex_[0]->Fill(ev.CommonAlphaT(),nVertex,weight);
-      AlphaTVsNoVertex_[n]->Fill(ev.CommonAlphaT(),nVertex,weight);
+      AlphaTVsNoVertex_[0]->Fill(ev.HadronicAlphaT(),nVertex,weight);
+      AlphaTVsNoVertex_[n]->Fill(ev.HadronicAlphaT(),nVertex,weight);
     }
 
 
 
     if(nVertex == 1){
       if ( n >= nMin_ && n <= nMax_ && n < AlphaTOneVertex_.size()) {
-        AlphaTOneVertex_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaTOneVertex_[n]->Fill(ev.CommonAlphaT(),weight);
+        AlphaTOneVertex_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaTOneVertex_[n]->Fill(ev.HadronicAlphaT(),weight);
       }
 
     }
 
     if(nVertex > 1){
       if ( n >= nMin_ && n <= nMax_ && n < AlphaTgOneVertex_.size()) {
-        AlphaTgOneVertex_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaTgOneVertex_[n]->Fill(ev.CommonAlphaT(),weight);
+        AlphaTgOneVertex_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaTgOneVertex_[n]->Fill(ev.HadronicAlphaT(),weight);
       }
 
 
@@ -678,29 +678,29 @@ bool WeeklyUpdatePlots::StandardPlots( Event::Data& ev ) {
 
     if( (ev.CommonMHT().Pt()-ev.PFMET().Pt())/(ev.CommonMHT().Pt()+ev.CommonHT()) < 0.15){
       if( n >= nMin_ && n <= nMax_ && n < AlphaTafterPFMEC_.size() ) {
-        AlphaTafterPFMEC_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaTafterPFMEC_[n]->Fill(ev.CommonAlphaT(),weight);
-        AlphaT_Zoomed_afterPFMEC_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaT_Zoomed_afterPFMEC_[n]->Fill(ev.CommonAlphaT(),weight);
+        AlphaTafterPFMEC_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaTafterPFMEC_[n]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaT_Zoomed_afterPFMEC_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaT_Zoomed_afterPFMEC_[n]->Fill(ev.HadronicAlphaT(),weight);
       }
     }
 
     if( (ev.CommonMHT().Pt()-LorentzV(*ev.metP4caloTypeII()).Pt())/(ev.CommonMHT().Pt()+ev.CommonHT()) < 0.15){
       if( n >= nMin_ && n <= nMax_ && n < AlphaTafterCaloMEC_.size() ) {
-        AlphaTafterCaloMEC_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaTafterCaloMEC_[n]->Fill(ev.CommonAlphaT(),weight);
-        AlphaT_ZoomedafterCaloMEC_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaT_ZoomedafterCaloMEC_[n]->Fill(ev.CommonAlphaT(),weight);
+        AlphaTafterCaloMEC_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaTafterCaloMEC_[n]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaT_ZoomedafterCaloMEC_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaT_ZoomedafterCaloMEC_[n]->Fill(ev.HadronicAlphaT(),weight);
       }
     }
 
 
     if(ev.CommonMHT().Pt()/LorentzV(*ev.metP4caloTypeII()).Pt() < 1.25){
       if ( n >= nMin_ && n <= nMax_ && n < AlphaT_METCut_.size()) {
-        AlphaT_METCut_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaT_METCut_[n]->Fill(ev.CommonAlphaT(),weight);
-        AlphaT_Zoomed_METCut_[0]->Fill(ev.CommonAlphaT(),weight);
-        AlphaT_Zoomed_METCut_[n]->Fill(ev.CommonAlphaT(),weight);
+        AlphaT_METCut_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaT_METCut_[n]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaT_Zoomed_METCut_[0]->Fill(ev.HadronicAlphaT(),weight);
+        AlphaT_Zoomed_METCut_[n]->Fill(ev.HadronicAlphaT(),weight);
       }
 
     }
@@ -751,8 +751,8 @@ bool WeeklyUpdatePlots::StandardPlots( Event::Data& ev ) {
 
 
     if ( n >= nMin_ && n <= nMax_ && n < BabyJetMHT_StandardAlphaT_.size()) {
-      BabyJetMHT_StandardAlphaT_[0]->Fill( ev.CommonAlphaT(), cos(ROOT::Math::VectorUtil::DeltaPhi(ev.CommonMHT(),ev.JD_CommonJets().babyHT)), weight );
-      BabyJetMHT_StandardAlphaT_[n]->Fill( ev.CommonAlphaT(), cos(ROOT::Math::VectorUtil::DeltaPhi(ev.CommonMHT(),ev.JD_CommonJets().babyHT)), weight );
+      BabyJetMHT_StandardAlphaT_[0]->Fill( ev.HadronicAlphaT(), cos(ROOT::Math::VectorUtil::DeltaPhi(ev.CommonMHT(),ev.JD_CommonJets().babyHT)), weight );
+      BabyJetMHT_StandardAlphaT_[n]->Fill( ev.HadronicAlphaT(), cos(ROOT::Math::VectorUtil::DeltaPhi(ev.CommonMHT(),ev.JD_CommonJets().babyHT)), weight );
     }
 
 
@@ -790,13 +790,13 @@ bool WeeklyUpdatePlots::StandardPlots( Event::Data& ev ) {
 
 
     if ( n >= nMin_ && n <= nMax_ && n < AlphaT_Zoomed_.size()  ) {
-      AlphaT_Zoomed_[0]->Fill( ev.CommonAlphaT(), weight );
-      AlphaT_Zoomed_[n]->Fill( ev.CommonAlphaT(), weight );
+      AlphaT_Zoomed_[0]->Fill( ev.HadronicAlphaT(), weight );
+      AlphaT_Zoomed_[n]->Fill( ev.HadronicAlphaT(), weight );
     }
 
     if ( n >= nMin_ && n <= nMax_ && n < AlphaT_.size()  ) {
-      AlphaT_[0]->Fill( ev.CommonAlphaT(), weight );
-      AlphaT_[n]->Fill( ev.CommonAlphaT(), weight );
+      AlphaT_[0]->Fill( ev.HadronicAlphaT(), weight );
+      AlphaT_[n]->Fill( ev.HadronicAlphaT(), weight );
     }
 
     if ( n >= nMin_ && n <= nMax_ && n < Mt2_.size() ) {
@@ -862,14 +862,14 @@ bool WeeklyUpdatePlots::StandardPlots( Event::Data& ev ) {
       CaloMET_[n]->Fill(  LorentzV(*ev.metP4caloTypeII()).Pt(), weight );
     }
 
-    if(ev.CommonAlphaT() < 0.55){
+    if(ev.HadronicAlphaT() < 0.55){
       if ( n >= nMin_ && n <= nMax_ && n < AlphatBefore_HT_.size() ) {
         AlphatBefore_HT_[0]->Fill( ev.CommonHT(), weight );
         AlphatBefore_HT_[n]->Fill( ev.CommonHT(), weight );
       }
     }
 
-    if(ev.CommonAlphaT() > 0.55){
+    if(ev.HadronicAlphaT() > 0.55){
 
 
       if ( n >= nMin_ && n <= nMax_ && n < HT_vs_SecondJetPt_after_alphaT_.size()) {
