@@ -523,7 +523,6 @@ def MakeMCTree(Threshold, Muon = None):
       htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
     
     
-      
       cutTreeMC.TAttach(minDRMuonJetCut,DiMuon)
       cutTreeMC.TAttach(DiMuon,ZMass_2Muons)
       cutTreeMC.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
@@ -559,6 +558,12 @@ mu_id = PSet(
     PixelHitsOnInrTrk = 1,
     MaxInrTrkDz = 1.
         )
+
+vertex_reweight = GoodVertexReweighting(
+PSet(GoodVertexWeights = [1.0, 0.071182041228993354, 0.3788533298983548, 0.70212224756460717, 0.95912926863057879,
+ 1.1063323506805849, 1.1826257455177471, 1.2297382718782017, 1.2772830447358376, 1.4266446590805815, 1.5732065775636328, 
+ 1.8401056375971667, 2.1784909215394999, 2.506266882602076, 3.3335988825191176, 4.687787057503483, 6.8602191807881647, 
+ 11.198474011060968, 14.883466002768214, 20.878255333866864, 1.0, 1.0, 1.0, 1.0, 1.0]).ps())
 
 
 # Here are the Summer 11 MC samples!!!

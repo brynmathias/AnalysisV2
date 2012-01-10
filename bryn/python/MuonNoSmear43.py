@@ -21,7 +21,7 @@ ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 CustomMuID = OL_CustomVBTFMuID(mu_id.ps())
 
 def addCutFlowMC(b) :
-#  b.AddWeightFilter("Weight", vertex_reweight)
+  b.AddWeightFilter("Weight", vertex_reweight)
   b.AddMuonFilter("PreCC",CustomMuID)
   b.AddPhotonFilter("PreCC",ra3PhotonIdFilter)
   b.AddElectronFilter("PreCC",vbtfElectronIdFilter)
