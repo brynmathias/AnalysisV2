@@ -216,9 +216,9 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
         if ( denomPreScale % nomPreScale == 0){
           if(DENOMFIRE){
             HT_Denom[0]->Fill(ev.CommonHT(),1);
-            AlphaT_Denom[0]->Fill(ev.CommonAlphaT(),1);
+            AlphaT_Denom[0]->Fill(ev.HadronicAlphaT(),1);
             if(NOMFIRE){
-              AlphaT_Nom[0]->Fill(ev.CommonAlphaT(),1);
+              AlphaT_Nom[0]->Fill(ev.HadronicAlphaT(),1);
               HT_Nom[0]->Fill(ev.CommonHT(),1);
             }
           }
