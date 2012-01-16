@@ -45,6 +45,8 @@ namespace Operation {
     std::vector<TH1D*>  MissedHT_;
     std::vector<TH1D*>  HT_forRatio_;
     std::vector<TH1D*>  BiasedDphi_;
+    std::vector<TH2D*>  HT_vs_AlphaT_Common_;
+    std::vector<TH2D*>  HT_vs_AlphaT_Hadronic_;
     std::vector<TH1D*>  AlphatCut_BiasedDphi_;
     std::vector<TH1D*>  DetlaPhi_LeadingJets_;
     std::vector<TH1D*>  DetlaPhi_NextToLeadingJets_;
@@ -62,15 +64,9 @@ namespace Operation {
     std::vector<TH1D*>  fem_;
     std::vector<TH1D*>  JetPt_;
     std::vector<TH1D*>  JetEta_;
-    std::vector<TH1D*>  AlphaT_Zoomed_METCut_;
     std::vector<TH1D*>  AlphaT_METCut_;
     std::vector<TH1D*>  DPhi_MHT_MHTbaby_AfterAlphaT_;
-    std::vector<TH2D*>  DPhi_MHT_MHTbaby_vsMHTbabyOverMHT_AfterAlphaT_;
-    std::vector<TH2D*>  DPhi_MHT_MHTbaby_vsMHTbabyOverMHT_;
-    std::vector<TH1D*>  AlphaTafterPFMEC_;
-    std::vector<TH1D*>  AlphaT_Zoomed_afterPFMEC_;
-    std::vector<TH1D*>  AlphaTafterCaloMEC_;
-    std::vector<TH1D*>  AlphaT_ZoomedafterCaloMEC_;
+
     std::vector<TH2D*>  AlphaT_components_;
     std::vector<TH2D*>  AlphaTVsNoVertex_;
     std::vector<TH1D*>  MultiplicityAfteraT_;
@@ -84,9 +80,9 @@ namespace Operation {
     std::vector<TH1D*>  AlphaTOneVertex_;
     std::vector<TH1D*>  AlphaTgOneVertex_;
     std::vector<TH1D*>  NumberVerticiesAfterAlphaT_;
-    std::vector<TH1D*>  DeltaPhiPsudoJets_;
+
     std::vector<TH2D*> MinBiasDphi_EtaPhiMap_;
-    std::vector<TH2D*> HT_vs_SecondJetPt_after_alphaT_;
+
     std::vector<TH2D*> HT_vs_SecondJetPt_;
     std::vector<TH1D*> AlphatBefore_HT_;
     // //DeadECAL Plots
