@@ -1,7 +1,7 @@
 #!/usr/bin/sh
-./Data37.py         -b -n50   
-./Data43.py         -b -n50
-./Data.py           -b -n50
+#./Data37.py         -b -n50   
+#./Data43.py         -b -n50
+#./Data.py           -b -n50
 ./MuonData37.py     -b -n50
 ./MuonData43.py     -b -n50
 ./MuonData.py       -b -n50
