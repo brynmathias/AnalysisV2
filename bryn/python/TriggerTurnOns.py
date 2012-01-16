@@ -617,7 +617,7 @@ sample = MuHad2011AB
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
 
-outDir = "../5GeVMuonsOddVetoVBTFID/ht%dNoUpper/"%(bin)
+outDir = "../MakesuretoUseHadAlphaT/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 

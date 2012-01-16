@@ -645,15 +645,6 @@ bool WeeklyUpdatePlots::StandardPlots( Event::Data& ev ) {
 
 
 
-    if(ev.CommonMHT().Pt()/LorentzV(*ev.metP4caloTypeII()).Pt() < 1.25){
-      if ( n >= nMin_ && n <= nMax_ && n < AlphaT_METCut_.size()) {
-        AlphaT_METCut_[0]->Fill(ev.HadronicAlphaT(),weight);
-        AlphaT_METCut_[n]->Fill(ev.HadronicAlphaT(),weight);
-        AlphaT_Zoomed_METCut_[0]->Fill(ev.HadronicAlphaT(),weight);
-        AlphaT_Zoomed_METCut_[n]->Fill(ev.HadronicAlphaT(),weight);
-      }
-
-    }
 
 
 
