@@ -211,9 +211,14 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
     op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
   if Debug == False:
     op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
-
+  alphaT055 = HadronicAlphaT(0.55)
+  dump = EventDump()
   cutTree.TAttach(cut,op)
+  cutTree.TAttach(cut,alphaT055)
+  cutTree.TAttach(alphaT055,dump)
   out.append(op)
+  out.append(dump)
+  out.append(alphaT055)
   return out
   """docstring for PreScaledPair"""
   pass
