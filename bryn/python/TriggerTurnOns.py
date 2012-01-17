@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 275.
+bin = 375.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -215,7 +215,7 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   dump = EventDump()
   cutTree.TAttach(cut,op)
   cutTree.TAttach(cut,alphaT055)
-  cutTree.TAttach(alphaT055,dump)
+  cutTree.FAttach(alphaT055,dump)
   out.append(op)
   out.append(dump)
   out.append(alphaT055)
@@ -622,7 +622,7 @@ sample = MuHad2011AB
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
 
-outDir = "../MakesuretoUseHadAlphaT/ht%dNoUpper/"%(bin)
+outDir = "../evDump/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
