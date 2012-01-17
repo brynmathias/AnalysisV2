@@ -211,14 +211,7 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
     op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
   if Debug == False:
     op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
-  alphaT055 = HadronicAlphaT(0.55)
-  dump = EventDump()
-  cutTree.TAttach(cut,op)
-  cutTree.TAttach(cut,alphaT055)
-  cutTree.TAttach(alphaT055,dump)
   out.append(op)
-  out.append(dump)
-  out.append(alphaT055)
   return out
   """docstring for PreScaledPair"""
   pass
@@ -430,6 +423,28 @@ alphatTesting = {
 # refTrigList =  ["HLT_Mu40_HT200_v*","HLT_Mu40_HT200_v*"]
 # TestTrigList = ["HLT_HT250_AlphaT0p53_v6","HLT_HT250_AlphaT0p55_v*"]
 #
+
+
+trigList = []
+sigList = []
+for key,vals in alphatTesting.iteritems():
+    trigList+=vals[0]
+    sigList.append(key)
+htCut = RECO_CommonHTCut(375.)
+alphaT055 = HadronicAlphaT(0.55)
+dump = EventDump()
+Cross_Trigger_PS.Triggers =  trigList
+TriggersRef = OP_MultiTrigger(Cross_Trigger_PS.ps())
+HT_Trigger_PS.Triggers = sigList
+TriggersSig = OP_MultiTrigger(HT_Trigger_PS.ps())
+cutTree.TAttach(muDr,TriggersRef)
+cutTree.TAttach(TriggersRef,TriggersSig)
+cutTree.FAttach(TriggersSig,alphaT055)
+cutTree.TAttach(alphaT055,dump)
+
+
+
+
 for key,vals in alphatTesting.iteritems():
   for ref in vals[0]:
     for htbin in vals[1]:
@@ -462,6 +477,9 @@ AlphaTwithDiMu = {
 "HLT_HT300_v9" :(["IsoMu20_v8" ,"HLT_IsoMu24_eta2p1_v3"]                                                      ,[0.,]),
 
 }
+
+
+
 for key,vals in AlphaTwithDiMu.iteritems():
   for htbin in vals[1]:
     for ref in vals[0]:
@@ -472,8 +490,14 @@ for key,vals in AlphaTwithDiMu.iteritems():
           out.append(muDRcut)
           cutTreeData.TAttach(diMuon,muDRcut)
           cutTreeData.TAttach(muDRcut,cut)
+          
           out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
           out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin),Debug = True))
+
+
+    
+
+
 
 # If muon is not required
 htTesting = {
