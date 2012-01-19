@@ -1,15 +1,15 @@
 10
 
 dir
-3575
+3600
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/samples/python/montecarlo/Summer11
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2011-12-12T13:52:16.714975Z
-3543
-bm409
+2012-01-16T11:27:01.049190Z
+3595
+dburton
 
 
 
@@ -168,11 +168,11 @@ file
 
 
 
-2011-12-12T12:56:07.000000Z
-b3f73944ddeb25eee34e6375f01f7972
-2011-12-12T13:52:16.714975Z
-3543
-bm409
+2012-01-19T11:51:41.000000Z
+0ae173e26c7c92f19231fdcebb8aac39
+2012-01-16T11:26:17.482306Z
+3594
+dburton
 
 
 
@@ -194,7 +194,7 @@ bm409
 
 
 
-24031
+24055
 
 QCD_Pt_50to80_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2.py
 file
@@ -706,17 +706,17 @@ bm409
 
 60999
 
-QCD_Summer11_Pythia_All.py
+QCD_Pt_600to800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
 
 
 
 
-2011-10-24T13:06:35.000000Z
-07c06af84430dace548b8324f53be67c
-2011-10-20T10:27:53.788830Z
-3328
-bainbrid
+2011-10-18T17:03:11.000000Z
+c800dc52bdeafbacbd93b86599fc333d
+2011-08-05T20:18:35.221310Z
+3111
+gouskos
 
 
 
@@ -738,41 +738,7 @@ bainbrid
 
 
 
-2018
-
-QCD_Pt_300to470_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
-file
-
-
-
-
-2011-12-12T12:56:07.000000Z
-ef2fd5e3b4cbca84f4b2534d988e9640
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-17404
+457
 
 QCD_Pt_1400to1800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -808,17 +774,17 @@ bm409
 
 22220
 
-QCD_Pt_600to800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
+QCD_Pt_300to470_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
 
 
 
 
-2011-10-18T17:03:11.000000Z
-c800dc52bdeafbacbd93b86599fc333d
-2011-08-05T20:18:35.221310Z
-3111
-gouskos
+2011-12-12T12:56:07.000000Z
+ef2fd5e3b4cbca84f4b2534d988e9640
+2011-12-12T13:52:16.714975Z
+3543
+bm409
 
 
 
@@ -840,7 +806,41 @@ gouskos
 
 
 
-457
+17404
+
+QCD_Summer11_Pythia_All.py
+file
+
+
+
+
+2011-10-24T13:06:35.000000Z
+07c06af84430dace548b8324f53be67c
+2011-10-20T10:27:53.788830Z
+3328
+bainbrid
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2018
 
 QCD_Pt_800to1000_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2.py
 file
@@ -909,6 +909,40 @@ gouskos
 
 
 457
+
+T_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1.pyc
+file
+
+
+
+
+2012-01-19T11:51:41.000000Z
+beae0d60559725330bc3f3bf5c9a1dfa
+2012-01-16T11:26:17.482306Z
+3594
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+9068
 
 ZJetsToNuNu_200_HT_inf_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1.py
 file
@@ -1012,40 +1046,6 @@ bm409
 
 67471
 
-TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1.py
-file
-
-
-
-
-2011-12-12T12:56:07.000000Z
-5e67cf4d143d5d588f91dbc2c5970741
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-23391
-
 TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_13.py
 file
 
@@ -1079,6 +1079,40 @@ bm409
 
 
 16656
+
+TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1.py
+file
+
+
+
+
+2011-12-12T12:56:07.000000Z
+5e67cf4d143d5d588f91dbc2c5970741
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+23391
 
 WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_v15_03_13.py
 file
@@ -1188,11 +1222,11 @@ file
 
 
 
-2011-12-12T12:56:07.000000Z
-05578d7615cb5139c866b09a59df563c
-2011-12-12T13:52:16.714975Z
-3543
-bm409
+2012-01-19T11:51:41.000000Z
+66705ee55cfbc5676900236593876520
+2012-01-16T11:27:01.049190Z
+3595
+dburton
 
 
 
@@ -1214,7 +1248,7 @@ bm409
 
 
 
-8555
+8581
 
 DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -1284,6 +1318,40 @@ mstoye
 
 30325
 
+T_TuneZ2_t_channel_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1.pyc
+file
+
+
+
+
+2012-01-19T11:51:41.000000Z
+16370812417f5f0bac5f584aa1a32fe2
+2012-01-16T11:26:17.482306Z
+3594
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+25089
+
 WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14.py
 file
 
@@ -1317,6 +1385,40 @@ bm409
 
 
 13888
+
+Tbar_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1.pyc
+file
+
+
+
+
+2012-01-19T11:51:41.000000Z
+449bbc3daa20bb7fa97faf2eb38e850f
+2012-01-16T11:27:01.049190Z
+3595
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+8969
 
 QCD_Pt_470to600_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2.py
 file
@@ -1426,11 +1528,11 @@ file
 
 
 
-2011-12-12T12:56:07.000000Z
-80b41138923c168ac18291e934df703c
-2011-12-12T13:52:16.714975Z
-3543
-bm409
+2012-01-19T11:51:41.000000Z
+67a579fa28c2c9426228d8d93e371861
+2012-01-16T11:26:17.482306Z
+3594
+dburton
 
 
 
@@ -1452,7 +1554,7 @@ bm409
 
 
 
-8626
+8653
 
 QCD_Pt_80to120_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2.py
 file
@@ -1596,11 +1698,11 @@ file
 
 
 
-2011-12-12T12:56:07.000000Z
-2b514a7b830da2354a0bfb92b18c129e
-2011-12-12T13:52:16.714975Z
-3543
-bm409
+2012-01-19T11:51:41.000000Z
+bf650d2cb212a73e15472d62245b1006
+2012-01-16T11:27:01.049190Z
+3595
+dburton
 
 
 
@@ -1622,7 +1724,7 @@ bm409
 
 
 
-12082
+12108
 
 QCD_Pt_800to1000_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -1657,6 +1759,40 @@ bm409
 
 
 40141
+
+Tbar_TuneZ2_t_channel_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1.pyc
+file
+
+
+
+
+2012-01-19T11:51:41.000000Z
+4418275cc2bef880608aba46ce818f7a
+2012-01-16T11:27:01.049190Z
+3595
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12748
 
 QCD_TuneZ2_HT_250To500_7TeV_madgraph_Summer11_PU_S4_START42_V11_v3.py
 file

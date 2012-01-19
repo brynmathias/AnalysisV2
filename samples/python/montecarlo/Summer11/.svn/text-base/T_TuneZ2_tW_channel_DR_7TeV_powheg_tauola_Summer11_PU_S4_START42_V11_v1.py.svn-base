@@ -47,5 +47,6 @@ T_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1=PSet(
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_10_27_12_44_45/T_TuneZ2_tW-channel-DR_7TeV-powheg-tauola.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_8_1_MUT.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_10_27_12_44_45/T_TuneZ2_tW-channel-DR_7TeV-powheg-tauola.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_9_1_qQV.root" ,
 	],
-	CrossSection=0,
+	CrossSection=7.466, #LO
+  Events = 814390
 )
