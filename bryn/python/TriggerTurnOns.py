@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 275.
+bin = 375.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -211,6 +211,7 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
     op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
   if Debug == False:
     op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
+  cutTree.TAttach(cut,op)
   out.append(op)
   return out
   """docstring for PreScaledPair"""
@@ -437,12 +438,22 @@ Cross_Trigger_PS.Triggers =  trigList
 TriggersRef = OP_MultiTrigger(Cross_Trigger_PS.ps())
 HT_Trigger_PS.Triggers = sigList
 TriggersSig = OP_MultiTrigger(HT_Trigger_PS.ps())
-cutTree.TAttach(muDr,TriggersRef)
-cutTree.TAttach(TriggersRef,TriggersSig)
-cutTree.FAttach(TriggersSig,alphaT055)
-cutTree.TAttach(alphaT055,dump)
+cutTreeData.TAttach(muDr,TriggersRef)
+cutTreeData.TAttach(TriggersRef,TriggersSig)
+cutTreeData.FAttach(TriggersSig,alphaT055)
+cutTreeData.TAttach(alphaT055,htCut)
+cutTreeData.TAttach(htCut,dump)
 
 
+skim_ps=PSet(
+    SkimName = "myskim",
+    DropBranches = False,
+    Branches = [
+        " keep * "
+        ]
+)
+skim = SkimOp(skim_ps.ps())
+cutTreeData.TAttach(htCut,skim)
 
 
 for key,vals in alphatTesting.iteritems():
@@ -451,7 +462,7 @@ for key,vals in alphatTesting.iteritems():
       cut = eval("RECO_CommonHTCut(%f)"%(htbin))
       out.append(cut)
       cutTreeData.TAttach(muDr,cut)
-      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
+#      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
 
 AlphaTwithDiMu = {
 "HLT_HT250_AlphaT0p58_v3": (["HLT_DoubleMu8_Mass8_HT200_v4","HLT_DoubleMu8_Mass8_HT200_v5"]   ,[275.,325.,375.,475.,575.,675.,775.,875.]),
@@ -491,8 +502,8 @@ for key,vals in AlphaTwithDiMu.iteritems():
           cutTreeData.TAttach(diMuon,muDRcut)
           cutTreeData.TAttach(muDRcut,cut)
           
-          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
-          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin),Debug = True))
+#          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin)))
+#          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin),Debug = True))
 
 
     
@@ -646,7 +657,7 @@ sample = MuHad2011AB
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
 
-outDir = "../5GeVMuonsOddVetoVBTFID/ht%dNoUpper/"%(bin)
+outDir = "../evDump/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
