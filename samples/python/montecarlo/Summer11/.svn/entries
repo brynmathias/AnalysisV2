@@ -1,14 +1,14 @@
 10
 
 dir
-3600
+3601
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/samples/python/montecarlo/Summer11
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2012-01-16T11:27:01.049190Z
-3595
+2012-01-19T13:33:56.031231Z
+3601
 dburton
 
 
@@ -93,6 +93,40 @@ bm409
 
 
 54094
+
+ZZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1.py
+file
+
+
+
+
+2012-01-19T14:17:26.000000Z
+c7a5e3379a716f7cb6d800434f957859
+2012-01-19T13:33:56.031231Z
+3601
+dburton
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+25869
 
 QCD_Pt_170to300_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2.py
 file
@@ -706,17 +740,17 @@ bm409
 
 60999
 
-QCD_Pt_600to800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
+QCD_Summer11_Pythia_All.py
 file
 
 
 
 
-2011-10-18T17:03:11.000000Z
-c800dc52bdeafbacbd93b86599fc333d
-2011-08-05T20:18:35.221310Z
-3111
-gouskos
+2011-10-24T13:06:35.000000Z
+07c06af84430dace548b8324f53be67c
+2011-10-20T10:27:53.788830Z
+3328
+bainbrid
 
 
 
@@ -738,41 +772,7 @@ gouskos
 
 
 
-457
-
-QCD_Pt_1400to1800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
-file
-
-
-
-
-2011-12-12T12:56:07.000000Z
-0c0d011eb443dde826be3ed41dc3f36f
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-22220
+2018
 
 QCD_Pt_300to470_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -808,17 +808,17 @@ bm409
 
 17404
 
-QCD_Summer11_Pythia_All.py
+QCD_Pt_1400to1800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
 
 
 
 
-2011-10-24T13:06:35.000000Z
-07c06af84430dace548b8324f53be67c
-2011-10-20T10:27:53.788830Z
-3328
-bainbrid
+2011-12-12T12:56:07.000000Z
+0c0d011eb443dde826be3ed41dc3f36f
+2011-12-12T13:52:16.714975Z
+3543
+bm409
 
 
 
@@ -840,7 +840,41 @@ bainbrid
 
 
 
-2018
+22220
+
+QCD_Pt_600to800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
+file
+
+
+
+
+2011-10-18T17:03:11.000000Z
+c800dc52bdeafbacbd93b86599fc333d
+2011-08-05T20:18:35.221310Z
+3111
+gouskos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+457
 
 QCD_Pt_800to1000_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2.py
 file
@@ -1011,6 +1045,40 @@ bm409
 
 
 50183
+
+WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1.py
+file
+
+
+
+
+2012-01-19T14:17:26.000000Z
+c2acacacf2fb731998f38658354ca01c
+2012-01-19T13:33:56.031231Z
+3601
+dburton
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+23804
 
 QCD_Pt_80to120_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -1963,4 +2031,72 @@ bm409
 
 
 289932
+
+QCD_BLepEnriched_TuneZ2_7TeV_pythia6_evtgen_Summer11_PU_S3_START42_V11_v1.py
+file
+
+
+
+
+2012-01-19T14:17:26.000000Z
+5bc47ead56f0cf7401a92c8cc08c7743
+2012-01-19T13:33:56.031231Z
+3601
+dburton
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+32613
+
+WZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1.py
+file
+
+
+
+
+2012-01-19T14:17:26.000000Z
+81b476009415271b2eb0bb985b6123a0
+2012-01-19T13:33:56.031231Z
+3601
+dburton
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+25994
 

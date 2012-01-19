@@ -1,7 +1,7 @@
 10
 
 dir
-3600
+3601
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/samples/python/data/Run2011
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
@@ -25,40 +25,6 @@ bm409
 
 
 53b2a5e2-b89b-4778-b471-5fcb16a2c67a
-
-MuHad_Run2011AB.py
-file
-
-
-
-
-2011-12-12T12:55:58.000000Z
-2b2c629b73bb5c827a5c46249ce116ce
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-905526
 
 SingleElectron_Run2011A_PromptReco_v6_V15_03_02.py
 file
@@ -93,6 +59,40 @@ bm409
 
 
 37915
+
+MuHad_Run2011AB.py
+file
+
+
+
+
+2011-12-12T12:55:58.000000Z
+2b2c629b73bb5c827a5c46249ce116ce
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+905526
 
 MuHad_Run2011A_L1OffSet.py
 file
@@ -162,16 +162,16 @@ bm409
 
 47158
 
-ElectronHad_Run2011A_May10ReReco_v1_V15_03_14.py
+__init__.py
 file
 
 
 
 
-2011-12-12T12:55:53.000000Z
-21c17124d310e30082598018ccd63e1c
-2011-12-12T13:52:16.714975Z
-3543
+2011-10-18T17:03:12.000000Z
+d41d8cd98f00b204e9800998ecf8427e
+2011-04-15T11:42:56.336079Z
+2253
 bm409
 
 
@@ -194,7 +194,7 @@ bm409
 
 
 
-65774
+0
 
 SingleMu_Run2011A_PromptReco_v4_d_V15-03-05.py
 file
@@ -230,48 +230,14 @@ bm409
 
 22702
 
-__init__.py
-file
-
-
-
-
-2011-10-18T17:03:12.000000Z
-d41d8cd98f00b204e9800998ecf8427e
-2011-04-15T11:42:56.336079Z
-2253
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-0
-
-DoubleElectron_Run2011AB.py
+ElectronHad_Run2011A_May10ReReco_v1_V15_03_14.py
 file
 
 
 
 
 2011-12-12T12:55:53.000000Z
-a7f1948ba7e633090a5c8bac879983c1
+21c17124d310e30082598018ccd63e1c
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -296,7 +262,7 @@ bm409
 
 
 
-567750
+65774
 
 HT_uptoRun163817.py
 file
@@ -332,14 +298,14 @@ bm409
 
 154695
 
-SingleMu_Run2011A_PromptReco_v4_NewMuRecipe_a.py
+DoubleElectron_Run2011AB.py
 file
 
 
 
 
-2011-12-12T12:55:59.000000Z
-63d4a00669137699e9252388dae00649
+2011-12-12T12:55:53.000000Z
+a7f1948ba7e633090a5c8bac879983c1
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -364,7 +330,7 @@ bm409
 
 
 
-84203
+567750
 
 SingleMu_Run2011A_PromptReco_v4_c_V15_03_05.py
 file
@@ -400,14 +366,14 @@ bm409
 
 42382
 
-SingleMu_Run2011A_PromptReco_v4_e.py
+SingleMu_Run2011A_PromptReco_v4_NewMuRecipe_a.py
 file
 
 
 
 
 2011-12-12T12:55:59.000000Z
-2e65dba7f9a28e6e25dea145cbce08b5
+63d4a00669137699e9252388dae00649
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -432,7 +398,7 @@ bm409
 
 
 
-30290
+84203
 
 ElectronHad_Run2011B_PromptReco_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_d.py
 file
@@ -467,6 +433,40 @@ bm409
 
 
 42051
+
+SingleMu_Run2011A_PromptReco_v4_e.py
+file
+
+
+
+
+2011-12-12T12:55:59.000000Z
+2e65dba7f9a28e6e25dea145cbce08b5
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+30290
 
 ElectronHad_Run2011A_May10ReReco_v1_RA4.py
 file
@@ -1080,40 +1080,6 @@ bm409
 
 84202
 
-SingleMu_Run2011A_PromptReco_v2.py
-file
-
-
-
-
-2011-12-12T12:55:59.000000Z
-35ec6a0f0081bb1cc9ed7e7930b60f9c
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-148578
-
 ElectronHad_Run2011A_PromptReco_v4_V15_03_14_residual.py
 file
 
@@ -1147,6 +1113,40 @@ bm409
 
 
 156409
+
+SingleMu_Run2011A_PromptReco_v2.py
+file
+
+
+
+
+2011-12-12T12:55:59.000000Z
+35ec6a0f0081bb1cc9ed7e7930b60f9c
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+148578
 
 ElectronHad_Run2011A_PromptReco_v6_V15_03_14_residual.py
 file
@@ -1216,40 +1216,6 @@ bm409
 
 44567
 
-MuHad_Run2011A_PromptReco_v5_residual.py
-file
-
-
-
-
-2011-12-12T12:55:57.000000Z
-179d230ef42a14891b0256eacbf8de9b
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-39986
-
 SingleMu_Run2011A_PromptReco_v4_d_V15_03_05.py
 file
 
@@ -1284,14 +1250,14 @@ bm409
 
 22702
 
-MuHad_Run2011A_May10ReReco_v1.py
+MuHad_Run2011A_PromptReco_v5_residual.py
 file
 
 
 
 
 2011-12-12T12:55:57.000000Z
-ae07e8cf3dce1df7b79418d47ef18a59
+179d230ef42a14891b0256eacbf8de9b
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -1316,7 +1282,7 @@ bm409
 
 
 
-124998
+39986
 
 ElectronHad_Run2011A_PromptReco_v4_a.py
 file
@@ -1351,6 +1317,40 @@ bm409
 
 
 17378
+
+MuHad_Run2011A_May10ReReco_v1.py
+file
+
+
+
+
+2011-12-12T12:55:57.000000Z
+ae07e8cf3dce1df7b79418d47ef18a59
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+124998
 
 MuHad_Run2011A_May10ReReco_v1_V15_03_05.py
 file
@@ -1454,40 +1454,6 @@ bm409
 
 15686
 
-ElectronHad_Run2011A_PromptReco_v4_e.py
-file
-
-
-
-
-2011-12-12T12:55:54.000000Z
-8b56ff56ed6b75e80fb18a23e5e9f0b2
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-21528
-
 MuHad_Run2011B_PromptReco_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_c.py
 file
 
@@ -1522,14 +1488,14 @@ bm409
 
 59670
 
-MuHad_Run2011A_PromptReco_v2_c.py
+ElectronHad_Run2011A_PromptReco_v4_e.py
 file
 
 
 
 
-2011-12-12T12:55:57.000000Z
-329cdb1a0144be0f1edd0890cb15c239
+2011-12-12T12:55:54.000000Z
+8b56ff56ed6b75e80fb18a23e5e9f0b2
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -1554,7 +1520,7 @@ bm409
 
 
 
-27100
+21528
 
 PhotonHad_uptoRun163817.py
 file
@@ -1589,6 +1555,40 @@ bm409
 
 
 37553
+
+MuHad_Run2011A_PromptReco_v2_c.py
+file
+
+
+
+
+2011-12-12T12:55:57.000000Z
+329cdb1a0144be0f1edd0890cb15c239
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+27100
 
 MuHad_Run2011A_PromptReco_v6_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -1828,6 +1828,40 @@ bm409
 
 50105
 
+SingleMu_Run2011A_PromptReco_v4_b_V15-03-05.py
+file
+
+
+
+
+2011-12-12T12:55:59.000000Z
+d1be3b379230bdaba823db0f52deb05f
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+54559
+
 ElectronHad_Run2011B_PromptReco_v1_V15_03_14_residual_c.py
 file
 
@@ -1862,39 +1896,8 @@ bm409
 
 57172
 
-SingleMu_Run2011A_PromptReco_v4_b_V15-03-05.py
-file
-
-
-
-
-2011-12-12T12:55:59.000000Z
-d1be3b379230bdaba823db0f52deb05f
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-54559
+V15_03_19
+dir
 
 SingleMu_Run2011A_PromptReco_v6_V15_03_02.py
 file
@@ -1930,8 +1933,39 @@ bm409
 
 60740
 
-V15_03_19
-dir
+SingleMu_Run2011A_PromptReco_v4_a_V15_03_05.py
+file
+
+
+
+
+2011-12-12T12:55:59.000000Z
+4626b4941f5e2b3060b11a9d635ca5f8
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+84202
 
 SingleMu_Run2011A_PromptReco_v4_V15_03_14.py
 file
@@ -1966,40 +2000,6 @@ bm409
 
 
 199610
-
-SingleMu_Run2011A_PromptReco_v4_a_V15_03_05.py
-file
-
-
-
-
-2011-12-12T12:55:59.000000Z
-4626b4941f5e2b3060b11a9d635ca5f8
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-84202
 
 SingleMu_Run2011A_PromptReco_v4_c.py
 file
@@ -2069,40 +2069,6 @@ bm409
 
 807255
 
-ElectronHad_Run2011A_PromptReco_v4.py
-file
-
-
-
-
-2011-12-12T12:55:53.000000Z
-7bfecab68c523130a324103c13d91937
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-17158
-
 HT_Run2011A.py
 file
 
@@ -2136,6 +2102,40 @@ bm409
 
 
 581062
+
+ElectronHad_Run2011A_PromptReco_v4.py
+file
+
+
+
+
+2011-12-12T12:55:53.000000Z
+7bfecab68c523130a324103c13d91937
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+17158
 
 MuHad_Run2011A_05Aug2011_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
