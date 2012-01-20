@@ -1,0 +1,40 @@
+A1+10
+RooRealVar::fL = 0.0346826 +/- 0.0119457
+RooRealVar::fR = 0.207877 +/- 0.0178934
+
+A2+10
+RooRealVar::fL = 0.0347739 +/- 0.0119537
+RooRealVar::fR = 0.206089 +/- 0.0178938
+
+A3+10
+RooRealVar::fL = 0.0345691 +/- 0.0119485
+RooRealVar::fR = 0.208262 +/- 0.0178993
+
+A0+10
+RooRealVar::fL = 0.0342425 +/- 0.0119587
+RooRealVar::fR = 0.230698 +/- 0.0180893
+
+A4+10
+RooRealVar::fL = 0.0360115 +/- 0.0119475
+RooRealVar::fR = 0.208259 +/- 0.0178993
+
+baseline, nocorr in MC
+RooRealVar::fL = 0.0347931 +/- 0.0119483
+RooRealVar::fR = 0.208226 +/- 0.0178985
+
+corr MC
+RooRealVar::fL = 0.0348223 +/- 0.0119625
+RooRealVar::fR = 0.208246 +/- 0.0179464
+
+data corr
+RooRealVar::fL = 0.0366369 +/- 0.0120376
+RooRealVar::fR = 0.229038 +/- 0.0183689
+
+data nocorr
+RooRealVar::fL = 0.0381063 +/- 0.0120337
+RooRealVar::fR = 0.227607 +/- 0.0183637
+
+data corr bkg*2
+RooRealVar::fL = 0.0359956 +/- 0.0121292
+RooRealVar::fR = 0.229698 +/- 0.0185135
+

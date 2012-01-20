@@ -1,0 +1,45 @@
+from icf.core import PSet
+
+#path="root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bm409//ICF/automated/2010_10_11_23_03_46/QCD_Pt_1800_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO/"
+path="/vols/cms02/rnandi/QCD_Pythia6_Pt1800toInf/"
+
+QCD_38_Pythia6_Pt1800toInf=PSet(
+  Name="QCD_38_Pythia6_Pt1800toInf",
+  Format=("ICF",2),
+  File=[
+    path+"SusyCAF_Tree_26_3_VHU.root",
+    path+"SusyCAF_Tree_18_3_5YZ.root",
+    path+"SusyCAF_Tree_11_3_jwE.root",
+    path+"SusyCAF_Tree_21_3_vRd.root",
+    path+"SusyCAF_Tree_25_3_ui5.root",
+    path+"SusyCAF_Tree_19_3_LL7.root",
+    path+"SusyCAF_Tree_18_1_6UL.root",
+    path+"SusyCAF_Tree_19_1_ZiJ.root",
+    path+"SusyCAF_Tree_25_1_1IA.root",
+    path+"SusyCAF_Tree_26_1_RXm.root",
+    path+"SusyCAF_Tree_11_1_wI6.root",
+    path+"SusyCAF_Tree_9_1_GHN.root",
+    path+"SusyCAF_Tree_22_1_GMb.root",
+    path+"SusyCAF_Tree_4_1_ZJE.root",
+    path+"SusyCAF_Tree_20_1_6q1.root",
+    path+"SusyCAF_Tree_2_1_7QL.root",
+    path+"SusyCAF_Tree_5_1_s2I.root",
+    path+"SusyCAF_Tree_13_1_a4I.root",
+    path+"SusyCAF_Tree_12_1_tYO.root",
+    path+"SusyCAF_Tree_3_1_cFz.root",
+    path+"SusyCAF_Tree_7_1_uak.root",
+    path+"SusyCAF_Tree_23_1_QDD.root",
+    path+"SusyCAF_Tree_10_1_424.root",
+    path+"SusyCAF_Tree_14_1_i6x.root",
+    path+"SusyCAF_Tree_17_1_CGH.root",
+    path+"SusyCAF_Tree_24_1_nI9.root",
+    path+"SusyCAF_Tree_6_1_hR0.root",
+    path+"SusyCAF_Tree_1_1_cBP.root",
+    path+"SusyCAF_Tree_15_1_jeO.root",
+    path+"SusyCAF_Tree_16_1_5gG.root",
+    path+"SusyCAF_Tree_8_1_EG8.root",
+    path+"SusyCAF_Tree_27_1_PC3.root",
+  ],
+  CrossSection=3.575e-04,
+  Reweight=35.,
+)

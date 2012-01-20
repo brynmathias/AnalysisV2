@@ -1,0 +1,14 @@
+include ../config.inc
+include ../Makefile_Debug.inc
+
+MODULE=bryn
+
+INCDIR+=-I$(ROOTSYS_INC) \
+	-I$(PYTHON_INC) $(INCDIR_EXTRA) \
+	-I ../framework/include
+CXXFLAGS+= $(shell $(ROOTSYS_BIN)/root-config --cflags)
+LINK_SEARCH+= -L$(ROOTSYS_LIB) $(LINK_SEARCH_EXTRA) \
+	      -L$(SUSY_WORKING_SW_DIR)/lib
+LIBS+= $(shell $(ROOTSYS_BIN)/root-config --cflags --libs) \
+       $(BOOST_PYTHON_LIB) $(PYTHON_LIB) $(ROOT_EXTRA_LIBS) \
+       -lFrameworkSUSY

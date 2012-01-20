@@ -1,0 +1,27 @@
+from montecarlo.Spring11.QCD_TuneZ2_7TeV_pythia6_Spring11_PU_START311_ALL import * # 2462 files
+qcdpy = QCD_TuneZ2_7TeV_pythia6_Spring11_PU_START311_ALL
+
+from montecarlo.Spring11.QCD_TuneD6T_7TeV_madgraph_Spring11_PU_START311_ALL import * # 1208 files
+qcdmg = QCD_TuneD6T_7TeV_madgraph_Spring11_PU_START311_ALL
+
+from montecarlo.Spring11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1 import * # 758 files
+wjets = WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1
+
+from montecarlo.Spring11.ZinvisibleJets_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import * # 110 files
+zinv = [ZinvisibleJets_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1]
+
+from montecarlo.Spring11.TTJets_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1 import * # 75 files
+ttbar = [TTJets_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1]
+
+from montecarlo.Spring11.TToBLNu_TuneZ2_t_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
+top_t_chan = TToBLNu_TuneZ2_t_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 
+from montecarlo.Spring11.TToBLNu_TuneZ2_tW_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
+top_tw_chan = TToBLNu_TuneZ2_tW_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 
+from montecarlo.Spring11.TToBLNu_TuneZ2_s_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
+top_s_chan = TToBLNu_TuneZ2_s_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 
+top = [top_t_chan,top_tw_chan,top_s_chan] # 75 files
+
+from montecarlo.Spring11.LMx_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1 import *
+from montecarlo.Spring11.SMS_T1 import *
+
+

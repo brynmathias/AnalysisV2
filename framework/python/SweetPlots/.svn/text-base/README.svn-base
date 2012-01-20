@@ -1,0 +1,102 @@
+====================================================
+PyROOT Plotting Tool for ICF Susy Analysis Framework
+====================================================
+
+Introduction
+------------
+This is a tool written with PyROOT to easily make nice 
+plots from the histograms produced from your analysis.
+
+Modules
+-------
+SweetPlots/
+    __init__.py
+    histos.py     #which histograms to plot (e.g. HT), 
+                   includes axis limits and labels.
+                   You need to make a file like this.  
+    plotter.py    #functions that do the plotting 
+    samples.py    #which samples to plot (e.g. QCD),
+                   includes line style, color etc.
+                   You need to make a file like this.  
+    utilities.py  #defines PSet
+    PlotMaker.py  #the script that you run 
+
+How to use
+----------
+Copy PlotMaker.py to the python directory of your analysis folder create files 
+histos.py and samples.py following the templates given in SweetPlots/histos.py
+and SweetPlots/samples.py for the plots you want to produce.
+
+e.g. samples.py
+######################################################################
+from SweetPlots.utilities import PSet
+
+QCD = PSet(
+    FileName = "QCD_Pythia_All.root",   #Name of file with the histograms
+    DisplayName = "QCD",                #Name displayed on legend of plot
+    DrawOption = "HISTE",               #Draw Option: HIST with error bars
+    LineColor = 8,                      #Line Color: Green
+    LineWidth = 2,                      #Line Width: 2
+    LineStyle = 1,                      #Line Style: solid
+    FillColor = 8,                      #Fill Color: Green
+    FillStyle = 3003,                   #Fill Style: Dotted
+    MarkerColor = 8,                    #Marker Color: Green 
+    MarkerStyle = 1,                    #Marker Style: small dot
+    Weight = 1.,                        #Weight: 1.
+)
+######################################################################
+
+Information:
+Color: http://root.cern.ch/root/html/TColor.html
+Line: http://root.cern.ch/root/html/TAttLine.html
+Marker: http://root.cern.ch/root/html/TAttMarker.html
+Fill: http://root.cern.ch/root/html/TAttFill.html
+
+e.g. histos.py
+######################################################################
+from SweetPlots.utilities import PSet
+
+HT = PSet(
+    Name = "M_all",                     #Name of histogram in file 
+    Title = "M",                        #Histogram Title
+    XAxisLabel = "Mass (GeV)",          #
+    XAxisMin = 0.,                      #
+    XAxisMax = 1000.,                   #These are self-explanatory
+    YAxisLabel = "Events / 100pb^{-1}", #
+    YAxisMin = 0.001,                   # 
+    YAxisMax = 1000000,                 #
+    LogOption = "log",                  #Make y-axis log scale, "" or 
+                                        #any other string for linear
+)
+######################################################################
+
+e.g. PlotMaker.py
+######################################################################
+from histos import *
+from samples import *
+from SweetPlots.plotter import DoPlotting
+
+samples = [QCD, LM0]                    #Samples to include on plots 
+histograms = [alphaT]                   #Plots to be made 
+files_folder = "../results/"            #Folder containing files with histograms
+plots_folder = "KinSuitePlots_ht/"      #Folder within file containing histograms 
+out_folder = "../Plots/"                #Folder to put final plots
+formats = [".png", ".eps"]              #File formats for plots
+DoPlotting([samples, histograms, files_folder, plots_folder, out_folder, formats])
+######################################################################
+
+Make sure SweetPlots/ is in your PYTHONPATH.
+
+You can acomplish this with: 
+export PYTHONPATH=$PYTHONPATH:/afs/cern.ch/user/<u>/<username>/SUSYv2/framework/python
+
+You need python 2.5. If you are on lxplus, this is not the default.
+Run the script SweetPlots/setup_PyRoot.sh to set everything up on lxplus.
+
+Finally, to run type: python PlotMaker.py
+
+Please improve this tool and fix any bugs that there might be.
+
+Robin Nandi
+robin.james.nandi@cern.ch
+21 May 2010

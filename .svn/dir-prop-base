@@ -1,0 +1,9 @@
+K 10
+svn:ignore
+V 38
+results
+setup.sh
+setup.csh
+config.inc
+
+END
