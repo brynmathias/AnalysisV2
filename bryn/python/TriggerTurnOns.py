@@ -507,7 +507,7 @@ for key,vals in AlphaTwithDiMu.iteritems():
           cutTreeData.TAttach(diMuon,muDRcut)
           cutTreeData.TAttach(muDRcut,cutLow)
           cutTreeData.TAttach(cutLow,cutUp)
-          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin[0])))
+          out.append(PreScaledPair(cutTreeData,cutUp,key,ref,"DiMu_HT%d_"%(htbin[0])))
 #          out.append(PreScaledPair(cutTreeData,cut,key,ref,"DiMu_HT%d_"%(htbin),Debug = True))
 
 
