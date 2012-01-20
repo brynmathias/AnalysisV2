@@ -464,7 +464,7 @@ for key,vals in alphatTesting.iteritems():
       out.append(cutLow)
       out.append(cutUp)
       cutTreeData.TAttach(muDr,cutLow)
-      cutLow.TAttach(cutLow,cutUp)
+      cutTreeData.TAttach(cutLow,cutUp)
       out.append(PreScaledPair(cutTreeData,cutUp,key,ref,"HT%d_"%(htbin[0])))
 
 AlphaTwithDiMu = {
