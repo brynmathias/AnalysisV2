@@ -460,7 +460,7 @@ for key,vals in alphatTesting.iteritems():
   for ref in vals[0]:
     for htbin in vals[1]:
       cutLow = eval("RECO_CommonHTCut(%f)"%(htbin[0]))
-      cutUp = eval("RECO_CommonHLTessThanCut(%f)"%(htbin[1]))
+      cutUp = eval("RECO_CommonHTLessThanCut(%f)"%(htbin[1]))
       out.append(cutLow)
       out.append(cutUp)
       cutTreeData.TAttach(muDr,cutLow)
@@ -499,7 +499,7 @@ for key,vals in AlphaTwithDiMu.iteritems():
     for ref in vals[0]:
       for muDR in [0.5]:
           cutLow = eval("RECO_CommonHTCut(%f)"%(htbin[0]))
-          cutUp = eval("RECO_CommonHLTessThanCut(%f)"%(htbin[1]))
+          cutUp = eval("RECO_CommonHTLessThanCut(%f)"%(htbin[1]))
           out.append(cutLow)
           out.append(cutUp)
           muDRcut =  RECO_MuonJetDRCut(muDR)
