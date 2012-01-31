@@ -198,7 +198,7 @@ void CommandMSUGRA(TString plotName_,
     //   Second = getCLs1080Exp();
     //    Second_up = getCLs1080Up();
     //    Second_low = getCLs1080Low();
-        Third = get1080Exp();
+        Third = get4600SidBandExp();
     //Third = getCLs1080ObsNLO();
 
   }
