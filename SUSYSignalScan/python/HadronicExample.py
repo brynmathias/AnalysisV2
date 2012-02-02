@@ -157,6 +157,7 @@ def cutFlow(cutTreeMC, model) :
        cutTreeMC.TAttach(MHToverMET,MuonPt)   
        cutTreeMC.TAttach(MuonPt,MuonEta)
        cutTreeMC.TAttach(MuonEta,oneBtagNoAlphaT)
+       out.append(oneBtagNoAlphaT)
        out.append(MuonEta)
        out.append(MuonPt)
        out.append( addBinnedStuff(model = switches()["model"],
