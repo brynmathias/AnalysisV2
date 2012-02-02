@@ -24,3 +24,4 @@ TestResults
 *.pyc
 *.so
 *.cxx
+*.json
