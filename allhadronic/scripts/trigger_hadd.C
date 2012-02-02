@@ -56,30 +56,40 @@ void trigger_hadd() {
   // root > .L hadd.C
   // root > hadd()
   
-  double lumi = 1080.;
+  double lumi = 2720.;
+  
+  int run_min = 161217;
+  int run_max = -1;
   
   //std::string file_name("Trigger_HT42_incomplete");
   //std::string file_name("Trigger_HT_Run2011A_L1OffSet");
-  std::string file_name("Trigger_HT_Run2011A");
   //std::string file_name("Trigger_HT_Run2011A_AllReco_17June");
+  //std::string file_name("Trigger_HT_Run2011A");
+  //std::string file_name("Trigger_HT_Run2011A_1fb");
+  //std::string file_name("Trigger_HTRun2011AB_Complete");
+  std::string file_name("Trigger_HTRun2011AB");
   
   std::string dir_name("Triggers");
   std::string his_name = "TriggersVsRunNumber";
   
   std::vector<std::string> filters;
-  filters.push_back("HLT_HT???_MHT??_v*");
-//   filters.push_back("HLT_HT250_AlphaT0p??_v*");
 
-//   filters.push_back("HLT_HT1??_v*");
-//   filters.push_back("HLT_HT2??_v*");
+//    filters.push_back("HLT_HT25?_MHT??_v*");
+//    //filters.push_back("HLT_HT26?_MHT??_v*");
+//    filters.push_back("HLT_HT3??_MHT??_v*");
+//    filters.push_back("HLT_HT4??_MHT??_v*");
+//    filters.push_back("HLT_HT5??_MHT??_v*");
+  
+//    filters.push_back("HLT_HT25?_AlphaT0p??_v*");
+//   //filters.push_back("HLT_HT26?_AlphaT0p??_v*");
+   filters.push_back("HLT_HT3??_AlphaT0p??_v*");
+   filters.push_back("HLT_HT4??_AlphaT0p??_v*");
+   filters.push_back("HLT_HT5??_AlphaT0p??_v*");
 
+//   //filters.push_back("HLT_HT1??_v*");
+//   //filters.push_back("HLT_HT2??_v*");
 //   filters.push_back("HLT_HT25?_v*");
-//   filters.push_back("HLT_HT26?_v*");
-//   filters.push_back("HLT_Mu?_HT200_v*");
-//   filters.push_back("HLT_Mu??_HT200_v*");
-
-//   filters.push_back("HLT_HT25?_v*");
-//   filters.push_back("HLT_HT26?_v*");
+//   //filters.push_back("HLT_HT26?_v*");
 //   filters.push_back("HLT_HT3??_v*");
 //   filters.push_back("HLT_HT4??_v*");
 //   filters.push_back("HLT_HT5??_v*");
@@ -89,7 +99,43 @@ void trigger_hadd() {
 //   filters.push_back("HLT_HT9??_v*");
 //   filters.push_back("HLT_HT9??_v*");
 //   filters.push_back("HLT_HT1???_v*");
+
+<<<<<<< HEAD:allhadronic/scripts/trigger_hadd.C
+ // filters.push_back("HLT_Mu?_v*");
+ // filters.push_back("HLT_Mu??_v*");
+ // filters.push_back("HLT_Mu2?_v*");
+ // filters.push_back("HLT_Mu3?_v*");
+  //filters.push_back("HLT_Mu4?_v*");
+  filters.push_back("HLT_IsoMu??_eta2p1_v*");
+  filters.push_back("HLT_IsoMu?_eta2p1_v*");
+
+  filters.push_back("HLT_IsoMu?_v*");
+  filters.push_back("HLT_IsoMu??_v*");
+// filters.push_back("HLT_Mu?_HT???_v*");
+// filters.push_back("HLT_Mu??_HT???_v*");
+  filters.push_back("HLT_HT25?_v*");
+//   filters.push_back("HLT_HT26?_v*");
+ // filters.push_back("HLT_HT3??_v*");
+  //filters.push_back("HLT_HT4??_v*");
+//  filters.push_back("HLT_HT5??_v*");
+//  filters.push_back("HLT_HT6??_v*");
+//  filters.push_back("HLT_HT7??_v*");
+ //  filters.push_back("HLT_HT8??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT9??_v*");
+ //  filters.push_back("HLT_HT1???_v*");
+  // filters.push_back("HLT_Mu?_v*");
+  // filters.push_back("HLT_Mu??_v*");
+  // filters.push_back("HLT_IsoMu?_v*");
+  // filters.push_back("HLT_IsoMu??_v*");
+  // filters.push_back("HLT_IsoMu?_eta2p1_v*");
+  // filters.push_back("HLT_IsoMu??_eta2p1_v*");
+=======
+//   filters.push_back("HLT_Mu?_HT???_v*");
+//   filters.push_back("HLT_Mu??_HT???_v*");
+
   
+>>>>>>> c7a7acbe340950cb6ed9f9b1d818b61bafdde065:allhadronic/scripts/trigger_hadd.C
   typedef std::map<int,float> Runs;
   typedef std::map<std::string,Runs> Triggers;
   Triggers trigs;
@@ -99,7 +145,7 @@ void trigger_hadd() {
     
     // Construct file name
     std::stringstream ss;
-    ss << "./" << file_name << "_" << ii << ".root";
+    ss << "../python/" << file_name << "_" << ii << ".root";
     
     // Attempt to open file
     TFile* file = new TFile(ss.str().c_str());
@@ -132,7 +178,6 @@ void trigger_hadd() {
       // Retrieve trigger name (and its prescale) from x-bin label
       std::string trigger = his->GetXaxis()->GetBinLabel(xbin+1);
 
-      
       // Check if trigger passes the filter 
       std::vector<std::string>::const_iterator ifilter = filters.begin();
       std::vector<std::string>::const_iterator jfilter = filters.end();
@@ -152,23 +197,29 @@ void trigger_hadd() {
 	int yval = (int)his->GetYaxis()->GetBinLowEdge(ybin+1);
 	yval = atoi(his->GetYaxis()->GetBinLabel(ybin+1));
 
-	// Cache runs used	
-	if ( weight > 0 ) { 
-	  if ( find( runs.begin(), runs.end(), yval ) == runs.end() ) {
-	    runs.push_back( yval );
+	// Limit run range
+	if ( ( run_min < 0 || yval >= run_min ) &&
+	     ( run_max < 0 || yval <= run_max ) ) {
+	  
+	  // Cache runs used	
+	  if ( weight > 0 ) { 
+	    if ( find( runs.begin(), runs.end(), yval ) == runs.end() ) { runs.push_back( yval ); }
 	  }
-	}
 	
-	// Populate map with histogram contents
-	Triggers::const_iterator iter = trigs.find( trigger );
-	if ( iter == trigs.end() ) {
-	  // If trigger name not found
-	  trigs[trigger][yval] = weight;
-	} else {
-	  if ( iter->second.find(yval) == iter->second.end() ) {
-	    // If trigger name found but prescale not found
+	  //trigger = ( trigger.size() > 3 ? std::string(trigger.substr(0,trigger.size()-3)) : "" );
+	  
+	  // Populate map with histogram contents
+	  Triggers::const_iterator iter = trigs.find( trigger );
+	  if ( iter == trigs.end() ) {
+	    // If trigger name not found
 	    trigs[trigger][yval] = weight;
+	  } else {
+	    if ( iter->second.find(yval) == iter->second.end() ) {
+	      // If trigger name found but prescale not found
+	      trigs[trigger][yval] = weight;
+	    }
 	  }
+	  
 	}
 	
       } // y-bins
@@ -228,7 +279,7 @@ void trigger_hadd() {
     std::string curr_trigger = ii->first.substr( 0, ii->first.find("_v") );
     std::string curr_version = ii->first.substr( ii->first.find("_v") );
     if ( last_trigger == "None" || 
-	 ( curr_trigger == last_trigger && 
+	 ( curr_trigger != last_trigger ||
 	   curr_version != last_version ) ) { 
       int tmp = ii->second.empty() ? 0 : ii->second.begin()->first;
       if ( tmp && find( indices.begin(), indices.end(), tmp ) == indices.end() ) { 
@@ -249,7 +300,7 @@ void trigger_hadd() {
 	 << std::endl;
     }    
   }
-  //std::cout << ss.str() << std::endl;
+  std::cout << ss.str() << std::endl;
   
   // Print Trigger list for PSet
   std::stringstream ssss;

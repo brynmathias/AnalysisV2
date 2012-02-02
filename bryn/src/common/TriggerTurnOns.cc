@@ -123,7 +123,7 @@ void TriggerTurnOns::Plots() {
 bool TriggerTurnOns::Plots( Event::Data& ev ) {
   UInt_t n = ev.CommonObjects().size();
   Double_t weight = ev.GetEventWeight();
-  int preScaleVal = 99999;
+  int preScaleVal = 9999999;
   if(ReWeight_ ){
     if(verb_){
       std::cout << "New Event" << std::endl;
@@ -132,34 +132,33 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
     std::vector<std::string>::const_iterator ite = ReWeightVec_.end();
     for( ; it != ite; ++it){
       if( it->at(it->size()-1) != '*'){
-        std::map<std::string, bool>::const_iterator trig = ev.hlt()->find(*it);
         std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*it);
-        if( (trig != ev.hlt()->end() && trig->second) && (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
-          preScaleVal = prescale->second ;
           if(verb_){
             std::cout << "Trigger " << (*it) << " Has a prescale of " << prescale->second << " " << std::endl;
           }
+        if( (prescale != ev.hlt_prescaled()->end() && prescale->second < preScaleVal) ) {
+          preScaleVal = prescale->second ;
+
         }
       }else{
         size_t found;
     // now loop though the map and test the string part -- slow!
-        std::map<std::string, bool>::const_iterator itrig = ev.hlt()->begin();
-        std::map<std::string, bool>::const_iterator jtrig = ev.hlt()->end();
         std::map<std::string, int>::const_iterator ipre = ev.hlt_prescaled()->begin();
-        for( ; itrig != jtrig; ++itrig, ++ipre ){
-          if(itrig->second){
+        std::map<std::string, int>::const_iterator jpre = ev.hlt_prescaled()->begin();
+        for( ; ipre != jpre; ++ipre ){
             std::string str = *it;
             str = str.substr(0, str.size() - 1 );
-          // cout <<*it<< " compare with " << itrig->first << endl;
-            found = itrig->first.find(str);
+            if(verb_){
+            cout <<*it<< " compare with " << ipre->first << endl;
+            }
+            found = ipre->first.find(str);
             if(found != string::npos){ preScaleVal = ipre->second; }
-          }
         }
       }
     }
     if(verb_){
       cout << " The lowest prescale in the event is " << preScaleVal << std::endl;
-      if(preScaleVal == 99999) {
+      if(preScaleVal == 9999999) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
         cout << "Triggers that exist in the event:" <<endl;
         for(std::map<std::string,bool>::const_iterator it2 = ev.hlt()->begin();
@@ -169,7 +168,7 @@ bool TriggerTurnOns::Plots( Event::Data& ev ) {
         std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
       }
     }
-    if(preScaleVal == 99999) preScaleVal = 1;
+    if(preScaleVal == 9999999) preScaleVal = 0;
     double factor = double(preScaleVal);
     weight *= factor;
   }

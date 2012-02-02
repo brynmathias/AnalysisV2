@@ -4,14 +4,16 @@ CVS
 .hg
 .hgignore
 
-bin
 TestResults
-*.obj
 *.cvsignore
 
-
+*filtered.json
+*Trigger*.json
 .DS_Store
-
+AK5*
+*.so
+*.cxx
+*.csh
 *.old
 *.log
 *.out
@@ -26,3 +28,12 @@ TestResults
 *.cxx
 *.json
 *__susyjob__*
+*.pyc
+*.cxx
+*.so
+*.sh
+*.csh
+__susyJob__*
+*.sh
+*.inc
+*.csh

@@ -1,0 +1,23 @@
+Regarding running on the sms, 
+
+*you need to set run_sms as you say. This
+fudges the x-section to be 1.0 exactly and thus allows f to be
+interpreted as a x-section (instead of a multiple of some nominal
+x-section as for mSUGRA). 
+
+*In likelihood.py, you need to change the upper
+limit of the f variable to a large number - I used 50 I think. This
+allows the x-section to float up as high as it needs to. 
+
+*In utils.py comment out the following:
+    #if xs.GetBinContent(xx, yy, zz) < cfg.minXSToConsider: continue
+                #if nocuts_noweight.GetBinContent(xx, yy, zz) != 10000:
+#                    print "WARNING: Found hole in scan (%d, %d)" % (x,y)
+                 #   continue 
+
+*You also need
+to comment all of the signal systematics in config.py and I also turned
+off the signal contamination (includeSignalContamination =
+False). 
+
+*Finally run the limit in profile likelihood mode (pl).

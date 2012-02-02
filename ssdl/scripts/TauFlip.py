@@ -149,9 +149,9 @@ test=PSet(
         Name="test",
         Format=("ICF",3),
         File=[
-"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_19_30_01//TTJets_TuneZ2_7TeV-madgraph-tauola.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_10_1_1zt.root" ,
-"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_19_30_01//TTJets_TuneZ2_7TeV-madgraph-tauola.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_11_1_Cqz.root" ,
-"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2011_04_07_19_30_01//TTJets_TuneZ2_7TeV-madgraph-tauola.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_12_1_mN2.root" ,
+"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2011_04_07_19_30_01//TTJets_TuneZ2_7TeV-madgraph-tauola.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_10_1_1zt.root" ,
+"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2011_04_07_19_30_01//TTJets_TuneZ2_7TeV-madgraph-tauola.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_11_1_Cqz.root" ,
+"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar//ICF/automated/2011_04_07_19_30_01//TTJets_TuneZ2_7TeV-madgraph-tauola.Spring11-PU_S1_START311_V1G1-v1.AODSIM//SusyCAF_Tree_12_1_mN2.root" ,
         ],
         Weight=1.,
 #        FirstEntry=2148,

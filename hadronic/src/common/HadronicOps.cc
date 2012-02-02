@@ -103,8 +103,8 @@ HadronicAlphaT::HadronicAlphaT( float cut )
 // -----------------------------------------------------------------------------
 //
 bool HadronicAlphaT::Process( Event::Data& ev ) {
-  if ( ev.CommonObjects().size() < 2 ||
-    ev.CommonObjects().size() > 50 ) { return false; }
+  if ( ev.JD_CommonJets().accepted.size() < 2 ||
+    ev.JD_CommonJets().accepted.size() > 50 ) { return false; }
   if ( AlphaT()( ev.JD_CommonJets().accepted ) > cut_ ) { return true; }
   return false;
 }

@@ -251,7 +251,7 @@ ss_mm_presel = SSDL_MC_PreSel(Gen_ss_mm.ps())
 ss_tt_presel = SSDL_MC_PreSel(Gen_ss_tt.ps())
 ss_em_presel = SSDL_MC_PreSel(Gen_ss_em.ps())
 ss_et_presel = SSDL_MC_PreSel(Gen_ss_et.ps())
-ss_mt_presel = SSDL_MC_PreSel(Gen_os_mt.ps())
+ss_mt_presel = SSDL_MC_PreSel(Gen_ss_mt.ps())
 
 #####
 
@@ -261,6 +261,7 @@ TwoJets_ET  = OP_NumComJets(">",1)
 TwoJets_MT = OP_NumComJets(">",1)
 TwoJets_TT = OP_NumComJets(">",1)
 
+pfMETcut_eff = OP_PFMETCut(120.)
 pfMETcut = OP_PFMETCut(120.)
 pfMETcut_ET = OP_PFMETCut(120.)
 pfMETcut_MT = OP_PFMETCut(120.)
@@ -371,7 +372,13 @@ if mode == 'mSugra':
 elif mode == 'SMS':
     out.append(smsOps(model = 'T1TauNu', cutTree = tree, cut = HTcut_wJets, label = 'test_postJetpostHT'))
 
+tree.Attach(pfMETcut_eff)
+if mode == 'mSugra':
+    out.append(tripleScale(model = 'tanB10', cutTree = tree, cut = pfMETcut_eff, label = 'test_postMET'))
+elif mode == 'SMS':
+    out.append(smsOps(model = 'T1TauNu', cutTree = tree, cut = pfMETcut_eff, label = 'test_postMET'))
 
+    
 tree.Attach(sigSsdlSelec_ET)
 
 if mode == 'mSugra':
@@ -481,7 +488,7 @@ elif mode == 'SMS':
 
 
 from datetime import date
-outpath = './AGB_SusyScan_' + str(date.today()) + '_HT400Met120_SMS_test'
+outpath = './AGB_SusyScan_' + str(date.today()) + '_HT400Met120_SMS_New'
 import os
 if os.path.exists(outpath):
     print 'Warning, outpath: ' + outpath + ' already exists'
@@ -494,7 +501,7 @@ from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_
 
 from montecarlo.PhysicsProcesses_mSUGRA_tanbeta50Fall10 import *
 
-from SSDLsamples.mc.SMS_T1taunu_x_05_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_T1taunu import SMS_T1taunu_x_05_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_T1taunu as SimpModel_t1TauNu
+from SSDLsamples.mc.SMS_T1taunu_x_05_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_T1taunu_noGenCut import SMS_T1taunu_x_05_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_T1taunu as SimpModel_t1TauNu
 
 tb50_old = [PhysicsProcesses_mSUGRA_tanbeta50Fall10]
 
@@ -506,16 +513,27 @@ SMS_test = PSet(
     Name = 'test',
     Format = ('ICF',3),
     File = [
-        "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/arlogb/SimplifiedModel_T1TauNu_Second/0.5_100.0_50.0to325.0_50.0.lhe_1.root"
+        "root://xrootd.grid.hep.ph.ic.ac.uk//store/user/arlogb/SimplifiedModel_T1TauNu_Second/0.5_100.0_50.0to325.0_50.0.lhe_1.root"
         ],
     Weight = 1.0,
+    # LastEntry = 10
+    )
+
+SMS_test2 = PSet(
+    Name = 'test2',
+    Format = ('ICF',3),
+    File = [
+        'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/arlogb/ICF/automated/2011_08_23_16_46_43/SusyCAF_Tree_79_3_rar.root'
+        ],
+    Weight = 1.0
     )
 
 test = [SMS_test]
-    
+test2 = [SMS_test2]
 
 reweight(TanB10,976.)
 if mode == 'mSugra':
     a.Run(outpath, conf, TanB10)
 elif mode == 'SMS':
-    a.Run(outpath, conf, test)
+    a.Run(outpath, conf, T1TauNu)
+    

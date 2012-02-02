@@ -1,0 +1,56 @@
+#include <boost/python.hpp>
+#include "HadronicOps.hh"
+#include "HadronicPlottingOps.hh"
+#include "BrynPlottingOps.hh"
+#include "TanjaCCControlPlots.hh"
+#include "BkgdEstPlottingOps.hh"
+#include "EWKbkgClassesPlotOps.hh"
+#include "JetMetPasPlottingOps.hh"
+#include "HadronicCommonPlots.hh"
+#include "BkgdManager.hh"
+
+
+using namespace boost::python;
+
+BOOST_PYTHON_MODULE(libHadronic) {
+
+  class_<Operation::HadronicAlphaT, bases<Operation::_Base> >( "HadronicAlphaT",  init<float>() );
+
+  class_<Operation::HadronicCut, bases<Operation::_Base> >( "HadronicCut",  init<float>() );
+
+  class_<Operation::HadronicPlottingOps, bases<Operation::_Base> >( "HadronicPlottingOps",
+                    init<const Utils::ParameterSet&>() );
+
+class_<Operation::EWKbkgClassesPlotOps, bases<Operation::_Base> >( "OP_EWKbkgClassesPlotOps",
+                     init<const std::string &>() );
+
+
+  class_<Operation::BrynPlottingOps, bases<Operation::_Base> >( "BrynPlottingOps",
+                init<const Utils::ParameterSet&>() );
+
+  class_<Operation::TanjaCCControlPlots, bases<Operation::_Base> >( "OP_TanjaCCControlPlots",
+                    init<const Utils::ParameterSet&>() );
+
+  class_<Operation::BkgdEstPlottingOps, bases<Operation::_Base> >( "OP_BkgdEstPlottingOps",
+                    init<const Utils::ParameterSet&>() );
+
+  class_<Operation::mSuGraPlottingOps, bases<Operation::_Base> >( "OP_mSuGraPlottingOps",
+                    init<const Utils::ParameterSet&>() );
+
+
+  class_<Operation::HadronicCommonPlots, bases<Operation::_Base> >( "HadronicCommonPlots",
+                    init<const Utils::ParameterSet&>());
+
+
+  class_<Operation::JetMetPasPlottingOps, bases<Operation::_Base> >( "JetMetPasPlottingOps",
+                    init<const Utils::ParameterSet&>() );
+
+
+
+  class_<Operation::UnCorLeadCut, bases<Operation::_Base> >("OP_UnCorLeadJetCut",init<float>() );
+
+  class_<Operation::BkgdManager>("BkgdManager")
+      .def("ReadIn",&Operation::BkgdManager::ReadIn)
+      .def("Run",&Operation::BkgdManager::Run);
+
+}

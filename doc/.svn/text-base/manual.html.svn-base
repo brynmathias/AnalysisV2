@@ -1,0 +1,359 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>manual</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2009-12-14 20:15:00 CET"/>
+<meta name="author" content="Alex Sparrow"/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color:lightblue; font-weight:normal }
+  .target { }
+  .timestamp { color: grey }
+  .timestamp-kwd { color: CadetBlue }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*/-->
+</script>
+</head><body>
+<h1 class="title">manual</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 SUSYNTUPLA v2 User's Guide </a>
+<ul>
+<li><a href="#sec-1.1">1.1 Setup </a>
+<ul>
+<li><a href="#sec-1.1.1">1.1.1 Installation and Configuration </a></li>
+<li><a href="#sec-1.1.2">1.1.2 Compiling </a></li>
+</ul>
+</li>
+<li><a href="#sec-1.2">1.2 The Code </a>
+<ul>
+<li><a href="#sec-1.2.1">1.2.1 The core </a></li>
+<li><a href="#sec-1.2.2">1.2.2 The Python.cc file </a></li>
+</ul>
+</li>
+<li><a href="#sec-1.3">1.3 Frequently Asked Questions </a>
+<ul>
+<li><a href="#sec-1.3.1">1.3.1 I get weird Symbol Not Found errors </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">1 SUSYNTUPLA v2 User's Guide </h2>
+<div id="text-1">
+
+
+</div>
+
+<div id="outline-container-1.1" class="outline-3">
+<h3 id="sec-1.1">1.1 Setup </h3>
+<div id="text-1.1">
+
+
+</div>
+
+<div id="outline-container-1.1.1" class="outline-4">
+<h4 id="sec-1.1.1">1.1.1 Installation and Configuration </h4>
+<div id="text-1.1.1">
+
+<p>Once you have extracted the source code to a folder of your choice, open
+the file setup.(c)sh in a text editor. Change the value of the variable,
+SUSY_WORKING_SW_DIR to the absolute path of the folder containing the
+SUSYNTUPLA code. It should look something like this:
+</p>
+
+
+<pre class="example">
+     setenv SUSY_WORKING_SW_DIR $HOME/susy_code
+</pre>
+
+
+
+
+<p>
+You may also alter the other variables to change the version of ROOT you
+are using or the Python path. If you are running on LXPLUS, these should
+already be correctly set. If you are running on your own machine, you may
+need to change the value of MY_ROOTSYS.
+</p>
+<p>
+Finally, open the file config.inc. If you are running on LXPLUS, these
+values should be set correctly. If you are running on your own machine, you
+may need to change them. This will depend on how ROOT is installed on your
+machine. For Ubuntu, I have:
+</p>
+
+
+<pre class="example">
+     ROOTSYS_INC=/usr/include/root
+     ROOTSYS_LIB=/usr/lib
+     ROOTSYS_BIN=/usr/bin
+     PYTHON_INC=/usr/include/python2.6
+     PYTHON_LIB=-lpython2.6
+     BOOST_PYTHON_LIB=-lboost_python-mt
+</pre>
+
+
+
+
+<p>
+For LXPLUS, it should be:
+</p>
+
+
+<pre class="example">
+     ROOTSYS_INC=$(ROOTSYS)/include
+     ROOTSYS_LIB=$(ROOTSYS)/lib
+     ROOTSYS_BIN=$(ROOTSYS)/bin
+     PYTHON_INC=/usr/include/python2.3
+     PYTHON_LIB=-lpython2.3
+     BOOST_PYTHON_LIB=-lboost_python-mt
+</pre>
+
+
+
+
+<p>
+Now, everything should be configured correctly. Simply source the file
+setup.(c)sh and your environment will be setup.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1.1.2" class="outline-4">
+<h4 id="sec-1.1.2">1.1.2 Compiling </h4>
+<div id="text-1.1.2">
+
+<p>The code structure for V2 of the code has changed. Common aspects of the
+code are in the directory framework/. These are compiled into a shared
+library which libFrameworkSUSY.so which can then be linked against your own
+analysis code. All code specific to a given analysis should reside in a
+separate folder within the SUSY code structure. For instance the single
+lepton analysis would reside in the folder onelepton. Each analysis' code is
+built into a separate shared library which will be stored in the lib/ folder
+in the root of the codebase. Each module has two makefiles Debug and
+Release. Most of the time, the Debug file should be used so that the
+resulting library can be debugged.
+</p>
+<p>
+In order to build the onelepton module, you must first build the core
+framework by changing in to the framework directory and typing:
+</p>
+
+
+
+<pre class="example">
+    make -f Debug
+</pre>
+
+
+
+
+<p>
+This compiles the core framework code. This should only be needed when the
+core code has been changed. NOTE: You do not need to make clean. To compile
+the onelepton code itself, change to the onelepton directory and type the
+same command.
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1.2" class="outline-3">
+<h3 id="sec-1.2">1.2 The Code </h3>
+<div id="text-1.2">
+
+
+</div>
+
+<div id="outline-container-1.2.1" class="outline-4">
+<h4 id="sec-1.2.1">1.2.1 The core </h4>
+<div id="text-1.2.1">
+
+<p>The V2 code is different in many respects to V1. The most important change
+is that variables are now cached and loaded/calculated on demand. All
+variables within the core code (e.g. CommonJets, MET, MHT) are now contained
+within a descendent of the Compute::Variable class. This class takes care of
+all the caching for you. When you try to access the variable
+e.g. CommonJets, you will now call a function. This function checks if the
+variable has already been calculated for the current event. If it has, it
+simply returns it. If not, then it will calculate it from scratch. In so
+doing it may have to access other variables which in turn will be
+calculated. In addition, it may have to access branches of the ntuple. These
+are encapsulated by the Event::Element class which will read the quantity
+from the ntuple and return it.
+</p>
+<p>
+This may seem like a huge complication but the advantage is that when you
+request a given variable, the code will perform the minimum possible
+calculations and ntuple I/O to satisfy the request. This gives huge speed
+improvements over the old code in many cases.
+</p>
+<p>
+In addition, the caching mechanism can be used within operations to define
+your own custom variables. This is done using the Compute::User
+class. Variables defined in this way can be loaded by any Operation class
+that needs them. They will be calculated only once per event and may be
+shared between several Operation classes.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1.2.2" class="outline-4">
+<h4 id="sec-1.2.2">1.2.2 The Python.cc file </h4>
+<div id="text-1.2.2">
+
+<p>This file is used to expose the operations defined in your shared library so
+that they can be accessed from a Python script. The magic that connects C++
+to Python is done by the BOOST Python library so you should look at <a href="http://www.boost.org/doc/libs/1_41_0/libs/python/doc/index.html">the manual</a> for proper documentation.
+</p>
+<p>
+The essential element of this file is the class_ directive. This has the
+following syntax:
+</p>
+
+
+<pre class="example">
+    class_&lt;ClassName,bases&lt;BaseClassName&gt;("PythonName",init&lt;ArgType1,ArgType2...&gt;());
+</pre>
+
+
+
+
+<p>
+This tells Python that the C++ class ClassName should be exposed as the
+Python class PythonName with a constructor that takes ArgType1,
+ArgType2&hellip; as arguments. It also tells Python that the class ClassName
+inherits from BaseClassName. For the purposes of simply exposing an
+operation to Python, this should be enough. So to expose the NumComMuons
+operation we do the following:
+</p>
+
+
+<pre class="example">
+    class_&lt;Operation::NumComMuons, bases&lt;Operation::_Base&gt; &gt;("OP_NumComMuons",
+                                                           init&lt;const std::string &amp;,
+                                                           UInt_t&gt;());
+</pre>
+
+
+
+
+<p>
+This tells Python to register the class NumComMuons in the Operation
+namespace as Python class OP_NumComMuons. The constructor will take a
+reference to a string and an unsinged integer. Also, the operation will inherit
+from the Operation::_Base class.
+</p>
+<p>
+Once you have done this, simply rebuild the module and the class will be
+available from Python.
+</p>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1.3" class="outline-3">
+<h3 id="sec-1.3">1.3 Frequently Asked Questions </h3>
+<div id="text-1.3">
+
+
+</div>
+
+<div id="outline-container-1.3.1" class="outline-4">
+<h4 id="sec-1.3.1">1.3.1 I get weird Symbol Not Found errors </h4>
+<div id="text-1.3.1">
+
+<p>These look a lot more confusing than they actually are. They occur because
+when the code is built as a shared library it will not complain about not
+being able to find bits of your code (since they may be in another shared
+library).
+</p>
+<p>
+To decipher them, use the c++filt command to untangle the problematic symbol
+name.
+</p>
+
+
+<pre class="example">
+    c++filt &lt;symbol_name&gt;
+</pre>
+
+
+
+<p>
+This will tell you where the problem is in your code.
+</p></div>
+</div>
+</div>
+</div>
+<div id="postamble"><p class="author"> Author: Alex Sparrow
+<a href="mailto:alex@alex-laptop">&lt;alex@alex-laptop&gt;</a>
+</p>
+<p class="date"> Date: 2009-12-14 20:15:00 CET</p>
+<p>HTML generated by org-mode 6.21b in emacs 23</p>
+</div></body>
+</html>

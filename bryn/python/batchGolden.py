@@ -9,6 +9,7 @@ import os
 import setupSUSY
 from libFrameworkSUSY import *
 from libHadronic import *
+from libWPol import *
 from libbryn import *
 from icf.core import PSet,Analysis
 from time import strftime
@@ -27,24 +28,6 @@ def ensure_dir(path):
       else: raise
 
 
-# -----------------------------------------------------------------------------
-# lets get some samples together!!
-from montecarlo.Spring11.QCD_TuneZ2_7TeV_pythia6_Spring11_PU_START311_ALL import *
-from montecarlo.Spring11.TTJets_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1 import *
-from montecarlo.Spring11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1 import *
-from montecarlo.Spring11.ZinvisibleJets_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
-from montecarlo.Spring11.LMx_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1 import *
-from montecarlo.Spring11.GJets_TuneD6T_HT_200_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
-from montecarlo.Spring11.TToBLNu_TuneZ2_t_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
-from montecarlo.Spring11.TToBLNu_TuneZ2_tW_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
-from montecarlo.Spring11.TToBLNu_TuneZ2_s_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1 import *
-
-MC = QCD_TuneZ2_7TeV_pythia6_Spring11_PU_START311_ALL+[TTJets_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,ZinvisibleJets_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1,LM0_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,LM1_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM2_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM3_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM4_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM5_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM6_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM7_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM8_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, LM9_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1,
-GJets_TuneD6T_HT_200_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1,
-TToBLNu_TuneZ2_s_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1,
-TToBLNu_TuneZ2_tW_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1,
-TToBLNu_TuneZ2_t_channel_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1
-]
 
 # -----------------------------------------------------------------------------
 # Reading the collections from the ntuple
@@ -186,7 +169,7 @@ skim = SkimOp(skim_ps.ps())
 
 genericPSet = PSet(
 DirName      = "275_325Gev",
-MinObjects   = 2,
+MinObjects   = 1,
 MaxObjects   = 15,
 StandardPlots     = True,
 )
@@ -206,129 +189,70 @@ def makePlotOp(OP = (), cutTree = None, cut = None, label = ""):
   cutTree.TAttach(cut,op)
   alpha = OP_CommonAlphaTCut(0.55)
   dump = EventDump()
+  skim_ps=PSet(
+    SkimName = "myskim",
+    DropBranches = False,
+    Branches = [
+        " keep * "
+        ]
+  )
+  skim = SkimOp(skim_ps.ps())
+  # out.append(skim)
+  # out.append(skim_ps)
   cutTree.TAttach(cut,alpha)
   cutTree.TAttach(alpha,dump)
+  # cutTree.TAttach(alpha,skim)
   out.append(alpha)
   out.append(dump)
   return out
   pass
 
-def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = []):
+def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],TriggerDict = None,lab = ""):
   """docstring for AddBinedHist"""
   out = []
-  for lower,upper in zip(htBins,htBins[1:]+[None]):
-    # print "Lower , Upper =", lower , upper
-    if int(lower) == 325 and upper is None: continue
-    if int(lower) == 375 and upper is None: continue
-    # print "continue should have happened now"
-    lowerCut = eval("RECO_CommonHTCut(%d)"%lower)
-    out.append(lowerCut)
-    cutTree.TAttach(cut,lowerCut)
-    if upper:
-      upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
-      out.append(upperCut)
-      cutTree.TAttach(lowerCut,upperCut)
-    pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%d%s"%(lower, "_%d"%upper if upper else ""))
-    out.append(pOps)
+  if TriggerDict is not None:
+      for lower,upper in zip(htBins,htBins[1:]+[None]):
+        # print "Lower , Upper =", lower , upper
+        if int(lower) == 325 and upper is None: continue
+        if int(lower) == 375 and upper is None: continue
+        # print "continue should have happened now"
+        lowerCut = eval("RECO_CommonHTCut(%d)"%lower)
+        triggerps = PSet(Verbose = False,
+        UsePreScaledTriggers = False,
+        Triggers = [])
+        triggerps.Triggers = TriggerDict["%d%s"%(lower, "_%d"%upper if upper else "")]
+        Trigger = OP_MultiTrigger( triggerps.ps() )
+        out.append(triggerps)
+        out.append(Trigger)
+        out.append(lowerCut)
+        cutTree.TAttach(cut,Trigger)
+        cutTree.TAttach(Trigger,lowerCut)
+        if upper:
+          upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
+          out.append(upperCut)
+          cutTree.TAttach(lowerCut,upperCut)
+        pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
+        out.append(pOps) 
+  else:
+      for lower,upper in zip(htBins,htBins[1:]+[None]):
+        # print "Lower , Upper =", lower , upper
+        if int(lower) == 325 and upper is None: continue
+        if int(lower) == 375 and upper is None: continue
+        # print "continue should have happened now"
+        lowerCut = eval("RECO_CommonHTCut(%d)"%lower)
+        out.append(lowerCut)
+        cutTree.TAttach(cut,lowerCut)
+        if upper:
+          upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
+          out.append(upperCut)
+          cutTree.TAttach(lowerCut,upperCut)
+        pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
+        out.append(pOps)
   return out
   pass
 
 
-pset1 = PSet(
-DirName      = "275_325Gev",
-MinObjects   = 1,
-MaxObjects   = 2,
-StandardPlots     = True,
-)
 
-Npset1 = PSet(
-DirName      = "n275_325Gev",
-MinObjects   = 3,
-MaxObjects   = 15,
-StandardPlots     = True,
-)
-
-pset2 = PSet(
-DirName      = "325Gev",
-MinObjects   = 2,
-MaxObjects   = 2,
-StandardPlots     = True,
-)
-
-Npset2 = PSet(
-DirName      = "n325Gev",
-MinObjects   = 3,
-MaxObjects   = 15,
-StandardPlots     = True,
-)
-
-pset3 = PSet(
-DirName      = "375Gev",
-MinObjects   = 2,
-MaxObjects   = 2,
-StandardPlots     = True,
-)
-
-Npset3 = PSet(
-DirName      = "n375Gev",
-MinObjects   = 3,
-MaxObjects   = 15,
-StandardPlots     = True,
-)
-
-
-pset5 = PSet(
-DirName      = "375Gev_afterDeadEcal",
-MinObjects   = 2,
-MaxObjects   = 2,
-StandardPlots     = True,
-)
-
-Npset5 = PSet(
-DirName      = "n375Gev_afterDeadEcal",
-MinObjects   = 3,
-MaxObjects   = 15,
-StandardPlots     = True,
-)
-
-pset4 = PSet(
-DirName      = "All",
-MinObjects   = 2,
-MaxObjects   = 2,
-StandardPlots     = True,
-)
-
-Npset4 = PSet(
-DirName      = "nAll",
-MinObjects   = 3,
-MaxObjects   = 15,
-StandardPlots     = True,
-)
-
-Npset6 = PSet(
-DirName      = "nAllCuts",
-MinObjects   = 3,
-MaxObjects   = 15,
-StandardPlots     = True,
-)
-
-pset6 = PSet(
-DirName      = "AllCuts",
-MinObjects   = 2,
-MaxObjects   = 2,
-StandardPlots     = True,
-)
-
-HadStandard275_375 = WeeklyUpdatePlots(pset1.ps())
-HadStandard325 = WeeklyUpdatePlots(pset2.ps())
-HadStandard375 = WeeklyUpdatePlots(pset3.ps())
-HadStandard375_after_DeadEcal = WeeklyUpdatePlots(pset5.ps())
-HadStandardAll = WeeklyUpdatePlots(pset4.ps())
-nHadStandard275_375 = WeeklyUpdatePlots(Npset1.ps())
-nHadStandard325 = WeeklyUpdatePlots(Npset2.ps())
-nHadStandard375 = WeeklyUpdatePlots(Npset3.ps())
-nHadStandardAll = WeeklyUpdatePlots(Npset4.ps())
-nHadStandard375_after_DeadEcal = WeeklyUpdatePlots(Npset5.ps())
 # Common cut definitions
 #Avaiable criteria for MC and for Data are at current slightly different Hence the making of two trees
 #DataOnly!
@@ -349,27 +273,17 @@ oddElectron = OP_OddElectron()
 oddPhoton = OP_OddPhoton()
 oddJet = OP_OddJet()
 badMuonInJet = OP_BadMuonInJet()
-numComLeptons = OP_NumComLeptons("<=",0)
+numComElectrons = OP_NumComElectrons("<=",0)
 numComPhotons = OP_NumComPhotons("<=",0)
 
-DiJet0 = OP_NumComJets("==",2)
-DiJet1 = OP_NumComJets("==",2)
-DiJet2 = OP_NumComJets("==",2)
-DiJet3 = OP_NumComJets("==",2)
-DiJet4 = OP_NumComJets("==",2)
-NJet0 = OP_NumComJets(">=",3)
-NJet1 = OP_NumComJets(">=",3)
-NJet2 = OP_NumComJets(">=",3)
-NJet3 = OP_NumComJets(">=",3)
-NJet4 = OP_NumComJets(">=",3)
-DiVertexJets = OP_NumComJets("==",2)
-NVertexJets = OP_NumComJets(">=",3)
+
 
 
 
 LessThan375 = RECO_CommonHTLessThanCut(375.)
 ht250_Trigger = RECO_CommonHTCut(250.)
 htCut275_2 = RECO_CommonHTCut(275.)
+HT875Cut = RECO_CommonHTCut(875.)
 
 ht275_Fail     = RECO_CommonHTCut(275.)
 ht325_Fail     = RECO_CommonHTCut(325.)
@@ -393,119 +307,47 @@ alphat = OP_CommonAlphaTCut(0.55)
 DeadEcalCutData = OP_DeadECALCut(0.3,0.3,0.5,30.,10,0,"./deadRegionList_GR10_P_V10.txt")
 DeadEcalCutMC =   OP_DeadECALCut(0.3,0.3,0.5,30.,10,0,"./deadRegionList_START38_V12.txt")
 #MHTCut = OP_TriggerMHT_Emu(90.,30.)
-MHTCut = OP_CommonMHTCut(100.)
+MHTCut = OP_CommonMHTCut(0.)
 MHT_METCut = OP_MHToverMET(1.25,50.)
-NJet5 = OP_NumComJets(">=",3)
 DiJet5 = OP_NumComJets("==",2)
-nHadStandardAllCuts=  WeeklyUpdatePlots(Npset6.ps())
-HadStandardAllCuts=  WeeklyUpdatePlots(pset6.ps())
 
 
-# Cross check with the allhadronic analysis
-t1 = PSet(
-    DirName      = "HadronicCommon_1",
-    MinObjects   = 2,
-    MaxObjects   = 15,
-    StandardPlots     = False,
-    DeadECALPlots = True,
-    CleaningControlPlots = False,
-    MECPlots = False,
-    DeadECALFile = "./deadRegionList_START36_V9.txt",
-    DeadECAL_MinJetPtCut = 30.,
-    DeadECAL_MinBiasCut = 0.5,
-    DeadECAL_NBadCellsCut = 10
-)
 
-t2 = deepcopy(t1)
-t2.DirName = "HadronicCommon_2"
-
-pset = PSet(
-DirName      = "275_infGev",
-MinObjects   = 1,
-MaxObjects   = 2,
-StandardPlots     = True,
-)
-
-Npset = PSet(
-DirName      = "n275_infGev",
-MinObjects   = 3,
-MaxObjects   = 15,
-StandardPlots     = True,
-)
-
-pset2 = deepcopy(pset)
-pset2.DirName = "275_375Gev"
-
-Npset2 = deepcopy(Npset)
-Npset2.DirName = "n275_375Gev"
-
-pset3 = deepcopy(pset)
-pset3.DirName = "375GeVafterDeadEcal"
-Npset3 = deepcopy(Npset)
-Npset3.DirName = "n375GeVafterDeadEcal"
-
-pset4 = deepcopy(pset)
-pset4.DirName = "allCuts"
-Npset4 = deepcopy(Npset)
-Npset4.DirName = "nAllCuts"
 # Define a crap load more plotting ops, for HT exclusive bins
-Plot_275_325_Fail_pset = deepcopy(genericPSet)
-Plot_275_325_Fail_pset.DirName="275_325Fail"
-Plot_325_375_Fail_pset = deepcopy(genericPSet)
-Plot_325_375_Fail_pset.DirName="325_375Fail"
-Plot_375_Fail_pset = deepcopy(genericPSet)
-Plot_375_Fail_pset.DirName="375Fail"
-Plot_275_325Fail = WeeklyUpdatePlots( Plot_275_325_Fail_pset.ps() )
-Plot_325_375Fail = WeeklyUpdatePlots( Plot_325_375_Fail_pset.ps() )
-Plot_375Fail     = WeeklyUpdatePlots( Plot_375_Fail_pset.ps() )
-
-HTplot = WeeklyUpdatePlots(pset.ps())
-nHTplot = WeeklyUpdatePlots(Npset.ps())
-controlRegion = WeeklyUpdatePlots(pset2.ps())
-ncontrolRegion = WeeklyUpdatePlots(Npset2.ps())
-afterDeadEcal = WeeklyUpdatePlots(pset3.ps())
-nafterDeadEcal = WeeklyUpdatePlots(Npset3.ps())
-afterAllCuts = WeeklyUpdatePlots(pset4.ps())
-nafterAllCuts = WeeklyUpdatePlots(Npset4.ps())
 
 
-pset2 = deepcopy(pset1)
-pset2.DirName = "HadronicCommon_2"
 
-t3 = deepcopy(t1)
-t3.DirName = "HadronicCommon_3"
-
-t4 = deepcopy(t1)
-t4.DirName = "HadronicCommon_4"
-
-HadStandard_1 = HadronicCommonPlots(t1.ps())
-HadStandard_2 = HadronicCommonPlots(t2.ps())
-HadStandard_3 = HadronicCommonPlots(t3.ps())
-HadStandard_4 = HadronicCommonPlots(t4.ps())
 VertexPtOverHT = OP_SumVertexPtOverHT(0.1)
 eventDump = EventDump()
-datatriggerps = PSet(
-    Verbose = False,
-    UsePreScaledTriggers = False,
-    Triggers = [
-"HLT_HT250_AlphaT0p53_v2",
-"HLT_HT250_AlphaT0p53_v3",
-"HLT_HT250_AlphaT0p53_v4",
-"HLT_HT250_AlphaT0p53_v5",
-"HLT_HT250_AlphaT0p53_v6",
-"HLT_HT250_AlphaT0p54_v2",
-"HLT_HT250_AlphaT0p54_v3",
-"HLT_HT250_AlphaT0p54_v4",
-"HLT_HT250_AlphaT0p55_v1",
-"HLT_HT250_AlphaT0p62_v1",
-"HLT_HT250_AlphaT0p62_v2",
-  ]
-)
-DataTrigger = OP_MultiTrigger( datatriggerps.ps() )
 
-JetAdd = JetAddition(0.)
-json = JSONFilter("Json Mask", json_to_pset("~rjb3/public_html/golden.json"))
+triggers = {
+    "275_325":["HLT_HT250_AlphaT0p55_v1","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p53_v2","HLT_HT250_AlphaT0p53_v3",
+           "HLT_HT250_AlphaT0p53_v4","HLT_HT250_AlphaT0p53_v5","HLT_HT250_AlphaT0p55_v2","HLT_HT250_AlphaT0p58_v3",
+           "HLT_HT250_AlphaT0p60_v3",],
+    "325_375":["HLT_HT300_AlphaT0p52_v1","HLT_HT300_AlphaT0p52_v2","HLT_HT300_AlphaT0p52_v3","HLT_HT300_AlphaT0p53_v3",
+           "HLT_HT300_AlphaT0p53_v4","HLT_HT300_AlphaT0p53_v5","HLT_HT300_AlphaT0p53_v6","HLT_HT300_AlphaT0p54_v5",
+           "HLT_HT300_AlphaT0p55_v3",],
+    "375_475":["HLT_HT350_AlphaT0p51_v1","HLT_HT350_AlphaT0p51_v2","HLT_HT350_AlphaT0p51_v3","HLT_HT350_AlphaT0p51_v4",
+           "HLT_HT350_AlphaT0p51_v5","HLT_HT350_AlphaT0p52_v1","HLT_HT350_AlphaT0p52_v2","HLT_HT350_AlphaT0p53_v10",],
+    "475_575":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "575_675":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "675_775":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "775_875":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+    "875":["HLT_HT400_AlphaT0p51_v1","HLT_HT400_AlphaT0p51_v2","HLT_HT400_AlphaT0p51_v3","HLT_HT400_AlphaT0p51_v4",
+           "HLT_HT400_AlphaT0p51_v5","HLT_HT400_AlphaT0p51_v6","HLT_HT400_AlphaT0p51_v7","HLT_HT400_AlphaT0p51_v10",
+           "HLT_HT400_AlphaT0p52_v5"],
+}
 
+
+# json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden2011.json"))
 # AlphatTriggerCut(0.52414,50)#
 # vertex_reweight = VertexReweighting(
 # PSet(
@@ -513,12 +355,23 @@ json = JSONFilter("Json Mask", json_to_pset("~rjb3/public_html/golden.json"))
 # # VertexWeights = [0.0, 0.027442995662725636, 0.12682983875287387, 0.28326829632076572, 0.40618954180036759, 0.41605144586432974, 0.33147399297403923, 0.21562021576661147, 0.1140047132529971]
 # ).ps())
 
-# PreScaleWeights = PreScaleReweighting(datatriggerps.ps())
+btagDiMuon= OP_NumCommonBtagJets(">=",1,2.0)
+btagOneMuon= OP_NumCommonBtagJets(">=",1,2.0)
+ZeroMuonbtag= OP_NumCommonBtagJets(">=",1,2.0)
 recHitCut = OP_SumRecHitPtCut(30.)
+ZeroMuon = OP_NumComMuons("<=",0)
 json_ouput = JSONOutput("filtered")
-def MakeDataTree(Threshold):
-  print int(Threshold)
+OneMuon = OP_NumComMuons("==",1)
+ZMassCut = RECO_2ndMuonMass(25.0, 91.2, False, "all")
+PFMTCut30 = RECO_PFMTCut(30.0)
+DiMuon = OP_NumComMuons("==",2)
+ZMass_2Muons = RECO_2ndMuonMass(25.0, 91.2, True, "OS")
+minDRMuonJetCut = RECO_MuonJetDRCut(0.5)
+minDRMuonJetCutDiMuon = RECO_MuonJetDRCut(0.5)
+def MakeDataTree(Threshold,Muon = None):
   out = []
+  print int(Threshold)
+
   secondJetET = OP_SecondJetEtCut(Threshold)
   HTBins = []
   if int(Threshold) is 100 : HTBins = [375+100*i for i in range(6)]
@@ -526,153 +379,225 @@ def MakeDataTree(Threshold):
   if int(Threshold) is 86 : HTBins = [325.,375.]
   # from batchGolden import *
   cutTreeData = Tree("Data")
-  cutTreeData.Attach(json)
+  # cutTreeData.Attach(json)
   # cutTreeData.TAttach(json,evFilter)
   # cutTreeData.TAttach(evFilter,skim)
   # cutTreeData.TAttach(evFilter,eventDump)
-  cutTreeData.TAttach(json,DataTrigger)
-  cutTreeData.TAttach(json,json_ouput)
+  # cutTreeData.TAttach(json,NoiseFilt)
+  # cutTreeData.TAttach(json,json_ouput)
   # cutTreeData.Attach(DataTrigger)
-  cutTreeData.TAttach(DataTrigger,MHTCut)
-  cutTreeData.TAttach(MHTCut,NoiseFilt)
+  cutTreeData.Attach(NoiseFilt)
   cutTreeData.TAttach(NoiseFilt,GoodVertexMonster)
   cutTreeData.TAttach(GoodVertexMonster,recHitCut)
   cutTreeData.TAttach(recHitCut,LeadingJetEta)
   cutTreeData.TAttach(LeadingJetEta,secondJetET)
   cutTreeData.TAttach(secondJetET,oddJet)
   cutTreeData.TAttach(oddJet,badMuonInJet)
-  cutTreeData.TAttach(badMuonInJet,oddMuon)
-  cutTreeData.TAttach(oddMuon,oddElectron)
+  cutTreeData.TAttach(badMuonInJet,#oddMuon)
+  #cutTreeData.TAttach(oddMuon,
+  oddElectron)
   cutTreeData.TAttach(oddElectron,oddPhoton)
-  cutTreeData.TAttach(oddPhoton,numComLeptons)
-  cutTreeData.TAttach(numComLeptons,numComPhotons)
+  cutTreeData.TAttach(oddPhoton,numComElectrons)
+  cutTreeData.TAttach(numComElectrons,numComPhotons)
   cutTreeData.TAttach(numComPhotons,VertexPtOverHT)
   cutTreeData.TAttach(VertexPtOverHT,htCut275)
   #FOR HT > 275Gev Plot
-  cutTreeData.TAttach(htCut275,DiJet3)
-  cutTreeData.TAttach(htCut275,NJet3)
-  cutTreeData.TAttach(DiJet3,HadStandardAll)
-  cutTreeData.TAttach(NJet3,nHadStandardAll)
   #END HT 275GEV Plot
   #Begin MHT/MET plot inthe low region.
   cutTreeData.TAttach(htCut275,DeadEcalCutData)
-  cutTreeData.TAttach(DeadEcalCutData,LessThan375)
-  cutTreeData.TAttach(LessThan375,DiJet0)
-  cutTreeData.TAttach(LessThan375,NJet0)
-  cutTreeData.TAttach(DiJet0,HadStandard275_375)
-  cutTreeData.TAttach(NJet0,nHadStandard275_375)
-  #for Vertext multiplicity plot at 325geV
-  cutTreeData.TAttach(htCut275,htCut375GeV)
-  cutTreeData.TAttach(htCut375GeV,DiJet2)
-  cutTreeData.TAttach(htCut375GeV,NJet2)
-  cutTreeData.TAttach(DiJet2,HadStandard375)
-  cutTreeData.TAttach(NJet2,nHadStandard375)
-  cutTreeData.TAttach(DeadEcalCutData,htCut375)
-  #Here be plots for baby jet MHT and MHT/MET in the signal region after dead ecal cuts
-  cutTreeData.TAttach(htCut375,DiJet4)
-  cutTreeData.TAttach(DiJet4,HadStandard375_after_DeadEcal)
-  cutTreeData.TAttach(htCut375,NJet4)
-  cutTreeData.TAttach(htCut375,alphaT1)
-  cutTreeData.TAttach(NJet4,nHadStandard375_after_DeadEcal)
   #Here be plots after all the cuts!!
-  # cutTreeData.TAttach(DeadEcalCutData,
-  cutTreeData.TAttach(htCut275,MHT_METCut)
-  cutTreeData.TAttach(MHT_METCut,htCut375All)
-  cutTreeData.TAttach(htCut375All,NJet5)
-  cutTreeData.TAttach(htCut375All,DiJet5)
-  cutTreeData.TAttach(htCut375All,alphat)
-  # cutTreeData.TAttach(alphat,eventDump)
-#  cutTreeData.TAttach(alphat,skim)
-  cutTreeData.TAttach(NJet5,nHadStandardAllCuts)
-  cutTreeData.TAttach(DiJet5,HadStandardAllCuts)
-  # cutTreeData.TAttach(MHT_METCut, alphat)
-  # cutTreeData.TAttach(alphat,eventDump)#skim)
-  # avobe here does one big inclusive bin!
-  # Now lets start binning in HT bins
-  # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
-  # we arrange the HT bins so they are not repoduced though out threshold runs.
+  cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
+  if Muon == None:
+      cutTreeData.TAttach(MHT_METCut,ZeroMuon)
+      cutTreeData.TAttach(ZeroMuon,ZeroMuonbtag)
+      out.append(AddBinedHist(cutTree = cutTreeData,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_") )
+    
+      out.append(AddBinedHist(cutTree = cutTreeData,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
+      htBins = HTBins,TriggerDict = triggers,lab = "") )
+  
+  else:
+      cutTreeData.TAttach(MHT_METCut,minDRMuonJetCut)
+      cutTreeData.TAttach(minDRMuonJetCut,OneMuon)
+      cutTreeData.TAttach(OneMuon,ZMassCut)
+      cutTreeData.TAttach(ZMassCut,PFMTCut30)
+      cutTreeData.TAttach(PFMTCut30,btagOneMuon)
+      out.append(AddBinedHist(cutTree = cutTreeData,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
+    
+      out.append(AddBinedHist(cutTree = cutTreeData,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
+      htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
+    
+    
+      
+      cutTreeData.TAttach(minDRMuonJetCut,DiMuon)
+      cutTreeData.TAttach(DiMuon,ZMass_2Muons)
+      cutTreeData.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
+      cutTreeData.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
+      # avobe here does one big inclusive bin!
+      # Now lets start binning in HT bins
+      # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
+      # we arrange the HT bins so they are not repoduced though out threshold runs.
 
-  out.append(AddBinedHist(cutTree = cutTreeData,
-            OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins) )
-
+      out.append(AddBinedHist(cutTree = cutTreeData,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
+    
+      out.append(AddBinedHist(cutTree = cutTreeData,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
+      htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
+    
   return (cutTreeData,secondJetET,out)
 
 #Second MC!
 
-def MakeMCTree(Threshold):
+def MakeMCTree(Threshold, Muon = None):
   out = []
+
   HTBins = []
+  
   if int(Threshold) is 100 : HTBins = [375+100*i for i in range(6)]
   if int(Threshold) is 73 : HTBins = [275.,325.]
   if int(Threshold) is 86 : HTBins = [325.,375.]
   secondJetET = OP_SecondJetEtCut(Threshold)
   cutTreeMC = Tree("MC")
   cutTreeMC.Attach(ht250_Trigger)
-  cutTreeMC.TAttach(ht250_Trigger,MHTCut)
-  cutTreeMC.TAttach(MHTCut,NoiseFilt)
+  cutTreeMC.TAttach(ht250_Trigger,NoiseFilt)
   cutTreeMC.TAttach(NoiseFilt,GoodVertexMonster)
   cutTreeMC.TAttach(GoodVertexMonster,recHitCut)
   cutTreeMC.TAttach(recHitCut,LeadingJetEta)
   cutTreeMC.TAttach(LeadingJetEta,secondJetET)
   cutTreeMC.TAttach(secondJetET,oddJet)
   cutTreeMC.TAttach(oddJet,badMuonInJet)
-  cutTreeMC.TAttach(badMuonInJet,oddMuon)
-  cutTreeMC.TAttach(oddMuon,oddElectron)
+  cutTreeMC.TAttach(badMuonInJet,
+  #oddMuon)
+  #cutTreeMC.TAttach(oddMuon,
+  oddElectron)
   cutTreeMC.TAttach(oddElectron,oddPhoton)
-  cutTreeMC.TAttach(oddPhoton,numComLeptons)
-  cutTreeMC.TAttach(numComLeptons,numComPhotons)
+  cutTreeMC.TAttach(oddPhoton,numComElectrons)
+  cutTreeMC.TAttach(numComElectrons,numComPhotons)
   cutTreeMC.TAttach(numComPhotons,VertexPtOverHT)
   cutTreeMC.TAttach(VertexPtOverHT,htCut275)
-  # cutTreeMC.TAttach(numComPhotons,ht275_Fail)
-  # cutTreeMC.TAttach(numComPhotons,ht325_Fail)
-  # cutTreeMC.TAttach(ht275_Fail,htLess325_Fail)
-  # cutTreeMC.TAttach(ht325_Fail,htLess375_Fail)
-  # cutTreeMC.TAttach(numComPhotons,ht375_Fail)
-  # cutTreeMC.TAttach(htLess325_Fail,Plot_275_325Fail)
-  # cutTreeMC.TAttach(htLess375_Fail,Plot_325_375Fail)
-  # cutTreeMC.TAttach(ht375_Fail,Plot_375Fail)
-  #FOR HT > 275Gev Plot
-  cutTreeMC.TAttach(htCut275,DiJet3)
-  cutTreeMC.TAttach(htCut275,NJet3)
-  cutTreeMC.TAttach(DiJet3,HadStandardAll)
-  cutTreeMC.TAttach(NJet3,nHadStandardAll)
-  #END HT 275GEV Plot
-  #Begin MHT/MET plot inthe low region.
   cutTreeMC.TAttach(htCut275,DeadEcalCutMC)
-  cutTreeMC.TAttach(DeadEcalCutMC,LessThan375)
-  cutTreeMC.TAttach(LessThan375,DiJet0)
-  cutTreeMC.TAttach(LessThan375,NJet0)
-  cutTreeMC.TAttach(DiJet0,HadStandard275_375)
-  cutTreeMC.TAttach(NJet0,nHadStandard275_375)
-
-  cutTreeMC.TAttach(DeadEcalCutMC,htCut375)
-  cutTreeMC.TAttach(htCut275,htCut375GeV)
-  cutTreeMC.TAttach(htCut375GeV,DiJet2)
-  cutTreeMC.TAttach(htCut375GeV,NJet2)
-
-  cutTreeMC.TAttach(DiJet2,HadStandard375)
-  cutTreeMC.TAttach(NJet2,nHadStandard375)
-
-  #Here be plots for baby jet MHT and MHT/MET in the signal region after dead ecal cuts
-  cutTreeMC.TAttach(htCut375,DiJet4)
-  cutTreeMC.TAttach(DiJet4,HadStandard375_after_DeadEcal)
-  cutTreeMC.TAttach(htCut375,NJet4)
-  cutTreeMC.TAttach(htCut375,alphaT1)
-  cutTreeMC.TAttach(NJet4,nHadStandard375_after_DeadEcal)
-
-
+ 
   #Here be plots after all the cuts!!
-  # cutTreeMC.TAttach(DeadEcalCutMC,
-  cutTreeMC.TAttach(htCut275,MHT_METCut)
-  cutTreeMC.TAttach(MHT_METCut,alphaT2)
-  cutTreeMC.TAttach(MHT_METCut,htCut375All)
-  cutTreeMC.TAttach(htCut375All,NJet5)
-  cutTreeMC.TAttach(htCut375All,DiJet5)
-  cutTreeMC.TAttach(NJet5,nHadStandardAllCuts)
-  cutTreeMC.TAttach(DiJet5,HadStandardAllCuts)
-  out.append(AddBinedHist(cutTree = cutTreeMC,
-            OP = ("WeeklyUpdatePlots",genericPSet), cut = MHT_METCut,
-            htBins = HTBins) )
+  cutTreeMC.TAttach(DeadEcalCutMC,MHT_METCut)
+  if Muon == None:
+      cutTreeMC.TAttach(MHT_METCut,ZeroMuon)
+      cutTreeMC.TAttach(ZeroMuon,ZeroMuonbtag)
+      out.append(AddBinedHist(cutTree = cutTreeMC,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_") )
+    
+      out.append(AddBinedHist(cutTree = cutTreeMC,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
+      htBins = HTBins,TriggerDict = triggers,lab = "") )
+      
+  else:
+      cutTreeMC.TAttach(MHT_METCut,minDRMuonJetCut)
+      cutTreeMC.TAttach(minDRMuonJetCut,OneMuon)
+      cutTreeMC.TAttach(OneMuon,ZMassCut)
+      cutTreeMC.TAttach(ZMassCut,PFMTCut30)
+      cutTreeMC.TAttach(PFMTCut30,btagOneMuon)
+      out.append(AddBinedHist(cutTree = cutTreeMC,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
+    
+      out.append(AddBinedHist(cutTree = cutTreeMC,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
+      htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
+    
+    
+      cutTreeMC.TAttach(minDRMuonJetCut,DiMuon)
+      cutTreeMC.TAttach(DiMuon,ZMass_2Muons)
+      cutTreeMC.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
+      cutTreeMC.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
+      # avobe here does one big inclusive bin!
+      # Now lets start binning in HT bins
+      # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
+      # we arrange the HT bins so they are not repoduced though out threshold runs.
+      out.append(AddBinedHist(cutTree = cutTreeMC,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
+      htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
+    
+      out.append(AddBinedHist(cutTree = cutTreeMC,
+      OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
+      htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
+
+
   return (cutTreeMC,secondJetET,out)
 
+
+# Define the custom muon ID
+
+mu_id = PSet(
+    doJetLoop = False,
+    MuID = "Tight",
+    MinPt = 10.,
+    MaxEta = 2.5,
+    MaxIsolation = 0.1,
+    DRMuJet = 0.3,
+    MaxGlbTrkDxy = 0.02,
+    MinGlbTrkNumOfValidHits = 11,
+    SegMatch2GlbMu = 1,
+    PixelHitsOnInrTrk = 1,
+    MaxInrTrkDz = 1.
+        )
+
+vertex_reweight = GoodVertexReweighting(
+PSet(GoodVertexWeights = [1.0, 0.071182041228993354, 0.3788533298983548, 0.70212224756460717, 0.95912926863057879,
+ 1.1063323506805849, 1.1826257455177471, 1.2297382718782017, 1.2772830447358376, 1.4266446590805815, 1.5732065775636328, 
+ 1.8401056375971667, 2.1784909215394999, 2.506266882602076, 3.3335988825191176, 4.687787057503483, 6.8602191807881647, 
+ 11.198474011060968, 14.883466002768214, 20.878255333866864, 1.0, 1.0, 1.0, 1.0, 1.0]).ps())
+
+
+# Here are the Summer 11 MC samples!!!
+
+from montecarlo.Summer11.DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
+from montecarlo.Summer11.ZJetsToNuNu_50_HT_100_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.ZJetsToNuNu_100_HT_200_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.ZJetsToNuNu_200_HT_inf_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.QCD_Summer11_madgraph_All import *
+from montecarlo.Summer11.TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.WJetsToLNu_250_HT_300_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
+from montecarlo.Summer11.T_TuneZ2_t_channel_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.T_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.Tbar_TuneZ2_t_channel_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1 import *
+from montecarlo.Summer11.Tbar_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1 import *
+
+# PU S6
+from montecarlo.Summer11.WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
+from montecarlo.Summer11.WZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
+from montecarlo.Summer11.ZZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
+
+
+vertex_reweight = GoodVertexReweighting(
+PSet(GoodVertexWeights = [1.0, 0.15001302510027506, 0.43375830446793989, 0.75490723451547181, 1.0767662177521609, 1.0857064732099417, 0.92697612441178856, 0.94600573227422968, 1.0331644653665495, 1.0657534976700362, 1.1616615312494092, 1.6809671358035108, 2.5371671412076915, 3.3528560115582478, 7.7874499515383793, 1.0,1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]).ps())
+
+
+
+PU_S6_Samples = [ WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1, 
+                WZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1,
+                 ZZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1]
+
+ # QCD_Summer11_madgraph_All +
+from montecarlo.Summer11.QCD_BLepEnriched_TuneZ2_7TeV_pythia6_evtgen_Summer11_PU_S3_START42_V11_v1 import *
+
+PU_S3_Sample = [ QCD_BLepEnriched_TuneZ2_7TeV_pythia6_evtgen_Summer11_PU_S3_START42_V11_v1]
+
+WJet_Sample =[ WJetsToLNu_250_HT_300_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1, WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 ]
+
+DiMuon_Sample = [ DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 ]
+
+TTbar_Sample = [ TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1, T_TuneZ2_t_channel_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1,T_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1,Tbar_TuneZ2_t_channel_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1,
+Tbar_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1, ]
+
+Zinv_Sample = [ ZJetsToNuNu_50_HT_100_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1,ZJetsToNuNu_100_HT_200_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1,ZJetsToNuNu_200_HT_inf_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1 ]
+Summer11_MC_Higher_Bins = PU_S3_Sample# [WJetsToLNu_250_HT_300_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,ZJetsToNuNu_50_HT_100_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1, WJetsToLNu_300_HT_inf_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1,ZJetsToNuNu_100_HT_200_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1,ZJetsToNuNu_200_HT_inf_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1,DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 ] + TTbar_Sample 
+Summer11_MC_Lower_Bins = PU_S3_Sample# [ZJetsToNuNu_50_HT_100_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1,ZJetsToNuNu_100_HT_200_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1,ZJetsToNuNu_200_HT_inf_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1, WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 ]+TTbar_Sample 

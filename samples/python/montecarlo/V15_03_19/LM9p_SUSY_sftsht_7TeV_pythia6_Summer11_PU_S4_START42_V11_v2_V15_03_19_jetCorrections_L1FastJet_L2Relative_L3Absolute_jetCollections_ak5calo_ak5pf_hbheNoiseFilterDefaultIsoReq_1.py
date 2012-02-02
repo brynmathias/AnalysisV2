@@ -1,0 +1,35 @@
+from icf.core import PSet
+
+LM9p_SUSY_sftsht_7TeV_pythia6_Summer11_PU_S4_START42_V11_v2_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1=PSet(
+	Name="LM9p_SUSY_sftsht_7TeV_pythia6_Summer11_PU_S4_START42_V11_v2_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1",
+	Format=("ICF",3),
+	File=[
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_10_1_pdU.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_11_1_hz9.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_12_1_shQ.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_13_1_riZ.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_14_1_Pp3.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_15_1_wPD.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_16_1_fmR.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_17_1_MmG.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_18_1_c8z.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_19_1_UK8.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_1_1_7fv.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_20_1_qZK.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_21_1_P3n.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_22_1_QIZ.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_23_1_7Q9.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_24_1_xJp.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_2_1_dmd.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_3_1_0Y3.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_4_1_v3o.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_5_1_bTP.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_6_1_kz5.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_7_1_CW0.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_8_1_64I.root" ,
+	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_11_02_18_40_19/SusyCAF_Tree_9_1_r2Z.root" ,
+	],
+	CrossSection=1.653,
+        Events=439010,
+        
+)

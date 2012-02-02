@@ -293,6 +293,7 @@ void eventDump::End(Event::Data & ev){
   std::string name = static_cast<std::string> ( ev.OutputFile()->GetName() ); // need to convert TString to string
   name.erase(name.size()-5, 5);
   name.append("_eventDumpInfo");
+  
   name.append(".txt");
   ofstream file;
   file.open(name.c_str(), ios::out);

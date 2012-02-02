@@ -1,0 +1,3 @@
+formula to fit for A0 and A4 directly. Note that the values extracted are 2(f0)
+and +/- 2(fL-fR)
+[2]*((1.0 + (x*x)) + (0.5*[0]*(1.0 - (3.0*x*x))) + ([1]*x))

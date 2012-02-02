@@ -1,0 +1,46 @@
+%latex file template for object tables
+\documentclass[hyperref={pdfpagelabels=false},9pt,table]{beamer}
+\let\Tiny=\tiny
+\usepackage{beamerthemesplit}
+\beamertemplatenavigationsymbolsempty
+\usetheme{Madrid}
+%
+\usepackage{verbatim}
+\usepackage{amsmath}
+\renewcommand\mathfamilydefault{\rmdefault} % ditto for math 
+\usepackage{cancel}
+\usepackage{dcolumn}
+
+\title[Cut flow]{Cut flow}
+\author{SUSY Team}
+\institute{ICF}
+
+%tables
+\renewcommand{\arraystretch}{1.2}
+\newcolumntype{.}{D{.}{.}{2}}
+\newcommand{\GeV}{\, \textrm{GeV}}
+\newcommand{\MHT}{\cancel{H}_{T}}
+\newcommand{\MET}{\cancel{E}_{T}}
+
+\begin{document}
+
+\frame{
+	\frametitle{Cut flow}
+	\begin{table}[h]
+		\centering
+		\tiny
+		\rowcolors{2}{blue!20}{blue!5}
+TABLECONTENTS
+%		\begin{tiny}\caption{
+%TABLECAPTION
+%		}\end{tiny}
+%		\label{tb:tablename}
+	\end{table}
+	\begin{center}
+		\begin{small}
+SUMMARY
+		\end{small}
+	\end{center}
+}%end of object table frame
+
+\end{document}

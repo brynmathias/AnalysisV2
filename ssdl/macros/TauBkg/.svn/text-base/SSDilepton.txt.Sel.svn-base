@@ -1,0 +1,7 @@
+#Selection for SameSign Dileptons
+SSMHTCut 0
+SSHTCut 350
+LeptonCut 1
+BkgAnal 0
+GenTxt gen.txt
+RecTxt rec.txt

@@ -1,0 +1,12 @@
+K 10
+svn:ignore
+V 56
+*.root
+results
+*.pyc
+*backup*
+*.py*.sh
+*.py*.json
+*.txt
+
+END
