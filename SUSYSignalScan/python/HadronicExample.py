@@ -44,15 +44,9 @@ def checkSwitches(d) :
 
 def switches() :
   d = {}
-<<<<<<< HEAD:SUSYSignalScan/python/HadronicExample.py
   d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2"][1]
-  d["selection"] = ["had", "muon"][1]
-  d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
-=======
-  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2"][5]
-  d["selection"] = ["had", "muon"][1]
+  d["selection"] = ["had", "muon"][0]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][0]
->>>>>>> c518a6c424c4119d61ba03f4f0d8dfae38143b91:SUSYSignalScan/python/HadronicExample.py
   d["jes"] = ["", "+ve", "-ve"][0]
   checkSwitches(d)
   return d
@@ -125,13 +119,8 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(secondJetET,deadECAL_MC)
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
   
-<<<<<<< HEAD:SUSYSignalScan/python/HadronicExample.py
-  #HTBins = [275,325] if int(switches()["thresholds"][1]) == 73 [325,375] if int(switches()['thresholds'][1]) == 86 else  [375+100*i for i in range(6)]
-  alphaTSlices = [(55,None),(52,53),(53,55)]
 
-=======
   alphaTSlices = [(55,None),(52,53),(53,55)]
->>>>>>> c518a6c424c4119d61ba03f4f0d8dfae38143b91:SUSYSignalScan/python/HadronicExample.py
   for slice in alphaTSlices:
      print slice
      aTlow = OP_HadAlphaTCut(slice[0]/100.)
@@ -143,6 +132,40 @@ def cutFlow(cutTreeMC, model) :
        cutTreeMC.FAttach(aThigh,aTlow)
      else:
        cutTreeMC.TAttach(MHToverMET,aTlow)
+     #Need to do some btagging as well!
+     oneBtag = OP_NumCommonBtagJets(">=",1,2.0)
+     out.append(oneBtag)
+     cutTreeMC.TAttach(aTlow,oneBtag)
+      
+ 
+
+     out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = oneBtag,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "btag_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+
+     out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = aTlow,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+  if switches()["selection"]=="muon" :
+       MuonEta = OP_AditionalMuonCuts(10.,2.1)
+       MuonPt = OP_LeadingMuonCut(45.)
+       oneBtagNoAlphaT = OP_NumCommonBtagJets(">=",1,2.0)
+       out.append(oneBtagNoAlphaT)
+       cutTreeMC.TAttach(MHToverMET,MuonPt)   
+       cutTreeMC.TAttach(MuonPt,MuonEta)
+       cutTreeMC.TAttach(MuonEta,oneBtagNoAlphaT)
+       out.append(MuonEta)
+       out.append(MuonPt)
+       out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = oneBtagNoAlphaT,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "NoAlphaT_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
   return out
 
@@ -157,7 +180,6 @@ vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter  = Photon_IDFilter( ra3photonidps.ps() )
 
 muonfilt = CustomVBTFMuID(mu_id.ps()) if switches()["selection"]=="muon" else Muon_IDFilter( vbtfmuonidps.ps() )
->>>>>>> c518a6c424c4119d61ba03f4f0d8dfae38143b91:SUSYSignalScan/python/HadronicExample.py
 # muonfilt = Muon_IDFilter(vbtfmuonidps.ps())
 import os
 susydir = os.environ['SUSY_WORKING_SW_DIR'] + '/'
@@ -202,11 +224,5 @@ def sample() :
     if switches()["model"] == "tanB40":return mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1
   elif isSms(switches()["model"]) : return SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt
   else :         return None
-
-#sample().File = sample().File[0:5]
-<<<<<<< HEAD:SUSYSignalScan/python/HadronicExample.py
-#print sample().File
-=======
-# print sample().File
->>>>>>> c518a6c424c4119d61ba03f4f0d8dfae38143b91:SUSYSignalScan/python/HadronicExample.py
+#sample().File = sample().File[0:2]
 anal_ak5_caloMC.Run(outputDir(), conf_ak5_calo_msugra,[sample()])

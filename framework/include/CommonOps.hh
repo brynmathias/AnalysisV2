@@ -161,7 +161,7 @@ namespace Operation {
  class NumCommonBtagJets : public Operation::_Base
  {
  public:
-   NumCommonBtagJets (const std::string & comparison, UInt_t number, float cutValue);
+   NumCommonBtagJets (const std::string & comparison,UInt_t Algo ,UInt_t number, float cutValue);
    ~NumCommonBtagJets ();
    bool Process(Event::Data & ev);
    std::ostream& Description(std::ostream& ostrm);
@@ -169,7 +169,9 @@ namespace Operation {
  private:
    Operation::_Compare<UInt_t> *mComparison; //!< Comparison string, i.e. "==", ">=", etc.
    UInt_t mNumber;           //!< Number of common leptons with which to compare.
+   UInt_t Algo_;
    float mCut; // !< value at which the btaging variable cuts.
+   
    /* data */
  };
 
