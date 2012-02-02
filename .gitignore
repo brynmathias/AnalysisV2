@@ -22,6 +22,12 @@ AK5*
 *.pdf
 *.o
 *.d
+.svn
+*.pyc
+*.so
+*.cxx
+*.json
+*__susyjob__*
 *.pyc
 *.cxx
 *.so
