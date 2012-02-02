@@ -1,0 +1,12530 @@
+
+================================
+ Setting up your environment...
+================================
+-------------------------------------
+ROOTSYS is  /vols/sl5_exp_software/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14/
+=====================================
+LD_LIBRARY_PATH is: /vols/sl5_exp_software/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14//lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc434/external/libjpg/8b/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc434/external/boost/1.44.0-cms3/lib:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib64:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib:/vols/grid/ui/3.2.5-0/glite/lib:/vols/grid/ui/3.2.5-0/glite/lib64:/vols/grid/ui/3.2.5-0/globus/lib:/vols/grid/ui/3.2.5-0/lcg/lib:/vols/grid/ui/3.2.5-0/lcg/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc434/external/gcc/4.3.4/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc434/external/xrootd/5.28.00d/lib:/vols/cms03/bm409/git/SignalScan/lib
+PYTHONPATH is: /vols/sl5_exp_software/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14//lib:/vols/cms03/bm409/git/SignalScan/lib
+=====================================
+Set-up complete.
+=====================================
+
+Photons.UseID = True
+Taus.MuonClean = False
+Photons.EtaEEMaxCut = 2.5
+Photons.HcalIsoCut = 2.0
+Photons.HcalIsoRel = 0.0
+Taus.JetClean = False
+Muons.PtCut = 20.0
+Photons.HadOverEmCut = 0.05
+Taus.ApplyID = True
+Taus.EtaCut = 2.5
+Photons.SigIhIhEBCut = 0.015
+Electrons.ApplyID = True
+Electrons.PtCut = 20.0
+Jets.PtCut = 30.0
+Electrons.CombIsoCut = 0.1
+Muons.CombIsoCut = 0.1
+Photons.TrackIsoRel = 0.0
+Muons.TrkIsoCut = 3.0
+Jets.TightID = False
+Photons.RequireLooseForOdd = False
+Photons.IDReq = 3
+Photons.EcalIsoRel = 0.0
+ApplyXCleaning = False
+Electrons.TrkIsoCut = 5.0
+Photons.SigIhIhEECut = 0.035
+Taus.ElecClean = False
+Electrons.RequireLooseForOdd = False
+Jets.ApplyID = True
+Jets.EtaCut = 2.5
+Muons.TightID = False
+Muons.EtaCut = 2.5
+AlphaT.CalcWithEt = True
+Taus.PtCut = 20.0
+Electrons.TightID = False
+Electrons.EtaCut = 2.5
+Photons.EtaEBMaxCut = 1.479
+Photons.EtCut = 40.0
+Muons.ApplyID = True
+Photons.EcalIsoCut = 4.0
+Photons.R9Cut = 0.0
+Photons.TrackIsoCut = 2.0
+Photons.EtaEEMinCut = 1.525
+Taus.TightID = False
+Muons.RequireLooseForOdd = True
+Photons.UseID = True
+Taus.MuonClean = False
+Photons.EtaEEMaxCut = 2.5
+Photons.HcalIsoCut = 2.0
+Photons.HcalIsoRel = 0.0
+Taus.JetClean = False
+Muons.PtCut = 20.0
+Photons.HadOverEmCut = 0.05
+Taus.ApplyID = True
+Taus.EtaCut = 2.5
+Photons.SigIhIhEBCut = 0.015
+Electrons.ApplyID = True
+Electrons.PtCut = 20.0
+Jets.PtCut = 30.0
+Electrons.CombIsoCut = 0.1
+Muons.CombIsoCut = 0.1
+Photons.TrackIsoRel = 0.0
+Muons.TrkIsoCut = 3.0
+Jets.TightID = False
+Photons.RequireLooseForOdd = False
+Photons.IDReq = 3
+Photons.EcalIsoRel = 0.0
+ApplyXCleaning = False
+Electrons.TrkIsoCut = 5.0
+Photons.SigIhIhEECut = 0.035
+Taus.ElecClean = False
+Electrons.RequireLooseForOdd = False
+Jets.ApplyID = True
+Jets.EtaCut = 2.5
+Muons.TightID = False
+Muons.EtaCut = 2.5
+AlphaT.CalcWithEt = True
+Taus.PtCut = 20.0
+Electrons.TightID = False
+Electrons.EtaCut = 2.5
+Photons.EtaEBMaxCut = 1.479
+Photons.EtCut = 40.0
+Muons.ApplyID = True
+Photons.EcalIsoCut = 4.0
+Photons.R9Cut = 0.0
+Photons.TrackIsoCut = 2.0
+Photons.EtaEEMinCut = 1.525
+Taus.TightID = False
+Muons.RequireLooseForOdd = True
+(55, None)
+(52, 53)
+(53, 55)
+Building ROOT dictionaries. Please wait...
+Initialising Analysis: AK5Calo
+WARNING: should this be PreCC?
+Batch running mode
+['root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_994_1_Plw.root', 'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_995_1_CP3.root', 'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_996_1_6Wf.root', 'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_997_2_cPz.root', 'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_999_2_Hs3.root', 'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_99_1_jyg.root', 'root://xrootd.grid.hep.ph.ic.ac.uk//store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_9_1_4z7.root']
+==================================================
+Running Analysis: AK5Calo
+==================================================
+On 1 sample(s):
+	mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1		1.00pb 
+==================================================
+Total number of events in the ntuple = 140000
+Setting mLastEntry to match input tree
+[CHAIN] At Entry: 0
+[CHAIN] File: /store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_994_1_Plw.root
+Secondary jet collection: ic5Jet    Pat
+Tertiary jet collection: ak5JetJPT   Pat
+mSuGra Event weights will be usedNeed still to be normalized to event number per m0-m1/2 bin. Lumi 100pb^-1.
+
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+[CHAIN] At Entry: 20000
+[CHAIN] File: /store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_995_1_CP3.root
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+[CHAIN] At Entry: 40000
+[CHAIN] File: /store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_996_1_6Wf.root
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+[CHAIN] At Entry: 60000
+[CHAIN] File: /store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_997_2_cPz.root
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+[CHAIN] At Entry: 80000
+[CHAIN] File: /store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_999_2_Hs3.root
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+[CHAIN] At Entry: 100000
+[CHAIN] File: /store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_99_1_jyg.root
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 1
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 2
+ sleptons 0
+ stops 0
+ sbottoms 0
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+[CHAIN] At Entry: 120000
+[CHAIN] File: /store/user/bbetchar/ICF/automated/2011_07_10_04_13_24/SusyCAF_Tree_9_1_4z7.root
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 1
+ charginos 0
+ gluinos 0
+ squarks 0
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+ Process = 10
+ neutralinos 0
+ charginos 0
+ gluinos 0
+ squarks 1
+ antisquarks 0
+ sleptons 0
+ stops 0
+ sbottoms 1
+ DID NOT FIND A SUBPROCESS 
+---------------------------------------------------------------
+Dataset info recorded in: ../results_Slices_muon_tanB10_86.7_/AK5Calo_mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1_29.log
+Total events processed by all operations: 13995.7
+---------------------------------------------------------------
+[Manager::~Manager] Analysis has taken 47 seconds to process 140000 events at an average rate of 2978 events/second
