@@ -42,7 +42,7 @@ msugra_pset = PSet(
     zBins =1,
     zLow =0.,
     zHigh =1000.,
-    verbose = True,
+    verbose = False,
     NLO = None
     )
 

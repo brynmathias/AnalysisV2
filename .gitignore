@@ -21,4 +21,6 @@ TestResults
 *.o
 *.d
 .svn
-.pyc
+*.pyc
+*.so
+*.cxx
