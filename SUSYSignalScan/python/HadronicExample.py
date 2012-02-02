@@ -46,11 +46,11 @@ def switches() :
   d = {}
   d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2"][5]
   d["selection"] = ["had", "muon"][0]
-  d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
+  d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][0]
   d["jes"] = ["", "+ve", "-ve"][0]
   checkSwitches(d)
   return d
-MChiCut = 0.8
+MChiCut = 0.
 default_common.Jets.PtCut = switches()["thresholds"][0]
 secondJetET = OP_SecondJetEtCut(switches()["thresholds"][1])
 numComPhotons = OP_NumComPhotons("<=",0)
@@ -90,8 +90,7 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(count_total,selection)
 
   if switches()["selection"]!="muon" :
-    cutTreeMC.TAttach(selection,oddMuon)
-    cutTreeMC.TAttach(oddMuon,oddElectron)
+    cutTreeMC.TAttach(selection,oddElectron)
     cutTreeMC.TAttach(oddElectron,oddPhoton)
     cutTreeMC.TAttach(oddPhoton,numComLeptons)
     cutTreeMC.TAttach(numComLeptons,numComPhotons)
@@ -102,13 +101,8 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(numComJetsGeq2,secondJetET)
     cutTreeMC.TAttach(secondJetET,deadECAL_MC)
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
-    cutTreeMC.TAttach(MHToverMET,alphaT)
-    cutTreeMC.TAttach(MHToverMET,alphaT70)
-    cutTreeMC.FAttach(alphaT70,alphaT55)
-    cutTreeMC.FAttach(alphaT55,alphaT53)
   else :
-    cutTreeMC.TAttach(selection,oddMuon)
-    cutTreeMC.TAttach(oddMuon,oddElectron)
+    cutTreeMC.TAttach(selection,oddElectron)
     cutTreeMC.TAttach(oddElectron,oddPhoton)
     cutTreeMC.TAttach(oddPhoton,numComElectrons)
     cutTreeMC.TAttach(numComElectrons,numComMuons)
@@ -124,57 +118,41 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(numComJetsGeq2,secondJetET)
     cutTreeMC.TAttach(secondJetET,deadECAL_MC)
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
-    cutTreeMC.TAttach(MHToverMET,alphaT)
-    cutTreeMC.TAttach(MHToverMET,alphaT70)
-    cutTreeMC.FAttach(alphaT70,alphaT55)
-    cutTreeMC.FAttach(alphaT55,alphaT53)
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "") )
-  out.append( addBinnedStuff(model = switches()["model"],
+  
+  #HTBins = [275,325] if int(switches()["thresholds"][1]) == 73 [325,375] if int(switches()['thresholds'][1]) == 86 else  [375+100*i for i in range(6)]
+  alphaTSlices = [(55,None),(52,53),(53,55)]
+  for slice in alphaTSlices:
+     print slice
+     aTlow = OP_HadAlphaTCut(slice[0]/100.)
+     out.append(aTlow)
+     if slice[1] is not None: 
+       aThigh = OP_HadAlphaTCut(slice[1]/100.)
+       out.append(aThigh)
+       cutTreeMC.TAttach(MHToverMET,aThigh)
+       cutTreeMC.FAttach(aThigh,aTlow)
+     else:
+       cutTreeMC.TAttach(MHToverMET,aTlow)
+     #Need to do some btagging as well!
+     oneBtag = OP_NumCommonBtagJets(">=",1,2.0)
+     out.append(oneBtag)
+     cutTreeMC.TAttach(aTlow,oneBtag)
+     out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
-                            cut = alphaT,
+                            cut = oneBtag,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = ""),extra = MChiCut)
+                            label2 = "btag_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT53,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "AlphaT53_55_") )
 
-  out.append( addBinnedStuff(model = switches()["model"],
+     out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
-                            cut = alphaT53,
+                            cut = aTlow,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "AlphaT53_55_"),extra = MChiCut)
+                            label2 = "AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT55,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "AlphaT55_70_") )
-
-  out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = alphaT55,
-                            htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "AlphaT55_70_"),extra = MChiCut)
-
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT70,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "AlphaT70_inf") )
-
-  out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = alphaT70,
-                            htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "AlphaT70_inf_"),extra = MChiCut)
   return out
+
+
+
 
 from ra1objectid.vbtfElectronId_cff import *
 from ra1objectid.vbtfMuonId_cff import *
@@ -225,6 +203,6 @@ def sample() :
   elif isSms(switches()["model"]) : return SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt
   else :         return None
 
-# sample().File = sample().File[0:5]
+#sample().File = sample().File[0:5]
 # print sample().File
 anal_ak5_caloMC.Run(outputDir(), conf_ak5_calo_msugra,[sample()])

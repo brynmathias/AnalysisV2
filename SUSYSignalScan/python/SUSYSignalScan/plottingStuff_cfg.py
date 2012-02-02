@@ -58,7 +58,7 @@ sms_pset = PSet(
     zLow =0.,
     zHigh =1000.,
     verbose = True,
-    MChiCut = -1
+    MChiCut = -1.
     )
 
 
@@ -93,6 +93,7 @@ def smsOps(model = "", cutTree = None, cut = None, label = "",MChiCut = -1) :
   pset2.yLow = 50.
   pset2.yHigh = 1150.
   if MChiCut != -1:
+    print MChiCut
     pset2.MChiCut = MChiCut
   op2 = OP_smsPlottingOps(pset2.ps())
   out.append(op2)
