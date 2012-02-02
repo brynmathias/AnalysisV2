@@ -45,12 +45,12 @@ def checkSwitches(d) :
 def switches() :
   d = {}
   d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2"][5]
-  d["selection"] = ["had", "muon"][0]
+  d["selection"] = ["had", "muon"][1]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][0]
   d["jes"] = ["", "+ve", "-ve"][0]
   checkSwitches(d)
   return d
-MChiCut = 0.
+MChiCut = -1.
 default_common.Jets.PtCut = switches()["thresholds"][0]
 secondJetET = OP_SecondJetEtCut(switches()["thresholds"][1])
 numComPhotons = OP_NumComPhotons("<=",0)
@@ -136,6 +136,18 @@ def cutFlow(cutTreeMC, model) :
      oneBtag = OP_NumCommonBtagJets(">=",1,2.0)
      out.append(oneBtag)
      cutTreeMC.TAttach(aTlow,oneBtag)
+      
+     if switches()["selection"]!="muon" :
+       cutTreeMC.TAttach(MHToverMET,MuonHighPT)   
+       cutTreeMC.TAttach(MuonHighPT,oneBtagNoAlphaT)
+      
+       out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = oneBtagNoAlphaT,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "NoAlphaT_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+
      out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = oneBtag,
