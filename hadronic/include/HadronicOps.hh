@@ -302,6 +302,35 @@ namespace Operation {
     float cut_;
   };
 
+  class MuonPtEtaCut : public Operation::_Base
+  {
+  public:
+    MuonPtEtaCut (float, float);
+    virtual ~MuonPtEtaCut (){;}
+    bool Process( Event::Data&);
+    std::ostream&  Description( std::ostream& );
+  private:
+    float PtCut_;
+    float EtaCut_;
+
+  };
+
+
+  class LeadingMuonCut : public Operation::_Base
+  {
+  public:
+    LeadingMuonCut (float);
+    virtual ~LeadingMuonCut (){;}
+    bool Process( Event::Data&);
+    std::ostream&  Description( std::ostream& );
+  private:
+    float PtCut_;
+
+
+  };
+
+
+
 
 }
 

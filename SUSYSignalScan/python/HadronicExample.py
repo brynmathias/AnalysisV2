@@ -119,7 +119,6 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(secondJetET,deadECAL_MC)
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
   
-  #HTBins = [275,325] if int(switches()["thresholds"][1]) == 73 [325,375] if int(switches()['thresholds'][1]) == 86 else  [375+100*i for i in range(6)]
   alphaTSlices = [(55,None),(52,53),(53,55)]
   for slice in alphaTSlices:
      print slice
@@ -138,9 +137,14 @@ def cutFlow(cutTreeMC, model) :
      cutTreeMC.TAttach(aTlow,oneBtag)
       
      if switches()["selection"]!="muon" :
-       cutTreeMC.TAttach(MHToverMET,MuonHighPT)   
-       cutTreeMC.TAttach(MuonHighPT,oneBtagNoAlphaT)
-      
+       MuonEta = OP_AditionalMuonCuts(10.,2.1)
+       MuonPt = OP_LeadingMuonCut(45.)
+       oneBtagNoAlphaT = OP_NumCommonBtagJets(">=",1,2.0)
+       cutTreeMC.TAttach(MHToverMET,MuonPt)   
+       cutTreeMC.TAttach(MuonPt,MuonEta)
+       cutTreeMC.TAttach(MuonEta,oneBtagNoAlphaT)
+       out.append(MuonEta)
+       out.append(MuonPt)
        out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = oneBtagNoAlphaT,
@@ -205,6 +209,9 @@ from SUSYSignalScan.SMS_T1 import *
 from SUSYSignalScan.SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt import *
 def outputDir() :
   o = "../results_%s_%s_%g_%s_MChiCut_%d"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"],MChiCut)
+  if "tan" in switches()["model"]:
+    o = "../results_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
+
   mkdir(o)
   return o
 
