@@ -46,7 +46,7 @@ def switches() :
   d = {}
   d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2"][5]
   d["selection"] = ["had", "muon"][1]
-  d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][0]
+  d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
   d["jes"] = ["", "+ve", "-ve"][0]
   checkSwitches(d)
   return d
@@ -136,21 +136,7 @@ def cutFlow(cutTreeMC, model) :
      out.append(oneBtag)
      cutTreeMC.TAttach(aTlow,oneBtag)
       
-     if switches()["selection"]!="muon" :
-       MuonEta = OP_AditionalMuonCuts(10.,2.1)
-       MuonPt = OP_LeadingMuonCut(45.)
-       oneBtagNoAlphaT = OP_NumCommonBtagJets(">=",1,2.0)
-       cutTreeMC.TAttach(MHToverMET,MuonPt)   
-       cutTreeMC.TAttach(MuonPt,MuonEta)
-       cutTreeMC.TAttach(MuonEta,oneBtagNoAlphaT)
-       out.append(MuonEta)
-       out.append(MuonPt)
-       out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = oneBtagNoAlphaT,
-                            htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "NoAlphaT_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
-
+ 
 
      out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
@@ -164,6 +150,20 @@ def cutFlow(cutTreeMC, model) :
                             cut = aTlow,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
                             label2 = "AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+  if switches()["selection"]=="muon" :
+       MuonEta = OP_AditionalMuonCuts(10.,2.1)
+       MuonPt = OP_LeadingMuonCut(45.)
+       oneBtagNoAlphaT = OP_NumCommonBtagJets(">=",1,2.0)
+       cutTreeMC.TAttach(MHToverMET,MuonPt)   
+       cutTreeMC.TAttach(MuonPt,MuonEta)
+       cutTreeMC.TAttach(MuonEta,oneBtagNoAlphaT)
+       out.append(MuonEta)
+       out.append(MuonPt)
+       out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = oneBtagNoAlphaT,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "NoAlphaT_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
   return out
 
