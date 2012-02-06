@@ -42,7 +42,7 @@ msugra_pset = PSet(
     zBins =1,
     zLow =0.,
     zHigh =1000.,
-    verbose = True,
+    verbose = False,
     NLO = None
     )
 
@@ -64,7 +64,7 @@ sms_pset = PSet(
 
 def tripleScale(model = "", cutTree = None, cut = None, label = "") :
   out = []
-  for scale in ["2.0","0.5","1.0"] :
+  for scale in ["1.0",]:#"2.0","0.5","1.0"] :
     scale2 = scale.replace(".","")
     if scale2[-1]=="0" : scale2 = scale2[:-1]
     pset = deepcopy(msugra_pset)
