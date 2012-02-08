@@ -82,7 +82,8 @@ class mSuGraPlottingOps : public PlottingBase {
      std::vector<TH3D *> H_M0_M12_MSTW2008;
      std::vector<TH3D *> H_M0_M12_NNPDF;
      std::vector<TH3D *> H_M0_M12_pdfweight;
-
+     std::vector<TH3D *> H_M0_M12_mChi_noweight_countRAW;
+     
 
     int    xBins_;
     double xLow_;
@@ -93,6 +94,7 @@ class mSuGraPlottingOps : public PlottingBase {
     int    zBins_;
     double zLow_;
     double zHigh_;
+    int moduloEvNum_;
     std::vector<double> M0_;
     std::vector<double> M12_;
     std::vector<double> NG_;
