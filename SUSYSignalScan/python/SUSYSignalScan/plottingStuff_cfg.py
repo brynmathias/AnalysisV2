@@ -49,12 +49,12 @@ msugra_pset = PSet(
 
 sms_pset = PSet(
     DirectoryName = "mSuGraScan",
-    xBins = 200,
+    xBins = 60,
     xLow = 0.,
-    xHigh = 2000.,
-    yBins =80,
+    xHigh = 1500.,
+    yBins =60,
     yLow =0.,
-    yHigh =800.,
+    yHigh =1500.,
     zBins =1,
     zLow =0.,
     zHigh =1000.,

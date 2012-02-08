@@ -254,5 +254,5 @@ SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_11_02_15_07_12/SusyCAF_Tree_97_1_yLX.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_11_02_15_07_12/SusyCAF_Tree_9_1_sit.root" ,
 	],
-	CrossSection=0,
+	Weight=1.,
 )
