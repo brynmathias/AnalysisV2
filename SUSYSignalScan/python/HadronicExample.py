@@ -44,7 +44,7 @@ def checkSwitches(d) :
 
 def switches() :
   d = {}
-  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt"][6]
+  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt"][4]
   d["selection"] = ["had", "muon"][0]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][0]
   d["jes"] = ["", "+ve", "-ve"][0]
@@ -230,5 +230,5 @@ def sample() :
     if switches()["model"] == "T2": return SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02
     if switches()["model"] == "T1": return SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01
   else :         return None
-#sample().File = sample().File[0:2]
+sample().File = sample().File[0:2]
 anal_ak5_caloMC.Run(outputDir(), conf_ak5_calo_msugra,[sample()])

@@ -90,11 +90,11 @@ bool smsPlottingOps::Process( Event::Data& ev ) {
   //NLO stuff: for the calculation of the NLO cross-section the processes are filled separately
   if(verbose_){
     std::cout << "The following branches are enabled/disabled\n" <<
-        "M0" << ev.M0.enabled() << "\n" <<
-        "MG" << ev.MG.enabled() << "\n" <<
-        "M12" << ev.M12.enabled() << "\n" <<
-        "MLSP" << ev.MLSP.enabled() << "\n" <<
-        "MChi" << ev.MChi.enabled() << "\n";
+        "M0 " << ev.M0.enabled() << "\n" <<
+        "MG " << ev.MG.enabled() << "\n" <<
+        "M12 " << ev.M12.enabled() << "\n" <<
+        "MLSP " << ev.MLSP.enabled() << "\n" <<
+        "MChi " << ev.MChi.enabled() << "\n";
   }
 
 

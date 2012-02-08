@@ -321,7 +321,7 @@ bool mSuGraPlottingOps::Process( Event::Data& ev ) {
         "MLSP" << ev.MLSP.enabled() << "\n" <<
         "MChi" << ev.MChi.enabled() << "\n";
   }
-  H_M0_M12_mChi_noweight_countRAW[0]->Fill(M0,M12,MChi,Weight);
+  H_M0_M12_mChi_noweight_countRAW[0]->Fill(M0,M12,MChi,weight);
   if( ev.EventNumber()%moduloEvNum_ != 0) return true;
   
   //    if(ev.M0.enabled() || ev.M12.enabled()){
