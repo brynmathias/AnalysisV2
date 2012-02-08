@@ -5,13 +5,8 @@ echo " Setting up your environment..."
 echo "================================"
 #-----------------------------------------------------------------------------
 # Set your ROOTSYS and PYTHONDIR here
-<<<<<<< HEAD
 export SUSY_WORKING_SW_DIR=$HOME/github/SignalScanUpgrade
-MY_ROOTSYS='/opt/root'
-=======
-export SUSY_WORKING_SW_DIR=/vols/cms03/bm409/git/SignalScan
-MY_ROOTSYS='/vols/sl5_exp_software/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14/'
->>>>>>> caa300b9a59366cb016e9014389b5940bd937482
+MY_ROOTSYS='/opt/root_5_32'
 MY_PYTHONPATH=$SUSY_WORKING_SW_DIR/lib
 MY_LD_LIBRARY_PATH=$MY_ROOTSYS/lib::$SUSY_WORKING_SW_DIR/lib
 
