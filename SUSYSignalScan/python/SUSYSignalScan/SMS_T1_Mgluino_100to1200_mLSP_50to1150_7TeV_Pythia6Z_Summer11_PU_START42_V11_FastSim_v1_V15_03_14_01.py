@@ -517,5 +517,5 @@ SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_Fas
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_08_13_13_52_43/SusyCAF_Tree_99_1_OQx.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_08_13_13_52_43/SusyCAF_Tree_9_1_7MS.root" ,
 	],
-	CrossSection=0,
+	Weight=1.,
 )
