@@ -125,6 +125,7 @@ bool checkTrigExists::Process( Event::Data &ev ){
   for( ; it != ite; ++it){
     if( it->at(it->size()-1) != '*'){
         // std::map<std::string, bool>::const_iterator trig = ev.hlt()->find(*it);
+      //std::cout << "Looking for " << (*it) << std::endl;
       std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*it);
       if( prescale == ev.hlt_prescaled()->end() ) return false;
       if( prescale != ev.hlt_prescaled()->end() && prescale->second == 0 ) return false;
