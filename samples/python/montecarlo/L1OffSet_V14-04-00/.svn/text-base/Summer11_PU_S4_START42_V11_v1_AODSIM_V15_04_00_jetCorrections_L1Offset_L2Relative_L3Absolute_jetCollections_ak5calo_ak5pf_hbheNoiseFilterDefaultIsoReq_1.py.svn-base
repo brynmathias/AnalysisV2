@@ -1,0 +1,9 @@
+from icf.core import PSet
+
+Summer11_PU_S4_START42_V11_v1_AODSIM_V15_04_00_jetCorrections_L1Offset_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1=PSet(
+	Name="Summer11_PU_S4_START42_V11_v1_AODSIM_V15_04_00_jetCorrections_L1Offset_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1",
+	Format=("ICF",3),
+	File=[
+	],
+	CrossSection=0,
+)
