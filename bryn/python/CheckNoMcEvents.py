@@ -157,7 +157,8 @@ default_common.Photons.RequireLooseForOdd = True
 NoiseFilt= OP_HadronicHBHEnoiseFilter()
 cutTreeData = Tree("Data")
 cutTreeData.Attach(NoiseFilt)
-
+def addCutFlowData(a) :
+  a+=cutTreeData
 
 conf_ak5_caloData = deepcopy(defaultConfig)
 conf_ak5_caloData.Ntuple = deepcopy(ak5_calo)
