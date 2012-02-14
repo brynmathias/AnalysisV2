@@ -5,5 +5,5 @@ QCD_BLepEnriched_TuneZ2_7TeV_pythia6_evtgen_Summer11_PU_S3_START42_V11_v1_V15_04
 	Format=("ICF",3),
 	File=[
 	],
-	CrossSection=0,
+Weight=1.0,
 )

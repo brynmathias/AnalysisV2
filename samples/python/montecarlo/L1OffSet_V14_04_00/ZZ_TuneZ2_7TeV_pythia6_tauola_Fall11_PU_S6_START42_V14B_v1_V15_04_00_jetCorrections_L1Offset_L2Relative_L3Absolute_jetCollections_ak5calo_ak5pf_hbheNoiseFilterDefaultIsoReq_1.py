@@ -217,5 +217,5 @@ ZZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1_V15_04_00_jetCorrecti
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_19_30_41/ZZ_TuneZ2_7TeV_pythia6_tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_99_1_z3k.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_19_30_41/ZZ_TuneZ2_7TeV_pythia6_tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_9_1_ugy.root" ,
 	],
-	CrossSection=0,
+Weight=1.0,
 )

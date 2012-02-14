@@ -3108,5 +3108,5 @@ WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_04_00_j
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_19_19_47/WJetsToLNu_TuneZ2_7TeV-madgraph-tauola.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_99_1_CoL.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_19_19_47/WJetsToLNu_TuneZ2_7TeV-madgraph-tauola.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_9_1_vAK.root" ,
 	],
-	CrossSection=0,
+Weight=1.0,
 )
