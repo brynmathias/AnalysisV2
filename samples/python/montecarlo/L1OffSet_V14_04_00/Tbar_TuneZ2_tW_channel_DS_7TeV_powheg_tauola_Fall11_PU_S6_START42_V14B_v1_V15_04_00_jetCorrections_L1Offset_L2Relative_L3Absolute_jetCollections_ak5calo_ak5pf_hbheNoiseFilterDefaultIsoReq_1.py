@@ -46,5 +46,6 @@ Tbar_TuneZ2_tW_channel_DS_7TeV_powheg_tauola_Fall11_PU_S6_START42_V14B_v1_V15_04
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2012_02_04_18_45_20/Tbar_TuneZ2_tW-channel-DS_7TeV-powheg-tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_8_1_jAr.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2012_02_04_18_45_20/Tbar_TuneZ2_tW-channel-DS_7TeV-powheg-tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_9_1_axj.root" ,
 	],
-Weight=1.0,
+	CrossSection=7.46, #LO
+    Events = 765246,
 )

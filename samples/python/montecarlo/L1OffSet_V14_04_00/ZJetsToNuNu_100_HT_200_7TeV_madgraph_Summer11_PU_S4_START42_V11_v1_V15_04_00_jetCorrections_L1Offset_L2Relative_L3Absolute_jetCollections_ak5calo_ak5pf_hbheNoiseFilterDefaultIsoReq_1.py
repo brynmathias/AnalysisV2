@@ -203,5 +203,6 @@ ZJetsToNuNu_100_HT_200_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1_V15_04_00_jet
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/elaird/ICF/automated/2012_02_04_17_57_34/ZJetsToNuNu_100_HT_200_7TeV-madgraph.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_99_2_z11.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/elaird/ICF/automated/2012_02_04_17_57_34/ZJetsToNuNu_100_HT_200_7TeV-madgraph.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_9_1_2Fl.root" ,
 	],
-Weight=1.0,
+	CrossSection=125.2, #LO From Prep Tool
+    Events = 3.92611e+06,
 )
