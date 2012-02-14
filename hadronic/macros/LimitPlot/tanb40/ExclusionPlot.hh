@@ -103,6 +103,8 @@ TGraphErrors* get1080Exp();
 TGraphErrors* get1080SidBandExp();
 TGraphErrors* get1080QCDExpExp();
 
+TGraphErrors* get4600SidBandExp();
+
 TGraphErrors* getATLASPLHC();
 TGraphErrors* getATLAScomb();
 

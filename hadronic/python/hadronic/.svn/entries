@@ -1,7 +1,7 @@
 10
 
 dir
-3526
+3575
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/hadronic/python/hadronic
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
@@ -28,7 +28,7 @@ bm409
 
 rob_golden_cff.py
 file
-3373
+
 
 
 
@@ -60,77 +60,9 @@ bainbrid
 
 9016
 
-scale_xsection_nlo1.0_tandat3.txt
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-7867f2770c862a4fe971a5153900ed4b
-2011-04-04T07:56:35.856253Z
-2166
-trommers
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-674806
-
-BatchGoldenSamples.py
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-cb942e88a1dfb892132c8ce8e220b4a7
-2011-03-04T13:01:51.234183Z
-2003
-bainbrid
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-11835
-
 __init__.py
 file
-3373
+
 
 
 
@@ -162,9 +94,77 @@ bainbrid
 
 0
 
+BatchGoldenSamples.py
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+cb942e88a1dfb892132c8ce8e220b4a7
+2011-03-04T13:01:51.234183Z
+2003
+bainbrid
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+11835
+
+scale_xsection_nlo1.0_tandat3.txt
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+7867f2770c862a4fe971a5153900ed4b
+2011-04-04T07:56:35.856253Z
+2166
+trommers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+674806
+
 scale_xsection_nlo2.0_tandat3.txt
 file
-3373
+
 
 
 
@@ -198,7 +198,7 @@ trommers
 
 __init__.pyc
 file
-3373
+
 
 
 
@@ -230,43 +230,9 @@ has-props
 
 157
 
-scale_xsection_nlo0.5_tandat3.txt
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-17eb82b081c65badf5879f4bd92db331
-2011-04-04T07:56:35.856253Z
-2166
-trommers
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-669253
-
 SweetBatchSub.py
 file
-3373
+
 
 
 
@@ -298,9 +264,43 @@ bainbrid
 
 3982
 
+scale_xsection_nlo0.5_tandat3.txt
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+17eb82b081c65badf5879f4bd92db331
+2011-04-04T07:56:35.856253Z
+2166
+trommers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+669253
+
 ReProcessing_PromptJson_Merged.txt
 file
-3373
+
 
 
 
@@ -334,7 +334,7 @@ bainbrid
 
 T1_weights.root
 file
-3373
+
 
 
 
@@ -366,43 +366,9 @@ has-props
 
 83128
 
-T2_weights.root
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-ba0ddd307d778094ffa3ec5b07e20836
-2011-04-04T07:56:35.856253Z
-2166
-trommers
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-86877
-
 batchGolden.py
 file
-3373
+
 
 
 
@@ -434,9 +400,43 @@ has-props
 
 13138
 
+T2_weights.root
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+ba0ddd307d778094ffa3ec5b07e20836
+2011-04-04T07:56:35.856253Z
+2166
+trommers
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+86877
+
 commonIncludes.py
 file
-3373
+
 
 
 
@@ -470,7 +470,7 @@ bm409
 
 samples_cff.py_old
 file
-3373
+
 
 
 
@@ -504,7 +504,7 @@ bm409
 
 scale_xsection_nlo1.0_tandat50.txt
 file
-3373
+
 
 
 
@@ -538,7 +538,7 @@ trommers
 
 rob_golden_gen_cff.py
 file
-3373
+
 
 
 
@@ -572,7 +572,7 @@ bainbrid
 
 samples_cff.py
 file
-3373
+
 
 
 
@@ -606,7 +606,7 @@ bm409
 
 scale_xsection_nlo2.0_tandat50.txt
 file
-3373
+
 
 
 
@@ -640,7 +640,7 @@ trommers
 
 scale_xsection_nlo1.0_tanssdat10.txt
 file
-3373
+
 
 
 
@@ -674,7 +674,7 @@ trommers
 
 scale_xsection_nlo2.0_tanssdat10.txt
 file
-3373
+
 
 
 
@@ -708,7 +708,7 @@ trommers
 
 samples_cfi.py
 file
-3373
+
 
 
 
@@ -742,7 +742,7 @@ bainbrid
 
 scale_xsection_nlo0.5_tandat50.txt
 file
-3373
+
 
 
 
@@ -776,7 +776,7 @@ trommers
 
 rob_golden_cff-orig.py
 file
-3373
+
 
 
 
@@ -810,7 +810,7 @@ bainbrid
 
 golden_cff.py
 file
-3373
+
 
 
 
@@ -844,7 +844,7 @@ bm409
 
 golden_Lep_cff.py
 file
-3373
+
 
 
 
@@ -878,7 +878,7 @@ bainbrid
 
 scale_xsection_nlo0.5_tanssdat10.txt
 file
-3373
+
 
 
 
@@ -912,7 +912,7 @@ trommers
 
 2011GoldenJson.json
 file
-3500
+
 
 
 

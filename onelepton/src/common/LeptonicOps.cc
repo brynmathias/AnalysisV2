@@ -1161,7 +1161,21 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
 
 
 
+  PrintRunLSEvent::PrintRunLSEvent() {}
 
+  PrintRunLSEvent::~PrintRunLSEvent() {}
+
+  bool PrintRunLSEvent::Process(Event::Data & ev) {
+
+    cout << ev.RunNumber() << ":" << ev.LumiSection() << ":" << ev.EventNumber() << "\n";
+
+    return true;
+  }
+
+  std::ostream& PrintRunLSEvent::Description(std::ostream &ostrm) {
+    ostrm << "Printed Run:LS:Event " ;
+    return ostrm;
+  }
 
 
 

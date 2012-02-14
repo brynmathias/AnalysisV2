@@ -9,7 +9,13 @@
 // -----------------------------------------------------------------------------
 //  
 int qcdBkgdEst_new() {
-
+  
+//   int nn = 100;
+//   std::vector<float> xx;
+//   std::vector<float> yy;
+//   for ( uint i = 0; i < nn; ++i ) { xx.push_back( i*100. ); }
+//   for ( uint ilumi = 0; ilumi < nn; ++ilumi ) { 
+    
   bool plots = true;
   
   bool use_sumw2 = true;
@@ -45,7 +51,7 @@ int qcdBkgdEst_new() {
   //double x3_default = pt3_default / meff_default ;
   //double x3_factor = ( 1. - x3_default ) / ( x3_default );
 
-  std::string dir = "/vols/cms02/bainbrid/qcd/trigger/SUSY2/results/";
+  std::string dir = "/vols/cms02/bainbrid/qcd/stable/SUSY2/results/";
   
   //std::string histo = "HtAfterAlphaT";
   std::string histo = "HtAfterRecHit";
@@ -83,40 +89,42 @@ int qcdBkgdEst_new() {
   
   bool test = true;
   if ( test ) {
-    std::string trunk = dir + "v80/Ratio__";
-    StringV q; q.push_back(trunk+"data.root"); 
+    //std::string trunk = dir + "v02/Ratio__";
+    //StringV q; q.push_back(trunk+"data.root"); files.push_back(q);
+    StringV q1; q1.push_back(dir + "v10/Ratio__data.root"); files.push_back(q1);
+    //StringV q2; q2.push_back(dir + "v02/Ratio__data.root"); files.push_back(q2);
     //StringV q; q.push_back("../python/Ratio_QCDPY.root"); 
     //StringV w(q); w.push_back(trunk+"wjets.root");
     //StringV z(q); z.push_back(trunk+"zinv.root");
     //StringV tt(q); tt.push_back(trunk+"ttbar.root");
-    files.push_back(q);
   }
   
   bool results = false;
   if ( results ) {
 
-    std::string trunk = dir + "v37/Ratio__";
-    StringV q; q.push_back(trunk+"qcdpy.root"); 
+    std::string trunk = dir + "v08/Ratio__";
+    StringV q; q.push_back(trunk+"qcdmg.root"); 
+    
     StringV sm(q); 
     sm.push_back(trunk+"wjets.root");
     sm.push_back(trunk+"zinv.root");
     sm.push_back(trunk+"ttbar.root");
-    //sm.push_back(trunk+"top.root");
-
-    //StringV lm6(sm); lm6.push_back(trunk+"lm6.root"); 
-    StringV w(q); w.push_back(trunk+"wjets.root");
-    StringV z(q); z.push_back(trunk+"zinv.root");
-    StringV tt(q); tt.push_back(trunk+"ttbar.root");
-    //StringV t(q); t.push_back(trunk+"top.root");
-    
-    //files.push_back(lm6);
     files.push_back(sm);
-    files.push_back(w);
-    files.push_back(z);
-    files.push_back(tt);
-    //files.push_back(t);
 
-    //files.push_back(StringV(1,dir+"v14/Ratio__data.root"));
+    StringV sm1(q); 
+    sm1.push_back(trunk+"wjets_incl.root");
+    sm1.push_back(trunk+"zinv.root");
+    sm1.push_back(trunk+"ttbar.root");
+    files.push_back(sm1);
+    
+    //StringV lm6(sm); lm6.push_back(trunk+"lm6.root"); files.push_back(lm6);
+    StringV wi(q); wi.push_back(trunk+"wjets_incl.root"); files.push_back(wi);
+    StringV w(q); w.push_back(trunk+"wjets.root"); files.push_back(w);
+    StringV z(q); z.push_back(trunk+"zinv.root"); files.push_back(z);
+    StringV tt(q); tt.push_back(trunk+"ttbar.root"); files.push_back(tt);
+    //StringV t(q); t.push_back(trunk+"top.root"); files.push_back(t);
+     
+    files.push_back(StringV(1,dir+"v08/Ratio__data.root"));
 
 //     std::string trunk = dir + "v36/Ratio__";
 //     StringV sm1; 
@@ -151,7 +159,9 @@ int qcdBkgdEst_new() {
   std::vector<std::string> type;
 
   if ( test ) { 
-    type.push_back("nominal");
+    type.push_back("Data");
+    type.push_back("Nominal triggers");
+    type.push_back("Alternative triggers");
   }
 
   if ( results ) {
@@ -159,12 +169,15 @@ int qcdBkgdEst_new() {
     //type.push_back("Spring11");
     //type.push_back("Summer11(Wincl)");
     //type.push_back("Summer11(W300)");
-    type.push_back("SM          ");
-    type.push_back("Wjets       ");
-    type.push_back("Zinv        ");
-    type.push_back("TTbar       ");
-    type.push_back("Single top  ");
-    type.push_back("Data, 2.7/fb");
+    type.push_back("SM (W+jets HT-binned)");
+    type.push_back("SM (W+jets inclusive)");
+//     type.push_back("SM   ");
+    type.push_back("Wjets (incl)");
+    type.push_back("Wjets (HT-binned)");
+    type.push_back("Zinv ");
+    type.push_back("TTbar");
+    //type.push_back("Single top  ");
+    type.push_back("Data ");
   }
   
   if ( type.size() < nfile ) { type.resize(nfile,"unknown"); }
@@ -173,16 +186,15 @@ int qcdBkgdEst_new() {
   std::vector<double> lumis;
 
   if ( test ) {
-    double tmp = 100.;
-    lumi = tmp;
-    lumis.push_back(tmp);
-    //lumis.push_back(100.);
+    lumi = 4650;
+    lumis.push_back(100.);
+    lumis.push_back(100.);
   }
 
   if ( results ) { 
-    double tmp = 1100.;
+    double tmp = 4650.;//xx[ilumi];
     lumi = tmp;
-    //lumis.push_back(tmp);
+    lumis.push_back(tmp);
     lumis.push_back(tmp);
     lumis.push_back(tmp);
     lumis.push_back(tmp);
@@ -202,10 +214,10 @@ int qcdBkgdEst_new() {
       break;
     }
   }
-  if ( data_file == -1 ) { 
-    data_file = 0;
-    std::cout << "Problem identifying data file!" << std::endl;
-  }
+//   if ( data_file == -1 ) { 
+//     data_file = 0;
+//     std::cout << "Problem identifying data file!" << std::endl;
+//   }
   
   std::vector<int> style;
 
@@ -216,12 +228,12 @@ int qcdBkgdEst_new() {
   }
 
   if ( results ) {
-    //style.push_back(24);
     style.push_back(24);
+    style.push_back(25);
     style.push_back(26);
     style.push_back(28);
-    style.push_back(30);
     style.push_back(27);
+    style.push_back(30);
     style.push_back(20);
   }
 
@@ -248,9 +260,9 @@ int qcdBkgdEst_new() {
   }
 
   if ( results ) {
-    //col.push_back(4);
     col.push_back(2);
-    col.push_back(1);
+    col.push_back(4);
+    col.push_back(6);
     col.push_back(6);
     col.push_back(6);
     col.push_back(6);
@@ -315,22 +327,23 @@ int qcdBkgdEst_new() {
 	     denom, denom_errh, denom_errl, 
 	     ratio, errh, errl, length,
 	     label,
-	     efficiency, use_sumw2 );
+	     efficiency, use_sumw2,
+	     data_file );
   
   ht_step.clear();
   for ( int iht = 0; iht < nht; ++iht ) { ht_step.push_back( ht[iht+1] - ht[iht] ); }
   
-  std::cout << " size " << ht.size()
-	    << " nbins " << nht 
-	    << " htmin " << ht_min 
-	    << " htmax " << ht_max
-	    << std::endl;
-  for ( int iht = 0; iht <= nht; ++iht ) {
-    std::cout << " ibin " << iht
-	      << " ht " << ht[iht]
-	      << " htstep " << (iht<nht?ht_step[iht]:0.)
-	      << std::endl;
-  }
+//   std::cout << " size " << ht.size()
+// 	    << " nbins " << nht 
+// 	    << " htmin " << ht_min 
+// 	    << " htmax " << ht_max
+// 	    << std::endl;
+//   for ( int iht = 0; iht <= nht; ++iht ) {
+//     std::cout << " ibin " << iht
+// 	      << " ht " << ht[iht]
+// 	      << " htstep " << (iht<nht?ht_step[iht]:0.)
+// 	      << std::endl;
+//   }
 
 //   // -----------------------------------------------------------------------------
 //   // -----------------------------------------------------------------------------
@@ -461,16 +474,16 @@ int qcdBkgdEst_new() {
 	    valx[ifile][imulti][iat][iht] = ht[iht] + ht_step[iht]/2. + axis_offset*ifile;
 	    errxh[ifile][imulti][iat][iht] = ht_step[iht]/2. + axis_offset*ifile;
 	    errxl[ifile][imulti][iat][iht] = ht_step[iht]/2. - axis_offset*ifile;
-	    valy[ifile][imulti][iat][iht] = numer[ifile][imulti][iat][iht];
-	    erryh[ifile][imulti][iat][iht] = numer_errh[ifile][imulti][iat][iht];
-	    erryl[ifile][imulti][iat][iht] = numer_errl[ifile][imulti][iat][iht];
+	    valy[ifile][imulti][iat][iht] = numer[ifile][imulti][iat][iht] / ht_step[iht];
+	    erryh[ifile][imulti][iat][iht] = numer_errh[ifile][imulti][iat][iht] / ht_step[iht];
+	    erryl[ifile][imulti][iat][iht] = numer_errl[ifile][imulti][iat][iht] / ht_step[iht];
 	  } else if ( choice == PLOT_DENOMINATOR ) {
 	    valx[ifile][imulti][iat][iht] = ht[iht] + ht_step[iht]/2. + axis_offset*ifile;
 	    errxh[ifile][imulti][iat][iht] = ht_step[iht]/2. + axis_offset*ifile;
 	    errxl[ifile][imulti][iat][iht] = ht_step[iht]/2. - axis_offset*ifile;
-	    valy[ifile][imulti][iat][iht] = denom[ifile][imulti][iat][iht];
-	    erryh[ifile][imulti][iat][iht] = denom_errh[ifile][imulti][iat][iht];
-	    erryl[ifile][imulti][iat][iht] = denom_errl[ifile][imulti][iat][iht];
+	    valy[ifile][imulti][iat][iht] = denom[ifile][imulti][iat][iht] / ht_step[iht];
+	    erryh[ifile][imulti][iat][iht] = denom_errh[ifile][imulti][iat][iht] / ht_step[iht];
+	    erryl[ifile][imulti][iat][iht] = denom_errl[ifile][imulti][iat][iht] / ht_step[iht];
 	  } else if ( choice == PLOT_RATIO ) {
 	    //if ( iht < length[ifile][imulti][iat] ) {
 	    valx[ifile][imulti][iat][iht] = ht[iht] + ht_step[iht]/2. + axis_offset*ifile;
@@ -622,10 +635,10 @@ int qcdBkgdEst_new() {
 	  
       std::stringstream ss_axis;
       if ( choice == PLOT_NUMERATOR ) { 
-	ss_axis << "N(#alpha_{T}>" << at[iat] << ")"; 
+	ss_axis << "N(#alpha_{T}>" << at[iat] << ") / GeV"; 
       } else if ( choice == PLOT_DENOMINATOR ) { 
 	if ( efficiency ) { ss_axis << "Total"; }
-	else { ss_axis << "N(#alpha_{T}<" << at[iat] << ")"; }
+	else { ss_axis << "N(#alpha_{T}<" << at[iat] << ") / GeV"; }
       } else if ( choice == PLOT_RATIO ) { 
 	if ( !efficiency ) { ss_axis << "R_{#alpha_{T}}(" << at[iat] << ")"; }
 	else { ss_axis << "#varepsilon(#alpha_{T}=" << at[iat] << ")"; }
@@ -671,9 +684,11 @@ int qcdBkgdEst_new() {
 		    << std::scientific << std::setprecision(3)
 		    << " A: " << fit_c->GetParameter(0) << " +/- " << fit_c->GetParError(0)
 		    << std::endl;
+	    //yy.push_back( fit_c->GetProb() ); //@@ ADDED
 	    if ( (int)ifile == data_file ) { fits.push_back( fit_c->GetProb() ); }
 	    //rat.push_back( fit_c->GetParameter(0) );
 	  } else {
+	    //yy.push_back( 0. ); //@@ ADDED
 	    std::cout << " NULL PTR! " << std::endl;
 	  }
 
@@ -726,7 +741,7 @@ int qcdBkgdEst_new() {
 	    std::cout << " NULL PTR! " << std::endl;
 	  }
 
-	  if (tmp_gr) delete tmp_gr;
+	  //if (tmp_gr) delete tmp_gr;
 
 	}
 
@@ -753,11 +768,11 @@ int qcdBkgdEst_new() {
 		
 	}
 	    
-	if ( nfile - ifile == 1 ) {
-	  std::cout << ss_flat.str() << std::endl;
-	  std::cout << ss_line.str() << std::endl;
-	  std::cout << ss_expo.str() << std::endl;
-	}
+ 	if ( nfile - ifile == 1 ) {
+  	  std::cout << ss_flat.str() << std::endl;
+ 	  std::cout << ss_line.str() << std::endl;
+ 	  std::cout << ss_expo.str() << std::endl;
+ 	}
 
 	mg->Add(gr,"p");
 	
@@ -780,12 +795,12 @@ int qcdBkgdEst_new() {
       mg->GetYaxis()->SetTitle(TString(ss_axis.str()));
       mg->GetYaxis()->SetTitleOffset(1.3);
       mg->GetXaxis()->SetRangeUser(ht_min+offset,ht_max+offset);
-      mg->GetYaxis()->SetRangeUser(min[imulti][iat]/2.,max[imulti][iat]*2.);
+      mg->GetYaxis()->SetRangeUser(min[imulti][iat]/2.0,max[imulti][iat]*1.2);
       //else mg->GetYaxis()->SetRangeUser(0.,0.12e-3);
       //mg->GetYaxis()->SetNoExponent(true);
       
       //mg->GetXaxis()->SetRangeUser(250,450.);
-      //mg->GetYaxis()->SetRangeUser(0.1,1000.);
+      //mg->GetYaxis()->SetRangeUser(0.,25.e-6);
       //mg->GetYaxis()->SetRangeUser(0.,0.05e-3);
       //mg->GetYaxis()->SetRangeUser(0.,0.04e-3);
       //canvas->SetLogy();
@@ -809,6 +824,8 @@ int qcdBkgdEst_new() {
       //canvas->SaveAs(TString(name+"_"+ss_canvas.str()+".C")); 
       //canvas->SaveAs(TString(name+"_"+ss_canvas.str()+".png")); 
       //canvas->SaveAs(TString(name+"_"+ss_canvas.str()+".pdf")); 
+
+      //if (canvas) delete canvas;
       
     } // iat
   } // imulti
@@ -857,7 +874,29 @@ int qcdBkgdEst_new() {
     if (!plot_ratio) c2->SaveAs("RaTvsEwkComposition.pdf"); 
     else c2->SaveAs("RaTvsEwkComposition_ratio.pdf"); 
   }
-    
+
+
+//   }
+
+//   yy.resize(xx.size(),0.);
+
+//   TCanvas* c1 = new TCanvas();
+//   TGraph* gr = new TGraph(nn, &(xx.front()), &(yy.front()) );
+//   c1->cd();
+//   gr->Draw("ap");
+//   //gr->SetBorderSize(0);
+//   gr->SetTitle("Fit range: 325 < HT < 985");
+//   gr->GetXaxis()->SetTitle("Integrated Lumi (pb^{-1})");
+//   gr->GetYaxis()->SetTitle("p-value");
+//   c1->SaveAs("tmp.C");
+//   delete c1;
+
+//   std::cout << std::endl;
+//   for ( uint i = 0; i < nn; ++i ) { std::cout << xx[i] << std::endl; }
+//   std::cout << std::endl;
+//   for ( uint i = 0; i < nn; ++i ) { std::cout << yy[i] << std::endl; }
+//   std::cout << std::endl;
+  
   return 0;
   
 }

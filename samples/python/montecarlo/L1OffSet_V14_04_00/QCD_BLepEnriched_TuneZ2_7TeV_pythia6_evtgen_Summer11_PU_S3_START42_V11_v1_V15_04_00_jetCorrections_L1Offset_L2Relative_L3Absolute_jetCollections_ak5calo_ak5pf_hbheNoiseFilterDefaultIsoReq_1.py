@@ -1,0 +1,9 @@
+from icf.core import PSet
+
+QCD_BLepEnriched_TuneZ2_7TeV_pythia6_evtgen_Summer11_PU_S3_START42_V11_v1_V15_04_00_jetCorrections_L1Offset_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1=PSet(
+	Name="QCD_BLepEnriched_TuneZ2_7TeV_pythia6_evtgen_Summer11_PU_S3_START42_V11_v1_V15_04_00_jetCorrections_L1Offset_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1",
+	Format=("ICF",3),
+	File=[
+	],
+Weight=1.0,
+)

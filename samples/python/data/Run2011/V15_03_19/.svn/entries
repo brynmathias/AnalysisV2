@@ -1,15 +1,15 @@
 10
 
 dir
-3542
+3601
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/samples/python/data/Run2011/V15_03_19
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2011-12-11T15:49:29.291082Z
-3539
-mstoye
+2011-12-12T13:52:16.714975Z
+3543
+bm409
 
 
 
@@ -28,7 +28,7 @@ mstoye
 
 SingleElectron_Run2011B_PromptReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 
@@ -59,6 +59,40 @@ bm409
 
 
 92923
+
+ElectronHad_Run2011A_05Aug2011_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
+file
+
+
+
+
+2011-12-12T12:56:00.000000Z
+1c2f38915a3f773235d083fb96944dc6
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+40937
 
 __init__.py
 file
@@ -94,43 +128,9 @@ gouskos
 
 0
 
-ElectronHad_Run2011A_05Aug2011_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
-file
-3543
-
-
-
-2011-12-12T12:56:00.000000Z
-1c2f38915a3f773235d083fb96944dc6
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-40937
-
 SingleMu_Run2011B_PromptReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 
@@ -164,7 +164,7 @@ bm409
 
 ElectronHad_Run2011A_May10ReReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 
@@ -196,43 +196,9 @@ bm409
 
 66439
 
-ElectronHad_Run2011B_PromptReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_a.py
-file
-3543
-
-
-
-2011-12-12T12:56:00.000000Z
-dbf1bc19f8aa4f02128a43be86057ba1
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-199440
-
 MuHad_Run2011A_05Aug2011_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 
@@ -264,9 +230,43 @@ bm409
 
 57170
 
+ElectronHad_Run2011B_PromptReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_a.py
+file
+
+
+
+
+2011-12-12T12:56:00.000000Z
+dbf1bc19f8aa4f02128a43be86057ba1
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+199440
+
 ElectronHad_Run2011B_PromptReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_b.py
 file
-3543
+
 
 
 
@@ -298,43 +298,9 @@ bm409
 
 38505
 
-ElectronHad_Run2011A_PromptReco_v4_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
-file
-3543
-
-
-
-2011-12-12T12:56:00.000000Z
-ddc5d67c1a36837f388f1188288bfe29
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-157123
-
 MuHad_Run2011A_May10ReReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 
@@ -366,9 +332,43 @@ bm409
 
 110172
 
+ElectronHad_Run2011A_PromptReco_v4_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
+file
+
+
+
+
+2011-12-12T12:56:00.000000Z
+ddc5d67c1a36837f388f1188288bfe29
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+157123
+
 ElectronHad_Run2011A_PromptReco_v6_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 
@@ -402,7 +402,7 @@ bm409
 
 MuHad_Run2011B_PromptReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_a.py
 file
-3543
+
 
 
 
@@ -470,7 +470,7 @@ mstoye
 
 MuHad_Run2011A_PromptReco_v4_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 
@@ -504,7 +504,7 @@ bm409
 
 MuHad_Run2011A_PromptReco_v6_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
-3543
+
 
 
 

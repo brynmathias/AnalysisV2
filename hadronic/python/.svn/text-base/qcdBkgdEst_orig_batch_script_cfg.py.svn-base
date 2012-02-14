@@ -278,7 +278,7 @@ elif ( dataset == 10 ) :
             Name="QCD_Pythia6_38_AllPtBins",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bm409//ICF/automated/2010_10_11_23_08_00//QCD_Pt_0to5_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_10_4_tTr.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bm409//ICF/automated/2010_10_11_23_08_00//QCD_Pt_0to5_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_10_4_tTr.root" ,
             ],
             CrossSection=48440000000.0,
             LastEntry = 10,

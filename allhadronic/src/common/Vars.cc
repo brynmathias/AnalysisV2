@@ -79,7 +79,7 @@ void Vars::update() {
   
   // Calc meff, at and do jet recombination
   meff_ = ht_ + mht_.Pt();
-  at_ = AlphaT()( jets_, pseudo_ );
+  at_ = jets_.size() < 2 ? 0. : AlphaT()( jets_, pseudo_ );
   
   // Construct pseudo di-jets
   j1_ = LorentzV(0.,0.,0.,0.);
@@ -90,7 +90,7 @@ void Vars::update() {
     if ( pseudo_[i] ) { j1_ += jets_[i]; et1_ += jets_[i].Et(); }
     else              { j2_ += jets_[i]; et2_ += jets_[i].Et(); }
   }
-
+  
   // Calculate DHT
   dht_ = fabs( et1_ - et2_ );
   

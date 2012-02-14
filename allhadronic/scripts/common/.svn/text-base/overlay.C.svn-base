@@ -187,7 +187,8 @@ TCanvas* createPlot( TDirectory* output_file,
 
     // Populate stats box
     std::stringstream ss;
-    ss << "Mean=" << int(his[ihis]->GetMean()*100.)/100. << ", RMS=" << int(his[ihis]->GetRMS()*100.)/100.;
+    //ss << "Mean=" << int(his[ihis]->GetMean()*100.)/100. << ", RMS=" << int(his[ihis]->GetRMS()*100.)/100.;
+    ss << "Entries=" << his[ihis]->GetEntries();
     TText* text = stats->AddText(ss.str().c_str());
     text->SetTextAlign(11);
     text->SetTextSize(0.025);

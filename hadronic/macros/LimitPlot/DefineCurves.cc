@@ -219,12 +219,37 @@ TGraphErrors* get1080Exp(){
 
 }
 
+TGraphErrors* get1080Exp(){
+
+  Int_t nl = 12;
+  Double_t xl[12]={  0 , 100, 300, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2000};
+  Double_t yl[12]={ 520, 520, 500, 460, 360, 260,  230,  215,  205,  195,  180,  175};
+  Double_t exl[12];
+  Double_t eyl[12];
+
+  TGraphErrors* gr1 = new TGraphErrors(nl,xl,yl,exl,eyl);
+  gr1->SetMarkerColor(kBlue);
+  gr1->SetMarkerStyle(21);
+
+  //gr1->Draw("LP");
+
+  TSpline3 *s = new TSpline3("grs",gr1);
+  s->SetLineColor(kBlue);
+  s->SetLineStyle(2);
+  s->SetLineWidth(3);
+
+  return gr1;
+
+}
+
+
+
 //this is just a placeholder
-TGraphErrors* get1080SidBandExp(){
+TGraphErrors* get4600SidBandExp(){
   
   Int_t nl = 11;
   Double_t xl[11]={  0 , 100 , 200, 300, 400, 500, 600, 700, 800, 900, 1000};
-  Double_t yl[11]={450,  450,  450,  450,  450, 440, 330, 250, 220, 210, 170};
+  Double_t yl[11]={0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 0};
   Double_t exl[11];
   Double_t eyl[11];
 
@@ -325,6 +350,29 @@ TGraphErrors* getATLASPLHC(){
 
 
 TSpline3* getCLs1080ObsNLOtb40(){
+
+  Int_t nl = 10;
+  Double_t xl[10]={380,500,700,900,1100,1300,1500,1700,1900,2000};
+  Double_t yl[10]={520,490,390,290, 230, 210, 205, 200, 195, 190};
+  Double_t exl[10];
+  Double_t eyl[10];
+
+  TGraphErrors* gr1 = new TGraphErrors(nl,xl,yl,exl,eyl);
+  //  gr1->SetMarkerColor(kRed);
+  //  gr1->SetMarkerStyle(21);
+
+  TSpline3 *s = new TSpline3("grs",gr1);
+  s->SetLineColor(kRed);
+  s->SetLineStyle(1);
+  s->SetLineWidth(3);
+
+  return s;
+}
+
+
+
+
+TSpline3* getCLs4600ObsNLOtb40(){
 
   Int_t nl = 10;
   Double_t xl[10]={380,500,700,900,1100,1300,1500,1700,1900,2000};

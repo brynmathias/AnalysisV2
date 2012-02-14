@@ -126,6 +126,9 @@ namespace Operation {
     double offset_;
     
     // HT RECO histograms
+    bool genHistos_;
+    vvTH2D hVarVsScale_;
+    vvTH2D hVarOverScaleVsJetPt_;
     vTH1D hGenPtHat_;
     vTH1D hGenPdgId_;
     vTH1D hGenStatus_;
@@ -206,7 +209,6 @@ namespace Operation {
     std::vector<double> epochs_;
     vvstring signal_;
     vvstring monitor_;
-    vvstring monitorRef_;
     vvdouble reweight_;
     vstring names_;
 

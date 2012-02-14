@@ -1,15 +1,15 @@
 10
 
 dir
-3526
+3575
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/hadronic/python
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2011-11-15T17:26:56.289989Z
-3444
-bm409
+2011-12-27T21:26:54.148053Z
+3557
+dburton
 has-props
 
 
@@ -28,7 +28,7 @@ has-props
 
 Hadronic_100_100_50_eff_cfg.py
 file
-3373
+
 
 
 
@@ -60,9 +60,56 @@ has-props
 
 26492
 
+Binned_DiMuon_HT_325.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+ec9c7a9f9e02ea4886f9928a16eb4b32
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4627
+
+qcdBkgdEst_orig_batch_script_cfg.py
+file
+
+
+
+
+
+c8fdcbca6485a3794e3d80114be67b66
+2011-12-16T09:18:24.975989Z
+3550
+bainbrid
+has-props
+
 MC38_deadECALList.txt
 file
-3373
+
 
 
 
@@ -94,46 +141,9 @@ trommers
 
 2108
 
-qcdBkgdEst_orig_batch_script_cfg.py
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-cd02ed67510ab18235204b084f3422e6
-2011-07-14T11:22:56.974139Z
-2987
-bm409
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-11265
-
-ra1objectid
-dir
-
 BrynTestingToBeVerified.py
 file
-3373
+
 
 
 
@@ -165,9 +175,80 @@ has-props
 
 18905
 
+ra1objectid
+dir
+
+Binned_DiMuon_Config.pyc
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+25c7e4cce76c91e5dc743e27b8186a0e
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15562
+
+Binned_DiMuon_HT_375.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+9cc37754348a0df01dfcdd395b287b4a
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4620
+
 deadRegionList_START38_V12.txt
 file
-3373
+
 
 
 
@@ -201,7 +282,7 @@ trommers
 
 McJESplus.py
 file
-3373
+
 
 
 
@@ -235,7 +316,7 @@ has-props
 
 Hadronic_cfg.py
 file
-3373
+
 
 
 
@@ -269,7 +350,7 @@ has-props
 
 Data.py
 file
-3373
+
 
 
 
@@ -303,7 +384,7 @@ has-props
 
 McJESminus.py
 file
-3373
+
 
 
 
@@ -335,43 +416,9 @@ has-props
 
 2228
 
-bkgdCore.py
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-f0f3aa26c329bd05497494baeb5b20f4
-2010-04-29T11:11:46.000000Z
-409
-trommers
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-724
-
 MakeStandardPlots.py
 file
-3373
+
 
 
 
@@ -403,9 +450,111 @@ has-props
 
 13318
 
+bkgdCore.py
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+f0f3aa26c329bd05497494baeb5b20f4
+2010-04-29T11:11:46.000000Z
+409
+trommers
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+724
+
+Binned_AlphaT_HT_275.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+fb28398e381116949620dd5546cd91d4
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3620
+
+Binned_Muon_Config.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+1daf14995fbd0d6d14ac4cc0f049ff10
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+17863
+
 McNoSmear.py
 file
-3373
+
 
 
 
@@ -437,22 +586,18 @@ has-props
 
 1997
 
-adeadRegionListCurrent.txt
+Binned_Sample_Config.py
 file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-25083e11961a06e2b08b579b7e41606e
-2010-09-29T13:37:32.030384Z
-1197
-trommers
 
 
 
 
-
+2012-01-08T10:23:05.000000Z
+2bd23f8d12cafbee91deaf0897e9ef7d
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
 
 
 
@@ -469,11 +614,15 @@ trommers
 
 
 
-2108
+
+
+
+
+15487
 
 deadRegionList_START36_V9.txt
 file
-3373
+
 
 
 
@@ -505,9 +654,77 @@ trommers
 
 2074
 
+adeadRegionListCurrent.txt
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+25083e11961a06e2b08b579b7e41606e
+2010-09-29T13:37:32.030384Z
+1197
+trommers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2108
+
+Binned_Sample_Config.pyc
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+71ce9bc31e98c0e3ef18467fc7df5100
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+13448
+
 bryn_cfg.py
 file
-3373
+
 
 
 
@@ -541,7 +758,7 @@ bm409
 
 extractSignificance_cff.py
 file
-3373
+
 
 
 
@@ -575,7 +792,7 @@ has-props
 
 makeBkgdEstPlots_MSUGRA_cfg.py
 file
-3373
+
 
 
 
@@ -609,7 +826,7 @@ has-props
 
 PASPlots.py
 file
-3373
+
 
 
 
@@ -643,7 +860,7 @@ has-props
 
 JamboreePlots.py
 file
-3373
+
 
 
 
@@ -677,7 +894,7 @@ has-props
 
 McJESetaMinus.py
 file
-3373
+
 
 
 
@@ -711,7 +928,7 @@ has-props
 
 deadRegionList_GR10_P_V7.txt
 file
-3373
+
 
 
 
@@ -745,7 +962,7 @@ trommers
 
 T1_weights.root
 file
-3373
+
 
 
 
@@ -779,41 +996,20 @@ has-props
 
 qcdBkgdEst_orig_cfg.py
 file
-3373
 
 
 
-2011-10-18T17:02:59.000000Z
-9edf9251e5cce17adecee20a1b2ac329
-2011-07-14T11:22:56.974139Z
-2987
-bm409
+
+
+debdabafcc424308ccbea4415098ea23
+2011-12-16T09:18:24.975989Z
+3550
+bainbrid
 has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-29659
 
 brynPlots_cff.py
 file
-3373
+
 
 
 
@@ -847,7 +1043,7 @@ whyntie
 
 makeHadPlots.py
 file
-3373
+
 
 
 
@@ -879,9 +1075,43 @@ has-props
 
 6994
 
+Binned_AlphaT_HT_325.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+1db5117846afc81f0cfb5805337d7dc1
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3601
+
 submitAll.sh
 file
-3373
+
 
 
 
@@ -913,9 +1143,43 @@ bm409
 
 293
 
+Binned_AlphaT_HT_375.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+12bf07ac8dd5676dbda614bfff2519c1
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5457
+
 BabyJets_cfg.py
 file
-3373
+
 
 
 
@@ -949,7 +1213,7 @@ has-props
 
 Hadronic_100_100_50_PFdiag_cfg.py
 file
-3373
+
 
 
 
@@ -983,7 +1247,7 @@ has-props
 
 WebBuilder.py
 file
-3373
+
 
 
 
@@ -1015,9 +1279,77 @@ bm409
 
 6031
 
+Binned_Muon_Config.pyc
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+51eae68c7b39b92d0a479f66a612a55c
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15052
+
+Binned_Muon_HT_275.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+01315f6c853867313130d78b82e8611f
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4580
+
 plottingStuff_cfg.py
 file
-3373
+
 
 
 
@@ -1049,43 +1381,9 @@ bm409
 
 3042
 
-GenVBoson.C
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-0d298998e56e667645dcecac9212d759
-2010-08-03T14:48:05.000000Z
-827
-mstoye
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2538
-
 makePhotPlots.py
 file
-3373
+
 
 
 
@@ -1117,9 +1415,43 @@ has-props
 
 11945
 
+GenVBoson.C
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+0d298998e56e667645dcecac9212d759
+2010-08-03T14:48:05.000000Z
+827
+mstoye
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2538
+
 MC36_deadECALList.txt
 file
-3373
+
 
 
 
@@ -1153,7 +1485,7 @@ trommers
 
 Hadronic_100_100_50_PFtest_cfg.py
 file
-3373
+
 
 
 
@@ -1185,20 +1517,17 @@ has-props
 
 27008
 
-hadronic
-dir
-
-GenVBoson.py
+Binned_DiMuon_Config.py
 file
-3373
 
 
 
-2011-10-18T17:02:59.000000Z
-6e57f9f0e4c1def77bf8be9a8a3d8afe
-2011-03-04T13:01:51.234183Z
-2003
-bainbrid
+
+2012-01-08T10:23:05.000000Z
+fc1f90a835ae6f1bf9c02ef0c7556e88
+2011-12-27T21:26:54.148053Z
+3557
+dburton
 has-props
 
 
@@ -1220,11 +1549,11 @@ has-props
 
 
 
-1610
+17865
 
 makeLepPlots.py
 file
-3373
+
 
 
 
@@ -1256,12 +1585,49 @@ has-props
 
 14193
 
+GenVBoson.py
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+6e57f9f0e4c1def77bf8be9a8a3d8afe
+2011-03-04T13:01:51.234183Z
+2003
+bainbrid
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1610
+
+hadronic
+dir
+
 validation
 dir
 
 met_cfg.py
 file
-3373
+
 
 
 
@@ -1295,7 +1661,7 @@ has-props
 
 SUSYpas2_cfg.py
 file
-3373
+
 
 
 
@@ -1329,7 +1695,7 @@ has-props
 
 T2_weights.root
 file
-3373
+
 
 
 
@@ -1363,7 +1729,7 @@ has-props
 
 makeBkgdEstPlots_nonMSUGRA_cfg.py
 file
-3373
+
 
 
 
@@ -1397,41 +1763,20 @@ has-props
 
 qcdBkgdEst_original_cfg.py
 file
-3373
 
 
 
-2011-10-18T17:02:59.000000Z
-966bfde54bbeb07df417051793eef4d4
-2011-07-14T11:22:56.974139Z
-2987
-bm409
+
+
+656ba3d46726bcd2b44858a725104578
+2011-12-16T09:18:24.975989Z
+3550
+bainbrid
 has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-17660
 
 exampleRun.py
 file
-3373
+
 
 
 
@@ -1465,7 +1810,7 @@ bm409
 
 muonControl_CMSSM.py
 file
-3373
+
 
 
 
@@ -1497,17 +1842,17 @@ has-props
 
 22098
 
-Hadronic_mSUGRA_cfg-1.py
+Binned_Muon_HT_325.py
 file
-3373
 
 
 
-2011-10-18T17:02:59.000000Z
-743b4b210c558dc3236432f60cce74f9
-2011-07-11T18:17:06.480604Z
-2947
-bm409
+
+2012-01-08T10:23:05.000000Z
+edbae9e5d11c4ad1263c0722a2cc4c6a
+2011-12-27T21:26:54.148053Z
+3557
+dburton
 has-props
 
 
@@ -1529,11 +1874,11 @@ has-props
 
 
 
-6462
+4582
 
 deadRegionList_GR10_P_V10.txt
 file
-3373
+
 
 
 
@@ -1565,9 +1910,43 @@ trommers
 
 2257
 
+Hadronic_mSUGRA_cfg-1.py
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+743b4b210c558dc3236432f60cce74f9
+2011-07-11T18:17:06.480604Z
+2947
+bm409
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6462
+
 SUSYpas_cfg.py
 file
-3373
+
 
 
 
@@ -1599,9 +1978,43 @@ has-props
 
 6561
 
+Binned_Muon_HT_375.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+e5aba2bb054f7138d1eb173f921d54c9
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4545
+
 qcdBkgdEst_cfg.py
 file
-3373
+
 
 
 
@@ -1633,43 +2046,9 @@ has-props
 
 9083
 
-events.txt
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-bade62c698b5098eb326cd9d1dab46d1
-2010-10-24T12:10:13.965001Z
-1375
-mstoye
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-21
-
 makeElectronPlots.py
 file
-3373
+
 
 
 
@@ -1701,9 +2080,43 @@ has-props
 
 13638
 
+events.txt
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+bade62c698b5098eb326cd9d1dab46d1
+2010-10-24T12:10:13.965001Z
+1375
+mstoye
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21
+
 newIdHadronic_cfg.py
 file
-3373
+
 
 
 
@@ -1737,7 +2150,7 @@ has-props
 
 makeMuonPlots.py
 file
-3373
+
 
 
 
@@ -1771,7 +2184,7 @@ has-props
 
 McJESetaPlus.py
 file
-3373
+
 
 
 
@@ -1805,7 +2218,7 @@ has-props
 
 McSmeared.py
 file
-3373
+
 
 
 
@@ -1837,9 +2250,43 @@ has-props
 
 1980
 
+Binned_DiMuon_HT_275.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+56bfa1130c1bf452735d421f98ddda1b
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4628
+
 bkgdEst_cfi.py
 file
-3373
+
 
 
 
@@ -1873,7 +2320,7 @@ has-props
 
 JESplusSMS.py
 file
-3373
+
 
 
 
@@ -1907,7 +2354,7 @@ bm409
 
 met_samples.py
 file
-3373
+
 
 
 
@@ -1941,7 +2388,7 @@ bm409
 
 example_cfg.py
 file
-3373
+
 
 
 
@@ -1975,7 +2422,7 @@ bainbrid
 
 JESminusSMS.py
 file
-3373
+
 
 
 
@@ -2007,43 +2454,9 @@ bm409
 
 13784
 
-autoPlotter.py
-file
-3373
-
-
-
-2011-10-18T17:02:59.000000Z
-586d24de243661f24f9a580631f1971f
-2010-10-05T13:36:29.345884Z
-1220
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-15006
-
 makeBkgdEstPlots_cfg.py
 file
-3373
+
 
 
 
@@ -2074,4 +2487,38 @@ has-props
 
 
 1950
+
+autoPlotter.py
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+586d24de243661f24f9a580631f1971f
+2010-10-05T13:36:29.345884Z
+1220
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+15006
 

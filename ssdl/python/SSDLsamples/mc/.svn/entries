@@ -1,14 +1,14 @@
 10
 
 dir
-3526
+3575
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/ssdl/python/SSDLsamples/mc
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2011-11-14T11:47:20.118818Z
-3434
+2011-12-09T09:01:41.245315Z
+3527
 pioppi
 
 
@@ -28,7 +28,7 @@ pioppi
 
 WWtoAnything_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1.py
 file
-3373
+
 
 
 
@@ -62,41 +62,19 @@ arlogb
 
 Irreducible.py
 file
-3500
 
 
 
-2011-11-30T15:34:47.000000Z
-53591a0d06e90d9bfcbb2a40efa7a037
-2011-11-14T10:37:47.936522Z
-3432
+
+
+2600115a2080294dd4365cb395eb8851
+2011-12-09T09:01:41.245315Z
+3527
 pioppi
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-7649
 
 SimpModel_T1TauNu.py
 file
-3373
+
 
 
 
@@ -130,7 +108,7 @@ arlogb
 
 WZtoAnything_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1.py
 file
-3373
+
 
 
 
@@ -164,7 +142,7 @@ arlogb
 
 PhotonVJets_7TeV_madgraph_Spring11_PU_S1_START311_V1G1_v1.py
 file
-3373
+
 
 
 
@@ -198,7 +176,7 @@ arlogb
 
 ZZtoAnything_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1.py
 file
-3373
+
 
 
 
@@ -232,7 +210,7 @@ arlogb
 
 __init__.py
 file
-3373
+
 
 
 
@@ -266,7 +244,7 @@ arlogb
 
 SMS_T1taunu_x_05_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_T1taunu.py
 file
-3373
+
 
 
 
@@ -300,7 +278,7 @@ arlogb
 
 T1TauNu.py
 file
-3500
+
 
 
 
@@ -334,7 +312,7 @@ pioppi
 
 SMS_T1taunu_x_05_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_T1taunu_noGenCut.py
 file
-3373
+
 
 
 
@@ -368,7 +346,7 @@ arlogb
 
 TanB10.py
 file
-3500
+
 
 
 

@@ -201,5 +201,6 @@ T_TuneZ2_t_channel_7TeV_powheg_tauola_Summer11_PU_S4_START42_V11_v1=PSet(
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_10_27_12_26_29/SusyCAF_Tree_99_0_pmQ.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2011_10_27_12_26_29/SusyCAF_Tree_9_6_DxY.root" ,
 	],
-	CrossSection=0,
+	CrossSection=35.72,
+  Events = 3900171
 )

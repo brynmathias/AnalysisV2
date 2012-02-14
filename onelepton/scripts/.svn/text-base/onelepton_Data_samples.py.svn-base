@@ -327,6 +327,10 @@ samplesData42X_ElHad_V15_03_19_residual = [
     ElectronHad_Run2011B_PromptReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_b
     ]
 
+samplesData42X_ElHad_May10Sync = [
+    ElectronHad_Run2011A_May10ReReco_v1_V15_03_19_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1
+    ]
+
 
 #samplesData42X_SingleEl_PromptReco = [
 #    SingleElectron_Run2011A_PromptReco_v4_a,

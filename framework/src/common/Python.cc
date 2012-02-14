@@ -170,6 +170,10 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
       bases<Operation::_Base> >("OP_NumComJets", init<const std::string &,
                                 UInt_t>());
 
+  class_<Operation::NumCommonBtagJets, bases<Operation::_Base> >("OP_NumCommonBtagJets",
+                     init<const std::string &,
+                     UInt_t,float>());
+
   class_<Operation::badMuonInJet, bases<Operation::_Base> >("OP_BadMuonInJet");
   class_<Operation::PhotkilledJet, bases<Operation::_Base> >("OP_PhotonKilledJet");
 
@@ -222,7 +226,8 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
                      init<float>());
   class_<Operation::alpha_tCut, bases<Operation::_Base> >("OP_HadAlphaTCut",
                      init<float>());
-
+  class_<Operation::alpha_tCut_Less, bases<Operation::_Base> >("OP_HadAlphaTCutLess",
+                     init<float>());
   class_<Operation::missedHTcut, bases<Operation::_Base> >("OP_MissedHTCut",
                  init<float>());
 
@@ -292,6 +297,7 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
     class_<Operation::EcalSpikeCleaner, bases<Operation::_Base> >("OP_EcalSpikeCleaner");
     class_<Event::JESUncert, bases<Compute::ObjectFilter<Event::Jet> > >("JESUncert", init<const std::string>());
     class_<Event::VertexReweighting,   bases<Compute::ObjectFilter<double> > >("VertexReweighting",   init<const Utils::ParameterSet &>());
+    class_<Event::GoodVertexReweighting,   bases<Compute::ObjectFilter<double> > >("GoodVertexReweighting",   init<const Utils::ParameterSet &>());
     class_<Event::PreScaleReweighting,   bases<Compute::ObjectFilter<double> > >("PreScaleReweighting",   init<const Utils::ParameterSet &>());
                                                                                 //scale factor, eta, use parameterisation
     class_<Event::JESCorrections, bases<Compute::ObjectFilter<Event::Jet> > >("JESCorrections",  init<const Utils::ParameterSet &, bool>() )

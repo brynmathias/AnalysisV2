@@ -6,7 +6,8 @@ CVS
 
 TestResults
 *.cvsignore
-
+*setup.*
+config.inc
 *filtered.json
 *Trigger*.json
 .DS_Store

@@ -109,7 +109,7 @@ BOOST_PYTHON_MODULE(libOneLepton) {
 
  class_<OneLepton::pfMETScale, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETScale", init<const std::string, double>());
 
-  //  class_<Operation::PrintRunLSEvent, bases<Operation::_Base> >("PrintRunLSEvent");
+ class_<Operation::PrintRunLSEvent, bases<Operation::_Base> >("OP_PrintRunLSEvent");
 
   //  class_<OneLepton::PolarisationReweighting, bases<Compute::ObjectFilter<double> > >("PolarisationReweighting",init<const Utils::ParameterSet &>());
   class_<OneLepton::TTPolarisationReweighting, bases<Compute::ObjectFilter<double> > >("TTPolarisationReweighting",init<const std::string, double>());

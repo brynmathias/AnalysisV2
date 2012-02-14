@@ -508,6 +508,19 @@ class HTthrustCut : public Operation::_Base {
 
 
 
+  class PrintRunLSEvent: public Operation::_Base {
+  public:
+
+    PrintRunLSEvent();
+    ~PrintRunLSEvent();
+    bool Process(Event::Data & ev);
+   std::ostream& Description(std::ostream& ostrm);
+  };
+
+
+
+
+
 } // end namespace
 
 #endif

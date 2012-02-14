@@ -452,8 +452,8 @@ elif ( dataset == 12 ) :
             Name="QCD_Pythia6_38_AllPtBins",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_10_17_20_12_27//QCD_Pt_800to1000_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_100_1_u1V.root" ,
-            #"root://gfe02.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_10_18_17_55_22//QCD_Pt_470to600_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_100_2_GlB.root" ,
+            "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_10_17_20_12_27//QCD_Pt_800to1000_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_100_1_u1V.root" ,
+            #"root://xrootd.grid.hep.ph.ic.ac.uk/store/user/bbetchar//ICF/automated/2010_10_18_17_55_22//QCD_Pt_470to600_TuneZ2_7TeV_pythia6.Fall10-START38_V12-v1.GEN-SIM-RECO//SusyCAF_Tree_100_2_GlB.root" ,
             ],
             CrossSection=48440000000.0,
             #LastEntry = 1000,
@@ -464,7 +464,7 @@ elif ( dataset == 13 ) :
             Name="QCD_MadGraph",
             Format=("ICF",2),
             File=[
-            "root://gfe02.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt500to1000-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_26_2.root",
+            "root://xrootd.grid.hep.ph.ic.ac.uk/store/user/as1604/ICF/automated/2010_08_15_23_34_33//QCD_Pt500to1000-madgraph.Spring10-START3X_V26_S09-v1.GEN-SIM-RECO/SusyCAF_Tree_26_2.root",
             ],
             CrossSection=5200.,
             LastEntry = 1000,

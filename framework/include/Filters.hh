@@ -2,6 +2,16 @@
 #include "Utils.hh"
 #include "Math/VectorUtil.h"
 #include "TRandom3.h"
+
+
+#include "CommonOps.hh"
+#include "EventData.hh"
+#include "Jet.hh"
+#include "KinSuite.hh"
+#include "Lepton.hh"
+
+
+
 namespace Event {
 
 
@@ -290,7 +300,8 @@ public:
   ~VertexReweighting(){}
 
   bool Apply( double* weight ) {
-    unsigned nvertices = mEv->GetVertexSize();
+
+   unsigned nvertices = mEv->GetVertexSize();
     if(nvertices >= weights_.size()) nvertices = weights_.size();
     *weight *= weights_[nvertices-1];
     return true;
@@ -304,6 +315,44 @@ public:
   std::vector<double> weights_;
 
   };
+
+
+class GoodVertexReweighting : public Compute::ObjectFilter<double> {
+
+public:
+  GoodVertexReweighting(const Utils::ParameterSet & ps):
+      weights_(ps.Get<std::vector<double> >("GoodVertexWeights"))
+  {
+    mModifies = true;
+  }
+  ~GoodVertexReweighting(){}
+
+  bool Apply(double *weight) {
+    unsigned nVertex = 0;
+    for(std::vector<float>::const_iterator vtx= mEv->vertexSumPt()->begin();vtx != mEv->vertexSumPt()->end();++vtx){
+      if(!mEv->vertexIsFake()->at( vtx-mEv->vertexSumPt()->begin()) &&
+        fabs((mEv->vertexPosition()->at( vtx-mEv->vertexSumPt()->begin())).Z()) < 24.0 &&
+        mEv->vertexNdof()->at( vtx-mEv->vertexSumPt()->begin() ) > 4 &&
+        (mEv->vertexPosition()->at( vtx-mEv->vertexSumPt()->begin())).Rho() < 2.0 ){  nVertex++; }} 
+     
+    //unsigned nvertices = mEv->GetVertexSize();
+    if(nVertex >= weights_.size()) nVertex = weights_.size();
+    *weight *= weights_[nVertex];
+    return true;
+  }
+
+    std::ostream & Description(std::ostream & ostrm) {
+      return ostrm;
+    }
+
+ private:
+  std::vector<double> weights_;
+
+  };
+
+
+
+
 
 class PreScaleReweighting : public Compute::ObjectFilter<double>
 {
@@ -363,7 +412,7 @@ public:
             std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++"<<std::endl;
           }
         }
-
+    //if(preScaleVal = 999){preScaleVal=0;}
     *weight *= preScaleVal;
     return true;
   }
