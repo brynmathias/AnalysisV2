@@ -44,9 +44,9 @@ def checkSwitches(d) :
 
 def switches() :
   d = {}
-  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt"][6]
-  d["selection"] = ["had", "muon"][1]
-  d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
+  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt"][7]
+  d["selection"] = ["had", "muon"][0]
+  d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][0]
   d["jes"] = ["", "+ve", "-ve"][0]
   checkSwitches(d)
   return d
@@ -120,7 +120,7 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
   
 
-  alphaTSlices = [(55,None),(52,53),(53,55)]
+  alphaTSlices = [(55,None)]#,(52,53),(53,55)]
   for slice in alphaTSlices:
      print slice
      aTlow = OP_HadAlphaTCut(slice[0]/100.)
@@ -132,41 +132,42 @@ def cutFlow(cutTreeMC, model) :
        cutTreeMC.FAttach(aThigh,aTlow)
      else:
        cutTreeMC.TAttach(MHToverMET,aTlow)
-     #Need to do some btagging as well!
-     oneBtag = OP_NumCommonBtagJets(">=",5,1,0.679)
-     out.append(oneBtag)
-     cutTreeMC.TAttach(aTlow,oneBtag)
-      
- 
-
-     out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = oneBtag,
-                            htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "btag_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
-
-
      out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = aTlow,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
                             label2 = "AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+
+     #Need to do some btagging as well!
+     for btags in [("==",0),("==",1),("==",2),(">",2)]:
+         btag = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
+         out.append(btag)
+         cutTreeMC.TAttach(aTlow,btag)
+         out.append( addBinnedStuff(model = switches()["model"],
+                                cutTree = cutTreeMC,
+                                cut = btag,
+                                htBins = [275, 325] + [375+100*i for i in range(6)],
+                                label2 = "btag_%s_%i_AlphaT%d_%s"%(btags[0],bags[1],int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+
+
   if switches()["selection"]=="muon" :
-       MuonEta = OP_AditionalMuonCuts(10.,2.1)
-       MuonPt = OP_LeadingMuonCut(45.)
-       oneBtagNoAlphaT = OP_NumCommonBtagJets(">=",5,1,0.679)
-       out.append(oneBtagNoAlphaT)
-       cutTreeMC.TAttach(MHToverMET,MuonPt)   
-       cutTreeMC.TAttach(MuonPt,MuonEta)
-       cutTreeMC.TAttach(MuonEta,oneBtagNoAlphaT)
-       out.append(oneBtagNoAlphaT)
-       out.append(MuonEta)
-       out.append(MuonPt)
-       out.append( addBinnedStuff(model = switches()["model"],
+    for btags in [("==",0),("==",1),("==",2),(">",2),(">=",1)]:
+        BtagNoAlphaT = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
+        out.append(BtagNoAlphaT)    
+        MuonEta = OP_AditionalMuonCuts(10.,2.1)
+        MuonPt = OP_LeadingMuonCut(45.)
+        cutTreeMC.TAttach(MHToverMET,MuonPt)   
+        cutTreeMC.TAttach(MuonPt,MuonEta)
+        cutTreeMC.TAttach(MuonEta,BtagNoAlphaT)
+        out.append(MuonEta)
+        out.append(MuonPt)
+        out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
-                            cut = oneBtagNoAlphaT,
+                            cut = BtagNoAlphaT,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "NoAlphaT_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+                            label2 = "btag_%s_%i_NoAlphaT_"%(btags[0],bags[1]),extra = MChiCut))
 
   return out
 
@@ -216,7 +217,7 @@ def outputDir() :
   #o = "../results_Slices_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
   o = "../results_%s_%s_%g_%s_MChiCut_%d"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"],MChiCut)
   if "tan" in switches()["model"] or MChiCut < 0:
-    o = "../results_%s_%s_%g_%s_Test"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
+    o = "../results_%s_%s_%g%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"] if switches()["jes"] == "" else "_"+switches()["jes"])
 
   mkdir(o)
   return o
