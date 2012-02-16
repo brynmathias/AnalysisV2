@@ -120,7 +120,7 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
   
 
-  alphaTSlices = [(55,None)]#,(52,53),(53,55)]
+  alphaTSlices = [(55,None),(52,53),(53,55)]
   for slice in alphaTSlices:
      print slice
      aTlow = OP_HadAlphaTCut(slice[0]/100.)
@@ -141,6 +141,7 @@ def cutFlow(cutTreeMC, model) :
 
      #Need to do some btagging as well!
      for btags in [("==",0),("==",1),("==",2),(">",2)]:
+         if slice[0]!= 55: continue
          btag = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
          out.append(btag)
          cutTreeMC.TAttach(aTlow,btag)
