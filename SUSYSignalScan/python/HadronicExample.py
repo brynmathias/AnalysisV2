@@ -148,7 +148,7 @@ def cutFlow(cutTreeMC, model) :
                                 cutTree = cutTreeMC,
                                 cut = btag,
                                 htBins = [275, 325] + [375+100*i for i in range(6)],
-                                label2 = "btag_%s_%i_AlphaT%d_%s"%(btags[0],bags[1],int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+                                label2 = "btag_%s_%i_AlphaT%d_%s"%(btags[0],btags[1],int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
 
 
@@ -167,7 +167,7 @@ def cutFlow(cutTreeMC, model) :
                             cutTree = cutTreeMC,
                             cut = BtagNoAlphaT,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "btag_%s_%i_NoAlphaT_"%(btags[0],bags[1]),extra = MChiCut))
+                            label2 = "btag_%s_%i_NoAlphaT_"%(btags[0],btags[1]),extra = MChiCut))
 
   return out
 
