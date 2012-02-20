@@ -30,7 +30,8 @@ public:
   JESUncert( std::string direction )
     : direction_(direction)
   {
-    mModifies = true;
+    mModifies = true,
+    Ran_ = new TRandom3();
   }
   ~JESUncert(){}
 
@@ -47,7 +48,11 @@ public:
       ob->SetPxPyPzE(ob->Px()/scale, ob->Py()/scale, ob->Pz()/scale, ob->E()/scale);
     }else if(strcmp("+ve",direction_.c_str()) == 0){
       ob->SetPxPyPzE(ob->Px()*scale, ob->Py()*scale, ob->Pz()*scale, ob->E()*scale);
-    }
+      }else if(strcmp("ran",direction_.c_str()) == 0){
+        double n = Ran_->Rndm();
+        if( n > 0.5){ ob->SetPxPyPzE(ob->Px()/scale, ob->Py()/scale, ob->Pz()/scale, ob->E()/scale);}
+        else{ob->SetPxPyPzE(ob->Px()*scale, ob->Py()*scale, ob->Pz()*scale, ob->E()*scale);}
+      }
       return true;
     }
 
@@ -58,6 +63,7 @@ public:
 
   private:
     std::string direction_;
+    TRandom3 *Ran_;
   };
 
 /**
