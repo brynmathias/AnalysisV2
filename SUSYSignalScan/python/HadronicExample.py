@@ -44,7 +44,7 @@ def checkSwitches(d) :
 
 def switches() :
   d = {}
-  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt"][7]
+  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt"][6]
   d["selection"] = ["had", "muon"][0]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][0]
   d["jes"] = ["", "+ve", "-ve"][0]
@@ -140,8 +140,8 @@ def cutFlow(cutTreeMC, model) :
 
 
      #Need to do some btagging as well!
-     for btags in [("==",0),("==",1),("==",2),(">",2)]:
-         if slice[0]!= 55: continue
+     for btags in [(">",0),("==",0),("==",1),("==",2),(">",2)]:
+         if slice[0] != 55: continue
          btag = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
          out.append(btag)
          cutTreeMC.TAttach(aTlow,btag)
@@ -154,7 +154,7 @@ def cutFlow(cutTreeMC, model) :
 
 
   if switches()["selection"]=="muon" :
-    for btags in [("==",0),("==",1),("==",2),(">",2),(">=",1)]:
+    for btags in [("==",0),("==",1),("==",2),(">",2),(">",0)]:
         BtagNoAlphaT = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
         out.append(BtagNoAlphaT)    
         MuonEta = OP_AditionalMuonCuts(10.,2.1)
@@ -212,7 +212,7 @@ from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_
 from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1 import *
 from SUSYSignalScan.SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01 import *
 from SUSYSignalScan.SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02 import *
-from SUSYSignalScan.SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_24_scan_T2bb import *
+from SUSYSignalScan.SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_25_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_scan_T2bb import *
 from SUSYSignalScan.SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt import *
 def outputDir() :
   #o = "../results_Slices_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
@@ -229,7 +229,7 @@ def sample() :
     if switches()["model"] == "tanB40":return mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1
   elif isSms(switches()["model"]) :
     if switches()["model"] == "T2tt": return SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt
-    if switches()["model"] == "T2bb": return SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_24_scan_T2bb
+    if switches()["model"] == "T2bb": return SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_25_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_scan_T2bb 
     if switches()["model"] == "T2": return SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02
     if switches()["model"] == "T1": return SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01
   else :         return None
