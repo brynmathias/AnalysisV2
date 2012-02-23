@@ -651,20 +651,12 @@ from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
-<<<<<<< HEAD:bryn/python/TriggerTurnOns.py
 from MuHad_L1OffSet import *
 sample = MuHad_L1Offset
 print sample.File
 outDir = "../L1Offset/ht%dNoUpper/"%(bin)
-=======
 sample = MuHad2011AB
 
-# sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
-#sample = HTRun2011AB
-
-outDir = "../evDump/ht%dNoUpper/"%(bin)
->>>>>>> 944fff3d50dd9e757ea5fb4ba5b7ce9b56ad4d7f:bryn/python/TriggerTurnOns.py
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 

@@ -61,22 +61,17 @@ std::ostream& WeeklyUpdatePlots::Description( std::ostream& ostrm ) {
 //
 void WeeklyUpdatePlots::StandardPlots() {
 
-
-
-
   BookHistArray( vertexPtovHT_,
     "vertexPtovHT",
     ";VertexPt / HT (GeV);Events/0.01;",
     1000, 0., 10.,
     nMax_+1, 0, 1, true );
 
-
-
   BookHistArray( AlphaTVsNoVertex_,
     "AlphaTVsNoVertex",
     ";;#alpha_{T};No.Vertercies;",
     400,0.,10.,
-    10,0.,10,
+    50,0.,50.,
     nMax_+1, 0, 1, true );
 
   BookHistArray( NumberVerticiesAfterAlphaT_,
@@ -110,12 +105,6 @@ void WeeklyUpdatePlots::StandardPlots() {
     20, 0., 1.,
     nMax_+1, 0, 1, true );
 
-
-
-
-
-
-
   BookHistArray( DPhi_MHT_MHTBaby_,
     "CosDetlaPhi_MHT_MHTBaby_",
     ";#Delta Cos#phi(MHT,MHTbaby); Events/0.65 rad;",
@@ -134,9 +123,6 @@ void WeeklyUpdatePlots::StandardPlots() {
     60, -3., 3.,
     64, -3.2, 3.2,
     nMax_+1, 0, 1, true );
-
-
-
 
   BookHistArray( BabyJetMHT_StandardAlphaT_,
     "BabyJetMHT_vs_AlphaT",
@@ -229,8 +215,6 @@ void WeeklyUpdatePlots::StandardPlots() {
     400,0.,10.,
     nMax_+1, 0, 1, true );
 
-
-
   BookHistArray( AlphatCut_Meff_,
     "EffectiveMass_after_alphaT_55",
     ";M_{eff} (GeV); Events/40 GeV;",
@@ -249,8 +233,6 @@ void WeeklyUpdatePlots::StandardPlots() {
     80,0.,2000.,
     nMax_+1, 0, 1, true );
 
-
-
   BookHistArray( HT_,
     "HT",
     ";H_{T} (GeV); Events/25 GeV;",
@@ -268,7 +250,6 @@ void WeeklyUpdatePlots::StandardPlots() {
     ";H_{T} (GeV);#alpha_{T};",
     100,0.,2500.,500,0.,5.,
     nMax_+1, 0, 1, true );
-
 
   BookHistArray( Meff_,
     "EffectiveMass",

@@ -649,7 +649,7 @@ mNumber(number) {
               }
           }
             // cout << "Sum of vertex Pt/HT  is "  << VertexPt/ev.CommonHT() << endl;
-          if( VertexPt/ev.CommonHT() > cut_ ) { return true; } // check the leading uncor jet has cor Pt > cut
+          if( VertexPt/ev.CommonHT() > cut_ ) { return true; } 
           else{return false;}
         }
 

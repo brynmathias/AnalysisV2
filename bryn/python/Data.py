@@ -41,4 +41,5 @@ from data.Run2011.HT_Run2011AB import *
 
 outdir = "../results_"+strftime("%d_%b")+"/Data/"
 ensure_dir(outdir)
+HT_Run2011AB.File = HT_Run2011AB.File[0:1]
 anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])#HT_Run2011A])
