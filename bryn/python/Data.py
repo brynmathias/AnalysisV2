@@ -16,7 +16,7 @@ vbtfMuonId_cff = Muon_IDFilter( vbtfmuonidps.ps()  )
 vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 
-cutTree,blah,l = MakeDataTree(100., Muon = None)
+cutTree = MakeDataTree(100., Muon = None)
 
 
 def addCutFlowData(a) :
@@ -37,7 +37,7 @@ addCutFlowData(anal_ak5_caloData)
 
 
 from data.Run2011.HT_Run2011AB import *
-
+HT_Run2011AB.File = ["../CMSSM_Tanb10_320_520.root"]
 
 outdir = "../results_"+strftime("%d_%b")+"/Data/"
 ensure_dir(outdir)

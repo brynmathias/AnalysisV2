@@ -6,7 +6,11 @@ CVS
 
 TestResults
 *.cvsignore
+<<<<<<< HEAD:.gitignore
 *setup.*
+=======
+setup.*
+>>>>>>> 089e576df45761c21be3f08e53ebd2d86b952f3a:.gitignore
 config.inc
 *filtered.json
 *Trigger*.json
@@ -23,6 +27,12 @@ AK5*
 *.pdf
 *.o
 *.d
+.svn
+*.pyc
+*.so
+*.cxx
+*.json
+*__susyjob__*
 *.pyc
 *.cxx
 *.so

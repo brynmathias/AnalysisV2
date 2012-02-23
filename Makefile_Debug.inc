@@ -2,7 +2,7 @@
 MAKE=make
 
 PROJECTDIR=$(SUSY_WORKING_SW_DIR)
-CXX=g++
+CXX=my-gccg++
 
 EXE_EXT=
 
