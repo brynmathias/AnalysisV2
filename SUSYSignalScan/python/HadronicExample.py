@@ -95,12 +95,12 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(badMuonInJet,oddJet)
     cutTreeMC.TAttach(oddJet,numComJetsGeq2)
     cutTreeMC.TAttach(numComJetsGeq2,secondJetET)
-    cutTreeMC.TAttach(secondJetET,deadECAL_MC)
-    cutTreeMC.TAttach(deadECAL_MC,oddElectron)
+    cutTreeMC.TAttach(secondJetET,MHToverMET)
+    cutTreeMC.TAttach(MHToverMET,oddElectron)
     cutTreeMC.TAttach(oddElectron,oddPhoton)
     cutTreeMC.TAttach(oddPhoton,numComPhotons)
     cutTreeMC.TAttach(numComPhotons,numComLeptons)
-    cutTreeMC.TAttach(numComLeptons,MHToverMET)
+    cutTreeMC.TAttach(numComLeptons,deadECAL_MC)
 
   else :
     cutTreeMC.TAttach(selection,oddElectron)
@@ -138,7 +138,7 @@ def cutFlow(cutTreeMC, model) :
                             cutTree = cutTreeMC,
                             cut = aTlow,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "NoMHTovMET_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+                            label2 = "NoDeadEcal_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
   for slice in alphaTSlices:
      print slice
@@ -244,7 +244,7 @@ def outputDir() :
   #o = "../results_Slices_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
   o = "../results_%s_%s_%g_%s_MChiCut_%d"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"],MChiCut)
   if "tan" in switches()["model"] or MChiCut < 0:
-    o = "../NoMHTovMETresults_%s_%s_%g%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"] if switches()["jes"] == "" else "_"+switches()["jes"])
+    o = "../NoDeadEcalresults_%s_%s_%g%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"] if switches()["jes"] == "" else "_"+switches()["jes"])
 
   mkdir(o)
   return o
