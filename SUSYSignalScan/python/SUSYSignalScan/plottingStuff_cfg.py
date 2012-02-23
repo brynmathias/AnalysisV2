@@ -8,7 +8,7 @@ from copy import deepcopy
 from SUSYSignalScan.utils import *
 from hadronic.commonIncludes import *
 def isCmssm(model) : return ("tanB" in model)
-def isSms(model) :   return (model in ["T1", "T2","T2bb","T2tt"])
+def isSms(model) :   return (model in ["T1", "T2","T2bb","T2tt","T1bbbb"])
 
 import os
 susydir = os.environ['SUSY_WORKING_SW_DIR'] + '/'
