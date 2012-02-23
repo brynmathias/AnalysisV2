@@ -90,9 +90,7 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(count_total,selection)
 
   if switches()["selection"]!="muon" :
-    cutTreeMC.TAttach(selection,numComPhotons)
-    cutTreeMC.TAttach(numComPhotons,numComLeptons)
-    cutTreeMC.TAttach(numComLeptons,LeadingJetEta)
+    cutTreeMC.TAttach(selection,LeadingJetEta)
     cutTreeMC.TAttach(LeadingJetEta,badMuonInJet)
     cutTreeMC.TAttach(badMuonInJet,oddJet)
     cutTreeMC.TAttach(oddJet,numComJetsGeq2)
@@ -101,6 +99,8 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
     cutTreeMC.TAttach(MHToverMET,oddElectron)
     cutTreeMC.TAttach(oddElectron,oddPhoton)
+    cutTreeMC.TAttach(oddPhoton,numComPhotons)
+    cutTreeMC.TAttach(numComPhotons,numComLeptons)
 
   else :
     cutTreeMC.TAttach(selection,oddElectron)
@@ -138,7 +138,7 @@ def cutFlow(cutTreeMC, model) :
                             cutTree = cutTreeMC,
                             cut = aTlow,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "MHT_ov_METAlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+                            label2 = "NoLeptonVetos_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
   for slice in alphaTSlices:
      print slice
@@ -147,53 +147,20 @@ def cutFlow(cutTreeMC, model) :
      if slice[1] is not None: 
        aThigh = OP_HadAlphaTCut(slice[1]/100.)
        out.append(aThigh)
-       cutTreeMC.TAttach(secondJetET,aThigh)
+       cutTreeMC.TAttach(numComLeptons,aThigh)
        cutTreeMC.FAttach(aThigh,aTlow)
      else:
-       cutTreeMC.TAttach(secondJetET,aTlow)
+       cutTreeMC.TAttach(numComLeptons,aTlow)
      #Need to do some btagging as well!
      out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = aTlow,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "SecondJetEt_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
-
-  for slice in alphaTSlices:
-     print slice
-     aTlow = OP_HadAlphaTCut(slice[0]/100.)
-     out.append(aTlow)
-     if slice[1] is not None: 
-       aThigh = OP_HadAlphaTCut(slice[1]/100.)
-       out.append(aThigh)
-       cutTreeMC.TAttach(deadECAL_MC,aThigh)
-       cutTreeMC.FAttach(aThigh,aTlow)
-     else:
-       cutTreeMC.TAttach(deadECAL_MC,aTlow)
-     #Need to do some btagging as well!
-     out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = aTlow,
-                            htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "deadECAL_MC_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+                            label2 = "AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
 
-  for slice in alphaTSlices:
-     print slice
-     aTlow = OP_HadAlphaTCut(slice[0]/100.)
-     out.append(aTlow)
-     if slice[1] is not None: 
-       aThigh = OP_HadAlphaTCut(slice[1]/100.)
-       out.append(aThigh)
-       cutTreeMC.TAttach(oddPhoton,aThigh)
-       cutTreeMC.FAttach(aThigh,aTlow)
-     else:
-       cutTreeMC.TAttach(oddPhoton,aTlow)
-     #Need to do some btagging as well!
-     out.append( addBinnedStuff(model = switches()["model"],
-                            cutTree = cutTreeMC,
-                            cut = aTlow,
-                            htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "OddObjects_MC_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+
 
 
 
@@ -271,7 +238,7 @@ from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_
 from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1 import *
 from SUSYSignalScan.SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01 import *
 from SUSYSignalScan.SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02 import *
-from SUSYSignalScan.SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_24_scan_T2bb import *
+from SUSYSignalScan.MS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_25_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_scan_T2bb import *
 from SUSYSignalScan.SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt import *
 def outputDir() :
   #o = "../results_Slices_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
@@ -288,7 +255,7 @@ def sample() :
     if switches()["model"] == "tanB40":return mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1
   elif isSms(switches()["model"]) :
     if switches()["model"] == "T2tt": return SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt
-    if switches()["model"] == "T2bb": return SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_24_scan_T2bb
+    if switches()["model"] == "T2bb": return MS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_25_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_scan_T2bb
     if switches()["model"] == "T2": return SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02
     if switches()["model"] == "T1": return SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01
   else :         return None
