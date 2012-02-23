@@ -90,17 +90,18 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(count_total,selection)
 
   if switches()["selection"]!="muon" :
-    cutTreeMC.TAttach(selection,oddElectron)
-    cutTreeMC.TAttach(oddElectron,oddPhoton)
-    cutTreeMC.TAttach(oddPhoton,numComLeptons)
-    cutTreeMC.TAttach(numComLeptons,numComPhotons)
-    cutTreeMC.TAttach(numComPhotons,LeadingJetEta)
+    cutTreeMC.TAttach(selection,numComPhotons)
+    cutTreeMC.TAttach(numComPhotons,numComLeptons)
+    cutTreeMC.TAttach(numComLeptons,LeadingJetEta)
     cutTreeMC.TAttach(LeadingJetEta,badMuonInJet)
     cutTreeMC.TAttach(badMuonInJet,oddJet)
     cutTreeMC.TAttach(oddJet,numComJetsGeq2)
     cutTreeMC.TAttach(numComJetsGeq2,secondJetET)
     cutTreeMC.TAttach(secondJetET,deadECAL_MC)
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
+    cutTreeMC.TAttach(MHToverMET,oddElectron)
+    cutTreeMC.TAttach(oddElectron,oddPhoton)
+
   else :
     cutTreeMC.TAttach(selection,oddElectron)
     cutTreeMC.TAttach(oddElectron,oddPhoton)
