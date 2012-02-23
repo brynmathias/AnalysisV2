@@ -154,13 +154,13 @@ def cutFlow(cutTreeMC, model) :
 
 
   if switches()["selection"]=="muon" :
-    for btags in [("==",0),("==",1),("==",2),(">",2),(">=",1)]:
-        BtagNoAlphaT = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
-        out.append(BtagNoAlphaT)    
-        MuonEta = OP_AditionalMuonCuts(10.,2.1)
-        MuonPt = OP_LeadingMuonCut(45.)
-        cutTreeMC.TAttach(MHToverMET,MuonPt)   
-        cutTreeMC.TAttach(MuonPt,MuonEta)
+      out.append(BtagNoAlphaT)    
+      MuonEta = OP_AditionalMuonCuts(10.,2.1)
+      MuonPt = OP_LeadingMuonCut(45.)
+      cutTreeMC.TAttach(MHToverMET,MuonPt)   
+      cutTreeMC.TAttach(MuonPt,MuonEta)
+      for btags in [("==",0),("==",1),("==",2),(">",2),(">=",1)]:
+        BtagNoAlphaT = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)        
         cutTreeMC.TAttach(MuonEta,BtagNoAlphaT)
         out.append(MuonEta)
         out.append(MuonPt)
