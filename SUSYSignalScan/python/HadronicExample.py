@@ -121,7 +121,7 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
   
 
-  alphaTSlices = [(55,None),(52,53),(53,55)]
+  alphaTSlices = [(55,None),]
   for slice in alphaTSlices:
      print slice
      aTlow = OP_HadAlphaTCut(slice[0]/100.)
@@ -138,19 +138,77 @@ def cutFlow(cutTreeMC, model) :
                             cutTree = cutTreeMC,
                             cut = aTlow,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
-                            label2 = "AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+                            label2 = "MHT_ov_METAlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+  for slice in alphaTSlices:
+     print slice
+     aTlow = OP_HadAlphaTCut(slice[0]/100.)
+     out.append(aTlow)
+     if slice[1] is not None: 
+       aThigh = OP_HadAlphaTCut(slice[1]/100.)
+       out.append(aThigh)
+       cutTreeMC.TAttach(secondJetET,aThigh)
+       cutTreeMC.FAttach(aThigh,aTlow)
+     else:
+       cutTreeMC.TAttach(secondJetET,aTlow)
+     #Need to do some btagging as well!
+     out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = aTlow,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "SecondJetEt_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+  for slice in alphaTSlices:
+     print slice
+     aTlow = OP_HadAlphaTCut(slice[0]/100.)
+     out.append(aTlow)
+     if slice[1] is not None: 
+       aThigh = OP_HadAlphaTCut(slice[1]/100.)
+       out.append(aThigh)
+       cutTreeMC.TAttach(deadECAL_MC,aThigh)
+       cutTreeMC.FAttach(aThigh,aTlow)
+     else:
+       cutTreeMC.TAttach(deadECAL_MC,aTlow)
+     #Need to do some btagging as well!
+     out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = aTlow,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "deadECAL_MC_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
 
-     for btags in [("==",0),("==",1),("==",2),(">",2)]:
-         if slice[0]!= 55: continue
-         btag = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
-         out.append(btag)
-         cutTreeMC.TAttach(aTlow,btag)
-         out.append( addBinnedStuff(model = switches()["model"],
-                                cutTree = cutTreeMC,
-                                cut = btag,
-                                htBins = [275, 325] + [375+100*i for i in range(6)],
-                                label2 = "btag_%s_%i_AlphaT%d_%s"%(btags[0],btags[1],int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+  for slice in alphaTSlices:
+     print slice
+     aTlow = OP_HadAlphaTCut(slice[0]/100.)
+     out.append(aTlow)
+     if slice[1] is not None: 
+       aThigh = OP_HadAlphaTCut(slice[1]/100.)
+       out.append(aThigh)
+       cutTreeMC.TAttach(oddPhoton,aThigh)
+       cutTreeMC.FAttach(aThigh,aTlow)
+     else:
+       cutTreeMC.TAttach(oddPhoton,aTlow)
+     #Need to do some btagging as well!
+     out.append( addBinnedStuff(model = switches()["model"],
+                            cutTree = cutTreeMC,
+                            cut = aTlow,
+                            htBins = [275, 325] + [375+100*i for i in range(6)],
+                            label2 = "OddObjects_MC_AlphaT%d_%s"%(int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
+
+
+
+
+
+     # for btags in [("==",0),("==",1),("==",2),(">",2)]:
+     #     if slice[0]!= 55: continue
+     #     btag = OP_NumCommonBtagJets(btags[0],5,btags[1],0.679)
+     #     out.append(btag)
+     #     cutTreeMC.TAttach(aTlow,btag)
+     #     out.append( addBinnedStuff(model = switches()["model"],
+     #                            cutTree = cutTreeMC,
+     #                            cut = btag,
+     #                            htBins = [275, 325] + [375+100*i for i in range(6)],
+     #                            label2 = "btag_%s_%i_AlphaT%d_%s"%(btags[0],btags[1],int(slice[0]), "" if slice[1] is None else "%d_"%int(slice[1])),extra = MChiCut))
 
 
 
