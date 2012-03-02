@@ -5,8 +5,8 @@ ROOTSYS_INC=$(ROOTSYS)/include
 ROOTSYS_LIB=$(ROOTSYS)/lib
 ROOTSYS_BIN=$(ROOTSYS)/bin
 
-PYTHON_INC=/System/Library/Frameworks/Python.Framework/Versions/2.6/include/python2.6
-PYTHON_LIB=-lpython2.6
+PYTHON_INC=/System/Library/Frameworks/Python.Framework/Versions/2.7/include/python2.7
+PYTHON_LIB=-lpython2.7
 
 ROOT_EXTRA_LIBS=-lMathCore -lMathMore -lGenVector
 BOOST_PYTHON_LIB=-lboost_python-mt
