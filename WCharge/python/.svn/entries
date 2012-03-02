@@ -1,14 +1,14 @@
 10
 
 dir
-3575
+3690
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/WCharge/python
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2010-10-25T22:53:32.414358Z
-1389
+2012-02-03T12:38:16.510550Z
+3635
 mjarvis
 
 
@@ -25,6 +25,108 @@ mjarvis
 
 
 53b2a5e2-b89b-4778-b471-5fcb16a2c67a
+
+SingleElectron_Run2011A_PromptReco_v4_268.py
+file
+
+
+
+
+2012-03-02T15:21:45.000000Z
+cbeeafc5f97caea125096c115675d62d
+2012-02-03T12:38:16.510550Z
+3635
+mjarvis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+33664
+
+SingleElectron_Run2011A_PromptReco_v4_299.py
+file
+
+
+
+
+2012-03-02T15:21:45.000000Z
+d4248c2303613ae444a3cc061a11d187
+2012-02-03T12:38:16.510550Z
+3635
+mjarvis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4037
+
+SingleElectron_Run2011A_PromptReco_v4_213.py
+file
+
+
+
+
+2012-03-02T15:21:45.000000Z
+3aa24b585998834ca582a700a8798b4e
+2012-02-03T12:38:16.510550Z
+3635
+mjarvis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+12952
 
 PFJetCorrections.py
 file
@@ -60,6 +162,108 @@ has-props
 
 531
 
+SingleElectron_Run2011A_May10ReReco_v1.py
+file
+
+
+
+
+2012-03-02T15:21:45.000000Z
+035402e6ffed0d3911fd259425b3d0d5
+2012-02-03T12:38:16.510550Z
+3635
+mjarvis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+86759
+
+SingleElectron_Run2011A_PromptReco_v4_245.py
+file
+
+
+
+
+2012-03-02T15:21:45.000000Z
+c9e66a607c61364d62145bf44dd6bcc1
+2012-02-03T12:38:16.510550Z
+3635
+mjarvis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+14765
+
+SingleElectron_Run2011A_PromptReco_v4_228.py
+file
+
+
+
+
+2012-03-02T15:21:45.000000Z
+ed8608fc12ceefd075a4e856c4d2a7af
+2012-02-03T12:38:16.510550Z
+3635
+mjarvis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+23764
+
 Spring10DataV2_L2L3Residual_AK5PF.txt
 file
 
@@ -93,4 +297,38 @@ mjarvis
 
 
 3298
+
+SingleElectron_Run2011A_PromptReco_v4_285.py
+file
+
+
+
+
+2012-03-02T15:21:45.000000Z
+af13d0662ecfa3401d59048154693ab1
+2012-02-03T12:38:16.510550Z
+3635
+mjarvis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+23167
 

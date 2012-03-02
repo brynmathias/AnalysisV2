@@ -177,7 +177,7 @@ default_common.Photons.RequireLooseForOdd = True
 
 from icf.JetCorrections import *
 corPset =  CorrectionPset("ResidualJetEnergyCorrections.txt")
-# corPset =  CorrectionPset("Spring10DataV2_L2L3Residual_AK5PF.txt")
+corPset =  CorrectionPset("Spring10DataV2_L2L3Residual_AK5PF.txt")
 JetCorrections = JESCorrections( corPset.ps() ,True)
 NoiseFilt= OP_HadronicHBHEnoiseFilter()
 selection = OP_GoodEventSelection()
@@ -740,6 +740,8 @@ sample = MuHad_L1Offset
 outDir = "../L1Offset/ht%dNoUpper/"%(bin)
 sample = MuHad2011AB
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
+
+sample.File = "../CMSSM_Tanb10_1800_280.root"
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 sample = HTRun2011AB
 

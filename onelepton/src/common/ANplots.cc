@@ -19,6 +19,11 @@ void ANplots::Start(Event::Data & ev) {
 
 void ANplots::BookHistos() {
   TH1::SetDefaultSumw2(kTRUE);
+
+
+  NPV_NoWeight = new TH1D("NPV_NoWeight","NPV_NoWeight",40,-0.5,39.5);
+  NPV_AfterWeight = new TH1D("NPV_AfterWeight","NPV_NoWeight",40,-0.5,39.5);
+
   ZmassmuRaw = new TH1D("Zmass",";Z mass GeV;",200,0,400); 
   Zmassmu = new TH1D("ZmassoppSign",";Z mass GeV;",200,0,400); 
   Zmassmu_pos = new TH1D("ZmassoppSign_pos",";Z mass GeV;",200,0,400); 
@@ -211,7 +216,10 @@ bool ANplots::Process(Event::Data & ev) {
   } 
 
 
-  
+  NPV_NoWeight->Fill(ev.GetVertexSize());
+  NPV_AfterWeight->Fill(ev.GetVertexSize(),ev.GetEventWeight());
+ 
+
   // define variables
   LorentzV pfMHT = ev.PFMET() + *(theRECOLepton.at(0));
   double LP = ((theRECOLepton.at(0)->Px() * pfMHT.Px()) + (theRECOLepton.at(0)->Py() * pfMHT.Py())) / (pfMHT.Pt() * pfMHT.Pt());
@@ -425,6 +433,7 @@ bool ANplots::Process(Event::Data & ev) {
 	}
 																										  
     }
+
 
 
    return true;

@@ -332,6 +332,41 @@ namespace Operation {
 
 
 
+
+  class nGenElectrons : public Operation::_Base
+  {
+  public:
+    nGenElectrons (const std::string&, UInt_t, double, double);
+    ~nGenElectrons();
+    bool Process( Event::Data& );
+    std::ostream& Description( std::ostream& );
+  private:
+    int nGenLeptons;
+    Operation::_Compare<UInt_t> *mComparison;
+    double etaCut_;
+    double ptCut_;
+      
+  };
+
+
+  class nGenMuons : public Operation::_Base
+  {
+  public:
+    nGenMuons (const std::string&, UInt_t, double, double);
+    ~nGenMuons();
+    bool Process( Event::Data& );
+    std::ostream& Description( std::ostream& );
+  private:
+    int nGenLeptons;
+    Operation::_Compare<UInt_t> *mComparison;
+    double etaCut_;
+    double ptCut_;
+      
+  };
+
+
+
+
 }
 
 #endif // hadronic_include_HadronicOps_hh

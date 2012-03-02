@@ -65,10 +65,10 @@ trg_set5 = PSet(
                 "HLT_Mu60_HT300*", ##5e33 - backUp
                 "HLT_HT300_Mu15_PFMHT40*", ##5e33
                 "HLT_HT300_Mu15_PFMHT50*", ##5e33 - backUp
-#                "HLT_HT350_Mu5_PFMHT45*", ##5e33
-#                "HLT_HT400_Mu5_PFMHT50*", ##5e33
-#                "HLT_HT300_Mu5_PFMHT40_v*", #2e33
-#                "HLT_HT350_Mu5_PFMHT45_v*" #2e33
+                ##                "HLT_HT350_Mu5_PFMHT45*", ##5e33
+                ##                "HLT_HT400_Mu5_PFMHT50*", ##5e33
+                ##                "HLT_HT300_Mu5_PFMHT40_v*", #2e33
+                ##                "HLT_HT350_Mu5_PFMHT45_v*" #2e33
                 ],
     Verbose = False,
     UsePreScaledTriggers = False
@@ -147,7 +147,6 @@ etrg_RA4sync_May10 = PSet(
 
 json = JSONFilter("Cert_160404-165542",
                   json_to_pset("%s/onelepton/json/Json_Latest.txt" % susyDir()))
-#                  json_to_pset("%s/onelepton/json/Cert_160404-163869_7TeV_May10ReReco_Collisions11_JSON_v3.txt" % susyDir())) ## for EleHad RA4 Sync exercise
 
 
 triggerData4X = OP_MultiTrigger(trg_set2.ps())
@@ -169,7 +168,7 @@ etriggerData42X_2011Full = OP_MultiTrigger(etrg_setFull.ps())
 
 triggerSyncMuHad = OP_MultiTrigger(trg_setSynch.ps())
 
-triggerMuMC =  OP_MultiTrigger(trg_setSynchMC.ps())
+#triggerMuMC =  OP_MultiTrigger(trg_setSynchMC.ps())
 
 etrigger_RA4sync_May10 = OP_MultiTrigger(etrg_RA4sync_May10.ps())
 
@@ -252,7 +251,7 @@ LessThan4Jts = OP_NumComJets("<",4)
 LessThan3Jts = OP_NumComJets("<",3)
 MonsterFilter = OP_MonsterFilter()
 
-NumOfGenLeptons = OP_GenNumberLepCut(1)
+NumOfGenLeptons = OP_GenNumberLepCut(2)
 PrintRunLSEvent = OP_PrintRunLSEvent()
 
 #SecondJetEtCut60 = OP_SecondJetEtCut(60.)
@@ -268,6 +267,13 @@ mu_fillLightTree_cfg = PSet(
     )
 AnalysisTree_Mu = AnalysisTree_HighPt("MuonTree", mu_fillLightTree_cfg.ps())
 
+mu_fillLightTree_data_cfg = PSet(
+    LeptonType = "Muons",
+    MinNumOfObjs = 2,
+    MaxNumOfObjs = 10,
+    GenInfo = False ## False for DATA, True for MC
+    )
+AnalysisTree_Mu_Data = AnalysisTree_HighPt_Data("MuonTree", mu_fillLightTree_data_cfg.ps())
 
 el_fillLightTree_cfg = PSet(
     LeptonType = "Electrons",
@@ -391,8 +397,8 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
 
     # 311 MC needs to be reweighted accoring to vertex multiplicity
     # see onelepton/python/onelepton/filters.py
-    if mode == "MC311" or mode == "MC42ttw_Z41" or mode == "MC42QCD" or mode == "MCskims":
-        vert = reweightVertices(a)
+    if mode == "MC311" or mode == "MC42ttw_Z41" or mode == "MC42QCD" or mode == "MCskims" or mode == "MC_Summer11" or mode == "MC_Fall11" or mode == "MCGrid" or mode == "SMS":
+        vert = reweightVertices(a,mode)
         filters += [vert]
 
     if mode == "MCGrid": filters += setupSUSYWeighting(a)
@@ -432,18 +438,14 @@ def setupMuonPreselection(MET, name, mode, less_than_3jets=False):
         # Attach a BSM grid before any cuts have been applied so that we can
         # calculate signal efficiency for limit setting
         (bsmgrid, store) = tripleScale(cutTree = tree, label = "NoCuts", SM=False)
-        tree.Attach(bsmgrid)
+        #tree.Attach(bsmgrid)
         tree.TAttach(bsmgrid, selection)
         filters += store
     else:
         tree.Attach(myCountsAndBSMGrids_Json)
-        tree.TAttach(myCountsAndBSMGrids_Json,triggerMuMC)
-        tree.TAttach(triggerMuMC,myCountsAndBSMGrids_Trigger)
-        tree.TAttach(myCountsAndBSMGrids_Trigger,tt_Pythia6_Cut)
-        tree.TAttach(tt_Pythia6_Cut,myCountsAndBSMGrids_pythiabug)
-        tree.TAttach(myCountsAndBSMGrids_pythiabug,MonsterFilter)
-        tree.TAttach(MonsterFilter,myCountsAndBSMGrids_Monster)
-        tree.TAttach(myCountsAndBSMGrids_Monster,selection)
+        tree.TAttach(myCountsAndBSMGrids_Json,myCountsAndBSMGrids_Trigger)
+        tree.TAttach(myCountsAndBSMGrids_Trigger,myCountsAndBSMGrids_pythiabug)
+        tree.TAttach(myCountsAndBSMGrids_pythiabug,selection)
 
 
 
@@ -573,8 +575,8 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
         filters += [JetCorrections]
     # 311 MC needs to be reweighted accoring to vertex multiplicity
     # see onelepton/python/onelepton/filters.py
-    if mode == "MC311" or mode == "MC42ttw_Z41" or mode == "MC42QCD" or mode == "MCskims":
-        vert = reweightVertices(a)
+    if mode == "MC311" or mode == "MC42ttw_Z41" or mode == "MC42QCD" or mode == "MCskims" or mode == "MC_Summer11" or mode == "MC_Fall11" or mode == "MCGrid" or mode == "SMS":
+        vert = reweightVertices(a,mode)
         filters += [vert]
 
     if mode == "MCGrid": filters += setupSUSYWeighting(a)
@@ -632,13 +634,14 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
     tree.TAttach(RA2TrackingFailureFilterCut,myCountsAndBSMGrids_track)
     tree.TAttach(myCountsAndBSMGrids_track,RA2ecaldeadcellfilterflagCut)
     tree.TAttach(RA2ecaldeadcellfilterflagCut,myCountsAndBSMGrids_RA2TPflag)
-
-
+    tree.TAttach(myCountsAndBSMGrids_RA2TPflag,ElHad_Cut_TP)
+    tree.TAttach(ElHad_Cut_TP,myCountsAndBSMGrids_TP)
+    tree.TAttach(myCountsAndBSMGrids_TP,ElHad_Cut_BE)
+    tree.TAttach(ElHad_Cut_BE,myCountsAndBSMGrids_BE)
+    tree.TAttach(myCountsAndBSMGrids_BE,AtLeast2Jts)
+    tree.TAttach(AtLeast2Jts,myCountsAndBSMGrids_2jets)
+    
     ### FOR SYCHRONIZATION######################################
-    # tree.TAttach(myCountsAndBSMGrids_RA2TPflag,ElHad_Cut_TPandBE)
-    # tree.TAttach(ElHad_Cut_TPandBE,myCountsAndBSMGrids_TP)
-    # tree.TAttach(myCountsAndBSMGrids_TP,AtLeast2Jts)
-    # tree.TAttach(AtLeast2Jts,myCountsAndBSMGrids_2jets)
     # tree.TAttach(myCountsAndBSMGrids_2jets,AtLeast3JtsSync)
     # tree.TAttach(AtLeast3JtsSync,myCountsAndBSMGrids_3jets)
     # tree.TAttach(myCountsAndBSMGrids_3jets,AtLeast4Jts)
@@ -660,9 +663,10 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
     ################################################################
 
 
-    tree.TAttach(myCountsAndBSMGrids_RA2TPflag,OneEl)
+    tree.TAttach(myCountsAndBSMGrids_2jets,OneEl)
     if qcd_antiselection:
         tree.TAttach(OneEl,ZeroLooseMu)
+        tree.TAttach(ZeroLooseMu,ZeroMu)
     else:
         tree.TAttach(OneEl,ZeroLooseEl)
         tree.TAttach(ZeroLooseEl,ZeroLooseMu)
@@ -695,16 +699,16 @@ def setupElectronPreselection(MET, name, mode, less_than_3jets=False, qcd_antise
             # tree.TAttach(ElHad_PromptB_v1_Cut_TP,AtLeast4Jts)
             
         elif mode == "data42X_Run2011Full":
-            tree.TAttach(RECO_CommonHTCut500,ElHad_Cut_TPandBE)
-            tree.TAttach(ElHad_Cut_TPandBE,myCountsAndBSMGrids_TP)
-            tree.TAttach(myCountsAndBSMGrids_TP,AtLeast3Jts)
+            tree.TAttach(RECO_CommonHTCut500,AtLeast3Jts)
+            #            tree.TAttach(RECO_CommonHTCut500,ElHad_Cut_TPandBE)
+            #            tree.TAttach(ElHad_Cut_TPandBE,myCountsAndBSMGrids_TP)
+            #            tree.TAttach(myCountsAndBSMGrids_TP,AtLeast3Jts)
             #            tree.TAttach(AtLeast3Jts,AnalysisTree_El_Data)
             # tree.TAttach(ElHad_allBE_deadecal_Cut,AtLeast4Jts)
             
         else:
             tree.TAttach(RECO_CommonHTCut500, AtLeast3Jts)
-            #            tree.TAttach(RECO_CommonHTCut500, NumOfGenLeptons)
-            #            tree.TAttach(NumOfGenLeptons, AtLeast3Jts)
+            #            tree.TAttach(AtLeast3Jts, NumOfGenLeptons)
             #            tree.TAttach(AtLeast3Jts , AnalysisTree_El)
             # tree.TAttach(RECO_CommonHTCut500, AtLeast4Jts)
             

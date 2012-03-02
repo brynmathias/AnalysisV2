@@ -1179,5 +1179,6 @@ QCD_TuneZ2_HT_100To250_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1_V15_04_00_jet
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_18_59_34/QCD_TuneZ2_HT-100To250_7TeV-madgraph.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_99_0_tZn.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_18_59_34/QCD_TuneZ2_HT-100To250_7TeV-madgraph.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_9_1_mGc.root" ,
 	],
-Weight=1.0,
+	CrossSection=4194000.0,
+    Events = 2.33047e+07,
 )

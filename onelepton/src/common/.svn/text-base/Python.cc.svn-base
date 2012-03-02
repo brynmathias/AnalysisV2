@@ -43,7 +43,7 @@ BOOST_PYTHON_MODULE(libOneLepton) {
  class_<OneLepton::CustomEleIdRA4Sync, bases<Compute::ObjectFilter<Event::Lepton> > >("CustomEleIdRA4Sync",init<const Utils::ParameterSet &>());
 
   class_<OneLepton::CustomMuId, bases<Compute::ObjectFilter<Event::Lepton> > >("CustomMuId",init<float,int,int>());
-  class_<OneLepton::CustomVBTFMuID, bases<Compute::ObjectFilter<Event::Lepton> > >("CustomVBTFMuID",init<const Utils::ParameterSet &>());
+  class_<OneLepton::CustomVBTFMuID, bases<Compute::ObjectFilter<Event::Lepton> > >("OL_CustomVBTFMuID",init<const Utils::ParameterSet &>());
 
 
   class_<Operation::HTPTCut, bases<Operation::_Base> >("OP_HTPTCut",
@@ -59,6 +59,8 @@ BOOST_PYTHON_MODULE(libOneLepton) {
   class_<Operation::GenNumberLepCut, bases<Operation::_Base> >("OP_GenNumberLepCut",							       init<int>());
   class_<Operation::PrintAlphaTEvents, bases<Operation::_Base> >("PrintAlphaTEvents");
   class_<Operation::UpperMuPtCut, bases<Operation::_Base> >("OP_UpperMuPtCut",init<float>() );
+  class_<Operation::LowerMuPtCut, bases<Operation::_Base> >("OP_LowerMuPtCut",init<float>() );
+
   class_<Operation::UpperElePtCut, bases<Operation::_Base> >("OP_UpperElePtCut",init<float>() );
   class_<Operation::MuJetVeto, bases<Operation::_Base> >("OP_MuJetVeto",init<float>());
 
@@ -91,6 +93,10 @@ BOOST_PYTHON_MODULE(libOneLepton) {
                                                                             init<const Utils::ParameterSet &>());
   class_<OneLepton::pfMETLeptonScale, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETLeptonScale",
                                                                             init<const Utils::ParameterSet &>());
+
+  class_<OneLepton::pfMETLeptonScaleRA4, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETLeptonScaleRA4",
+                                                                            init<const Utils::ParameterSet &>());
+
   class_<OneLepton::METResSmearNaive, bases<Compute::ObjectFilter<ICF_LorentzV> > >("METResSmearNaive",
                                                                                       init<const std::string, double, double>());
   class_<OneLepton::SystematicsPlots, bases<Operation::_Base> >("SystematicsPlots",init<const std::string &,const Utils::ParameterSet &>());

@@ -1,4 +1,4 @@
-#include "common/style.C"
+#include "style.C"
 #include <TCanvas.h>
 #include <TDirectory.h>
 #include <TFile.h>
@@ -51,32 +51,44 @@ void poissonErr( double x, double& errh, double& errl ) {
 
   // from http://www.slac.stanford.edu/BFROOT/www/Statistics/Report/report.pdf
   
-  double poisson_eh[10] = { 1.15, 1.36, 1.53, 1.73, 1.98, 2.21, 2.42, 2.61, 2.80, 3.00 };
-  double poisson_el[10] = { 0.00, 1.00, 2.00, 2.14, 2.30, 2.49, 2.68, 2.86, 3.03, 3.19 };
+  double poisson_eh[11] = { 1.15, 1.36, 1.53, 1.73, 1.98, 2.21, 2.42, 2.61, 2.80, 3.00, 3.16 };
+  double poisson_el[11] = { 0.00, 1.00, 2.00, 2.14, 2.30, 2.49, 2.68, 2.86, 3.03, 3.19, 3.16 };
   if ( x < 10. ) {
     // Poisson errors
     int n = int(x);
     double f = x - double(int(x));
     errh = poisson_eh[n] + f*( poisson_eh[n+1] - poisson_eh[n] );
     errl = poisson_el[n] + f*( poisson_el[n+1] - poisson_el[n] );
+//     std::cout << std::fixed
+// 	      << std::setprecision(2)
+// 	      << " x: " << x
+// 	      << " n: " << n
+// 	      << " f: " << f
+// 	      << " poisson_eh[n]: " << poisson_eh[n]
+// 	      << " poisson_eh[n+1]: " << poisson_eh[n+1]
+// 	      << " errh: " << errh
+// 	      << " poisson_el[n]: " << poisson_el[n]
+// 	      << " poisson_el[n+1]: " << poisson_el[n+1]
+// 	      << " errl: " << errl
+// 	      << std::endl;
   } else {
     // Normal approximation
-    errh = sqrt(x);
-    errl = sqrt(x);
+    errh = -1.;//sqrt(x);
+    errl = -1.;//sqrt(x);
   }
 
 }
 
-double poissonErrH( double x ) {
+double poissonErrH( double x, double e ) {
   double errh = 0., errl = 0.;
   poissonErr(x,errh,errl);
-  return errh;
+  return errh<-1.e-6?e:errh;
 }
 
-double poissonErrL( double x ) {
+double poissonErrL( double x, double e ) {
   double errh = 0., errl = 0.;
   poissonErr(x,errh,errl);
-  return errl;
+  return errl<-1.e-6?e:errl;
 }
 
 // -----------------------------------------------------------------------------
@@ -540,6 +552,7 @@ TH1D* rebin( TFile* file, const char* name, int multi, double width, double xlow
   
   // Create new rebinned histogram
   TH1D* output = new TH1D( TString(input->GetName())+"_Rebinned", "", int((xhigh+width-xlow)/width), xlow, xhigh+width );
+  output->Sumw2();
   
   // Populate new histogram
   for ( int bin = 1; bin <= input->GetNbinsX(); ++bin ) {
@@ -551,8 +564,6 @@ TH1D* rebin( TFile* file, const char* name, int multi, double width, double xlow
     Double_t centre = output->GetBinLowEdge(output->GetNbinsX()) + output->GetBinWidth(output->GetNbinsX())/2.;
     output->Fill( centre, input->GetBinContent(output->GetNbinsX()+1) );
   }
-  
-  output->Sumw2();
   
   if (true) {
     if ( input ) {
@@ -659,7 +670,7 @@ TH1D* rebinNew( TFile* file, TString name, int multi ) {
   if ( input ) { 
     //std::cout << "Retrieved histogram with name \"" << input->GetName() << "\"" << std::endl;
   } else {
-    //std::cout << "Unable to retrieve histogram with name \"" << name << "\"" << std::endl;
+    std::cout << "Unable to retrieve histogram with name \"" << name << "\"" << std::endl;
     return 0; 
   }
 
@@ -761,6 +772,7 @@ TH1D* rebinNew( TFile* file, TString name, int multi ) {
 
   // Populate new histogram
   if (!output) output = input;
+  //output->Sumw2();
   for ( int bin = 1; bin <= output->GetNbinsX(); ++bin ) {
     Double_t centre = output->GetBinLowEdge(bin) + output->GetBinWidth(bin)/2.;
     int find_bin = input->FindBin(centre);
@@ -899,7 +911,7 @@ void calcRatio( const uint nfile,
  		IntVVV& length,
 		std::string& label,
 		bool efficiency = false,
-		bool use_sumw2 = true,
+		int use_sumw2 = 1,
 		int data_file = -1 ) {
 
   std::vector<double> seff;
@@ -1014,6 +1026,14 @@ void calcRatio( const uint nfile,
 	  TH1D* above = rebinNew( file, TString(post.str()), multi[imulti] );
 	  TH1D* below = rebinNew( file, TString(pre.str()), multi[imulti] );
 	  
+	  //@@ ALPHA_T SLICES PLUS LAST INCLUSIVE BIN
+	  if ( iat+1 < nat ) {
+	    std::stringstream post1;
+	    post1 << dir.str() << name.str() << at[iat+1];
+	    TH1D* above1 = rebinNew( file, TString(post1.str()), multi[imulti] );
+	    above->Add(above1,-1.);
+	  }
+
 	  if ( above && (int)ht.size() < nht-1 ) {
 	    int nbins = above->GetXaxis()->GetNbins();
 	    nbins = nbins<nht?nbins:nht; //@@ check nbins does not exceed max
@@ -1036,28 +1056,28 @@ void calcRatio( const uint nfile,
 
 	    if ( efficiency == false ) { below->Add(above,-1.); }
 	      
-	    // 	      if ( true ) { 
-	    // 		std::cout << " CONTENTS: file: " << files[ifile][jfile] 
-	    // 			  << " multi: " << multi[imulti]
-	    // 			  << " aT:" << at[iat]
-	    // 			  << "  HT:" << ht[ipt]
-	    // 			  << " n: " 
-	    // 			  << above->GetBinContent(ipt+1) 
-	    // 			  << " ne: " 
-	    // 			  << above->GetBinError(ipt+1) 
-	    // 			  << " d: " 
-	    // 			  << below->GetBinContent(ipt+1) 
-	    // 			  << " de: " 
-	    // 			  << below->GetBinError(ipt+1) 
-	    // 			  << std::endl;
-	    // 	      }
+// 	    	      if ( true ) { 
+// 	    		std::cout << " CONTENTS: file: " << files[ifile][jfile] 
+// 	    			  << " multi: " << multi[imulti]
+// 	    			  << " aT:" << at[iat]
+// 	    			  << "  HT:" << ht[iht]
+// 	    			  << " n: " 
+// 	    			  << above->GetBinContent(iht+1) 
+// 	    			  << " ne: " 
+// 	    			  << above->GetBinError(iht+1) 
+// 	    			  << " d: " 
+// 	    			  << below->GetBinContent(iht+1) 
+// 	    			  << " de: " 
+// 	    			  << below->GetBinError(iht+1) 
+// 	    			  << std::endl;
+// 	    	      }
 	    
 // 	    double bw  = 1.;
 	    for ( int iht = 0; iht < nht; ++iht ) {
 	      
 	      //@@ If no entries in any bins, no weight can be determined. (Likely the sample is QCD, with no QCD in numerator)
 
-	      bool other = true;
+	      bool other = false;
 
 	      double a   = above->GetBinContent(iht+1);
 	      double ae  = above->GetBinError(iht+1);
@@ -1066,23 +1086,28 @@ void calcRatio( const uint nfile,
 	      double aeh = ae;
 	      double ael = ae;
 
-	      for ( int jht = 0; jht < nht; ++jht ) {
-		double aa = above->GetBinContent((iht+jht+1)%nht);
-		double ee = above->GetBinError((iht+jht+1)%nht);
-		if ( aa > 0. ) { aw = (ee*ee)/aa; break; } 
-	      } 
-	      
-	      if ( !use_sumw2 ) { 
-		an = a;
-		ae = sqrt(a);
-		aeh = a > 10. ? ae : poissonErrH(a);
-		ael = a > 10. ? ae : poissonErrL(a);
-	      } else if ( aw > 0. ) {
-		an  = a/aw;
-		aeh = an > 10. ? ae : ( other ? poissonErrH(a) : aw * poissonErrH(an) );
-		ael = an > 10. ? ae : ( other ? poissonErrL(a) : aw * poissonErrL(an) );
+ 	      for ( int jht = 0; jht < nht; ++jht ) {
+		int bin = ((iht-jht)%nht); bin += bin<0?nht:0;
+ 		double aa = above->GetBinContent(bin+1);
+ 		double ee = above->GetBinError(bin+1);
+ 		if ( aa > 0. ) { aw = (ee*ee)/aa; break; } 
+ 	      }
+
+ 	      if ( use_sumw2 == 0 ) { 
+ 		an = a;
+ 		ae = sqrt(a);
+ 		aeh = a > 10. ? ae : poissonErrH(a,ae);
+ 		ael = a > 10. ? ae : poissonErrL(a,ae);
+ 	      } else if ( use_sumw2 == 1 && aw > 0. ) {
+ 		an  = a/aw;
+ 		aeh = an > 10. ? ae : ( other ? poissonErrH(a,ae) : aw * poissonErrH(an,ae) );
+ 		ael = an > 10. ? ae : ( other ? poissonErrL(a,ae) : aw * poissonErrL(an,ae) );
+ 	      } else if ( use_sumw2 == 2 && aw > 0. ) {
+ 		an  = a/aw;
+		aeh = a > 0. ? ae : aw*poissonErrH(a,ae);
+		ael = a > 0. ? ae : aw*poissonErrL(a,ae);
 	      }
-	      
+
 	      double b   = below->GetBinContent(iht+1);
 	      double be  = below->GetBinError(iht+1);
 	      double bw  = -1.;
@@ -1090,7 +1115,7 @@ void calcRatio( const uint nfile,
 	      double beh = be;
 	      double bel = be;
 
-	      for ( int jht = 0; jht < nht; ++jht ) {
+ 	      for ( int jht = 0; jht < nht; ++jht ) {
 		double bb  = below->GetBinContent((iht+jht+1)%nht);
 		double ee = below->GetBinError((iht+jht+1)%nht);
 		if ( bb > 0. ) { bw = (ee*ee)/bb; break; } 
@@ -1099,12 +1124,12 @@ void calcRatio( const uint nfile,
 	      if ( !use_sumw2 ) { 
 		bn = b;
 		be = sqrt(b);
-		beh = b > 10. ? be : poissonErrH(b);
-		bel = b > 10. ? be : poissonErrL(b);
+		beh = b > 10. ? be : poissonErrH(b,be);
+		bel = b > 10. ? be : poissonErrL(b,be);
 	      } else if ( bw > 0. ) {
 		bn  = b/bw;
-		beh = bn > 10. ? be : ( other ? poissonErrH(b) : bw * poissonErrH(bn) );
-		bel = bn > 10. ? be : ( other ? poissonErrL(b) : bw * poissonErrL(bn) );
+		beh = bn > 10. ? be : ( other ? poissonErrH(b,be) : bw * poissonErrH(bn,be) );
+		bel = bn > 10. ? be : ( other ? poissonErrL(b,be) : bw * poissonErrL(bn,be) );
 	      }
 
 	      numer[ifile][imulti][iat][iht]      += a;
@@ -1114,28 +1139,29 @@ void calcRatio( const uint nfile,
 	      denom_errh[ifile][imulti][iat][iht] += beh*beh;
 	      denom_errl[ifile][imulti][iat][iht] += bel*bel;
 
-// 	      std::cout << " ifile: " << ifile
-// 			<< " jfile: " << jfile
-// 			<< " file: " << short_name
-// 			<< " imulti: " << imulti
-// 			<< " iat: " << iat
-// 			<< " iht: " << iht
-// 			<< " a: " << a
-//  			<< " ae: " << ae
-// //  			<< " seh: " << sqrt(numer_errh[ifile][imulti][iat][iht])
-// //  			<< " sel: " << sqrt(numer_errl[ifile][imulti][iat][iht])
-//  			<< " aw: " << aw
-//  			<< " an: " << an
-// 			<< " aeh: " << aeh
-// 			<< " ael: " << ael
-// // 			<< " r: " << (a>0.?aeh/a:0.)
-// // 			<< " b: " << b
-// // 			<< " e: " << be
-// // 			<< " w: " << bw
-// // 			<< " n: " << bn
-// // 			<< " eh: " << beh
-// // 			<< " el: " << bel
-// 			<< std::endl;
+	      std::cout << " ifile: " << ifile
+			<< " jfile: " << jfile
+			<< " file: " << short_name
+			<< " imulti: " << imulti
+			<< " iat: " << iat
+			<< " iht: " << iht
+			<< " a: " << a
+ 			<< " ae: " << ae
+//  			<< " seh: " << sqrt(numer_errh[ifile][imulti][iat][iht])
+//  			<< " sel: " << sqrt(numer_errl[ifile][imulti][iat][iht])
+ 			<< " aw: " << aw
+ 			<< " an: " << an
+			<< " aeh: " << aeh
+			<< " ael: " << ael
+			<< " sumw2?: " << use_sumw2
+// 			<< " r: " << (a>0.?aeh/a:0.)
+// 			<< " b: " << b
+// 			<< " e: " << be
+// 			<< " w: " << bw
+// 			<< " n: " << bn
+// 			<< " eh: " << beh
+// 			<< " el: " << bel
+			<< std::endl;
 	      
 	    } 
 	  }
@@ -1169,7 +1195,7 @@ void calcRatio( const uint nfile,
 	    
 	  // Trigger efficiencies
 	  if ( trigger_effs && data_file > -1 ) {
-	    std::cout << " get here 0: " << a << std::endl;
+	    //std::cout << " get here 0: " << a << std::endl;
 	    double n  = 0.;
 	    double eh = 0.;
 	    double el = 0.;
@@ -1191,9 +1217,9 @@ void calcRatio( const uint nfile,
 	      calcErr( n, eh, el, b, beh, bel, beff[iht], beffh[iht], beffl[iht] ); 
 	      b = n; beh = eh; bel = el;
 	    }
-	    std::cout << " get here 1: " << a << std::endl;
+	    //std::cout << " get here 1: " << a << std::endl;
 	  } else {
-	    std::cout << " get here 2: " << std::endl;
+	    //std::cout << " get here 2: " << std::endl;
 	  }
 
 	  numer[ifile][imulti][iat][iht]      = a;

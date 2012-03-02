@@ -5,5 +5,5 @@ Summer11_PU_S4_START42_V11_v1_AODSIM_V15_04_00_jetCorrections_L1Offset_L2Relativ
 	Format=("ICF",3),
 	File=[
 	],
-	CrossSection=0,
+Weight=1.0,
 )

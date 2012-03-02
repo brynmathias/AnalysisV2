@@ -5,8 +5,9 @@ echo " Setting up your environment..."
 echo "================================"
 #-----------------------------------------------------------------------------
 # Set your ROOTSYS and PYTHONDIR here
-export SUSY_WORKING_SW_DIR=$HOME/github/JESTests
+export SUSY_WORKING_SW_DIR=$HOME/github/AnalysisV2
 MY_ROOTSYS='/opt/root_5_32'
+export SUSY_WORKING_SW_DIR=/vols/cms03/bm409/git/AnalysisV2
 MY_PYTHONPATH=$SUSY_WORKING_SW_DIR/lib
 MY_LD_LIBRARY_PATH=$MY_ROOTSYS/lib::$SUSY_WORKING_SW_DIR/lib
 

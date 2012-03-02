@@ -17,11 +17,9 @@ from onelepton.filters import muonSystematics
 from icf.utils import autoname
 
 # here a few flags to ensure you correct all instances
-#mode = "data4X"
-#mode = "data42X_PromptReco"
-#mode = "data42X_ReReco"
 #mode  = "MCGrid"
-mode = "MC42ttw_Z41"
+#mode = "MC42ttw_Z41"
+mode = "MC_Fall11"
 #mode  = "MC42QCD"
 #mode = "MCskims"
 #mode = "data42_muHadSkims"
@@ -96,10 +94,6 @@ syst_filters = muonSystematics(sig, systematics)
 # List of samples available. Please add here.
 samplesList = {
     "MCGrid"             : samplesBSMgrids42,
-    "data311"            : samplesData311,
-    "data4X"             : samplesData311,
- #   "data42X_PromptReco" : samplesData42X_MuHad_PromptReco,
- #   "data42X_ReReco"     : samplesData42X_MuHad_ReReco,
     "data42X_PromptReco" : samplesDataMuHadresidualPrompt,
     "data42X_ReReco"     : samplesDataMuHadresidualMay,
   #  "MC42ttw_Z41"        : samplesMC42Wtt,
@@ -110,7 +104,8 @@ samplesList = {
     "MC42QCDMu"          : samplesMCQCDmu,
     "FASTW"              : [WJets_HT300toInf_Madgraph_Summer11_GEN_V2_leo_TuneZ2_Fastsim_4_2_4_p1_NoPU_V2_651176baf0801b18003b251b106ec60b],
     "SMS"                : samplesSMS,
-    "sample_Fall11_data" : sample_Fall11
+    "sample_Fall11_data" : sample_Fall11,
+    "MC_Fall11"          :  samplesMC_Fall11
     }
 
 if systematics: syst_str = "_"+systematics
@@ -118,7 +113,7 @@ else: syst_str = ""
 
 
 if mode.startswith("data"): output_dir = autoname("./results")
-else: output_dir = autoname("./resultsSync%(syst_mode)s", syst_mode=syst_str)
+else: output_dir = autoname("./results%(syst_mode)s", syst_mode=syst_str)
 
 #output_dir = "./notrigger"
 

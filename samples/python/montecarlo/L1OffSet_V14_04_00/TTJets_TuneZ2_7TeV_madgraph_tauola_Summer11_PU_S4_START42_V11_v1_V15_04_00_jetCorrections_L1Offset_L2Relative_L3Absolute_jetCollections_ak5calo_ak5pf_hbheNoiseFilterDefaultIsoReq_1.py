@@ -194,5 +194,6 @@ TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1_V15_04_00_jetCo
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2012_02_06_10_52_39/SusyCAF_Tree_99_1_UEp.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2012_02_06_10_52_39/SusyCAF_Tree_9_0_Jfs.root" ,
 	],
-Weight=1.0,
+    CrossSection=157.5,
+    Events = 3.70195e+06,
 )

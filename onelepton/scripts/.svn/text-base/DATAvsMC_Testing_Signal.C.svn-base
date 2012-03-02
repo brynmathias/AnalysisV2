@@ -31,13 +31,14 @@ struct GlobalParameterSet {
   int HistosPerCanvas;
   bool GlobalLog;	
   double intLumi;
+  bool norm2area;
 };
 
 void setTDRStyle();
 
 using namespace std;
 
-TH1D *plot1Dhisto(double intLumi,TFile *fileName,TString folderName,TString histoName,int color,int rebin,float xMin,float xMax,TString xName, TString yName,TString sampleName,bool mc);
+TH1D *plot1Dhisto(double intLumi,TFile *fileName,TString folderName,TString histoName,int color,int rebin,float xMin,float xMax,TString xName, TString yName,TString sampleName,bool mc,GlobalParameterSet Parameters);
 
 void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,double xMax,TString xName, TString yName, vector<TString> MCFileNames, vector<TString> MCNames, vector<int> MCColors, vector<bool> AddToBkg,vector<TString> DataFileNames,vector<TString> dataNames,vector<int> dataColors,vector<TString> SystNames,vector<int> SystColors, TCanvas *cCanvas,int padNr,bool UseLog, GlobalParameterSet Parameters);
 
@@ -62,11 +63,11 @@ void mainFunction(bool print = false) {
 // CHOOSE FOLDERS	==================================
 //  folderNames.push_back("ANplots150_NOLP");
 //  rebinFactor.push_back(1);
-  folderNames.push_back("ANplots250_NOLP");
+//  folderNames.push_back("ANplots250_NOLP");
+//  rebinFactor.push_back(1);
+  folderNames.push_back("ANplots350_NOLPsecondD500");
   rebinFactor.push_back(1);
-  folderNames.push_back("ANplots350_NOLP");
-  rebinFactor.push_back(1);
-  folderNames.push_back("ANplots450_NOLP");
+  folderNames.push_back("ANplots450_NOLPsecondD500");
   rebinFactor.push_back(1);
   //   folderNames.push_back("myPlost");
   // rebinFactor.push_back(1);
@@ -125,6 +126,8 @@ void mainFunction(bool print = false) {
   // Draw all histograms with log scale
   Parameters.GlobalLog = false; 
 
+  Parameters.norm2area = true;
+
   // Parameters.PrintFileName = "DATAvsMC.pdf";
   
  // =================================================  
@@ -135,22 +138,22 @@ void mainFunction(bool print = false) {
   // Parameters.intLumi = 881.; //Electron PR
   // Parameters.intLumi = 201.; //Electron RR
   // Parameters.intLumi = 203.; //Muon PR
-  Parameters.intLumi = 1140.; //Muon PR
+  Parameters.intLumi = 4700.; //Muon PR
   // path to files
-  TString path = "/vols/cms02/gouskos/onelepton/20110817_El_Sel_COR/";
+  TString path = "/vols/cms01/mstoye/JAN29/SUSYv2/onelepton/scripts/resultsPythia/";
   //    TString path = "/vols/cms01/mstoye/Markus8/SUSYv2/onelepton/scripts/resultsUNCOR/";
   //  TString path = "/vols/cms02/gouskos/onelepton/20110820_MuFromMarkus/";
   // MC filenames
-  TString filename_MCqcd = path+"qcd.root";
+  TString filename_MCqcd = path+"qcdmu.root";
   TString filename_MCz   = path+"z.root";
-  TString filename_MCw   = path+"w_Full300.root";
-  TString filename_MCtt1 = path+"tt_1lep.root";
-  TString filename_MCtt2 = path+"tt_2lep.root";
-  TString filename_MCbkg = path+"bkg_Full.root";
-  TString filename_MClm1 = path+"lm1.root";
-  TString filename_MClm6 = path+"lm6.root";
+  TString filename_MCw   = path+"w_BugFilter.root";
+  TString filename_MCtt1 = path+"tt.root";
+  //  TString filename_MCtt2 = path+"tt_2lep.root";
+  TString filename_MCbkg = path+"BKG_BugFilter.root";
+  //  TString filename_MClm1 = "/vols/cms01/mstoye/JAN29/SUSYv2/onelepton/scripts/Feb8LM1resultsPythia/Muons_LM1_SUSY_sftsht_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1_1.root";
+  TString filename_MClm6 = path+"LM6.root";
   // DATA filenames
-  TString filename_DATAmu =  path+"data_residual.root";
+  TString filename_DATAmu =  path+"BKG_BugFilter.root";
 
 // ==================================================  
 // END OF NORMAL CONFIGURATION PART =================
@@ -164,8 +167,8 @@ void mainFunction(bool print = false) {
   int wColor = kMagenta-4;
   int qcdColor = kGray+2;
   int bkgColor = 2;
-  int lm1Color = 1;
-  int lm6Color = 4;
+  int lm1Color = 4;
+  int lm6Color = 1;
 
 
   // prevent unfortunate parameter combinations
@@ -187,7 +190,7 @@ void mainFunction(bool print = false) {
   if(!Parameters.ShowMCComposition) {
     Parameters.StackMCComposition = false;
   }
- 
+  
   // Systematics to use (names should be the same as in muon/electron_base)
   vector<TString> SystNames;
   vector<int> SystColors;
@@ -207,44 +210,47 @@ void mainFunction(bool print = false) {
   vector<TString> MCNames;
   vector<int> MCColors;
   vector<bool> AddToBkg;  
-   
+  
+  if (!Parameters.norm2area) {
+    MCFileNames.push_back(filename_MCbkg);
+    MCNames.push_back(TString("MC"));
+    MCColors.push_back(bkgColor);
+    AddToBkg.push_back(true);
+  }
+
   MCFileNames.push_back(filename_MCw);
   MCNames.push_back(TString("W"));
   MCColors.push_back(wColor);
-  AddToBkg.push_back(true);
+  if (Parameters.norm2area) { AddToBkg.push_back(true); }
+  else { AddToBkg.push_back(false); }
 
   MCFileNames.push_back(filename_MCtt1);
-  MCNames.push_back(TString("tt(l)"));
+  MCNames.push_back(TString("tt"));
   MCColors.push_back(tt1Color);
-  AddToBkg.push_back(true);
-   
+  AddToBkg.push_back(false);
+  /*
   MCFileNames.push_back(filename_MCtt2);
   MCNames.push_back(TString("tt(ll)"));
   MCColors.push_back(tt2Color);
   AddToBkg.push_back(true);
+  */
 
   MCFileNames.push_back(filename_MCz);
   MCNames.push_back(TString("Z"));
   MCColors.push_back(zColor);
-  AddToBkg.push_back(true);
+  AddToBkg.push_back(false);
   
   MCFileNames.push_back(filename_MCqcd);
   MCNames.push_back(TString("QCD"));
   MCColors.push_back(qcdColor);
-  AddToBkg.push_back(true);
-
-  /*  
-  MCFileNames.push_back(filename_MCbkg);
-  MCNames.push_back(TString("MC"));
-  MCColors.push_back(bkgColor);
   AddToBkg.push_back(false);
-  */
+  
   /*
   MCFileNames.push_back(filename_MClm1);
   MCNames.push_back(TString("LM1"));
   MCColors.push_back(lm1Color);
-  //  AddToBkg.push_back();  
-
+  AddToBkg.push_back();  
+  
   MCFileNames.push_back(filename_MClm6);
   MCNames.push_back(TString("LM6"));
   MCColors.push_back(lm6Color);
@@ -260,15 +266,16 @@ void mainFunction(bool print = false) {
   dataNames.push_back("DATA");
   dataColors.push_back(1);
   */
-
+  //  /*
   dataFileNames.push_back(filename_MClm6);
   dataNames.push_back("LM6");
   dataColors.push_back(lm6Color);
-
+  //  */
+  /*
   dataFileNames.push_back(filename_MClm1);
   dataNames.push_back("LM1");
   dataColors.push_back(lm1Color);
-
+  */
   // There is the possibility of drawing more than one DATA sample
   //dataFileNames.push_back(path+"dataOldMET.root");
   //dataNames.push_back("DATA old MET");
@@ -304,7 +311,7 @@ void mainFunction(bool print = false) {
       plotNr++;
     } 
     if(plots.count("LP_tot")>0) { 
-      createDataVsMC(folderNames[i],"LP_tot",2*rebinFactor[i],-0.5,1.5,"L_{P}","Entries / bin",MCFileNames,MCNames,MCColors,AddToBkg,dataFileNames,dataNames,dataColors,SystNames,SystColors,Canvases[plotNr/Parameters.HistosPerCanvas],plotNr%Parameters.HistosPerCanvas,false,Parameters);
+      createDataVsMC(folderNames[i],"LP_tot",2*rebinFactor[i],-0.6,1.6,"L_{P}","Entries / bin",MCFileNames,MCNames,MCColors,AddToBkg,dataFileNames,dataNames,dataColors,SystNames,SystColors,Canvases[plotNr/Parameters.HistosPerCanvas],plotNr%Parameters.HistosPerCanvas,false,Parameters);
       plotNr++; 
     } 
   }
@@ -434,7 +441,7 @@ void mainFunction(bool print = false) {
 // Help functions ===========================
 
 // Draw 1D histos
-TH1D *plot1Dhisto(double intLumi,TFile *fileName,TString folderName,TString histoName,int color,int rebin,float xMin,float xMax,TString xName, TString yName,TString sampleName,bool mc) {  
+TH1D *plot1Dhisto(double intLumi,TFile *fileName,TString folderName,TString histoName,int color,int rebin,float xMin,float xMax,TString xName, TString yName,TString sampleName,bool mc,GlobalParameterSet Parameters) {  
   
   TH1D *hTemp = (TH1D*)fileName->Get(folderName+"/"+histoName);
   hTemp->SetName(histoName+"_"+sampleName);
@@ -456,9 +463,14 @@ TH1D *plot1Dhisto(double intLumi,TFile *fileName,TString folderName,TString hist
   // last/first bin: put over/underflow
   hTemp->SetBinContent(hTemp->FindBin(xMax),hTemp->Integral(hTemp->FindBin(xMax),hTemp->GetNbinsX()+1));
   hTemp->SetBinContent(hTemp->FindBin(xMin),hTemp->Integral(-1,hTemp->FindBin(xMin)));  
+  if ((Parameters.norm2area) && (hTemp->Integral()>0.)) { hTemp->Scale(1./(hTemp->Integral())); }
   //fileName->Close();
   return hTemp;
 } // ~ end of plot1Dhisto function
+
+
+
+
 
 
 void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,double xMax,TString xName, TString yName, vector<TString> MCFileNames, vector<TString> MCNames, vector<int> MCColors, vector<bool> AddToBkg,vector<TString> DataFileNames,vector<TString> dataNames,vector<int> dataColors,vector<TString> SystNames,vector<int> SystColors, TCanvas *cCanvas, int padNr, bool UseLog,GlobalParameterSet Parameters) {
@@ -477,7 +489,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   vector<TH1D*> MChistos;
   bool noneAdded = true;
   for(unsigned int i =0;i<MCFileNames.size();i++) {
-    MChistos.push_back(plot1Dhisto(Parameters.intLumi,TFile::Open(MCFileNames[i],"READONLY"),folderName,histoName,MCColors[i],rebin,xMin,xMax,xName,yName,"MC",true));
+    MChistos.push_back(plot1Dhisto(Parameters.intLumi,TFile::Open(MCFileNames[i],"READONLY"),folderName,histoName,MCColors[i],rebin,xMin,xMax,xName,yName,"MC",true,Parameters));
     if(noneAdded&&AddToBkg[i]) {
       hSM0 = (TH1D *) MChistos[i]->Clone();
       noneAdded = false;
@@ -500,7 +512,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
 	  TString SystFileName = MCFileNames[j];
 	  SystFileName.Insert(SystFileName.Last('/'),"_"+SystNames[i]);
 	  TFile *SystMCFile = TFile::Open(SystFileName,"READONLY");
-	  TH1D *SystHistoTemp = plot1Dhisto(Parameters.intLumi,SystMCFile,folderName,histoName,SystColors[i],rebin,xMin,xMax,xName,yName,"MC",true);
+	  TH1D *SystHistoTemp = plot1Dhisto(Parameters.intLumi,SystMCFile,folderName,histoName,SystColors[i],rebin,xMin,xMax,xName,yName,"MC",true,Parameters);
 	  SystHistoTemp->SetLineStyle(2);
 	  if(noneAdded) {
 	    SystHistos.push_back((TH1D *) SystHistoTemp->Clone());
@@ -544,7 +556,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   // Create Data Histograms
   vector<TH1D *> dataHistos; 
   for(unsigned int i=0; i<DataFileNames.size();i++) {
-    dataHistos.push_back(plot1Dhisto(Parameters.intLumi,TFile::Open(DataFileNames[i],"READONLY"),folderName,histoName,dataColors[i],rebin,xMin,xMax,xName,yName,"Data",true));
+    dataHistos.push_back(plot1Dhisto(Parameters.intLumi,TFile::Open(DataFileNames[i],"READONLY"),folderName,histoName,dataColors[i],rebin,xMin,xMax,xName,yName,"Data",true,Parameters));
     dataHistos[i]->SetMarkerSize(0); 
     dataHistos[i]->SetMarkerColor(dataColors[i]); 
     dataHistos[i]->SetMarkerStyle(21);
@@ -553,12 +565,8 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
       NoError(dataHistos[i],xMin,xMax);
     }
     // y-axis range
-    if (UseLog){ 
-      dataHistos[i]->GetYaxis()->SetRangeUser(1.,3.*(dataHistos[i]->GetBinContent(dataHistos[i]->GetMaximumBin()))); 
-    }
-    else{ 
-      dataHistos[i]->GetYaxis()->SetRangeUser(0.,1.8*(dataHistos[i]->GetBinContent(dataHistos[i]->GetMaximumBin())));
-    }
+    if (UseLog){ dataHistos[i]->GetYaxis()->SetRangeUser(1.,3.*(dataHistos[i]->GetBinContent(dataHistos[i]->GetMaximumBin()))); }
+    else{ dataHistos[i]->GetYaxis()->SetRangeUser(0.,1.8*(dataHistos[i]->GetBinContent(dataHistos[i]->GetMaximumBin()))); }
   }
   
   cCanvas->SetName(folderName+histoName);
@@ -578,16 +586,14 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
       MChistos[i]->SetLineStyle(kDashed);
       //      MChistos[i]->SetFillStyle(3004);
       //      MChistos[i-1]->SetFillStyle(3004);
-      MChistos[i-1]->SetFillColor(MCColors[i-1]); 	  	
+      MChistos[i-1]->SetFillColor(MCColors[i-1]);
     }  	
     for(int i=MChistos.size()-1;i>=0;i--) {
-      if(Parameters.ShowMCStatErrorbars)
-	MChistos[i]->Draw("HIST E0 same");
-      else
-	MChistos[i]->Draw("HIST same");
+      if(Parameters.ShowMCStatErrorbars) { MChistos[i]->Draw("HIST E0 same"); }
+      else { MChistos[i]->Draw("HIST same"); }
     }
   }
-  
+
   hSM0->SetLineColor(kRed);
   hSM0->SetFillStyle(3004);
   hSM0->SetFillColor(kRed);
@@ -598,8 +604,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
     hSM0systErrors->Draw("E2 same");
   }
 
-  if(!Parameters.ShowMCStatErrorbars&&!Parameters.StackMCComposition)
-    hSM0->Draw("HIST same"); 
+  if(!Parameters.ShowMCStatErrorbars&&!Parameters.StackMCComposition && (!Parameters.norm2area)) { hSM0->Draw("HIST same"); }
   	
   if(Parameters.ShowSystematicsDetails) {
     for(unsigned int i=0; i<SystHistos.size();i++) {
@@ -616,8 +621,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
 
   // Draw Legend
   TLegend *lSamples = legendRAW();
-  if(!Parameters.StackMCComposition)
-    lSamples->AddEntry(hSM0,"Total MC","FL");
+  if((!Parameters.StackMCComposition) && (!Parameters.norm2area)) { lSamples->AddEntry(hSM0,"Total MC","FL"); }
   if(Parameters.ShowErrorBand) {
     lSamples->AddEntry(hSM0systErrors,"Systematic Error","FL");
     lSamples->AddEntry(hSM0allErrors,"MC Syst. #oplus Stat. Error","FL");
@@ -636,19 +640,28 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   
   TLatex *lPreliminary = new TLatex(0.19,0.96,"CMS Simulation");
 
-  //  TLatex *lIntLumi = new TLatex(0.2,0.87,"#scale[0.8]{#int L dt = "+lumi+" pb^{-1}, #sqrt{s} = 7 TeV}");
-  TLatex *lIntLumi  = new TLatex(0.15,0.86,"#scale[1.]{#int L dt = 1.14 fb^{-1}}");
-  TLatex *lIntLumiB = new TLatex(0.15,0.77,"#scale[1.]{#sqrt{s} = 7 TeV}");
+  TLatex *lIntLumi;
+  TLatex *lIntLumiB;
+  
+  if (Parameters.norm2area) {
+    lIntLumiB = new TLatex(0.15,0.86,"#scale[1.]{#sqrt{s} = 7 TeV}");
+    lIntLumi  = new TLatex(0.15,0.77," ");
+  } 
+  else {
+    lIntLumi  = new TLatex(0.15,0.86,"#scale[1.]{#int L dt = 1.14 fb^{-1}}");
+    lIntLumiB = new TLatex(0.15,0.77,"#scale[1.]{#sqrt{s} = 7 TeV}");
+  }
+  
   lPreliminary->SetNDC();
   lIntLumi->SetNDC();
   lIntLumiB->SetNDC();
   lPreliminary->Draw("same");
-  lIntLumi->Draw("same"); 
   lIntLumiB->Draw("same"); 
+  if (!Parameters.norm2area) { lIntLumi->Draw("same"); }
   //  gPad->SetGridx(); 
   //  gPad->SetGridy();
   /*
-  // DRAW RATIO PLOTS ============================================================================
+  // DRAW RATIO PLOT ============================================================================
 
   vector<TH1D*> hRatio;
   for(unsigned int i=0; i<dataHistos.size()&&MChistos.size()>0; i++) {

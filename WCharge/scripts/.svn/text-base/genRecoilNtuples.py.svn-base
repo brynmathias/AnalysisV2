@@ -19,20 +19,16 @@ from SingleElectron_Run2011A_PromptReco_v4_299 import *
 
 #Import MC PSETS
 from DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1 import *
-#from DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1 import *
-
 from DYToEE_M_10To20_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1 import * 
 from DYToEE_M_20_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1 import * 
-#from DYToMuMu_M_10To20_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1 import * 
-#from DYToMuMu_M_20_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1 import * 
 from DYToTauTau_M_10To20_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1 import * 
 from DYToTauTau_M_20_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1 import * 
-#from TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import * 
+
+from TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import * 
 from TT_TuneZ2_7TeV_pythia6_tauola_Summer11_PU_S3_START42_V11_v2 import * 
-#from WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import * 
+
 from WToENu_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2 import * 
 from WToTauNu_TuneZ2_7TeV_pythia6_tauola_Summer11_PU_S3_START42_V11_v2 import * 
-#from WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
 from WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
 
 
@@ -41,7 +37,7 @@ bData = False#True#True#False#False? True?
 bRecoil = False# True#False
 bTP = False#True
 bRecoilNtuple = True
-iRecType = 1 # 0=ZData, 1=ZMC, 2=WMC
+iRecType = 0 # 0=ZData, 1=ZMC, 2=W + MC , 3= W - MC,  4 W + data , 5 W - data
 DEBUG = False#True
 
 #Standard Cuts
@@ -70,18 +66,15 @@ conf.Ntuple.TerJets.Suffix = "Pat"
 conf.Ntuple.TerJets.Prefix = "ak7JetPF"
 
 # Create the analysis
-a = Analysis("Recoil")
+if iRecType in [2,4] : #W  + data
+  a = Analysis("ntuple_wp")
+elif iRecType in [3,5] : #W - data
+  a = Analysis("ntuple_wm")
+else :
+  a = Analysis("ntuple")
 
 # Create a Tree called Main
 tree = Tree("Main")
-
-#trigger_bits = ("HLT_Ele27_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v2",
-#            "HLT_Ele32_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v1",
-#            "HLT_Ele45_CaloIdVT_TrkIdT_v2"
-#		    )
-      
-#triggers = PSet(Triggers=trigger_bits)
-#Trigg = OP_MultiTrigger(triggers.ps())
 
 # Additional Cuts
 ZeroMuons = OP_NumComMuons("==", 0)
@@ -90,7 +83,7 @@ default_Asym = PSet(
     jet_ET = 40.,
     lep_ET = 35.,
     lep_MT = 0.,
-    lep_VetoET = 25.,
+    lep_VetoET = 15.,
     lep_WP = 3,
     lep_VetoWP = 0,
     lep_AntiWP = 3,
@@ -221,11 +214,25 @@ Default_Asym=AsymTemplateHistos("Default_Asym",default_Asym.ps())
 
 # Set up CUT flow
 a += tree
-if iRecType==0 :
-  jsonfil=JSONFilter("Cert_160404-167151_7TeV",json_to_pset("/vols/cms02/mjarvis/SUSY2/WCharge/scripts/Cert_160404-167151_7TeV_PromptReco_Collisions11_JSON.txt"))
-  #tree.TAttach(Trigg,jsonfil)
-  tree.Attach(jsonfil)
+if iRecType==0 or iRecType==4 or iRecType==5 : #Z data or W data
+  trigger_bits = (
+            "HLT_Ele27_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v1",
+            "HLT_Ele32_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v1",
+            "HLT_Ele32_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v2",
+            "HLT_Ele32_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v3",
+            "HLT_Ele32_CaloIdVT_CaloIsoT_TrkIdT_TrkIsoT_v4",
+		    )
+  triggers = PSet(
+            Triggers=trigger_bits,
+            Verbose=False,
+            UsePreScaledTriggers=False
+            )
+  Trigg = OP_MultiTrigger(triggers.ps())
+  jsonfil=JSONFilter("Cert_160404-167151_7TeV",json_to_pset("/vols/cms03/mjarvis/SUSYv2/WCharge/scripts/json_folder/Cert_160404-166967_7TeV_May10ReRecoPlusPromptReco_840pb.json"))
   json_output=JSONOutput("filtered")
+
+  tree.Attach(Trigg)
+  tree.TAttach(Trigg,jsonfil)
   tree.TAttach(jsonfil,json_output)
   tree.TAttach(json_output,ZeroMuons)
 else :
@@ -233,7 +240,7 @@ else :
   
 tree.TAttach(ZeroMuons,Default_Asym) #
 
-if iRecType in [0,3]:#ZDATA WDATA
+if iRecType in [0,4,5]:#ZDATA WDATA
   samples =[
     SingleElectron_Run2011A_May10ReReco_v1,
     SingleElectron_Run2011A_PromptReco_v4_213,
@@ -243,18 +250,15 @@ if iRecType in [0,3]:#ZDATA WDATA
     SingleElectron_Run2011A_PromptReco_v4_285,
     SingleElectron_Run2011A_PromptReco_v4_299
   ]
-if iRecType == 2:#WMC
+if iRecType in [2 ,3 ]:#WMC
   samples =[
-    #WToENu_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2, 
+    WToENu_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2, 
     WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1,
   ]
 if iRecType == 1:#ZMC
   samples =[
     DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Spring11_PU_S1_START311_V1G1_v1,
-    #    DYToEE_M_10To20_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, 
-    #DYToEE_M_20_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, 
-    #DYToTauTau_M_10To20_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1, 
-    #DYToTauTau_M_20_TuneZ2_7TeV_pythia6_tauola_Spring11_PU_S1_START311_V1G1_v1, 
+    DYToEE_M_20_TuneZ2_7TeV_pythia6_Spring11_PU_S1_START311_V1G1_v1, 
   ]
 if DEBUG : 
     samples = samples[0:1]

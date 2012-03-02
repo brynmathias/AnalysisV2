@@ -222,6 +222,16 @@ class HTthrustCut : public Operation::_Base {
     float cut_;
   };
 
+  class LowerMuPtCut : public Operation::_Base {
+  public:
+    LowerMuPtCut( float );
+    ~LowerMuPtCut() {;}
+    bool Process( Event::Data& );
+    std::ostream& Description( std::ostream& );
+  private:
+    float cut_;
+  };
+
 
  class UpperElePtCut : public Operation::_Base {
   public:
