@@ -8,7 +8,7 @@ from copy import deepcopy
 from SUSYSignalScan.utils import *
 from hadronic.commonIncludes import *
 def isCmssm(model) : return ("tanB" in model)
-def isSms(model) :   return (model in ["T1", "T2"])
+def isSms(model) :   return (model in ["T1", "T2","T2bb","T2tt"])
 
 import os
 susydir = os.environ['SUSY_WORKING_SW_DIR'] + '/'
@@ -42,29 +42,30 @@ msugra_pset = PSet(
     zBins =1,
     zLow =0.,
     zHigh =1000.,
-    verbose = True,
+    Modulo = -1,
+    verbose = False,
     NLO = None
     )
 
 sms_pset = PSet(
     DirectoryName = "mSuGraScan",
-    xBins = 200,
+    xBins = 60,
     xLow = 0.,
-    xHigh = 2000.,
-    yBins =80,
+    xHigh = 1500.,
+    yBins =60,
     yLow =0.,
-    yHigh =800.,
+    yHigh =1500.,
     zBins =1,
     zLow =0.,
     zHigh =1000.,
     verbose = True,
-    MChiCut = -1
+    MChiCut = -1.
     )
 
 
 def tripleScale(model = "", cutTree = None, cut = None, label = "") :
   out = []
-  for scale in ["2.0","0.5","1.0"] :
+  for scale in ["1.0",]:#"2.0","0.5","1.0"] :
     scale2 = scale.replace(".","")
     if scale2[-1]=="0" : scale2 = scale2[:-1]
     pset = deepcopy(msugra_pset)
@@ -93,6 +94,7 @@ def smsOps(model = "", cutTree = None, cut = None, label = "",MChiCut = -1) :
   pset2.yLow = 50.
   pset2.yHigh = 1150.
   if MChiCut != -1:
+    print MChiCut
     pset2.MChiCut = MChiCut
   op2 = OP_smsPlottingOps(pset2.ps())
   out.append(op2)

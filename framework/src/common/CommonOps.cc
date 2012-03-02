@@ -173,9 +173,10 @@ namespace Operation {
   }
 
   
-    NumCommonBtagJets::NumCommonBtagJets (const std::string & comparison, UInt_t number, float cutValue):
+    NumCommonBtagJets::NumCommonBtagJets (const std::string & comparison, UInt_t Algo, UInt_t number, float cutValue):
     mCut(cutValue),
-    mNumber(number) {
+    mNumber(number),
+    Algo_(Algo){
     if ( strcmp("==",comparison.c_str()) == 0 ) {
       mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, EQ>);
     } else if ( strcmp("!=",comparison.c_str()) == 0 ) {
@@ -200,7 +201,7 @@ namespace Operation {
       UInt_t nBtags = 0;
       for(unsigned int i=0; i<ev.JD_CommonJets().accepted.size(); i++) {
         // std::cout << "we are on jet " << i << " the btag discriminator is " << ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), 4) << std::endl;
-       if(ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), 4) > mCut) {
+       if(ev.GetBTagResponse(ev.JD_CommonJets().accepted.at(i)->GetIndex(), Algo_) > mCut) {
          nBtags++;
          //if we make it into here, the jet has passed the b-tag requirement
          

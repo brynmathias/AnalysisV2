@@ -165,7 +165,7 @@ conf_ic5_calo.Common = deepcopy(default_common)
 conf_ak5_calo = deepcopy(defaultConfig)
 conf_ak5_calo.Ntuple = deepcopy(ak5_calo)
 conf_ak5_calo.XCleaning = deepcopy(default_cc)
-conf_ak5_calo.Common.print_out()
+#conf_ak5_calo.Common.print_out()
 conf_ak5_calo.Common = deepcopy(default_common)
 
 conf_ak5_calo_msugra = deepcopy(conf_ak5_calo)

@@ -6,7 +6,7 @@ CVS
 
 TestResults
 *.cvsignore
-*setup.*
+setup.*
 config.inc
 *filtered.json
 *Trigger*.json
@@ -23,6 +23,12 @@ AK5*
 *.pdf
 *.o
 *.d
+.svn
+*.pyc
+*.so
+*.cxx
+*.json
+*__susyjob__*
 *.pyc
 *.cxx
 *.so
