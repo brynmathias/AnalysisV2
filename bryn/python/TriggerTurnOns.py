@@ -349,9 +349,7 @@ cutTreeData.TAttach(badEvents,json_ouput)
 #cutTreeData.TAttach(badEvents,NoiseFilt)
 cutTreeData.TAttach(json,NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,selection)
-cutTreeData.TAttach(selection,# oddMuon)
-# cutTreeData.TAttach(oddMuon,
-oddElectron)
+cutTreeData.TAttach(selection,oddElectron)
 cutTreeData.TAttach(oddElectron,oddPhoton)
 cutTreeData.TAttach(oddPhoton,numComElectrons)
 cutTreeData.TAttach(numComElectrons,numComPhotons)
@@ -637,7 +635,6 @@ conf_ak5_caloData = deepcopy(defaultConfig)
 conf_ak5_caloData.Ntuple = deepcopy(ak5_calo)
 conf_ak5_caloData.XCleaning = deepcopy(default_cc)
 conf_ak5_caloData.Common = deepcopy(default_common)
-# conf_ak5_calo.Common.print_out()
 anal_ak5_caloData=Analysis("AK5Calo")
 addCutFlowData(anal_ak5_caloData)
 
@@ -653,9 +650,13 @@ addCutFlowData(anal_ak5_pfData)
 from data.Run2011.HTRun2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_02 import *
 from data.Run2011.MuHad2011AB import *
-from SingleMu import *
-#from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
+<<<<<<< HEAD:bryn/python/TriggerTurnOns.py
+from MuHad_L1OffSet import *
+sample = MuHad_L1Offset
+print sample.File
+outDir = "../L1Offset/ht%dNoUpper/"%(bin)
+=======
 sample = MuHad2011AB
 
 sample.File = "../CMSSM_Tanb10_1800_280.root"
@@ -663,6 +664,7 @@ sample.File = "../CMSSM_Tanb10_1800_280.root"
 #sample = HTRun2011AB
 
 outDir = "../evDump/ht%dNoUpper/"%(bin)
+>>>>>>> 944fff3d50dd9e757ea5fb4ba5b7ce9b56ad4d7f:bryn/python/TriggerTurnOns.py
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
