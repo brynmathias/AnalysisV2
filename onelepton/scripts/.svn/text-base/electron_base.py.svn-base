@@ -23,27 +23,28 @@ from icf.utils import autoname
 #mode = "data4X"
 #mode = "data42X_PromptReco"
 #mode = "data42X_ReReco"
-mode = "data42X_Run2011Full"
 #mode = "MC42ttw_Z41"
 #mode  = "MC42QCD"
 #mode  = "MCGrid"
 #mode = "SMS"
 #mode = "data42X_Sync"
+#mode = "data42X_Run2011Full"
+mode = "MC_Summer11"
+#mode = "MC_Fall11"
 ##AUTOMATE_MODE##
 
 isSM = not (mode in ["MCGrid", "SMS"])
 
 # Systematics
 systematics = None
-#systematics = "metup_flat"
-#systematics = "metdown_flat"
+#systematics = "metup"
+#systematics = "metdown"
 #systematics = "metres_conservative"
-#systematics = "metres_11"
-#systematics = "metres_12"
 #systematics = "polup"
 #systematics = "poldown"
-#systematics = "mupt"
-##AUTOMATE_SYSTEMATICS##
+#systematics = "polup_plus"
+#systematics = "poldown_plus"
+
 
 # MET type
 #MET = "typeI"
@@ -58,12 +59,13 @@ run_qcd_antiselection = False
 sig, tree, extra = setupElectronPreselection(MET, "Electrons", mode, qcd_antiselection = run_qcd_antiselection)
 
 # Define ST bins to use
+#bins = [0,150]
 bins = [0,150, 250, 350, 450]
 
 # Define HT bins to use
-#HTbins = [500,999999999999999999]
-HTbins = [500, 750, 1000, 999999999999999999]
-#HTbins = []
+HTbins = [500,999999999999999999]
+#HTbins = [500, 750, 1000, 999999999999999999]
+
 BinnedHTPTCut = []
 backtuple_list = []
 sig_plots = []
@@ -126,11 +128,13 @@ samplesList = {
     "data42X_PromptReco" : samplesData42X_ElHad_PR_V15_03_14_residual,#samplesData42X_ElHad_PromptReco,
     "data42X_ReReco"     : samplesData42X_ElHad_RR_V15_03_14_residual,#samplesData42X_ElHad_ReReco,
     "data42X_Run2011Full": samplesData42X_ElHad_V15_03_19_residual,
+    "MC_Summer11"        : samplesMC_Summer11,
+    "MC_Fall11"          : samplesMC_Fall11,
     #    "data42X_Sync"       : samplesData42X_ElHad_May10Sync,
     "MC42ttw_Z41"        : samplesMC42Wtt,
     "MC42QCD"            : samplesMC42QCD,
     "SMS"                : samplesSMS
-
+    
     }
 
 if systematics: syst_str = "_"+systematics
@@ -138,7 +142,7 @@ else: syst_str = ""
 
 #if mode.startswith("data"): output_dir = autoname("./resultsData")
 #else: output_dir = autoname("./resultsMC%(syst_mode)s", syst_mode=syst_str)
-output_dir = "/vols/cms02/gouskos/onelepton/20111201_TMP2"
+output_dir = "/vols/cms01/gouskos/20120113_El_HTbins_STbins_Sel"
 #output_dir = "./data"
 
 # Run the analysis!

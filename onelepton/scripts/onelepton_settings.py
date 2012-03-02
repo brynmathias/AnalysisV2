@@ -127,7 +127,8 @@ Els_QCD = PSet(
     ConversionsExtra = -1,
     SupressErrors = True,
     d0dzCutApplied = False,
-    DetaOrDphi = True
+    DetaOrDphi = True,
+    D0BS = 0.02
     )
 
 

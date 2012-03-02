@@ -327,6 +327,68 @@ class LooseEleId : public Compute::ObjectFilter<Event::Lepton>{
   };
 
 
+
+ class pfMETLeptonScaleRA4 : public Compute::ObjectFilter<ICF_LorentzV> {
+  public:
+    pfMETLeptonScaleRA4(const Utils::ParameterSet & ps) :
+      mLepton(ps.Get<std::string>("Lepton"))
+    { mModifies = true;
+      if(mLepton == "Muon") mLeptonType = pfMETLeptonScaleRA4::MUON;
+      else if(mLepton == "Electron") mLeptonType = pfMETLeptonScaleRA4::ELECTRON;
+      else throw std::invalid_argument("Invalid lepton type: " + mLepton);
+    }
+
+    ~pfMETLeptonScaleRA4() {}
+
+    bool Apply(ICF_LorentzV* ob) {
+      //cout << " in the loop"<<endl;
+      //check that a RECO muon exists so that we can set up the quantity to be smeared:
+      const std::vector<const Lepton*> * leptons = (mLeptonType == MUON) ? &(mEv->LD_CommonMuons().accepted) :
+	(mLeptonType == ELECTRON) ? &(mEv->LD_CommonElectrons().accepted) : 0;
+      if(!leptons || leptons->size() < 1) return false;
+
+      // initial PFMET
+      LorentzV pfMETDefault = *ob;
+      // corrected PFMET
+      LorentzV corPFMET;
+      LorentzV lepcorICFV;
+      if (mLeptonType == ELECTRON)
+	{throw std::invalid_argument("Invalid lepton type for pfMETLeptonScaleRA4, not yet coded: " + mLepton);}
+
+      if (mLeptonType == MUON)
+	{
+	  // Get muon 4 vector directly from ntuple:
+	  int iM = leptons->at(0)->GetIndex();
+	  TLorentzVector v;
+	  v.SetPxPyPzE(mEv->muonP4()->at(iM).Px(),mEv->muonP4()->at(iM).Py(),mEv->muonP4()->at(iM).Pz(),mEv->muonP4()->at(iM).E());
+	  // Get the corrected muon 4 vector	
+	  lepcorICFV.SetPxPyPzE(leptons->at(0)->Px(), leptons->at(0)->Py(), leptons->at(0)->Pz(), leptons->at(0)->E());
+	  LorentzV lepuncor;
+	  lepuncor.SetPxPyPzE(v.Px(), v.Py(), v.Pz(), v.E());
+	  // add th uncorrected and subtract the corrected-> effectively replace uncorrected by corrected muon for PFM
+	  LorentzV diff = lepuncor-lepcorICFV;
+	  //cout << " initial PT " << lepuncor.Pt()<< " final PT " << lepcorICFV.Pt()<< endl;
+	  // cout << " initial PT " << lepuncor.Pt()<< " final PT " << lepcorICFV.Pt()<< " rel " << (lepuncor.Pt()-lepcorICFV.Pt())/lepuncor.Pt() << " kappa: "<< 1./lepuncor.Pt()-1/lepcorICFV.Pt() <<  endl;
+	  corPFMET = pfMETDefault+lepuncor-lepcorICFV;
+	}
+
+      ob->operator=(corPFMET);
+      return true;
+    }
+
+    std::ostream & Description(std::ostream & ostrm) {
+      ostrm << "pfMET replacing scaled lepton of type " << mLepton ;
+      return ostrm;
+    }
+
+  private:
+   
+    std::string mLepton;
+    enum LeptonType{ ELECTRON, MUON } mLeptonType;
+  };
+
+
+
 // Replace PFmet by PFMETtype1
 
   class pfMETtopfMETtypeI : public Compute::ObjectFilter<ICF_LorentzV> {
@@ -895,7 +957,8 @@ public:
 
 
     bool wrongLepCounting = false;
-    if ( (NGenMuons==1 && NGenElectrons!=0) || (NGenElectrons==1 && NGenMuons!=0) || (NGenTaus!=0) ) { wrongLepCounting = true; *weight *= 1.; return true; }
+    if ( (NGenMuons==1 && NGenElectrons!=0) || (NGenElectrons==1 && NGenMuons!=0) || (NGenTaus!=0) || (NGenMuons==0 && NGenElectrons==0) )
+      { wrongLepCounting = true; *weight *= 1.; return true; }
 
     const Event::GenObject* genTop;
     const Event::GenObject* genW;
@@ -962,12 +1025,13 @@ public:
     double CosThetaCM = cos(ROOT::Math::VectorUtil::Angle(jGenLepOnWRestFrame,jGenWInTopFrame));
 
 
-    double f0 = 0.714;
-    double fL = 0.251;
-    double fR = 0.034; // this remains unchanged
+    double f0 = 0.708256;
+    double fL = 0.256748;
+    double fR = 0.035; // this remains unchanged
 
     // change them by this "fLmfR_shift_" i.e. +5% 0.05
-    double fL_changed = fL*(1.+fLmfR_shift_);
+    //    double fL_changed = fL*(1.+fLmfR_shift_); // relative change
+    double fL_changed = fL+fLmfR_shift_; // absolute change
     double f0_changed = 1.-fR-fL_changed;
     //      cout << fLmfR_shift_ << " " << fL << " " << fL_changed << " " << f0 << " " << f0_changed << "\n";
 

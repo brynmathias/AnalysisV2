@@ -156,6 +156,9 @@ BOOST_PYTHON_MODULE(libWPol) {
 							    init<float>());
   class_<Operation::RECOPFMETCut2, bases<Operation::_Base> >("RECO_PFMETCut2",
 							     init<float, float>());
+  class_<WPol::LeptonEffRA4, bases<Compute::ObjectFilter<Event::Lepton> > >("LeptonEffRA4",
+									       init<>());
+
 
 
 #ifdef ELECTRONS
@@ -164,6 +167,8 @@ BOOST_PYTHON_MODULE(libWPol) {
 
   class_<WPol::LepMinIsoFilter, bases<Compute::ObjectFilter<Event::Lepton> > >("LepMinIsoFilter",
 									       init<double>());
+
+
   class_<WPol::CustomEleId, bases<Compute::ObjectFilter<Event::Lepton> > >("CustomEleId",
                                                                            init<const Utils::ParameterSet &>());
 
@@ -211,12 +216,18 @@ class_<WPol::RECOpfMTCut, bases<Operation::_Base> >("ePFMTCut",
 										  init<const Utils::ParameterSet &>());
  class_<WPol::pfMETsmearing, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETsmearing",
 									   init<const Utils::ParameterSet &>());
+
+ class_<WPol::pfMETResUncOfficial, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETResUncOfficial",
+										 init<std::string,std::string>());
+
  class_<WPol::pfMETResSmear, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETResSmear",
 									   init<const Utils::ParameterSet &>());
  class_<WPol::pfMETResSmearPU, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETResSmearPU",
 									     init<const Utils::ParameterSet &>());
  class_<WPol::MuonScaleShift, bases<Compute::ObjectFilter<Event::Lepton> > >("MuonScaleShift",
 									     init<const Utils::ParameterSet &>());
+ class_<WPol::MuonScaleUncertRA4, bases<Compute::ObjectFilter<Event::Lepton> > >("MuonScaleUncertRA4",
+										 init<std::string>());
  class_<WPol::pfMETJECUnc, bases<Compute::ObjectFilter<ICF_LorentzV> > >("pfMETJECUnc",
 									 init<const Utils::ParameterSet &>());
  class_<WPol::ECALTransparencyCorrections, bases<Compute::ObjectFilter<Event::Lepton> > >("ECALTransparencyCorrections", init<const Utils::ParameterSet &>());

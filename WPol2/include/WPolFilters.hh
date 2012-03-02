@@ -60,10 +60,8 @@ namespace WPol{
       mShh(ps.Get<bool>("SigmaIEtaIEta")),
       mConv(ps.Get<bool>("Conversions")),
       mConvExtra(ps.Get<bool>("ConversionsExtra")),
-
       mRelCombIsoBarrel(ps.Get<double>(prefix+".RelCombIso.Barrel")),
       mRelCombIsoEndcap(ps.Get<double>(prefix+".RelCombIso.Endcap")),
-
       mTrkIsoBarrel(ps.Get<double>(prefix+".TrkIso.Barrel")),
       mTrkIsoEndcap(ps.Get<double>(prefix+".TrkIso.Endcap")),
       mEcalIsoBarrel(ps.Get<double>(prefix+".EcalIso.Barrel")),
@@ -117,7 +115,7 @@ namespace WPol{
          bool passHoE = false;
          bool passDeltaEta = false; bool passDeltaPhi = false;
          bool passShh = false;
-         bool passConv = false;
+	 //    bool passConv = false;
          bool passConvExtra = false;
          int iM = (ob)->GetIndex();
 
@@ -316,14 +314,16 @@ namespace WPol{
 	if(mScale) {
 	  //	  pfMHT.SetPx(mValue * pfMHT.X());
 	  //	  pfMHT.SetPy(mValue * pfMHT.Y());
-	  float tmpX = pfMHT.X(); float tmpY = pfMHT.Y(); float tmpZ = pfMHT.Z(); float tmpE = pfMHT.E();
+	  //	  float tmpX = pfMHT.X(); float tmpY = pfMHT.Y();
+	  float tmpZ = pfMHT.Z(); float tmpE = pfMHT.E();
 	  pfMHT.SetPxPyPzE(mValue*pfMHT.X(),mValue*pfMHT.Y(),tmpZ,tmpE);
 	  ob->operator=(pfMHT - *(mEv->LD_CommonMuons().accepted.at(0)));
 	} else {
 	  double newMETscaling = gRandom->Gaus(pfMHT.Pt(), mValue * pfMHT.Pt()) / pfMHT.Pt();
 	  //	  pfMHT.SetPx(newMETscaling * pfMHT.X());
 	  //	  pfMHT.SetPy(newMETscaling * pfMHT.Y());
-	  float tmpX = pfMHT.X(); float tmpY = pfMHT.Y(); float tmpZ = pfMHT.Z(); float tmpE = pfMHT.E();
+	  //float tmpX = pfMHT.X(); float tmpY = pfMHT.Y(); 
+	  float tmpZ = pfMHT.Z(); float tmpE = pfMHT.E();
 	  pfMHT.SetPxPyPzE(newMETscaling*pfMHT.X(),newMETscaling*pfMHT.Y(),tmpZ,tmpE);
 	  ob->operator=(pfMHT - *(mEv->LD_CommonMuons().accepted.at(0)));
 	}
@@ -498,6 +498,216 @@ namespace WPol{
     bool mPlusPlus;
   };
 
+
+class LeptonEffRA4 : public Compute::ObjectFilter<Event::Lepton> {
+  public:
+    LeptonEffRA4() 
+    {
+      mModifies = true; 
+    }
+
+    ~LeptonEffRA4() {}
+
+    //bool Apply(const Event::Lepton* ob) {
+    bool Apply(Event::Lepton* ob) {
+      // cout << "start "<<endl;
+      if(ob->Pt()>20&&ob->Pt()<40)
+	{
+	  float prpports = 0.9+ (ob->Pt()-20.)/20.*0.1;
+	  // cout << prpports <<endl;
+	  if(prpports < mRandom.Uniform(0,1))   ob->SetPxPyPzE(1,1,1,sqrt(3));
+	}
+      // cout << "end "<<endl;
+      return true;
+    }
+
+    std::ostream & Description(std::ostream & ostrm){
+      ostrm << "Custom MuonID " << std::endl;
+      return ostrm;
+    }
+
+  private:
+  TRandom mRandom;
+  
+  };
+
+
+ class MuonScaleUncertRA4 : public Compute::ObjectFilter<Event::Lepton> {
+  public:
+    MuonScaleUncertRA4(std::string filename) :
+      mBiasFile(filename)
+     
+    { mModifies = true; 
+
+      // This reads in the bias histogram
+      mFile = new TFile(mBiasFile.c_str());
+      mBiashist = (TH2F*) mFile->Get("hEtaPhi");
+      if(mBiashist==0) {
+	std::cout << "Histogram hEtaPhi does not exist." << std::endl;
+	return;
+      }
+      etaAxis = mBiashist->GetXaxis();
+      phiAxis = mBiashist->GetYaxis();
+    }
+
+    ~MuonScaleUncertRA4() {}
+
+    //bool Apply(const Event::Lepton* ob) {
+    bool Apply(Event::Lepton* ob) {
+
+      // getting the bias
+      static const float TeVtoGeV=0.001;
+      float bias = mBiashist->GetBinContent(etaAxis->FindBin(ob->Eta()),  phiAxis->FindBin(ob->Phi()));
+      double newPt = 1./fabs(ob->GetCharge()/ob->Pt()+bias*TeVtoGeV);
+      double newPtFactor = newPt/ob->Pt();
+      // cout << " newPtFactor " << newPtFactor<<" "<< bias <<endl;
+      ob->SetPxPyPzE(newPtFactor*ob->Px(),newPtFactor*ob->Py(),ob->Pz(),ob->E());
+
+      return true;
+    }
+
+    std::ostream & Description(std::ostream & ostrm){
+      ostrm << "Custom MuonID " << std::endl;
+      return ostrm;
+    }
+
+  private:
+   std::string mBiasFile;
+   TFile* mFile;
+   TH2F* mBiashist;
+   TH2F* mBiasErrorhist;
+   TAxis * etaAxis;
+   TAxis * phiAxis;
+
+  };
+
+
+
+  class pfMETResUncOfficial : public Compute::ObjectFilter<ICF_LorentzV> {
+  public:
+    pfMETResUncOfficial(std::string name,std::string Lepton) :
+      mJECResFile(name),mLepton(Lepton)
+    { mModifies = true; 
+      corFile = new TFile(mJECResFile.c_str());
+      corHist = (TH2D*) corFile->Get("pfJetResolutionMCtoDataCorrLUT");
+      mPFJetThresh=10.;
+      mUnclusteredShift=0.1;
+
+    }
+
+    ~pfMETResUncOfficial() {}
+
+    bool Apply(ICF_LorentzV* ob) {
+    
+      LorentzV pfUnclustered, scaledjets, myscaledjet;
+      //      double unc = 0.0;
+      Event::Lepton const * theRECOLepton;
+      if(mLepton == "Muon") theRECOLepton = mEv->LD_CommonMuons().accepted.at(0);
+      else if(mEv->LD_CommonElectrons().accepted.size() > 0) theRECOLepton = mEv->LD_CommonElectrons().accepted.at(0);
+      else if(mEv->LD_Electrons().size() > 0) theRECOLepton = &mEv->LD_Electrons()[0];
+      else return true;
+
+      //decide whether the lepton is electron or muon, then add it back into the MET calculation
+      pfUnclustered = *ob + *(theRECOLepton);
+      // cout <<"starting with"<< pfUnclustered.Pt()<<endl;
+      LorentzV pfClustered(0,0,0,0);
+      //to change to use SecJets, use JD_SecJets, TerJets, JD_TerJets
+      for(unsigned int i=0; i< mEv->JD_Jets().size(); i++) {
+
+
+	//loop through all jets above threshold (in this case the Jets relate to AK5PF2PAT)
+	if(mEv->JD_Jets().at(i).Pt() > mPFJetThresh&&fabs(mEv->JD_Jets().at(i).Eta())<4.7) {
+	  //calculate the uncertainty on the JEC according to corrected PT and Eta
+
+	  if(  fabs(ROOT::Math::VectorUtil::DeltaR(*(theRECOLepton),mEv->JD_Jets().at(i)))<.3  ) continue;
+	  int binX = corHist->GetXaxis()->FindBin(fabs(mEv->JD_Jets().at(i).Eta()));
+	  int binY = corHist->GetYaxis()->FindBin(mEv->JD_Jets().at(i).Pt());
+	  float unc =  corHist->GetBinContent(binX,binY);
+	  float corrPTfactor =1;
+	  //  for(std::vector<ICF_LorentzV*>::const_iterator it = mEv->genJetP4().begin();
+	  //     it != mEv->genJetP4().end();it++) 
+	  for(unsigned int it=0; it<mEv->genJetP4()->size();it++)
+	  //     it != mEv->genJetP4().end();it++) 
+	    {
+
+	      LorentzV Genjet=(mEv->genJetP4()->at(it));
+	      bool cirrection = false;
+	      double dr = fabs(ROOT::Math::VectorUtil::DeltaR(Genjet, mEv->JD_Jets().at(i) ) );
+	      if(dr<0.5)
+		{ 
+		  //Genjet=*(mEv->genJetP4().at(it));
+		  if(fabs(Genjet.Pt()-mEv->JD_Jets().at(i).Pt())/mEv->JD_Jets().at(i).Pt()>0.9){
+		    for(std::vector<Event::GenObject>::const_iterator it = mEv->GenParticles().begin();
+			it != mEv->GenParticles().end();
+			++it){
+		      
+		      if(it->GetStatus() != 1) continue;
+		      if(abs(it->GetID())== 12||abs(it->GetID()) == 14|| abs(it->GetID()) == 16) 
+			{
+			  if(fabs(ROOT::Math::VectorUtil::DeltaR(Genjet,*it ))<0.5){
+			    // cout << "Genjet before addin neutrinos: "<< Genjet.Pt()<<endl;
+			    if(it->Pt()<Genjet.Pt())    Genjet -=  *it ;
+			    // cout << "Genjet after addin neutrinos: "<< Genjet.Pt()<<endl;
+			    cirrection=true;
+			  }
+			  
+			}
+		      
+		    }
+		  }
+		  corrPTfactor = (mEv->JD_Jets().at(i).Pt()+(unc-1)*(mEv->JD_Jets().at(i).Pt()-Genjet.Pt()))/mEv->JD_Jets().at(i).Pt();
+		  if(fabs(Genjet.Pt()-mEv->JD_Jets().at(i).Pt())/mEv->JD_Jets().at(i).Pt()>1) corrPTfactor=1;
+		  if(fabs(Genjet.Pt()-mEv->JD_Jets().at(i).Pt())/Genjet.Pt()>1) corrPTfactor=1;
+		  if (cirrection){
+
+		    //   cout << Genjet.Pt()<< " "<< mEv->JD_Jets().at(i).Pt()<<" error scare " <<  unc-1 <<  "corfact: "<< corrPTfactor << endl;
+		    //	    cout << " unc: "<<unc <<   " binX " << binX << " jet Eta: " << mEv->JD_Jets().at(i).Eta()<<    " binY " << binY << endl;
+		  }
+
+		}
+	    }
+
+	  // add in the jets to the (lepton + neutrino) to leave you with unclustered energy
+	  pfUnclustered += (mEv->JD_Jets().at(i));
+	  // scale the jets by the JECUnc either up or down
+	  pfClustered -= mEv->JD_Jets().at(i) * corrPTfactor;
+	  // make a negative vector sum of all the scaled jets
+	  
+	}
+      }
+      //shift the unclustered energy either up or down
+      pfUnclustered =  pfUnclustered*(1+ random.Gaus(1,pfUnclustered.Pt()*0.1)/pfUnclustered.Pt());
+      //add in the negative vector sum of scaled jets
+      pfUnclustered += pfClustered;
+
+      //  cout <<"ending with"<< pfUnclustered.Pt()<<endl;
+
+      //std::cout << "scaled MHT: " << pfUnclustered.Pt() << std::endl;
+
+      //finally, add the lepton back into the calculation
+      ob->operator=(pfUnclustered - *(theRECOLepton));
+      return true;
+
+    }
+
+    std::ostream & Description(std::ostream & ostrm) {
+      ostrm << "pfMET systematic from JEC Uncertainties";
+      return ostrm;
+    }
+
+  private:
+    std::string mJECResFile;
+    TFile* corFile;
+    TH2D * corHist;
+    TRandom random;
+    float mPFJetThresh;
+    std::string mLepton;
+    double mUnclusteredShift;
+  };
+
+
+
+
   class pfMETJECUnc : public Compute::ObjectFilter<ICF_LorentzV> {
   public:
     pfMETJECUnc(const Utils::ParameterSet & ps) :
@@ -531,6 +741,8 @@ namespace WPol{
 	//loop through all jets above threshold (in this case the Jets relate to AK5PF2PAT)
 	if(mEv->JD_Jets().at(i).Pt() > mPFJetThresh&&fabs(mEv->JD_Jets().at(i).Eta())<4.7) {
 	  //calculate the uncertainty on the JEC according to corrected PT and Eta
+
+	  if(  fabs(ROOT::Math::VectorUtil::DeltaR(*(theRECOLepton),mEv->JD_Jets().at(i)))<.3  ) continue;
 	  jecUnc.setJetEta(mEv->JD_Jets().at(i).Eta());
 	  jecUnc.setJetPt(mEv->JD_Jets().at(i).Pt());
 	  float uncI = jecUnc.getUncertainty(true);
@@ -538,6 +750,7 @@ namespace WPol{
 	  jecUncRes.setJetEta(mEv->JD_Jets().at(i).Eta());
 	  jecUncRes.setJetPt(mEv->JD_Jets().at(i).Pt());
 	  float uncII = jecUncRes.getUncertainty(true)-1.;
+
 	  //  cout << " JEC uncerties " << uncI<<" "<< uncII<<endl;
 	  unc = sqrt(uncII*uncII+uncI*uncI);
 	  //add in the jets to the (lepton + neutrino) to leave you with unclustered energy
@@ -577,6 +790,11 @@ namespace WPol{
     double mUnclusteredShift;
     bool mShiftUp;
   };
+
+
+
+
+
 
   class ECALTransparencyCorrections : public Compute::ObjectFilter<Event::Lepton>{
    public:
@@ -1015,7 +1233,7 @@ namespace Alex{
          bool passHoE = false;
          bool passDeltaEta = false; bool passDeltaPhi = false;
          bool passShh = false;
-         bool passConv = false;
+         //bool passConv = false;
          bool passConvExtra = false;
          int iM = (ob)->GetIndex();
 
