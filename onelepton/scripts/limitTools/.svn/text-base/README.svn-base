@@ -1,0 +1,31 @@
+Instructions to install the Higg Limit code and run :
+
+(1) Setup Higgs limit code area:
+> setenv SCRAM_ARCH slc5_amd64_gcc434 
+
+> cmsrel CMSSW_4_2_8
+> cd CMSSW_4_2_8/src 
+> cmsenv
+> cvs co  HiggsAnalysis/CombinedLimit
+> scramv1 b
+
+(2)
+Inside the directory : HiggsAnalysis/CombinedLimit/data/tutorials/
+you should put the content of limitTools/
+ 
+(3) Submit Jobs to lxplus:
+> ./runLimit.sh 
+[ Set MODE="OBS" or "EXP" 
+and THRESHOLD="thrHT500" or "thrHT750 or "thrHT1000" ]
+
+(4) 
+> bjobs |grep "RUN" |wc -l
+[ View how many jobs are in RUNNING state ]
+
+(5) After jobs are completed:
+Put the script "CLs_reader_snippet.sh" under mSUGRA_ObservedLimit_thrHTxxx
+>./CLs_reader_snippet.sh    
+[ this script will read the CLs value from each SUSY point output and will return a txt file with the m0 , m1/2 and CLs values ]
+
+(6) Produce the ExclusionLimit plot: 
+ If you want to produce the 2D exclusion plot yourslef as well , you can use the plotLimit.C macro . By editing this macro, you have to put the name of the txt file produced at (5) as an argument to the plotLimit function.
