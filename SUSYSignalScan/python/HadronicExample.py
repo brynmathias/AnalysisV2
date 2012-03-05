@@ -59,7 +59,8 @@ JESUncert = JESUncert(switches()["jes"])
 alphaT70 = OP_HadAlphaTCut(0.70)
 alphaT55 = OP_HadAlphaTCut(0.55)
 alphaT53 = OP_HadAlphaTCut(0.53)
-
+noGenEle = OP_nGenElectrons("<=",0,10.,2.5)
+noGenMu = OP_nGenMuons("<=",0,10.,2.5)
 if switches()["selection"]=="muon" :
   from libOneLepton import *
   from libWPol import *
@@ -79,15 +80,16 @@ if switches()["selection"]=="muon" :
 def cutFlow(cutTreeMC, model) :
   out = []
 
-  cutTreeMC.Attach(count_total)
+  cutTreeMC.Attach(noGenEle)
+  cutTreeMC.TAttach(noGenEle,noGenMu)
   if isCmssm(model) :
-    cutTreeMC.TAttach(count_total,selection)
+    cutTreeMC.TAttach(noGenMu,selection)
     out.append( tripleScale(model = switches()["model"], cutTree = cutTreeMC, cut = count_total, label = "before") )
   elif isSms(model) :
   #  cutTreeMC.TAttach(count_total,smsFilter)
     out.append( smsOps(model = switches()["model"], cutTree = cutTreeMC, cut =
     count_total, label = "before") )
-    cutTreeMC.TAttach(count_total,selection)
+    cutTreeMC.TAttach(noGenMu,selection)
 
   if switches()["selection"]!="muon" :
     cutTreeMC.TAttach(selection,oddElectron)
