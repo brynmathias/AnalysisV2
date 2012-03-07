@@ -848,13 +848,14 @@ std::ostream& sumRecHitPtCut::Description( std::ostream &ostrm ) {
    nGenElectrons::~nGenElectrons(){ delete mComparison; }
    bool nGenElectrons::Process( Event::Data& ev ){
      int nGenEle = 0;
-     GenMatrixBin myGenMatrixBin(&ev);
-     for (vector <Event::GenObject const *>::const_iterator aIt = myGenMatrixBin.the_GenEli.begin();
-      aIt != myGenMatrixBin.the_GenEli.end();
-      aIt++) {
-          if( (*aIt)->Pt() > ptCut_ && fabs((*aIt)->Eta()) < etaCut_ ) nGenEle++;
-      }
-     
+     for (std::vector<Event::GenObject>::const_iterator genParticle = ev.GenParticles().begin();  genParticle != ev.GenParticles().end(); ++genParticle) {
+       if(fabs(genParticle->GetID())==11){//select gen muons
+         if(fabs(genParticle->Eta()) < etaCut_ && genParticle->Pt() > ptCut_ ){
+           nGenEle++;
+         }
+       }
+     }
+
       return (*mComparison)(UInt_t(nGenEle), nGenLeptons);
 
    }
@@ -892,13 +893,13 @@ std::ostream& nGenElectrons::Description(std::ostream &ostrm) {
    nGenMuons::~nGenMuons(){ delete mComparison; }
    bool nGenMuons::Process( Event::Data& ev ){
      int nGenEle = 0;
-     GenMatrixBin myGenMatrixBin(&ev);
-     for (vector <Event::GenObject const *>::const_iterator aIt = myGenMatrixBin.the_GenMuon.begin();
-      aIt != myGenMatrixBin.the_GenMuon.end();
-      aIt++) {
-          if( (*aIt)->Pt() > ptCut_ && fabs((*aIt)->Eta()) < etaCut_ ) nGenEle++;
-      }
-     
+     for (std::vector<Event::GenObject>::const_iterator genParticle = ev.GenParticles().begin();  genParticle != ev.GenParticles().end(); ++genParticle) {
+       if(fabs(genParticle->GetID())==13){//select gen muons
+         if(fabs(genParticle->Eta()) < etaCut_ && genParticle->Pt() > ptCut_ ){
+           nGenEle++;
+         }
+       }
+     }
       return (*mComparison)(UInt_t(nGenEle), nGenLeptons);
 
    }
@@ -910,6 +911,51 @@ std::ostream& nGenMuons::Description(std::ostream &ostrm) {
 }
 
 
+// -----------------------------------------------------------------------------
+//
+
+
+   nGenPhotons::nGenPhotons(const std::string & comparison,UInt_t nGenLep, double pt, double eta ):
+      nGenLeptons(nGenLep),
+      etaCut_(eta),
+      ptCut_(pt){
+      if ( strcmp("==",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, EQ>);
+      }else if ( strcmp("!=",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, NEQ>);
+      } else if ( strcmp("<",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LT>);
+      } else if ( strcmp(">",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GT>);
+      } else if ( strcmp(">=",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GTEQ>);
+      } else if ( strcmp("<=",comparison.c_str()) == 0 ) {
+      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LTEQ>);
+      } else {
+      throw std::invalid_argument(std::string("Invalid operation"));
+      }
+   }
+   
+   nGenPhotons::~nGenPhotons(){ delete mComparison; }
+   bool nGenPhotons::Process( Event::Data& ev ){
+     int nGenEle = 0;
+     for (std::vector<Event::GenObject>::const_iterator genParticle = ev.GenParticles().begin();  genParticle != ev.GenParticles().end(); ++genParticle) {
+       if(fabs(genParticle->GetID())==22){//select gen muons
+         if(fabs(genParticle->Eta()) < etaCut_ && genParticle->Pt() > ptCut_ ){
+           nGenEle++;
+         }
+       }
+     }
+
+      return (*mComparison)(UInt_t(nGenEle), nGenLeptons);
+
+   }
+
+std::ostream& nGenPhotons::Description(std::ostream &ostrm) {
+  ostrm << "Num GenPhotons Operation (num " << mComparison->type();
+  ostrm << " " << nGenLeptons << " with pt > " << ptCut_ << " GeV and |eta| < " << etaCut_ << ")";
+  return ostrm;
+}
 
 
 

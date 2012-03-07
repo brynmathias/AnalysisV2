@@ -335,6 +335,21 @@ namespace Operation {
       
   };
 
+  class nGenPhotons : public Operation::_Base
+  {
+  public:
+    nGenPhotons (const std::string&, UInt_t, double, double);
+    ~nGenPhotons();
+    bool Process( Event::Data& );
+    std::ostream& Description( std::ostream& );
+  private:
+    int nGenLeptons;
+    Operation::_Compare<UInt_t> *mComparison;
+    double etaCut_;
+    double ptCut_;
+      
+  };
+
 
 
 
