@@ -1,0 +1,69 @@
+#!/bin/bash 
+
+SIGMA="0.5"
+
+#if [ $SIGMA == "0.5" ];
+#    then cls_file="cls_explimit.txt";
+#else if [ $SIGMA == "0.025" ];
+#    then cls_file="cls_explimit_plus1sigma.txt";
+#else if [ $SIGMA == "0.975" ];
+#    then cls_file="cls_explimit_minus1sigma.txt";
+#else 
+#    echo "Not valid sigma given !!!!"
+#fi
+cls_file="cls_explimit.txt"
+
+OUTPUT_TXT_START="output_quant"${SIGMA}"_"
+OUTPUT_TXT_EXTEN=".txt"
+
+NJOBS=1000
+COUNTER=1
+# SUSY points counters
+M0=0; M12=0; SUSYSTEP=40
+M0max=2000; M12max=800
+    
+while [ $M0 -le ${M0max} ];
+#for (( M0=100; M0<=M0max; M0+=20 ))
+  do
+
+#    while [ $M12 -le ${M12max} ];
+  for (( M12=0; M12<=M12max; M12+=${SUSYSTEP} ))
+    do
+
+#while [ $COUNTER -le $NJOBS ];
+#    do
+
+    OUTPUT_TXT=${OUTPUT_TXT_START}"_mo"${M0}"_mh"${M12}"_*"${OUTPUT_TXT_EXTEN}
+#skip point if code did not finish properly
+     if ! grep -q " Hybrid New " ${OUTPUT_TXT} 
+        then
+	echo 'Error: did not finish properly'
+     fi
+
+    limits=$( cat ${OUTPUT_TXT} | grep "CLs =" | awk '{print $3}') 
+
+#    echo $( cat ${OUTPUT_TXT} | grep "CLs =" )
+
+    limit_save=999 #initialize to nonsense
+
+    for j in ${limits[@]}; do
+	#echo $j
+	limit_save=$j
+    done
+
+    #save last CLs number
+    echo ${M0}" "${M12}" "$limit_save >> ${cls_file}
+    #see if the point is excluded or not
+#    echo $limit_save | awk '{if($1 < 0.05) print $1}' 
+#    excluded=$( echo $limit_save | awk '{if($1 < 0.05) print "1"; else print "0";}' ) 
+#	echo $excluded
+	
+    
+
+    let COUNTER=${COUNTER}+1 
+  done
+  let M0=${M0}+${SUSYSTEP}
+done
+
+
+

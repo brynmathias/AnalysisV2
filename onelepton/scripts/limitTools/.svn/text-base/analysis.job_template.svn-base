@@ -1,0 +1,15 @@
+#!/bin/sh
+ 
+export LOCALDIR=_localDirectory_
+#/afs/cern.ch/user/g/georgia/CMSSW_4_2_8/src/HiggsAnalysis/CombinedLimit/data/tutorials
+ 
+cd $LOCALDIR
+
+export SCRAM_ARCH =lc5_amd64_gcc434 
+source /afs/cern.ch/cms/sw/cmsset_default.sh
+cmsenv
+#rehash
+
+ls -lrt
+
+#combine -M HybridNew --frequentist --testStat LHC -n _outputFile_ _dataCardfile_
