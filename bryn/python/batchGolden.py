@@ -404,7 +404,7 @@ def MakeDataTree(Threshold,Muon = None):
   # #Here be plots after all the cuts!!
   cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
   if Muon == None:
-      cutTreeData.TAttach(DeadEcalCutData,ZeroMuon)#MHT_METCut
+      cutTreeData.TAttach(MHT_METCut,ZeroMuon)#
   #     # cutTreeData.TAttach(ZeroMuon,ZeroMuonbtag)
   #     # out.append(AddBinedHist(cutTree = cutTreeData,
   #     # OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
@@ -481,7 +481,7 @@ def MakeMCTree(Threshold, Muon = None):
   #Here be plots after all the cuts!!
   cutTreeMC.TAttach(DeadEcalCutMC,MHT_METCut)
   if Muon == None:
-      cutTreeMC.TAttach(DeadEcalCutMC,ZeroMuon)#MHT_METCut
+      cutTreeMC.TAttach(MHT_METCut,ZeroMuon)#
       # cutTreeMC.TAttach(ZeroMuon,ZeroMuonbtag)
       # out.append(AddBinedHist(cutTree = cutTreeMC,
       # OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
