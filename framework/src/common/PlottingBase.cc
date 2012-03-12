@@ -156,5 +156,5 @@ histarray.clear();
     histarray.push_back(temphist);
   } // end of loop over histograms to book
 
-} // end of BookHistArray (2D) helper function.
+} // end of BookHistArray (3D) helper function.
 

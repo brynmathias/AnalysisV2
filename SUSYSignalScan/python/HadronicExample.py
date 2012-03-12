@@ -128,34 +128,16 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(MHToverMET,alphaT70)
     cutTreeMC.FAttach(alphaT70,alphaT55)
     cutTreeMC.FAttach(alphaT55,alphaT53)
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "") )
-  out.append( addBinnedStuff(model = switches()["model"],
+ out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = alphaT,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
                             label2 = ""),extra = MChiCut)
-
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT53,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "AlphaT53_55_") )
-
   out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
                             cut = alphaT53,
                             htBins = [275, 325] + [375+100*i for i in range(6)],
                             label2 = "AlphaT53_55_"),extra = MChiCut)
-
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT55,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "AlphaT55_70_") )
 
   out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
@@ -163,11 +145,6 @@ def cutFlow(cutTreeMC, model) :
                             htBins = [275, 325] + [375+100*i for i in range(6)],
                             label2 = "AlphaT55_70_"),extra = MChiCut)
 
-  # out.append( addBinnedStuff(model = switches()["model"],
-  #                           cutTree = cutTreeMC,
-  #                           cut = alphaT70,
-  #                           htBins = [250, 300, 350, 450],
-  #                           label2 = "AlphaT70_inf") )
 
   out.append( addBinnedStuff(model = switches()["model"],
                             cutTree = cutTreeMC,
