@@ -37,9 +37,11 @@ addCutFlowData(anal_ak5_caloData)
 
 
 from data.Run2011.HT_Run2011AB import *
-HT_Run2011AB.File = ["../CMSSM_Tanb10_320_520.root"]
+from htRemake import *
+
+#HT_Run2011AB.File = ["../CMSSM_Tanb10_320_520.root"]
 
 outdir = "../results_"+strftime("%d_%b")+"/Data/"
 ensure_dir(outdir)
 HT_Run2011AB.File = HT_Run2011AB.File[0:1]
-anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])#HT_Run2011A])
+anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011A_05Aug2011_v1_V15_04_00_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1])#HT_Run2011A])

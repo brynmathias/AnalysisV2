@@ -433,14 +433,14 @@ alphatTesting = {
 #     sigList.append(key)
 # htCut = RECO_CommonHTCut(375.)
 # alphaT055 = HadronicAlphaT(0.55)
-# dump = EventDump()
+dump = EventDump()
 # Cross_Trigger_PS.Triggers =  trigList
 # TriggersRef = OP_MultiTrigger(Cross_Trigger_PS.ps())
 # HT_Trigger_PS.Triggers = sigList
 # TriggersSig = OP_MultiTrigger(HT_Trigger_PS.ps())
 # cutTreeData.TAttach(muDr,alphaT055)
 # cutTreeData.TAttach(alphaT055,htCut)
-# cutTreeData.TAttach(htCut,dump)
+#cutTreeData.TAttach(NoiseFilt,dump)
 # 
 # 
 # skim_ps=PSet(
@@ -651,14 +651,21 @@ from data.Run2011.MuHad2011AB import *
 from SingleMu import *
 #from data.Run2011.MuHad2011AB import *
 from data.Run2011.MuHad_Run2011A_Complete_V15_03_14 import *
+from SUSYSignalScan.SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02 import *
+from SUSYSignalScan.SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01 import *
+from SUSYSignalScan.SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_24_scan_T2bb import *
+from SUSYSignalScan.SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt import *
 sample = MuHad2011AB
-sample.File = "../CMSSM_Tanb10_1800_280.root"
-sample.Name = "CMSSM_Tanb10_1800_280"
+sample.File = SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02.File
+sample.File = SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01.File
+sample.File = SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_24_scan_T2bb.File
+sample.File = SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt.File
+sample.Name = "T2ttTestFile"
 # sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
 # MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
 #sample = HTRun2011AB
 
-outDir = "../evDump/ht%dNoUpper/"%(bin)
+outDir = "../T2ttTest/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
