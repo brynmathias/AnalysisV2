@@ -404,7 +404,7 @@ def MakeDataTree(Threshold,Muon = None):
   # #Here be plots after all the cuts!!
   cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
   if Muon == None:
-      cutTreeData.TAttach(MHT_METCut,ZeroMuon)
+      cutTreeData.TAttach(DeadEcalCutData,ZeroMuon)#MHT_METCut
   #     # cutTreeData.TAttach(ZeroMuon,ZeroMuonbtag)
   #     # out.append(AddBinedHist(cutTree = cutTreeData,
   #     # OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
@@ -481,7 +481,7 @@ def MakeMCTree(Threshold, Muon = None):
   #Here be plots after all the cuts!!
   cutTreeMC.TAttach(DeadEcalCutMC,MHT_METCut)
   if Muon == None:
-      cutTreeMC.TAttach(MHT_METCut,ZeroMuon)
+      cutTreeMC.TAttach(DeadEcalCutMC,ZeroMuon)#MHT_METCut
       # cutTreeMC.TAttach(ZeroMuon,ZeroMuonbtag)
       # out.append(AddBinedHist(cutTree = cutTreeMC,
       # OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
@@ -491,36 +491,36 @@ def MakeMCTree(Threshold, Muon = None):
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "") )
       
-  else:
-      cutTreeMC.TAttach(MHT_METCut,minDRMuonJetCut)
-      cutTreeMC.TAttach(minDRMuonJetCut,OneMuon)
-      cutTreeMC.TAttach(OneMuon,ZMassCut)
-      cutTreeMC.TAttach(ZMassCut,PFMTCut30)
-      # cutTreeMC.TAttach(PFMTCut30,btagOneMuon)
-      # out.append(AddBinedHist(cutTree = cutTreeMC,
-      # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
-      # htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
-    
-      out.append(AddBinedHist(cutTree = cutTreeMC,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
-      htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
-    
-    
-      cutTreeMC.TAttach(minDRMuonJetCut,DiMuon)
-      cutTreeMC.TAttach(DiMuon,ZMass_2Muons)
-      cutTreeMC.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
-      # cutTreeMC.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
-      # avobe here does one big inclusive bin!
-      # Now lets start binning in HT bins
-      # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
-      # we arrange the HT bins so they are not repoduced though out threshold runs.
-      # out.append(AddBinedHist(cutTree = cutTreeMC,
-      # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
-      # htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
-    
-      out.append(AddBinedHist(cutTree = cutTreeMC,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
-      htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
+  # else:
+  #     cutTreeMC.TAttach(MHT_METCut,minDRMuonJetCut)
+  #     cutTreeMC.TAttach(minDRMuonJetCut,OneMuon)
+  #     cutTreeMC.TAttach(OneMuon,ZMassCut)
+  #     cutTreeMC.TAttach(ZMassCut,PFMTCut30)
+  #     # cutTreeMC.TAttach(PFMTCut30,btagOneMuon)
+  #     # out.append(AddBinedHist(cutTree = cutTreeMC,
+  #     # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
+  #     # htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
+  #   
+  #     out.append(AddBinedHist(cutTree = cutTreeMC,
+  #     OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
+  #     htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
+  #   
+  #   
+  #     cutTreeMC.TAttach(minDRMuonJetCut,DiMuon)
+  #     cutTreeMC.TAttach(DiMuon,ZMass_2Muons)
+  #     cutTreeMC.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
+  #     # cutTreeMC.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
+  #     # avobe here does one big inclusive bin!
+  #     # Now lets start binning in HT bins
+  #     # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
+  #     # we arrange the HT bins so they are not repoduced though out threshold runs.
+  #     # out.append(AddBinedHist(cutTree = cutTreeMC,
+  #     # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
+  #     # htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
+  #   
+  #     out.append(AddBinedHist(cutTree = cutTreeMC,
+  #     OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
+  #     htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
 
 
   return (cutTreeMC,secondJetET,out)
@@ -542,11 +542,22 @@ mu_id = PSet(
     MaxInrTrkDz = 1.
         )
 
+
+# PU S6
+# vertex_reweight = GoodVertexReweighting(
+# PSet(GoodVertexWeights =[1.0, 0.6747792521746856, 1.0448420078821972, 1.3055015002285708, 1.3983895957384924, 1.4093911155782819, 1.3850308438481276, 1.3018072225453758, 1.1623455679439036, 1.0517773707737472, 0.89838694986924372, 0.76765214151467354, 0.63185640954246791, 0.49262105848611853, 0.42787145593782405, 0.3847054078776958, 0.35778382190253444, 0.34148368315539618, 0.28535617241618649, 0.24963682196802897, 0.15231738209843554, 0.10766396055685283, 0.066294358386045707, 0.039350814964675719, 0.071293966061105704] ).ps())
+
+# PU S4
 vertex_reweight = GoodVertexReweighting(
 PSet(GoodVertexWeights = [1.0, 0.071182041228993354, 0.3788533298983548, 0.70212224756460717, 0.95912926863057879,
  1.1063323506805849, 1.1826257455177471, 1.2297382718782017, 1.2772830447358376, 1.4266446590805815, 1.5732065775636328, 
  1.8401056375971667, 2.1784909215394999, 2.506266882602076, 3.3335988825191176, 4.687787057503483, 6.8602191807881647, 
  11.198474011060968, 14.883466002768214, 20.878255333866864, 1.0, 1.0, 1.0, 1.0, 1.0]).ps())
+
+
+
+QCD_Summer11_Pythia_All # S3
+QCD_Summer11_madgraph_All #S4
 
 
 # Here are the Summer 11 MC samples!!!
@@ -569,11 +580,6 @@ from montecarlo.Summer11.Tbar_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_P
 from montecarlo.Summer11.WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
 from montecarlo.Summer11.WZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
 from montecarlo.Summer11.ZZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
-
-
-vertex_reweight = GoodVertexReweighting(
-PSet(GoodVertexWeights = [1.0, 0.15001302510027506, 0.43375830446793989, 0.75490723451547181, 1.0767662177521609, 1.0857064732099417, 0.92697612441178856, 0.94600573227422968, 1.0331644653665495, 1.0657534976700362, 1.1616615312494092, 1.6809671358035108, 2.5371671412076915, 3.3528560115582478, 7.7874499515383793, 1.0,1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]).ps())
-
 
 
 PU_S6_Samples = [ WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1, 

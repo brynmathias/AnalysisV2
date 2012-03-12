@@ -37,10 +37,11 @@ addCutFlowData(anal_ak5_caloData)
 
 from data.Run2011.HT_Run2011AB import *
 
-outDir = "../results_"+strftime("%d_%b")+"//Data37"
+outDir = "../results_NoMHTovMET_"+strftime("%d_%b")+"//Data37"
 ensure_dir(outDir)
+from htRemake import *
 # HT42_incomplete.LastEntry = 100
 # HT42_incomplete.File = HT42_incomplete.File[0:1]
 #HT_Run2011AB.File = ["/home/hep/db1110/public_html//Darren_And_Bryn_Sync/Had_Skim.root"]
-anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011AB])
+anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011A_05Aug2011_v1_V15_04_00_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1])
 
