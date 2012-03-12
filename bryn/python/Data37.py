@@ -37,7 +37,7 @@ addCutFlowData(anal_ak5_caloData)
 
 from data.Run2011.HT_Run2011AB import *
 
-outDir = "../results_NoMHTovMET_"+strftime("%d_%b")+"//Data37"
+outDir = "../results_FullCutFlow_"+strftime("%d_%b")+"//Data37"
 ensure_dir(outDir)
 from htRemake import *
 # HT42_incomplete.LastEntry = 100
