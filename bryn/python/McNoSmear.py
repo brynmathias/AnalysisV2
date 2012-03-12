@@ -36,4 +36,4 @@ addCutFlowMC(anal_ak5_caloMC)
 outDir = "../results_"+strftime("%d_%b")+"//NoSmear/"
 ensure_dir(outDir)
 
-anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,Summer11_MC_Higher_Bins)
+anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,QCD_Summer11_madgraph_All)
