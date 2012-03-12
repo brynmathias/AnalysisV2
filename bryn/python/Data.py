@@ -16,7 +16,7 @@ vbtfMuonId_cff = Muon_IDFilter( vbtfmuonidps.ps()  )
 vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 
-cutTree = MakeDataTree(100., Muon = None)
+cutTree,l = MakeDataTree(100., Muon = None)
 
 
 def addCutFlowData(a) :
@@ -39,9 +39,9 @@ addCutFlowData(anal_ak5_caloData)
 from data.Run2011.HT_Run2011AB import *
 from htRemake import *
 
-# HT_Run2011AB.File = ["../CMSSM_Tanb10_320_520.root"]
+HT_Run2011AB.File = ["../CMSSM_Tanb10_1800_280.root"]
 
 outdir = "../results_"+strftime("%d_%b")+"/Data/"
 ensure_dir(outdir)
 HT_Run2011AB.File = HT_Run2011AB.File[0:1]
-anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011A_05Aug2011_v1_V15_04_00_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1])#HT_Run2011A])
+anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[HT_Run2011AB])#HT_Run2011A])
