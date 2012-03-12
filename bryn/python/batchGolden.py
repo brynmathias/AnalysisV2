@@ -377,23 +377,21 @@ def MakeDataTree(Threshold,Muon = None):
   # from batchGolden import *
   cutTreeData = Tree("Data")
   cutTreeData.Attach(json)
-  #cutTreeData.TAttach(json,evFilter)
-  #cutTreeData.TAttach(evFilter,skim)
-  #cutTreeData.TAttach(evFilter,eventDump)
+  # #cutTreeData.TAttach(json,evFilter)
+  # #cutTreeData.TAttach(evFilter,skim)
+  # #cutTreeData.TAttach(evFilter,eventDump)
   cutTreeData.TAttach(json,NoiseFilt)
-  cutTreeData.TAttach(json,json_ouput)
-
-  #cutTreeData.Attach(eventDump)
-  
+  # cutTreeData.TAttach(json,json_ouput)
+  # 
+  # cutTreeData.Attach(eventDump)
+  # 
   cutTreeData.TAttach(NoiseFilt,GoodVertexMonster)
   cutTreeData.TAttach(GoodVertexMonster,recHitCut)
   cutTreeData.TAttach(recHitCut,LeadingJetEta)
   cutTreeData.TAttach(LeadingJetEta,secondJetET)
   cutTreeData.TAttach(secondJetET,oddJet)
   cutTreeData.TAttach(oddJet,badMuonInJet)
-  cutTreeData.TAttach(badMuonInJet,#oddMuon)
-  #cutTreeData.TAttach(oddMuon,
-  oddElectron)
+  cutTreeData.TAttach(badMuonInJet,oddElectron)
   cutTreeData.TAttach(oddElectron,oddPhoton)
   cutTreeData.TAttach(oddPhoton,numComElectrons)
   cutTreeData.TAttach(numComElectrons,numComPhotons)
@@ -407,49 +405,50 @@ def MakeDataTree(Threshold,Muon = None):
   cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
   if Muon == None:
       cutTreeData.TAttach(MHT_METCut,ZeroMuon)
-      # cutTreeData.TAttach(ZeroMuon,ZeroMuonbtag)
-      # out.append(AddBinedHist(cutTree = cutTreeData,
-      # OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
-      # htBins = HTBins,TriggerDict = triggers,lab ="btag_") )
-    
+  #     # cutTreeData.TAttach(ZeroMuon,ZeroMuonbtag)
+  #     # out.append(AddBinedHist(cutTree = cutTreeData,
+  #     # OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuonbtag,
+  #     # htBins = HTBins,TriggerDict = triggers,lab ="btag_") )
+  #   
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "") )
-  # 
-  else:
-      cutTreeData.TAttach(MHT_METCut,minDRMuonJetCut)
-      cutTreeData.TAttach(minDRMuonJetCut,OneMuon)
-      cutTreeData.TAttach(OneMuon,ZMassCut)
-      cutTreeData.TAttach(ZMassCut,PFMTCut30)
-      # cutTreeData.TAttach(PFMTCut30,btagOneMuon)
-      # out.append(AddBinedHist(cutTree = cutTreeData,
-      # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
-      # htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
-    
-      out.append(AddBinedHist(cutTree = cutTreeData,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
-      htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
-     
-     
-       
-      cutTreeData.TAttach(minDRMuonJetCut,DiMuon)
-      cutTreeData.TAttach(DiMuon,ZMass_2Muons)
-      cutTreeData.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
-      # cutTreeData.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
-      # avobe here does one big inclusive bin!
-  #     # Now lets start binning in HT bins
-  #     # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
-  #     # we arrange the HT bins so they are not repoduced though out threshold runs.
-  # 
-      # out.append(AddBinedHist(cutTree = cutTreeData,
-      # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
-      # htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
+  # # 
+  # else:
+  #     cutTreeData.TAttach(MHT_METCut,minDRMuonJetCut)
+  #     cutTreeData.TAttach(minDRMuonJetCut,OneMuon)
+  #     cutTreeData.TAttach(OneMuon,ZMassCut)
+  #     cutTreeData.TAttach(ZMassCut,PFMTCut30)
+  #     # cutTreeData.TAttach(PFMTCut30,btagOneMuon)
+  #     # out.append(AddBinedHist(cutTree = cutTreeData,
+  #     # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagOneMuon,
+  #     # htBins = HTBins,TriggerDict = triggers,lab ="btag_OneMuon_") )
   #   
-      out.append(AddBinedHist(cutTree = cutTreeData,
-      OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
-      htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
-  #   
-  return cutTreeData
+  #     out.append(AddBinedHist(cutTree = cutTreeData,
+  #     OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
+  #     htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
+  #    
+  #    
+  #      
+  #     cutTreeData.TAttach(minDRMuonJetCut,DiMuon)
+  #     cutTreeData.TAttach(DiMuon,ZMass_2Muons)
+  #     cutTreeData.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
+  #     # cutTreeData.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
+  #     # avobe here does one big inclusive bin!
+  # #     # Now lets start binning in HT bins
+  # #     # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
+  # #     # we arrange the HT bins so they are not repoduced though out threshold runs.
+  # # 
+  #     # out.append(AddBinedHist(cutTree = cutTreeData,
+  #     # OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
+  #     # htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
+  # #   
+  #     out.append(AddBinedHist(cutTree = cutTreeData,
+  #     OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
+  #     htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
+  #
+  out.append(secondJetET)   
+  return (cutTreeData, out)
 
 #Second MC!
 
@@ -471,10 +470,7 @@ def MakeMCTree(Threshold, Muon = None):
   cutTreeMC.TAttach(LeadingJetEta,secondJetET)
   cutTreeMC.TAttach(secondJetET,oddJet)
   cutTreeMC.TAttach(oddJet,badMuonInJet)
-  cutTreeMC.TAttach(badMuonInJet,
-  #oddMuon)
-  #cutTreeMC.TAttach(oddMuon,
-  oddElectron)
+  cutTreeMC.TAttach(badMuonInJet,oddElectron)
   cutTreeMC.TAttach(oddElectron,oddPhoton)
   cutTreeMC.TAttach(oddPhoton,numComElectrons)
   cutTreeMC.TAttach(numComElectrons,numComPhotons)
