@@ -1,0 +1,33 @@
+# Simple counting experiment, with one signal and a few background processes 
+# Simplified version of the 35/pb H->WW analysis for mH = 160 GeV
+imax 12  number of channels (e.g. 3 bins in STlep  x2 for ele+mu x2 for the control region)
+jmax 2  number of backgrounds ( W, Top, Z) 
+kmax 6  number of nuisance parameters (sources of systematical uncertainties)
+------------
+# we have just one channel, in which we observe 0 events
+bin            1     2    3     4     5     6     7     8    9     10   11   12
+observation    8.   3.    5.    5.   3.     3.   31.    7.   12.   31.  12.  11.  
+
+------------
+# now we list the expected events for signal and all backgrounds in that bin
+# the second 'process' line must have a positive number for backgrounds, and 0 for signal
+# then we list the independent sources of uncertainties, and give their effect (syst. error)
+# on each process and bin
+bin   1         1      2        2        3        3        4       4      5      5       6       6       7      7     8     8     9    9    10   10    11    11    12     12     
+process   susy    mbkg    susy     mbkg     susy    mbkg     susy    ebkg    susy   ebkg    susy    ebkg    susy   mbkg  susy  mbkg  susy  mbkg  susy  ebkg  susy  ebkg susy  ebkg
+process    0         1       0      1        0         1       0        2      0      2       0       2     0   1   0   1   0   1   0   2   0   2  0  2
+rate    _evt1_   8.2   _evt2_  2.9     _evt3_  4.6   _evt4_   4.8    _evt5_   2.6   _evt6_   2.6  _evt7_  31.  _evt8_  7.  _evt9_  12.  _evt10_   31.   _evt11_  12.   _evt12_  11.
+
+lumi    lnN    1.045  1.045   1.045  1.045   1.045   1.045  1.067  1.045   1.067  1.045   1.067   1.045  1.045  1.045   1.045  1.045   1.045   1.045 1.045  1.045   1.045  1.045   1.045   1.045
+jec     lnN     _ssys1_    1.05  _ssys2_  1.11 _ssys3_  1.07 _ssys4_  1.10 _ssys5_  1.10   _ssys6_  1.08  -  -  -  -   -  -   -   -  -  -  -  -
+bkgcorr lnN     -    100    -   100  - 100  -  100   -   100   -   100   -  100   -   100  -  100  - 100   -  100  -  100
+mcstat  lnN     -   1.10    -   1.11    -  1.12   -  1.09    -   1.14  -  1.14  -  -  -  -   -  -   -   -  -  -  -  -
+metres  lnN     _sys1_  1.01  _sys2_  1.08  _sys3_ 1.06 _sys4_  1.06  _sys5_ 1.04 _sys6_ 1.01 -  -  -  -   -  -   -   -  -  -  -  -
+smixed  lnN     -   1.065   -  1.078   -  1.055   -   1.067   -   1.107   -  1.134   -  -  -  -   -  -   -   -  -  -  -  -
+
+#lep     lnN     -    1.01     -     1.05    -    1.01   -   -   -   -   -   -  -  -  -  -   -  -   -   -  -  -  -  -
+#wpol    lnN     -    1.02   -     1.03     -    1.03   -   1.03   -   1.07 -  1.13  -  -  -  -   -  -   -   -  -  -  -  -
+#wxsec   lnN     -   1.1      -   1.0   -    1.0  -    1.01    -   1.01  -  1.02  -  -  -  -   -  -   -   -  -  -  -  -
+#ttxsec  lnN     -   1.04   -   1.01   -    1.01  -    1.01    -   1.01  - 1.01   -  -  -  -   -  -   -   -  -  -  -  -
+#topdil  lnN     -   1.04     -   1.05    -   1.02   -   1.05     -  1.07    -  1.01  -  -  -  -   -  -   -   -  -  -  -  -
+#lepeff  lnN     -   1.02   -   1.01  -   1.04   -  1.03  -   1.04   -  1.02  -  -  -  -   -  -   -   -  -  -  -  -

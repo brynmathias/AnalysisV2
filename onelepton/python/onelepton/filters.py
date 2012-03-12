@@ -17,13 +17,13 @@ def metScaleSystematic(a, shiftdir, lepton):
     pfmet_jecunc = PSet(
         #the location of the JECUncertainty txt file
         jecuncfile = "GR_R_42_V19_AK5PF_Uncertainty.txt",
-        jecuncfileresidual = "/vols/cms01/mstoye/SVNtestKill/SUSYv2/onelepton/scripts/GR_R_42_V19_AK5PF_L2L3Residual.txt",
+        jecuncfileresidual = "GR_R_42_V19_AK5PF_L2L3Residual.txt",
         #either Muon or Electron
         lepton = lepton,
         #the jet threshold to consider for the JEC Uncertainties
         pfjetthresh = 10.0,
         #the percentage/100 to shift the unclustered energy by
-        unclusteredshift = 0.05,
+        unclusteredshift = 0.1,
         #whether or not to apply the shift upwards (True) or downwards (False)
         shiftup = shiftdir
         )
@@ -41,12 +41,21 @@ def metScaleSystematicFlat(a, lepton, shiftdir):
     filt = one.pfMETScale(lepton, shift)
     a.AddMETFilter("pfMET", filt)
     return filt
+
 def JESjetsFlat(a, shiftdir):
     jetshift = {True:5., False:-5.}[shiftdir]
     filtJets = fwk.JESCorrectionsTrivial(jetshift)
     a.AddJetFilter("PreCC",filtJets)
     return filtJets
 
+def leptonEff(a, lepton):
+    lepiEffFilter = wpol.LeptonEffRA4()
+    if lepton=="Muon":
+        a.AddMuonFilter("PreCC", lepiEffFilter)
+    elif lepton=="Electron":
+        a.AddElectronFilter("PreCC", lepiEffFilter)
+    return lepiEffFilter
+    
 def metResolutionSystematic(a, lepton, smear = 0.01):
     # the results from the fits: (see root_macros/METResolutionFits_binned.C)
     if lepton == "Muon":
@@ -67,50 +76,45 @@ def metResolutionSystematicNaive(a, lepton, smear_long, smear_trans):
     a.AddMETFilter("pfMET", met_res_filter)
     return met_res_filter
 
-def reweightVertices(a):
+def metResolutionOffi(a, lepton):
+    met_res_filter = wpol.pfMETResUncOfficial("pfJetResolutionMCtoDataCorrLUT.root",lepton)
+    a.AddMETFilter("pfMET", met_res_filter)
+    return met_res_filter
+
+
+
+def reweightVertices(a, mode):
     """ Apply the vertex reweighting factors for MC
     a : analysis object
     """
-    vertex_reweight = fwk.VertexReweighting(
-        PSet(
 
-        ## Spring11 Re-Weighting factors
-        #        VertexWeights = [0.000, 0.114, 0.403, 0.866, 1.302, 1.351,
-        #                         1.314, 1.279, 1.063, 1.027, 0.977, 1.015,
-        #                         1.080, 0.945, 1.127, 1.420, 1.253, 1.207,
-        #                         4.618, 1.358, 0.000, 0.000, 0.000, 0.000,
-        #                         0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
-        #                         0.000, 0.000, 0.000, 0.000, 0.000]
+    ## MC Summer11 Full 2011 data PV Re-Weightiung factors
+    if mode == "MC311" or mode == "MC42ttw_Z41" or mode == "MC42QCD" or mode == "MCskims" or mode == "MC_Summer11" or mode == "MCGrid" or mode == "SMS":
+        vertex_reweight = fwk.VertexReweighting(
+            PSet(
+            VertexWeights = [ 0.056, 0.374, 0.682, 0.984, 1.190, 1.316,
+                              1.303, 1.318, 1.481, 1.559, 1.625, 1.754,
+                              2.137, 2.054, 2.201, 3.132, 3.331, 4.368,
+                              7.661, 4.452, 0.000, 0.000, 0.000,0.000,
+                              0.000, 0.000, 0.000, 0.000, 0.000,0.000,
+                              0.000, 0.000, 0.000, 0.000]
+            ).ps()
+            )
         
-        ## Pre-LP Vertex Re-Weigting factors
-        #        VertexWeights = [0.0, 0.169, 0.511, 1.276, 1.688, 1.564,
-        #        1.715, 1.135, 1.042, 0.476, 0.469, 0.385,
-        #        0.359, 0.37, 0.502, 0.489, 0.0, 0.0, 0.0, 0.0]
+    ## MC Fall11 Full 2011 data PV Re-Weightiung factors
+    else:
+        vertex_reweight = fwk.VertexReweighting(
+            PSet(
+            VertexWeights = [0.47856,0.89045,1.10546,1.27494,1.29902, 1.33857,
+                             1.28995,1.17192,1.15496,1.01023, 0.81216,0.66377,
+                             0.54145,0.37616,0.25488, 0.24152,0.16984,0.13147,
+                             0.15945,0.06103, 0.00000,0.07234,0.00000,0.00000,
+                             0.00000, 0.00000,0.00000,0.00000,0.00000,0.00000,
+                             0.00000,0.00000,0.00000,0.00000,0.00000, 0.00000,
+                             0.00000,0.00000,0.00000]
+            ).ps()
+            )
         
-        ##  Re-Weightiung factors
-        #        VertexWeights = [0.000, 0.074, 0.424, 0.869, 1.295, 1.477,
-        #                         1.457, 1.377, 1.376, 1.206, 1.075, 1.304,
-        #                         1.061, 0.896, 0.968, 0.926, 0.752, 1.223,
-        #                         0.000, 0.000]
-
-        ## Full 2011 data Re-Weightiung factors
-        #        VertexWeights = [0.000, 0.057, 0.358, 0.723, 1.041, 1.232,
-        #                         1.337, 1.356, 1.365, 1.410, 1.483, 1.541,
-        #                         1.643, 1.876, 1.872, 2.241, 2.860, 2.806,
-        #                         3.186, 5.018, 2.389, 4.460, 0.000, 0.000,
-        #                         0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
-        #                         0.000, 0.000, 0.000, 0.000, 0.000]
-
-        ## Fall11 MC sample Re-Weighting factors using the full 2011 dataset
-        VertexWeights = [0.000, 0.495, 0.867, 1.159, 1.348, 1.375,
-                         1.371, 1.276, 1.177, 1.033, 0.877, 0.697,
-                         0.531, 0.399, 0.285, 0.234, 0.158, 0.111,
-                         0.074, 0.074, 0.034, 0.061, 0.000, 0.000,
-                         0.000, 0.000, 0.000, 0.000, 0.000, 0.000,
-                         0.000, 0.000, 0.000, 0.000, 0.000]
-        
-        ).ps()
-        )
     a.AddWeightFilter("Weight", vertex_reweight)
     return vertex_reweight
 
@@ -136,6 +140,17 @@ def muPtScaleSystematic(a, gen=False):
         Gen = gen
         ).ps()
     pfmet_pt_scale = one.pfMETLeptonScale(pfmet_pt_scalePSet)
+    a.AddMETFilter("pfMET",pfmet_pt_scale)
+    return (pt_scale, pfmet_pt_scale)
+
+def muPtScaleRA4(a):
+    """ Apply muon pT Scale systematic from wpol code """
+    pt_scale = wpol.MuonScaleUncertRA4("promptReco_runEtaPhi_05_045.root")
+    a.AddMuonFilter("PreCC", pt_scale)
+    pfmet_pt_scaleRA4PSet = PSet(
+        Lepton = "Muon"
+        ).ps()
+    pfmet_pt_scale = one.pfMETLeptonScaleRA4(pfmet_pt_scaleRA4PSet)
     a.AddMETFilter("pfMET",pfmet_pt_scale)
     return (pt_scale, pfmet_pt_scale)
 
@@ -178,7 +193,8 @@ def muonSystematics(a, mode):
     elif mode == "metdown_flat":
         filters += [metScaleSystematicFlat(a,"Muon", False)]
         filters += [JESjetsFlat(a,False)]
-
+    elif mode == "metres_offi":
+        filters += [metResolutionOffi(a, "Muon")] 
     elif mode == "metres_conservative":
         filters += [metResolutionSystematicNaive(a, "Muon", 0.075, 0.0375)]
     elif mode == "metres_11":
@@ -199,8 +215,11 @@ def muonSystematics(a, mode):
         filters += [ttpolarisationReweighting(a, "Muon", 0.05)]
     elif mode == "ttpoldown":
         filters += [ttpolarisationReweighting(a, "Muon", -0.05)]
+    elif mode == "muon_eff":
+        filters += [leptonEff(a,"Muon")]
     elif mode == "mupt":
-        filters += [muPtScaleSystematic(a)]
+#        filters += [muPtScaleSystematic(a)]
+        filters += [muPtScaleRA4(a)]
     else: raise ValueError("Invalid systematics mode: %s" % mode)
 
     return filters
@@ -214,8 +233,10 @@ def electronSystematics(a, mode):
         return
     elif mode == "metup":
         filters += [metScaleSystematic(a, True, "Electron")]
+        filters += [metScaleSystematicJets(a, True)]
     elif mode == "metdown":
         filters += [metScaleSystematic(a, False, "Electron")]
+        filters += [metScaleSystematicJets(a, False)]
     elif mode == "metup_flat":
         filters += [metScaleSystematicFlat(a, "Electron", True)]
         filters += [JESjetsFlat(a, True)]
@@ -246,6 +267,8 @@ def electronSystematics(a, mode):
         filters += [elPtScaleSystematic(a, False, 0.01, True)]
     elif mode == "elpt_down":
         filters += [elPtScaleSystematic(a, False, 0.01, False)]
+    elif mode == "electron_eff":
+        filters += [leptonEff(a,"Electron")]   
     else: raise ValueError("Invalid systematics mode: %s" % mode)
 
     return filters

@@ -378,14 +378,14 @@ namespace OneLepton{
       MuonGlbTrkD0PV[countMus] = ev.GetMuonGlobalTrackdxy((*iMu)->GetIndex());
       MuonGlbTrkD0err[countMus] = ev.GetMuonGlobalTrackdxyError((*iMu)->GetIndex());
       MuonRelCombIso[countMus] = (*iMu)->GetCombIsolation();
-
+      /*
       if (genInfo_) {
 	int iMatch = ev.leptonMatch(*iMu,2);
 	MuonType[countMus] = ev.leptonType(iMatch); 
 	//	  MuongPar[countMus] = ExtendedType(ev,*iMu,2);
 	if ( iMatch>=0) { MuonGenMother[countMus] = abs(ev.MC_GenLeptons()[iMatch]->GetMotherID()); }
       }
-      
+      */
       // Fill the Jet-Muon variables
       double muonPreJetPt_ = -999.;
       double muonPreJetEta_ = -999.;
@@ -438,13 +438,14 @@ namespace OneLepton{
       ElectronEta[countEls] = (*iEl)->Eta();
       ElectronPhi[countEls] = (*iEl)->Phi();
       ElectronChrg[countEls] = (*iEl)->GetCharge();
+      /*
       if (genInfo_) {
 	int iMatch = ev.leptonMatch(*iEl,1);
 	ElectronType[countEls] = ev.leptonType(iMatch); 
 	//	  ElectrongPar[countEls] = ExtendedType(ev,*iEl,2);
 	if ( iMatch>=0) { ElectronGenMother[countEls] = abs(ev.MC_GenLeptons()[iMatch]->GetMotherID()); }
       }
-      
+      */
       // Fill the Jet-Electron variables
       double electronPreJetPt_ = -999.;
       double electronPreJetDRmin_ = 999.;
@@ -652,7 +653,7 @@ namespace OneLepton{
 
 
     // Fill the GenVariables
-
+    /*
     if (genInfo_) {
       //      cout << "--HERE--0" << "\n";
       GenMatrixBin myGenMatrixBin(&ev);
@@ -843,7 +844,7 @@ namespace OneLepton{
     }
     //    cout << "--HERE--19" << "\n";
     //    if ( (lepRecoGenMatching) && (lepIsFromW) ) { tree->Fill(); }
-
+    */
     tree->Fill();
 
     return true;

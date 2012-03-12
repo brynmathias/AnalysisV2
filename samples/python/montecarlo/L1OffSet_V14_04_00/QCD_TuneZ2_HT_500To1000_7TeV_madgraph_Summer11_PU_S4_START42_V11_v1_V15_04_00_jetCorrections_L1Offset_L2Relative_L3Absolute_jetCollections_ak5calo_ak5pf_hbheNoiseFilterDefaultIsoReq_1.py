@@ -588,5 +588,6 @@ QCD_TuneZ2_HT_500To1000_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1_V15_04_00_je
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_18_59_34/QCD_TuneZ2_HT-500To1000_7TeV-madgraph.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_97_0_rMG.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_18_59_34/QCD_TuneZ2_HT-500To1000_7TeV-madgraph.Summer11-PU_S4_START42_V11-v1.AODSIM/SusyCAF_Tree_9_1_BIX.root" ,
 	],
-Weight=1.0,
+	CrossSection=5856.0,
+    Events = 1.15682e+07,
 )

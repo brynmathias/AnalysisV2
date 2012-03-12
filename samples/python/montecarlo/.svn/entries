@@ -1,15 +1,15 @@
 10
 
 dir
-3601
+3690
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/samples/python/montecarlo
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2012-01-19T13:33:56.031231Z
-3601
-dburton
+2012-02-14T11:34:25.260304Z
+3663
+bm409
 has-props
 
 
@@ -25,6 +25,9 @@ has-props
 
 
 53b2a5e2-b89b-4778-b471-5fcb16a2c67a
+
+L1OffSet_V14_04_00
+dir
 
 QCD_Madgraph_500_1000.py
 file
@@ -502,40 +505,6 @@ bm409
 
 81442
 
-QCD_Madgraph_250_500.py
-file
-
-
-
-
-2011-12-12T12:56:03.000000Z
-4ee4390a19c8499c735aa04d3f82acb4
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-6832
-
 PhysicsProcesses_TopologyT4_38xFall10_spadhi_PhysicsProcesses_TopologyT4_38xFall10_7e3d0954d994b653c9c6cafe6f6b4102_LP_Apr2011.py
 file
 
@@ -569,6 +538,40 @@ bm409
 
 
 23216
+
+QCD_Madgraph_250_500.py
+file
+
+
+
+
+2011-12-12T12:56:03.000000Z
+4ee4390a19c8499c735aa04d3f82acb4
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6832
 
 DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola_CMSSW_3_8_7.py
 file
@@ -604,40 +607,6 @@ bm409
 
 29630
 
-QCD_EMEnriched_Pt80to170.py
-file
-
-
-
-
-2011-12-12T12:56:03.000000Z
-47ac525052f8c2e0f40a7e623b2d386c
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-6136
-
 LMsignal38PileUp.py
 file
 
@@ -671,6 +640,40 @@ bm409
 
 
 42899
+
+QCD_EMEnriched_Pt80to170.py
+file
+
+
+
+
+2011-12-12T12:56:03.000000Z
+47ac525052f8c2e0f40a7e623b2d386c
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+6136
 
 QCD_38_Pythia6_Pt1000to1400.py
 file
@@ -842,14 +845,14 @@ bm409
 
 35361
 
-QCD_Pt_3000to3500_7TeV_pythia8_Summer10_START36_V10_S09_v2.py
+QCD_38_Pythia6_Pt1400to1800.py
 file
 
 
 
 
-2011-12-12T12:56:04.000000Z
-1af1263a0f8968c457e801215dd70bbc
+2011-12-12T12:56:03.000000Z
+31a92cc653aca6788f72c6a22d0be6e2
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -874,41 +877,7 @@ bm409
 
 
 
-602
-
-PhotonJet_38_Pythia6_Pt120to170.py
-file
-
-
-
-
-2011-12-12T12:56:01.000000Z
-f002083e881be17ea66fc1b7e12b25f2
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2431
+2419
 
 QCD_38_Pythia6_Pt300to470.py
 file
@@ -944,14 +913,14 @@ bm409
 
 9569
 
-QCD_38_Pythia6_Pt1400to1800.py
+PhotonJet_38_Pythia6_Pt120to170.py
 file
 
 
 
 
-2011-12-12T12:56:03.000000Z
-31a92cc653aca6788f72c6a22d0be6e2
+2011-12-12T12:56:01.000000Z
+f002083e881be17ea66fc1b7e12b25f2
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -976,7 +945,41 @@ bm409
 
 
 
-2419
+2431
+
+QCD_Pt_3000to3500_7TeV_pythia8_Summer10_START36_V10_S09_v2.py
+file
+
+
+
+
+2011-12-12T12:56:04.000000Z
+1af1263a0f8968c457e801215dd70bbc
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+602
 
 QCD_Pt_170to230_7TeV_pythia8_Summer10_START36_V10_S09_v2.py
 file
@@ -1982,40 +1985,6 @@ bm409
 OneLeptonSkims
 dir
 
-ZJets_TuneZ2_7TeV-alpgen-tauola_Spring11.py
-file
-
-
-
-
-2011-12-12T12:56:09.000000Z
-942af716fd98d4f5b3844b47661a38d3
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-426570
-
 PhysicsProcesses_TopologyT21_38xFall10_spadhi.py
 file
 
@@ -2050,17 +2019,17 @@ bm409
 
 819
 
-w_jets_mg_edwardSkim.py
+ZJets_TuneZ2_7TeV-alpgen-tauola_Spring11.py
 file
 
 
 
 
-2011-10-18T17:03:11.000000Z
-5432a13dd3a3ef80e270741526a9970c
-2010-10-11T07:47:47.820294Z
-1236
-mstoye
+2011-12-12T12:56:09.000000Z
+942af716fd98d4f5b3844b47661a38d3
+2011-12-12T13:52:16.714975Z
+3543
+bm409
 
 
 
@@ -2082,7 +2051,7 @@ mstoye
 
 
 
-8003
+426570
 
 Zjets_madgraph_NNLO.py
 file
@@ -2118,17 +2087,17 @@ bm409
 
 8536
 
-PhotonJet_38_Pythia6_Pt80to120.py
+w_jets_mg_edwardSkim.py
 file
 
 
 
 
-2011-12-12T12:56:01.000000Z
-ce87b6392750d4806701744442c56430
-2011-12-12T13:52:16.714975Z
-3543
-bm409
+2011-10-18T17:03:11.000000Z
+5432a13dd3a3ef80e270741526a9970c
+2010-10-11T07:47:47.820294Z
+1236
+mstoye
 
 
 
@@ -2150,7 +2119,7 @@ bm409
 
 
 
-2466
+8003
 
 PhysicsProcesses_TopologyT1_38xFall10_spadhi_PhysicsProcesses_TopologyT1_38xFall10_f959c379445f9d7540d41cf9ffa87a96.py
 file
@@ -2185,6 +2154,40 @@ bm409
 
 
 21556
+
+PhotonJet_38_Pythia6_Pt80to120.py
+file
+
+
+
+
+2011-12-12T12:56:01.000000Z
+ce87b6392750d4806701744442c56430
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2466
 
 PhysicsProcesses_topology_T21_38xFall10v1_spadhi.py
 file
@@ -2356,40 +2359,6 @@ bm409
 
 17404
 
-PhysicsProcesses_TopologyT5_38xFall10_spadhi_PhysicsProcesses_TopologyT5_38xFall10_d29e4f3917076227642d4f571bcff7fa_LP_Apr2011.py
-file
-
-
-
-
-2011-12-12T12:56:03.000000Z
-2a3124174c79bfb7480d1ea006482830
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-23216
-
 SUSYScan.py
 file
 
@@ -2423,6 +2392,40 @@ rnandi
 
 
 21431
+
+PhysicsProcesses_TopologyT5_38xFall10_spadhi_PhysicsProcesses_TopologyT5_38xFall10_d29e4f3917076227642d4f571bcff7fa_LP_Apr2011.py
+file
+
+
+
+
+2011-12-12T12:56:03.000000Z
+2a3124174c79bfb7480d1ea006482830
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+23216
 
 PhotonJet_38_Pythia6_Pt170to300.py
 file
@@ -2628,40 +2631,6 @@ bm409
 
 16423
 
-z_inv_mg_edwardSkim.py
-file
-
-
-
-
-2011-10-18T17:03:11.000000Z
-bfb99b0465f3c434ebdeeba543ee732b
-2010-10-22T10:42:57.284620Z
-1345
-henning
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1643
-
 PhysicsProcesses_mSUGRA_tanbeta50Fall10_spadhi.py
 file
 
@@ -2695,6 +2664,40 @@ bm409
 
 
 22381
+
+z_inv_mg_edwardSkim.py
+file
+
+
+
+
+2011-10-18T17:03:11.000000Z
+bfb99b0465f3c434ebdeeba543ee732b
+2010-10-22T10:42:57.284620Z
+1345
+henning
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1643
 
 PhysicsProcesses_mSUGRA_tanbeta50Fall10.py
 file
@@ -2730,40 +2733,6 @@ bm409
 
 63198
 
-PhysicsProcesses_topology_T11_38xFall10v1_spadhi.py
-file
-
-
-
-
-2011-12-12T12:56:01.000000Z
-3a91569f5e16469300e89d7099775a70
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-806
-
 PhysicsProcesses_TopologyT2_38xFall10_spadhi_PhysicsProcesses_TopologyT2_38xFall10_f959c379445f9d7540d41cf9ffa87a96.py
 file
 
@@ -2797,6 +2766,40 @@ bm409
 
 
 21384
+
+PhysicsProcesses_topology_T11_38xFall10v1_spadhi.py
+file
+
+
+
+
+2011-12-12T12:56:01.000000Z
+3a91569f5e16469300e89d7099775a70
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+806
 
 LMx.py
 file
@@ -2934,14 +2937,14 @@ bm409
 
 1330
 
-QCD_EMEnriched_Pt30to80.py
+ZJets_TuneZ2_7TeV-alpgen-tauola_CMSSW_3_8_5.py
 file
 
 
 
 
-2011-12-12T12:56:03.000000Z
-7c5249655c2ce11799ee53153b01ea2a
+2011-12-12T12:56:09.000000Z
+6f866b77be76c7df0823a1e00e4983e5
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -2966,7 +2969,7 @@ bm409
 
 
 
-41478
+21463
 
 QCD_Pt_300to380_7TeV_pythia8_Summer10_START36_V10_S09_v1.py
 file
@@ -3002,14 +3005,14 @@ bm409
 
 782
 
-ZJets_TuneZ2_7TeV-alpgen-tauola_CMSSW_3_8_5.py
+QCD_EMEnriched_Pt30to80.py
 file
 
 
 
 
-2011-12-12T12:56:09.000000Z
-6f866b77be76c7df0823a1e00e4983e5
+2011-12-12T12:56:03.000000Z
+7c5249655c2ce11799ee53153b01ea2a
 2011-12-12T13:52:16.714975Z
 3543
 bm409
@@ -3034,7 +3037,7 @@ bm409
 
 
 
-21463
+41478
 
 PhysicsProcesses_TopologyT2_38xFall10.py
 file
@@ -3342,40 +3345,6 @@ bm409
 
 2799
 
-QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
-file
-
-
-
-
-2011-12-12T12:56:04.000000Z
-1376afaf2db258e3b917ec88436dfc5b
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-21038
-
 WJets_Madgraph.py
 file
 
@@ -3409,6 +3378,40 @@ bm409
 
 
 11958
+
+QCD_Pt_1000to1400_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
+file
+
+
+
+
+2011-12-12T12:56:04.000000Z
+1376afaf2db258e3b917ec88436dfc5b
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21038
 
 QCD_Pt_30to50_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -3444,17 +3447,17 @@ bm409
 
 66351
 
-QCD_BCtoE_Pt30to80.py
+QCD_Pt_120to170_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
 
 
 
 
-2011-12-12T12:56:03.000000Z
-82cfe446af2d1e65044d58a7d8aac758
-2011-12-12T13:52:16.714975Z
-3543
-bm409
+2011-10-18T17:03:11.000000Z
+8b600242f867431a5fe7b4d96cb46daf
+2011-08-05T19:03:25.325986Z
+3110
+georgia
 
 
 
@@ -3476,41 +3479,7 @@ bm409
 
 
 
-2654
-
-PhysicsProcesses_TopologyT3_38xFall10_spadhi_PhysicsProcesses_TopologyT3_38xFall10_d29e4f3917076227642d4f571bcff7fa_LP_Apr2011.py
-file
-
-
-
-
-2011-12-12T12:56:03.000000Z
-dddf1d81c02ceaeb1951a3f6117c60c6
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-23215
+457
 
 PhysicsProcesses_TopologyT1_38xFall10_spadhi.py
 file
@@ -3546,17 +3515,17 @@ bm409
 
 20455
 
-QCD_Pt_120to170_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
+PhysicsProcesses_TopologyT3_38xFall10_spadhi_PhysicsProcesses_TopologyT3_38xFall10_d29e4f3917076227642d4f571bcff7fa_LP_Apr2011.py
 file
 
 
 
 
-2011-10-18T17:03:11.000000Z
-8b600242f867431a5fe7b4d96cb46daf
-2011-08-05T19:03:25.325986Z
-3110
-georgia
+2011-12-12T12:56:03.000000Z
+dddf1d81c02ceaeb1951a3f6117c60c6
+2011-12-12T13:52:16.714975Z
+3543
+bm409
 
 
 
@@ -3578,7 +3547,41 @@ georgia
 
 
 
-457
+23215
+
+QCD_BCtoE_Pt30to80.py
+file
+
+
+
+
+2011-12-12T12:56:03.000000Z
+82cfe446af2d1e65044d58a7d8aac758
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2654
 
 QCD_Pt_1400to1800_TuneZ2_7TeV_pythia6_Summer11_PU_S3_START42_V11_v2_V15_03_14_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1.py
 file
@@ -3648,40 +3651,6 @@ bm409
 
 602
 
-PhotonJet_38_Pythia6_Pt50to80.py
-file
-
-
-
-
-2011-12-12T12:56:01.000000Z
-8dbb0c69f9b31d39c43acba0b722d8c1
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-2420
-
 QCD_Pt_1800to2200_7TeV_pythia8_Summer10_START36_V10_S09_v2.py
 file
 
@@ -3715,6 +3684,40 @@ bm409
 
 
 602
+
+PhotonJet_38_Pythia6_Pt50to80.py
+file
+
+
+
+
+2011-12-12T12:56:01.000000Z
+8dbb0c69f9b31d39c43acba0b722d8c1
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2420
 
 PhysicsProcesses_mSUGRA_tanbeta10Fall10_spadhi_PhysicsProcesses_mSUGRA_tanbeta10Fall10_89b6a3994a6055d40027085b0a39a60b.py
 file
@@ -3852,9 +3855,6 @@ bm409
 
 970
 
-L1OffSet_V14-04-00
-dir
-
 QCD_38_Pythia6_Pt800to1000.py
 file
 
@@ -3923,40 +3923,6 @@ bm409
 
 819
 
-QCD_Pt_80to120_7TeV_pythia8_Summer10_START36_V10_S09_v1.py
-file
-
-
-
-
-2011-12-12T12:56:04.000000Z
-a4d14a6ea496b28ffd92008a918b7c46
-2011-12-12T13:52:16.714975Z
-3543
-bm409
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1525
-
 TTJets_TuneZ2_7TeV_madgraph_tauola_Fall10_START38_V12_v3.py
 file
 
@@ -3990,6 +3956,40 @@ bm409
 
 
 7517
+
+QCD_Pt_80to120_7TeV_pythia8_Summer10_START36_V10_S09_v1.py
+file
+
+
+
+
+2011-12-12T12:56:04.000000Z
+a4d14a6ea496b28ffd92008a918b7c46
+2011-12-12T13:52:16.714975Z
+3543
+bm409
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1525
 
 PhotonJet_38_Pythia6_Pt800to1400.py
 file

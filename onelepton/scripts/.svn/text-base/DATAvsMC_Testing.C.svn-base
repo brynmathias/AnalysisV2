@@ -31,6 +31,10 @@ struct GlobalParameterSet {
   int HistosPerCanvas;
   bool GlobalLog;	
   double intLumi;
+  bool MuPred;
+  bool ratioplot;
+  bool electrons;
+  bool htBins;
 };
 
 void setTDRStyle();
@@ -41,9 +45,10 @@ TH1D *plot1Dhisto(double intLumi,TFile *fileName,TString folderName,TString hist
 
 void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,double xMax,TString xName, TString yName, vector<TString> MCFileNames, vector<TString> MCNames, vector<int> MCColors, vector<bool> AddToBkg,vector<TString> DataFileNames,vector<TString> dataNames,vector<int> dataColors,vector<TString> SystNames,vector<int> SystColors, TCanvas *cCanvas,int padNr,bool UseLog, GlobalParameterSet Parameters);
 					
-TCanvas* createCanvas(TString name,int xlen,int ylen,int xDiv);
+TCanvas* createCanvas(TString name,int xlen,int ylen,int xDiv, bool ratio);
 
 TLegend *legendRAW();
+TLegend *legendRAW(double xmin, double ymin, double xmax, double ymax);
 
 void NoError (TH1D* histo,double xMin,double xMax);
 
@@ -60,15 +65,16 @@ void mainFunction(bool print = false) {
   vector<TString> folderNames;
   vector<int> rebinFactor;
 // CHOOSE FOLDERS	==================================
-
-//  folderNames.push_back("ANplots150_NOLPsecondD500");
-//  rebinFactor.push_back(1);
-  
-  folderNames.push_back("ANplots250_NOLPsecondD500");
+/*
+  folderNames.push_back("ANplots150_NOLPsecondD500");
   rebinFactor.push_back(1);
-  folderNames.push_back("ANplots350_NOLPsecondD500");
+*/
+  
+  folderNames.push_back("ANplots250_NOLPsecondD1000");
+  rebinFactor.push_back(1);
+  folderNames.push_back("ANplots350_NOLPsecondD1000");
   rebinFactor.push_back(1); // 2 for search reg
-  folderNames.push_back("ANplots450_NOLPsecondD500");
+  folderNames.push_back("ANplots450_NOLPsecondD1000");
   rebinFactor.push_back(1);
   
 //  folderNames.push_back("OP_ANplots_ST150_inf");
@@ -129,6 +135,11 @@ void mainFunction(bool print = false) {
 
   // Draw all histograms with log scale
   Parameters.GlobalLog = false; 
+  Parameters.MuPred = true; 
+  Parameters.ratioplot = false; 
+
+  Parameters.electrons = false;
+  Parameters.htBins = true;
 
   // Parameters.PrintFileName = "DATAvsMC.pdf";
   
@@ -147,22 +158,36 @@ void mainFunction(bool print = false) {
   //  TString path = "/vols/cms02/gouskos/onelepton/20110820_MuFromMarkus/";
   //  TString path = "/vols/cms01/mstoye/Markus8/SUSYv2/onelepton/scripts/resultsMC_lt3j/";
   //  TString path = "/vols/cms01/mstoye/Markus8/SUSYv2/onelepton/scripts/resultsMC_lt3j_St150infPlots/";
-  TString path = "/vols/cms02/gouskos/onelepton/20111201_El_Sel/";
   //  TString path = "/vols/cms02/gouskos/onelepton/20110827_Mu_lt3jts_HT350/";
-  // MC filenames
-  TString filename_MCqcd = path+"qcd.root";
-  TString filename_MCz   = path+"z.root";
-  TString filename_MCw   = path+"w.root";
-  TString filename_MCtt  = path+"tt.root";
-  // DATA filenames
-   TString filename_DATAmu =  path+"data.root";
 
+  //  TString path = "/vols/cms01/gouskos/20120127_El_HTbins_STbins_Sel/";
+  TString path = "/vols/cms01/mstoye/JAN29/SUSYv2/onelepton/scripts/";
+
+
+  // MC filenames
+   //inclusive HT
+  TString filename_MCqcd = path+"resultsHTbins/qcdmu.root";
+  TString filename_MCz   = path+"resultsHTbins/z.root";
+  TString filename_MCw   = path+"resultsHTbins/w.root";
+  TString filename_MCtt  = path+"resultsHTbins/tt.root";
+  // DATA filenames
+  TString filename_DATAmu = path+"resultsHTbins/data.root";
+  
+  // HT bins
+/*
+ TString filename_MCqcd = path+"resultsHTbins/qcdmu.root";
+  TString filename_MCz   = path+"resultsHTbins/z.root";
+  TString filename_MCw   = path+"resultsHTbinsPythia/w.root";
+  TString filename_MCtt  = path+"resultsHTbins/tt.root";
+  // DATA filenames
+  TString filename_DATAmu =  path+"resultsHTbins/data.root";
+*/
 // ==================================================  
 // END OF NORMAL CONFIGURATION PART =================
 
 // MORE PARAMETERS ==================================
   int xSizeCanvas = 500;
-  int ySizeCanvas = 750;
+  int ySizeCanvas = 500;
   int zColor = 5;
   int ttColor = 3;
   int wColor = 6;
@@ -261,7 +286,7 @@ void mainFunction(bool print = false) {
   for(int i=0; i<CanvasesSize;i++) {
     TString name = "canvas ";
     name +=i;
-    Canvases[i]=createCanvas(name,xSizeCanvas,ySizeCanvas,Parameters.HistosPerCanvas);
+    Canvases[i]=createCanvas(name,xSizeCanvas,ySizeCanvas,Parameters.HistosPerCanvas,Parameters.ratioplot);
   }
   int plotNr=0;
   for(unsigned int i=0; i<folderNames.size(); i++) {
@@ -391,13 +416,13 @@ void mainFunction(bool print = false) {
       // Canvases[0]->Print(Parameters.PrintFileName+"[");
       // Canvases[0]->Print(Parameters.PrintFileName);
       for(int i=0; i<CanvasesSize; i++) {
-	Canvases[i]->Print(TString("plots/")+TString(Canvases[i]->GetName())+".pdf");
+	Canvases[i]->Print(TString("plots_20120202_Mu/")+TString(Canvases[i]->GetName())+".pdf");
       }
       // Canvases[0]->Print(Parameters.PrintFileName+"]");
       // Canvases[0]->Print(TString(Canvases[0]->GetName())+".pdf");
       
   }
-  /*else {
+  /*else { 
       for(int i=0; i<CanvasesSize; i++) {
 	TString PrintName=Parameters.PrintFileName;
 	TString s = "_";
@@ -473,6 +498,27 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   // Create MC histos and add them SM0
   vector<TH1D*> MChistos;
   bool noneAdded = true;
+
+  float eventsMC=0;
+  if(Parameters.MuPred){
+    for(unsigned int i =0;i<3;i++) {
+      TFile* fhh = TFile::Open(MCFileNames[i],"READONLY");
+      TH1D *hTemp = (TH1D*)fhh->Get(folderName+"/CounterCtrl_tot");
+      eventsMC += hTemp->GetBinContent(1);
+      cout << "eventsMC " <<eventsMC<< endl;
+      //delete hTemp;
+      // delete fhh;
+    }
+    
+    TFile* fdata_test = TFile::Open(DataFileNames[0],"READONLY");
+    TH1D *hTempddd = (TH1D*)fdata_test->Get(folderName+"/CounterCtrl_tot");
+    cout << "eventsMC " << eventsMC<< " "<<hTempddd->GetBinContent(1) << endl;
+    Parameters.intLumi =  100*hTempddd->GetBinContent(1)/eventsMC;
+  }
+  
+  // delete fdata_test;
+  // delete hTempddd;
+
   for(unsigned int i =0;i<MCFileNames.size();i++) {
     MChistos.push_back(plot1Dhisto(Parameters.intLumi,TFile::Open(MCFileNames[i],"READONLY"),folderName,histoName,MCColors[i],rebin,xMin,xMax,xName,yName,"MC",true));
     if(noneAdded&&AddToBkg[i]) {
@@ -542,39 +588,44 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   vector<TH1D *> dataHistos; 
   for(unsigned int i=0; i<DataFileNames.size();i++) {
     dataHistos.push_back(plot1Dhisto(Parameters.intLumi,TFile::Open(DataFileNames[i],"READONLY"),folderName,histoName,dataColors[i],rebin,xMin,xMax,xName,yName,"Data",false));
-    dataHistos[i]->SetMarkerSize(1); 
+    dataHistos[i]->SetMarkerSize(1.2); 
     dataHistos[i]->SetMarkerColor(dataColors[i]); 
-    dataHistos[i]->SetMarkerStyle(21);
+    dataHistos[i]->SetMarkerStyle(20);
     // remove error manually  
     if(!Parameters.ShowStatErrorbars){
       NoError(dataHistos[i],xMin,xMax);
     }
     // y-axis range
     if (UseLog){ 
-      dataHistos[i]->GetYaxis()->SetRangeUser(1.,3.*(dataHistos[i]->GetBinContent(dataHistos[i]->GetMaximumBin()))); 
+      dataHistos[i]->GetYaxis()->SetRangeUser(1.,3.5*(dataHistos[i]->GetBinContent(dataHistos[i]->GetMaximumBin()))); 
     }
     else{ 
-      dataHistos[i]->GetYaxis()->SetRangeUser(0.,1.8*(dataHistos[i]->GetBinContent(dataHistos[i]->GetMaximumBin())));
+      float maximum =  hSM0->GetMaximum();
+      if(maximum<dataHistos[i]->GetMaximum())maximum=dataHistos[i]->GetMaximum();
+      dataHistos[i]->GetYaxis()->SetRangeUser(0.,maximum*1.8);
     }
 
   }
   
   cCanvas->SetName(folderName+histoName);
   cCanvas->cd(2*padNr+1);  
+
   if(UseLog) {
     gPad->SetLogy(); 
   }
   dataHistos[0]->Draw("P E0");
 
   //DRAW ALL HISTOGRAMS =====================================================    
-
+  
   if(Parameters.ShowMCComposition){
     for(unsigned int i=1; Parameters.StackMCComposition&&i<MChistos.size();i++) {
       MChistos[i]->Add(MChistos[i],MChistos[i-1]);
       MChistos[i]->SetFillColor(MCColors[i]);
+      MChistos[i]->SetLineStyle(1);
       MChistos[i]->SetFillStyle(3004);
       MChistos[i-1]->SetFillStyle(3004);
-      MChistos[i-1]->SetFillColor(MCColors[i-1]); 	  	
+      MChistos[i-1]->SetFillColor(MCColors[i-1]); 	  	  
+      
     }  	
     for(int i=MChistos.size()-1;i>=0;i--) {
       if(Parameters.ShowMCStatErrorbars)
@@ -607,7 +658,7 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
     hSM0->Draw("HIST same E0");
   }
   // Draw Legend
-  TLegend *lSamples = legendRAW();
+  TLegend *lSamples = legendRAW(0.77,0.58,0.95,0.89);
   if(!Parameters.StackMCComposition)
     lSamples->AddEntry(hSM0,"Total MC","FL");
   if(Parameters.ShowErrorBand) {
@@ -625,121 +676,150 @@ void createDataVsMC(TString folderName,TString histoName,int rebin,double xMin,d
   }
   
   lSamples->Draw("same");
+
+  TLatex *lWhichLepton;
+  if (Parameters.electrons) { lWhichLepton = new TLatex(0.73,0.9,"Electrons"); }
+  else { lWhichLepton = new TLatex(0.73,0.9,"Muons"); }
+  lWhichLepton->SetNDC();
+  lWhichLepton->Draw("same");
   
+
   TLatex *lPreliminary = new TLatex(0.19,0.96,"CMS Preliminary 2011");
 
   //  TLatex *lIntLumi = new TLatex(0.15,0.89,"#scale[0.8]{#int L dt = "+lumi+" pb^{-1}, #sqrt{s} = 7 TeV}");
-  TLatex *lIntLumi  = new TLatex(0.2,0.86,"#scale[1.]{4.7 fb^{-1}, #sqrt{s} = 7 TeV}");
-  TLatex *lIntLumiB = new TLatex(0.2,0.77,"#scale[1.]{#sqrt{s} = 7 TeV}");
+  TLatex *lIntLumi  = new TLatex(0.22,0.88,"#scale[1.]{4.7 fb^{-1}, #sqrt{s} = 7 TeV}");
+  TLatex *lIntLumiB = new TLatex(0.22,0.79,"#scale[1.]{#sqrt{s} = 7 TeV}");
   lPreliminary->SetNDC();
   lIntLumi->SetNDC();
   lIntLumiB->SetNDC();
   lPreliminary->Draw("same");
   lIntLumi->Draw("same"); 
+  gPad->SetFillColor(0);
   //  lIntLumiB->Draw("same"); 
   //  gPad->SetGridx(); 
   //  gPad->SetGridy();
   
+
+  // --- create HT and STlep legends
+  //"ANplots150_NOLPsecondD500" folderNames
+  
+  TString HT500 = "secondD500";
+  TString HT750 = "secondD750";
+  TString HT1000 = "secondD1000";
+  
+  TString ST150 = "plots150";
+  TString ST250 = "plots250";
+  TString ST350 = "plots350";
+  TString ST450 = "plots450";
+
+  TString tmpLegendHT, tmpLegendST;
+
+  if (((folderName.SubString(HT500)).Length())>0)       { if (Parameters.htBins) { tmpLegendHT = "H_{T}#in[500,750]"; }  else { tmpLegendHT = "H_{T}>500";}  } 
+  else if (((folderName.SubString(HT750)).Length())>0)  { if (Parameters.htBins) { tmpLegendHT = "H_{T}#in[750,1000]"; } else { tmpLegendHT = "H_{T}>750";}  } 
+  else if (((folderName.SubString(HT1000)).Length())>0) { if (Parameters.htBins) { tmpLegendHT = "H_{T}>1000"; }         else { tmpLegendHT = "H_{T}>1000";} } 
+  else { tmpLegendHT = "error"; }
+
+  if (((folderName.SubString(ST150)).Length())>0)      { tmpLegendST = "S^{lep}_{T}#in[150,250]"; }
+  else if (((folderName.SubString(ST250)).Length())>0) { tmpLegendST = "S^{lep}_{T}#in[250,350]"; }
+  else if (((folderName.SubString(ST350)).Length())>0) { tmpLegendST = "S^{lep}_{T}#in[350,450]"; }
+  else if (((folderName.SubString(ST450)).Length())>0) { tmpLegendST = "S^{lep}_{T}>450"; }
+  else { tmpLegendST = "error"; }
+
+  TString legendHTandST = tmpLegendHT+" , "+tmpLegendST; 
+  TLatex *lHTandST = new TLatex(0.22,0.8,legendHTandST);
+  lHTandST->SetNDC();
+  //  lHTandST->Draw("same");
+  
+  TLatex *lHT = new TLatex(0.22,0.8,tmpLegendHT);
+  lHT->SetNDC();
+  lHT->Draw("same");
+
+  TLatex *lST = new TLatex(0.22,0.7,tmpLegendST);
+  lST->SetNDC();
+  lST->Draw("same");
+
+
+
   // DRAW RATIO PLOTS ============================================================================
-
-  vector<TH1D*> hRatio;
-  for(unsigned int i=0; i<dataHistos.size()&&MChistos.size()>0; i++) {
-    hRatio.push_back((TH1D*)dataHistos[i]->Clone(""));
-    hRatio.back()->Divide(dataHistos[i],hSM0);
-    hRatio.back()->GetYaxis()->SetTitle("Data / MC");
-    hRatio.back()->GetYaxis()->SetTitleSize(0.16);
-    hRatio.back()->GetXaxis()->SetTitle("");
-    hRatio.back()->GetYaxis()->SetNdivisions(409);
-    hRatio.back()->GetYaxis()->SetRangeUser(0.,2.);
-    hRatio.back()->SetTitleSize(0.16, "XY");
-    hRatio.back()->SetTitleOffset(0.5, "Y");
-    hRatio.back()->SetLabelSize(0.165,"XY");
-
-  }
-
-  for(unsigned int i=0; Parameters.UseSystematics&&Parameters.ShowSystematicsDetails&&i<SystHistos.size(); i++) {
-    hRatio.push_back((TH1D*)SystHistos[i]->Clone(""));
-    hRatio.back()->Divide(SystHistos[i],hSM0);
-    hRatio.back()->GetYaxis()->SetTitle("Data&Syst/MC");
-    hRatio.back()->GetYaxis()->SetRangeUser(0.5,1.5);
-    hRatio.back()->GetXaxis()->SetTitle("");
-    hRatio.back()->SetTitleSize(0.06, "XY");
-    hRatio.back()->SetTitleOffset(0.8, "Y");
-    hRatio.back()->SetLabelSize(0.08,"XY");
-    NoError(hRatio.back(),xMin,xMax);
-  }
-    
-  cCanvas->cd(2*padNr+2);
-  //  TBox *unity = new TBox(xMin-0.1,0.95,xMax+0.15, 1.05); // LP
-  TBox *unity = new TBox(xMin-0.1,0.95,xMax+0.15, 1.05);
-
-  unity->SetLineWidth(2);
-  //unity.SetLineStyle(Root.kDashed);
-  unity->SetLineColor(2);
-  unity->SetFillColor(2);
-  unity->SetFillStyle(3002);
-  //  unity->Draw();
-  //  gPad->SetGridx(); 
-  //  gPad->SetGridy();
-  for(unsigned int i=hRatio.size()-1; i<hRatio.size(); i--) {
-    if(i==hRatio.size()-1) {
-      hRatio[i]->Draw();
-      //      unity->Draw("same");
-      hRatio[i]->Draw("same");
-    }
-    else
-      {
-	hRatio[i]->GetYaxis()->SetTitleSize(0.055);
-	hRatio[i]->Draw("same"); 
+  if (Parameters.ratioplot)
+    {
+      vector<TH1D*> hRatio;
+      for(unsigned int i=0; i<dataHistos.size()&&MChistos.size()>0; i++) {
+	hRatio.push_back((TH1D*)dataHistos[i]->Clone(""));
+	hRatio.back()->Divide(dataHistos[i],hSM0);
+	hRatio.back()->GetYaxis()->SetTitle("Data / MC");
+	hRatio.back()->GetYaxis()->SetTitleSize(0.16);
+	hRatio.back()->GetXaxis()->SetTitle("");
+	hRatio.back()->GetYaxis()->SetNdivisions(409);
+	hRatio.back()->GetYaxis()->SetRangeUser(0.,2.);
+	hRatio.back()->SetTitleSize(0.16, "XY");
+	hRatio.back()->SetTitleOffset(0.5, "Y");
+	hRatio.back()->SetLabelSize(0.165,"XY");
+	
       }
- }
+      
+      for(unsigned int i=0; Parameters.UseSystematics&&Parameters.ShowSystematicsDetails&&i<SystHistos.size(); i++) {
+	hRatio.push_back((TH1D*)SystHistos[i]->Clone(""));
+	hRatio.back()->Divide(SystHistos[i],hSM0);
+	hRatio.back()->GetYaxis()->SetTitle("Data&Syst/MC");
+	hRatio.back()->GetYaxis()->SetRangeUser(0.5,1.5);
+	hRatio.back()->GetXaxis()->SetTitle("");
+	hRatio.back()->SetTitleSize(0.06, "XY");
+	hRatio.back()->SetTitleOffset(0.8, "Y");
+	hRatio.back()->SetLabelSize(0.08,"XY");
+	NoError(hRatio.back(),xMin,xMax);
+      }
+      
+      cCanvas->cd(2*padNr+2);
+      //  TBox *unity = new TBox(xMin-0.1,0.95,xMax+0.15, 1.05); // LP
+      TBox *unity = new TBox(xMin-0.1,0.95,xMax+0.15, 1.05);
+      
+      unity->SetLineWidth(2);
+      //unity.SetLineStyle(Root.kDashed);
+      unity->SetLineColor(2);
+      unity->SetFillColor(2);
+      unity->SetFillStyle(3002);
+      //  unity->Draw();
+      //  gPad->SetGridx(); 
+      //  gPad->SetGridy();
+      for(unsigned int i=hRatio.size()-1; i<hRatio.size(); i--) {
+	if(i==hRatio.size()-1) {
+	  hRatio[i]->Draw();
+	  //      unity->Draw("same");
+	  hRatio[i]->Draw("same");
+	}
+	else
+	  {
+	    hRatio[i]->GetYaxis()->SetTitleSize(0.055);
+	    hRatio[i]->Draw("same"); 
+	  }
+      }
+    } // ratio stuff close
 
-  /*
-  double xMinBox = 0.;   double xMaxBox = 0.;
-  if (histoName != "LP_tot") {
-    if (histoName != "SumLepPt_tot") {
-      if ((folderName == "ANplots150_NOLP")) { xMinBox = 0.; xMaxBox = 300.; } 
-      if ((folderName == "ANplots250_NOLP")) { xMinBox = 0.; xMaxBox = 400.; }
-      if ((folderName == "ANplots350_NOLP")) { xMinBox = 0.; xMaxBox = 500.; }
-      if ((folderName == "ANplots450_NOLP")) { xMinBox = 0.; xMaxBox = 1000.; }
-    }
-    else {
-      if ((folderName == "ANplots150_NOLP")) { xMinBox = 100.; xMaxBox = 300.; } 
-      if ((folderName == "ANplots250_NOLP")) { xMinBox = 200.; xMaxBox = 400.; }
-      if ((folderName == "ANplots350_NOLP")) { xMinBox = 300.; xMaxBox = 500.; }
-      if ((folderName == "ANplots450_NOLP")) { xMinBox = 400.; xMaxBox = 1000.; }
-    }
-  } 
-  else { xMinBox = xMin-0.1; xMaxBox = xMax+0.03; }
-  */
-  /*  
-  //  TBox *unity = new TBox(xMin-0.1,0.95,xMax+0.15, 1.05); // LP
-  TBox *unity = new TBox(xMin-0.1,0.95,xMax+0.15, 1.05);
-
-  unity->SetLineWidth(2);
-  //unity.SetLineStyle(Root.kDashed);
-  unity->SetLineColor(2);
-  unity->SetFillColor(2);
-  unity->SetFillStyle(3002);
-  unity->Draw("same");
-  */
 }
 
-TCanvas* createCanvas(TString name,int xlen,int ylen, int xDiv) {
+TCanvas* createCanvas(TString name,int xlen,int ylen, int xDiv, bool ratio) {
   TCanvas* aCanvas = new TCanvas(name,name,xlen*xDiv,ylen);
 
   float xstep = 1./xDiv;
-
+  
+  
   for (int i1=0; i1<xDiv; i1++) {
 
-    TPad *mainPad = new TPad("","",0.01+((i1)*xstep),0.25,((i1+1)*xstep)-0.01,0.99);
-    mainPad->SetNumber(1+i1*2);
+    TPad *mainPad = new TPad();//,0.01+((i1)*xstep),0.25,((i1+1)*xstep)-0.01,0.99);
+    mainPad->SetNumber(1+i1);
+    if(ratio){
+      mainPad = new TPad();//,0.01+((i1)*xstep),0.25,((i1+1)*xstep)-0.01,0.99);
+      mainPad->SetNumber(i1);
+    }
     mainPad->Draw();
-
-    TPad *ratioPad = new TPad("","",0.01+((i1)*xstep),0.01,((i1+1)*xstep)-0.01,0.25);
-    ratioPad->SetNumber(i1*2+2);
-    ratioPad->Draw();
+    if(ratio){
+      TPad *ratioPad = new TPad("","",0.01+((i1)*xstep),0.01,((i1+1)*xstep)-0.01,0.25);
+      ratioPad->SetNumber(i1*2+2);
+     ratioPad->Draw();
+    }
   }
+  
 
   aCanvas->SetFillColor(0);
   aCanvas->SetBottomMargin(0.125);
@@ -754,6 +834,19 @@ TCanvas* createCanvas(TString name,int xlen,int ylen, int xDiv) {
 TLegend *legendRAW() {
 
   TLegend *leg = new TLegend(0.73,0.67,0.95,0.93);
+  leg->SetFillStyle(0);
+  leg->SetBorderSize(0);
+  leg->SetTextSize(0.05);
+  leg->SetTextFont(62);
+
+  return leg;
+}
+
+
+
+TLegend *legendRAW(double xmin, double ymin, double xmax, double ymax) {
+
+  TLegend *leg = new TLegend(xmin,ymin,xmax,ymax);
   leg->SetFillStyle(0);
   leg->SetBorderSize(0);
   leg->SetTextSize(0.05);

@@ -602,6 +602,27 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
     return ostrm;
   }
 
+  LowerMuPtCut::LowerMuPtCut( float cut )
+    : cut_(cut)
+  {;}
+
+  // -----------------------------------------------------------------------------
+  //
+  bool LowerMuPtCut::Process( Event::Data& ev ) {
+
+    if (ev.LD_CommonMuons().accepted.size()) {
+      return ev.LD_CommonMuons().accepted.at(0)->Pt() >= cut_;
+    }
+
+    return true;
+  }
+  // -----------------------------------------------------------------------------
+  //
+  std::ostream& LowerMuPtCut::Description( std::ostream &ostrm ) {
+    ostrm << "lower muon PT < " << cut_ << " " ;
+    return ostrm;
+  }
+
   UpperElePtCut::UpperElePtCut( float cut )
     : cut_(cut)
   {;}
@@ -707,7 +728,7 @@ std::ostream& HTlepCut::Description(std::ostream &ostrm) {
 	if(myGenMatrixBin.the_GenTau.size()==2)	  return true;
 	return false;
       }
-
+    if(mNoLep==1&&aNLepton==0) return true;
     if(aNLepton==mNoLep) return true;
 
     return false;

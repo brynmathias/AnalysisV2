@@ -177,7 +177,7 @@ default_common.Photons.RequireLooseForOdd = True
 
 from icf.JetCorrections import *
 corPset =  CorrectionPset("ResidualJetEnergyCorrections.txt")
-# corPset =  CorrectionPset("Spring10DataV2_L2L3Residual_AK5PF.txt")
+corPset =  CorrectionPset("Spring10DataV2_L2L3Residual_AK5PF.txt")
 JetCorrections = JESCorrections( corPset.ps() ,True)
 NoiseFilt= OP_HadronicHBHEnoiseFilter()
 selection = OP_GoodEventSelection()
@@ -661,9 +661,8 @@ sample.File = SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_S
 sample.File = SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_24_scan_T2bb.File
 sample.File = SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt.File
 sample.Name = "T2ttTestFile"
-# sample.File = sample.File[0:5]#["/Users/bryn/WokringDir/DevVersionSUSYv2/Ntuples/AK5Calo_tedSync_newFormat.root"]
-# MuHad_Run2011A_Complete_V15_03_02.File = MuHad_Run2011A_Complete_V15_03_02.File[1:10]
-#sample = HTRun2011AB
+
+sample.File = "../CMSSM_Tanb10_1800_280.root"
 
 outDir = "../T2ttTest/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)

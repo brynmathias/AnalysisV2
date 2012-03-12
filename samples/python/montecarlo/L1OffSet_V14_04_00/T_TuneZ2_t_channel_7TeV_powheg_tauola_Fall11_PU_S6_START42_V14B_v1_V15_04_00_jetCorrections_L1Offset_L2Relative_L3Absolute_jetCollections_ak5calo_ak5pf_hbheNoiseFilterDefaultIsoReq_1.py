@@ -181,5 +181,6 @@ T_TuneZ2_t_channel_7TeV_powheg_tauola_Fall11_PU_S6_START42_V14B_v1_V15_04_00_jet
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2012_02_04_18_45_20/T_TuneZ2_t-channel_7TeV-powheg-tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_97_4_ohL.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2012_02_04_18_45_20/T_TuneZ2_t-channel_7TeV-powheg-tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_98_4_iL7.root" ,
 	],
-Weight=1.0,
+	CrossSection=35.72,
+    Events = 3.48573e+06,
 )

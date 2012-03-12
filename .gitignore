@@ -8,10 +8,14 @@ TestResults
 *.cvsignore
 <<<<<<< HEAD:.gitignore
 *setup.*
+<<<<<<< HEAD:.gitignore
 =======
 setup.*
 >>>>>>> 089e576df45761c21be3f08e53ebd2d86b952f3a:.gitignore
 config.inc
+=======
+*config.inc
+>>>>>>> a49284bebc041d70a1c6db8249ad0b0fbd222266:.gitignore
 *filtered.json
 *Trigger*.json
 .DS_Store

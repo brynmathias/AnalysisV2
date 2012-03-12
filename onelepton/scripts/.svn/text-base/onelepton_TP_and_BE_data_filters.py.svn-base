@@ -63,6 +63,15 @@ ElHad_TPandBE_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_filt
 ElHad_TPandBE_deadecal_ps._quiet_set("Accept", False)
 ElHad_Cut_TPandBE = EventSelector(ElHad_TPandBE_deadecal_ps.ps())
 
+ElHad_TP_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_filteredEventsTP_cfi.py")
+ElHad_TP_deadecal_ps._quiet_set("Accept", False)
+ElHad_Cut_TP = EventSelector(ElHad_TP_deadecal_ps.ps())
+
+ElHad_BE_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_filteredEventsBE_cfi.py")
+ElHad_BE_deadecal_ps._quiet_set("Accept", False)
+ElHad_Cut_BE = EventSelector(ElHad_BE_deadecal_ps.ps())
+
+
 #ElHad_Prompt_deadecal_ps = getDeadECALList("../python/deadecal/ElectronHad_Run2011A_Prompt_v4_filteredEventsBE_cfi.py")
 #ElHad_Prompt_deadecal_ps._quiet_set("Accept", False)
 #ElHad_Prompt_Cut_BE = EventSelector(ElHad_Prompt_deadecal_ps.ps())

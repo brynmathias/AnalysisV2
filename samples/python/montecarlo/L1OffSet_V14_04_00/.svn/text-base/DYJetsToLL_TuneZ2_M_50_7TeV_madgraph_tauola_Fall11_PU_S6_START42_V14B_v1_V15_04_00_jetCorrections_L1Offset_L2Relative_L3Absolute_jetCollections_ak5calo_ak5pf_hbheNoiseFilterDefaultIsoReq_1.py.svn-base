@@ -1595,5 +1595,6 @@ DYJetsToLL_TuneZ2_M_50_7TeV_madgraph_tauola_Fall11_PU_S6_START42_V14B_v1_V15_04_
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_18_59_34/DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_999_0_dOd.root" ,
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/henning/ICF/automated/2012_02_04_18_59_34/DYJetsToLL_TuneZ2_M-50_7TeV-madgraph-tauola.Fall11-PU_S6_START42_V14B-v1.AODSIM/SusyCAF_Tree_9_1_qIf.root" ,
 	],
-	CrossSection=0,
+    CrossSection=3048., ## NNLO
+    Events = 3.15539e+07,
 )
