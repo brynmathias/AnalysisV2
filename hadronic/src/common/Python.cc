@@ -20,6 +20,8 @@
 using namespace boost::python;
 
 BOOST_PYTHON_MODULE(libHadronic) {
+  class_<Operation::MuonPtEtaCut, bases<Operation::_Base> >( "OP_AditionalMuonCuts", init<float,float>());
+  class_<Operation::LeadingMuonCut, bases<Operation::_Base> >( "OP_LeadingMuonCut", init<float>());
     
     class_<Event::AddJetEnergy, bases<Compute::ObjectFilter<Event::Jet> > >("JetAddition", init<float>());
 

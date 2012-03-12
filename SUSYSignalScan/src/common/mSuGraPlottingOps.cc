@@ -59,17 +59,18 @@ std::ostream & SMPlottingOps::Description(std::ostream & ostrm){
 
 //----------------------------------------------------------------------
 mSuGraPlottingOps::mSuGraPlottingOps(  const Utils::ParameterSet& ps ) :
-dirName_( ps.Get<std::string>("DirectoryName")),
-  xBins_(ps.Get<int>("xBins")),
-  xLow_(ps.Get<double>("xLow")),
-  xHigh_(ps.Get<double>("xHigh")),
-  yBins_(ps.Get<int>("yBins")),
-  yLow_(ps.Get<double>("yLow")),
-  yHigh_(ps.Get<double>("yHigh")),
-  zBins_(ps.Get<int>("zBins")),
-  zLow_(ps.Get<double>("zLow")),
-  zHigh_(ps.Get<double>("zHigh")),
-  verbose_(ps.Get<bool>("verbose")),
+dirName_   ( ps.Get<std::string>("DirectoryName")),
+  xBins_   ( ps.Get<int>("xBins")),
+  xLow_    ( ps.Get<double>("xLow")),
+  xHigh_   ( ps.Get<double>("xHigh")),
+  yBins_   ( ps.Get<int>("yBins")),
+  yLow_    ( ps.Get<double>("yLow")),
+  yHigh_   ( ps.Get<double>("yHigh")),
+  zBins_   ( ps.Get<int>("zBins")),
+  zLow_    ( ps.Get<double>("zLow")),
+  zHigh_   ( ps.Get<double>("zHigh")),
+  verbose_ ( ps.Get<bool>("verbose")),
+  moduloEvNum_ (ps.Get<int>("Modulo")),
   M0_ (ps.Get<std::vector<double> >("NLO.M0")),
   M12_(ps.Get<std::vector<double> >("NLO.M12")),
   NG_ (ps.Get<std::vector<double> >("NLO.ng")),
@@ -122,6 +123,15 @@ void mSuGraPlottingOps::BookHistos() {
                  yBins_,yLow_,yHigh_, //m12
                  zBins_,zLow_,zHigh_, //mChi
                  1,0,1,false);
+
+  BookHistArray( H_M0_M12_mChi_noweight_countRAW,
+                 "H_M0_M12_mChi_noweight_countRAW",
+                 ";m0;m12;mChi;",
+                 xBins_,xLow_,xHigh_, //m0
+                 yBins_,yLow_,yHigh_, //m12
+                 zBins_,zLow_,zHigh_, //mChi
+                 1,0,1,false);
+
 
     BookHistArray( H_M0_M12_mChi_noweight,
                    "m0_m12_mChi_noweight",
@@ -311,6 +321,9 @@ bool mSuGraPlottingOps::Process( Event::Data& ev ) {
         "MLSP" << ev.MLSP.enabled() << "\n" <<
         "MChi" << ev.MChi.enabled() << "\n";
   }
+  H_M0_M12_mChi_noweight_countRAW[0]->Fill(M0,M12,MChi,Weight);
+  if( ev.EventNumber()%moduloEvNum_ != 0) return true;
+  
   //    if(ev.M0.enabled() || ev.M12.enabled()){
   H_M0_M12_mChi[0]->Fill(M0,M12,MChi,weight);
   H_M0_M12_mChi_noweight[0]->Fill(M0,M12,MChi,1);
@@ -318,7 +331,6 @@ bool mSuGraPlottingOps::Process( Event::Data& ev ) {
   if((ev.M0.enabled() || ev.MG.enabled())){
 
     process = NLO::GetProcess(ev);
-
     Double_t NLOcrosssection = 0.; // if we dont find a NLO x section, fill with zero - this will help with debugging
     if(verbose_ )cout << " Leading order XC is " << weight << endl;
     std::map<std::pair<int,int> , std::vector<double> >::const_iterator nloXsec = M0_M12_NLO_.find(make_pair(int(M0),int(M12)));

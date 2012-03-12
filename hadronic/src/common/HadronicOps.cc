@@ -649,9 +649,9 @@ mNumber(number) {
               }
             }
             // cout << "Sum of vertex Pt/HT  is "  << VertexPt/ev.CommonHT() << endl;
-            if( VertexPt/ev.CommonHT() > cut_ ) { return true; } // check the leading uncor jet has cor Pt > cut
-            else{return false;}
-          }
+          if( VertexPt/ev.CommonHT() > cut_ ) { return true; } 
+          else{return false;}
+        }
 
 // -----------------------------------------------------------------------------
 //
@@ -738,6 +738,54 @@ mNumber(number) {
             ostrm << "OddJet Veto using configurable Jet Threshold of  " << Threshold_ << " GeV " ;
             return ostrm;
           }
+
+
+
+
+
+// -----------------------------------------------------------------------------
+//
+
+        MuonPtEtaCut::MuonPtEtaCut(float pt, float eta) :
+        PtCut_(pt),
+        EtaCut_(eta)
+          {;}
+        bool MuonPtEtaCut::Process(Event::Data& ev){
+          std::vector<Event::Lepton const *>::const_iterator imuon = ev.LD_CommonMuons().accepted.begin();
+          std::vector<Event::Lepton const *>::const_iterator jmuon = ev.LD_CommonMuons().accepted.end();
+          for( ; imuon != jmuon; ++imuon){          
+            if( (*imuon)->Pt() < PtCut_ || fabs((*imuon)->Eta()) > EtaCut_ ) return false;
+          }
+          return true;
+        }
+
+
+// -----------------------------------------------------------------------------
+//
+        std::ostream& MuonPtEtaCut::Description( std::ostream &ostrm ) {
+          ostrm << "An extra muon quality criteria cut, if Eta > " << EtaCut_ << " and Pt < " << PtCut_  <<" GeV " ;
+          return ostrm;
+        }
+
+
+// -----------------------------------------------------------------------------
+//
+
+        LeadingMuonCut::LeadingMuonCut(float pt) :
+        PtCut_(pt)
+          {;}
+        bool LeadingMuonCut::Process(Event::Data& ev){
+          if( ev.LD_CommonMuons().accepted[0]->Pt() > PtCut_) return true;
+          return false;
+        }
+
+
+// -----------------------------------------------------------------------------
+//
+        std::ostream& LeadingMuonCut::Description( std::ostream &ostrm ) {
+          ostrm << "Leading Muon Pt < " << PtCut_  <<" GeV " ;
+          return ostrm;
+        }
 
 
 

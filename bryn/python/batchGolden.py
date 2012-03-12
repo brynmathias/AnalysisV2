@@ -313,7 +313,6 @@ DiJet5 = OP_NumComJets("==",2)
 
 
 
-# Define a crap load more plotting ops, for HT exclusive bins
 
 
 
@@ -347,7 +346,7 @@ triggers = {
 }
 
 
-# json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden2011.json"))
+json = JSONFilter("Json Mask", json_to_pset("/home/hep/db1110/public_html/Golden2011.json"))
 # AlphatTriggerCut(0.52414,50)#
 # vertex_reweight = VertexReweighting(
 # PSet(
@@ -355,9 +354,7 @@ triggers = {
 # # VertexWeights = [0.0, 0.027442995662725636, 0.12682983875287387, 0.28326829632076572, 0.40618954180036759, 0.41605144586432974, 0.33147399297403923, 0.21562021576661147, 0.1140047132529971]
 # ).ps())
 
-btagDiMuon= OP_NumCommonBtagJets(">=",1,2.0)
-btagOneMuon= OP_NumCommonBtagJets(">=",1,2.0)
-ZeroMuonbtag= OP_NumCommonBtagJets(">=",1,2.0)
+
 recHitCut = OP_SumRecHitPtCut(30.)
 ZeroMuon = OP_NumComMuons("<=",0)
 json_ouput = JSONOutput("filtered")
@@ -379,14 +376,15 @@ def MakeDataTree(Threshold,Muon = None):
   if int(Threshold) is 86 : HTBins = [325.,375.]
   # from batchGolden import *
   cutTreeData = Tree("Data")
-  # cutTreeData.Attach(json)
-  # cutTreeData.TAttach(json,evFilter)
-  # cutTreeData.TAttach(evFilter,skim)
-  # cutTreeData.TAttach(evFilter,eventDump)
-  # cutTreeData.TAttach(json,NoiseFilt)
-  # cutTreeData.TAttach(json,json_ouput)
-  # cutTreeData.Attach(DataTrigger)
-  cutTreeData.Attach(NoiseFilt)
+  cutTreeData.Attach(json)
+  #cutTreeData.TAttach(json,evFilter)
+  #cutTreeData.TAttach(evFilter,skim)
+  #cutTreeData.TAttach(evFilter,eventDump)
+  cutTreeData.TAttach(json,NoiseFilt)
+  cutTreeData.TAttach(json,json_ouput)
+
+  #cutTreeData.Attach(eventDump)
+  
   cutTreeData.TAttach(NoiseFilt,GoodVertexMonster)
   cutTreeData.TAttach(GoodVertexMonster,recHitCut)
   cutTreeData.TAttach(recHitCut,LeadingJetEta)
@@ -401,11 +399,11 @@ def MakeDataTree(Threshold,Muon = None):
   cutTreeData.TAttach(numComElectrons,numComPhotons)
   cutTreeData.TAttach(numComPhotons,VertexPtOverHT)
   cutTreeData.TAttach(VertexPtOverHT,htCut275)
-  #FOR HT > 275Gev Plot
-  #END HT 275GEV Plot
-  #Begin MHT/MET plot inthe low region.
+  # #FOR HT > 275Gev Plot
+  # #END HT 275GEV Plot
+  # #Begin MHT/MET plot inthe low region.
   cutTreeData.TAttach(htCut275,DeadEcalCutData)
-  #Here be plots after all the cuts!!
+  # #Here be plots after all the cuts!!
   cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
   if Muon == None:
       cutTreeData.TAttach(MHT_METCut,ZeroMuon)
@@ -417,7 +415,7 @@ def MakeDataTree(Threshold,Muon = None):
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "") )
-  
+  # 
   else:
       cutTreeData.TAttach(MHT_METCut,minDRMuonJetCut)
       cutTreeData.TAttach(minDRMuonJetCut,OneMuon)
@@ -431,27 +429,27 @@ def MakeDataTree(Threshold,Muon = None):
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = PFMTCut30,
       htBins = HTBins,TriggerDict = triggers,lab = "OneMuon_") )
-    
-    
-      
+     
+     
+       
       cutTreeData.TAttach(minDRMuonJetCut,DiMuon)
       cutTreeData.TAttach(DiMuon,ZMass_2Muons)
       cutTreeData.TAttach(ZMass_2Muons,minDRMuonJetCutDiMuon)
       cutTreeData.TAttach(minDRMuonJetCutDiMuon,btagDiMuon)
       # avobe here does one big inclusive bin!
-      # Now lets start binning in HT bins
-      # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
-      # we arrange the HT bins so they are not repoduced though out threshold runs.
-
+  #     # Now lets start binning in HT bins
+  #     # So we can HADD the files at the end and get a chorent set to save the book keeping nightmare:
+  #     # we arrange the HT bins so they are not repoduced though out threshold runs.
+  # 
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = btagDiMuon,
       htBins = HTBins,TriggerDict = triggers,lab ="btag_DiMuon_") )
-    
+  #   
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("WeeklyUpdatePlots",genericPSet), cut = minDRMuonJetCutDiMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "DiMuon_") )
-    
-  return (cutTreeData,secondJetET,out)
+  #   
+  return cutTreeData
 
 #Second MC!
 

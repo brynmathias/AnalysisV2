@@ -702,9 +702,9 @@ void EventWeight::_Update() const{
         mData = mEv.GetSusyCrossSection()*mDesiredLumi/10000;
       }
       catch(std::exception & e){
-        std::cout
-            << "[FIXME] Error reading susyCrossSection branch from ntuple.\n"
-            << "This should be fixed. Continuing." << std::endl;
+       // std::cout
+       //     << "[FIXME] Error reading susyCrossSection branch from ntuple.\n"
+       //     << "This should be fixed. Continuing." << std::endl;
         mData = 0;
       }
       break;
