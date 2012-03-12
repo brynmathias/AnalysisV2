@@ -17,7 +17,7 @@ ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 
 default_common.Jets.PtCut=50.*(325./375.)
 #  Change the settings from golden to use the lowest scaled bin.
-cutTree,blah,l = MakeDataTree(100.*(325./375.), Muon = None)
+cutTree,blah = MakeDataTree(100.*(325./375.), Muon = None)
 
 def addCutFlowData(a) :
   a.AddPhotonFilter("PreCC",ra3PhotonIdFilter)

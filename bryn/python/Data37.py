@@ -15,7 +15,7 @@ vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 #  Change the settings from golden to use the lowest scaled bin.
 default_common.Jets.PtCut=50.*(275./375.)
-cutTree,blah,l = MakeDataTree(100.*(275./375.), Muon = None)
+cutTree,blah = MakeDataTree(100.*(275./375.), Muon = None)
 print cutTree
 
 def addCutFlowData(a) :
