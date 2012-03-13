@@ -38,7 +38,7 @@ outDir = "../results_FullCutFlow_"+strftime("%d_%b")+"//NoSmear37/"
 ensure_dir(outDir)
 
 
-anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,QCD_Summer11_madgraph_All)
+anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,QCD_Summer11_Pythia_All)
 # anal_ak5_pfMC.Run(outDir,conf_ak5_pfMC,MC)
 # anal_ak5_pfMC.Run("../results_"+strftime("%d_%b_%H")+"//NoSmear",conf_ak5_pfMC,[QCD_AllPtBins_7TeV_Pythia])
 # anal_ak5_jptMC.Run("../results_"+strftime("%d_%b_%H")+"//NoSmear",conf_ak5_jptMC,MC)
