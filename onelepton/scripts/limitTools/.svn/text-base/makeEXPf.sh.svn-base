@@ -1,0 +1,86 @@
+#!/bin/bash
+
+SIGMA=0.975 # 0.5 or 0.025/0.975
+
+THRESHOLD="thrHT500"
+DIRECTORY="mSUGRA_newExpectedLimit_"${THRESHOLD}
+
+NJOBS=10000
+POINTS_PER_JOB="1"
+
+let SHIFT=${POINTS_PER_JOB}
+echo "Number of SUSY points to run per batch-Job: "${SHIFT}
+echo ""
+
+CFI_FILENAME_START="source_${DIRECTORY}_"
+CFI_FILENAME_EXTEN=".cfi"
+
+OUTPUT_FILENAME_START="higgsCombine"
+OUTPUT_FILENAME_EXTEN=""
+#OUTPUT_FILENAME_START="higgsCombine"
+#OUTPUT_FILENAME_EXTEN=".HybridNew.root"
+OUTPUT_TXT_START="output_quant"${SIGMA}"_"
+OUTPUT_TXT_EXTEN=".txt"
+
+CFG_TEMPLATE_FILE="realistic-counting-experiment-exp-"${THRESHOLD}".txt_template"
+CFG_FILENAME_START="realistic-counting-experiment-"
+CFG_FILENAME_EXTEN=".txt"
+
+JOB_FILENAME_TEMPLATE="analysis.job_template"
+JOB_FILENAME_START="susy-batchanalysis-sigma"${SIGMA}"_"
+JOB_FILENAME_EXTEN=".job"
+
+TMP_DIR=${DIRECTORY}
+#rm -rf ${TMP_DIR}; mkdir ${TMP_DIR}
+
+PWD_DIR=${PWD}/${TMP_DIR}
+
+# BatchJob counters 
+NMAX=0; NFILE=0
+
+COUNTER=1
+# SUSY points counters
+M0=0; M12=0; SUSYSTEP=40
+M0max=2000; M12max=800
+
+while [ $M0 -le ${M0max} ];
+#for (( M0=100; M0<=M0max; M0+=20 ))
+  do
+
+#    while [ $M12 -le ${M12max} ];
+  for (( M12=0; M12<=M12max; M12+=SUSYSTEP ))
+    do
+
+  # Batch Job filename
+    JOB_FILENAME=${JOB_FILENAME_START}${COUNTER}${JOB_FILENAME_EXTEN}
+    sed -e "s@_localDirectory_@${PWD_DIR}@g" ${JOB_FILENAME_TEMPLATE} > ${JOB_FILENAME}
+    
+    CFG_FILENAME=${CFG_FILENAME_START}${COUNTER}${CFG_FILENAME_EXTEN}
+
+      # Output filename per SUSY point
+    OUTPUT_FILENAME=${OUTPUT_FILENAME_START}"_mo"${M0}"_mh"${M12}"_"${COUNTER}${OUTPUT_FILENAME_EXTEN}
+    
+    OUTPUT_ROOT=${OUTPUT_FILENAME_START}"_mo"${M0}"_mh"${M12}"_*.HybridNew.mH120.*.root"
+    cd ${TMP_DIR};   OUTPUT_ROOT=`ls ${OUTPUT_ROOT}` ; cd ../
+
+    OUTPUT_TXT=${OUTPUT_TXT_START}"_mo"${M0}"_mh"${M12}"_"${COUNTER}${OUTPUT_TXT_EXTEN}
+
+     LINE="combine -M HybridNew --frequentist --testStat LHC -n "${OUTPUT_FILENAME}" "${CFG_FILENAME}" --singlePoint 1.0 --readHybridResult --toysFile="${OUTPUT_ROOT}" --expectedFromGrid "${SIGMA}" | awk '{print \$0}' > "${OUTPUT_TXT}
+    echo ${LINE} >> ${JOB_FILENAME}
+    
+    mv ${JOB_FILENAME} ${TMP_DIR}/${JOB_FILENAME}
+    cd ${TMP_DIR}; echo "Submitting Job: "${PWD}"/"${JOB_FILENAME}; 
+    chmod 751 ${JOB_FILENAME}
+    bsub -q 1nh ${JOB_FILENAME}
+    echo ""; cd ..
+    
+    if [ $COUNTER -eq $NJOBS ]; then
+	exit;#	break;
+    fi
+
+    let COUNTER=${COUNTER}+1 
+  done
+
+  let M0=${M0}+${SUSYSTEP}
+done
+

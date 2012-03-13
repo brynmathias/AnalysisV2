@@ -21,6 +21,9 @@ namespace Operation {
     
     std::string mFolderName;
 
+    TH1D* NPV_NoWeight;
+    TH1D* NPV_AfterWeight;
+
     TH1D* Zmassmu; 
     TH1D* Zmassmu_pos; 
     TH1D* Zmassmu_neg; 

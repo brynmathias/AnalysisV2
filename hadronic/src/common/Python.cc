@@ -22,11 +22,17 @@ using namespace boost::python;
 BOOST_PYTHON_MODULE(libHadronic) {
   class_<Operation::MuonPtEtaCut, bases<Operation::_Base> >( "OP_AditionalMuonCuts", init<float,float>());
   class_<Operation::LeadingMuonCut, bases<Operation::_Base> >( "OP_LeadingMuonCut", init<float>());
+    
     class_<Event::AddJetEnergy, bases<Compute::ObjectFilter<Event::Jet> > >("JetAddition", init<float>());
 
   class_<Operation::examplePlotOps, bases<Operation::_Base> >( "OP_examplePlots",
                                                                  init<const Utils::ParameterSet&>() );
 
+
+  class_<Operation::nGenElectrons, bases<Operation::_Base> >("OP_nGenElectrons",init<const std::string &, UInt_t,float,float>() );
+
+  class_<Operation::nGenMuons, bases<Operation::_Base> >("OP_nGenMuons",init<const std::string &, UInt_t,float,float>() );
+  class_<Operation::nGenPhotons, bases<Operation::_Base> >("OP_nGenPhotons",init<const std::string &, UInt_t,float,float>() );
   class_<Operation::gensignalProcessID, bases<Operation::_Base> >( "gensignalProcessID",  init<int,int,int,int>() );
 
   class_<Operation::genProcess, bases<Operation::_Base> >( "genProcess",  init<const std::string &>() );
@@ -130,7 +136,6 @@ class_<Operation::VertexPtOverHT, bases<Operation::_Base> >("OP_SumVertexPtOverH
 class_<Operation::TriggerMHT_Emu, bases<Operation::_Base> >("OP_TriggerMHT_Emu",init<float,float>() );
 class_<Operation::TriggerHT_Emu, bases<Operation::_Base> >("OP_TriggerHT_Emu",init<float,float>() );
 
-class_<Operation::confiurableOddJet, bases<Operation::_Base> >("OP_ConfigurableOddJetVeto",init<float>() );
 
 
 }

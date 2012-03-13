@@ -61,6 +61,9 @@ NtupleData::NtupleData(const std::string & fileName,
     mSecTauSuffix(Utils::GetConfig<std::string>("Ntuple.SecTaus.Suffix")),
     mPhotonPrefix(Utils::GetConfig<std::string>("Ntuple.Photons.Prefix")),
     mPhotonSuffix(Utils::GetConfig<std::string>("Ntuple.Photons.Suffix")),
+    //Branch 'SimpModelScanxCHI' does not exist. Disabling.
+    //Branch 'SimpModelScanmGL' does not exist. Disabling.
+    //Branch 'SimpModelScanmLSP' does not exist. Disabling.
 
     // General event data
     RunNumber(mDataTree,"run",this),
@@ -385,7 +388,7 @@ NtupleData::NtupleData(const std::string & fileName,
     genMotherStored(mDataTree,"genMotherStored",this),
     genMother(mDataTree,"genMother",this),
     genPdgId(mDataTree,"genPdgId",this),
-    genJetP4(mDataTree,"gen"+mJetPrefix+"GenJetsP4"+mJetSuffix,this),
+    genJetP4(mDataTree,"genak5GenJetsP4",this),
     genJetMatchIndex(mDataTree,mJetPrefix+"GenJetMatchIndex"+mJetSuffix,this),
     genMetP4True(mDataTree,"genmetP4True",this),
     genMetP4IC5(mDataTree,"metGenMetP4IC5",this),

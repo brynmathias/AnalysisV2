@@ -1,0 +1,342 @@
+#!/bin/bash
+
+#THEORY
+TH="NULL" # or DOWN or NULL
+# Run the Observed or Expected limit
+MODE="OBS" # or EXP
+# Which bin in HT threshold
+THRESHOLD="thrHT500"
+
+# The directory where the input txt SUSYgrid files are
+TXTDIR="MCgrid"
+
+S1="OBS"
+S2="EXP"
+
+STH1="UP"; STH2="DOWN"; STH3="NULL";
+
+if [ $TH = $STH1 ]; then
+    TH_FILE="thryUnc_up.txt"
+elif [ $TH = $STH2 ]; then
+    TH_FILE="thryUnc_down.txt"
+fi
+
+if [ $MODE = $S1 ]; then 
+    DIRECTORY="mSUGRA_ObservedLimit_"${TXTDIR}"_"${TH}"_"${THRESHOLD} 
+elif [ $MODE = $S2 ]; then 
+    DIRECTORY="mSUGRA_ExpectedLimit_"${TXTDIR}"_"${TH}"_"${THRESHOLD}   
+fi
+
+# Lumi factor scaling
+ELUM=1.0106
+MLUM=1.0075
+
+NJOBS=10000
+POINTS_PER_JOB="1"
+
+let SHIFT=${POINTS_PER_JOB}
+echo "Number of SUSY points to run per batch-Job: "${SHIFT}
+echo ""
+
+CFI_FILENAME_START="source_${DIRECTORY}_"
+CFI_FILENAME_EXTEN=".cfi"
+
+OUTPUT_FILENAME_START=""
+OUTPUT_FILENAME_EXTEN=""
+#OUTPUT_FILENAME_START="higgsCombine"
+#OUTPUT_FILENAME_EXTEN=".HybridNew.root"
+OUTPUT_TXT_START="output"
+OUTPUT_TXT_EXTEN=".txt"
+
+#if [ $MODE = $S1 ]; then
+CFG_TEMPLATE_FILE="realistic-counting-experiment-"${THRESHOLD}".txt_template"
+#elif [ $MODE = $S2 ]; then
+#    CFG_TEMPLATE_FILE="realistic-counting-experiment-exp-"${THRESHOLD}".txt_template"
+#fi
+
+CFG_FILENAME_START="realistic-counting-experiment-"
+CFG_FILENAME_EXTEN=".txt"
+
+JOB_FILENAME_TEMPLATE="analysis.job_template"
+JOB_FILENAME_START="susy-batchanalysis"
+JOB_FILENAME_EXTEN=".job"
+
+TMP_DIR=${DIRECTORY}
+rm -rf ${TMP_DIR}; mkdir ${TMP_DIR}
+
+PWD_DIR=${PWD}/${TMP_DIR}
+
+# BatchJob counters 
+NMAX=0; NFILE=0
+
+COUNTER=1
+# SUSY points counters
+M0=0; M12=0; SUSYSTEP=20
+M0max=2000; M12max=800
+
+while [ $M0 -le ${M0max} ];
+#for (( M0=100; M0<=M0max; M0+=20 ))
+  do
+
+#    while [ $M12 -le ${M12max} ];
+  for (( M12=0; M12<=M12max; M12+=SUSYSTEP ))
+    do
+    # The Signal yield
+    EVTLINE=`more ${TXTDIR}/grid_${THRESHOLD}.txt |grep "${M0} ${M12}"`
+    a=( $EVTLINE )
+    
+    EVT1=${a[2]}; EVT2=${a[3]}; EVT3=${a[4]}
+    EVT4=${a[5]}; EVT5=${a[6]}; EVT6=${a[7]}
+ #   echo "(m0= "$M0", m1/2= "$M12")- Signal yield: ("$EVT1", "$EVT2", "$EVT3", "$EVT4", "$EVT5", "$EVT6")"
+    
+    # Break, if the Signal yield variables are empty...
+    if [ ! $EVT1 ] || [ ! $EVT2 ] || [ ! $EVT3  ];
+	then echo "Empty event yield variables!!!"; echo ""; continue;
+    fi
+    echo "(m0= "$M0", m1/2= "$M12")- Signal yield: ("$EVT1", "$EVT2", "$EVT3", "$EVT4", "$EVT5", "$EVT6")"
+
+    # The Signal contamination
+    EVTLINEC=`more ${TXTDIR}/grid_${THRESHOLD}_ctrl.txt |grep "${M0} ${M12}"`
+    b=( $EVTLINEC )
+
+    EVT7=${b[2]}; EVT8=${b[3]}; EVT9=${b[4]}
+    EVT10=${b[5]}; EVT11=${b[6]}; EVT12=${b[7]}
+
+    if [ $EVT7 == 0 ];
+	then EVT7=0.001;
+    fi	
+	
+    if [ $EVT8 == 0 ];
+	then EVT8=0.001;
+    fi 
+
+    if [ $EVT9 == 0 ];
+	then EVT9=0.001;
+    fi 
+
+    if [ $EVT10 == 0 ];
+	then EVT10=0.001;
+    fi 
+
+    if [ $EVT11 == 0 ];
+	then EVT11=0.001;
+    fi 
+
+    if [ $EVT12 == 0 ];
+	then EVT12=0.001;
+    fi 
+
+  #  echo "(m0= "$M0", m1/2= "$M12")- Signal contamination: ("$EVT7", "$EVT8", "$EVT9", "$EVT10", "$EVT11", "$EVT12")"
+ 
+    # Signal systematics
+      # METresolution
+    EVTLINES1=`more ${TXTDIR}/grid_${THRESHOLD}_metres_conservative.txt |grep "${M0} ${M12}"`
+    c=( $EVTLINES1 )
+    
+    EVTS1=${c[2]}; EVTS2=${c[3]}; EVTS3=${c[4]}
+    EVTS4=${c[5]}; EVTS5=${c[6]}; EVTS6=${c[7]}
+
+#    echo "(m0= "$M0", m1/2= "$M12")- Signal yield shifted: ("$EVTS1", "$EVTS2", "$EVTS3", "$EVTS4", "$EVTS5", "$EVTS6")"
+
+    if [ $EVT1 == 0 ]; 
+	then EVT1=0.001; SYS1=1; 
+    else
+	SYS1=$(echo "scale=4; ($EVT1 - $EVTS1) / $EVT1 " | bc ); 
+	SYS1=`echo $SYS1 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	SYS1=$(echo "scale=2; (1 + $SYS1) " | bc );
+    fi
+    if [ $EVT2 == 0 ]; 
+	then EVT2=0.001; SYS2=1;
+    else
+	SYS2=$(echo "scale=4; ($EVT2 - $EVTS2) / $EVT2 " | bc ); 
+	SYS2=`echo $SYS2 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	SYS2=$(echo "scale=2; (1 + $SYS2) " | bc );
+    fi
+    if [ $EVT3 == 0 ]; 
+	then EVT3=0.001; SYS3=1;
+    else
+	SYS3=$(echo "scale=4; ($EVT3 - $EVTS3) / $EVT3 " | bc ); 
+	SYS3=`echo $SYS3 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	SYS3=$(echo "scale=2; (1 + $SYS3) " | bc );
+    fi
+    if [ $EVT4 == 0 ]; 
+	then EVT4=0.001; SYS4=1;
+    else
+	SYS4=$(echo "scale=4; ($EVT4 - $EVTS4) / $EVT4 " | bc ); 
+	SYS4=`echo $SYS4 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	SYS4=$(echo "scale=2; (1 + $SYS4) " | bc );
+    fi
+    if [ $EVT5 == 0 ]; 
+	then EVT5=0.001; SYS5=1;
+    else
+	SYS5=$(echo "scale=4; ($EVT5 - $EVTS5) / $EVT5 " | bc ); 
+	SYS5=`echo $SYS5 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	SYS5=$(echo "scale=2; (1 + $SYS5) " | bc );
+    fi
+    if [ $EVT6 == 0 ]; 
+	then EVT6=0.001; SYS6=1;
+    else
+	SYS6=$(echo "scale=4; ($EVT6 - $EVTS6) / $EVT6 " | bc ); 
+	SYS6=`echo $SYS6 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	SYS6=$(echo "scale=2; (1 + $SYS6) " | bc );
+    fi
+
+    # JEC; use the average
+    EVTLINEP=`more ${TXTDIR}/grid_${THRESHOLD}_metup.txt |grep "${M0} ${M12}"`
+    u=( $EVTLINEP )
+ # Metup
+    EVTU1=${u[2]}; EVTU2=${u[3]}; EVTU3=${u[4]};
+    EVTU4=${u[5]}; EVTU5=${u[6]}; EVTU6=${u[7]};
+#    echo "(m0= "$M0", m1/2= "$M12")- Signal yield metup: ("$EVTU1", "$EVTU2", "$EVTU3", "$EVTU4", "$EVTU5", "$EVTU6")" 
+
+    EVTLINED=`more ${TXTDIR}/grid_${THRESHOLD}_metdown.txt |grep "${M0} ${M12}"`
+    d=( $EVTLINED )
+ # Metdown
+    EVTD1=${d[2]}; EVTD2=${d[3]}; EVTD3=${d[4]};
+    EVTD4=${d[5]}; EVTD5=${d[6]}; EVTD6=${d[7]};
+ #   echo "(m0= "$M0", m1/2= "$M12")- Signal yield metdown: ("$EVTD1", "$EVTD2", "$EVTD3", "$EVTD4", "$EVTD5", "$EVTD6")" 
+
+    if [ $EVT1 == 0 ];
+	then s1=1.00;
+    else 
+	u1=$(echo "scale=4; $EVT1 - $EVTU1 " | bc );
+	u1=`echo $u1 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	d1=$(echo "scale=4; $EVT1 - $EVTD1 " | bc );
+	d1=`echo $d1 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	s1=$(echo "scale=4; ( $u1 + $d1 ) / ( 2.*$EVT1 )" | bc );
+	s1=$(echo "scale=4; (1 + $s1) " | bc );
+    fi
+    if [ $EVT2 == 0 ];
+	then s2=1.00;
+    else
+	u2=$(echo "scale=4; $EVT2 - $EVTU2 " | bc );
+	u2=`echo $u2 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	d2=$(echo "scale=4; $EVT2 - $EVTD2 " | bc );
+	d2=`echo $d2 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	s2=$(echo "scale=4; ( $u2 + $d2 ) / ( 2.*$EVT2 ) " | bc );
+	s2=$(echo "scale=4; (1 + $s2) " | bc );
+    fi
+    if [ $EVT3 == 0 ];
+	then s3=1.00;
+    else
+	u3=$(echo "scale=4; $EVT3 - $EVTU3 " | bc );
+	u3=`echo $u3 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	d3=$(echo "scale=4; $EVT3 - $EVTD3 " | bc );
+	d3=`echo $d3 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	s3=$(echo "scale=4; ( $u3 + $d3 ) / ( 2.*$EVT3 )" | bc );
+	s3=$(echo "scale=4; (1 + $s3) " | bc );
+    fi
+    if [ $EVT4 == 0 ];
+	then s4=1.00;
+    else
+	u4=$(echo "scale=4; $EVT4 - $EVTU4 " | bc );
+	u4=`echo $u4 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	d4=$(echo "scale=4; $EVT4 - $EVTD4 " | bc );
+	d4=`echo $d4 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	s4=$(echo "scale=4; ( $u4 + $d4 ) / ( 2.*$EVT4 )" | bc );
+	s4=$(echo "scale=4; (1 + $s4) " | bc ); 
+    fi
+    if [ $EVT5 == 0 ];
+	then s5=1.00;
+    else
+	u5=$(echo "scale=4; $EVT5 - $EVTU5 " | bc );
+	u5=`echo $u5 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	d5=$(echo "scale=4; $EVT5 - $EVTD5 " | bc );
+	d5=`echo $d5 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	s5=$(echo "scale=4; ( $u5 + $d5 ) / ( 2.*$EVT5 )" | bc );
+	s5=$(echo "scale=4; (1 + $s5) " | bc ); 
+    fi
+    if [ $EVT6 == 0 ];
+	then s6=1.00;
+    else
+	u6=$(echo "scale=4; $EVT6 - $EVTU6 " | bc );
+	u6=`echo $u6 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	d6=$(echo "scale=4; $EVT6 - $EVTD6 " | bc );
+	d6=`echo $d6 |awk ' { if($1>=0) { print $1} else {print $1*-1 }}' `
+	s6=$(echo "scale=4; ( $u6 + $d6 ) / ( 2.*$EVT6 )" | bc );
+	s6=$(echo "scale=4; (1 + $s6) " | bc );
+    fi
+    echo "(m0= "$M0", m1/2= "$M12")- JEC signal uncertainty: ("$s1", "$s2", "$s3", "$s4", "$s5", "$s6")"
+
+      # The trigger inefficiency on the signal yield
+    TRGEFF=0.97;
+
+    EVT1=$(echo "scale=4; ($EVT1 * $TRGEFF) " | bc ); 
+    EVT2=$(echo "scale=4; ($EVT2 * $TRGEFF) " | bc ); 
+    EVT3=$(echo "scale=4; ($EVT3 * $TRGEFF) " | bc ); 
+    EVT4=$(echo "scale=4; ($EVT4 * $TRGEFF) " | bc ); 
+    EVT5=$(echo "scale=4; ($EVT5 * $TRGEFF) " | bc ); 
+    EVT6=$(echo "scale=4; ($EVT6 * $TRGEFF) " | bc ); 
+    EVT7=$(echo "scale=4; ($EVT7 * $TRGEFF) " | bc ); 
+    EVT8=$(echo "scale=4; ($EVT8 * $TRGEFF) " | bc ); 
+    EVT9=$(echo "scale=4; ($EVT9 * $TRGEFF) " | bc ); 
+    EVT10=$(echo "scale=4; ($EVT10 * $TRGEFF) " | bc ); 
+    EVT11=$(echo "scale=4; ($EVT11 * $TRGEFF) " | bc ); 
+    EVT12=$(echo "scale=4; ($EVT12 * $TRGEFF) " | bc ); 
+
+    # Lumi scaling
+    EVT1=$(echo "scale=4; ($EVT1 * $MLUM) " | bc );                                                                                           
+    EVT2=$(echo "scale=4; ($EVT2 * $MLUM) " | bc );                                                                                           
+    EVT3=$(echo "scale=4; ($EVT3 * $MLUM) " | bc );                                                                                            
+
+    EVT4=$(echo "scale=4; ($EVT4 * $ELUM) " | bc );                                                                                            
+    EVT5=$(echo "scale=4; ($EVT5 * $ELUM) " | bc );                                                                                           
+    EVT6=$(echo "scale=4; ($EVT6 * $ELUM) " | bc );                                                                                           
+
+    EVT7=$(echo "scale=4; ($EVT7 * $MLUM) " | bc );                                                                                           
+    EVT8=$(echo "scale=4; ($EVT8 * $MLUM) " | bc );                                                                                           
+    EVT9=$(echo "scale=4; ($EVT9 * $MLUM) " | bc );                                                                                           
+
+    EVT10=$(echo "scale=4; ($EVT10 * $ELUM) " | bc );                                                                                         
+    EVT11=$(echo "scale=4; ($EVT11 * $ELUM) " | bc );                                                                                         
+    EVT12=$(echo "scale=4; ($EVT12 * $ELUM) " | bc );      
+
+  # Batch Job filename
+    JOB_FILENAME=${JOB_FILENAME_START}${COUNTER}${JOB_FILENAME_EXTEN}
+    sed -e "s@_localDirectory_@${PWD_DIR}@g" ${JOB_FILENAME_TEMPLATE} > ${JOB_FILENAME}
+    
+      # Output filename per SUSY point
+    OUTPUT_FILENAME=${OUTPUT_FILENAME_START}"_mo"${M0}"_mh"${M12}"_"${COUNTER}${OUTPUT_FILENAME_EXTEN}
+    
+    OUTPUT_TXT=${OUTPUT_TXT_START}"_mo"${M0}"_mh"${M12}"_"${COUNTER}${OUTPUT_TXT_EXTEN}
+      # Datacard filename per SUSY point
+    CFG_FILENAME=${CFG_FILENAME_START}${COUNTER}${CFG_FILENAME_EXTEN}
+    sed -e "s@_evt1_@${EVT1}@g" -e "s@_evt2_@${EVT2}@g" -e "s@_evt3_@${EVT3}@g" -e "s@_evt4_@${EVT4}@g" -e "s@_evt5_@${EVT5}@g" -e "s@_evt6_@${EVT6}@g" -e "s@_evt7_@${EVT7}@g" -e "s@_evt8_@${EVT8}@g" -e "s@_evt9_@${EVT9}@g" -e "s@_evt10_@${EVT10}@g" -e "s@_evt11_@${EVT11}@g" -e "s@_evt12_@${EVT12}@g" -e "s@_sys1_@${SYS1}@g" -e "s@_sys2_@${SYS2}@g" -e "s@_sys3_@${SYS3}@g" -e "s@_sys4_@${SYS4}@g" -e "s@_sys5_@${SYS5}@g" -e "s@_sys6_@${SYS6}@g" -e "s@_ssys1_@${s1}@g" -e "s@_ssys2_@${s2}@g" -e "s@_ssys3_@${s3}@g" -e "s@_ssys4_@${s4}@g" -e "s@_ssys5_@${s5}@g" -e "s@_ssys6_@${s6}@g" ${CFG_TEMPLATE_FILE} > ${TMP_DIR}/${CFG_FILENAME}
+
+      # Append the following command line in the current Datacard file
+    SSTRENGTH=1.0
+    if [ $TH = $STH3 ]; then
+	SSTRENGTH=1.0
+    else
+	EVTLINEP=`more ${TH_FILE} |grep "${M0} ${M12}"`
+	the=( $EVTLINEP )
+	SSTRENGTH=${the[2]};
+	echo "r = "${SSTRENGTH}
+	if [ ! $SSTRENGTH ] ; then                                                                                                        
+	    echo "Empty r !!!"; SSTRENGTH=1.0
+	fi                                           
+    fi
+
+    if [ $MODE = $S1 ]; then 
+	LINE="combine -M HybridNew --frequentist --testStat LHC -n "${OUTPUT_FILENAME}" "${CFG_FILENAME}" --singlePoint "${SSTRENGTH}" -T3000 | awk '{print \$0}' > "${OUTPUT_TXT}
+    elif [ $MODE = $S2 ]; then 
+	LINE="combine -M HybridNew --frequentist --testStat LHC -n "${OUTPUT_FILENAME}" "${CFG_FILENAME}" -s -1 --singlePoint "${SSTRENGTH}" -T3000 --saveToys --saveHybridResult"
+    fi
+    echo ${LINE} >> ${JOB_FILENAME}
+    
+    mv ${JOB_FILENAME} ${TMP_DIR}/${JOB_FILENAME}
+    cd ${TMP_DIR}; echo "Submitting Job: "${PWD}"/"${JOB_FILENAME}; 
+    chmod 751 ${JOB_FILENAME}
+#    bsub -q 2nd ${JOB_FILENAME}
+    echo ""; cd ..
+    
+    if [ $COUNTER -eq $NJOBS ]; then
+	exit;#	break;
+    fi
+
+    let COUNTER=${COUNTER}+1 
+  done
+
+  let M0=${M0}+${SUSYSTEP}
+done
+
