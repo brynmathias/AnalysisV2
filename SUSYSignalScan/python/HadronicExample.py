@@ -44,7 +44,7 @@ def checkSwitches(d) :
 
 def switches() :
   d = {}
-  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt","T1bbbb"][6]
+  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt","T1bbbb"][1]
   d["selection"] = ["had", "muon"][0]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
   d["jes"] = ["", "+ve", "-ve","ran"][0]
@@ -100,8 +100,10 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(badMuonInJet,oddJet)
     cutTreeMC.TAttach(oddJet,numComJetsGeq2)
     cutTreeMC.TAttach(numComJetsGeq2,secondJetET)
-    cutTreeMC.TAttach(secondJetET,deadECAL_MC)
-    cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
+    cutTreeMC.TAttach(secondJetET,
+    deadECAL_MC)
+    cutTreeMC.TAttach(deadECAL_MC,
+    MHToverMET)
   else :
     cutTreeMC.TAttach(selection,oddElectron)
     cutTreeMC.TAttach(oddElectron,oddPhoton)
@@ -191,7 +193,7 @@ if isCmssm(switches()["model"]) :
     if switches()["model"] == "tanB40": LOweights = SignalScanLOCrossSectionWeighting(xsToPSet( readLOXS(susydir+"SUSYSignalScan/textfiles/goodModelNames_40_m500_1.txt") ).ps())
 
 def addCutFlowMC(a,cutTreeMC) :
-  if "tan" in switches()["model"]:a.AddWeightFilter("Weight",LOweights)
+  #if "tan" in switches()["model"]:a.AddWeightFilter("Weight",LOweights)
   if switches()["jes"] != "":
     a.AddJetFilter("PreCC",JESUncert)
   a.AddMuonFilter("PreCC",muonfilt); print "WARNING: should this be PreCC?"
@@ -208,7 +210,7 @@ stuff = cutFlow(cutTreeMC, model = switches()["model"])
 #MC sms
 anal_ak5_caloMC =Analysis("AK5Calo")
 addCutFlowMC(anal_ak5_caloMC,cutTreeMC)
-from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1 import *
+from SUSYSignalScan.mSUGRA_m0_220to3000_m12_100to1000_tanb_10andA0_0_7TeV_Pythia6Z_StoreResults_PU_START42_V11_FastSim_v5_V15_04_02_scan_msugra_Winter11_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
 from SUSYSignalScan.mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1 import *
 from SUSYSignalScan.SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01 import *
 from SUSYSignalScan.SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02 import *
@@ -219,14 +221,14 @@ def outputDir() :
   #o = "../results_Slices_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
   o = "../results_%s_%s_%g_%s_MChiCut_%d"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"],MChiCut)
   if "tan" in switches()["model"] or MChiCut < 0:
-    o = "../results_%s_%s_%g%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"] if switches()["jes"] == "" else "_"+switches()["jes"])
+    o = "../results_NEWSCAN_%s_%s_%g%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"] if switches()["jes"] == "" else "_"+switches()["jes"])
 
   mkdir(o)
   return o
 
 def sample() :
   if isCmssm(switches()["model"]) :
-    if switches()["model"] == "tanB10":return mSUGRA_m0_20to2000_m12_20to760_tanb_10andA0_0_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FastSim_v1
+    if switches()["model"] == "tanB10":return mSUGRA_m0_220to3000_m12_100to1000_tanb_10andA0_0_7TeV_Pythia6Z_StoreResults_PU_START42_V11_FastSim_v5_V15_04_02_scan_msugra_Winter11_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 
     if switches()["model"] == "tanB40":return mSUGRA_m0_20to2000_m12_20to760_tanb_40andA0_m500_7TeV_Pythia6Z_Summer11_PU_S4_START42_V11_FSIM_v1
   elif isSms(switches()["model"]) :
     if switches()["model"] == "T2tt": return SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt
@@ -235,5 +237,5 @@ def sample() :
     if switches()["model"] == "T2": return SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02
     if switches()["model"] == "T1": return SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01
   else :         return None
-sample().File = sample().File[0:1]
+#sample().File = sample().File[0:1]
 anal_ak5_caloMC.Run(outputDir(), conf_ak5_calo_msugra,[sample()])

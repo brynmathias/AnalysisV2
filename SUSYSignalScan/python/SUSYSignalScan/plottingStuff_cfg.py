@@ -33,12 +33,12 @@ isr_pset = PSet(
 
 msugra_pset = PSet(
     DirectoryName = "mSuGraScan",
-    xBins = 200,
+    xBins = 150,
     xLow = 0.,
-    xHigh = 2000.,
-    yBins =80,
+    xHigh = 3000.,
+    yBins =50,
     yLow =0.,
-    yHigh =800.,
+    yHigh =1000.,
     zBins =1,
     zLow =0.,
     zHigh =1000.,
@@ -69,7 +69,7 @@ def tripleScale(model = "", cutTree = None, cut = None, label = "") :
     scale2 = scale.replace(".","")
     if scale2[-1]=="0" : scale2 = scale2[:-1]
     pset = deepcopy(msugra_pset)
-    mSUGRAFile = susydir + "SUSYSignalScan/textfiles/scale_xsection_nlo%s_m0_m12_%s_1v1.txt"%(scale, model.replace("tanB","") )
+    mSUGRAFile = susydir + "SUSYSignalScan/textfiles/msugra_m0_m12_%s_0_1_NLO_1.0.new.txt"%( model.replace("tanB","") )
     processes, kfactors = readKFactors(mSUGRAFile)
     ps = kfactorsToPSet(processes, kfactors)
     pset._quiet_set("NLO", ps)
