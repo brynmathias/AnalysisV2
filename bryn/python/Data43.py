@@ -38,6 +38,6 @@ addCutFlowData(anal_ak5_caloData)
 
 from data.Run2011.HT_Run2011AB import *
 from htRemake import *
-outDir = "../results_FullCutFlow_"+strftime("%d_%b")+"//Data43"
+outDir = "../results_NoMHTovMET_"+strftime("%d_%b")+"//Data43"
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[HT_Run2011A_05Aug2011_v1_V15_04_00_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1])
