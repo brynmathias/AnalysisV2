@@ -98,7 +98,7 @@ macosx={"name":"Mac OS X 10.6 - 64 bit",
 # Mac OS X Lion
 macosxLion={"name":"Mac OS X 10.7 - 64 bit",
   "platform":(False,"__APPLE__"),
-  "root_sys" : (False,"/opt/root"),
+  "root_sys" : (True,"/opt/root"),
   "root_sys_inc" : (False,"$(ROOTSYS)/include"),
   "root_sys_lib" : (False,"$(ROOTSYS)/lib"),
   "root_sys_bin" : (False,"$(ROOTSYS)/bin"),
