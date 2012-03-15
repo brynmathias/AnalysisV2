@@ -38,14 +38,14 @@ def mkdir(path) :
     if e.errno!=17 : raise e
 
 def checkSwitches(d) :
-  assert d["model"] in ["T1","T1bbbb","T2","T2bb","T2tt","tanB3","tanB10","tanB40","tanB50"]
+  assert d["model"] in ["T1","T1bbbb","T1tttt","T2","T2bb","T2tt","tanB3","tanB10","tanB40","tanB50"]
   assert d["jes"] in ["","+ve","-ve","ran"]
   assert isCmssm(d["model"]) or isSms(d["model"])
 
 def switches() :
   d = {}
-  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt","T1bbbb"][1]
-  d["selection"] = ["had", "muon"][0]
+  d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt","T1bbbb","T1tttt"][6]
+  d["selection"] = ["had", "muon"][1]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
   d["jes"] = ["", "+ve", "-ve","ran"][0]
   checkSwitches(d)
@@ -60,8 +60,6 @@ JESUncert = JESUncert(switches()["jes"])
 alphaT70 = OP_HadAlphaTCut(0.70)
 alphaT55 = OP_HadAlphaTCut(0.55)
 alphaT53 = OP_HadAlphaTCut(0.53)
-noGenEle = OP_nGenElectrons("<=",0,10.,2.5)
-noGenMu = OP_nGenMuons("<=",0,10.,2.5)
 if switches()["selection"]=="muon" :
   from libOneLepton import *
   from libWPol import *
@@ -81,16 +79,15 @@ if switches()["selection"]=="muon" :
 def cutFlow(cutTreeMC, model) :
   out = []
 
-  cutTreeMC.Attach(noGenEle)
-  cutTreeMC.TAttach(noGenEle,noGenMu)
+  cutTreeMC.Attach(count_total)
   if isCmssm(model) :
-    cutTreeMC.TAttach(noGenMu,selection)
+    cutTreeMC.TAttach(count_total,selection)
     out.append( tripleScale(model = switches()["model"], cutTree = cutTreeMC, cut = count_total, label = "before") )
   elif isSms(model) :
   #  cutTreeMC.TAttach(count_total,smsFilter)
     out.append( smsOps(model = switches()["model"], cutTree = cutTreeMC, cut =
     count_total, label = "before") )
-    cutTreeMC.TAttach(noGenMu,selection)
+    cutTreeMC.TAttach(count_total,selection)
 
   if switches()["selection"]!="muon" :
     cutTreeMC.TAttach(selection,oddElectron)
@@ -102,10 +99,8 @@ def cutFlow(cutTreeMC, model) :
     cutTreeMC.TAttach(badMuonInJet,oddJet)
     cutTreeMC.TAttach(oddJet,numComJetsGeq2)
     cutTreeMC.TAttach(numComJetsGeq2,secondJetET)
-    cutTreeMC.TAttach(secondJetET,
-    deadECAL_MC)
-    cutTreeMC.TAttach(deadECAL_MC,
-    MHToverMET)
+    cutTreeMC.TAttach(secondJetET,deadECAL_MC)
+    cutTreeMC.TAttach(deadECAL_MC,MHToverMET)
   else :
     cutTreeMC.TAttach(selection,oddElectron)
     cutTreeMC.TAttach(oddElectron,oddPhoton)
@@ -219,6 +214,7 @@ from SUSYSignalScan.SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer1
 from SUSYSignalScan.SMS_T2bb_Msbottom_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_25_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1_scan_T2bb import *
 from SUSYSignalScan.SMS_T2tt_Mstop_225to1200_mLSP_50to1025_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_18_scan_T2tt import *
 from SUSYSignalScan.SMS_T1bbbb_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v3_V15_04_02_scan_T1bbbb_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
+from SUSYSignalScan.SMS_T1tttt_Mgluino_450to1200_mLSP_50to800_7TeV_Pythia6Z_Summer11_PU_START42_V11_FSIM_v2_V15_04_02_scan_T1tttt_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 import *
 def outputDir() :
   #o = "../results_Slices_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
   o = "../results_%s_%s_%g_%s_MChiCut_%d"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"],MChiCut)
@@ -238,6 +234,7 @@ def sample() :
     if switches()["model"] == "T1bbbb": return SMS_T1bbbb_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v3_V15_04_02_scan_T1bbbb_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1
     if switches()["model"] == "T2": return SMS_T2_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_02
     if switches()["model"] == "T1": return SMS_T1_Mgluino_100to1200_mLSP_50to1150_7TeV_Pythia6Z_Summer11_PU_START42_V11_FastSim_v1_V15_03_14_01
+    if switches()["model"] == "T1tttt": return SMS_T1tttt_Mgluino_450to1200_mLSP_50to800_7TeV_Pythia6Z_Summer11_PU_START42_V11_FSIM_v2_V15_04_02_scan_T1tttt_jetCorrections_L1FastJet_L2Relative_L3Absolute_jetCollections_ak5calo_ak5pf_hbheNoiseFilterDefaultIsoReq_1 
   else :         return None
 #sample().File = sample().File[0:1]
 anal_ak5_caloMC.Run(outputDir(), conf_ak5_calo_msugra,[sample()])
