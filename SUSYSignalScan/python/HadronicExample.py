@@ -45,7 +45,7 @@ def checkSwitches(d) :
 def switches() :
   d = {}
   d["model"] = ["tanB3", "tanB10", "tanB40", "tanB50", "T1", "T2","T2bb","T2tt","T1bbbb","T1tttt"][6]
-  d["selection"] = ["had", "muon"][1]
+  d["selection"] = ["had", "muon"][0]
   d["thresholds"] = [(36.7, 73.7), (43.3, 86.7), (50.0, 100.0)][2]
   d["jes"] = ["", "+ve", "-ve","ran"][0]
   checkSwitches(d)
@@ -219,7 +219,7 @@ def outputDir() :
   #o = "../results_Slices_%s_%s_%g_%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"])
   o = "../results_%s_%s_%g_%s_MChiCut_%d"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"],MChiCut)
   if "tan" in switches()["model"] or MChiCut < 0:
-    o = "../results_NEWSCAN_%s_%s_%g%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"] if switches()["jes"] == "" else "_"+switches()["jes"])
+    o = "../results_FIX_NEWSCAN_%s_%s_%g%s"%(switches()["selection"], switches()["model"], switches()["thresholds"][1],switches()["jes"] if switches()["jes"] == "" else "_"+switches()["jes"])
 
   mkdir(o)
   return o
