@@ -64,8 +64,8 @@ void CleaningCuts::CleaningPlots() {
 
   BookHistArray( MHTovMET_raw_,
     "MHTovMET",
-    ";MHT/MET;Events/0.1;",
-    100, 0., 10,
+    ";MHT/MET;Events/0.25;",
+    100, 0., 5,
     nMax_+1, 0, 1, true );
 
 
