@@ -159,13 +159,13 @@ def MakeDataTree(Threshold,Muon = None):
   # #Here be plots after all the cuts!!
   cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
   if Muon == None:
-      cutTreeData.TAttach(VertexPtOverHT,ZeroMuon)#
+      cutTreeData.TAttach(DeadEcalCutData,ZeroMuon)#
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("CleaningCuts",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = None,lab = "") )
   # 
   else:
-      cutTreeData.TAttach(VertexPtOverHT,minDRMuonJetCut)
+      cutTreeData.TAttach(DeadEcalCutData,minDRMuonJetCut)
       cutTreeData.TAttach(minDRMuonJetCut,OneMuon)
       cutTreeData.TAttach(OneMuon,ZMassCut)
       cutTreeData.TAttach(ZMassCut,PFMTCut30)
@@ -207,13 +207,13 @@ def MakeMCTree(Threshold, Muon = None):
   #Here be plots after all the cuts!!
   cutTreeMC.TAttach(DeadEcalCutMC,MHT_METCut)
   if Muon == None:
-      cutTreeMC.TAttach(VertexPtOverHT,ZeroMuon)
+      cutTreeMC.TAttach(DeadEcalCutMC,ZeroMuon)
       out.append(AddBinedHist(cutTree = cutTreeMC,
       OP = ("CleaningCuts",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "") )
       
   else:
-      cutTreeMC.TAttach(VertexPtOverHT,minDRMuonJetCut)
+      cutTreeMC.TAttach(DeadEcalCutMC,minDRMuonJetCut)
       cutTreeMC.TAttach(minDRMuonJetCut,OneMuon)
       cutTreeMC.TAttach(OneMuon,ZMassCut)
       cutTreeMC.TAttach(ZMassCut,PFMTCut30)    
