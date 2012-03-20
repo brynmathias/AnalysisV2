@@ -7,7 +7,7 @@ from libOneLepton import *
 from icf.core import PSet,Analysis
 from time import strftime
 import icf.utils as Utils
-from cleaningsCutsGolden import *
+from cleaningCutsGolden import *
 from ra1objectid.vbtfElectronId_cff import *
 from ra1objectid.vbtfMuonId_cff import *
 from ra1objectid.ra3PhotonId_cff import *
@@ -35,7 +35,7 @@ conf_ak5_caloMC.Common.print_out()
 anal_ak5_caloMC=Analysis("AK5Calo")
 addCutFlowMC(anal_ak5_caloMC)
 
-outDir = "../results_Cleaning_"+strftime("%d_%b")+"//MuonNoSmear/"
+outDir = "../results_DCAL_"+strftime("%d_%b")+"//MuonNoSmear/"
 ensure_dir(outDir)
 
 anal_ak5_caloMC.Run(outDir,conf_ak5_caloMC,Summer11_MC_Higher_Bins)
