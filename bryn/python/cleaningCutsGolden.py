@@ -152,9 +152,9 @@ def MakeDataTree(Threshold,Muon = None):
   cutTreeData.TAttach(secondJetET,oddJet)
   cutTreeData.TAttach(oddJet,badMuonInJet)
   cutTreeData.TAttach(badMuonInJet,oddElectron)
-   cutTreeData.TAttach(oddElectron,oddPhoton)
-   cutTreeData.TAttach(oddPhoton,numComElectrons)
-   cutTreeData.TAttach(numComElectrons,numComPhotons)
+  cutTreeData.TAttach(oddElectron,oddPhoton)
+  cutTreeData.TAttach(oddPhoton,numComElectrons)
+  cutTreeData.TAttach(numComElectrons,numComPhotons)
   #  cutTreeData.TAttach(numComPhotons,VertexPtOverHT)
   #  cutTreeData.TAttach(VertexPtOverHT,DeadEcalCutData)
   #  # #Here be plots after all the cuts!!
