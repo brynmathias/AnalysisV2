@@ -71,8 +71,9 @@ def AddBinedHist(cutTree = None, OP = (), cut = None, htBins = [],TriggerDict = 
       upperCut =  eval("RECO_CommonHTLessThanCut(%d)"%upper)
       out.append(upperCut)
       cutTree.TAttach(lowerCut,upperCut)
-      pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
-      out.append(pOps)
+    pOps = makePlotOp(cutTree = cutTree, OP = OP, cut = upperCut if upper else lowerCut, label = "%s%d%s"%(lab,lower, "_%d"%upper if upper else ""))
+    out.append(pOps)
+
   return out
   pass
 
