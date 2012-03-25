@@ -151,22 +151,22 @@ def MakeDataTree(Threshold,Muon = None):
   cutTreeData.TAttach(LeadingJetEta,secondJetET)
   cutTreeData.TAttach(secondJetET,oddJet)
   cutTreeData.TAttach(oddJet,badMuonInJet)
-  # cutTreeData.TAttach(badMuonInJet,oddElectron)
-  #  cutTreeData.TAttach(oddElectron,oddPhoton)
-  #  cutTreeData.TAttach(oddPhoton,numComElectrons)
-  #  cutTreeData.TAttach(numComElectrons,numComPhotons)
+  cutTreeData.TAttach(badMuonInJet,oddElectron)
+   cutTreeData.TAttach(oddElectron,oddPhoton)
+   cutTreeData.TAttach(oddPhoton,numComElectrons)
+   cutTreeData.TAttach(numComElectrons,numComPhotons)
   #  cutTreeData.TAttach(numComPhotons,VertexPtOverHT)
   #  cutTreeData.TAttach(VertexPtOverHT,DeadEcalCutData)
   #  # #Here be plots after all the cuts!!
   #  cutTreeData.TAttach(DeadEcalCutData,MHT_METCut)
   if Muon == None:
-      cutTreeData.TAttach(badMuonInJet,ZeroMuon)#
+      cutTreeData.TAttach(numComPhotons,ZeroMuon)#
       out.append(AddBinedHist(cutTree = cutTreeData,
       OP = ("CleaningCuts",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = None,lab = "") )
   # 
   else:
-      cutTreeData.TAttach(badMuonInJet,minDRMuonJetCut)
+      cutTreeData.TAttach(numComPhotons,minDRMuonJetCut)
       cutTreeData.TAttach(minDRMuonJetCut,OneMuon)
       cutTreeData.TAttach(OneMuon,ZMassCut)
       cutTreeData.TAttach(ZMassCut,PFMTCut30)
@@ -198,23 +198,23 @@ def MakeMCTree(Threshold, Muon = None):
   cutTreeMC.TAttach(LeadingJetEta,secondJetET)
   cutTreeMC.TAttach(secondJetET,oddJet)
   cutTreeMC.TAttach(oddJet,badMuonInJet)
-  # cutTreeMC.TAttach(badMuonInJet,oddElectron)
-  # cutTreeMC.TAttach(oddElectron,oddPhoton)
-  # cutTreeMC.TAttach(oddPhoton,numComElectrons)
-  # cutTreeMC.TAttach(numComElectrons,numComPhotons)
+  cutTreeMC.TAttach(badMuonInJet,oddElectron)
+  cutTreeMC.TAttach(oddElectron,oddPhoton)
+  cutTreeMC.TAttach(oddPhoton,numComElectrons)
+  cutTreeMC.TAttach(numComElectrons,numComPhotons)
   # cutTreeMC.TAttach(numComPhotons,VertexPtOverHT)
   # cutTreeMC.TAttach(VertexPtOverHT,DeadEcalCutMC)
  
   #Here be plots after all the cuts!!
-  cutTreeMC.TAttach(badMuonInJet,MHT_METCut)
+  # cutTreeMC.TAttach(numComPhotons,MHT_METCut)
   if Muon == None:
-      cutTreeMC.TAttach(badMuonInJet,ZeroMuon)
+      cutTreeMC.TAttach(numComPhotons,ZeroMuon)
       out.append(AddBinedHist(cutTree = cutTreeMC,
       OP = ("CleaningCuts",genericPSet), cut = ZeroMuon,
       htBins = HTBins,TriggerDict = triggers,lab = "") )
       
   else:
-      cutTreeMC.TAttach(badMuonInJet,minDRMuonJetCut)
+      cutTreeMC.TAttach(numComPhotons,minDRMuonJetCut)
       cutTreeMC.TAttach(minDRMuonJetCut,OneMuon)
       cutTreeMC.TAttach(OneMuon,ZMassCut)
       cutTreeMC.TAttach(ZMassCut,PFMTCut30)    

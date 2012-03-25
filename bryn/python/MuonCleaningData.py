@@ -38,7 +38,7 @@ anal_ak5_caloData=Analysis("AK5Calo")
 addCutFlowData(anal_ak5_caloData)
 from MuHad import *
 
-outdir = "../results_LepVetosIn_"+strftime("%d_%b")+"//MuonData/"
+outdir = "../results_LepVetos_"+strftime("%d_%b")+"//MuonData/"
 
 ensure_dir(outdir)
 anal_ak5_caloData.Run(outdir,conf_ak5_caloData,[MuHad])
