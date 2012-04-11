@@ -147,6 +147,27 @@ iclx_root_527={"name":"IC LX (64bit ROOT 5.27)",
       "python_env" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc434/external/python/2.6.4-cms14/bin"),
       }
 
+
+
+iclx_root_532={"name":"IC LX (64bit ROOT 5.32)",
+      "platform" : (False,"linux"),
+      "root_sys" : (True,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/"),
+      "root_sys_inc" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/include/"),
+      "root_sys_lib" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/lib/"),
+      "root_sys_bin" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/bin/"),
+      "python_inc" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/include/python2.6/"),
+      "python_lib" : (False,"-lpython2.6"),
+      "boost_python_lib" : (False,"-lboost_python"),
+      "root_extra_libs" : (False,"-lMathCore -lMathMore -lGenVector"),
+      "link_search_extra" : (False,"-L/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/lib -L/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.44.0-cms3/lib"),
+      "incdir_extra" : (False,"-I/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/include/python2.6 -I/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.44.0-cms3/include"),
+      "ld_path_extra" :
+(False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/libjpg/8b/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.47.0//lib:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib64:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib:/vols/grid/ui/3.2.5-0/glite/lib:/vols/grid/ui/3.2.5-0/glite/lib64:/vols/grid/ui/3.2.5-0/globus/lib:/vols/grid/ui/3.2.5-0/lcg/lib:/vols/grid/ui/3.2.5-0/lcg/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/xrootd/3.1.0-cms2/lib"),
+      "python_env" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/bin"),
+      }
+
+
+
 bristol_root_527={"name":"Bristol (64bit ROOT 5.27)",
       "platform" : (False,"linux"),
       "root_sys" : (True,"/cms/slc5_amd64_gcc434/lcg/root/5.27.06b-cms14/"),
@@ -195,7 +216,7 @@ linux_custom={"name":"Linux Generic (With Custom ROOTSYS)",
         "python_env" : (False,""),
         }
 
-inst_types=[iclx_root_527, iclx, bristol_root_527,slc4_32, slc4_64, slc5_64,linux_other,macosx,macosxLion,ubuntu_1004, linux_custom]
+inst_types=[iclx_root_532,iclx_root_527, iclx, bristol_root_527,slc4_32, slc4_64, slc5_64,linux_other,macosx,macosxLion,ubuntu_1004, linux_custom]
 
 print "Please enter path to the directory containing the SUSY code."
 base_dir=my_input("Code directory",sys.path[0])
