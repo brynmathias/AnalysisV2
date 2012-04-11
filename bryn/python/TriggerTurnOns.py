@@ -387,7 +387,7 @@ alphatTesting = {
 }
 
 dump = EventDump()
-
+cutTreeData.TAttach(MHT_METCut,muDr)
 for key,vals in alphatTesting.iteritems():
   for ref in vals[0]:
     for htbin in vals[1]:
