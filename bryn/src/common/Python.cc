@@ -7,7 +7,7 @@
 #include "Ops.hh"
 #include "PreScaledTriggers.hh"
 #include "PreScaleSimple.hh"
-
+#include "CleaningCuts.hh"
 
 using namespace boost::python;
 
@@ -15,6 +15,10 @@ BOOST_PYTHON_MODULE(libbryn) {
 
   class_<Operation::WeeklyUpdatePlots, bases<Operation::_Base> >( "WeeklyUpdatePlots",
                     init<const Utils::ParameterSet&>());
+
+  class_<Operation::CleaningCuts, bases<Operation::_Base> >( "CleaningCuts",
+                    init<const Utils::ParameterSet&>());
+
 
 
   class_<Operation::eventselector_t, bases<Operation::_Base> >( "OP_RunLumiEvSelector",
