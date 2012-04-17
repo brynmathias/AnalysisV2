@@ -13,7 +13,7 @@ endif
 INCDIR= \
 -Iinclude
 
-CXXFLAGS= -c -Wall -ansi -g -D$(PLATFORM) -D_REENTRANT -fPIC
+CXXFLAGS=  -c -Wall -ansi -g -D$(PLATFORM) -D_REENTRANT -fPIC
 
 ifeq ($(PLATFORM),"linux")
 CXXFLAGS+= -pthread -D_REENTRANT

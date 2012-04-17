@@ -131,13 +131,18 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
     if( nom->at(nom->size()-1) != '*'){
       std::map<std::string, int>::const_iterator prescale = ev.hlt_prescaled()->find(*nom);
       std::map<std::string, bool>::const_iterator fire = ev.hlt()->find(*nom);
-
+      std::map<std::string, bool>::const_iterator hltbeg = ev.hlt()->begin();
+      std::map<std::string, bool>::const_iterator hltend = ev.hlt()->end();
+      
+      if ( verb_) {
+          for(  ;hltbeg != hltend; ++hltbeg  ){std::cout << hltbeg->first << std::endl;}
+      }
       if( prescale != ev.hlt_prescaled()->end() ){
         nomPreScale *= -prescale->second;
       }
       if( fire != ev.hlt()->end() ){
         carryonsearchingNom = false;
-        // cout << "Have found " << (*nom) << endl;
+        if(verb_)cout << "Have found " << (*nom) << endl;
         NOMFIRE = fire->second; continue;}
       }
       else{

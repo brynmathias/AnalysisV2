@@ -208,9 +208,9 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   # print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
   if Debug == True:
-    op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0]).ps() )
+    op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0], Verbose = Flase).ps() )
   if Debug == False:
-    op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig).ps() )
+    op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig, Verbose = False).ps() )
   cutTree.TAttach(cut,op)
   out.append(op)
   return out
@@ -347,9 +347,10 @@ out = []
 # cutTreeData.TAttach(badEvents,json_ouput)
 #cutTreeData.TAttach(badEvents,NoiseFilt)
 # cutTreeData.TAttach(json,NoiseFilt)
-cutTreeData.Attach(NoiseFilt)
-cutTreeData.TAttach(NoiseFilt,selection)
-cutTreeData.TAttach(selection,oddElectron)
+#cutTreeData.Attach(NoiseFilt)
+#cutTreeData.TAttach(NoiseFilt,selection)
+#cutTreeData.TAttach(selection,oddElectron)
+cutTreeData.Attach(oddElectron)
 cutTreeData.TAttach(oddElectron,oddPhoton)
 cutTreeData.TAttach(oddPhoton,numComElectrons)
 cutTreeData.TAttach(numComElectrons,numComPhotons)
@@ -383,18 +384,20 @@ cutTreeData.TAttach(MHT_METCut,ht325)
 
 alphatTesting = {
   "HLT_HT250_AlphaT0p55_v1": (["HLT_Mu40_eta2p1_v9",],  [275.,325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT300_AlphaT0p53_v1": (["HLT_Mu40_eta2p1_v9",],  [275.,325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT300_AlphaT0p53_v1": (["HLT_Mu40_eta2p1_v9",],  [325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT350_AlphaT0p52_v1": (["HLT_Mu40_eta2p1_v9",],  [375.,475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p51_v1": (["HLT_Mu40_eta2p1_v9",],  [475.,575.,675.,775.,875.]),
 }
 
 dump = EventDump()
-cutTreeData.TAttach(MHT_METCut,muDr)
+cutTreeData.TAttach(zeroMuon,muDr)
 for key,vals in alphatTesting.iteritems():
   for ref in vals[0]:
     for htbin in vals[1]:
       cut = eval("RECO_CommonHTCut(%f)"%(htbin))
       out.append(cut)
       cutTreeData.TAttach(muDr,cut)
-      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin)))
+      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin),Debug = False))
 
 
 
