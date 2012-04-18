@@ -151,10 +151,10 @@ iclx_root_527={"name":"IC LX (64bit ROOT 5.27)",
 
 iclx_root_532={"name":"IC LX (64bit ROOT 5.32)",
       "platform" : (False,"linux"),
-      "root_sys" : (True,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00/"),
-      "root_sys_inc" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00/include/"),
-      "root_sys_lib" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00/lib/"),
-      "root_sys_bin" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00/bin/"),
+      "root_sys" : (True,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/"),
+      "root_sys_inc" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/include/"),
+      "root_sys_lib" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/lib/"),
+      "root_sys_bin" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/bin/"),
       "python_inc" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/include/python2.6/"),
       "python_lib" : (False,"-lpython2.6"),
       "boost_python_lib" : (False,"-lboost_python"),
@@ -162,9 +162,10 @@ iclx_root_532={"name":"IC LX (64bit ROOT 5.32)",
       "link_search_extra" : (False,"-L/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/lib -L/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.47.0/lib"),
       "incdir_extra" : (False,"-I/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/include/python2.6 -I/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.47.0/include"),
       "ld_path_extra" :
-(False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/libjpg/8b/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.47.0//lib:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib64:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib:/vols/grid/ui/3.2.5-0/glite/lib:/vols/grid/ui/3.2.5-0/glite/lib64:/vols/grid/ui/3.2.5-0/globus/lib:/vols/grid/ui/3.2.5-0/lcg/lib:/vols/grid/ui/3.2.5-0/lcg/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/xrootd/3.1.0-cms2/lib"),
+(False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/libjpg/8b/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.47.0//lib:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib64:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib:/vols/grid/ui/3.2.5-0/glite/lib:/vols/grid/ui/3.2.5-0/glite/lib64:/vols/grid/ui/3.2.5-0/globus/lib:/vols/grid/ui/3.2.5-0/lcg/lib:/vols/grid/ui/3.2.5-0/lcg/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/xrootd/3.1.0-cms2/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/xz/5.0.3/lib"),
       "python_env" : (False,"/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/bin"),
       }
+
 
 
 

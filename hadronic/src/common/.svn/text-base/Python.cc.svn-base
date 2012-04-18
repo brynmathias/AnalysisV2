@@ -79,6 +79,8 @@ class_<Operation::PlotPhotons, bases<Operation::_Base> >( "OP_PlotPhotons",
 
   class_<Operation::MHToverMET, bases<Operation::_Base> >("OP_MHToverMET",init<float,float>() );
 
+  class_<Operation::MHTTakeMuoverMETTakeMu, bases<Operation::_Base> >("OP_MHTTakeMuoverMETTakeMu",init<float,float>() );
+
   class_<Operation::MHToverPFMET, bases<Operation::_Base> >("OP_MHToverPFMET",init<float>() );
 
   class_<Operation::sumRecHitPtCut, bases<Operation::_Base> >("OP_SumRecHitPtCut",init<float>() );

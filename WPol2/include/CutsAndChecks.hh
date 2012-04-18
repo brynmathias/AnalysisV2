@@ -715,6 +715,29 @@ namespace Operation {
 
   }; // ~RECO2ndMuonMassCut class
 
+
+ class RECODiMuon_ZMass : public Operation::_Base {
+
+  public:
+
+    RECODiMuon_ZMass(float MuonPt, float Mass, bool keepZ, std::string charge);
+    ~RECODiMuon_ZMass();
+
+    bool Process(Event::Data & ev);
+
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+
+    float mMuonPt;
+    float mMass;
+    bool mKeepZ;
+    std::string mCharge;
+
+  }; // ~RECODiMuon_ZMassCut class
+
+ 
+
 class MCMuMuInvMass : public Operation::_Base {
 
 public:

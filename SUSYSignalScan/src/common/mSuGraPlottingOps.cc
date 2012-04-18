@@ -123,6 +123,7 @@ void mSuGraPlottingOps::BookHistos() {
                  yBins_,yLow_,yHigh_, //m12
                  zBins_,zLow_,zHigh_, //mChi
                  1,0,1,false);
+<<<<<<< .mine
 
   BookHistArray( H_M0_M12_mChi_noweight_countRAW,
                  "H_M0_M12_mChi_noweight_countRAW",
@@ -134,12 +135,58 @@ void mSuGraPlottingOps::BookHistos() {
 
 
     BookHistArray( H_M0_M12_mChi_noweight,
+=======
+  
+  BookHistArray( H_M0_M12_mChi_noweight,
+>>>>>>> .r3774
                    "m0_m12_mChi_noweight",
                    ";m0;m12;mChi;",
                    xBins_,xLow_,xHigh_, //m0
                    yBins_,yLow_,yHigh_, //m12
                    zBins_,zLow_,zHigh_, //mChi
                    1,0,1,false);
+
+    BookHistArray( H_M0_M12_mChi_025,
+                   "m0_m12_mChi_025_",
+                   ";m0;m12",
+                   41,187.5,1212.5,//m0
+                   43,37.5,1112.5,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_mChi_050,
+                   "m0_m12_mChi_050_",
+                   ";m0;m12",
+                   41,187.5,1212.5,//m0
+                   43,37.5,1112.5,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_mChi_075,
+                   "m0_m12_mChi_075_",
+                   ";m0;m12",
+                   41,187.5,1212.5,//m0
+                   43,37.5,1112.5,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_mChi_025_noweight,
+                   "m0_m12_mChi_025_noweight_",
+                   ";m0;m12",
+                   41,187.5,1212.5,//m0
+                   43,37.5,1112.5,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_mChi_050_noweight,
+                   "m0_m12_mChi_050_noweight_",
+                   ";m0;m12",
+                   41,187.5,1212.5,//m0
+                   43,37.5,1112.5,//m12
+                   1, 0, 1,false );
+
+    BookHistArray( H_M0_M12_mChi_075_noweight,
+                   "m0_m12_mChi_075_noweight_",
+                   ";m0;m12",
+                   41,187.5,1212.5,//m0
+                   43,37.5,1112.5,//m12
+                   1, 0, 1,false );
 
     BookHistArray( H_M0_M12_sb,
                    "m0_m12_sb",
@@ -289,7 +336,7 @@ void mSuGraPlottingOps::BookHistos() {
 
 bool mSuGraPlottingOps::Process( Event::Data& ev ) {
   // Event weight
-  Double_t weight = ev.GetEventWeight();
+  Double_t weight = ev.GetEventWeight(); //cout << " BSM weight = " << weight << "\n";
   NLO::SUSYProcess process;
 
   double M0 = 0.;
@@ -327,6 +374,11 @@ bool mSuGraPlottingOps::Process( Event::Data& ev ) {
   //    if(ev.M0.enabled() || ev.M12.enabled()){
   H_M0_M12_mChi[0]->Fill(M0,M12,MChi,weight);
   H_M0_M12_mChi_noweight[0]->Fill(M0,M12,MChi,1);
+
+  if (MChi==0.25) { H_M0_M12_mChi_025_noweight[0]->Fill(M0,M12,1); H_M0_M12_mChi_025[0]->Fill(M0,M12,weight); }
+  if (MChi==0.50) { H_M0_M12_mChi_050_noweight[0]->Fill(M0,M12,1); H_M0_M12_mChi_050[0]->Fill(M0,M12,weight); }
+  if (MChi==0.75) { H_M0_M12_mChi_075_noweight[0]->Fill(M0,M12,1); H_M0_M12_mChi_075[0]->Fill(M0,M12,weight); }
+
       //    }
   if((ev.M0.enabled() || ev.MG.enabled())){
 

@@ -143,6 +143,18 @@ namespace Operation {
     float cut_;
     float threshold_;
   };
+
+  class MHTTakeMuoverMETTakeMu: public Operation::_Base{
+  public:
+    MHTTakeMuoverMETTakeMu( float, float );
+    ~MHTTakeMuoverMETTakeMu() {;}
+    bool Process( Event::Data& );
+    std::ostream& Description( std::ostream& );
+  private:
+    float cut_;
+    float threshold_;
+  };
+
   class MHToverPFMET: public Operation::_Base{
   public:
     MHToverPFMET( float );

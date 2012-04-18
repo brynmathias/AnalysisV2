@@ -14,11 +14,11 @@ observation   108.   32.  25.  92.   35.   17.   502.  160.  80.   496.  158.  9
 # then we list the independent sources of uncertainties, and give their effect (syst. error)
 # on each process and bin
 bin    1       1      2        2        3        3        4       4      5      5       6       6       7      7     8     8     9    9    10   10    11    11    12     12     
-process         susy    mbkg    susy     mbkg     susy    mbkg     susy    ebkg    susy   ebkg    susy    ebkg    susy   mbkg  susy  mbkg  susy  mbkg  susy  ebkg  susy  ebkg susy  ebkg
-process         0         1       0      1        0         1       0        2      0      2       0       2     0      1     0    1     0    1    0    2    0    2   0   2
+process   susy    mbkg    susy     mbkg     susy    mbkg     susy    ebkg    susy   ebkg    susy    ebkg    susy   mbkg  susy  mbkg  susy  mbkg  susy  ebkg  susy  ebkg susy  ebkg
+process    0         1       0      1        0         1       0        2      0      2       0       2     0      1     0    1     0    1    0    2    0    2   0   2
 rate   _evt1_   113.   _evt2_  44.1     _evt3_    26.1    _evt4_    81.6  _evt5_   28.6   _evt6_   18.7  _evt7_  502.  _evt8_  160.  _evt9_  80.  _evt10_   496.   _evt11_  158.   _evt12_  93.
 
-lumi    lnN    1.036  -  1.036  -  1.036  - 1.062  -  1.062  - 1.062   - 1.036  -  1.036  - 1.036  - 1.036  -  1.036  -  1.036  -
+lumi     lnN    1.036 - 1.036 - 1.036 - 1.062 - 1.062 - 1.062 - 1.036 - 1.036 - 1.036 - 1.036 - 1.036 - 1.036 -
 jec     lnN     _ssys1_    1.04  _ssys2_  1.06 _ssys3_  1.06 _ssys4_  1.05 _ssys5_  1.09   _ssys6_  1.07  -  -  -  -   -  -   -   -  -  -  -  -
 bkgcorr lnN     -    100    -   100  - 100  -  100   -   100   -   100   -  100   -   100  -  100  - 100   -  100  -  100
 mcstat  lnN     -   1.02    -   1.03    -  1.05   -  1.01    -   1.03  -  1.06  -  -  -  -   -  -   -   -  -  -  -  -

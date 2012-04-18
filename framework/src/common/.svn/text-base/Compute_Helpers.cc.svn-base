@@ -142,6 +142,8 @@ CommonMeff::CommonMeff(const Event::Data & ev) :
     mData = mEv.CommonSumEt() + mEv.CommonObjectSum().Pt();
 
   }
+
+
   CommonMHT::CommonMHT(const Event::Data & ev) :
     Compute::Variable<LorentzV, CommonMHT>(ev) {}
 
@@ -156,6 +158,31 @@ CommonMeff::CommonMeff(const Event::Data & ev) :
     }
 
   }
+ 
+
+  CommonMHTTakeMu::CommonMHTTakeMu(const Event::Data & ev) :
+    Compute::Variable<LorentzV, CommonMHTTakeMu>(ev) {}
+
+  void CommonMHTTakeMu::_Update() const {
+    mData.SetPxPyPzE(0.,0.,0.,0.);
+
+    // Loop
+    for ( std::vector<Event::Jet const *>::const_iterator j = mEv.JD_CommonJets().accepted.begin();
+      j != mEv.JD_CommonJets().accepted.end();
+      ++j ) {
+      mData -= (**j);
+    }
+
+    for ( std::vector<Event::Lepton const *>::const_iterator j = mEv.LD_CommonMuons().accepted.begin();
+      j != mEv.LD_CommonMuons().accepted.end();
+      ++j ) {
+      mData -= (**j);
+    }
+
+  }
+ 
+
+
 
   CommonHT::CommonHT(const Event::Data & ev) :
     Compute::Variable<Double_t, CommonHT>(ev) {}
@@ -166,6 +193,26 @@ CommonMeff::CommonMeff(const Event::Data & ev) :
     // Loop
     for ( std::vector<Event::Jet const *>::const_iterator j = mEv.JD_CommonJets().accepted.begin();
       j != mEv.JD_CommonJets().accepted.end();
+      ++j ) {
+      mData += (*j)->Et();
+    }
+  }
+
+  CommonHTTakeMu::CommonHTTakeMu(const Event::Data & ev) :
+    Compute::Variable<Double_t, CommonHTTakeMu>(ev) {}
+
+  void CommonHTTakeMu::_Update() const {
+    mData = 0.0;
+
+    // Loop
+    for ( std::vector<Event::Jet const *>::const_iterator j = mEv.JD_CommonJets().accepted.begin();
+      j != mEv.JD_CommonJets().accepted.end();
+      ++j ) {
+      mData += (*j)->Et();
+    }
+
+    for ( std::vector<Event::Lepton const *>::const_iterator j = mEv.LD_CommonMuons().accepted.begin();
+      j != mEv.LD_CommonMuons().accepted.end();
       ++j ) {
       mData += (*j)->Et();
     }
@@ -188,7 +235,8 @@ CommonMeff::CommonMeff(const Event::Data & ev) :
     }
   }
 
-  CommonMinDPhi::CommonMinDPhi(const Event::Data & ev) :
+
+ CommonMinDPhi::CommonMinDPhi(const Event::Data & ev) :
     Compute::Variable<Double_t, CommonMinDPhi>(ev) {}
 
   void CommonMinDPhi::_Update() const {
@@ -265,6 +313,7 @@ AlphaTwithEt(Utils::GetConfig<bool>("Common.AlphaT.CalcWithEt")) {}
 
       mData = alpha_t;
   }
+
   HadronicAlphaT::HadronicAlphaT(const Event::Data & ev) :
     Compute::Variable<Double_t, HadronicAlphaT>(ev),
 AlphaTwithEt(Utils::GetConfig<bool>("Common.AlphaT.CalcWithEt")) {}
@@ -277,6 +326,21 @@ AlphaTwithEt(Utils::GetConfig<bool>("Common.AlphaT.CalcWithEt")) {}
 
       mData = alpha_t;
   }
+
+
+  HadronicAlphaTTakeMu::HadronicAlphaTTakeMu(const Event::Data & ev) :
+    Compute::Variable<Double_t, HadronicAlphaTTakeMu>(ev),
+AlphaTwithEt(Utils::GetConfig<bool>("Common.AlphaT.CalcWithEt")) {}
+
+  void HadronicAlphaTTakeMu::_Update() const {
+      std::vector<bool> pseudo;
+      double alpha_t = AlphaT()( mEv.CommonJetsAndMuons(), pseudo, AlphaTwithEt );
+      if ( pseudo.size() != mEv.CommonJetsAndMuons().size() ) { throw std::runtime_error("Pseudo jet calculations did not use all common objects");}
+
+
+      mData = alpha_t;
+  }
+
 
   CommonMT2::CommonMT2(const Event::Data & ev) :
     Compute::Variable<Double_t, CommonMT2>(ev) {}
@@ -513,6 +577,7 @@ AlphaTwithEt(Utils::GetConfig<bool>("Common.AlphaT.CalcWithEt")) {}
       mData.push_back(**i);
     }
   }
+
  HadronicObjects::HadronicObjects(const Event::Data & ev) :
     Compute::Variable<std::vector<LorentzV>, HadronicObjects>(ev) {}
 
@@ -556,6 +621,31 @@ AlphaTwithEt(Utils::GetConfig<bool>("Common.AlphaT.CalcWithEt")) {}
 	  i++ ) {
       mData.push_back(**i);
     }
+  }
+
+
+
+  CommonJetsAndMuons::CommonJetsAndMuons(const Event::Data & ev) :
+    Compute::Variable<std::vector<LorentzV>, CommonJetsAndMuons>(ev) {}
+
+  void CommonJetsAndMuons::_Update() const {
+    mData.clear();
+
+    // Muons
+    for ( std::vector<Event::Lepton const *>::const_iterator i = mEv.LD_CommonMuons().accepted.begin();
+	  i != mEv.LD_CommonMuons().accepted.end();
+	  i++ ) {
+      mData.push_back(**i);
+    }
+
+    // Jets
+    for ( std::vector<Event::Jet const *>::const_iterator i = mEv.JD_CommonJets().accepted.begin();
+	  i != mEv.JD_CommonJets().accepted.end();
+	  i++ ) {
+      mData.push_back(**i);
+    }
+    //    sort(mData.begin(),     mData.end(),     KinSuite::Compare);
+    sort(mData.begin(),     mData.end(),     KinSuite::Compare);
   }
 
 

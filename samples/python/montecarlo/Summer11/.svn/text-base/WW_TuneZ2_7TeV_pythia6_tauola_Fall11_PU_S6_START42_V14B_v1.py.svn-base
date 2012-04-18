@@ -200,5 +200,5 @@ WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1=PSet(
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/dburton/ICF/automated/2012_01_16_10_05_06/SusyCAF_Tree_9_0_iQh.root" ,
 	],
 	CrossSection=27.83,
-  Events = 3849288,
+  Events = 3829288,
 )

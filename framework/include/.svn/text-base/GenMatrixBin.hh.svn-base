@@ -20,6 +20,7 @@ public:
   bool idSelecTauNu(Event::GenObject const * gen, float et, float eta);
 
   vector <Event::GenObject const *> the_GenJets;
+  vector <Event::GenObject const *> the_GenB;
   vector <Event::GenObject const *> the_GenEli;
   vector <Event::GenObject const *> the_GenTau;
   vector <Event::GenObject const *> the_GenMuon;
@@ -32,6 +33,12 @@ public:
   vector <Event::GenObject const *> the_GenEliNu;
   vector <Event::GenObject const *> the_GenMuonExtra;
   vector <Event::GenObject const *> the_GenElectronExtra;
+  vector <Event::GenObject const *> the_GenJets_noB;
+  vector <Event::GenObject const *> the_GenJets_udsg;
+  vector <Event::GenObject const *> the_GenJets_c;
+
+  vector <Event::GenObject const *> the_GenBandC;
+
 
   int nTauMuon;
   int nTauEli;

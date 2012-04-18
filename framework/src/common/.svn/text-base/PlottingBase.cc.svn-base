@@ -108,6 +108,69 @@ void PlottingBase::BookHistArray( std::vector<TH2D*>& histarray,
 } // end of BookHistArray (2D) helper function.
 
 
+void PlottingBase::BookHistArray( std::vector<TH2D*>& histarray,
+				  TString histname , 
+				  TString title,
+				  UInt_t xbins, Double_t xmin, Double_t xmax,
+				  UInt_t ybins, Double_t* yarray,
+				  UInt_t numhists, UInt_t histnumstart, UInt_t histnumstep, 
+				  Bool_t zero_is_all ) {
+  
+  histarray.clear();
+  TString fullhistname;
+  
+  // Loop over the histograms to book.
+  for (UInt_t i=histnumstart; i<(histnumstart + numhists*histnumstep); i+=histnumstep) {
+    
+    // Determine the name of the histogram from the supplied options.
+    if (numhists==1) fullhistname =  histname;
+    else if (zero_is_all && i==0) fullhistname = histname + "_all";
+    else fullhistname = histname + "_" + GetInt(i);
+    
+    TH2D * temphist = new TH2D(fullhistname, title, xbins, xmin, xmax, ybins, yarray);
+    temphist->Sumw2();
+    
+    // Add the histogram to the vector.
+    histarray.push_back(temphist);
+
+  } // end of loop over histograms to book
+  
+} // end of BookHistArray (2D) helper function.
+
+
+void PlottingBase::BookHistArray( std::vector<TH2D*>& histarray,
+				  TString histname , 
+				  TString title,
+				  UInt_t xbins, Double_t* xarray,
+				  UInt_t ybins, Double_t* yarray,
+				  UInt_t numhists, UInt_t histnumstart, UInt_t histnumstep, 
+				  Bool_t zero_is_all ) {
+  
+  histarray.clear();
+  TString fullhistname;
+  
+  // Loop over the histograms to book.
+  for (UInt_t i=histnumstart; i<(histnumstart + numhists*histnumstep); i+=histnumstep) {
+    
+    // Determine the name of the histogram from the supplied options.
+    if (numhists==1) fullhistname =  histname;
+    else if (zero_is_all && i==0) fullhistname = histname + "_all";
+    else fullhistname = histname + "_" + GetInt(i);
+    
+    // Create the histogram
+    TH2D * temphist = new TH2D(fullhistname, title, xbins, xarray, ybins, yarray);
+    temphist->Sumw2();
+    
+    // Add the histogram to the vector.
+    histarray.push_back(temphist);
+
+  } // end of loop over histograms to book
+  
+} // end of BookHistArray (2D) helper function.
+
+
+
+
 void PlottingBase::BookHistArray(std::vector<TH2D*>& histarray,
 				 TString histname , 
 				 TString title,

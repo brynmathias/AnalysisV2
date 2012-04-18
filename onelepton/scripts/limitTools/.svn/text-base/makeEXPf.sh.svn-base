@@ -1,9 +1,10 @@
 #!/bin/bash
 
-SIGMA=0.975 # 0.5 or 0.025/0.975
+SIGMA=0.16 # 0.5 or 0.16/0.84
 
-THRESHOLD="thrHT500"
-DIRECTORY="mSUGRA_newExpectedLimit_"${THRESHOLD}
+THRESHOLD="thrHT1000"
+DIRECTORY="mSUGRA_ExpectedLimit_pMCgrid3x3_NULL_"${THRESHOLD}
+#DIRECTORY="mSUGRA_newExpectedLimit_"${THRESHOLD}
 
 NJOBS=10000
 POINTS_PER_JOB="1"
@@ -22,7 +23,7 @@ OUTPUT_FILENAME_EXTEN=""
 OUTPUT_TXT_START="output_quant"${SIGMA}"_"
 OUTPUT_TXT_EXTEN=".txt"
 
-CFG_TEMPLATE_FILE="realistic-counting-experiment-exp-"${THRESHOLD}".txt_template"
+CFG_TEMPLATE_FILE="realistic-counting-experiment-"${THRESHOLD}".txt_template"
 CFG_FILENAME_START="realistic-counting-experiment-"
 CFG_FILENAME_EXTEN=".txt"
 
@@ -31,8 +32,6 @@ JOB_FILENAME_START="susy-batchanalysis-sigma"${SIGMA}"_"
 JOB_FILENAME_EXTEN=".job"
 
 TMP_DIR=${DIRECTORY}
-#rm -rf ${TMP_DIR}; mkdir ${TMP_DIR}
-
 PWD_DIR=${PWD}/${TMP_DIR}
 
 # BatchJob counters 
@@ -40,7 +39,7 @@ NMAX=0; NFILE=0
 
 COUNTER=1
 # SUSY points counters
-M0=0; M12=0; SUSYSTEP=40
+M0=0; M12=0; SUSYSTEP=20
 M0max=2000; M12max=800
 
 while [ $M0 -le ${M0max} ];
@@ -65,13 +64,21 @@ while [ $M0 -le ${M0max} ];
 
     OUTPUT_TXT=${OUTPUT_TXT_START}"_mo"${M0}"_mh"${M12}"_"${COUNTER}${OUTPUT_TXT_EXTEN}
 
-     LINE="combine -M HybridNew --frequentist --testStat LHC -n "${OUTPUT_FILENAME}" "${CFG_FILENAME}" --singlePoint 1.0 --readHybridResult --toysFile="${OUTPUT_ROOT}" --expectedFromGrid "${SIGMA}" | awk '{print \$0}' > "${OUTPUT_TXT}
+    LINE="combine -M HybridNew --frequentist --testStat LHC -n "${OUTPUT_FILENAME}" "${CFG_FILENAME}" --singlePoint 1.0 --readHybridResult --toysFile="${OUTPUT_ROOT}" --expectedFromGrid "${SIGMA}" | awk '{print \$0}' > "${OUTPUT_TXT}
+    #    LINE="combine -M HybridNew --frequentist --testStat LHC -n "${OUTPUT_FILENAME}" "${CFG_FILENAME}" --singlePoint 1.0 --readHybridResult --toysFile="${OUTPUT_ROOT}" --expectedFromGrid "${SIGMA}" | awk '{print \$0}' 2> "${OUTPUT_TXT}".err > "${OUTPUT_TXT}
+
+    #LINE2="rfcp "${OUTPUT_TXT}".err /castor/cern.ch/user/g/gouskos/LP_Analysis/Moriond2012/Limits_mSugra/HT1000_exp/"
+    #LINE3="rm -rf "${OUTPUT_TXT}".err"
+
     echo ${LINE} >> ${JOB_FILENAME}
+    #echo ${LINE2} >> ${JOB_FILENAME}
+    #echo ${LINE3} >> ${JOB_FILENAME}
     
     mv ${JOB_FILENAME} ${TMP_DIR}/${JOB_FILENAME}
     cd ${TMP_DIR}; echo "Submitting Job: "${PWD}"/"${JOB_FILENAME}; 
     chmod 751 ${JOB_FILENAME}
-    bsub -q 1nh ${JOB_FILENAME}
+#    bsub -q 1nh ${JOB_FILENAME}
+    bsub -cwd `pwd` -o ${OUTPUT_TXT}.LSFout -e ${OUTPUT_TXT}.LSFerr -q 1nh ${JOB_FILENAME}
     echo ""; cd ..
     
     if [ $COUNTER -eq $NJOBS ]; then

@@ -115,7 +115,9 @@ class Data : public ND_CLASS {
     Compute::ObjSum ObjSum;
     Compute::SumEt SumEt;
     Compute::CommonHT CommonHT;
+    Compute::CommonHTTakeMu CommonHTTakeMu;
     Compute::CommonMHT CommonMHT;
+    Compute::CommonMHTTakeMu CommonMHTTakeMu;
     Compute::CommonMT CommonMT;
     Compute::CommonMinDPhi CommonMinDPhi;
     Compute::CommonMinBiasDPhi CommonMinBiasDPhi;
@@ -126,6 +128,7 @@ class Data : public ND_CLASS {
     Compute::CommonAlphaT CommonAlphaT;
     Compute::LeptonicAlphaT LeptonicAlphaT;
     Compute::HadronicAlphaT HadronicAlphaT;
+    Compute::HadronicAlphaTTakeMu HadronicAlphaTTakeMu;
     Compute::CommonMT2 CommonMT2;
     Compute::CommonRecoilMET CommonRecoilMET;
     Compute::CommonObjectSum CommonObjectSum;
@@ -138,6 +141,7 @@ class Data : public ND_CLASS {
     Compute::LeptonicObjects LeptonicObjects;
     Compute::HadronicObjects HadronicObjects;
     Compute::CommonJetsAndElectrons CommonJetsAndElectrons;
+    Compute::CommonJetsAndMuons CommonJetsAndMuons;
     Compute::CommonMeff CommonMeff;
     ThrustStuffVar CommonThrustStuff;
     Compute::M3 M3;

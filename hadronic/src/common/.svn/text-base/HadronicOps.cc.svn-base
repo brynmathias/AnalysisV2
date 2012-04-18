@@ -262,11 +262,62 @@ bool MHToverMET::Process(Event::Data& ev){
   else return false;
 }
 
-//
 std::ostream& MHToverMET::Description( std::ostream &ostrm ) {
   ostrm << "Passing MHT over MET cut of: " << cut_ << " " ;
   return ostrm;
 }
+
+
+//-------------------------------------------------------------------
+MHTTakeMuoverMETTakeMu::MHTTakeMuoverMETTakeMu(float cut, float threshold)
+  : cut_(cut),
+  threshold_(threshold)
+  {;}
+
+bool MHTTakeMuoverMETTakeMu::Process(Event::Data& ev){
+
+
+  PolarLorentzV mHT(0.,0.,0.,0.);
+  std::vector<Event::Jet const *>::const_iterator ijet = ev.JD_CommonJets().accepted.begin();
+  std::vector<Event::Jet const *>::const_iterator jjet = ev.JD_CommonJets().accepted.end();
+  std::vector<Event::Jet const *>::const_iterator ibaby = ev.JD_CommonJets().baby.begin();
+  std::vector<Event::Jet const *>::const_iterator jbaby = ev.JD_CommonJets().baby.end();
+  for(; ijet!=jjet; ++ijet){
+    if( (*ijet)->Pt() > threshold_){
+      mHT -= (**ijet);
+    }
+  }
+  for( ; ibaby!=jbaby; ++ibaby){
+    if( (*ibaby)->pt() > threshold_ ){
+      mHT -= (**ibaby);
+    }
+  }
+
+  std::vector<Event::Lepton const *>::const_iterator imu=ev.LD_CommonMuons().accepted.begin();
+  std::vector<Event::Lepton const *>::const_iterator jmu=ev.LD_CommonMuons().accepted.end();
+  for(; imu!=jmu; ++imu){
+    mHT -= (**imu);
+  }
+
+  LorentzV calomet = LorentzV(*ev.metP4caloTypeII());
+
+  for(int i = 0; i < int(ev.LD_CommonElectrons().accepted.size());i++){
+    calomet = calomet+(*ev.LD_CommonElectrons().accepted[i]);
+  }
+  for(int i = 0; i < int(ev.PD_CommonPhotons().accepted.size());i++){
+    calomet = calomet+(*ev.PD_CommonPhotons().accepted[i]);
+  }
+
+  if( mHT.Pt()/calomet.Pt()  < cut_)return true;
+  else return false;
+}
+
+
+std::ostream& MHTTakeMuoverMETTakeMu::Description( std::ostream &ostrm ) {
+  ostrm << "Passing MHT over MET both Take Mu cut of: " << cut_ << " " ;
+  return ostrm;
+}
+
 //
 MHToverPFMET::MHToverPFMET(float cut)
   : cut_(cut)

@@ -65,6 +65,16 @@
                         UInt_t ybins, Double_t ymin, Double_t ymax,
 			UInt_t numhists, UInt_t histnumstart, UInt_t histnumstep, Bool_t zero_is_all);
 
+    void  BookHistArray(std::vector<TH2D *> & histarray, TString histname,  TString title,
+                        UInt_t xbins, Double_t xmin, Double_t xman,
+                        UInt_t ybins, Double_t* yarray,
+			UInt_t numhists, UInt_t histnumstart, UInt_t histnumstep, Bool_t zero_is_all);
+
+    void  BookHistArray(std::vector<TH2D *> & histarray, TString histname,  TString title,
+                        UInt_t xbins, Double_t* xarray,
+                        UInt_t ybins, Double_t* yarray,
+			UInt_t numhists, UInt_t histnumstart, UInt_t histnumstep, Bool_t zero_is_all);
+
     void BookHistArray(std::vector<TH3D *> & histarray, TString histname, TString title,
     UInt_t xbins, Double_t xmin, Double_t xmax,
     UInt_t ybins, Double_t ymin, Double_t ymax,
