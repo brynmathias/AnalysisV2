@@ -317,7 +317,7 @@ zeroMuon = OP_NumComMuons("<=",0)
 ZMassCut = RECO_2ndMuonMass(25.0, 91.2, True, "all")
 
 numComPhotons = OP_NumComPhotons("<=",0)
-muDr = RECO_MuonJetDRCut(0.3)
+muDr = RECO_MuonJetDRCut(0.5)
 VertexPtOverHT = OP_SumVertexPtOverHT(0.1)
 # -----------------------------------------------------------------------------
 # Definition of analyses
@@ -462,9 +462,9 @@ mu_id = PSet(
    MinPt = 10.,
    MaxEta = 2.1,
    MaxIsolation = 0.1,
-   DRMuJet = 0.3,
+   DRMuJet = 0.5,
    MaxGlbTrkDxy = 0.02,
-   MinGlbTrkNumOfValidHits = 9,
+   MinGlbTrkNumOfValidHits = 11,
    SegMatch2GlbMu = 1,
    PixelHitsOnInrTrk = 1,
    MaxInrTrkDz = 1.,
