@@ -350,7 +350,6 @@ class Analysis:
         for idx in range(len(jobs["jobs"])):
             with open("%s/status/%d" % (dir_name, idx+1), "w") as f:
                 f.write(self.GetStatusString("WAITING"))
-  cmssw_dir = os.environ["CMSSW_DIR"]
 	susy_working_dir = os.environ["SUSY_WORKING_SW_DIR"]
         script_dir = os.getcwd()
 	script_name = sys.argv[0]

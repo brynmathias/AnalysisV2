@@ -413,7 +413,7 @@ for key,vals in alphatTesting.iteritems():
       cut = eval("RECO_CommonHTCut(%f)"%(htbin))
       out.append(cut)
       cutTreeData.TAttach(muDr,cut)
-      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin),Debug = True))
+      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin),Debug = False))
 
 
 
@@ -500,7 +500,7 @@ addCutFlowData(anal_ak5_pfData)
 from SingleMu_Run2012A_PromptReco_v1_V17_pre2_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf import *
 sample = SingleMu_Run2012A_PromptReco_v1_V17_pre2_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf
 
-outDir = "../2012/ht%dNoUpper_DEBUG/"%(bin)
+outDir = "../2012/ht%dNoUpper/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 
