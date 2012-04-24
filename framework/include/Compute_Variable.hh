@@ -43,7 +43,7 @@ class Variable {
       if ( static_cast<const Event::NtupleData &>(mEv).GetCurrentEntry() != mCurrentEntry ) {
 	// We need to update the code, so we use the Barton-Nackman trick
 	// to pass update using a statically-polymorphic structure
-	//std::cout << "Compute::Variable updated" << std::endl;
+	std::cout << "Compute::Variable updated" << std::endl;
 	static_cast<const X &>(*this)._Update();
 	mCurrentEntry = static_cast<const Event::NtupleData &>(mEv).GetCurrentEntry();
       }

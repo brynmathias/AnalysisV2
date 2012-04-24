@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 275.
+bin = 375.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -350,9 +350,9 @@ out = []
 #cutTreeData.Attach(NoiseFilt)
 #cutTreeData.TAttach(NoiseFilt,selection)
 #cutTreeData.TAttach(selection,oddElectron)
-cutTreeData.Attach(json)
-cutTreeData.TAttach(json,NoiseFilt)
-cutTreeData.TAttach(json,json_ouput)
+cutTreeData.Attach(NoiseFilt)#json)
+#cutTreeData.TAttach(json,NoiseFilt)
+#cutTreeData.TAttach(json,json_ouput)
 #cutTreeData.TAttach(json_ouput,NoiseFilt)
 cutTreeData.TAttach(NoiseFilt,oddElectron)
 cutTreeData.TAttach(oddElectron,oddPhoton)
