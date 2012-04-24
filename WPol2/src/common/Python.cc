@@ -116,6 +116,9 @@ BOOST_PYTHON_MODULE(libWPol) {
 								init<float>());
   class_<Operation::RECO2ndMuonMass, bases<Operation::_Base> >("RECO_2ndMuonMass",
 							       init<float,float,bool,std::string>());
+  class_<Operation::RECODiMuon_ZMass, bases<Operation::_Base> >("RECO_DiMuon_ZMass",
+							       init<float,float,bool,std::string>());
+
   class_<Operation::MCCSFramePlots, bases<Operation::_Base> >("MC_CSFramePlots",
 							      init<const std::string &,const std::string &>());
   class_<Operation::RECOCSFramePlots, bases<Operation::_Base> >("RECO_CSFramePlots",

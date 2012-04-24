@@ -5,11 +5,11 @@ export LOCALDIR=_localDirectory_
  
 cd $LOCALDIR
 
-export SCRAM_ARCH =lc5_amd64_gcc434 
+export SCRAM_ARCH =slc5_amd64_gcc434 
 source /afs/cern.ch/cms/sw/cmsset_default.sh
 cmsenv
 #rehash
 
-ls -lrt
+#ls -lrt
 
 #combine -M HybridNew --frequentist --testStat LHC -n _outputFile_ _dataCardfile_

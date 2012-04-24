@@ -170,9 +170,10 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
       bases<Operation::_Base> >("OP_NumComJets", init<const std::string &,
                                 UInt_t>());
 
-  class_<Operation::NumCommonBtagJets, bases<Operation::_Base> >("OP_NumCommonBtagJets",
+  class_<Operation::NumCommonBtagJets, 
+      bases<Operation::_Base> >("OP_NumCommonBtagJets",
                      init<const std::string &,
-                     UInt_t,UInt_t,float>());
+                     UInt_t,float,int>());
 
   class_<Operation::badMuonInJet, bases<Operation::_Base> >("OP_BadMuonInJet");
   class_<Operation::PhotkilledJet, bases<Operation::_Base> >("OP_PhotonKilledJet");
@@ -181,6 +182,9 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
               init<float>());
 
   class_<Operation::secondJetEtCut, bases<Operation::_Base> >("OP_SecondJetEtCut",
+                    init<float>());
+
+  class_<Operation::secondJetOrMuEtCut, bases<Operation::_Base> >("OP_SecondJetOrMuEtCut",
                     init<float>());
 
  class_<Operation::PhotonJetDRCut, bases<Operation::_Base> >("OP_PhotonJetDRCut",
@@ -193,15 +197,30 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
   class_<Operation::firstJetetaCut, bases<Operation::_Base> >("OP_FirstJetEta",
                  init<float>());
 
+  class_<Operation::firstJetOrMuetaCut, bases<Operation::_Base> >("OP_FirstJetOrMuEta",
+                 init<float>());
+
   class_<Operation::RecoilMHTCut,bases<Operation::_Base> >("OP_RecoilMHTCut",init<float>());
 
   class_<Operation::HTCut, bases<Operation::_Base> >("RECO_CommonHTCut",
                  init<float>());
 
+
   class_<Operation::HTLessThanCut, bases<Operation::_Base> >("RECO_CommonHTLessThanCut",
                 init<float>());
 
+  class_<Operation::HTTakeMuCut, bases<Operation::_Base> >("RECO_CommonHTTakeMuCut",
+                 init<float>());
+
+
+  class_<Operation::HTTakeMuLessThanCut, bases<Operation::_Base> >("RECO_CommonHTTakeMuLessThanCut",
+                init<float>());
+
+
   class_<Operation::firstJetPtCut, bases<Operation::_Base> >("OP_FirstJetPtCut",
+                init<float>());
+
+  class_<Operation::firstJetOrMuPtCut, bases<Operation::_Base> >("OP_FirstJetOrMuPtCut",
                 init<float>());
 
   class_<Operation::SumETCut, bases<Operation::_Base> >("OP_CommonSumETCut",
@@ -227,6 +246,10 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
   class_<Operation::alpha_tCut, bases<Operation::_Base> >("OP_HadAlphaTCut",
                      init<float>());
   class_<Operation::alpha_tCut_Less, bases<Operation::_Base> >("OP_HadAlphaTCutLess",
+                     init<float>());
+  class_<Operation::alpha_tTakeMuCut, bases<Operation::_Base> >("OP_HadAlphaTTakeMuCut",
+                     init<float>());
+  class_<Operation::alpha_tTakeMuCut_Less, bases<Operation::_Base> >("OP_HadAlphaTTakeMuCutLess",
                      init<float>());
   class_<Operation::missedHTcut, bases<Operation::_Base> >("OP_MissedHTCut",
                  init<float>());

@@ -1261,6 +1261,53 @@ std::ostream& MCMuMuInvMass::Description(std::ostream &ostrm) {
     return ostrm;
   }
 
+  //=================
+  // Two Islated Muons Making a Z mass
+  //================
+
+  RECODiMuon_ZMass::RECODiMuon_ZMass(float MuonPt, float Mass, bool keepZ, std::string charge) :
+    mMuonPt(MuonPt), mMass(Mass), mKeepZ(keepZ), mCharge(charge) {}
+
+  RECODiMuon_ZMass::~RECODiMuon_ZMass() {}
+
+  bool RECODiMuon_ZMass::Process(Event::Data & ev) {
+    
+    //do we want to veto (i.e. throw away) events in the Z-mass window?
+    //also, do we want to explicitly take OS muons, SS muons or both?
+    if(mCharge != "OS" && mCharge != "SS" && mCharge != "all") {
+      std::cout << "RECO 2ndMuon Invariant Mass Cut - options on charge are SS, OS or all: " << mCharge << " selected. Please correct!" << std::endl;
+      return false;
+    }
+
+    float Zmass = 0.0;
+    if(ev.LD_CommonMuons().accepted.size()>1) {
+      for (unsigned int imu=0; imu < ev.LD_CommonMuons().accepted.size(); ++imu) {
+	if(imu == 0) continue; //i.e. don't make an invariant mass with the same muon (remember LD_CommonMuons is a subset of LD_Muons)
+	if((ev.LD_CommonMuons().accepted.at(0)->GetCharge() != ev.LD_CommonMuons().accepted.at(imu)->GetCharge() && mCharge == "OS") || (ev.LD_CommonMuons().accepted.at(0)->GetCharge() == ev.LD_CommonMuons().accepted.at(imu)->GetCharge() && mCharge == "SS") || mCharge == "all") {
+	  float ZmassCurrent = ROOT::Math::VectorUtil::InvariantMass(*(ev.LD_CommonMuons().accepted.at(imu)),*(ev.LD_CommonMuons().accepted.at(0)));
+          if(Zmass == 0.0) Zmass = ZmassCurrent;
+          if(fabs(ZmassCurrent-mMass) < (fabs(Zmass-mMass))) Zmass = ZmassCurrent; //if another muon pair combination gives an invariant mass closer to the Z-mass...
+	}
+      }
+    } else return false;
+    
+    bool inWindow;
+    if(Zmass > mMass-mMuonPt && Zmass < mMass+mMuonPt) inWindow = true; //i.e. the event is in the Z-mass window
+    else inWindow = false;
+
+    //i.e. if the event is in the mass window and we want to keep those events, or if the event is not in the mass window, but we want to reject Z-events anyway, then keep these events    
+    if((inWindow && mKeepZ) ||(!inWindow && !mKeepZ) ) return true; 
+    
+    return false; //otherwise either the event is in the mass window when we don't want it, or is outside the mass window when we do
+  }
+
+  std::ostream& RECODiMuon_ZMass::Description(std::ostream &ostrm) {
+    ostrm << "RECO 2ndMuon Invariant Mass made from Isolated muons +/- " << mMuonPt << "GeV from " << mMass << " are";
+    if(!mKeepZ) ostrm << " NOT ";
+    ostrm << "kept";
+    return ostrm;
+  }
+
   //================
   // RECO Cut on PF MT
   //================

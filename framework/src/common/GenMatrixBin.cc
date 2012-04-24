@@ -16,6 +16,16 @@ GenMatrixBin::GenMatrixBin(Event::Data* ev) {
     if(fabs((*j).GetID())==6||fabs((*j).GetID())==8) the_GenTop.push_back(&(*j));
     if(fabs((*j).GetID())==24) the_GenW.push_back(&(*j)) ;
     if(fabs((*j).GetID())==23) the_GenZ.push_back(&(*j)) ;
+    if(!hasDaughter(ev,(*j).GetIndex())){
+      if((fabs((*j).GetID())==5 || (fabs((*j).GetID())==4))){the_GenBandC.push_back(&(*j));}
+      }
+    if(fabs((*j).GetID())==5&& !hasDaughter(ev,(*j).GetIndex())){the_GenB.push_back(&(*j));}
+    else{
+      if (!hasDaughter(ev,(*j).GetIndex()) && idSelecHad(&(*j),0,15) && fabs((*j).GetID())!=5){the_GenJets_noB.push_back(&(*j));}
+      //if (!hasDaughter(ev,(*j).GetIndex()) && idSelecTau(&(*j),0,15)){the_GenJets_noB.push_back(&(*j));}
+      if (!hasDaughter(ev,(*j).GetIndex()) && idSelecHad(&(*j),0,15) && fabs((*j).GetID())!=5 && fabs((*j).GetID()!=4)){the_GenJets_udsg.push_back(&(*j));}
+      if (!hasDaughter(ev,(*j).GetIndex()) && idSelecHad(&(*j),0,15) && fabs((*j).GetID()==4)){the_GenJets_c.push_back(&(*j));} 
+    }
 
 
     if(!hasDaughter(ev,i)) { // only particles without daughters in status 3 are regarded
@@ -68,10 +78,11 @@ GenMatrixBin::GenMatrixBin(Event::Data* ev) {
           }
 
         }
+        nTauHad=the_GenTau.size()-nTauEli-nTauMuon; /// reasonable? I don't think so
 
-        nTauHad=the_GenTau.size()-nTauEli-nTauMuon;
         //  if(nTauHad<0) cout << "GenMatrixBin:: more tau to leptons found then there are taus: IMPOSSIBLE "<<endl;
 	}
+
   }
   // cout << "Phi "<<j->Phi()<<endl;
   // cout << "Status "<<j->GetStatus()<<endl;

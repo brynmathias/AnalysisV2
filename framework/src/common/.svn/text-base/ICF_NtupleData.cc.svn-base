@@ -207,6 +207,7 @@ NtupleData::NtupleData(const std::string & fileName,
     muonNumberOfPixelLayersWithMeasurement(mDataTree,mMuonPrefix+"NumberOfPixelLayersWithMeasurement"+mMuonSuffix,this),
     muonInnerTrackVertexz(mDataTree,mMuonPrefix+"InnerTrackVertexz"+mMuonSuffix,this),
     muonGlobalTrackPTsigma(mDataTree,mMuonPrefix+"SigmaPt"+mMuonSuffix,this),
+    muonNumberOfTrackerLayersWithMeasurement(mDataTree,mMuonPrefix+"NumberOfTrackerLayersWithMeasurement"+mMuonSuffix,this),
 
 
     //MICHELE ->Secondary Muon Collection

@@ -47,17 +47,31 @@ namespace Compute {
     void _Update() const;
   };
 
-  // Common object MHT
+  // Common jets MHT
   class CommonMHT : public Compute::Variable<LorentzV, CommonMHT> {
   public:
     CommonMHT(const Event::Data & ev);
     void _Update() const;
   };
 
-  // Common object HT
+  // Common jets and Muon MHT
+  class CommonMHTTakeMu : public Compute::Variable<LorentzV, CommonMHTTakeMu> {
+  public:
+    CommonMHTTakeMu(const Event::Data & ev);
+    void _Update() const;
+  };
+
+  // Common jets HT
   class CommonHT : public Compute::Variable<Double_t, CommonHT> {
   public:
     CommonHT(const Event::Data & ev);
+    void _Update() const;
+  };
+
+  // Common jets and muons HT
+  class CommonHTTakeMu : public Compute::Variable<Double_t, CommonHTTakeMu> {
+  public:
+    CommonHTTakeMu(const Event::Data & ev);
     void _Update() const;
   };
 
@@ -128,6 +142,16 @@ namespace Compute {
     const bool AlphaTwithEt;
 
   };
+
+  class HadronicAlphaTTakeMu : public Compute::Variable<Double_t, HadronicAlphaTTakeMu> {
+  public:
+    HadronicAlphaTTakeMu(const Event::Data & ev);
+    void _Update() const;
+  private:
+    const bool AlphaTwithEt;
+
+  };
+
 
   class CommonMT2 : public Compute::Variable<Double_t, CommonMT2> {
   public:
@@ -201,9 +225,17 @@ namespace Compute {
   };
 
 
+
   class CommonJetsAndElectrons : public Compute::Variable<std::vector<LorentzV>, CommonJetsAndElectrons> {
   public:
     CommonJetsAndElectrons(const Event::Data & ev);
+    void _Update() const;
+  };
+
+
+  class CommonJetsAndMuons : public Compute::Variable<std::vector<LorentzV>, CommonJetsAndMuons> {
+  public:
+    CommonJetsAndMuons(const Event::Data & ev);
     void _Update() const;
   };
 

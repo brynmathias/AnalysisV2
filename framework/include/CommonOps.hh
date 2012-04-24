@@ -161,7 +161,9 @@ namespace Operation {
  class NumCommonBtagJets : public Operation::_Base
  {
  public:
-   NumCommonBtagJets (const std::string & comparison,UInt_t Algo ,UInt_t number, float cutValue);
+
+   NumCommonBtagJets (const std::string & comparison, UInt_t number, float cutValue,int cutAlgoValue);
+
    ~NumCommonBtagJets ();
    bool Process(Event::Data & ev);
    std::ostream& Description(std::ostream& ostrm);
@@ -169,9 +171,8 @@ namespace Operation {
  private:
    Operation::_Compare<UInt_t> *mComparison; //!< Comparison string, i.e. "==", ">=", etc.
    UInt_t mNumber;           //!< Number of common leptons with which to compare.
-   UInt_t Algo_;
    float mCut; // !< value at which the btaging variable cuts.
-   
+   int mAlgoCut; // !< btag algortithm number
    /* data */
  };
 
@@ -246,6 +247,78 @@ namespace Operation {
 
  };
 
+
+
+  class HTTakeMuCut : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     * @param [in] mSumEtCutVal
+     */
+    HTTakeMuCut(float mSumEtCutVal);
+
+    ~HTTakeMuCut() {;}
+
+    /*! \brief Cuts on
+     * \param Reference to the event data container.
+     * \return True if
+     */
+    bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+
+    float mSumEtCutVal;
+
+  };
+
+  /*! \brief Cuts on the basis of the SumEt of the the event's common objects.
+   *
+   * \author Markus Stoye
+   * \date February 2009
+   */
+
+ class HTTakeMuLessThanCut : public Operation::_Base {
+
+ public:
+
+   /*! \brief Constructor.
+    * @param [in] mSumEtCutVal
+    */
+   HTTakeMuLessThanCut(float mSumEtCutVal);
+
+   ~HTTakeMuLessThanCut() {;}
+
+   /*! \brief Cuts on
+    * \param Reference to the event data container.
+    * \return True if
+    */
+   bool Process(Event::Data & ev);
+
+   /*! \brief Describes the operation, for analysis output to terminal/log file.
+    * @param [in] ostrm Reference to output stream (for output).
+    * @return Reference to output stream.
+    */
+   std::ostream& Description(std::ostream& ostrm);
+
+ private:
+
+   float mSumEtCutVal;
+
+ };
+
+
+
+
+
+
+
  /*! \brief Cuts on the basis of the SumEt of the the event's common objects.
   *
   * \author Bryn Mathias
@@ -283,6 +356,8 @@ namespace Operation {
 
     float mMHTCut;
   }; // ~CommonMHTCut class
+
+
 
 
   /*! \brief Cuts on the basis of the AlphaT of the the event's common objects.
@@ -838,6 +913,75 @@ namespace Operation {
   }; // ~RecoilMETCut class
 
 
+ class  firstJetOrMuetaCut : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     *
+     * @param [in] comparison Comparison string, i.e. "==", ">=", etc.
+     * @param [in] first jet max eta value
+     */
+     firstJetOrMuetaCut(float mMHTvalue );
+
+    ~ firstJetOrMuetaCut(); //!< Destructor.
+
+    /*! \brief
+     *
+     * \param Reference to the event data container.
+     * \return True if the
+     */
+   bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+    // Operation private data members
+    //--------------------------------
+    float mCut;           //!<
+
+  }; // ~firstJetetaCut class
+
+
+ class  firstJetOrMuPtCut : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     *
+     * @param [in] comparison Comparison string, i.e. "==", ">=", etc.
+     * @param [in] mMHTvalue
+     */
+     firstJetOrMuPtCut(float mMHTvalue );
+
+    ~firstJetOrMuPtCut(); //!< Destructor.
+
+    /*! \brief
+     *
+     * \param Reference to the event data container.
+     * \return True if the
+     */
+   bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+    // Operation private data members
+    //--------------------------------
+    float mCut;           //!<
+
+  }; // ~FirstJetPtCut class
+
+
+
  class  firstJetetaCut : public Operation::_Base {
 
   public:
@@ -942,6 +1086,40 @@ namespace Operation {
 
   }; // ~missedHTcut class
 
+ class  firstJetOrMuEtCut : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     *
+     * @param [in] comparison Comparison string, i.e. "==", ">=", etc.
+     * @param [in] first jet min et value
+     */
+     firstJetOrMuEtCut(float mMHTvalue );
+
+    ~ firstJetOrMuEtCut(); //!< Destructor.
+
+    /*! \brief
+     *
+     * \param Reference to the event data container.
+     * \return True if the
+     */
+   bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+    // Operation private data members
+    //--------------------------------
+    float mCut;           //!<
+
+  }; // ~firstJetEtCut class
+
+
  class  firstJetEtCut : public Operation::_Base {
 
   public:
@@ -976,6 +1154,40 @@ namespace Operation {
   }; // ~firstJetEtCut class
 
 
+
+
+ class  secondJetOrMuEtCut : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     *
+     * @param [in] comparison Comparison string, i.e. "==", ">=", etc.
+     * @param [in] mMHTvalue
+     */
+     secondJetOrMuEtCut(float mMHTvalue );
+
+    ~ secondJetOrMuEtCut(); //!< Destructor.
+
+    /*! \brief
+     *
+     * \param Reference to the event data container.
+     * \return True if the
+     */
+   bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+    // Operation private data members
+    //--------------------------------
+    float mCut;           //!<
+
+  }; // ~secondJetEtCut class
 
 
  class  secondJetEtCut : public Operation::_Base {
@@ -1116,6 +1328,74 @@ namespace Operation {
     float mCut;           //!<
 
   }; // ~alpha_tCut_Less class
+
+
+ class  alpha_tTakeMuCut : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     *
+     * @param [in] comparison Comparison string, i.e. "==", ">=", etc.
+     * @param [in] mMHTvalue
+     */
+     alpha_tTakeMuCut(float mMHTvalue );
+
+    ~ alpha_tTakeMuCut(); //!< Destructor.
+
+    /*! \brief
+     *
+     * \param Reference to the event data container.
+     * \return True if the
+     */
+   bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+    // Operation private data members
+    //--------------------------------
+    float mCut;           //!<
+
+  }; // ~alpha_tTakeMuCut class
+
+ class  alpha_tTakeMuCut_Less : public Operation::_Base {
+
+  public:
+
+    /*! \brief Constructor.
+     *
+     * @param [in] comparison Comparison string, i.e. "==", ">=", etc.
+     * @param [in] mMHTvalue
+     */
+     alpha_tTakeMuCut_Less(float mMHTvalue );
+
+    ~ alpha_tTakeMuCut_Less(); //!< Destructor.
+
+    /*! \brief
+     *
+     * \param Reference to the event data container.
+     * \return True if the
+     */
+   bool Process(Event::Data & ev);
+
+    /*! \brief Describes the operation, for analysis output to terminal/log file.
+     * @param [in] ostrm Reference to output stream (for output).
+     * @return Reference to output stream.
+     */
+    std::ostream& Description(std::ostream& ostrm);
+
+  private:
+    // Operation private data members
+    //--------------------------------
+    float mCut;           //!<
+
+  }; // ~alpha_tTakeMuCut_Less class
+
 
  ////////////////////////////////////////////////////////
 

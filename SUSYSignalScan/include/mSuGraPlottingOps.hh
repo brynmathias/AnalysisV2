@@ -85,6 +85,14 @@ class mSuGraPlottingOps : public PlottingBase {
      std::vector<TH3D *> H_M0_M12_mChi_noweight_countRAW;
      
 
+  std::vector<TH2D *> H_M0_M12_mChi_025;
+  std::vector<TH2D *> H_M0_M12_mChi_050;
+  std::vector<TH2D *> H_M0_M12_mChi_075;
+
+  std::vector<TH2D *> H_M0_M12_mChi_025_noweight;
+  std::vector<TH2D *> H_M0_M12_mChi_050_noweight;
+  std::vector<TH2D *> H_M0_M12_mChi_075_noweight;
+
     int    xBins_;
     double xLow_;
     double xHigh_;

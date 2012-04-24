@@ -1,15 +1,15 @@
 10
 
 dir
-3690
+3816
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy/trunk/AnalysisV2/hadronic/python
 svn+ssh://bm409@svn.cern.ch/reps/icfsusy
 
 
 
-2011-12-27T21:26:54.148053Z
-3557
-dburton
+2012-04-23T11:44:26.364090Z
+3813
+zmeng
 has-props
 
 
@@ -59,6 +59,74 @@ has-props
 
 
 26492
+
+RA1_MuonData_2.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+27ee14e76932034280a1ccff030ec4b1
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2357
+
+RA1_Data_2.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+7814549e104283674a00d035399ea2ec
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1543
 
 Binned_DiMuon_HT_325.py
 file
@@ -416,40 +484,6 @@ has-props
 
 2228
 
-bkgdCore.py
-file
-
-
-
-
-2011-10-18T17:02:59.000000Z
-f0f3aa26c329bd05497494baeb5b20f4
-2010-04-29T11:11:46.000000Z
-409
-trommers
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-724
-
 MakeStandardPlots.py
 file
 
@@ -483,6 +517,40 @@ has-props
 
 
 13318
+
+bkgdCore.py
+file
+
+
+
+
+2011-10-18T17:02:59.000000Z
+f0f3aa26c329bd05497494baeb5b20f4
+2010-04-29T11:11:46.000000Z
+409
+trommers
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+724
 
 Binned_AlphaT_HT_275.py
 file
@@ -552,6 +620,40 @@ has-props
 
 17863
 
+RA1_Data_43.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+769bb9cad811d5b4edfc29565229232b
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1679
+
 McNoSmear.py
 file
 
@@ -619,6 +721,40 @@ has-props
 
 
 15487
+
+RA1_Data_37.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+a7c25f4383cac76f668cd602aa235cd8
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1759
 
 deadRegionList_START36_V9.txt
 file
@@ -721,6 +857,40 @@ has-props
 
 
 13448
+
+RA1_MuonNoSmear_3.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+18bdd231d0dc6b5df5c69466943a2729
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3756
 
 bryn_cfg.py
 file
@@ -858,6 +1028,40 @@ has-props
 
 17066
 
+RA1_MuonNoSmear.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+776ac446f8c21f3b8ebce2543f0ae098
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4211
+
 JamboreePlots.py
 file
 
@@ -925,6 +1129,40 @@ has-props
 
 
 2244
+
+RA1_McNoSmear_2.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+f9c25922f7c5a8a066eeb15942fd8600
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1549
 
 deadRegionList_GR10_P_V7.txt
 file
@@ -994,6 +1232,40 @@ has-props
 
 83128
 
+batchGolden_btag.pyc
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+6be6e0b9896a74cc51f8864975442606
+2012-04-02T08:32:23.692073Z
+3738
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+17109
+
 brynPlots_cff.py
 file
 
@@ -1040,6 +1312,40 @@ debdabafcc424308ccbea4415098ea23
 3550
 bainbrid
 has-props
+
+RA1_MuonData.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+ebfa0d16af17d8ec01dcaf65aeb94262
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2397
 
 Binned_AlphaT_HT_325.py
 file
@@ -1177,6 +1483,40 @@ has-props
 
 5457
 
+RA1_MuonData43.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+b652cf17012d4fa94b374d0767285501
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1740
+
 BabyJets_cfg.py
 file
 
@@ -1279,6 +1619,40 @@ has-props
 
 28319
 
+RA1_MuonData37.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+87deecc481281d8ec555362b8e7c21c5
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1671
+
 Binned_Muon_HT_275.py
 file
 
@@ -1346,6 +1720,40 @@ has-props
 
 
 15052
+
+RA1_MuonNoSmear_2.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+c30773741a1b8ff5eab3d43d9593c43c
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3436
 
 plottingStuff_cfg.py
 file
@@ -1774,6 +2182,40 @@ file
 bainbrid
 has-props
 
+batchGolden_baseline.pyc
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+5a0f331865d3f9315a7c44a2d7213284
+2012-04-02T08:32:23.692073Z
+3738
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+31258
+
 exampleRun.py
 file
 
@@ -1807,40 +2249,6 @@ bm409
 
 
 3451
-
-Binned_Muon_HT_325.py
-file
-
-
-
-
-2012-01-08T10:23:05.000000Z
-edbae9e5d11c4ad1263c0722a2cc4c6a
-2011-12-27T21:26:54.148053Z
-3557
-dburton
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-4582
 
 muonControl_CMSSM.py
 file
@@ -1876,17 +2284,17 @@ has-props
 
 22098
 
-Hadronic_mSUGRA_cfg-1.py
+Binned_Muon_HT_325.py
 file
 
 
 
 
-2011-10-18T17:02:59.000000Z
-743b4b210c558dc3236432f60cce74f9
-2011-07-11T18:17:06.480604Z
-2947
-bm409
+2012-01-08T10:23:05.000000Z
+edbae9e5d11c4ad1263c0722a2cc4c6a
+2011-12-27T21:26:54.148053Z
+3557
+dburton
 has-props
 
 
@@ -1908,7 +2316,7 @@ has-props
 
 
 
-6462
+4582
 
 deadRegionList_GR10_P_V10.txt
 file
@@ -1944,17 +2352,17 @@ trommers
 
 2257
 
-Binned_Muon_HT_375.py
+Hadronic_mSUGRA_cfg-1.py
 file
 
 
 
 
-2012-01-08T10:23:05.000000Z
-e5aba2bb054f7138d1eb173f921d54c9
-2011-12-27T21:26:54.148053Z
-3557
-dburton
+2011-10-18T17:02:59.000000Z
+743b4b210c558dc3236432f60cce74f9
+2011-07-11T18:17:06.480604Z
+2947
+bm409
 has-props
 
 
@@ -1976,7 +2384,7 @@ has-props
 
 
 
-4545
+6462
 
 SUSYpas_cfg.py
 file
@@ -2011,6 +2419,74 @@ has-props
 
 
 6561
+
+Binned_Muon_HT_375.py
+file
+
+
+
+
+2012-01-08T10:23:05.000000Z
+e5aba2bb054f7138d1eb173f921d54c9
+2011-12-27T21:26:54.148053Z
+3557
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4545
+
+RA1_McNoSmear.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+e18b649ed789fd3152bd7e7575d60535
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1603
 
 qcdBkgdEst_cfg.py
 file
@@ -2148,6 +2624,40 @@ has-props
 
 11116
 
+RA1_MuonData_3.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+d78baddbe92f220124cbf089721c6e5b
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2367
+
 makeMuonPlots.py
 file
 
@@ -2181,6 +2691,43 @@ has-props
 
 
 14252
+
+RA1_McNoSmear43.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+48b47798d3219682494b9052cf5bd998
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1560
+
+Single_Mu_RA1
+dir
 
 McJESetaPlus.py
 file
@@ -2250,6 +2797,74 @@ has-props
 
 1980
 
+utils.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+0671a1b9eef14703149abaa909a7e50f
+2012-04-04T12:38:30.466472Z
+3760
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2010
+
+RA1_McNoSmear37.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+89394a1960cb6fad0a6fca02ec8db5c2
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2143
+
 Binned_DiMuon_HT_275.py
 file
 
@@ -2317,6 +2932,40 @@ has-props
 
 
 597
+
+batchGolden_btag.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+1e3f8e1ba8a8ef38a1d8eca7052afba4
+2012-04-02T08:32:23.692073Z
+3738
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+28554
 
 JESplusSMS.py
 file
@@ -2420,6 +3069,108 @@ bainbrid
 
 1151
 
+batchGolden_baseline.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+5f4749cfa350785ede13eadf08375eae
+2012-04-02T08:32:23.692073Z
+3738
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+50413
+
+RA1_Data.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+0e2187e1350dde8716ba27ccbc6d9417
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1757
+
+RA1_MuonNoSmear43.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+c516bd5a6cd10f16b10fe53134292ce1
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1614
+
 JESminusSMS.py
 file
 
@@ -2453,6 +3204,40 @@ bm409
 
 
 13784
+
+RA1_MuonNoSmear37.py
+file
+
+
+
+
+2012-04-11T14:49:25.000000Z
+2390d8af0cde642c69d67887260dca38
+2012-04-02T08:31:50.639284Z
+3737
+dburton
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1616
 
 makeBkgdEstPlots_cfg.py
 file

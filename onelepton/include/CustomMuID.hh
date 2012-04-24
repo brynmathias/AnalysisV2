@@ -75,7 +75,7 @@ namespace OneLepton{
       mIsolation(ps.Get<double>("MaxIsolation")),
       mDRMuJet(ps.Get<double>("DRMuJet")),
       mMaxGlbTrkDxy(ps.Get<double>("MaxGlbTrkDxy")),
-      mMinGlbTrkNumOfValidHits(ps.Get<int>("MinGlbTrkNumOfValidHits")),
+      mMinNumTrkLayers(ps.Get<int>("MinNumTrkLayers")),
       mSegMatch2GlbMu(ps.Get<int>("SegMatch2GlbMu")),
       mPixelHitsOnInrTrk(ps.Get<int>("PixelHitsOnInrTrk")),
       mMaxInrTrkDz(ps.Get<double>("MaxInrTrkDz")),
@@ -97,33 +97,34 @@ namespace OneLepton{
       bool muonIsTight = false;
 
       try {
-  // new definition - 2011
+  // new definition - 2012
         if (
           ( id )  &&
           ( ((ob->Pt()) >= mMinPt) && (fabs(ob->Eta()) <= mMaxEta) )  &&
           ( (ob->GetCombIsolation()) < mIsolation )  &&
           ( fabs(mEv->GetMuonInnerTrackDxyBS(ob->GetIndex())) <= mMaxGlbTrkDxy )  &&
           ( mEv->muonNumberOfMatches()->at(ob->GetIndex()) > mSegMatch2GlbMu )  &&
-          ( mEv->muonGlobalTracknumberOfValidTrackerHits()->at(ob->GetIndex()) >= mMinGlbTrkNumOfValidHits )  &&
+          ( mEv->muonNumberOfTrackerLayersWithMeasurement()->at(ob->GetIndex()) >= mMinNumTrkLayers )  &&
           ( mEv->muonNumberOfPixelLayersWithMeasurement()->at(ob->GetIndex()) >= mPixelHitsOnInrTrk )  &&
           ( ( fabs(mEv->muonInnerTrackVertexz()->at(ob->GetIndex()) - (mEv->GetvertexPosition(0).Z())) ) < mMaxInrTrkDz ) &&
 	  ( mEv->muonGlobalTrackPTsigma()->at(ob->GetIndex())/(ob->Pt()*ob->Pt())< 0.001) 
           ) { muonIsTight = true; }
-  // ~end of new definition - 2011
+  // ~end of new definition - 2012
       }
       catch (std::invalid_argument & e) {
-  // old definition - 2010
+  // old definition - 2011
         if (
           ( id )  &&
           ( ((ob->Pt()) >= mMinPt) && (fabs(ob->Eta()) <= mMaxEta) )  &&
           ( (ob->GetCombIsolation()) < mIsolation )  &&
           ( fabs(mEv->GetMuonInnerTrackDxyBS(ob->GetIndex())) <= mMaxGlbTrkDxy )  &&
           ( mEv->muonNumberOfMatches()->at(ob->GetIndex()) > mSegMatch2GlbMu )  &&
-          ( mEv->GetMuonInnerTracknumberOfValidHits(ob->GetIndex()) >= mMinGlbTrkNumOfValidHits )  &&
-          ( mEv->muonNumberOfValidPixelHits()->at(ob->GetIndex()) >= mPixelHitsOnInrTrk ) &&
-          ( ( fabs(mEv->GetMuonInnerTrackDz(ob->GetIndex()))) < mMaxInrTrkDz ) 
+          ( mEv->muonGlobalTracknumberOfValidTrackerHits()->at(ob->GetIndex()) >= mMinNumTrkLayers )  &&
+          ( mEv->muonNumberOfPixelLayersWithMeasurement()->at(ob->GetIndex()) >= mPixelHitsOnInrTrk )  &&
+          ( ( fabs(mEv->muonInnerTrackVertexz()->at(ob->GetIndex()) - (mEv->GetvertexPosition(0).Z())) ) < mMaxInrTrkDz ) &&
+	  ( mEv->muonGlobalTrackPTsigma()->at(ob->GetIndex())/(ob->Pt()*ob->Pt())< 0.001) 
           ) { muonIsTight = true; }
-  // ~end of old definition - 2010
+  // ~end of old definition - 2011
       }
 
 	int muonPFIndex =-1;
@@ -170,7 +171,7 @@ namespace OneLepton{
     double mIsolation;
     double mDRMuJet;
     double mMaxGlbTrkDxy;
-    int mMinGlbTrkNumOfValidHits;
+    int mMinNumTrkLayers;
     int mSegMatch2GlbMu;
     int mPixelHitsOnInrTrk;
     double mMaxInrTrkDz;

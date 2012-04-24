@@ -317,7 +317,7 @@ zeroMuon = OP_NumComMuons("<=",0)
 ZMassCut = RECO_2ndMuonMass(25.0, 91.2, True, "all")
 
 numComPhotons = OP_NumComPhotons("<=",0)
-muDr = RECO_MuonJetDRCut(0.5)
+muDr = RECO_MuonJetDRCut(0.3)
 VertexPtOverHT = OP_SumVertexPtOverHT(0.1)
 # -----------------------------------------------------------------------------
 # Definition of analyses
@@ -459,12 +459,12 @@ vbtfElectronIdFilter = Electron_IDFilter( vbtfelectronidWP95ps.ps() )
 ra3PhotonIdFilter    = Photon_IDFilter( ra3photonidps.ps() )
 mu_id = PSet(
    MuID = "Tight",
-   MinPt = 5.,
+   MinPt = 10.,
    MaxEta = 2.1,
    MaxIsolation = 0.1,
-   DRMuJet = 0.5,
+   DRMuJet = 0.3,
    MaxGlbTrkDxy = 0.02,
-   MinGlbTrkNumOfValidHits = 11,
+   MinGlbTrkNumOfValidHits = 9,
    SegMatch2GlbMu = 1,
    PixelHitsOnInrTrk = 1,
    MaxInrTrkDz = 1.,

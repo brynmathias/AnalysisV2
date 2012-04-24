@@ -1,25 +1,18 @@
 #!/bin/bash 
 
-SIGMA="0.5"
+TH="UP" #or DOWN
+THRESHOLD="thrHT500"
+MODE="OBS"
 
-#if [ $SIGMA == "0.5" ];
-#    then cls_file="cls_explimit.txt";
-#else if [ $SIGMA == "0.025" ];
-#    then cls_file="cls_explimit_plus1sigma.txt";
-#else if [ $SIGMA == "0.975" ];
-#    then cls_file="cls_explimit_minus1sigma.txt";
-#else 
-#    echo "Not valid sigma given !!!!"
-#fi
-cls_file="cls_explimit.txt"
+cls_file="cls_"${MODE}"_"${THRESHOLD}"_thyUnc_"${TH}".txt"
 
-OUTPUT_TXT_START="output_quant"${SIGMA}"_"
+OUTPUT_TXT_START="output"
 OUTPUT_TXT_EXTEN=".txt"
 
-NJOBS=1000
+NJOBS=10000
 COUNTER=1
 # SUSY points counters
-M0=0; M12=0; SUSYSTEP=40
+M0=0; M12=0; SUSYSTEP=20
 M0max=2000; M12max=800
     
 while [ $M0 -le ${M0max} ];

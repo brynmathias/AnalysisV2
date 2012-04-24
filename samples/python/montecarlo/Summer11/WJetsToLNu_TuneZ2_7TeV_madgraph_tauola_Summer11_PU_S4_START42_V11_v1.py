@@ -2370,5 +2370,5 @@ WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1=PSet(
 	"root://xrootd.grid.hep.ph.ic.ac.uk//store/user/gouskos/ICF/automated/2011_06_22_10_25_36/SusyCAF_Tree_9_1_K4V.root" ,
 	],
 	CrossSection=31314.,
-        Events = 47008773,
+        Events = 46608773,
 )
