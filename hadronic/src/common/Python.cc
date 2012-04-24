@@ -1,8 +1,13 @@
 #include <boost/python.hpp>
 #include "HadronicOps.hh"
 #include "HadronicPlottingOps.hh"
+#include "WeeklyUpdatePlots.hh"
+#include "Muon_ControlPlots.hh"
+#include "BtagSystematicPlots.hh"
 #include "BrynPlottingOps.hh"
 #include "TanjaCCControlPlots.hh"
+#include "DarrenPlots.hh"
+#include "ControlPlottingOps.hh"
 #include "BkgdEstPlottingOps.hh"
 #include "ISRPlottingOps.hh"
 #include "PdfPlottingOps.hh"
@@ -53,7 +58,24 @@ class_<Operation::PlotPhotons, bases<Operation::_Base> >( "OP_PlotPhotons",
  class_<Operation::BrynPlottingOps, bases<Operation::_Base> >( "BrynPlottingOps",
                 init<const Utils::ParameterSet&>() );
 
-  class_<Operation::TanjaCCControlPlots, bases<Operation::_Base> >( "OP_TanjaCCControlPlots",
+ class_<Operation::DarrenPlots, bases<Operation::_Base> >( "DarrenPlots",
+                init<const Utils::ParameterSet&>() );
+
+ class_<Operation::WeeklyUpdatePlots, bases<Operation::_Base> >( "WeeklyUpdatePlots",
+                    init<const Utils::ParameterSet&>());
+
+ class_<Operation::Muon_ControlPlots, bases<Operation::_Base> >( "Muon_ControlPlots",
+                    init<const Utils::ParameterSet&>());
+
+ class_<Operation::BtagSystematicPlots, bases<Operation::_Base> >( "BtagSystematicPlots",
+                    init<const Utils::ParameterSet&>());
+
+
+ class_<Operation::ControlPlottingOps, bases<Operation::_Base> >( "MuonControlPlots",
+                init<const Utils::ParameterSet&>() );
+
+
+class_<Operation::TanjaCCControlPlots, bases<Operation::_Base> >( "OP_TanjaCCControlPlots",
                     init<const Utils::ParameterSet&>() );
 
   class_<Operation::BkgdEstPlottingOps, bases<Operation::_Base> >( "OP_BkgdEstPlottingOps",
@@ -84,14 +106,17 @@ class_<Operation::PlotPhotons, bases<Operation::_Base> >( "OP_PlotPhotons",
 
   class_<Operation::PFMET, bases<Operation::_Base> >("OP_PFMET",init<float>() );
 
-  class_<Operation::MHToverMET, bases<Operation::_Base> >("OP_MHToverMET",init<float,float>() );
+  class_<Operation::MHTOvCaloMETCut, bases<Operation::_Base> >("OP_MHTOvCaloMETCut",init<float>() );
 
   class_<Operation::MHTTakeMuoverMETTakeMu, bases<Operation::_Base> >("OP_MHTTakeMuoverMETTakeMu",init<float,float>() );
 
   class_<Operation::MHToverPFMET, bases<Operation::_Base> >("OP_MHToverPFMET",init<float>() );
 
-  class_<Operation::sumRecHitPtCut, bases<Operation::_Base> >("OP_SumRecHitPtCut",init<float>() );
 
+  class_<Operation::MHToverMET, bases<Operation::_Base> >("OP_MHToverMET",init<float,float>() );
+
+
+  class_<Operation::sumRecHitPtCut, bases<Operation::_Base> >("OP_SumRecHitPtCut",init<float>() );
 
 
   class_<Operation::MHTovHT, bases<Operation::_Base> >("OP_MHTovHT",init<float>() );

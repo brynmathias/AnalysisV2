@@ -170,9 +170,10 @@ class_<Operation::UnPrescaled, bases<Operation::_Base> >("OP_UnPrescaled",
       bases<Operation::_Base> >("OP_NumComJets", init<const std::string &,
                                 UInt_t>());
 
-  class_<Operation::NumCommonBtagJets, bases<Operation::_Base> >("OP_NumCommonBtagJets",
+  class_<Operation::NumCommonBtagJets, 
+      bases<Operation::_Base> >("OP_NumCommonBtagJets",
                      init<const std::string &,
-                     UInt_t,UInt_t,float>());
+                     UInt_t,float,int>());
 
   class_<Operation::badMuonInJet, bases<Operation::_Base> >("OP_BadMuonInJet");
   class_<Operation::PhotkilledJet, bases<Operation::_Base> >("OP_PhotonKilledJet");

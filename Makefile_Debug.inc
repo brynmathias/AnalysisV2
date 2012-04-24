@@ -2,12 +2,17 @@
 MAKE=make
 
 PROJECTDIR=$(SUSY_WORKING_SW_DIR)
-CXX=/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/bin/g++
+
 
 EXE_EXT=
-
+CXX=
 ifndef PLATFORM
 PLATFORM=linux
+endif
+
+
+ifeq ($(PLATFORM),__APPLE__)
+  CXX+=gcc-4.7
 endif
 
 INCDIR= \
@@ -15,8 +20,11 @@ INCDIR= \
 
 CXXFLAGS= -std=c++0x -c -Wall -ansi -g -D$(PLATFORM) -D_REENTRANT -fPIC
 
-ifeq ($(PLATFORM),"linux")
+#@echo PLATFORM
+@echo ===========
+ifeq ($(PLATFORM),linux)
 CXXFLAGS+= -pthread -D_REENTRANT
+CXX+=/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/bin/g++
 endif
 
 DEPFLAGS= -MM -D$(PLATFORM)

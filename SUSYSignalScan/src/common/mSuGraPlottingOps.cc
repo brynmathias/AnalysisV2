@@ -123,7 +123,7 @@ void mSuGraPlottingOps::BookHistos() {
                  yBins_,yLow_,yHigh_, //m12
                  zBins_,zLow_,zHigh_, //mChi
                  1,0,1,false);
-<<<<<<< .mine
+
 
   BookHistArray( H_M0_M12_mChi_noweight_countRAW,
                  "H_M0_M12_mChi_noweight_countRAW",
@@ -134,11 +134,9 @@ void mSuGraPlottingOps::BookHistos() {
                  1,0,1,false);
 
 
-    BookHistArray( H_M0_M12_mChi_noweight,
-=======
+
   
   BookHistArray( H_M0_M12_mChi_noweight,
->>>>>>> .r3774
                    "m0_m12_mChi_noweight",
                    ";m0;m12;mChi;",
                    xBins_,xLow_,xHigh_, //m0

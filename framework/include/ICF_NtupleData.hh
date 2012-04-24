@@ -188,6 +188,7 @@ namespace ICF{
     Event::Element<std::vector<unsigned>* , NtupleData> muonNumberOfPixelLayersWithMeasurement;
     Event::Element<std::vector<floatle>* , NtupleData> muonInnerTrackVertexz;
     Event::Element<std::vector<float>* , NtupleData> muonGlobalTrackPTsigma;
+    Event::Element<std::vector<unsigned>* , NtupleData> muonNumberOfTrackerLayersWithMeasurement;
 
 
   //MICHELE ->Secondary Muon Collection

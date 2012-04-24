@@ -1,4 +1,3 @@
-<<<<<<< .mine
 #include "HadronicOps.hh"
 #include "AlphaT.hh"
 #include <iostream>
