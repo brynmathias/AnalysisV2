@@ -67,8 +67,8 @@ void trigger_hadd() {
   //std::string file_name("Trigger_HT_Run2011A");
   //std::string file_name("Trigger_HT_Run2011A_1fb");
   //std::string file_name("Trigger_HTRun2011AB_Complete");
-  std::string file_name("Trigger_HTRun2011AB");
-  
+  //std::string file_name("Trigger_HTRun2011AB");
+  std::string file_name("Trigger_SingleMu_Run2012A_PromptReco_v1_V17_pre2_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf");
   std::string dir_name("Triggers");
   std::string his_name = "TriggersVsRunNumber";
   
@@ -82,9 +82,9 @@ void trigger_hadd() {
   
 //    filters.push_back("HLT_HT25?_AlphaT0p??_v*");
 //   //filters.push_back("HLT_HT26?_AlphaT0p??_v*");
-   filters.push_back("HLT_HT3??_AlphaT0p??_v*");
-   filters.push_back("HLT_HT4??_AlphaT0p??_v*");
-   filters.push_back("HLT_HT5??_AlphaT0p??_v*");
+   filters.push_back("HLT_HT???_AlphaT0p??_v*");
+   filters.push_back("HLT_HT???_AlphaT0p??_v*");
+   filters.push_back("HLT_HT???_AlphaT0p??_v*");
 
 //   //filters.push_back("HLT_HT1??_v*");
 //   //filters.push_back("HLT_HT2??_v*");
@@ -100,7 +100,6 @@ void trigger_hadd() {
 //   filters.push_back("HLT_HT9??_v*");
 //   filters.push_back("HLT_HT1???_v*");
 
-<<<<<<< HEAD:allhadronic/scripts/trigger_hadd.C
  // filters.push_back("HLT_Mu?_v*");
  // filters.push_back("HLT_Mu??_v*");
  // filters.push_back("HLT_Mu2?_v*");
@@ -113,7 +112,7 @@ void trigger_hadd() {
   filters.push_back("HLT_IsoMu??_v*");
 // filters.push_back("HLT_Mu?_HT???_v*");
 // filters.push_back("HLT_Mu??_HT???_v*");
-  filters.push_back("HLT_HT25?_v*");
+  filters.push_back("HLT_HT???_v*");
 //   filters.push_back("HLT_HT26?_v*");
  // filters.push_back("HLT_HT3??_v*");
   //filters.push_back("HLT_HT4??_v*");
@@ -130,18 +129,16 @@ void trigger_hadd() {
   // filters.push_back("HLT_IsoMu??_v*");
   // filters.push_back("HLT_IsoMu?_eta2p1_v*");
   // filters.push_back("HLT_IsoMu??_eta2p1_v*");
-=======
 //   filters.push_back("HLT_Mu?_HT???_v*");
 //   filters.push_back("HLT_Mu??_HT???_v*");
 
   
->>>>>>> c7a7acbe340950cb6ed9f9b1d818b61bafdde065:allhadronic/scripts/trigger_hadd.C
   typedef std::map<int,float> Runs;
   typedef std::map<std::string,Runs> Triggers;
   Triggers trigs;
   std::vector<int> runs;
   
-  for ( int ii = 0; ii < 1000; ++ii ) {
+  for ( int ii = 0; ii < 100; ++ii ) {
     
     // Construct file name
     std::stringstream ss;
@@ -203,7 +200,7 @@ void trigger_hadd() {
 	  
 	  // Cache runs used	
 	  if ( weight > 0 ) { 
-	    if ( find( runs.begin(), runs.end(), yval ) == runs.end() ) { runs.push_back( yval ); }
+	    if ( std::find( runs.begin(), runs.end(), yval ) == runs.end() ) { runs.push_back( yval ); }
 	  }
 	
 	  //trigger = ( trigger.size() > 3 ? std::string(trigger.substr(0,trigger.size()-3)) : "" );
@@ -350,11 +347,11 @@ void trigger_hadd() {
   //gStyle->SetPalette(1);
   canvas->SetLogz();
   
-  TLatex* prelim = new TLatex( 0.25, 0.96, "#scale[0.8]{CMS 2011 preliminary}" );
+  TLatex* prelim = new TLatex( 0.25, 0.96, "#scale[0.8]{CMS 2012 preliminary}" );
   prelim->SetTextSize(0.025);
   prelim->SetNDC();
   
-  std::stringstream ss1; ss1 << "#int L dt = " << std::setprecision(3) << lumi/1000. << " fb^{-1}, #sqrt{s} = 7 TeV";
+  std::stringstream ss1; ss1 << "#int L dt = " << std::setprecision(3) << lumi/1000. << " fb^{-1}, #sqrt{s} = 8 TeV";
   TLatex* lumis = new TLatex( 0.8, 0.96, ss1.str().c_str() );
   lumis->SetTextAlign(32);
   lumis->SetTextSize(0.020);

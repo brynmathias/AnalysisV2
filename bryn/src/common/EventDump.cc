@@ -154,16 +154,16 @@ bool eventDump::Process(Event::Data & ev){
     // JJ - bug here - referenced taus not commontaus
   std::string taus;
   taus = "Taus \n";
-  for (std::vector<Event::Lepton const *>::const_iterator iph = ev.LD_CommonTaus().accepted.begin();
-  iph != ev.LD_CommonTaus().accepted.end();
-  ++iph) {
-    std::stringstream tau;
-    tau << "Pt: " << std::setw(4) << std::setprecision(6) << (*iph)->Pt()
-      << " Phi: " << std::setw(4) << std::setprecision(6) << (*iph)->Phi()
-      << " Eta: " << std::setw(4) << std::setprecision(6) << (*iph)->Eta()
-      <<endl;
-    taus += tau.str();
-  }
+//  for (std::vector<Event::Lepton const *>::const_iterator iph = ev.LD_CommonTaus().accepted.begin();
+//  iph != ev.LD_CommonTaus().accepted.end();
+//  ++iph) {
+//    std::stringstream tau;
+//    tau << "Pt: " << std::setw(4) << std::setprecision(6) << (*iph)->Pt()
+//      << " Phi: " << std::setw(4) << std::setprecision(6) << (*iph)->Phi()
+//      << " Eta: " << std::setw(4) << std::setprecision(6) << (*iph)->Eta()
+//      <<endl;
+//    taus += tau.str();
+//  }
 
   std::string jetsNcc;
   jetsNcc = "Jets \n";
@@ -240,13 +240,13 @@ bool eventDump::Process(Event::Data & ev){
     // JJ - bug here - referenced taus not taus
   std::string tausNcc;
   tausNcc = "Taus : \n";
-  for (std::vector<Event::Lepton>::const_iterator iph = ev.LD_Taus().begin();
-  iph != ev.LD_Taus().end();
-  ++iph) {
-    std::stringstream tauNcc;
-    tauNcc << "Pt: " << std::setw(4) << std::setprecision(6) << iph->Pt() << " Phi: " << std::setw(4) << std::setprecision(6) << iph->Phi() << " Eta: " << std::setw(4) << std::setprecision(6) << iph->Eta() << endl;
-    tausNcc += tauNcc.str();
-  }
+//  for (std::vector<Event::Lepton>::const_iterator iph = ev.LD_Taus().begin();
+//  iph != ev.LD_Taus().end();
+//  ++iph) {
+//    std::stringstream tauNcc;
+//    tauNcc << "Pt: " << std::setw(4) << std::setprecision(6) << iph->Pt() << " Phi: " << std::setw(4) << std::setprecision(6) << iph->Phi() << " Eta: " << std::setw(4) << std::setprecision(6) << iph->Eta() << endl;
+//    tausNcc += tauNcc.str();
+//  }
 
   bool printTrig = true;
   std::stringstream ss;

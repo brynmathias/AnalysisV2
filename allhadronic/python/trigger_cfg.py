@@ -73,12 +73,12 @@ ps = PSet(
     )
 test = Trigger(ps.ps())
 
+json = JSONFilter("Json Mask", json_to_pset("../../bryn/python/Cert_190456-191276_8TeV_PromptReco_Collisions12_JSON.txt"))
 # -----------------------------------------------------------------------------
 # Cut flow
 
 cut_flow = Tree("CutFlow")
-#cut_flow.Attach(json)
-#cut_flow.TAttach(json,json_output)
+cut_flow.Attach(json)
 #cut_flow.TAttach(json_output,selection)
 #cut_flow.TAttach(selection,NoiseFilt)
 #cut_flow.Attach(numComPhotons)
@@ -88,7 +88,7 @@ cut_flow = Tree("CutFlow")
 #cut_flow.TAttach(numComElectrons,oddElectron)
 #cut_flow.TAttach(oddElectron,numComMuons)
 #cut_flow.TAttach(numComMuons,oddMuon)
-cut_flow.Attach(test)
+cut_flow.TAttach(json,test)
 
 # -----------------------------------------------------------------------------
 # Dataset
@@ -103,7 +103,7 @@ data=PSet(
     Weight=1.,
     LastEntry = 10,
     )
-from SingleMu_Run2012A_PromptReco_v1_V17_pre1_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf import *
+from SingleMu_Run2012A_PromptReco_v1_V17_pre2_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf import *
 
 # -----------------------------------------------------------------------------
 # Analysis
@@ -114,7 +114,7 @@ anal=Analysis("Trigger")
 #anal.AddJetFilter("PreCC",JetCorrections)
 anal+=cut_flow
 
-anal.Run(".",conf,[SingleMu_Run2012A_PromptReco_v1_V17_pre1_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf])
+anal.Run(".",conf,[SingleMu_Run2012A_PromptReco_v1_V17_pre2_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf])
 #anal.Run(".",conf,[Jet_35pb_WithTP_json051110])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011A_PromptReco_v1])
 #anal.Run(".",conf_ak5_calo,[HT_Run2011_promptReco_DCS])

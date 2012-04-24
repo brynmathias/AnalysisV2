@@ -3,7 +3,7 @@
 """
 Created by Bryn Mathias on 2010-05-07.
 """
-bin = 375.
+bin = 275.
 # -----------------------------------------------------------------------------
 # Necessary includes
 import errno
@@ -208,7 +208,7 @@ def PreScaledPair(cutTree = None, cut = None, NumeratorTrig = None, DenominatorT
   # print type(NumeratorTrig) , type(DenominatorTrig)
   out = []
   if Debug == True:
-    op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0], Verbose = Flase).ps() )
+    op = PreScaledTriggers( PSet(DirName = "DEBUG_"+Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig[0], DenominatorTrigger= DenominatorTrig[0], Verbose = False).ps() )
   if Debug == False:
     op = SimplePreScaledTriggers( PSet(DirName = Label+NumeratorTrig[0]+"_"+DenominatorTrig[0],NumeratorTrigger = NumeratorTrig, DenominatorTrigger = DenominatorTrig, Verbose = False).ps() )
   cutTree.TAttach(cut,op)
@@ -326,7 +326,7 @@ MHT_METCut = OP_MHToverMET(1.25,50.)
 # AK5 Calo
 json_ouput = JSONOutput("filtered")
 alphaT = OP_CommonAlphaTCut(0.53)
-json = JSONFilter("Json Mask", json_to_pset("./Golden2011.json"))
+json = JSONFilter("Json Mask", json_to_pset("./Cert_190456-191276_8TeV_PromptReco_Collisions12_JSON.txt"))
 evDump = EventDump()
 json_lost = JSONOutput("lost")
 
@@ -334,7 +334,7 @@ json_lost = JSONOutput("lost")
 cutTreeData = Tree("Data")
 out = []
 
-# cutTreeData.Attach(json)
+#cutTreeData.Attach(json)
 # for trig in triggers:
 #   op = JSONOutput("%s"%(trig))
 #   trigCut = CheckTrigExists( PSet(TrigExistsList = ["%s"%(trig)]).ps() )
@@ -350,7 +350,11 @@ out = []
 #cutTreeData.Attach(NoiseFilt)
 #cutTreeData.TAttach(NoiseFilt,selection)
 #cutTreeData.TAttach(selection,oddElectron)
-cutTreeData.Attach(oddElectron)
+cutTreeData.Attach(json)
+cutTreeData.TAttach(json,NoiseFilt)
+cutTreeData.TAttach(json,json_ouput)
+#cutTreeData.TAttach(json_ouput,NoiseFilt)
+cutTreeData.TAttach(NoiseFilt,oddElectron)
 cutTreeData.TAttach(oddElectron,oddPhoton)
 cutTreeData.TAttach(oddPhoton,numComElectrons)
 cutTreeData.TAttach(numComElectrons,numComPhotons)
@@ -383,21 +387,33 @@ cutTreeData.TAttach(MHT_METCut,ht325)
 
 
 alphatTesting = {
-  "HLT_HT250_AlphaT0p55_v1": (["HLT_Mu40_eta2p1_v9",],  [275.,325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT300_AlphaT0p53_v1": (["HLT_Mu40_eta2p1_v9",],  [325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p52_v1": (["HLT_Mu40_eta2p1_v9",],  [375.,475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p51_v1": (["HLT_Mu40_eta2p1_v9",],  [475.,575.,675.,775.,875.]),
+  "HLT_HT250_AlphaT0p55_v1": (["HLT_IsoMu24_eta2p1_v11",],  [275.,325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT250_AlphaT0p55_v2": (["HLT_IsoMu24_eta2p1_v12",],  [275.,325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT250_AlphaT0p55_v3": (["HLT_IsoMu24_eta2p1_v12",],  [275.,325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT300_AlphaT0p53_v1": (["HLT_IsoMu24_eta2p1_v11",],  [325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT300_AlphaT0p53_v2": (["HLT_IsoMu24_eta2p1_v12",],  [325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT300_AlphaT0p53_v3": (["HLT_IsoMu24_eta2p1_v12",],  [325.,375.,475.,575.,675.,775.,875.]),
+  "HLT_HT350_AlphaT0p52_v1": (["HLT_IsoMu24_eta2p1_v11",],  [375.,475.,575.,675.,775.,875.]),
+  "HLT_HT350_AlphaT0p52_v2": (["HLT_IsoMu24_eta2p1_v12",],  [375.,475.,575.,675.,775.,875.]),
+  "HLT_HT350_AlphaT0p52_v3": (["HLT_IsoMu24_eta2p1_v12",],  [375.,475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p52_v7": (["HLT_IsoMu24_eta2p1_v11",],  [475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p52_v8": (["HLT_IsoMu24_eta2p1_v12",],  [475.,575.,675.,775.,875.]),
+  "HLT_HT400_AlphaT0p52_v9": (["HLT_IsoMu24_eta2p1_v12",],  [475.,575.,675.,775.,875.]),
+  "HLT_HT450_AlphaT0p51_v7": (["HLT_IsoMu24_eta2p1_v11",],  [575.,675.,775.,875.]),
+  "HLT_HT450_AlphaT0p51_v8": (["HLT_IsoMu24_eta2p1_v12",],  [575.,675.,775.,875.]),
+  "HLT_HT450_AlphaT0p51_v9": (["HLT_IsoMu24_eta2p1_v12",],  [575.,675.,775.,875.]),
 }
 
 dump = EventDump()
-cutTreeData.TAttach(zeroMuon,muDr)
+cutTreeData.TAttach(DeadEcalCutData,muDr)
+cutTreeData.TAttach(muDr,dump)
 for key,vals in alphatTesting.iteritems():
   for ref in vals[0]:
     for htbin in vals[1]:
       cut = eval("RECO_CommonHTCut(%f)"%(htbin))
       out.append(cut)
       cutTreeData.TAttach(muDr,cut)
-      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin),Debug = False))
+      out.append(PreScaledPair(cutTreeData,cut,key,ref,"HT%d_"%(htbin),Debug = True))
 
 
 
@@ -481,10 +497,10 @@ conf_ak5_pfData.Common = deepcopy(default_common)
 anal_ak5_pfData=Analysis("AK5PF")
 addCutFlowData(anal_ak5_pfData)
 
-from SingleMu_Run2012A_PromptReco_v1_V17_pre1_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf import *
-sample = SingleMu_Run2012A_PromptReco_v1_V17_pre1_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf
+from SingleMu_Run2012A_PromptReco_v1_V17_pre2_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf import *
+sample = SingleMu_Run2012A_PromptReco_v1_V17_pre2_taus_0_jetCorrections_L1FastJet_L2Relative_L3Absolute_L2L3Residual_jetCollections_ak5calo_ak5pf
 
-outDir = "../2012/ht%dNoUpper/"%(bin)
+outDir = "../2012/ht%dNoUpper_DEBUG/"%(bin)
 ensure_dir(outDir)
 anal_ak5_caloData.Run(outDir,conf_ak5_caloData,[sample])
 

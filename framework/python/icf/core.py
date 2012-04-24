@@ -351,12 +351,10 @@ class Analysis:
             with open("%s/status/%d" % (dir_name, idx+1), "w") as f:
                 f.write(self.GetStatusString("WAITING"))
 	susy_working_dir = os.environ["SUSY_WORKING_SW_DIR"]
-	cmssw_dir = os.envrion["CMSSW_DIR"]
         script_dir = os.getcwd()
 	script_name = sys.argv[0]
-        script_str = "#!/bin/sh\nsource %s/setup.sh\ncd %s\ncmsenv\ncd %s\n%s -j %s -J ${SGE_TASK_ID} -S %s"
+        script_str = "#!/bin/sh\nsource %s/setup.sh\ncd %s\n%s -j %s -J ${SGE_TASK_ID} -S %s"
 	open(dir_name+"/job.sh","w").write(script_str %(susy_working_dir,
-							cmssw_dir,
                                                         script_dir,
                                                         script_name,
                                                         dir_name+"/job.json",
@@ -386,6 +384,7 @@ class Analysis:
         self.ParseOptions()
         if self.options.leet_mode:
             self.batch_status(self.options.leet_mode)
+        #if not self.options.batch:
         generateDictionaries(dictionariesToGenerate())
         if self.options.batch:
             self.batch()

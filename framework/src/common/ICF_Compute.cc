@@ -91,25 +91,25 @@ namespace ICF{
   void Taus::_Update() const{
     mData.clear();
     int idx=0;
-    for(std::vector<ICF_LorentzV>::const_iterator ii= mEv.tauP4()->begin();
-    ii!=mEv.tauP4()->end(); ++ii,++idx){
-      Event::Lepton tau(*ii,mEv.tauCharge()->at(idx),
-			0.,
-			0.,
-			0.,
+//    for(std::vector<ICF_LorentzV>::const_iterator ii= mEv.tauP4()->begin();
+//    ii!=mEv.tauP4()->end(); ++ii,++idx){
+//      Event::Lepton tau(*ii,mEv.tauCharge()->at(idx),
+//			0.,
+//			0.,
+//			0.,
 			//        mEv.tauTrkIso()->at(idx),
 			//        mEv.tauEcalIso()->at(idx),
 			//        mEv.tauHcalIso()->at(idx),
       //  true,
       //  true,
       //  mEv.tauIDLoose()->at(idx),
-      0,
+//      0,
       //  mEv.tauIDTight()->at(idx),
-      0,
-  3,
-        idx);
-      mData.push_back(tau);
-    }
+//      0,
+//  3,
+//        idx);
+//      mData.push_back(tau);
+//    }
   }
 
   SecTaus::SecTaus(const ICF::NtupleData &ev) :

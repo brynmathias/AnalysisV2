@@ -115,7 +115,7 @@ void Trigger::End( Event::Data& ev ) {
 	ss << "  RunNumber: " << iii->first
 	   << ( vs_==2 ? " Prescales: " : " Events: " ) << iii->second
 	   << std::endl;
-      }    
+      }
     }
     std::cout << ss.str() << std::endl;
 
