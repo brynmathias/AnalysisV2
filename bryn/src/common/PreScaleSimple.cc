@@ -85,7 +85,23 @@ void PreScaleSimple::Plots() {
     1, 0, 1, true );
 
 
+  BookHistArray( MuPt_Denom,
+    "MuPt_Denom",
+    ";#mu P_{T}",
+    500,0.,500.,
+    1, 0, 1, true );
 
+
+  BookHistArray( MuPt_Nom,
+    "MuPt_Nom",
+    ";#mu P_{T}",
+    500,0.,500.,
+    1, 0, 1, true );
+
+
+
+
+  
 
 }
 
@@ -215,9 +231,16 @@ bool PreScaleSimple::Plots( Event::Data& ev ) {
       if(denomPreScale > 0 && nomPreScale > 0){
         if ( denomPreScale % nomPreScale == 0){
           if(DENOMFIRE){
+            if(ev.LD_CommonMuons().accepted.size() > 0 ){
+              MuPt_Denom[0]->Fill(ev.LD_CommonMuons().accepted[0]->Pt(),1);
+            }
             HT_Denom[0]->Fill(ev.CommonHT(),1);
             AlphaT_Denom[0]->Fill(ev.HadronicAlphaT(),1);
             if(NOMFIRE){
+              if(ev.LD_CommonMuons().accepted.size() > 0 ){
+                MuPt_Nom[0]->Fill(ev.LD_CommonMuons().accepted[0]->Pt(),1);
+              }
+             
               AlphaT_Nom[0]->Fill(ev.HadronicAlphaT(),1);
               HT_Nom[0]->Fill(ev.CommonHT(),1);
             }

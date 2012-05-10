@@ -35,6 +35,8 @@ namespace Operation {
     std::vector<TH1D*> HT_Denom;
     std::vector<TH1D*> AlphaT_Nom;
     std::vector<TH1D*> AlphaT_Denom;
+    std::vector<TH1D*> MuPt_Denom;
+    std::vector<TH1D*> MuPt_Nom;
     void Plots();
     bool Plots( Event::Data& );
     };
