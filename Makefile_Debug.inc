@@ -2,6 +2,7 @@
 MAKE=make
 
 PROJECTDIR=$(SUSY_WORKING_SW_DIR)
+CXX=
 
 
 EXE_EXT=
@@ -18,10 +19,8 @@ endif
 INCDIR= \
 -Iinclude
 
-CXXFLAGS= -std=c++0x -c -Wall -ansi -g -D$(PLATFORM) -D_REENTRANT -fPIC
+CXXFLAGS=  -c -Wall -ansi -g -D$(PLATFORM) -D_REENTRANT -fPIC
 
-#@echo PLATFORM
-@echo ===========
 ifeq ($(PLATFORM),linux)
 CXXFLAGS+= -pthread -D_REENTRANT
 CXX+=/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/bin/g++

@@ -533,9 +533,6 @@ PSet(GoodVertexWeights = [1.0, 0.071182041228993354, 0.3788533298983548, 0.70212
 
 
 
-QCD_Summer11_Pythia_All # S3
-QCD_Summer11_madgraph_All #S4
-
 
 # Here are the Summer 11 MC samples!!!
 
@@ -544,6 +541,7 @@ from montecarlo.Summer11.ZJetsToNuNu_50_HT_100_7TeV_madgraph_Summer11_PU_S4_STAR
 from montecarlo.Summer11.ZJetsToNuNu_100_HT_200_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1 import *
 from montecarlo.Summer11.ZJetsToNuNu_200_HT_inf_7TeV_madgraph_Summer11_PU_S4_START42_V11_v1 import *
 from montecarlo.Summer11.QCD_Summer11_madgraph_All import *
+from montecarlo.Summer11.QCD_Summer11_Pythia_All import *
 from montecarlo.Summer11.TTJets_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
 from montecarlo.Summer11.WJetsToLNu_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
 from montecarlo.Summer11.WJetsToLNu_250_HT_300_TuneZ2_7TeV_madgraph_tauola_Summer11_PU_S4_START42_V11_v1 import *
@@ -557,6 +555,9 @@ from montecarlo.Summer11.Tbar_TuneZ2_tW_channel_DR_7TeV_powheg_tauola_Summer11_P
 from montecarlo.Summer11.WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
 from montecarlo.Summer11.WZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
 from montecarlo.Summer11.ZZ_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1 import *
+QCD_Summer11_Pythia_All # S3
+QCD_Summer11_madgraph_All #S4
+
 
 
 PU_S6_Samples = [ WW_TuneZ2_7TeV_pythia6_tauola_Fall11_PU_S6_START42_V14B_v1, 

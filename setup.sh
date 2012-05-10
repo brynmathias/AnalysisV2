@@ -5,11 +5,11 @@ echo " Setting up your environment..."
 echo "================================"
 #-----------------------------------------------------------------------------
 # Set your ROOTSYS and PYTHONDIR here
-export SUSY_WORKING_SW_DIR=$HOME/github/AnalysisV2
-MY_ROOTSYS='/opt/root_5_32'
+export SUSY_WORKING_SW_DIR=/vols/cms03/bm409/git/AnalysisV2
+MY_ROOTSYS='/vols/sl5_exp_software/cms/slc5_amd64_gcc462/lcg/root/5.32.00-cms5/'
 MY_PYTHONPATH=$SUSY_WORKING_SW_DIR/lib
-MY_LD_LIBRARY_PATH=$MY_ROOTSYS/lib::$SUSY_WORKING_SW_DIR/lib
-
+MY_LD_LIBRARY_PATH=$MY_ROOTSYS/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/libjpg/8b/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/boost/1.47.0//lib:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib64:/vols/grid/ui/3.2.5-0/d-cache/dcap/lib:/vols/grid/ui/3.2.5-0/glite/lib:/vols/grid/ui/3.2.5-0/glite/lib64:/vols/grid/ui/3.2.5-0/globus/lib:/vols/grid/ui/3.2.5-0/lcg/lib:/vols/grid/ui/3.2.5-0/lcg/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/gcc/4.6.2/lib64:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/xrootd/3.1.0-cms2/lib:/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/xz/5.0.3/lib:$SUSY_WORKING_SW_DIR/lib
+export PATH=/vols/sl5_exp_software/cms/slc5_amd64_gcc462/external/python/2.6.4/bin:$PATH
 #-----------------------------------------------------------------------------
 #
 #===============
@@ -67,8 +67,8 @@ echo "====================================="
 #
 
 # Set up LD_LIBRARY_PATH
-export DYLD_LIBRARY_PATH=$MY_LD_LIBRARY_PATH
-echo "DYLD_LIBRARY_PATH is:" $LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$MY_LD_LIBRARY_PATH
+echo "LD_LIBRARY_PATH is:" $LD_LIBRARY_PATH
 
 # Set up PYTHONPATH
 export PYTHONPATH=$ROOTSYS/lib:$MY_PYTHONPATH
