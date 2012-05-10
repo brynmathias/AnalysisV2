@@ -394,17 +394,17 @@ cutTreeData.TAttach(MHT_METCut,ht325)
 
 
 alphatTesting = {
-<<<<<<< HEAD
-  "HLT_HT250_AlphaT0p55_v1": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [275.,325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT250_AlphaT0p55_v2": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [275.,325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT300_AlphaT0p53_v1": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT300_AlphaT0p53_v2": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [325.,375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p52_v1": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [375.,475.,575.,675.,775.,875.]),
-  "HLT_HT350_AlphaT0p52_v2": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [375.,475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p52_v7": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
-  "HLT_HT400_AlphaT0p52_v8": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
-  "HLT_HT450_AlphaT0p51_v7": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
-  "HLT_HT450_AlphaT0p51_v8": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
+  "HLT_IsoMu24_eta2p1_v12":  (["HLT_Mu15_eta2p1_v3"],[0.,]),
+  # "HLT_HT250_AlphaT0p55_v1": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [275.,325.,375.,475.,575.,675.,775.,875.]),
+  # "HLT_HT250_AlphaT0p55_v2": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [275.,325.,375.,475.,575.,675.,775.,875.]),
+  # "HLT_HT300_AlphaT0p53_v1": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [325.,375.,475.,575.,675.,775.,875.]),
+  # "HLT_HT300_AlphaT0p53_v2": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [325.,375.,475.,575.,675.,775.,875.]),
+  # "HLT_HT350_AlphaT0p52_v1": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [375.,475.,575.,675.,775.,875.]),
+  # "HLT_HT350_AlphaT0p52_v2": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [375.,475.,575.,675.,775.,875.]),
+  # "HLT_HT400_AlphaT0p52_v7": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
+  # "HLT_HT400_AlphaT0p52_v8": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
+  # "HLT_HT450_AlphaT0p51_v7": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
+  # "HLT_HT450_AlphaT0p51_v8": (["HLT_IsoMu24_eta2p1_v11","HLT_IsoMu24_eta2p1_v12","HLT_IsoMu24_eta2p1_v13"],  [475.,575.,675.,775.,875.]),
 }
 
 dump = EventDump()
