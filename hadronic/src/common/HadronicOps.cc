@@ -6,8 +6,6 @@
 #include <fstream>
 //#include "NLOTools.hh"
 #include "Types.hh"
-#include "GenData.hh"
-#include "GenMatrixBin.hh"
 using namespace Operation;
 
 
@@ -17,10 +15,10 @@ using namespace Operation;
 //
 gensignalProcessID::gensignalProcessID( int cut1 ,int cut2,int cut3,int cut4 )
   : cut1_(cut1),
-    cut2_(cut2),
-      cut3_(cut3),
-        cut4_(cut4)
-          {;}
+  cut2_(cut2),
+  cut3_(cut3),
+  cut4_(cut4)
+  {;}
 
 // -----------------------------------------------------------------------------
 //
@@ -77,7 +75,7 @@ std::ostream& genProcess::Description( std::ostream &ostrm ) {
 HadronicHT_SecondJetCut::HadronicHT_SecondJetCut(float Jet, float HT):
 secondJetCut_(Jet),
   HTCut_(HT)
-    {;}
+  {;}
 // -----------------------------------------------------------------------------
 //
 bool HadronicHT_SecondJetCut::Process( Event::Data& ev){
@@ -100,14 +98,14 @@ std::ostream& HadronicHT_SecondJetCut::Description( std::ostream &ostrm ) {
 //
 HadronicAlphaT::HadronicAlphaT( float cut )
   : cut_(cut)
-    {;}
+  {;}
 
 // -----------------------------------------------------------------------------
 //
 bool HadronicAlphaT::Process( Event::Data& ev ) {
-  if ( ev.JD_CommonJets().accepted.size() < 2 ||
-    ev.JD_CommonJets().accepted.size() > 50 ) { return false; }
-  if ( AlphaT()( ev.JD_CommonJets().accepted ) > cut_ ) { return true; }
+  if ( ev.CommonObjects().size() < 2 ||
+    ev.CommonObjects().size() > 50 ) { return false; }
+  if ( AlphaT()( ev.CommonObjects() ) > cut_ ) { return true; }
   return false;
 }
 
@@ -122,7 +120,7 @@ std::ostream& HadronicAlphaT::Description( std::ostream &ostrm ) {
 //
 MHTovHT::MHTovHT(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool MHTovHT::Process(Event::Data& ev){
 
@@ -140,7 +138,7 @@ std::ostream& MHTovHT::Description( std::ostream &ostrm ) {
 //
 PFMET::PFMET(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool PFMET::Process(Event::Data& ev){
   if(ev.PFMET().Pt() > cut_)return true;
@@ -157,7 +155,7 @@ std::ostream& PFMET::Description( std::ostream &ostrm ) {
 //
 ReversedPFMET::ReversedPFMET(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool ReversedPFMET::Process(Event::Data& ev){
   if(ev.PFMET().Pt() < cut_)return true;
@@ -173,7 +171,7 @@ std::ostream& ReversedPFMET::Description( std::ostream &ostrm ) {
 
 BabyMHT::BabyMHT(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool BabyMHT::Process(Event::Data& ev){
   if( ev.JD_CommonJets().babyHT.Pt() > cut_)return true;
@@ -190,7 +188,7 @@ std::ostream& BabyMHT::Description( std::ostream &ostrm ) {
 
 ReversedBabyMHT::ReversedBabyMHT(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool ReversedBabyMHT::Process(Event::Data& ev){
   if( ev.JD_CommonJets().babyHT.Pt() < cut_)return true;
@@ -207,25 +205,25 @@ std::ostream& ReversedBabyMHT::Description( std::ostream &ostrm ) {
 
 /*LowPtBiasedDphi::LowPtBiasedDphi(float cut)
 : cut_(cut)
-  {;}
+{;}
 
 bool LowPtBiasedDphi::Process(Event::Data& ev){
-  if( ev.LowPtBiasedCommonRecoilMETJetDPhi() < cut_)return true;
-  else return false;
+if( ev.LowPtBiasedCommonRecoilMETJetDPhi() < cut_)return true;
+else return false;
 }
 
 //
 std::ostream& LowPtBiasedDphi::Description( std::ostream &ostrm ) {
-  ostrm << " " << cut_ << " " ;
-  return ostrm;
+ostrm << " " << cut_ << " " ;
+return ostrm;
 }
 */
 
 //-------------------------------------------------------------------
 MHToverMET::MHToverMET(float cut, float threshold)
   : cut_(cut),
-    threshold_(threshold)
-      {;}
+  threshold_(threshold)
+  {;}
 
 bool MHToverMET::Process(Event::Data& ev){
 
@@ -264,15 +262,66 @@ bool MHToverMET::Process(Event::Data& ev){
   else return false;
 }
 
-//
 std::ostream& MHToverMET::Description( std::ostream &ostrm ) {
   ostrm << "Passing MHT over MET cut of: " << cut_ << " " ;
   return ostrm;
 }
+
+
+//-------------------------------------------------------------------
+MHTTakeMuoverMETTakeMu::MHTTakeMuoverMETTakeMu(float cut, float threshold)
+  : cut_(cut),
+  threshold_(threshold)
+  {;}
+
+bool MHTTakeMuoverMETTakeMu::Process(Event::Data& ev){
+
+
+  PolarLorentzV mHT(0.,0.,0.,0.);
+  std::vector<Event::Jet const *>::const_iterator ijet = ev.JD_CommonJets().accepted.begin();
+  std::vector<Event::Jet const *>::const_iterator jjet = ev.JD_CommonJets().accepted.end();
+  std::vector<Event::Jet const *>::const_iterator ibaby = ev.JD_CommonJets().baby.begin();
+  std::vector<Event::Jet const *>::const_iterator jbaby = ev.JD_CommonJets().baby.end();
+  for(; ijet!=jjet; ++ijet){
+    if( (*ijet)->Pt() > threshold_){
+      mHT -= (**ijet);
+    }
+  }
+  for( ; ibaby!=jbaby; ++ibaby){
+    if( (*ibaby)->pt() > threshold_ ){
+      mHT -= (**ibaby);
+    }
+  }
+
+  std::vector<Event::Lepton const *>::const_iterator imu=ev.LD_CommonMuons().accepted.begin();
+  std::vector<Event::Lepton const *>::const_iterator jmu=ev.LD_CommonMuons().accepted.end();
+  for(; imu!=jmu; ++imu){
+    mHT -= (**imu);
+  }
+
+  LorentzV calomet = LorentzV(*ev.metP4caloTypeII());
+
+  for(int i = 0; i < int(ev.LD_CommonElectrons().accepted.size());i++){
+    calomet = calomet+(*ev.LD_CommonElectrons().accepted[i]);
+  }
+  for(int i = 0; i < int(ev.PD_CommonPhotons().accepted.size());i++){
+    calomet = calomet+(*ev.PD_CommonPhotons().accepted[i]);
+  }
+
+  if( mHT.Pt()/calomet.Pt()  < cut_)return true;
+  else return false;
+}
+
+
+std::ostream& MHTTakeMuoverMETTakeMu::Description( std::ostream &ostrm ) {
+  ostrm << "Passing MHT over MET both Take Mu cut of: " << cut_ << " " ;
+  return ostrm;
+}
+
 //
 MHToverPFMET::MHToverPFMET(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool MHToverPFMET::Process(Event::Data& ev){
   return ( ev.CommonMHT().Pt()/ev.PFMET().Pt()  < cut_);
@@ -292,7 +341,7 @@ std::ostream& MHToverPFMET::Description( std::ostream &ostrm ) {
 
 BabyMHTovHT::BabyMHTovHT(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool BabyMHTovHT::Process(Event::Data& ev){
   if( ev.JD_CommonJets().killedHT.Pt()/ev.CommonHT() > cut_)return true;
@@ -308,7 +357,7 @@ std::ostream& BabyMHTovHT::Description( std::ostream &ostrm ) {
 
 MHTOvCaloMETCut::MHTOvCaloMETCut(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool MHTOvCaloMETCut::Process(Event::Data& ev){
 
@@ -339,7 +388,7 @@ std::ostream& MHTOvCaloMETCut::Description(std::ostream &ostrm){
 
 MHTPFMETDiffOvMeffCut::MHTPFMETDiffOvMeffCut(float cut)
   : cut_(cut)
-    {;}
+  {;}
 
 bool MHTPFMETDiffOvMeffCut::Process(Event::Data& ev){
 
@@ -411,8 +460,8 @@ bool DeadECALCut::Process(Event::Data& ev) {
 }
 
 bool DeadECALCut::Process( Event::Data& ev,
-  std::vector<LorentzV>& jets,
-std::vector<LorentzV>& baby ) {
+         std::vector<LorentzV>& jets,
+         std::vector<LorentzV>& baby ) {
 
   // cout << " +++++++++++++++++++START DEAD ECAL CUT++++++++++++++ " << endl;
   double minDeltaEta = 100.;
@@ -460,18 +509,18 @@ std::vector<LorentzV>& baby ) {
       try{deadECALDR = DeadECALDR(ev,biasDPhiList[i].Jet.Phi(),
         biasDPhiList[i].Jet.Eta(),nBadCells_);
       // cout << "DeadEcalDR " << deadECALDR << endl;
-      }
-      catch(...){
-        deadECALDR = DeadECALDR_File(deadECALfile_,biasDPhiList[i].Jet.Phi(),
-          biasDPhiList[i].Jet.Eta(),nBadCells_);
-      }
-      // cout << "dead EcalDr" << deadECALDR << " DeltaEta" << minDeltaEta << endl;
-      if(deadECALDR < cut_ || minDeltaEta < cut2_ )return false;
     }
+    catch(...){
+      deadECALDR = DeadECALDR_File(deadECALfile_,biasDPhiList[i].Jet.Phi(),
+        biasDPhiList[i].Jet.Eta(),nBadCells_);
+    }
+      // cout << "dead EcalDr" << deadECALDR << " DeltaEta" << minDeltaEta << endl;
+    if(deadECALDR < cut_ || minDeltaEta < cut2_ )return false;
   }
+}
 
 
-  return true;
+return true;
 
 
 }
@@ -488,7 +537,7 @@ std::ostream& DeadECALCut::Description( std::ostream &ostrm ) {
 
 UnCorrCut::UnCorrCut( float cut )
   : cut_(cut)
-    {;}
+  {;}
 
 
 bool UnCorrCut::Process( Event::Data& ev ) {
@@ -543,17 +592,19 @@ mNumber(number) {
           NPvs::~NPvs() { delete mComparison; }
 
 
-          bool NPvs::Process( Event::Data& ev ) {return (*mComparison)(UInt_t((ev.vertexPosition())->size()),mNumber);}
+          bool NPvs::Process( Event::Data& ev ) {return (*mComparison)(UInt_t((ev.vertexPosition())->size()),
+            mNumber);
+        }
 
 
 
 // -----------------------------------------------------------------------------
 //
-          std::ostream& NPvs::Description( std::ostream &ostrm ) {
-            ostrm << "Number Primary vertex cut (num " << mComparison->type();
-            ostrm << " " << mNumber << ")";
-            return ostrm;
-          }
+        std::ostream& NPvs::Description( std::ostream &ostrm ) {
+          ostrm << "Number Primary vertex cut (num " << mComparison->type();
+          ostrm << " " << mNumber << ")";
+          return ostrm;
+        }
 
 
 
@@ -564,42 +615,42 @@ mNumber(number) {
 
 // -----------------------------------------------------------------------------
 //
-          HadronicCut::HadronicCut( float cut )
-            : cut_(cut)
-              {;}
+        HadronicCut::HadronicCut( float cut )
+          : cut_(cut)
+          {;}
 
 // -----------------------------------------------------------------------------
 //
-          bool HadronicCut::Process( Event::Data& ev ) {
+        bool HadronicCut::Process( Event::Data& ev ) {
 
-            double cut = 0.;
+          double cut = 0.;
 
-            if (1) {
+          if (1) {
 
-              UInt_t n = ev.CommonObjects().size();
-              LorentzV mht = ev.CommonRecoilMET();
+            UInt_t n = ev.CommonObjects().size();
+            LorentzV mht = ev.CommonRecoilMET();
 
-              std::vector<bool> pseudo;
-              AlphaT()( ev.CommonObjects(), pseudo, false );
-              if ( pseudo.size() != ev.CommonObjects().size() ) { abort(); }
+            std::vector<bool> pseudo;
+            AlphaT()( ev.CommonObjects(), pseudo, false );
+            if ( pseudo.size() != ev.CommonObjects().size() ) { abort(); }
 
-              LorentzV lv1(0.,0.,0.,0.);
-              LorentzV lv2(0.,0.,0.,0.);
-              if ( n == 2 ) {
-                lv1 = ev.CommonObjects()[0];
-                lv2 = ev.CommonObjects()[1];
-              } else if ( n > 2 ) {
-                for ( unsigned int i = 0; i < ev.CommonObjects().size(); ++i ) {
-                  if ( pseudo[i] ) { lv1 += ev.CommonObjects()[i]; }
-                  else             { lv2 += ev.CommonObjects()[i]; }
-                }
-                if ( lv2.Pt() > lv1.Pt() ) { LorentzV tmp = lv1; lv1 = lv2; lv2 = tmp; }
+            LorentzV lv1(0.,0.,0.,0.);
+            LorentzV lv2(0.,0.,0.,0.);
+            if ( n == 2 ) {
+              lv1 = ev.CommonObjects()[0];
+              lv2 = ev.CommonObjects()[1];
+            } else if ( n > 2 ) {
+              for ( unsigned int i = 0; i < ev.CommonObjects().size(); ++i ) {
+                if ( pseudo[i] ) { lv1 += ev.CommonObjects()[i]; }
+                else             { lv2 += ev.CommonObjects()[i]; }
               }
+              if ( lv2.Pt() > lv1.Pt() ) { LorentzV tmp = lv1; lv1 = lv2; lv2 = tmp; }
+            }
 
 //     double rho_a = lv2.Pt() / ( lv1.Pt() + lv2.Pt() + mht.Pt() );
 //     double rho_b = lv1.Pt() / ( lv1.Pt() + lv2.Pt() + mht.Pt() );
 
-              double m_jj  = ( lv1 + lv2 ).M();
+            double m_jj  = ( lv1 + lv2 ).M();
 //     double m2_jj  = ( lv1 + lv2 ).M2();
 //     double mt_jj  = ( lv1 + lv2 ).Mt();
 //     double mt2_jj  = ( lv1 + lv2 ).Mt2();
@@ -610,180 +661,132 @@ mNumber(number) {
 //     double mt_j2_mht = ( lv2 + mht ).Mt();
 //     double mt2_j2_mht = ( lv2 + mht ).Mt2();
 
-              cut = m_jj;
-            }
-
-            return cut < cut_;
-
+            cut = m_jj;
           }
+
+          return cut < cut_;
+
+        }
 
 // -----------------------------------------------------------------------------
 //
-          std::ostream& HadronicCut::Description( std::ostream &ostrm ) {
-            ostrm << "HadronicCut " << cut_ << " " ;
-            return ostrm;
-          }
+        std::ostream& HadronicCut::Description( std::ostream &ostrm ) {
+          ostrm << "HadronicCut " << cut_ << " " ;
+          return ostrm;
+        }
 // -----------------------------------------------------------------------------
 //
 
 
-          VertexPtOverHT::VertexPtOverHT( float cut )
-            : cut_(cut)
-              {;}
+        VertexPtOverHT::VertexPtOverHT( float cut )
+          : cut_(cut)
+          {;}
 
 
-          bool VertexPtOverHT::Process( Event::Data& ev ) {
-            if(!ev.vertexSumPt.enabled()){return true;}
-            double  VertexPt = 0.;
-            for(std::vector<floatle>::const_iterator vtx =
-              ev.vertexSumPt()->begin();
-            vtx != ev.vertexSumPt()->end();++vtx){
+        bool VertexPtOverHT::Process( Event::Data& ev ) {
+          if(!ev.vertexSumPt.enabled()){return true;}
+          double  VertexPt = 0.;
+          for(std::vector<floatle>::const_iterator vtx =
+            ev.vertexSumPt()->begin();
+          vtx != ev.vertexSumPt()->end();++vtx){
 
-              if(!ev.vertexIsFake()->at( vtx-ev.vertexSumPt()->begin()) &&
-                fabs((ev.vertexPosition()->at( vtx-ev.vertexSumPt()->begin())).Z()) < 24.0 &&
-                  ev.vertexNdof()->at( vtx-ev.vertexSumPt()->begin() ) > 4
-              && (ev.vertexPosition()->at( vtx-ev.vertexSumPt()->begin())).Rho() < 2.0 ){
+            if(!ev.vertexIsFake()->at( vtx-ev.vertexSumPt()->begin()) &&
+            fabs((ev.vertexPosition()->at( vtx-ev.vertexSumPt()->begin())).Z()) < 24.0 &&
+            ev.vertexNdof()->at( vtx-ev.vertexSumPt()->begin() ) > 4
+            && (ev.vertexPosition()->at( vtx-ev.vertexSumPt()->begin())).Rho() < 2.0 ){
 
-                VertexPt += *vtx;
+              VertexPt += *vtx;
 
               }
-            }
+          }
             // cout << "Sum of vertex Pt/HT  is "  << VertexPt/ev.CommonHT() << endl;
-          if( VertexPt/ev.CommonHT() > cut_ ) { return true; } 
+          if( VertexPt/ev.CommonHT() > cut_ ) { return true; } // check the leading uncor jet has cor Pt > cut
           else{return false;}
         }
 
 // -----------------------------------------------------------------------------
 //
-          std::ostream& VertexPtOverHT::Description( std::ostream &ostrm ) {
-            ostrm << "Checking that  sum Vertex Pt / HT is  > " << cut_ << " " ;
-            return ostrm;
+        std::ostream& VertexPtOverHT::Description( std::ostream &ostrm ) {
+          ostrm << "Checking that  sum Vertex Pt / HT is  > " << cut_ << " " ;
+          return ostrm;
+        }
+
+// -----------------------------------------------------------------------------
+//
+        TriggerMHT_Emu::TriggerMHT_Emu( float cut, float Threshold)
+          : cut_(cut),
+          Threshold_(Threshold) {;}
+
+        bool TriggerMHT_Emu::Process( Event::Data& ev ){
+          LorentzV TriggerMHT;
+          std::vector<Event::Jet >::const_iterator ijet = ev.JD_Jets().begin();
+          std::vector<Event::Jet >::const_iterator jjet = ev.JD_Jets().end();
+          for ( ; ijet != jjet; ++ijet ){
+            if( ijet->Pt() > Threshold_ ){ TriggerMHT += *ijet ;}
           }
 
+          if( TriggerMHT.Pt() > cut_ ) return true;
+          else return false;
+        }
+
 // -----------------------------------------------------------------------------
 //
-          TriggerMHT_Emu::TriggerMHT_Emu( float cut, float Threshold)
-            : cut_(cut),
-              Threshold_(Threshold) {;}
+        std::ostream& TriggerMHT_Emu::Description( std::ostream &ostrm ) {
+          ostrm << "MHT from jets above " << Threshold_ << " is  < " << cut_ << " GeV " ;
+          return ostrm;
+        }
+// -----------------------------------------------------------------------------
+//
 
-          bool TriggerMHT_Emu::Process( Event::Data& ev ){
-            LorentzV TriggerMHT;
-            std::vector<Event::Jet >::const_iterator ijet = ev.JD_Jets().begin();
-            std::vector<Event::Jet >::const_iterator jjet = ev.JD_Jets().end();
-            for ( ; ijet != jjet; ++ijet ){
-              if( ijet->Pt() > Threshold_ ){ TriggerMHT += *ijet ;}
-            }
 
-            if( TriggerMHT.Pt() > cut_ ) return true;
-            else return false;
+
+
+// -----------------------------------------------------------------------------
+//
+
+// -----------------------------------------------------------------------------
+//
+        TriggerHT_Emu::TriggerHT_Emu( float cut, float Threshold)
+          : cut_(cut),
+          Threshold_(Threshold) {;}
+
+        bool TriggerHT_Emu::Process( Event::Data& ev ){
+          float TriggerHT;
+          std::vector<Event::Jet >::const_iterator ijet = ev.JD_Jets().begin();
+          std::vector<Event::Jet >::const_iterator jjet = ev.JD_Jets().end();
+          for ( ; ijet != jjet; ++ijet ){
+            if( ijet->Pt() > Threshold_ ){ TriggerHT += (*ijet).Et(); }
           }
 
-// -----------------------------------------------------------------------------
-//
-          std::ostream& TriggerMHT_Emu::Description( std::ostream &ostrm ) {
-            ostrm << "MHT from jets above " << Threshold_ << " is  < " << cut_ << " GeV " ;
-            return ostrm;
-          }
-// -----------------------------------------------------------------------------
-//
-
-
-
+          if( TriggerHT > cut_ ) return true;
+          else return false;
+        }
 
 // -----------------------------------------------------------------------------
 //
-
-// -----------------------------------------------------------------------------
-//
-          TriggerHT_Emu::TriggerHT_Emu( float cut, float Threshold)
-            : cut_(cut),
-              Threshold_(Threshold) {;}
-
-          bool TriggerHT_Emu::Process( Event::Data& ev ){
-            float TriggerHT;
-            std::vector<Event::Jet >::const_iterator ijet = ev.JD_Jets().begin();
-            std::vector<Event::Jet >::const_iterator jjet = ev.JD_Jets().end();
-            for ( ; ijet != jjet; ++ijet ){
-              if( ijet->Pt() > Threshold_ ){ TriggerHT += (*ijet).Et(); }
-            }
-
-            if( TriggerHT > cut_ ) return true;
-            else return false;
-          }
-
-// -----------------------------------------------------------------------------
-//
-          std::ostream& TriggerHT_Emu::Description( std::ostream &ostrm ) {
-            ostrm << "HT from jets above " << Threshold_ << " is  < " << cut_ << " GeV " ;
-            return ostrm;
-          }
+        std::ostream& TriggerHT_Emu::Description( std::ostream &ostrm ) {
+          ostrm << "HT from jets above " << Threshold_ << " is  < " << cut_ << " GeV " ;
+          return ostrm;
+        }
 // -----------------------------------------------------------------------------
 //
 
-          confiurableOddJet::confiurableOddJet( float threshold ) :
-          Threshold_(threshold){;}
+        confiurableOddJet::confiurableOddJet( float threshold ) :
+        Threshold_(threshold){;}
 
-          bool confiurableOddJet::Process( Event::Data& ev){
-            std::vector<Event::Jet const *>::const_iterator ijet = ev.JD_CommonJets().odd.begin();
-            std::vector<Event::Jet const *>::const_iterator jjet = ev.JD_CommonJets().odd.end();
-            for( ; ijet != jjet; ++ijet){
-              if((*ijet)->Pt() > Threshold_) return false;
-            }
-            return true;
-          }
-// -----------------------------------------------------------------------------
-//
-
-          std::ostream& confiurableOddJet::Description( std::ostream &ostrm ) {
-            ostrm << "OddJet Veto using configurable Jet Threshold of  " << Threshold_ << " GeV " ;
-            return ostrm;
-          }
-
-
-
-
-
-// -----------------------------------------------------------------------------
-//
-
-        MuonPtEtaCut::MuonPtEtaCut(float pt, float eta) :
-        PtCut_(pt),
-        EtaCut_(eta)
-          {;}
-        bool MuonPtEtaCut::Process(Event::Data& ev){
-          std::vector<Event::Lepton const *>::const_iterator imuon = ev.LD_CommonMuons().accepted.begin();
-          std::vector<Event::Lepton const *>::const_iterator jmuon = ev.LD_CommonMuons().accepted.end();
-          for( ; imuon != jmuon; ++imuon){          
-            if( (*imuon)->Pt() < PtCut_ || fabs((*imuon)->Eta()) > EtaCut_ ) return false;
+        bool confiurableOddJet::Process( Event::Data& ev){
+          std::vector<Event::Jet const *>::const_iterator ijet = ev.JD_CommonJets().odd.begin();
+          std::vector<Event::Jet const *>::const_iterator jjet = ev.JD_CommonJets().odd.end();
+          for( ; ijet != jjet; ++ijet){
+            if((*ijet)->Pt() > Threshold_) return false;
           }
           return true;
         }
-
-
-// -----------------------------------------------------------------------------
-//
-        std::ostream& MuonPtEtaCut::Description( std::ostream &ostrm ) {
-          ostrm << "An extra muon quality criteria cut, if Eta > " << EtaCut_ << " and Pt < " << PtCut_  <<" GeV " ;
-          return ostrm;
-        }
-
-
 // -----------------------------------------------------------------------------
 //
 
-        LeadingMuonCut::LeadingMuonCut(float pt) :
-        PtCut_(pt)
-          {;}
-        bool LeadingMuonCut::Process(Event::Data& ev){
-          if( ev.LD_CommonMuons().accepted[0]->Pt() > PtCut_) return true;
-          return false;
-        }
-
-
-// -----------------------------------------------------------------------------
-//
-        std::ostream& LeadingMuonCut::Description( std::ostream &ostrm ) {
-          ostrm << "Leading Muon Pt < " << PtCut_  <<" GeV " ;
+        std::ostream& confiurableOddJet::Description( std::ostream &ostrm ) {
+          ostrm << "OddJet Veto using configurable Jet Threshold of  " << Threshold_ << " GeV " ;
           return ostrm;
         }
 
@@ -799,209 +802,74 @@ mNumber(number) {
 
 
 
-  sumRecHitPtCut::sumRecHitPtCut( float sumRecHitPtCut)
-    : cut_(sumRecHitPtCut){;}
+        sumRecHitPtCut::sumRecHitPtCut( float sumRecHitPtCut)
+          : cut_(sumRecHitPtCut){;}
 
-  bool sumRecHitPtCut::Process( Event::Data& ev ){
-    std::vector<PolarLorentzV>::const_iterator iEcalB=ev.rechitCaloP4Eb()->begin();
-    std::vector<PolarLorentzV>::const_iterator jEcalB=ev.rechitCaloP4Eb()->end();
-    std::vector<PolarLorentzV>::const_iterator iEcalE=ev.rechitCaloP4Ee()->begin();
-    std::vector<PolarLorentzV>::const_iterator jEcalE=ev.rechitCaloP4Ee()->end();
-    std::vector<PolarLorentzV>::const_iterator iHbHe=ev.rechitCaloP4Hbhe()->begin();
-    std::vector<PolarLorentzV>::const_iterator jHbHe=ev.rechitCaloP4Hbhe()->end();
-    std::vector<PolarLorentzV>::const_iterator iHF=ev.rechitCaloP4Hf()->begin();
-    std::vector<PolarLorentzV>::const_iterator jHF=ev.rechitCaloP4Hf()->end();
-    std::vector<PolarLorentzV> RecHitcollection;
+        bool sumRecHitPtCut::Process( Event::Data& ev ){
+        std::vector<PolarLorentzV>::const_iterator iEcalB=ev.rechitCaloP4Eb()->begin();
+        std::vector<PolarLorentzV>::const_iterator jEcalB=ev.rechitCaloP4Eb()->end();
+        std::vector<PolarLorentzV>::const_iterator iEcalE=ev.rechitCaloP4Ee()->begin();
+        std::vector<PolarLorentzV>::const_iterator jEcalE=ev.rechitCaloP4Ee()->end();
+        std::vector<PolarLorentzV>::const_iterator iHbHe=ev.rechitCaloP4Hbhe()->begin();
+        std::vector<PolarLorentzV>::const_iterator jHbHe=ev.rechitCaloP4Hbhe()->end();
+        std::vector<PolarLorentzV>::const_iterator iHF=ev.rechitCaloP4Hf()->begin();
+        std::vector<PolarLorentzV>::const_iterator jHF=ev.rechitCaloP4Hf()->end();
+        std::vector<PolarLorentzV> RecHitcollection;
 
-    float sumRecHitPt = 0.;
-// cout << " Starting EB " << endl;
-    for(int idx = 0; iEcalB!=jEcalB;++iEcalB,++idx){
-      if( ev.rechitCaloSeverityLevelEb()->at(idx) > 1 and  (*iEcalB).Pt()>0)
-        RecHitcollection.push_back(*iEcalB);
- //sumRecHitPt += (*iEcalB).Pt();
-    }
-// cout << " Starting EE " << endl;
-    for(int idx = 0; iEcalE!=jEcalE;++iEcalE,++idx){
-      if( ev.rechitCaloSeverityLevelEe()->at(idx) > 1 and (*iEcalE).Pt()>0)
-        RecHitcollection.push_back(*iEcalE);
- // sumRecHitPt += (*iEcalE).Pt();
-    }
-// cout << " Starting HEHB " << endl;
-    for(int idx = 0; iHbHe!=jHbHe;++iHbHe,++idx){
-      if( ev.rechitCaloSeverityLevelHbhe()->at(idx) > 9 and (*iHbHe).Pt()>0)
-        RecHitcollection.push_back(*iHbHe);
-// sumRecHitPt += (*iHbHe).Pt();
-    }
-// cout << " Starting HF " << endl;
-    for(int idx = 0; iHF!=jHF;++iHF,++idx){
-      if( ev.rechitCaloSeverityLevelHf()->at(idx) > 9 and (*iHF).Pt()>0 )
-        RecHitcollection.push_back(*iHF);
- // sumRecHitPt += (*iHF).Pt();
-    }
+        float sumRecHitPt = 0.;
+        // cout << " Starting EB " << endl;
+        for(int idx = 0; iEcalB!=jEcalB;++iEcalB,++idx){
+          if( ev.rechitCaloSeverityLevelEb()->at(idx) > 1 and  (*iEcalB).Pt()>0)
+         RecHitcollection.push_back(*iEcalB);
+         //sumRecHitPt += (*iEcalB).Pt();
+        }
+        // cout << " Starting EE " << endl;
+        for(int idx = 0; iEcalE!=jEcalE;++iEcalE,++idx){
+          if( ev.rechitCaloSeverityLevelEe()->at(idx) > 1 and (*iEcalE).Pt()>0)
+          RecHitcollection.push_back(*iEcalE);
+         // sumRecHitPt += (*iEcalE).Pt();
+        }
+        // cout << " Starting HEHB " << endl;
+        for(int idx = 0; iHbHe!=jHbHe;++iHbHe,++idx){
+          if( ev.rechitCaloSeverityLevelHbhe()->at(idx) > 9 and (*iHbHe).Pt()>0)
+          RecHitcollection.push_back(*iHbHe);
+        // sumRecHitPt += (*iHbHe).Pt();
+        }
+        // cout << " Starting HF " << endl;
+        for(int idx = 0; iHF!=jHF;++iHF,++idx){
+          if( ev.rechitCaloSeverityLevelHf()->at(idx) > 9 and (*iHF).Pt()>0 )
+          RecHitcollection.push_back(*iHF);
+         // sumRecHitPt += (*iHF).Pt();
+        }
 
 
-    for (std::vector<PolarLorentzV>::const_iterator it = RecHitcollection.begin() ; it != RecHitcollection.end() ; it++){
+        for (std::vector<PolarLorentzV>::const_iterator it = RecHitcollection.begin() ; it != RecHitcollection.end() ; it++){
 
-      std::vector<PolarLorentzV>::const_iterator in = it + 1;
+         std::vector<PolarLorentzV>::const_iterator in = it + 1;
 
-      if(*it==*in){
-//cout << "duplicate event that is " <<  *it << "and " << *in << endl;
-      }
-      else {
+        if(*it==*in){
+        //cout << "duplicate event that is " <<  *it << "and " << *in << endl;
+        }
+        else {
 
         sumRecHitPt += it->Pt();
 
-      }
+        }
 
-    }
-
-
+}
 
 
-    if( sumRecHitPt > cut_ ) return false;
-    else return true;
-  }
+
+
+        if( sumRecHitPt > cut_ ) return false;
+        else return true;
+        }
 
 // -----------------------------------------------------------------------------
 //
-std::ostream& sumRecHitPtCut::Description( std::ostream &ostrm ) {
-  ostrm << "Veto Events with sum of cleaned rechits above " << cut_ << " GeV " ;
-  return ostrm;
-}
+        std::ostream& sumRecHitPtCut::Description( std::ostream &ostrm ) {
+          ostrm << "Veto Events with sum of cleaned rechits above " << cut_ << " GeV " ;
+          return ostrm;
+        }
 // -----------------------------------------------------------------------------
 //
-
-
-   nGenElectrons::nGenElectrons(const std::string & comparison,UInt_t nGenLep, double pt, double eta ):
-      nGenLeptons(nGenLep),
-      etaCut_(eta),
-      ptCut_(pt){
-      if ( strcmp("==",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, EQ>);
-      }else if ( strcmp("!=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, NEQ>);
-      } else if ( strcmp("<",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LT>);
-      } else if ( strcmp(">",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GT>);
-      } else if ( strcmp(">=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GTEQ>);
-      } else if ( strcmp("<=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LTEQ>);
-      } else {
-      throw std::invalid_argument(std::string("Invalid operation"));
-      }
-   }
-   
-   nGenElectrons::~nGenElectrons(){ delete mComparison; }
-   bool nGenElectrons::Process( Event::Data& ev ){
-     int nGenEle = 0;
-     for (std::vector<Event::GenObject>::const_iterator genParticle = ev.GenParticles().begin();  genParticle != ev.GenParticles().end(); ++genParticle) {
-       if(fabs(genParticle->GetID())==11){//select gen muons
-         if(fabs(genParticle->Eta()) < etaCut_ && genParticle->Pt() > ptCut_ ){
-           nGenEle++;
-         }
-       }
-     }
-
-      return (*mComparison)(UInt_t(nGenEle), nGenLeptons);
-
-   }
-
-std::ostream& nGenElectrons::Description(std::ostream &ostrm) {
-  ostrm << "Num GenElectrons Operation (num " << mComparison->type();
-  ostrm << " " << nGenLeptons << " with pt > " << ptCut_ << " GeV and |eta| < " << etaCut_ << ")";
-  return ostrm;
-}
-
-
-
-
-   nGenMuons::nGenMuons(const std::string & comparison,UInt_t nGenLep, double pt, double eta ):
-      nGenLeptons(nGenLep),
-      etaCut_(eta),
-      ptCut_(pt){
-      if ( strcmp("==",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, EQ>);
-      }else if ( strcmp("!=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, NEQ>);
-      } else if ( strcmp("<",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LT>);
-      } else if ( strcmp(">",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GT>);
-      } else if ( strcmp(">=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GTEQ>);
-      } else if ( strcmp("<=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LTEQ>);
-      } else {
-      throw std::invalid_argument(std::string("Invalid operation"));
-      }
-   }
-   
-   nGenMuons::~nGenMuons(){ delete mComparison; }
-   bool nGenMuons::Process( Event::Data& ev ){
-     int nGenEle = 0;
-     for (std::vector<Event::GenObject>::const_iterator genParticle = ev.GenParticles().begin();  genParticle != ev.GenParticles().end(); ++genParticle) {
-       if(fabs(genParticle->GetID())==13){//select gen muons
-         if(fabs(genParticle->Eta()) < etaCut_ && genParticle->Pt() > ptCut_ ){
-           nGenEle++;
-         }
-       }
-     }
-      return (*mComparison)(UInt_t(nGenEle), nGenLeptons);
-
-   }
-
-std::ostream& nGenMuons::Description(std::ostream &ostrm) {
-  ostrm << "Num GenMuons Operation (num " << mComparison->type();
-  ostrm << " " << nGenLeptons << " with pt > " << ptCut_ << " GeV and |eta| < " << etaCut_ << ")";
-  return ostrm;
-}
-
-
-// -----------------------------------------------------------------------------
-//
-
-
-   nGenPhotons::nGenPhotons(const std::string & comparison,UInt_t nGenLep, double pt, double eta ):
-      nGenLeptons(nGenLep),
-      etaCut_(eta),
-      ptCut_(pt){
-      if ( strcmp("==",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, EQ>);
-      }else if ( strcmp("!=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, NEQ>);
-      } else if ( strcmp("<",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LT>);
-      } else if ( strcmp(">",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GT>);
-      } else if ( strcmp(">=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, GTEQ>);
-      } else if ( strcmp("<=",comparison.c_str()) == 0 ) {
-      mComparison = reinterpret_cast<_Compare<UInt_t> *>(new Operation::Compare<UInt_t, LTEQ>);
-      } else {
-      throw std::invalid_argument(std::string("Invalid operation"));
-      }
-   }
-   
-   nGenPhotons::~nGenPhotons(){ delete mComparison; }
-   bool nGenPhotons::Process( Event::Data& ev ){
-     int nGenEle = 0;
-     for (std::vector<Event::GenObject>::const_iterator genParticle = ev.GenParticles().begin();  genParticle != ev.GenParticles().end(); ++genParticle) {
-       if(fabs(genParticle->GetID())==22){//select gen muons
-         if(fabs(genParticle->Eta()) < etaCut_ && genParticle->Pt() > ptCut_ ){
-           nGenEle++;
-         }
-       }
-     }
-
-      return (*mComparison)(UInt_t(nGenEle), nGenLeptons);
-
-   }
-
-std::ostream& nGenPhotons::Description(std::ostream &ostrm) {
-  ostrm << "Num GenPhotons Operation (num " << mComparison->type();
-  ostrm << " " << nGenLeptons << " with pt > " << ptCut_ << " GeV and |eta| < " << etaCut_ << ")";
-  return ostrm;
-}
-

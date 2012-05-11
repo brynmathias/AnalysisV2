@@ -244,7 +244,7 @@ bool MHToverMET::Process(Event::Data& ev){
     }
   }
 
-  LorentzV calomet = LorentzV(*ev.metP4caloTypeII());
+  LorentzV calomet = LorentzV(*ev.metP4calo());
 
   for(int i = 0; i < int(ev.LD_CommonElectrons().accepted.size());i++){
     calomet = calomet+(*ev.LD_CommonElectrons().accepted[i]);

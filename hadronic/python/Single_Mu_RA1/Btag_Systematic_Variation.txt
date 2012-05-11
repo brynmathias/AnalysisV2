@@ -1,0 +1,15 @@
+BtagVariation_30.0_40.0 0.0295675
+BtagVariation_40.0_50.0 0.0295095
+BtagVariation_50.0_60.0 0.0210867
+BtagVariation_60.0_70.0 0.0219349
+BtagVariation_70.0_80.0 0.0227033
+BtagVariation_80.0_100.0 0.0204062
+BtagVariation_100.0_120.0 0.0185857
+BtagVariation_120.0_160.0 0.0256242
+BtagVariation_160.0_210.0 0.0383341
+BtagVariation_210.0_260.0 0.0409675
+BtagVariation_260.0_320.0 0.0420284
+BtagVariation_320.0_400.0 0.0541299
+BtagVariation_400.0_500.0 0.0578761
+BtagVariation_500.0_670.0 0.0655432
+BtagVariation_670.0_1500.0 0.1310864

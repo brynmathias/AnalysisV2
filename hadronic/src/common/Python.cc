@@ -4,6 +4,7 @@
 #include "WeeklyUpdatePlots.hh"
 #include "Muon_ControlPlots.hh"
 #include "BtagSystematicPlots.hh"
+#include "Btag_PredPlots.hh"
 #include "BrynPlottingOps.hh"
 #include "TanjaCCControlPlots.hh"
 #include "DarrenPlots.hh"
@@ -70,6 +71,8 @@ class_<Operation::PlotPhotons, bases<Operation::_Base> >( "OP_PlotPhotons",
  class_<Operation::BtagSystematicPlots, bases<Operation::_Base> >( "BtagSystematicPlots",
                     init<const Utils::ParameterSet&>());
 
+ class_<Operation::Btag_PredPlots, bases<Operation::_Base> >( "Btag_PredPlots",
+                    init<const Utils::ParameterSet&>());
 
  class_<Operation::ControlPlottingOps, bases<Operation::_Base> >( "MuonControlPlots",
                 init<const Utils::ParameterSet&>() );
